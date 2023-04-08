@@ -1,5 +1,11 @@
 # @yicode/template-yiapi-free
 
+## 0.3.0
+
+### Minor Changes
+
+-   发布包
+
 ## 0.2.0
 
 ### Minor Changes
