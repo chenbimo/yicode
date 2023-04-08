@@ -21,7 +21,7 @@
         "url": "https://github.com/chenbimo/yivite-cli.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "workspace:*",
+        "@yicode/yiapi": "workspace:^",
         "cos-nodejs-sdk-v5": "^2.11.19",
         "got": "^12.6.0"
     }
