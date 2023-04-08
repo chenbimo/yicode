@@ -1,5 +1,11 @@
 # @yicode/yidash
 
+## 3.2.0
+
+### Minor Changes
+
+-   调整架构
+
 ## 3.1.2
 
 ### Patch Changes
