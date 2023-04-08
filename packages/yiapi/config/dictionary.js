@@ -9,28 +9,30 @@ import { systemConfig } from '../system.js';
 let configPath = fnFileProtocolPath(path.resolve(systemConfig.appDir, 'config', 'dictionary.js'));
 let { dictionaryConfig: importConfig } = await fnImport(configPath, 'dictionaryConfig', []);
 
-const dictionaryConfig = mergeAndConcat(
-    {
-        目录分类: {
-            name: '目录分类',
-            value: '',
-            describe: '目录分类字典',
-            code: 'treeCategory',
-            children: [
-                {
-                    name: '菜单',
-                    value: '',
-                    code: 'menu'
-                },
-                {
-                    name: '接口',
-                    value: '',
-                    code: 'api'
-                }
-            ]
-        }
-    },
-    importConfig
+const dictionaryConfig = _values(
+    mergeAndConcat(
+        {
+            目录分类: {
+                name: '目录分类',
+                value: '',
+                describe: '目录分类字典',
+                code: 'treeCategory',
+                children: [
+                    {
+                        name: '菜单',
+                        value: '',
+                        code: 'menu'
+                    },
+                    {
+                        name: '接口',
+                        value: '',
+                        code: 'api'
+                    }
+                ]
+            }
+        },
+        importConfig
+    )
 );
 
 export { dictionaryConfig };
