@@ -15,7 +15,7 @@
         "build": "pnpm --filter=@yicode/* run build",
         "clear": "rimraf 'packages/*/{lib,node_modules}' && rimraf node_modules",
         "version": "changeset version",
-        "changeset": "changeset",
+        "choose": "changeset",
         "release": "changeset publish --registry=https://registry.npmjs.com/"
     },
     "keywords": [
