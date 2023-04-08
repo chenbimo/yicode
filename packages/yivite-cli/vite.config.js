@@ -2,7 +2,7 @@ import path from 'path';
 import process from 'process';
 import { rmSync } from 'node:fs';
 import { defineConfig, loadEnv } from 'vite';
-import vue from '@vitejs/plugin-vue';
+import viteVue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
@@ -231,7 +231,7 @@ export default defineConfig(async ({ command, mode }) => {
     let allPlugins = [];
     allPlugins.push(Unocss.default(unocssConfig));
     allPlugins.push(Icons(iconsPlugin));
-    allPlugins.push(vue(vuePlugin));
+    allPlugins.push(viteVue(vuePlugin));
     allPlugins.push(Components(componentsPlugin));
     allPlugins.push(AutoImport(autoImportPlugin));
     allPlugins.push(vueI18n(vueI18nPlugin));

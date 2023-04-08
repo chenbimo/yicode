@@ -26,6 +26,11 @@
     "homepage": "https://yicode.tech",
     "license": "GPL-3.0",
     "dependencies": {
+        "blueimp-md5": "2.19.0",
+        "copy-to-clipboard": "3.3.3",
+        "lodash-es": "4.17.21",
+        "merge-anything": "5.1.4",
+        "nanoid": "4.0.1",
         "pako": "^2.1.0"
     }
 }
