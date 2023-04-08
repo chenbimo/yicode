@@ -1,6 +1,6 @@
 {
     "name": "@yicode/template-yiapi-free",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "易接口测试",
     "main": "yiapi.js",
     "type": "module",
