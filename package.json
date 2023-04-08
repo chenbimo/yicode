@@ -1,0 +1,48 @@
+{
+    "name": "root",
+    "version": "0.0.0",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "description": "随易科技（yicode.tech） - 软件开发生态",
+    "homepage": "https://yicode.tech",
+    "main": "index.js",
+    "scripts": {
+        "preinstall": "npx only-allow pnpm",
+        "prepare": "husky install"
+    },
+    "keywords": [
+        "yicode",
+        "cli",
+        "webpack",
+        "vite",
+        "vue",
+        "vue2",
+        "vue3",
+        "nodejs"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "license": "GPL 3.0",
+    "devDependencies": {
+        "@yicode/commander": "^10.0.3",
+        "blueimp-md5": "^2.19.0",
+        "chalk": "^5.2.0",
+        "cli-table3": "^0.6.3",
+        "copy-anything": "^3.0.3",
+        "dayjs": "^1.11.7",
+        "fast-glob": "^3.2.12",
+        "fs-extra": "^11.1.1",
+        "got": "^12.6.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^13.2.1",
+        "lodash-es": "^4.17.21",
+        "log-symbols": "^5.1.0",
+        "merge-anything": "^5.1.4",
+        "micromatch": "^4.0.5",
+        "nanoid": "^4.0.2",
+        "ora": "^6.3.0",
+        "prettier": "^2.8.7"
+    }
+}
