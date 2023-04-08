@@ -1,0 +1,3 @@
+const schemaConfig = {};
+
+export { schemaConfig };

@@ -1,0 +1,3 @@
+const corsConfig = {};
+
+export { corsConfig };

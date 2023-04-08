@@ -1,0 +1,28 @@
+{
+    "name": "@yicode/template-yiapi-free",
+    "version": "0.0.1",
+    "description": "易接口测试",
+    "main": "yiapi.js",
+    "type": "module",
+    "scripts": {
+        "preinstall": "npx only-allow pnpm",
+        "dev": "nodemon --config=nodemon.json",
+        "pro": "pm2 start pm2.config.cjs"
+    },
+    "keywords": [
+        "api",
+        "nodejs",
+        "fastify"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "homepage": "https://yicode.tech",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yivite-cli.git"
+    },
+    "dependencies": {
+        "@yicode/yiapi": "workspace:*",
+        "cos-nodejs-sdk-v5": "^2.11.19",
+        "got": "^12.6.0"
+    }
+}
