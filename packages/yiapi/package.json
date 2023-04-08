@@ -1,0 +1,51 @@
+{
+    "name": "@yicode/yiapi",
+    "version": "1.20.1",
+    "description": "yiapi(易接口)，5 分钟上手 Node.js 接口开发",
+    "main": "yiapi.js",
+    "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "keywords": [
+        "fastify",
+        "nodejs",
+        "api"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "license": "GPL-3.0",
+    "dependencies": {
+        "@fastify/autoload": "^5.7.1",
+        "@fastify/cors": "^8.2.1",
+        "@fastify/jwt": "^6.7.1",
+        "@fastify/multipart": "^7.5.0",
+        "@fastify/redis": "^6.1.0",
+        "@fastify/routes": "^5.1.0",
+        "@fastify/sensible": "^5.2.0",
+        "@fastify/static": "^6.9.0",
+        "@fastify/swagger": "^8.3.1",
+        "@fastify/swagger-ui": "^1.6.0",
+        "ajv": "^8.12.0",
+        "ajv-i18n": "^4.2.0",
+        "bull": "^4.10.4",
+        "enquirer": "^2.3.6",
+        "fastify": "^4.15.0",
+        "fastify-plugin": "^4.5.0",
+        "fastify-xml-body-parser": "^2.2.0",
+        "knex": "^2.4.2",
+        "knex-schema-inspector": "^3.0.1",
+        "mysql2": "^3.2.0",
+        "nodemailer": "^6.9.1",
+        "winston": "^3.8.2",
+        "winston-daily-rotate-file": "^4.7.1"
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "verbose": true,
+    "ignore": ["*.test.js", "fixtures/*", "**/node_modules/**/*", "**/logs/*", "**/data/*"],
+    "execMap": {
+        "js": "node --trace-warnings --unhandled-rejections=strict"
+    },
+    "env": {
+        "NODE_ENV": "development"
+    }
+}

@@ -12,8 +12,9 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "prepare": "husky install",
-        "build": "pnpm --filter=@qftjs/* run build",
+        "build": "pnpm --filter=@yicode/* run build",
         "clear": "rimraf 'packages/*/{lib,node_modules}' && rimraf node_modules",
+        "version": "changeset version",
         "changeset": "changeset",
         "release": "pnpm build && pnpm release:only",
         "release:only": "changeset publish --registry=https://registry.npmjs.com/"
@@ -35,6 +36,8 @@
         "@yicode/commander": "^10.0.3",
         "blueimp-md5": "^2.19.0",
         "chalk": "^5.2.0",
+        "copy-to-clipboard": "3.3.3",
+        "portfinder": "^1.0.32",
         "cli-table3": "^0.6.3",
         "copy-anything": "^3.0.3",
         "dayjs": "^1.11.7",
