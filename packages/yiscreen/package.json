@@ -1,0 +1,29 @@
+{
+    "name": "@yicode/yiscreen",
+    "version": "3.2.0",
+    "description": "yiscreen（易大屏）大屏边框库",
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "main": "./index.js",
+    "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "sideEffects": true,
+    "keywords": [
+        "lodash",
+        "utils",
+        "helper",
+        "help"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "license": "GPL-3.0",
+    "dependencies": {}
+}
