@@ -11,6 +11,27 @@ docs
 .npmrc
 .VSCodeCounter
 pnpm-lock.*
+oclif.manifest.json
+dist
+report.html
+dist-ssr
+*.local
+.vscode-test/
+*.vsix
+out
+
+# Editor directories and files
+.vscode/*
+.cache
+.yicode/auto-imports.d.ts
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Runtime data
 pids
