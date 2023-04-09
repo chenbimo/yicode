@@ -1,0 +1,53 @@
+{
+    "name": "@yicode/yicode-cli",
+    "version": "0.0.0",
+    "description": "yicode（易编程） - 命令行实用工具",
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "bin": {
+        "mynewcli": "./bin/run"
+    },
+    "homepage": "https://yicode.tech",
+    "license": "GPL-3.0",
+    "main": "dist/index.js",
+    "repository": "https://github.com/chenbimo/yicode.git",
+    "files": [],
+    "dependencies": {
+        "@oclif/core": "^2",
+        "@oclif/plugin-help": "^5",
+        "@oclif/plugin-plugins": "^2.4.4"
+    },
+    "devDependencies": {
+        "oclif": "^3",
+        "shx": "^0.3.3"
+    },
+    "oclif": {
+        "bin": "mynewcli",
+        "dirname": "mynewcli",
+        "commands": "./dist/commands",
+        "plugins": [
+            "@oclif/plugin-help",
+            "@oclif/plugin-plugins"
+        ],
+        "topicSeparator": " ",
+        "topics": {
+            "hello": {
+                "description": "Say hello to the world and others"
+            }
+        }
+    },
+    "scripts": {
+        "build": "shx rm -rf dist && tsc -b",
+        "lint": "eslint . --ext .ts --config .eslintrc",
+        "postpack": "shx rm -f oclif.manifest.json",
+        "posttest": "npm run lint",
+        "prepack": "npm run build && oclif manifest && oclif readme",
+        "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+        "version": "oclif readme && git add README.md"
+    },
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "keywords": [
+        "oclif"
+    ]
+}
