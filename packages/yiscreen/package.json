@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiscreen",
-    "version": "3.2.0",
+    "version": "3.2.1",
     "description": "yiscreen（易大屏）大屏边框库",
     "scripts": {
         "preinstall": "npx only-allow pnpm"

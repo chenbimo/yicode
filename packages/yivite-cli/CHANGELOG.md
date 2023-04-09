@@ -1,5 +1,13 @@
 # @yicode/yivite-cli
 
+## 1.18.1
+
+### Patch Changes
+
+-   更新版本
+-   Updated dependencies
+    -   @yicode/yidash@3.2.1
+
 ## 1.18.0
 
 ### Minor Changes

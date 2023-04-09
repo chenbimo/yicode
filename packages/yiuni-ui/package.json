@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiuni-ui",
-    "version": "3.2.0",
+    "version": "3.2.1",
     "description": "yiuni-ui（易有你爱）uniapp UI框架",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
