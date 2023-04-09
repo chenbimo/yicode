@@ -54,7 +54,7 @@
         "lodash-es": "^4.17.21",
         "luch-request": "^3.0.8",
         "mp-html": "^2.4.1",
-        "pinia": "^2.0.32",
+        "pinia": "^2.0.34",
         "vue": "^3.2.47",
         "vue-i18n": "^9.2.2"
     },
@@ -65,10 +65,10 @@
         "@dcloudio/uni-stacktracey": "vue3",
         "@dcloudio/vite-plugin-uni": "vue3",
         "husky": "^8.0.3",
-        "lint-staged": "^13.2.0",
+        "lint-staged": "^13.2.1",
         "prettier": "^2.8.7",
         "rollup-plugin-copy": "^3.4.0",
-        "sass": "^1.60.0",
-        "vite": "4.3.0-beta.3"
+        "sass": "^1.61.0",
+        "vite": "4.3.0-beta.4"
     }
 }

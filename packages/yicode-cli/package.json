@@ -12,13 +12,13 @@
     "repository": "https://github.com/chenbimo/yicode.git",
     "files": [],
     "dependencies": {
-        "@oclif/core": "^2",
-        "@oclif/plugin-help": "^5",
+        "@oclif/core": "^2.8.0",
+        "@oclif/plugin-help": "^5.2.9",
         "@oclif/plugin-plugins": "^2.4.4"
     },
     "devDependencies": {
-        "oclif": "^3",
-        "shx": "^0.3.3"
+        "oclif": "^3.7.3",
+        "shx": "^0.3.4"
     },
     "oclif": {
         "bin": "mynewcli",
