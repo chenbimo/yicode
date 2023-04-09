@@ -4,6 +4,7 @@
     "description": "易接口免费模板",
     "main": "yiapi.js",
     "type": "module",
+    "private": false,
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "dev": "nodemon --config=nodemon.json",
