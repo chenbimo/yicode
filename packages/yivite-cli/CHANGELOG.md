@@ -1,5 +1,11 @@
 # @yicode/yivite-cli
 
+## 1.18.2
+
+### Patch Changes
+
+-   精简图标集
+
 ## 1.18.1
 
 ### Patch Changes
