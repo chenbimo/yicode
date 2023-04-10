@@ -23,7 +23,8 @@ export const apiSchema = {
             thumbnail: fnSchema(schemaConfig.image, '字典缩略图'),
             image_lists: fnSchema(schemaConfig.image_lists, '字典轮播图'),
             describe: fnSchema(null, '字典描述', 'string', 0, 300),
-            content: fnSchema(schemaConfig.content, '字典正文')
+            content: fnSchema(schemaConfig.content, '字典正文'),
+            state: fnSchema(schemaConfig.state, '是否启用')
         },
         required: ['id']
     }
@@ -58,7 +59,8 @@ export default async function (fastify, opts) {
                     thumbnail: req.body.thumbnail,
                     images: req.body.images,
                     describe: req.body.describe,
-                    content: req.body.content
+                    content: req.body.content,
+                    state: req.body.state
                 };
 
                 let result = await dictionaryModel //

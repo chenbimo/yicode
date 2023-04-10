@@ -344,7 +344,7 @@ async function syncDatabase() {
                             // 设置唯一标识
                             table['string']('uuid', 128).index().notNullable().defaultTo('').comment('唯一标识符');
                             // 设置状态
-                            table['tinyint']('state').notNullable().defaultTo(0).comment('状态');
+                            table['tinyint']('state').notNullable().defaultTo(0).comment('状态(0:正常,1:禁用,2)');
 
                             // 设置时间
                             table['bigint']('created_at').notNullable().unsigned().defaultTo(0).comment('创建时间');
