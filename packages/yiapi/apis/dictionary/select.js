@@ -16,6 +16,7 @@ export const apiSchema = {
         properties: {
             page: fnSchema(schemaConfig.page, '第几页'),
             limit: fnSchema(schemaConfig.limit, '每页数量'),
+            state: fnSchema(schemaConfig.state, '是否开启'),
             category: fnSchema(null, '分类代号', 'string', 1, 20, null)
         },
         required: ['category']
@@ -38,6 +39,9 @@ export default async function (fastify, opts) {
                     .modify(function (queryBuilder) {
                         if (req.body.keywords !== undefined) {
                             queryBuilder.where('name', 'like', `%${req.body.keywords}%`);
+                        }
+                        if (req.body.state !== undefined) {
+                            queryBuilder.where('state', req.body.state);
                         }
                     });
 

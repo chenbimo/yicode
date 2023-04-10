@@ -14,7 +14,8 @@ export const apiSchema = {
         title: '查询所有轮播图接口',
         type: 'object',
         properties: {
-            category: fnSchema(null, '分类代号', 'string', 1, 20, null)
+            category: fnSchema(null, '分类代号', 'string', 1, 20, null),
+            state: fnSchema(schemaConfig.state, '是否开启')
         }
     }
 };
@@ -29,7 +30,14 @@ export default async function (fastify, opts) {
         },
         handler: async function (req, res) {
             try {
-                let dictionaryModel = fastify.mysql.table(mapTableConfig.sys_dictionary).where('category', req.body.category);
+                let dictionaryModel = fastify.mysql
+                    .table(mapTableConfig.sys_dictionary)
+                    .where('category', req.body.category)
+                    .modify(function (queryBuilder) {
+                        if (req.body.state !== undefined) {
+                            queryBuilder.where('state', req.body.state);
+                        }
+                    });
                 let resultData = await dictionaryModel.clone().select();
 
                 let rows = resultData.map((item) => {
