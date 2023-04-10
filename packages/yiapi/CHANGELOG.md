@@ -1,5 +1,11 @@
 # @yicode/yiapi
 
+## 1.21.3
+
+### Patch Changes
+
+-   字段查询增加状态字段过滤
+
 ## 1.21.2
 
 ### Patch Changes
