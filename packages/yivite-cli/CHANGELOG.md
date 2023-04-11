@@ -1,5 +1,11 @@
 # @yicode/yivite-cli
 
+## 1.18.3
+
+### Patch Changes
+
+-   升级依赖
+
 ## 1.18.2
 
 ### Patch Changes
