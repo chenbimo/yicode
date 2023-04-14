@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yivite-cli",
-    "version": "1.18.4",
+    "version": "1.19.0",
     "description": "专注于vite + vue3 的项目开发脚手架",
     "main": "index.js",
     "bin": {
@@ -136,6 +136,7 @@
         "@unocss/transformer-directives": "^0.50.8",
         "@unocss/transformer-variant-group": "^0.50.8",
         "@vitejs/plugin-vue": "^4.1.0",
+        "@vue-macros/reactivity-transform": "^0.3.4",
         "@yicode/commander": "^10.0.3",
         "@yicode/yidash": "workspace:^",
         "fast-glob": "^3.2.12",

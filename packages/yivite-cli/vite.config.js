@@ -22,6 +22,7 @@ import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import { createRequire } from 'module';
 import topLevelAwait from 'vite-plugin-top-level-await';
+import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 
 import { cliDir, appDir, srcDir, yicodeDir, cacheDir } from './config.js';
 import { fnGetFileProtocolPath, fnImportModule, fnOmit, requireFrom } from './utils.js';
@@ -50,7 +51,7 @@ export default defineConfig(async ({ command, mode }) => {
 
     // vue 插件
     let vuePlugin = {
-        reactivityTransform: true
+        // reactivityTransform: true
     };
 
     // 自动导入插件
@@ -229,6 +230,7 @@ export default defineConfig(async ({ command, mode }) => {
 
     // 插件列表
     let allPlugins = [];
+    allPlugins.push(ReactivityTransform());
     allPlugins.push(Unocss.default(unocssConfig));
     allPlugins.push(Icons(iconsPlugin));
     allPlugins.push(viteVue(vuePlugin));

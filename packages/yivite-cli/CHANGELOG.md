@@ -1,5 +1,11 @@
 # @yicode/yivite-cli
 
+## 1.19.0
+
+### Minor Changes
+
+-   响应式语法糖使用独立包
+
 ## 1.18.4
 
 ### Patch Changes
