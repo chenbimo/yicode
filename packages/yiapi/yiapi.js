@@ -226,7 +226,7 @@ thirdPluginsFiles.forEach((file) => {
 function initServer() {
     return new Promise(async (resolve, reject) => {
         // 启动服务！
-        fastify.listen({ port: appConfig.port }, async function (err, address) {
+        fastify.listen({ port: appConfig.port, host: '127.0.0.1' }, async function (err, address) {
             if (err) {
                 fastify.log.error(err);
                 process.exit(1);
