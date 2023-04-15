@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yivite-cli",
-    "version": "1.19.0",
+    "version": "1.19.2",
     "description": "专注于vite + vue3 的项目开发脚手架",
     "main": "index.js",
     "bin": {
@@ -145,11 +145,11 @@
         "portfinder": "^1.0.32",
         "rollup-plugin-visualizer": "^5.9.0",
         "unocss": "^0.50.8",
-        "unplugin-auto-import": "^0.15.2",
+        "unplugin-auto-import": "^0.15.3",
         "unplugin-icons": "^0.16.1",
         "unplugin-vue-components": "^0.24.1",
         "unplugin-vue-define-options": "^1.3.3",
-        "vite": "4.3.0-beta.5",
+        "vite": "4.3.0-beta.6",
         "vite-plugin-chunk-split": "^0.4.7",
         "vite-plugin-html": "^3.2.0",
         "vite-plugin-inspect": "^0.7.21",

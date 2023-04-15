@@ -1,5 +1,17 @@
 # @yicode/yicode-cli
 
+## 0.0.5
+
+### Patch Changes
+
+-   更新依赖
+
+## 0.0.4
+
+### Patch Changes
+
+-   更新依赖
+
 ## 0.0.3
 
 ### Patch Changes
