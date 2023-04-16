@@ -59,7 +59,13 @@ export default {
     bio: {
         type: 'string',
         comment: '签名',
-        length: 300,
+        length: 100,
+        default: ''
+    },
+    describe: {
+        type: 'string',
+        comment: '描述',
+        length: 500,
         default: ''
     },
     is_recommend: {
