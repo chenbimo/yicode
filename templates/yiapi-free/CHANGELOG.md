@@ -1,5 +1,12 @@
 # @yicode/template-yiapi-free
 
+## 0.3.7
+
+### Patch Changes
+
+-   Updated dependencies
+    -   @yicode/yiapi@1.21.7
+
 ## 0.3.6
 
 ### Patch Changes
