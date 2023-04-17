@@ -270,7 +270,7 @@ export default defineConfig(async ({ command, mode }) => {
             root: appDir,
             base: './',
             envDir: path.resolve(srcDir, 'env'),
-            logLevel: 'warn',
+            logLevel: 'info',
             build: {
                 reportCompressedSize: false,
                 chunkSizeWarningLimit: 4096,
