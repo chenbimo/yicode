@@ -1,5 +1,3 @@
-import { GetModuleInfo } from 'rollup';
-
 export function staticImportedScan(id, getModuleInfo, cache, importChain) {
     if (cache.has(id)) {
         return cache.get(id);

@@ -1,12 +1,11 @@
-import { ManualChunksOption } from 'rollup';
-import { Plugin } from 'vite';
 import assert from 'assert';
 import path from 'path';
+import { init, parse } from 'es-module-lexer';
+import MagicString from 'magic-string';
+
 import { staticImportedScan } from './staticImportScan';
 import { isCSSIdentifier } from './helper';
 import { normalizePath, resolveEntry } from './utils';
-import { init, parse } from 'es-module-lexer';
-import MagicString from 'magic-string';
 
 const SPLIT_DEFAULT_MODULES = {
     __commonjsHelpers__: [/commonjsHelpers/]
@@ -21,7 +20,7 @@ const wrapCustomSplitConfig = async (manualChunks, customOptions, customChunk, r
     const depsInGroup = {};
     for (const group of groups) {
         const packageInfo = customOptions[group];
-        depsInGroup[group] = await Promise.all(packageInfo.filter((item) => typeof item === 'string').map((item) => resolveEntry(item as string, root)));
+        depsInGroup[group] = await Promise.all(packageInfo.filter((item) => typeof item === 'string').map((item) => resolveEntry(item, root)));
         depsInGroup[group] = depsInGroup[group].filter((item) => item.length > 0);
     }
     return (moduleId, { getModuleIds, getModuleInfo }) => {

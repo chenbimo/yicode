@@ -2,14 +2,14 @@
     "name": "@yicode/yivite-chunk",
     "version": "1.0.2",
     "description": "vite代码分割",
-    "main": "index.js",
-    "type": "module",
+    "main": "lib.js",
     "private": false,
     "publishConfig": {
         "access": "public"
     },
     "scripts": {
-        "preinstall": "npx only-allow pnpm"
+        "preinstall": "npx only-allow pnpm",
+        "build": "rollup -c"
     },
     "repository": {
         "type": "git",

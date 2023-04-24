@@ -54,7 +54,7 @@
         "knex-schema-inspector": "^3.0.1",
         "lodash-es": "^4.17.21",
         "log-symbols": "^5.1.0",
-        "merge-anything": "^5.1.4",
+        "merge-anything": "^5.1.5",
         "micromatch": "^4.0.5",
         "mysql2": "^3.2.3",
         "nanoid": "^4.0.2",
