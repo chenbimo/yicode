@@ -51,7 +51,7 @@ export default async function (fastify, opts) {
                 }
 
                 // 判断密码
-                if (fnMD5(fnPureMD5(req.body.password)) !== adminData.password) {
+                if (fnMD5(req.body.password) !== adminData.password) {
                     return {
                         ...constantConfig.code.FAIL,
                         msg: '密码错误'

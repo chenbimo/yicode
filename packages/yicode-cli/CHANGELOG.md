@@ -1,5 +1,11 @@
 # @yicode/yicode-cli
 
+## 0.0.7
+
+### Patch Changes
+
+-   发布版本
+
 ## 0.0.6
 
 ### Patch Changes

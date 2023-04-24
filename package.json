@@ -33,7 +33,7 @@
         "@changesets/cli": "^2.26.1",
         "conventional-changelog-cli": "^2.2.2",
         "lint-staged": "^13.2.1",
-        "prettier": "^2.8.7",
+        "prettier": "^2.8.8",
         "simple-git-hooks": "^2.8.1"
     },
     "simple-git-hooks": {

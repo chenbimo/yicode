@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiuni-vue3",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": false,
     "scripts": {
         "dev:app": "uni -p app",
@@ -49,13 +49,13 @@
         "@dcloudio/uni-mp-toutiao": "vue3",
         "@dcloudio/uni-mp-weixin": "vue3",
         "@dcloudio/uni-quickapp-webview": "vue3",
-        "@dcloudio/uni-ui": "^1.4.26",
+        "@dcloudio/uni-ui": "^1.4.27",
         "blueimp-md5": "^2.19.0",
         "dayjs": "^1.11.7",
         "lodash-es": "^4.17.21",
         "luch-request": "^3.0.8",
         "mp-html": "^2.4.1",
-        "pinia": "^2.0.34",
+        "pinia": "^2.0.35",
         "vue": "^3.2.47",
         "vue-i18n": "^9.2.2"
     },
@@ -67,7 +67,7 @@
         "@dcloudio/vite-plugin-uni": "vue3",
         "husky": "^8.0.3",
         "lint-staged": "^13.2.1",
-        "prettier": "^2.8.7",
+        "prettier": "^2.8.8",
         "rollup-plugin-copy": "^3.4.0",
         "sass": "^1.62.0",
         "vite": "4.3.0"

@@ -142,7 +142,7 @@ async function plugin(fastify, opts) {
                 username: 'dev',
                 nickname: '开发管理员',
                 role_codes: 'dev',
-                password: fnMD5(fnPureMD5(fnPureMD5(appConfig.devPassword)))
+                password: fnMD5(fnPureMD5(appConfig.devPassword))
             };
             await adminModel.clone().insert(fnClearInsertData(insertApiData));
         }

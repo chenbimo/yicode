@@ -1,7 +1,7 @@
 {
-    "name": "@yicode/yivite-cli",
-    "version": "1.20.1",
-    "description": "专注于vite + vue3 的项目开发脚手架",
+    "name": "@yicode/yivite-chunk",
+    "version": "1.20.0",
+    "description": "vite代码分割",
     "main": "index.js",
     "bin": {
         "yivite": "index.js"
