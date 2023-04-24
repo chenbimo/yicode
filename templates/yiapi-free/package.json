@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yiapi-free",
-    "version": "0.3.8",
+    "version": "0.3.11",
     "description": "易接口免费模板",
     "main": "yiapi.js",
     "type": "module",
@@ -19,7 +19,7 @@
     "homepage": "https://yicode.tech",
     "repository": {
         "type": "git",
-        "url": "https://github.com/chenbimo/yivite-cli.git"
+        "url": "https://github.com/chenbimo/yicode.git"
     },
     "dependencies": {
         "@yicode/yiapi": "workspace:^",

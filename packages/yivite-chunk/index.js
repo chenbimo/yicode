@@ -2,31 +2,30 @@ import { ManualChunksOption } from 'rollup';
 import { Plugin } from 'vite';
 import assert from 'assert';
 import path from 'path';
-import { ChunkSplit, CustomChunk, CustomSplitting } from './types';
 import { staticImportedScan } from './staticImportScan';
 import { isCSSIdentifier } from './helper';
 import { normalizePath, resolveEntry } from './utils';
 import { init, parse } from 'es-module-lexer';
 import MagicString from 'magic-string';
 
-const SPLIT_DEFAULT_MODULES: CustomSplitting = {
+const SPLIT_DEFAULT_MODULES = {
     __commonjsHelpers__: [/commonjsHelpers/]
 };
 
-const cache = new Map<string, boolean>();
+const cache = new Map();
 
-const wrapCustomSplitConfig = async (manualChunks: ManualChunksOption, customOptions: CustomSplitting, customChunk: CustomChunk, root: string): Promise<ManualChunksOption> => {
+const wrapCustomSplitConfig = async (manualChunks, customOptions, customChunk, root) => {
     assert(typeof manualChunks === 'function');
     const groups = Object.keys(customOptions);
     // Create cache ahead of time to decrease the cost of resolve.sync!
-    const depsInGroup: Record<string, string[]> = {};
+    const depsInGroup = {};
     for (const group of groups) {
         const packageInfo = customOptions[group];
-        depsInGroup[group] = await Promise.all(packageInfo.filter((item): boolean => typeof item === 'string').map((item) => resolveEntry(item as string, root)));
+        depsInGroup[group] = await Promise.all(packageInfo.filter((item) => typeof item === 'string').map((item) => resolveEntry(item as string, root)));
         depsInGroup[group] = depsInGroup[group].filter((item) => item.length > 0);
     }
-    return (moduleId, { getModuleIds, getModuleInfo }): string | null | undefined => {
-        const isDepInclude = (id: string, depPaths: string[], importChain: string[]): boolean | null | undefined => {
+    return (moduleId, { getModuleIds, getModuleInfo }) => {
+        const isDepInclude = (id, depPaths, importChain) => {
             // compat windows
             id = normalizePath(id);
             const key = `${id}-${depPaths.join('|')}`;
@@ -84,7 +83,7 @@ const wrapCustomSplitConfig = async (manualChunks: ManualChunksOption, customOpt
     };
 };
 
-const generateManualChunks = async (splitOptions: ChunkSplit, root: string) => {
+const generateManualChunks = async (splitOptions, root) => {
     const { strategy = 'default', customSplitting = {}, customChunk = () => null } = splitOptions;
 
     if (strategy === 'all-in-one') {
@@ -93,7 +92,7 @@ const generateManualChunks = async (splitOptions: ChunkSplit, root: string) => {
 
     if (strategy === 'unbundle') {
         return wrapCustomSplitConfig(
-            (id, { getModuleInfo }): string | undefined => {
+            (id, { getModuleInfo }) => {
                 if (id.includes('node_modules') && !isCSSIdentifier(id)) {
                     if (staticImportedScan(id, getModuleInfo, new Map(), [])) {
                         return 'vendor';
@@ -117,7 +116,7 @@ const generateManualChunks = async (splitOptions: ChunkSplit, root: string) => {
     }
 
     return wrapCustomSplitConfig(
-        (id, { getModuleInfo }): string | undefined => {
+        (id, { getModuleInfo }) => {
             if (id.includes('node_modules') && !isCSSIdentifier(id)) {
                 if (staticImportedScan(id, getModuleInfo, new Map(), [])) {
                     return 'vendor';
@@ -134,12 +133,12 @@ const generateManualChunks = async (splitOptions: ChunkSplit, root: string) => {
 };
 
 export function chunkSplitPlugin(
-    splitOptions: ChunkSplit = {
+    splitOptions = {
         strategy: 'default'
     }
-): Plugin {
+) {
     return {
-        name: 'vite-plugin-chunk-split',
+        name: 'yivite-chunk',
         async config(c) {
             await init;
             const root = normalizePath(c.root || process.cwd());

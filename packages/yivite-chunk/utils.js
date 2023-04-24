@@ -1,14 +1,13 @@
 import os from 'os';
 import path from 'path';
-import type { InternalResolveOptions } from 'vite';
 
 const dynamicImport = new Function('m', 'return import(m)');
 
-export function slash(p: string): string {
+export function slash(p) {
     return p.replace(/\\/g, '/');
 }
 
-export function normalizePath(id: string): string {
+export function normalizePath(id) {
     let key = path.posix.normalize(isWindows ? slash(id) : id);
     if (key.charCodeAt(0) === 0) {
         key = key.substring(1);
@@ -17,9 +16,9 @@ export function normalizePath(id: string): string {
 }
 export const isWindows = os.platform() === 'win32';
 
-export async function resolveEntry(name: string, root: string): Promise<string> {
+export async function resolveEntry(name, root) {
     const { resolvePackageEntry, resolvePackageData } = await dynamicImport('vite');
-    return resolvePackageEntry(name, resolvePackageData(name, root, true)!, true, {
+    return resolvePackageEntry(name, resolvePackageData(name, root, true), true, {
         isBuild: true,
         isProduction: process.env.NODE_ENV === 'production',
         isRequire: false,
@@ -28,5 +27,5 @@ export async function resolveEntry(name: string, root: string): Promise<string> 
         mainFields: [],
         conditions: []
         // extensions: []
-    } as unknown as InternalResolveOptions)!;
+    });
 }

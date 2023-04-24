@@ -1,5 +1,27 @@
 # @yicode/yivite-cli
 
+## 1.20.4
+
+### Patch Changes
+
+-   发布版本
+-   Updated dependencies
+    -   @yicode/yivite-chunk@1.0.2
+
+## 1.20.3
+
+### Patch Changes
+
+-   发布版本
+-   Updated dependencies
+    -   @yicode/yivite-chunk@1.0.1
+
+## 1.20.2
+
+### Patch Changes
+
+-   发布版本
+
 ## 1.20.1
 
 ### Patch Changes

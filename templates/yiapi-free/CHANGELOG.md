@@ -1,5 +1,23 @@
 # @yicode/template-yiapi-free
 
+## 0.3.11
+
+### Patch Changes
+
+-   发布版本
+
+## 0.3.10
+
+### Patch Changes
+
+-   发布版本
+
+## 0.3.9
+
+### Patch Changes
+
+-   发布版本
+
 ## 0.3.8
 
 ### Patch Changes
