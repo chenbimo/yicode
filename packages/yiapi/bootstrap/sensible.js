@@ -6,4 +6,4 @@ async function plugin(fastify, opts) {
         errorHandler: false
     });
 }
-export default fp(plugin);
+export default fp(plugin, { name: 'sensible' });

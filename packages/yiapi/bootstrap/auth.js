@@ -156,4 +156,4 @@ async function plugin(fastify, opts) {
         }
     });
 }
-export default fp(plugin, { dependencies: ['cors', 'mysql', 'tool'] });
+export default fp(plugin, { name: 'auth', dependencies: ['cors', 'mysql', 'tool'] });
