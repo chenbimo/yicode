@@ -16,7 +16,9 @@ const mapTableConfig = mergeAny(
         sys_notice: 'sys_notice',
         sys_role: 'sys_role',
         sys_tree: 'sys_tree',
-        sys_user: 'sys_user'
+        sys_user: 'sys_user',
+        sys_menu: 'sys_menu',
+        sys_api: 'sys_api'
     },
     importConfig
 );

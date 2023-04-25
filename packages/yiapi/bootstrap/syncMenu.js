@@ -9,10 +9,10 @@ import { mapTableConfig } from '../config/mapTable.js';
 async function syncMenuDir(fastify) {
     try {
         // 准备好表
-        let treeModel = fastify.mysql.table(`${mapTableConfig.sys_tree}`);
+        let menuModel = fastify.mysql.table(mapTableConfig.sys_menu);
 
         // 第一次请求菜单数据，用于创建一级菜单
-        let menuData = await treeModel.clone().where({ category: 'menu', pid: 0 }).select();
+        let menuData = await menuModel.clone().where({ pid: 0 }).select();
         let menuValue = [];
 
         // 将要添加的目录数据
@@ -35,7 +35,6 @@ async function syncMenuDir(fastify) {
             if (menuValue.includes(item.name) === false) {
                 insertMenuData.push({
                     uuid: fnUUID(),
-                    category: 'menu',
                     name: item.name,
                     value: item.value,
                     level: 1,
@@ -51,11 +50,11 @@ async function syncMenuDir(fastify) {
         });
 
         if (_isEmpty(deleteMenuData)) {
-            await treeModel.clone().whereIn('uuid', deleteMenuData).delete();
+            await menuModel.clone().whereIn('uuid', deleteMenuData).delete();
         }
 
         if (_isEmpty(insertMenuData) === false) {
-            await treeModel.clone().insert(insertMenuData);
+            await menuModel.clone().insert(insertMenuData);
         }
     } catch (err) {
         fastify.log.error(err);
@@ -67,13 +66,13 @@ async function syncMenuDir(fastify) {
 async function syncMenuFile(fastify) {
     try {
         // 准备好表
-        let treeModel = fastify.mysql.table(`${mapTableConfig.sys_tree}`);
+        let menuModel = fastify.mysql.table(`${mapTableConfig.sys_menu}`);
 
-        let menuParentData = await treeModel.clone().where({ category: 'menu', pid: 0 }).select();
+        let menuParentData = await menuModel.clone().where({ pid: 0 }).select();
         let menuParentObject = _keyBy(menuParentData, 'name');
 
         // 第二次请求菜单数据，用于创建二级菜单
-        let menuChildData = await treeModel.clone().where('category', 'menu').andWhere('pid', '<>', 0).select();
+        let menuChildData = await menuModel.clone().andWhere('pid', '<>', 0).select();
 
         // 菜单名数组
         let menuValue = [];
@@ -104,7 +103,6 @@ async function syncMenuFile(fastify) {
                     if (parentMenuData) {
                         insertMenuFile.push({
                             uuid: fnUUID(),
-                            category: 'menu',
                             name: item.name,
                             value: item.value,
                             level: 2,
@@ -122,11 +120,11 @@ async function syncMenuFile(fastify) {
         });
 
         if (_isEmpty(deleteMenuFile) === false) {
-            await treeModel.clone().whereIn('uuid', deleteMenuFile).delete();
+            await menuModel.clone().whereIn('uuid', deleteMenuFile).delete();
         }
 
         if (_isEmpty(insertMenuFile) === false) {
-            await treeModel.clone().insert(insertMenuFile);
+            await menuModel.clone().insert(insertMenuFile);
         }
     } catch (err) {
         fastify.log.error(err);

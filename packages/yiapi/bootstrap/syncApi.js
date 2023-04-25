@@ -31,7 +31,7 @@ import { systemConfig } from '../system.js';
 // 同步接口目录
 async function syncApiDir(fastify) {
     // 准备好表
-    let treeModel = fastify.mysql.table(`${mapTableConfig.sys_tree}`);
+    let apiModel = fastify.mysql.table(mapTableConfig.sys_api);
 
     // 所有的接口元数据文件，用来生成目录
     let allApiMeta = await fnAllApiMeta();
@@ -42,7 +42,7 @@ async function syncApiDir(fastify) {
     });
 
     // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
-    let apis = await treeModel.clone().where({ category: 'api' });
+    let apis = await apiModel.clone().select();
 
     // 所有接口目录数据
     let apisDir = apis.filter((item) => item.is_bool === 0);
@@ -83,7 +83,6 @@ async function syncApiDir(fastify) {
         }
         apiMeta.value = apiDirName;
         apiMeta.is_bool = 0;
-        apiMeta.category = 'api';
         apiMeta.pid = 0;
         apiMeta.pids = '0';
 
@@ -101,18 +100,18 @@ async function syncApiDir(fastify) {
 
     // 如果待删除接口目录大于0，则删除
     if (_isEmpty(deleteApiDirData) === false) {
-        await treeModel.clone().whereIn('id', deleteApiDirData).delete();
+        await apiModel.clone().whereIn('id', deleteApiDirData).delete();
     }
 
     // 如果待增加接口目录大于0，则增加
     if (_isEmpty(insertApiDirData) === false) {
-        await treeModel.clone().insert(insertApiDirData);
+        await apiModel.clone().insert(insertApiDirData);
     }
 
     // 如果待更新接口目录大于0，则更新
     if (_isEmpty(updateApiDirData) === false) {
         const updateBatchData = updateApiDirData.map((item) => {
-            return treeModel
+            return apiModel
                 .clone()
                 .where('id', item.id)
                 .update(_omit(item, ['id', 'uuid', 'created_at']));
@@ -125,7 +124,7 @@ async function syncApiDir(fastify) {
 async function syncApiFile(fastify) {
     try {
         // 准备好表
-        let treeModel = fastify.mysql.table(`${mapTableConfig.sys_tree}`);
+        let apiModel = fastify.mysql.table(mapTableConfig.sys_api);
 
         // 所有的接口文件，用来生成接口
         let allApiFiles = await fnAllApiFiles();
@@ -136,7 +135,7 @@ async function syncApiFile(fastify) {
         });
 
         // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
-        let apis = await treeModel.clone().where({ category: 'api' });
+        let apis = await apiModel.clone().select();
 
         // 所有接口目录数据
         let apisDir = apis.filter((item) => item.is_bool === 0);
@@ -191,7 +190,6 @@ async function syncApiFile(fastify) {
                 let apiParams = {
                     uuid: fnUUID(),
                     pid: 0,
-                    category: 'api',
                     name: apiSchema?.summary || '',
                     value: apiFileName,
                     icon: '',
@@ -253,18 +251,18 @@ async function syncApiFile(fastify) {
 
         // 如果待删除接口大于0，则删除
         if (_isEmpty(deleteApiData) === false) {
-            await treeModel.clone().whereIn('id', deleteApiData).delete();
+            await apiModel.clone().whereIn('id', deleteApiData).delete();
         }
 
         // 如果待增加接口大于0，则增加
         if (_isEmpty(insertApiData) === false) {
-            await treeModel.clone().insert(insertApiData);
+            await apiModel.clone().insert(insertApiData);
         }
 
         // 如果待更新接口大于0，则更新
         if (_isEmpty(updateApiData) === false) {
             const updateBatchData = updateApiData.map((item) => {
-                return treeModel.clone().where('id', item.id).update(_omit(item, 'id'));
+                return apiModel.clone().where('id', item.id).update(_omit(item, 'id'));
             });
             await Promise.all(updateBatchData);
         }
