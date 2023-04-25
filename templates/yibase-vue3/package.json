@@ -1,7 +1,7 @@
 {
-    "name": "@yicode/yibase-vue3",
+    "name": "@yicode-template/yibase-vue3",
     "private": false,
-    "version": "1.0.0",
+    "version": "1.0.2",
     "scripts": {
         "dev": "yivite dev",
         "build": "yivite build"
