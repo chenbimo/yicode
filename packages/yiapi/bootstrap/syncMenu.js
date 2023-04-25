@@ -1,9 +1,23 @@
 import fp from 'fastify-plugin';
-import { forEach as _forEach, isEmpty as _isEmpty, keyBy as _keyBy } from 'lodash-es';
+import {
+    //
+    forEach as _forEach,
+    isEmpty as _isEmpty,
+    keyBy as _keyBy,
+    omit as _omit,
+    forOwn as _forOwn,
+    isObject as _isObject,
+    cloneDeep as _cloneDeep,
+    uniq as _uniq
+} from 'lodash-es';
 
-import { fnCamelCase, fnUUID, fnTimestamp } from '../utils/index.js';
+import { fnUUID, fnTimestamp, fnKebabCase } from '../utils/index.js';
 import { menuConfig } from '../config/menu.js';
 import { mapTableConfig } from '../config/mapTable.js';
+
+let menuConfigNew = [];
+let menuDirNew = [];
+let menuFileNew = [];
 
 // 同步菜单目录
 async function syncMenuDir(fastify) {
@@ -12,28 +26,32 @@ async function syncMenuDir(fastify) {
         let menuModel = fastify.mysql.table(mapTableConfig.sys_menu);
 
         // 第一次请求菜单数据，用于创建一级菜单
-        let menuData = await menuModel.clone().where({ pid: 0 }).select();
-        let menuValue = [];
+        let menuDir = await menuModel.clone().where({ pid: 0 }).select();
+        let menuDirByValue = _keyBy(menuDir, 'value');
 
-        // 将要添加的目录数据
-        let insertMenuData = [];
+        let deleteMenuDirValue = [];
+        let insertMenuDir = [];
+        let deleteMenuDir = [];
+        let updateMenuDir = [];
 
-        // 将要删除的数据
-        let deleteMenuData = [];
-
-        menuData.forEach((item) => {
-            if (menuValue.includes(item.name)) {
-                deleteMenuData.push(item.uuid);
+        // 删除重复数据
+        menuDir.forEach((item) => {
+            if (deleteMenuDirValue.includes(item.value) === true) {
+                deleteMenuDir.push(item.id);
             } else {
-                menuValue.push(item.name);
+                deleteMenuDirValue.push(item.value);
+            }
+            if (menuDirNew.includes(item.value) === false) {
+                deleteMenuDir.push(item.id);
             }
         });
 
-        _forEach(menuConfig, (item, index) => {
-            item.value = fnCamelCase(item.value);
-
-            if (menuValue.includes(item.name) === false) {
-                insertMenuData.push({
+        _forEach(menuConfigNew, (item, index) => {
+            // item.value = fnKebabCase(item.value);
+            // 映射的菜单数据
+            let mapMenu = menuDirByValue[item.value];
+            if (!mapMenu) {
+                insertMenuDir.push({
                     uuid: fnUUID(),
                     name: item.name,
                     value: item.value,
@@ -46,15 +64,36 @@ async function syncMenuDir(fastify) {
                     created_at: fnTimestamp(),
                     updated_at: fnTimestamp()
                 });
+            } else {
+                updateMenuDir.push({
+                    id: mapMenu.id,
+                    name: item.name,
+                    value: item.value,
+                    describe: item.describe || '',
+                    updated_at: fnTimestamp()
+                });
             }
         });
 
-        if (_isEmpty(deleteMenuData)) {
-            await menuModel.clone().whereIn('uuid', deleteMenuData).delete();
+        // 删除菜单目录
+        if (_isEmpty(deleteMenuDir) === false) {
+            await menuModel.clone().whereIn('id', _uniq(deleteMenuDir)).delete();
         }
 
-        if (_isEmpty(insertMenuData) === false) {
-            await menuModel.clone().insert(insertMenuData);
+        // 添加菜单目录
+        if (_isEmpty(insertMenuDir) === false) {
+            await menuModel.clone().insert(insertMenuDir);
+        }
+
+        // 如果待更新接口目录大于0，则更新
+        if (_isEmpty(updateMenuDir) === false) {
+            const updateBatch = updateMenuDir.map((item) => {
+                return menuModel
+                    .clone()
+                    .where('id', item.id)
+                    .update(_omit(item, ['id']));
+            });
+            await Promise.all(updateBatch);
         }
     } catch (err) {
         fastify.log.error(err);
@@ -68,37 +107,37 @@ async function syncMenuFile(fastify) {
         // 准备好表
         let menuModel = fastify.mysql.table(`${mapTableConfig.sys_menu}`);
 
-        let menuParentData = await menuModel.clone().where({ pid: 0 }).select();
-        let menuParentObject = _keyBy(menuParentData, 'name');
+        let menuDir = await menuModel.clone().where({ pid: 0 }).select();
+        let menuDirByValue = _keyBy(menuDir, 'value');
 
         // 第二次请求菜单数据，用于创建二级菜单
-        let menuChildData = await menuModel.clone().andWhere('pid', '<>', 0).select();
+        let menuData = await menuModel.clone().andWhere('pid', '<>', 0).select();
+        let menuByValue = _keyBy(menuData, 'value');
 
-        // 菜单名数组
-        let menuValue = [];
-
-        // 将要删除的数据
+        let deleteMenuFileValue = [];
+        let insertMenuFile = [];
+        let updateMenuFile = [];
         let deleteMenuFile = [];
 
-        menuChildData.forEach((item) => {
-            if (menuValue.includes(item.name)) {
-                deleteMenuFile.push(item.uuid);
+        // 获得删除数据
+        menuData.forEach((item) => {
+            if (deleteMenuFileValue.includes(item.value)) {
+                deleteMenuFile.push(item.id);
             } else {
-                menuValue.push(item.name);
+                deleteMenuFileValue.push(item.value);
+            }
+            if (menuFileNew.includes(item.value) === false) {
+                deleteMenuFile.push(item.id);
             }
         });
 
-        // 待添加的子菜单（二级菜单）
-        let insertMenuFile = [];
-
-        _forEach(menuConfig, (mainItem) => {
-            mainItem.value = fnCamelCase(mainItem.value);
-
+        _forEach(menuConfigNew, (mainItem) => {
+            // mainItem.value = fnKebabCase(mainItem.value);
             _forEach(mainItem.children, (item, index) => {
-                item.value = fnCamelCase(item.value);
-
-                if (menuValue.includes(item.name) === false) {
-                    let parentMenuData = menuParentObject[mainItem.name] || null;
+                // item.value = fnKebabCase(item.value);
+                let mapMenu = menuByValue[item.value];
+                if (!mapMenu) {
+                    let parentMenuData = menuDirByValue[mainItem.value];
 
                     if (parentMenuData) {
                         insertMenuFile.push({
@@ -115,24 +154,65 @@ async function syncMenuFile(fastify) {
                             updated_at: fnTimestamp()
                         });
                     }
+                } else {
+                    updateMenuFile.push({
+                        id: mapMenu.id,
+                        name: item.name,
+                        value: item.value,
+                        describe: item.describe || '',
+                        updated_at: fnTimestamp()
+                    });
                 }
             });
         });
 
         if (_isEmpty(deleteMenuFile) === false) {
-            await menuModel.clone().whereIn('uuid', deleteMenuFile).delete();
+            await menuModel.clone().whereIn('id', _uniq(deleteMenuFile)).delete();
         }
 
         if (_isEmpty(insertMenuFile) === false) {
             await menuModel.clone().insert(insertMenuFile);
+        }
+
+        // 如果待更新接口目录大于0，则更新
+        if (_isEmpty(updateMenuFile) === false) {
+            const updateBatchData = updateMenuFile.map((item) => {
+                return menuModel
+                    .clone()
+                    .where('id', item.id)
+                    .update(_omit(item, ['id']));
+            });
+            await Promise.all(updateBatchData);
         }
     } catch (err) {
         fastify.log.error(err);
     }
 }
 
+// 转换菜单结构
+async function convertMenuStruct() {
+    let dataArray = [];
+    _forOwn(menuConfig, (item, key) => {
+        item.value = fnKebabCase(key);
+        menuDirNew.push(item.value);
+        if (_isObject(item['children'])) {
+            let childrenData = _cloneDeep(item['children']);
+            item['children'] = [];
+            _forOwn(childrenData, (item2, key2) => {
+                item2.value = fnKebabCase(key2);
+                menuFileNew.push(item2.value);
+                item['children'].push(item2);
+            });
+        }
+        dataArray.push(item);
+    });
+    return dataArray;
+}
+
 async function plugin(fastify) {
     try {
+        menuConfigNew = await convertMenuStruct();
+
         await syncMenuDir(fastify);
         await syncMenuFile(fastify);
     } catch (err) {
