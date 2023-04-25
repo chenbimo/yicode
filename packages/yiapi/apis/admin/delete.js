@@ -37,12 +37,12 @@ export default async function (fastify, opts) {
                 let result = await adminModel.delete();
 
                 return {
-                    ...constantConfig.code.INSERT_SUCCESS,
+                    ...constantConfig.code.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.INSERT_FAIL;
+                return constantConfig.code.DELETE_FAIL;
             }
         }
     });

@@ -36,10 +36,10 @@ export default async function (fastify, opts) {
                     .modify(function (queryBuilder) {});
 
                 let result = await bannerModel.delete();
-                return constantConfig.code.INSERT_SUCCESS;
+                return constantConfig.code.DELETE_SUCCESS;
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.INSERT_FAIL;
+                return constantConfig.code.DELETE_FAIL;
             }
         }
     });
