@@ -350,6 +350,7 @@ export function fnApiParamsCheck(req) {
 /**
  * 可控导入
  * @param {String} path 导入路径
+ * @param {String} name 导入失败时的名称
  * @param {Any} default 默认值
  */
 export async function fnImport(path, name, defaultValue) {
