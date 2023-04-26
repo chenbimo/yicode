@@ -135,7 +135,7 @@
         "@unocss/transformer-compile-class": "^0.51.8",
         "@unocss/transformer-directives": "^0.51.8",
         "@unocss/transformer-variant-group": "^0.51.8",
-        "@vitejs/plugin-vue": "^4.1.0",
+        "@vitejs/plugin-vue": "^4.2.0",
         "@vue-macros/reactivity-transform": "^0.3.4",
         "@yicode/commander": "^10.0.3",
         "@yicode/yidash": "workspace:^",
