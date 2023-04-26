@@ -90,15 +90,18 @@ let $Method = {
                     password: yidash_crypto_md5($Data.formData.password)
                 }
             });
-            console.log('🚀 ~ file: index.vue:90 ~ apiAdminLogin ~ res:', res);
 
             $Storage.local.set('token', res.token);
             $Storage.local.set('userData', res.data);
 
             $GlobalData.token = res.token;
             $GlobalData.userData = res.data;
-
-            // $Router.push('/');
+            Message.success({
+                content: res.msg
+            });
+            setTimeout(() => {
+                $Router.push('/');
+            }, 1500);
         } catch (err) {
             console.log('🚀 ~ file: index.vue:100 ~ apiAdminLogin ~ err:', err);
             Message.error({
