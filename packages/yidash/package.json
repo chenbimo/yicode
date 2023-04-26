@@ -5,9 +5,12 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm"
     },
-    "main": "./index.js",
     "type": "module",
     "private": false,
+    "exports": {
+        ".": "./index.js",
+        "./yidashLibNames.json": "./yidashLibNames.json"
+    },
     "publishConfig": {
         "access": "public"
     },

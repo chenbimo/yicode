@@ -13,5 +13,5 @@ files.forEach((file) => {
     fileData.push(`export { ${fileName} } from './lib/${file}';\r\n`);
 });
 writeFileSync('./index.js', fileData.join(''));
-writeFileSync('./yidashLibNames.json', JSON.stringify(libNames));
+writeFileSync('./yidashLibNames.json', `${JSON.stringify(libNames)}`);
 console.log('数据生成完毕');
