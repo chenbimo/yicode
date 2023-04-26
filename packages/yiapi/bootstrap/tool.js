@@ -85,7 +85,12 @@ async function plugin(fastify, opts) {
             const dataMenu = await fastify.redisGet(cacheConfig.cacheData_menu, 'json');
 
             let result = dataMenu.filter((item) => {
-                return item.state === 0 && userMenu.includes(item.id);
+                if (item.state === 0 && userMenu.includes(item.id)) {
+                    return true;
+                } else {
+                    console.log('🚀 ~ file: tool.js:92 ~ result ~ item:', item);
+                    return false;
+                }
             });
             return result;
         } catch (err) {
@@ -96,10 +101,9 @@ async function plugin(fastify, opts) {
     // 设置权限数据
     fastify.decorate('cacheTreeData', async () => {
         // 菜单列表
-        let dataTree = await fastify.mysql.table(`${mapTableConfig.sys_tree}`).select();
-
-        let dataMenu = dataTree.filter((item) => item.category === 'menu');
-        let dataApi = dataTree.filter((item) => item.category === 'api');
+        let dataTree = await fastify.mysql.table(mapTableConfig.sys_tree).select();
+        let dataMenu = await fastify.mysql.table(mapTableConfig.sys_menu).select();
+        let dataApi = await fastify.mysql.table(mapTableConfig.sys_api).select();
 
         // 白名单接口
         let dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
