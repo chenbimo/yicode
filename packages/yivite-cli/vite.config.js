@@ -26,7 +26,6 @@ import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 
 import { cliDir, appDir, srcDir, yicodeDir, cacheDir } from './config.js';
 import { fnGetFileProtocolPath, fnImportModule, fnOmit, requireFrom } from './utils.js';
-import yidashLibNames from '@yicode/yidash/yidashLibNames.json' assert { type: 'json' };
 import unocssConfig from './unocss.config.js';
 
 export default defineConfig(async ({ command, mode }) => {
@@ -80,8 +79,7 @@ export default defineConfig(async ({ command, mode }) => {
                     'lodash-es': [
                         //
                         ['*', '_']
-                    ],
-                    '@yicode/yidash': yidashLibNames
+                    ]
                 }
             ],
             dirs: [
