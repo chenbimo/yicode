@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import * as commander from '@yicode/commander';
 import fs from 'fs-extra';
 import url from 'url';
 import path from 'path';
@@ -43,9 +42,6 @@ import { systemConfig } from '../system.js';
 import { databaseConfig } from '../config/database.js';
 import { fieldTypeConfig } from '../config/fieldType.js';
 import { mapTableConfig } from '../config/mapTable.js';
-
-// 主程序
-// const program = new commander.Command();
 
 // 是否全部检测通过，未通过则不进行表创建
 let isCheckPass = true;
