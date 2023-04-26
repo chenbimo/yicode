@@ -1,5 +1,13 @@
 # @yicode/yiadmin-vue3
 
+## 3.2.3
+
+### Patch Changes
+
+-   .
+-   Updated dependencies
+    -   @yicode/yidash@3.2.4
+
 ## 3.2.2
 
 ### Patch Changes

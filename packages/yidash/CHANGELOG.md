@@ -1,5 +1,11 @@
 # @yicode/yidash
 
+## 3.2.4
+
+### Patch Changes
+
+-   .
+
 ## 3.2.3
 
 ### Patch Changes

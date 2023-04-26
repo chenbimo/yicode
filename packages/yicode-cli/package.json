@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yicode-cli",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "yicode（易编程） - 命令行实用工具",
     "author": "chensuiyi <bimostyle@qq.com>",
     "bin": {

@@ -1,5 +1,14 @@
 # @yicode/yivite-cli
 
+## 1.21.1
+
+### Patch Changes
+
+-   .
+-   Updated dependencies
+    -   @yicode/yidash@3.2.4
+    -   @yicode/yivite-chunk@1.0.6
+
 ## 1.21.0
 
 ### Minor Changes
