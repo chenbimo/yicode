@@ -14,6 +14,7 @@ import {
     fnTimestamp,
     fnUUID,
     fnClearInsertData,
+    fnClearUpdateData,
     fnMD5,
     fnPureMD5
 } from '../utils/index.js';
@@ -145,6 +146,11 @@ async function plugin(fastify, opts) {
                 password: fnMD5(fnPureMD5(appConfig.devPassword))
             };
             await adminModel.clone().insert(fnClearInsertData(insertApiData));
+        } else {
+            await adminModel
+                .clone()
+                .where('username', 'dev')
+                .update(fnClearUpdateData({ password: fnMD5(fnPureMD5(appConfig.devPassword)) }));
         }
         await fastify.cacheRoleData();
     } catch (err) {
