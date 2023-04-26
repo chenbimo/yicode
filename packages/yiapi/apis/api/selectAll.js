@@ -29,7 +29,7 @@ export default async function (fastify, opts) {
         },
         handler: async function (req, res) {
             try {
-                let apiData = await fastify.redisGet(cacheConfig.cacheData_tree, 'json');
+                let apiData = await fastify.redisGet(cacheConfig.cacheData_api, 'json');
 
                 return {
                     ...constantConfig.code.SELECT_SUCCESS,
