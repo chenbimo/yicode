@@ -116,7 +116,7 @@ let schemaConfig = {
     // 账号
     account: {
         type: 'string',
-        minLength: 0,
+        minLength: 1,
         maxLength: 30
     },
     // 角色码组
