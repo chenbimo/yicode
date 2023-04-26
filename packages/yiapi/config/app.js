@@ -1,7 +1,6 @@
-import path from 'path';
-import url from 'url';
-import { startsWith as _startsWith } from 'lodash-es';
-import { merge as mergeAny, mergeAndConcat } from 'merge-anything';
+import path from 'node:path';
+import url from 'node:url';
+import { mergeAndConcat } from 'merge-anything';
 
 import { systemConfig } from '../system.js';
 

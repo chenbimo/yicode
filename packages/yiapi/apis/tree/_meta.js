@@ -1,3 +1,4 @@
-export default {
-    name: '系统 - 目录树'
+export const metaConfig = {
+    dir: '系统 - 嵌套树',
+    name: '嵌套树'
 };

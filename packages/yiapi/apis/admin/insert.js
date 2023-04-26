@@ -3,15 +3,15 @@ import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo, fnMD5, fnPureMD5, 
 import { mapTableConfig } from '../../config/mapTable.js';
 import { constantConfig } from '../../config/constant.js';
 import { schemaConfig } from '../../config/schema.js';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
     tags: [apiInfo.parentDirName],
-    summary: `添加管理员`,
-    description: `${apiInfo.apiPath}`,
+    summary: `添加${metaConfig.name}`,
     body: {
-        title: '添加管理员接口',
+        title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
             username: fnSchema(schemaConfig.username, '用户名'),

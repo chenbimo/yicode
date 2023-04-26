@@ -3,15 +3,15 @@ import { fnSchema, fnApiInfo } from '../../utils/index.js';
 import { mapTableConfig } from '../../config/mapTable.js';
 import { constantConfig } from '../../config/constant.js';
 import { schemaConfig } from '../../config/schema.js';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
     tags: [apiInfo.parentDirName],
-    summary: `删除角色`,
-    description: `${apiInfo.apiPath}`,
+    summary: `删除${metaConfig.name}`,
     body: {
-        title: '删除角色接口',
+        title: `删除${metaConfig.name}接口`,
         type: 'object',
         properties: {
             id: fnSchema(schemaConfig.id, '唯一ID')

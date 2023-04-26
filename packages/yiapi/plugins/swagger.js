@@ -15,7 +15,7 @@ async function main(fastify, opts) {
                 description: `${appConfig.appName}接口文档`,
                 version: '1.0.0'
             },
-            host: 'localhost',
+            host: '127.0.0.1',
             schemes: ['http'],
             consumes: ['application/json'],
             produces: ['application/json']

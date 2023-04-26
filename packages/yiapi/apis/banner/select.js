@@ -3,15 +3,15 @@ import { fnApiInfo, fnPageOffset, fnSchema } from '../../utils/index.js';
 import { mapTableConfig } from '../../config/mapTable.js';
 import { constantConfig } from '../../config/constant.js';
 import { schemaConfig } from '../../config/schema.js';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
-    summary: `查询轮播图`,
+    summary: `查询${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
-    description: `${apiInfo.apiPath}`,
     body: {
-        title: '查询轮播图接口',
+        title: `查询${metaConfig.name}接口`,
         type: 'object',
         properties: {
             page: fnSchema(schemaConfig.page, '第几页'),

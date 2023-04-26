@@ -1,5 +1,4 @@
-// 初始化用到的菜单配置，请勿改动
-import path from 'path';
+import path from 'node:path';
 import { forOwn as _forOwn, values as _values } from 'lodash-es';
 import { merge as mergeAny } from 'merge-anything';
 

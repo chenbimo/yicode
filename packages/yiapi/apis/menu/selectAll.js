@@ -1,22 +1,21 @@
-import { fnSchema, fnApiInfo } from '../../utils/index.js';
+import { fnApiInfo, fnSchema } from '../../utils/index.js';
 
 import { mapTableConfig } from '../../config/mapTable.js';
 import { constantConfig } from '../../config/constant.js';
 import { schemaConfig } from '../../config/schema.js';
+import { cacheConfig } from '../../config/cache.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
-    summary: `增加${metaConfig.name}浏览量`,
+    summary: `查询所有${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
     body: {
-        title: `增加${metaConfig.name}浏览量接口`,
+        title: `查询所有${metaConfig.name}接口`,
         type: 'object',
-        properties: {
-            id: fnSchema(schemaConfig.id, '唯一ID')
-        },
-        required: ['id']
+        properties: {},
+        required: []
     }
 };
 
@@ -26,23 +25,21 @@ export default async function (fastify, opts) {
         url: `/${apiInfo.pureFileName}`,
         schema: apiSchema,
         config: {
-            isLogin: true
+            isLogin: false
         },
         handler: async function (req, res) {
             try {
-                let noticeModel = fastify.mysql //
-                    .table(mapTableConfig.sys_notice)
-                    .where({ id: req.body.id });
-
-                let result = await noticeModel.increment({ views: 1 });
+                let menuData = await fastify.redisGet(cacheConfig.cacheData_tree, 'json');
 
                 return {
-                    ...constantConfig.code.UPDATE_SUCCESS,
-                    data: result
+                    ...constantConfig.code.SELECT_SUCCESS,
+                    data: {
+                        rows: menuData
+                    }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.UPDATE_FAIL;
+                return constantConfig.code.SELECT_FAIL;
             }
         }
     });

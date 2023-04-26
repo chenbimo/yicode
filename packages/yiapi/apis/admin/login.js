@@ -6,15 +6,15 @@ import { mapTableConfig } from '../../config/mapTable.js';
 import { constantConfig } from '../../config/constant.js';
 import { schemaConfig } from '../../config/schema.js';
 import { cacheConfig } from '../../config/cache.js';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
     tags: [apiInfo.parentDirName],
-    summary: `管理员登录`,
-    description: `${apiInfo.apiPath}`,
+    summary: `${metaConfig.name}登录`,
     body: {
-        title: '管理员登录接口',
+        title: `${metaConfig.name}登录接口`,
         type: 'object',
         properties: {
             account: fnSchema(schemaConfig.account, '账号'),

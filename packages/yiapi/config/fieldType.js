@@ -1,4 +1,4 @@
-// 数字字段
+// 表类型字段
 const fieldTypeConfig = {
     integer: {
         type: 'number',

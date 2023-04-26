@@ -1,5 +1,5 @@
+import path from 'node:path';
 import fs from 'fs-extra';
-import path from 'path';
 import * as _ from 'lodash-es';
 import fp from 'fastify-plugin';
 import Queue from 'bull';

@@ -3,15 +3,15 @@ import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo } from '../../utils
 import { mapTableConfig } from '../../config/mapTable.js';
 import { constantConfig } from '../../config/constant.js';
 import { schemaConfig } from '../../config/schema.js';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
     tags: [apiInfo.parentDirName],
-    summary: `添加轮播图`,
-    description: `${apiInfo.apiPath}`,
+    summary: `添加${metaConfig.name}`,
     body: {
-        title: '添加轮播图接口',
+        title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
             title: fnSchema(schemaConfig.title, '轮播标题'),

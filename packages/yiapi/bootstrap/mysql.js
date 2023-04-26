@@ -1,5 +1,5 @@
+import path from 'node:path';
 import fs from 'fs-extra';
-import path from 'path';
 import fp from 'fastify-plugin';
 import Knex from 'knex';
 import fg from 'fast-glob';

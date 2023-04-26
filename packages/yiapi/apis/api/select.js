@@ -15,8 +15,7 @@ export const apiSchema = {
         type: 'object',
         properties: {
             page: fnSchema(schemaConfig.page, '第几页'),
-            limit: fnSchema(schemaConfig.limit, '每页数量'),
-            keywords: fnSchema(schemaConfig.keywords, '搜索关键字')
+            limit: fnSchema(schemaConfig.limit, '每页数量')
         }
     }
 };
@@ -30,31 +29,21 @@ export default async function (fastify, opts) {
             isLogin: false
         },
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
             try {
-                let noticeModel = trx //
-                    .table(mapTableConfig.sys_notice)
-                    .modify(function (queryBuilder) {
-                        if (req.body.keywords) {
-                            queryBuilder.where('title', 'like', `%${req.body.keywords}%`);
-                        }
-                    });
+                let model = fastify.mysql //
+                    .table(mapTableConfig.sys_tree)
+                    .modify(function (queryBuilder) {});
 
-                // 记录总数
-                let { total } = await noticeModel //
-                    .clone()
-                    .count('id', { as: 'total' })
-                    .first();
+                let { total } = await model.clone().count('id', { as: 'total' }).first();
 
-                // 记录列表
-                let rows = await noticeModel //
+                let rows = await model
+                    //
                     .clone()
                     .orderBy('created_at', 'desc')
                     .offset(fnPageOffset(req.body.page, req.body.limit))
                     .limit(req.body.limit)
                     .select();
 
-                await trx.commit();
                 return {
                     ...constantConfig.code.SELECT_SUCCESS,
                     data: {
@@ -66,7 +55,6 @@ export default async function (fastify, opts) {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                await trx.rollback();
                 return constantConfig.code.SELECT_FAIL;
             }
         }

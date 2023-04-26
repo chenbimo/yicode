@@ -4,15 +4,15 @@ import { mapTableConfig } from '../../config/mapTable.js';
 import { constantConfig } from '../../config/constant.js';
 import { schemaConfig } from '../../config/schema.js';
 import { cacheConfig } from '../../config/cache.js';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
-    summary: `查询所有目录`,
+    summary: `查询所有${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
-    description: `${apiInfo.apiPath}`,
     body: {
-        title: '查询所有目录接口',
+        title: `查询所有${metaConfig.name}接口`,
         type: 'object',
         properties: {
             category: fnSchema(schemaConfig.category, '目录分类')

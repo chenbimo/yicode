@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
 import winston from 'winston';
 import { merge as mergeAny } from 'merge-anything';
 import 'winston-daily-rotate-file';

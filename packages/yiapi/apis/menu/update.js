@@ -16,7 +16,6 @@ export const apiSchema = {
         properties: {
             id: fnSchema(schemaConfig.id, '唯一ID'),
             pid: fnSchema(schemaConfig.pid, '父级目录ID'),
-            category: fnSchema(schemaConfig.category, '目录分类'),
             name: fnSchema(null, '目录名称', 'string', 1, 30),
             value: fnSchema(null, '目录值', 'string', 0, 300),
             icon: fnSchema(schemaConfig.image, '目录图标'),
@@ -61,7 +60,6 @@ export default async function (fastify, opts) {
                 // 需要更新的数据
                 let data = {
                     pid: req.body.pid,
-                    category: req.body.category,
                     name: req.body.name,
                     value: req.body.value,
                     icon: req.body.icon,

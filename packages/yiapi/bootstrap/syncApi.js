@@ -1,7 +1,7 @@
-import url from 'url';
+import url from 'node:url';
+import path from 'node:path';
 import fg from 'fast-glob';
 import fp from 'fastify-plugin';
-import path from 'path';
 
 import { mapTableConfig } from '../config/mapTable.js';
 
@@ -76,11 +76,10 @@ async function syncApiDir(fastify) {
         let apiDirName = getApiDirName(file);
 
         // 如果数据库中存在当前接口目录，则进行添加或更新
-        let { default: _default } = await fnImport(url.pathToFileURL(file), {});
-        let apiMeta = fnCloneAny(_default);
-        if (!apiMeta.uuid) {
-            apiMeta.uuid = fnUUID();
-        }
+        let { metaConfig } = await fnImport(url.pathToFileURL(file), {});
+        let apiMeta = {};
+        apiMeta.name = metaConfig.dir;
+        apiMeta.uuid = fnUUID();
         apiMeta.value = apiDirName;
         apiMeta.is_bool = 0;
         apiMeta.pid = 0;

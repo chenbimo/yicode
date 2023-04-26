@@ -152,11 +152,11 @@ export async function fnApiInfo(metaUrl) {
 
     let metaFile = path.dirname(metaUrl) + '/_meta.js';
 
-    let { default: apiData } = await fnImport(metaFile, {});
+    let { metaConfig } = await fnImport(metaFile, {});
 
     let apiHash = {
         pureFileName: pureFileName,
-        parentDirName: apiData?.name ? apiData?.name : parentDirName,
+        parentDirName: metaConfig?.dir ? metaConfig?.dir : parentDirName,
         apiPath: [parentDirName, pureFileName].join('/')
     };
 

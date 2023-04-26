@@ -3,15 +3,15 @@ import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo } from '../../utils
 import { mapTableConfig } from '../../config/mapTable.js';
 import { constantConfig } from '../../config/constant.js';
 import { schemaConfig } from '../../config/schema.js';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
-    summary: `更新角色`,
+    summary: `更新${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
-    description: `${apiInfo.apiPath}`,
     body: {
-        title: '更新角色接口',
+        title: `更新${metaConfig.name}接口`,
         type: 'object',
         properties: {
             id: fnSchema(schemaConfig.id, '唯一ID'),

@@ -3,15 +3,15 @@ import { fnSchema, fnApiInfo } from '../../utils/index.js';
 import { mapTableConfig } from '../../config/mapTable.js';
 import { constantConfig } from '../../config/constant.js';
 import { schemaConfig } from '../../config/schema.js';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
-    summary: `查询通知详情`,
+    summary: `查询${metaConfig.name}详情`,
     tags: [apiInfo.parentDirName],
-    description: `${apiInfo.apiPath}`,
     body: {
-        title: '查询通知详情接口',
+        title: `查询${metaConfig.name}详情接口`,
         type: 'object',
         properties: {
             id: fnSchema(schemaConfig.id, '唯一ID')
