@@ -1,7 +1,5 @@
 <template>
-    <div class="page-index">
-        yibase-vue3
-    </div>
+    <div class="page-index">yibase-vue3</div>
 </template>
 
 <script setup>
@@ -14,14 +12,13 @@ let $Router = useRouter();
 // 数据集
 let $Data = $ref({
     // 显示和隐藏
-    isShow: {},
+    isShow: {}
 });
 
 // 方法集
 let $Method = {
     initData() {}
 };
-
 
 $Method.initData();
 </script>

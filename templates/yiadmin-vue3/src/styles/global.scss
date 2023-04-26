@@ -35,6 +35,14 @@ a {
     display: inline-block;
 }
 
+.app {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
 .link {
     color: #2588ff;
 }
