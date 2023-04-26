@@ -1,5 +1,5 @@
 <template>
-    <div class="page-index">yibase-vue3</div>
+    <div class="page-user"></div>
 </template>
 
 <script setup>
@@ -24,6 +24,6 @@ $Method.initData();
 </script>
 
 <style lang="scss" scoped>
-.page-index {
+.page-user {
 }
 </style>
