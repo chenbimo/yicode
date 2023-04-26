@@ -1,3 +1,4 @@
+import { yidash_routes_generate } from '@yicode/yidash';
 let routeFiles = import.meta.glob('@/pages/**/route.js', { eager: true });
 let pageFiles = import.meta.glob('@/pages/**/index.vue');
 let layoutFiles = import.meta.glob('@/layouts/**/index.vue');
