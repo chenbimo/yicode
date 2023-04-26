@@ -1,6 +1,8 @@
 <template>
     <div class="app">
-        <router-view></router-view>
+        <a-config-provider size="small">
+            <router-view></router-view>
+        </a-config-provider>
     </div>
 </template>
 <script setup>

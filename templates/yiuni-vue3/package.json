@@ -66,10 +66,10 @@
         "@dcloudio/uni-stacktracey": "vue3",
         "@dcloudio/vite-plugin-uni": "vue3",
         "husky": "^8.0.3",
-        "lint-staged": "^13.2.1",
+        "lint-staged": "^13.2.2",
         "prettier": "^2.8.8",
         "rollup-plugin-copy": "^3.4.0",
         "sass": "^1.62.1",
-        "vite": "^4.3.2"
+        "vite": "^4.3.3"
     }
 }

@@ -9,7 +9,15 @@ export const useGlobal = defineStore('global', () => {
         // 用户数据
         userData: $Storage.local.get('userData') || {},
         clientWidth: '',
-        clientHeight: ''
+        clientHeight: '',
+        defaultAvatar: 'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9123.png~tplv-uwbnlip3yd-webp.webp',
+        tableBordered: {
+            cell: true
+        },
+        tableScroll: {
+            x: '100%',
+            y: '100%'
+        }
     });
 
     // 全局计算数据
