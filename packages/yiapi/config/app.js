@@ -1,18 +1,10 @@
 import path from 'node:path';
-import url from 'node:url';
 import { mergeAndConcat } from 'merge-anything';
 
+import { fnFileProtocolPath, fnImport } from '../utils/index.js';
 import { systemConfig } from '../system.js';
 
-async function fnImport(path, defaultValue) {
-    try {
-        const data = await import(path);
-        return data;
-    } catch (err) {
-        return defaultValue;
-    }
-}
-let configPath = url.pathToFileURL(path.resolve(systemConfig.appDir, 'config', 'app.js'));
+let configPath = fnFileProtocolPath(path.resolve(systemConfig.appDir, 'config', 'app.js'));
 let { appConfig: importConfig } = await fnImport(configPath, 'appConfig', {});
 
 const appConfig = mergeAndConcat(
