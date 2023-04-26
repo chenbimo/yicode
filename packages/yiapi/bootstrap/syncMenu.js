@@ -47,7 +47,6 @@ async function syncMenuDir(fastify) {
         });
 
         _forEach(menuConfigNew, (item, index) => {
-            // item.value = fnKebabCase(item.value);
             // 映射的菜单数据
             let mapMenu = menuDirByValue[item.value];
             if (!mapMenu) {
@@ -58,7 +57,7 @@ async function syncMenuDir(fastify) {
                     level: 1,
                     pids: '0',
                     pid: 0,
-                    sort: index,
+                    sort: item.sort || index,
                     is_open: 0,
                     describe: item.describe || '',
                     created_at: fnTimestamp(),
@@ -69,6 +68,7 @@ async function syncMenuDir(fastify) {
                     id: mapMenu.id,
                     name: item.name,
                     value: item.value,
+                    sort: item.sort || index,
                     describe: item.describe || '',
                     updated_at: fnTimestamp()
                 });
@@ -131,14 +131,11 @@ async function syncMenuFile(fastify) {
             }
         });
 
-        _forEach(menuConfigNew, (mainItem) => {
-            // mainItem.value = fnKebabCase(mainItem.value);
-            _forEach(mainItem.children, (item, index) => {
-                // item.value = fnKebabCase(item.value);
+        _forEach(menuConfigNew, (menu, index1) => {
+            _forEach(menu.children, (item, index2) => {
                 let mapMenu = menuByValue[item.value];
+                let parentMenuData = menuDirByValue[menu.value];
                 if (!mapMenu) {
-                    let parentMenuData = menuDirByValue[mainItem.value];
-
                     if (parentMenuData) {
                         insertMenuFile.push({
                             uuid: fnUUID(),
@@ -147,7 +144,7 @@ async function syncMenuFile(fastify) {
                             level: 2,
                             pids: `0,${parentMenuData.id}`,
                             pid: parentMenuData.id,
-                            sort: index,
+                            sort: item.sort || index2,
                             is_open: 0,
                             describe: item.describe || '',
                             created_at: fnTimestamp(),
@@ -159,6 +156,9 @@ async function syncMenuFile(fastify) {
                         id: mapMenu.id,
                         name: item.name,
                         value: item.value,
+                        pids: `0,${parentMenuData.id}`,
+                        pid: parentMenuData.id,
+                        sort: item.sort || index2,
                         describe: item.describe || '',
                         updated_at: fnTimestamp()
                     });
