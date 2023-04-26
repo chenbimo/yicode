@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import fp from 'fastify-plugin';
 import fastifyJwt from '@fastify/jwt';
-import dayjs from 'dayjs';
 import micromatch from 'micromatch';
 import {
     //

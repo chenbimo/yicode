@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import dayjs from 'dayjs';
 import { isCookieEnabled, getCookie, setCookie, removeCookie } from 'tiny-cookie';
 
 export const useGlobal = defineStore('global', () => {

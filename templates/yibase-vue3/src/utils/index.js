@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 // 合并数据
 export function utilMerge(...obj) {
     return mergeAny(..._.cloneDeep(obj));
