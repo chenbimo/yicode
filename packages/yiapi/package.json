@@ -43,7 +43,7 @@
         "copy-anything": "^3.0.3",
         "enquirer": "^2.3.6",
         "fast-glob": "^3.2.12",
-        "fastify": "^4.16.0",
+        "fastify": "^4.16.3",
         "fastify-plugin": "^4.5.0",
         "fastify-xml-body-parser": "^2.2.0",
         "fs-extra": "^11.1.1",

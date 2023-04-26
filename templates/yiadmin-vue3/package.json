@@ -43,6 +43,6 @@
     },
     "devDependencies": {
         "@yicode/yivite-cli": "workspace:^",
-        "sass": "^1.62.0"
+        "sass": "^1.62.1"
     }
 }
