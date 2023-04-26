@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiadmin-vue3",
-    "version": "3.2.1",
+    "version": "3.2.2",
     "description": "yiadmin-vue3（易管理）vue3后台管理模板",
     "scripts": {
         "preinstall": "npx only-allow pnpm",

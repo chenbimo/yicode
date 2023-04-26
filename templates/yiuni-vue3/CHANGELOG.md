@@ -1,5 +1,11 @@
 # uni-preset-vue
 
+## 0.1.2
+
+### Patch Changes
+
+-   release
+
 ## 0.1.1
 
 ### Patch Changes

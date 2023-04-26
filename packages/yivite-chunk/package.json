@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yivite-chunk",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "vite代码分割",
     "main": "lib.js",
     "private": false,
