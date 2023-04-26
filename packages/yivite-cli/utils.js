@@ -1,13 +1,15 @@
-import url from 'url';
-import path from 'path';
+import url from 'node:url';
+import path from 'node:path';
 import fg from 'fast-glob';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import { copy as copyAny } from 'copy-anything';
+import { cloneDeep, startsWith } from 'lodash-es';
+// import { createRequire } from 'node:module';
+// const require = createRequire(import.meta.url);
 
 // 使用require方式加载模块
-export function requireFrom(path, dv = {}) {
-    return require(path) || dv;
-}
+// export function requireFrom(path, dv = {}) {
+//     return require(path) || dv;
+// }
 
 export function fnFilename(metaUrl) {
     return url.fileURLToPath(metaUrl);
@@ -23,26 +25,42 @@ export function fnDirname(metaUrl) {
 }
 
 // 获取file协议的路径
-export function fnGetFileProtocolPath(_path) {
-    if (_path.startsWith('file:')) {
+export function fnFileProtocolPath(_path) {
+    if (startsWith(_path, 'file:')) {
         return _path;
     } else {
-        return 'file://' + path.normalize(_path);
+        return 'file:///' + _path.replace(/\\+/gi, '/');
     }
 }
 
-export async function fnImportModule(path, defaultValue) {
+/**
+ * 可控导入
+ * @param {String} path 导入路径
+ * @param {Any} default 默认值
+ */
+export async function fnImport(path, name, defaultValue) {
     try {
-        let i = await import(path);
-        if (i && i.default) {
-            return i.default;
-        } else {
-            return i;
-        }
+        let data = await import(path);
+        return copyAny(data);
     } catch (err) {
-        return defaultValue;
+        return copyAny({
+            [name]: defaultValue
+        });
     }
 }
+
+// export async function fnImportModule(path, defaultValue) {
+//     try {
+//         let i = await import(path);
+//         if (i && i.default) {
+//             return i.default;
+//         } else {
+//             return i;
+//         }
+//     } catch (err) {
+//         return defaultValue;
+//     }
+// }
 
 /**
  * 获取所有环境变量.env文件的文件名组成的数组

@@ -5,7 +5,7 @@ import path from 'path';
 import fs from 'fs-extra';
 // yicode相关
 import { appDir, cliDir, srcDir } from './config.js';
-import { fnGetFileProtocolPath, fnGetEnvNames } from './utils.js';
+import { fnFileProtocolPath, fnGetEnvNames } from './utils.js';
 
 const pkg = fs.readJSONSync('./package.json');
 
@@ -29,7 +29,7 @@ program //
         'development'
     )
     .action(async (options) => {
-        let execFile = fnGetFileProtocolPath(path.resolve(cliDir, 'scripts', 'dev.js'));
+        let execFile = fnFileProtocolPath(path.resolve(cliDir, 'scripts', 'dev.js'));
         let { main } = await import(execFile);
         main(options);
     });

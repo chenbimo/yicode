@@ -1,6 +1,7 @@
 import path from 'path';
 import process from 'process';
 import { rmSync } from 'node:fs';
+import { pathToFileURL } from 'node:url';
 import { defineConfig, loadEnv } from 'vite';
 import viteVue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
@@ -24,16 +25,23 @@ import { createRequire } from 'module';
 import topLevelAwait from 'vite-plugin-top-level-await';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 
+// unocss相关配置
+import { defineConfig as defineUnocssConfig, presetAttributify, presetUno, presetIcons } from 'unocss';
+import transformerVariantGroup from '@unocss/transformer-variant-group';
+import transformerCompileClass from '@unocss/transformer-compile-class';
+import transformerDirectives from '@unocss/transformer-directives';
+
+import { yidashLibNames } from '@yicode/yidash/yidashLibNames.js';
+
 import { cliDir, appDir, srcDir, yicodeDir, cacheDir } from './config.js';
-import { fnGetFileProtocolPath, fnImportModule, fnOmit, requireFrom } from './utils.js';
-import unocssConfig from './unocss.config.js';
+import { fnFileProtocolPath, fnOmit, fnImport } from './utils.js';
 
 export default defineConfig(async ({ command, mode }) => {
     // 没有则生成目录
     fs.ensureDirSync(cacheDir);
     fs.ensureDirSync(yicodeDir);
 
-    const yiviteConfig = requireFrom(path.resolve(yicodeDir, 'yivite.config.js')) || {};
+    const { yiviteConfig } = await fnImport(fnFileProtocolPath(path.resolve(yicodeDir, 'yivite.config.js')), 'yiviteConfig', {});
     let pkg = fs.readJsonSync(path.resolve(appDir, 'package.json'), { throws: false }) || {};
 
     let findPort = await portfinder.getPortPromise({ port: 8000, stopPort: 9000 });
@@ -49,9 +57,7 @@ export default defineConfig(async ({ command, mode }) => {
     }
 
     // vue 插件
-    let vuePlugin = {
-        // reactivityTransform: true
-    };
+    let vuePlugin = {};
 
     // 自动导入插件
     let autoImportPlugin = mergeAny(
@@ -79,7 +85,8 @@ export default defineConfig(async ({ command, mode }) => {
                     'lodash-es': [
                         //
                         ['*', '_']
-                    ]
+                    ],
+                    '@yicode/yidash': yidashLibNames
                 }
             ],
             dirs: [
@@ -118,6 +125,42 @@ export default defineConfig(async ({ command, mode }) => {
         directoryAsNamespace: false,
         resolvers: [IconsResolver()]
     };
+
+    let unocssConfig = defineUnocssConfig(
+        Object.assign(
+            {
+                presets: [
+                    //
+                    presetUno(),
+                    presetAttributify()
+                ],
+                transformers: [
+                    //
+                    transformerDirectives(),
+                    transformerVariantGroup(),
+                    transformerCompileClass()
+                ],
+                rules: [
+                    //
+                    [
+                        //
+                        'absolute',
+                        {
+                            position: 'absolute'
+                        }
+                    ],
+                    [
+                        //
+                        'relative',
+                        {
+                            position: 'relative'
+                        }
+                    ]
+                ]
+            },
+            yiviteConfig?.unocssConfig || {}
+        )
+    );
 
     // 代码分割
 
@@ -229,7 +272,7 @@ export default defineConfig(async ({ command, mode }) => {
     // 插件列表
     let allPlugins = [];
     allPlugins.push(ReactivityTransform());
-    allPlugins.push(Unocss.default(unocssConfig));
+    allPlugins.push(Unocss(unocssConfig));
     allPlugins.push(Icons(iconsPlugin));
     allPlugins.push(viteVue(vuePlugin));
     allPlugins.push(Components(componentsPlugin));
