@@ -1,5 +1,11 @@
 # @yicode/yiapi
 
+## 1.23.0
+
+### Minor Changes
+
+-   .
+
 ## 1.22.2
 
 ### Patch Changes
