@@ -53,6 +53,17 @@ a {
     height: 100%;
     padding: 0 15px;
 }
+.bg-contain,
+.bg-cover {
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.bg-contain {
+    background-size: contain;
+}
+.bg-cover {
+    background-size: cover;
+}
 
 .page-full {
     position: absolute;
