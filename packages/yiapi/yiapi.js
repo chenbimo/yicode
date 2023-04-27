@@ -39,6 +39,7 @@ import sysUserTable from './tables/user.js';
 fs.ensureDirSync(path.resolve(systemConfig.appDir, 'addons'));
 fs.ensureDirSync(path.resolve(systemConfig.appDir, 'apis'));
 fs.ensureDirSync(path.resolve(systemConfig.appDir, 'config'));
+fs.ensureDirSync(path.resolve(systemConfig.appDir, 'config', 'custom'));
 fs.ensureDirSync(path.resolve(systemConfig.appDir, 'logs'));
 fs.ensureDirSync(path.resolve(systemConfig.appDir, 'plugins'));
 fs.ensureDirSync(path.resolve(systemConfig.appDir, 'public'));
