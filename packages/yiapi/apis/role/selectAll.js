@@ -1,8 +1,7 @@
 import { fnApiInfo, fnSchema } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -28,7 +27,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let roleModel = fastify.mysql //
-                    .table(mapTableConfig.sys_role)
+                    .table(appConfig.table.sys_role)
                     .modify(function (queryBuilder) {
                         // 如果不是开发管理员查询，则排除掉开发角色
                         if (req.session.role_codes !== 'dev') {
@@ -39,14 +38,14 @@ export default async function (fastify, opts) {
                 let rows = await roleModel.clone().select();
 
                 return {
-                    ...constantConfig.code.SELECT_SUCCESS,
+                    ...appConfig.httpCode.SELECT_SUCCESS,
                     data: {
                         rows: rows
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.SELECT_FAIL;
+                return appConfig.httpCode.SELECT_FAIL;
             }
         }
     });

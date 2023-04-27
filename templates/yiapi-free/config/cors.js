@@ -1,3 +1,0 @@
-const corsConfig = {};
-
-export { corsConfig };

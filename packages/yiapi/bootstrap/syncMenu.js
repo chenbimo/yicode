@@ -12,8 +12,7 @@ import {
 } from 'lodash-es';
 
 import { fnUUID, fnTimestamp, fnKebabCase } from '../utils/index.js';
-import { menuConfig } from '../config/menu.js';
-import { mapTableConfig } from '../config/mapTable.js';
+import { appConfig } from '../config/appConfig.js';
 
 let menuConfigNew = [];
 let menuDirNew = [];
@@ -23,7 +22,7 @@ let menuFileNew = [];
 async function syncMenuDir(fastify) {
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table(mapTableConfig.sys_menu);
+        let menuModel = fastify.mysql.table(appConfig.table.sys_menu);
 
         // 第一次请求菜单数据，用于创建一级菜单
         let menuDir = await menuModel.clone().where({ pid: 0 }).select();
@@ -105,7 +104,7 @@ async function syncMenuDir(fastify) {
 async function syncMenuFile(fastify) {
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table(`${mapTableConfig.sys_menu}`);
+        let menuModel = fastify.mysql.table(`${appConfig.table.sys_menu}`);
 
         let menuDir = await menuModel.clone().where({ pid: 0 }).select();
         let menuDirByValue = _keyBy(menuDir, 'value');
@@ -192,7 +191,7 @@ async function syncMenuFile(fastify) {
 // 转换菜单结构
 async function convertMenuStruct() {
     let dataArray = [];
-    _forOwn(menuConfig, (item, key) => {
+    _forOwn(appConfig.menu, (item, key) => {
         if (item.disabled !== true) {
             item.value = fnKebabCase(key);
             menuDirNew.push(item.value);

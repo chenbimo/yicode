@@ -1,6 +1,7 @@
 import fp from 'fastify-plugin';
 import fs from 'fs-extra';
-import { mapTableConfig } from '../config/mapTable.js';
+
+import { appConfig } from '../config/appConfig.js';
 
 import {
     //
@@ -19,17 +20,14 @@ import {
     fnPureMD5
 } from '../utils/index.js';
 
-import { appConfig } from '../config/app.js';
-import { roleConfig } from '../config/role.js';
-
 async function plugin(fastify, opts) {
     // 同步接口
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table(mapTableConfig.sys_menu);
-        let apiModel = fastify.mysql.table(mapTableConfig.sys_api);
-        let adminModel = fastify.mysql.table(mapTableConfig.sys_admin);
-        let roleModel = fastify.mysql.table(mapTableConfig.sys_role);
+        let menuModel = fastify.mysql.table(appConfig.table.sys_menu);
+        let apiModel = fastify.mysql.table(appConfig.table.sys_api);
+        let adminModel = fastify.mysql.table(appConfig.table.sys_admin);
+        let roleModel = fastify.mysql.table(appConfig.table.sys_role);
 
         // 查询所有角色
         let roleData = await roleModel.clone().select();
@@ -56,7 +54,7 @@ async function plugin(fastify, opts) {
         // let updateRoleData = [];
 
         // 需要同步的角色，过滤掉数据库中已经存在的角色
-        _forEach(roleConfig, (item) => {
+        _forEach(appConfig.role, (item) => {
             if (roleCodes.includes(item.code) === false && item.code !== 'dev') {
                 // 角色不存在，则添加
                 item.uuid = fnUUID();

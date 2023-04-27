@@ -1,8 +1,7 @@
 import { fnApiInfo, fnSchema } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -15,7 +14,7 @@ export const apiSchema = {
         type: 'object',
         properties: {
             category: fnSchema(null, '分类代号', 'string', 1, 20, null),
-            state: fnSchema(schemaConfig.state, '是否开启')
+            state: fnSchema(sysConfig.schemaField.state, '是否开启')
         }
     }
 };
@@ -31,7 +30,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let dictionaryModel = fastify.mysql
-                    .table(mapTableConfig.sys_dictionary)
+                    .table(appConfig.table.sys_dict)
                     .where('category', req.body.category)
                     .modify(function (queryBuilder) {
                         if (req.body.state !== undefined) {
@@ -47,14 +46,14 @@ export default async function (fastify, opts) {
                     return item;
                 });
                 return {
-                    ...constantConfig.code.SELECT_SUCCESS,
+                    ...appConfig.httpCode.SELECT_SUCCESS,
                     data: {
                         rows: rows
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.SELECT_FAIL;
+                return appConfig.httpCode.SELECT_FAIL;
             }
         }
     });

@@ -1,10 +1,8 @@
 import fp from 'fastify-plugin';
-import path from 'path';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
-import fg from 'fast-glob';
 
-import { appConfig } from '../config/app.js';
+import { appConfig } from '../config/appConfig.js';
 
 async function main(fastify, opts) {
     await fastify.register(fastifySwagger, {

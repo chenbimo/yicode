@@ -1,8 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo, fnMD5, fnPureMD5, fnUUID } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,10 +13,10 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            username: fnSchema(schemaConfig.username, '用户名'),
-            password: fnSchema(schemaConfig.password, '密码'),
-            nickname: fnSchema(schemaConfig.nickname, '昵称'),
-            role_codes: fnSchema(schemaConfig.role_codes, '角色代码')
+            username: fnSchema(sysConfig.schemaField.username, '用户名'),
+            password: fnSchema(sysConfig.schemaField.password, '密码'),
+            nickname: fnSchema(sysConfig.schemaField.nickname, '昵称'),
+            role_codes: fnSchema(sysConfig.schemaField.role_codes, '角色代码')
         },
         required: ['username', 'password', 'nickname', 'role_codes']
     }
@@ -33,11 +32,11 @@ export default async function (fastify, opts) {
         },
         handler: async function (req, res) {
             try {
-                let adminModel = fastify.mysql.table(mapTableConfig.sys_admin);
+                let adminModel = fastify.mysql.table(appConfig.table.sys_admin);
                 let adminExistsData = await adminModel.clone().where('username', req.body.username).first();
                 if (adminExistsData) {
                     return {
-                        ...constantConfig.code.FAIL,
+                        ...appConfig.httpCode.FAIL,
                         msg: '管理员账号或昵称已存在'
                     };
                 }
@@ -51,12 +50,12 @@ export default async function (fastify, opts) {
 
                 let result = await adminModel.clone().insert(fnClearInsertData(insertData));
                 return {
-                    ...constantConfig.code.INSERT_SUCCESS,
+                    ...appConfig.httpCode.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.INSERT_FAIL;
+                return appConfig.httpCode.INSERT_FAIL;
             }
         }
     });

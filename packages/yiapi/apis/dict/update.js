@@ -1,8 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,17 +13,17 @@ export const apiSchema = {
         title: `更新${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            id: fnSchema(schemaConfig.id, '唯一ID'),
-            category: fnSchema(schemaConfig.category, '字典分类'),
-            code: fnSchema(schemaConfig.code, '字典编码'),
+            id: fnSchema(sysConfig.schemaField.id, '唯一ID'),
+            category: fnSchema(sysConfig.schemaField.category, '字典分类'),
+            code: fnSchema(sysConfig.schemaField.code, '字典编码'),
             name: fnSchema(null, '字典名称', 'string', 1, 20),
             value: fnSchema(null, '字典值', 'string', 0, 500),
             symbol: fnSchema(null, '字典符号', 'string', 0, 20),
-            thumbnail: fnSchema(schemaConfig.image, '字典缩略图'),
-            image_lists: fnSchema(schemaConfig.image_lists, '字典轮播图'),
+            thumbnail: fnSchema(sysConfig.schemaField.image, '字典缩略图'),
+            image_lists: fnSchema(sysConfig.schemaField.image_lists, '字典轮播图'),
             describe: fnSchema(null, '字典描述', 'string', 0, 300),
-            content: fnSchema(schemaConfig.content, '字典正文'),
-            state: fnSchema(schemaConfig.state, '是否启用')
+            content: fnSchema(sysConfig.schemaField.content, '字典正文'),
+            state: fnSchema(sysConfig.schemaField.state, '是否启用')
         },
         required: ['id']
     }
@@ -43,10 +42,10 @@ export default async function (fastify, opts) {
             try {
                 if (req.body.type === 'number') {
                     if (Number.isNaN(Number(req.body.value)) === true) {
-                        return { ...constantConfig.code.UPDATE_FAIL, msg: '字典值不是一个数字类型' };
+                        return { ...appConfig.httpCode.UPDATE_FAIL, msg: '字典值不是一个数字类型' };
                     }
                 }
-                let dictionaryModel = trx.table(mapTableConfig.sys_dictionary).modify(function (queryBuilder) {});
+                let dictionaryModel = trx.table(appConfig.table.sys_dict).modify(function (queryBuilder) {});
 
                 let currentData = await dictionaryModel.clone().where({ id: req.body.id }).first();
 
@@ -69,11 +68,11 @@ export default async function (fastify, opts) {
                     .update(fnClearUpdateData(updateData));
 
                 await trx.commit();
-                return constantConfig.code.UPDATE_SUCCESS;
+                return appConfig.httpCode.UPDATE_SUCCESS;
             } catch (err) {
                 await trx.rollback();
                 fastify.log.error(err);
-                return constantConfig.code.UPDATE_FAIL;
+                return appConfig.httpCode.UPDATE_FAIL;
             }
         }
     });

@@ -1,15 +1,12 @@
 #!/usr/bin/env node
 import fs from 'fs-extra';
-import url from 'url';
-import path from 'path';
+import url from 'node:url';
+import path from 'node:path';
 import fp from 'fastify-plugin';
 import Knex from 'knex';
 import fg from 'fast-glob';
 import { SchemaInspector } from 'knex-schema-inspector';
-import { createRequire } from 'module';
 import enquirer from 'enquirer';
-import cliTable from 'cli-table3';
-import chalk from 'chalk';
 import logSymbols from 'log-symbols';
 import ora from 'ora';
 import { merge as mergeAny } from 'merge-anything';
@@ -38,10 +35,8 @@ import {
 } from 'lodash-es';
 
 import { fnImport, fnCloneAny } from '../utils/index.js';
-import { systemConfig } from '../system.js';
-import { databaseConfig } from '../config/database.js';
-import { fieldTypeConfig } from '../config/fieldType.js';
-import { mapTableConfig } from '../config/mapTable.js';
+import { appConfig } from '../config/appConfig.js';
+import { sysConfig } from '../config/sysConfig.js';
 
 // 是否全部检测通过，未通过则不进行表创建
 let isCheckPass = true;
@@ -179,13 +174,9 @@ async function fnMergeTableData(_appTableData, sysTableData, addonTableData) {
 async function fnAllTableData() {
     try {
         // 系统表数据
-        let sysTableData = await fnGetTableData(['./tables/*.js', '!**/_*.js'], systemConfig.yiapiDir, 'sys_');
-
-        // 插件表数据
-        let addonTableData = await fnGetTableData(['./addons/*/tables/*', '!**/_*.js'], systemConfig.appDir, 'addon_');
-
-        // 用户表数据
-        let _appTableData = await fnGetTableData(['./tables/*', '!**/_*.js'], systemConfig.appDir);
+        let sysTableData = await fnGetTableData(['./tables/*.js', '!**/_*.js'], sysConfig.yiapiDir, 'sys_');
+        let addonTableData = await fnGetTableData(['./addons/*/tables/*', '!**/_*.js'], sysConfig.appDir, 'addon_');
+        let _appTableData = await fnGetTableData(['./tables/*', '!**/_*.js'], sysConfig.appDir);
 
         // 应用表跟系统表和插件表合并后的数据
         let appTableData = await fnMergeTableData(_appTableData, sysTableData, addonTableData);
@@ -209,7 +200,7 @@ async function fnCheckTableData(allTableData, allTables) {
              * 表名映射转换
              * 有时候有同名表，避免覆盖
              */
-            let mapTable = mapTableConfig[tableDataItem._meta.table];
+            let mapTable = appConfig.table[tableDataItem._meta.table];
             tableDataItem._meta.table = mapTable ? mapTable : tableDataItem._meta.table;
 
             tableDataItem._meta.tableNewName = null;
@@ -230,7 +221,7 @@ async function fnCheckTableData(allTableData, allTables) {
                 }
                 if (['_meta'].includes(fieldName) === false) {
                     // 获取字段的类型信息
-                    let fieldInfo = fieldTypeConfig[fieldData.type];
+                    let fieldInfo = sysConfig.tableFieldType[fieldData.type];
                     // 判断字段类型是否存在
                     if (!fieldInfo) {
                         console.log(`${logSymbols.error} ${tableDataItem._meta.name}（${tableDataItem._meta.table}）表 ${fieldName} 字段的 ${fieldData.type} 类型不存在`);
@@ -257,11 +248,11 @@ async function syncDatabase() {
         let mysql = await new Knex({
             client: 'mysql2',
             connection: {
-                host: databaseConfig.host,
-                port: databaseConfig.port,
-                user: databaseConfig.username,
-                password: databaseConfig.password,
-                database: databaseConfig.db
+                host: appConfig.database.host,
+                port: appConfig.database.port,
+                user: appConfig.database.username,
+                password: appConfig.database.password,
+                database: appConfig.database.db
             },
             acquireConnectionTimeout: 30000,
             asyncStackTraces: true,
@@ -348,7 +339,7 @@ async function syncDatabase() {
                             table['bigint']('deleted_at').notNullable().unsigned().defaultTo(0).comment('删除时间');
                         } else {
                             // 获取字段的类型信息
-                            let fieldInfo = fieldTypeConfig[fieldData.type];
+                            let fieldInfo = sysConfig.tableFieldType[fieldData.type];
                             // 字段链式调用实例
                             let fieldItem = null;
 

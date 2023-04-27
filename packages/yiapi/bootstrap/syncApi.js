@@ -3,7 +3,7 @@ import path from 'node:path';
 import fg from 'fast-glob';
 import fp from 'fastify-plugin';
 
-import { mapTableConfig } from '../config/mapTable.js';
+import { appConfig } from '../config/appConfig.js';
 
 import {
     //
@@ -16,7 +16,6 @@ import {
 import {
     //
     getApiDirName,
-    fnFileProtocolPath,
     fnTimestamp,
     getApiFileName,
     fnAllApiMeta,
@@ -26,12 +25,10 @@ import {
     fnUUID
 } from '../utils/index.js';
 
-import { systemConfig } from '../system.js';
-
 // 同步接口目录
 async function syncApiDir(fastify) {
     // 准备好表
-    let apiModel = fastify.mysql.table(mapTableConfig.sys_api);
+    let apiModel = fastify.mysql.table(appConfig.table.sys_api);
 
     // 所有的接口元数据文件，用来生成目录
     let allApiMeta = await fnAllApiMeta();
@@ -127,7 +124,7 @@ async function syncApiDir(fastify) {
 async function syncApiFile(fastify) {
     try {
         // 准备好表
-        let apiModel = fastify.mysql.table(mapTableConfig.sys_api);
+        let apiModel = fastify.mysql.table(appConfig.table.sys_api);
 
         // 所有的接口文件，用来生成接口
         let allApiFiles = await fnAllApiFiles();
@@ -184,7 +181,7 @@ async function syncApiFile(fastify) {
             // 获得父级数据
             let parentApiData = apiDirByValue[path.dirname(apiFileName)] || {};
 
-            let { apiSchema } = await fnImport(fnFileProtocolPath(file), {});
+            let { apiSchema } = await fnImport(file, {});
 
             if (apiFileValue.includes(apiFileName) === false && !autoApiObject[apiFileName]) {
                 // 如果当前接口在数据库中不存在，且没有添加过，则添加接口

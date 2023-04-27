@@ -1,20 +1,19 @@
 import fs from 'fs-extra';
-import path from 'node:path';
+import { resolve } from 'node:path';
 import winston from 'winston';
 import { merge as mergeAny } from 'merge-anything';
 import 'winston-daily-rotate-file';
 
-import { appConfig } from './app.js';
-import { fnFileProtocolPath, fnImport } from '../utils/index.js';
-import { systemConfig } from '../system.js';
+import { fnImport } from '../utils/index.js';
+import { appConfig } from './appConfig.js';
+import { sysConfig } from './sysConfig.js';
 
-let configPath = fnFileProtocolPath(path.resolve(systemConfig.appDir, 'config', 'logger.js'));
-let { loggerConfig: importConfig } = await fnImport(configPath, 'loggerConfig', {});
-fs.ensureDir(path.resolve(systemConfig.appDir, 'logs'));
+let { logConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'logConfig.js'), 'logConfig', {});
+fs.ensureDir(resolve(sysConfig.appDir, 'logs'));
 
 let fileConfig = mergeAny(
     {
-        dirname: path.resolve(systemConfig.appDir, 'logs'),
+        dirname: resolve(sysConfig.appDir, 'logs'),
         filename: '%DATE%.log',
         datePattern: 'YYYY-MM-DD',
         zippedArchive: false,
@@ -47,6 +46,6 @@ if (process.env.NODE_ENV === 'production') {
     configParams.transports = [new winston.transports.Console()];
 }
 
-const loggerConfig = winston.createLogger(configParams);
+const logConfig = winston.createLogger(configParams);
 
-export { loggerConfig };
+export { logConfig };

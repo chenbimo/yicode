@@ -12,26 +12,22 @@ import {
     omit as _omit
 } from 'lodash-es';
 
-import { systemConfig } from '../system.js';
-import { jwtConfig } from '../config/jwt.js';
-import { appConfig } from '../config/app.js';
-import { cacheConfig } from '../config/cache.js';
-import { constantConfig } from '../config/constant.js';
+import { appConfig } from '../config/appConfig.js';
 import { fnRouterPath, fnApiParamsCheck, fnClearLogData } from '../utils/index.js';
 
 async function plugin(fastify, opts) {
     await fastify.register(fastifyJwt, {
-        secret: jwtConfig.secret,
+        secret: appConfig.jwt.secret,
         decoratorName: 'session',
         decode: {
             complete: true
         },
         sign: {
-            algorithm: jwtConfig.algorithm,
-            expiresIn: jwtConfig.expiresIn
+            algorithm: appConfig.jwt.algorithm,
+            expiresIn: appConfig.jwt.expiresIn
         },
         verify: {
-            algorithms: [jwtConfig.algorithm]
+            algorithms: [appConfig.jwt.algorithm]
         }
     });
 
@@ -47,26 +43,26 @@ async function plugin(fastify, opts) {
 
             /* --------------------------------- 请求资源判断 --------------------------------- */
             if (req.url.indexOf('.') !== -1) {
-                if (fs.existsSync(path.join(systemConfig.appDir, 'public', req.url)) === true) {
+                if (fs.existsSync(path.join(sysConfig.appDir, 'public', req.url)) === true) {
                     return;
                 } else {
                     // 文件不存在
-                    res.send(constantConfig.code.NO_FILE);
+                    res.send(appConfig.httpCode.NO_FILE);
                     return;
                 }
             }
 
             /* --------------------------------- 接口存在性判断 -------------------------------- */
-            let allApiNames = await fastify.redisGet(cacheConfig.cacheData_apiNames, 'json');
+            let allApiNames = await fastify.redisGet(appConfig.cacheData.apiNames, 'json');
 
             if (allApiNames.includes(req.url) === false) {
-                res.send(constantConfig.code.API_NOT_FOUND);
+                res.send(appConfig.httpCode.API_NOT_FOUND);
                 return;
             }
 
             /* --------------------------------- 接口禁用检测 --------------------------------- */
             if (req.routeConfig.isDisalbed === true) {
-                res.send(constantConfig.code.API_DISABLED);
+                res.send(appConfig.httpCode.API_DISABLED);
                 return;
             }
 
@@ -76,7 +72,7 @@ async function plugin(fastify, opts) {
                     let jwtData = await req.jwtVerify();
                 } catch (err) {
                     res.send({
-                        ...constantConfig.code.NOT_LOGIN,
+                        ...appConfig.httpCode.NOT_LOGIN,
                         detail: 'token 验证失败'
                     });
                     return;
@@ -107,7 +103,7 @@ async function plugin(fastify, opts) {
 
             /* ---------------------------------- 白名单判断 --------------------------------- */
             // 从缓存获取白名单接口
-            let dataApiWhiteLists = await fastify.redisGet(cacheConfig.cacheData_apiWhiteLists, 'json');
+            let dataApiWhiteLists = await fastify.redisGet(appConfig.cacheData.apiWhiteLists, 'json');
             let whiteApis = dataApiWhiteLists?.map((item) => item.value);
             let allWhiteApis = _uniq(_concat(appConfig.whiteApis, whiteApis || []));
 
@@ -130,14 +126,14 @@ async function plugin(fastify, opts) {
                     if (req.session.id) {
                         // 判断是否登录，登录了就返回没有接口权限
                         res.send({
-                            ...constantConfig.code.FAIL,
+                            ...appConfig.httpCode.FAIL,
                             msg: `您没有 [ ${req?.routeSchema?.summary || req.url} ] 接口的操作权限`
                         });
                         return;
                     } else {
                         // 如果没登录，则返回未登录
                         res.send({
-                            ...constantConfig.code.NOT_LOGIN,
+                            ...appConfig.httpCode.NOT_LOGIN,
                             detail: '没有接口权限'
                         });
                         return;
@@ -147,7 +143,7 @@ async function plugin(fastify, opts) {
         } catch (err) {
             fastify.log.error(err);
             res.send({
-                ...constantConfig.code.FAIL,
+                ...appConfig.httpCode.FAIL,
                 msg: err.msg || '认证异常',
                 other: err.other || ''
             });

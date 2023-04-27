@@ -1,9 +1,7 @@
 import { fnApiInfo, fnSchema } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
-import { cacheConfig } from '../../config/cache.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -29,17 +27,17 @@ export default async function (fastify, opts) {
         },
         handler: async function (req, res) {
             try {
-                let apiData = await fastify.redisGet(cacheConfig.cacheData_api, 'json');
+                let apiData = await fastify.redisGet(appConfig.cacheData.api, 'json');
 
                 return {
-                    ...constantConfig.code.SELECT_SUCCESS,
+                    ...appConfig.httpCode.SELECT_SUCCESS,
                     data: {
                         rows: apiData
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.SELECT_FAIL;
+                return appConfig.httpCode.SELECT_FAIL;
             }
         }
     });

@@ -1,22 +1,21 @@
 import { fnSchema, fnApiInfo } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
-    summary: `增加${metaConfig.name}浏览量`,
+    summary: `查询${metaConfig.name}详情`,
     tags: [apiInfo.parentDirName],
     body: {
-        title: `增加${metaConfig.name}浏览量接口`,
+        title: `查询${metaConfig.name}详情接口`,
         type: 'object',
         properties: {
-            id: fnSchema(schemaConfig.id, '唯一ID')
+            code: fnSchema(null, '字典代号', 'string', 1, 20)
         },
-        required: ['id']
+        required: ['code']
     }
 };
 
@@ -26,23 +25,24 @@ export default async function (fastify, opts) {
         url: `/${apiInfo.pureFileName}`,
         schema: apiSchema,
         config: {
-            isLogin: true
+            isLogin: false
         },
         handler: async function (req, res) {
             try {
-                let noticeModel = fastify.mysql //
-                    .table(mapTableConfig.sys_notice)
-                    .where({ id: req.body.id });
+                let dictionaryModel = fastify.mysql.table(appConfig.table.sys_dict);
 
-                let result = await noticeModel.increment({ views: 1 });
+                let result = await dictionaryModel //
+                    .clone()
+                    .where('code', req.body.code)
+                    .first();
 
                 return {
-                    ...constantConfig.code.UPDATE_SUCCESS,
+                    ...appConfig.httpCode.SELECT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.UPDATE_FAIL;
+                return appConfig.httpCode.SELECT_FAIL;
             }
         }
     });

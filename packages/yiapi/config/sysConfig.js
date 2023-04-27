@@ -1,3 +1,12 @@
+import { resolve } from 'node:path';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { cwd } from 'node:process';
+
+// 系统路径
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(dirname(__filename));
+
 // 字符串长度枚举
 let stringEnum = [
     //
@@ -11,7 +20,7 @@ let stringEnum = [
     //
     10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000
 ];
-let schemaConfig = {
+let schemaField = {
     // 主键 ID
     id: {
         type: 'integer',
@@ -159,7 +168,7 @@ let schemaConfig = {
         maxLength: 30,
         pattern: '^[a-zA-Z][-_a-zA-Z0-9]{5,19}$'
     },
-    // QQ 号
+    // QQ号
     qq: {
         type: 'string',
         minLength: 5,
@@ -189,16 +198,203 @@ let schemaConfig = {
 
 // 字符串内置字段
 stringEnum.forEach((num) => {
-    schemaConfig[`string0to${num}`] = {
+    schemaField[`string0to${num}`] = {
         type: 'string',
         minLength: 0,
         maxLength: num
     };
-    schemaConfig[`string1to${num}`] = {
+    schemaField[`string1to${num}`] = {
         type: 'string',
         minLength: 1,
         maxLength: num
     };
 });
 
-export { schemaConfig };
+// 表字段定义
+let tableField = {
+    phone: {
+        comment: '手机号',
+        type: 'string',
+        length: 20,
+        default: ''
+    },
+    username: {
+        comment: '用户名',
+        type: 'string',
+        length: 20,
+        default: ''
+    },
+    password: {
+        comment: '密码',
+        type: 'string',
+        length: 300,
+        default: ''
+    },
+    image: {
+        comment: '图片',
+        type: 'string',
+        length: 300,
+        default: ''
+    },
+    gender: {
+        comment: '性别(1:男,2:女,3:未知)',
+        type: 'tinyint',
+        length: 1,
+        default: 3
+    },
+    longitude: {
+        comment: '经度',
+        type: 'string',
+        length: 50,
+        default: ''
+    },
+    latitude: {
+        comment: '纬度',
+        type: 'string',
+        length: 50,
+        default: ''
+    },
+    boolEnum: {
+        comment: '布尔枚举{0:关,1:开}',
+        type: 'tinyint',
+        length: 1,
+        default: 0
+    },
+    state: {
+        comment: '状态{0:正常,1:禁用,2:删除}',
+        type: 'tinyint',
+        length: 1,
+        default: 0
+    },
+    content: {
+        comment: '正文',
+        type: 'text',
+        default: ''
+    }
+};
+
+// 字段类型
+let tableFieldType = {
+    integer: {
+        type: 'number',
+        length: true,
+        unsigned: true
+    },
+    bigInteger: {
+        type: 'number',
+        unsigned: true
+    },
+    tinyint: {
+        type: 'number',
+        length: true,
+        unsigned: true
+    },
+    smallint: {
+        type: 'number',
+        unsigned: true
+    },
+    mediumint: {
+        type: 'number',
+        unsigned: true
+    },
+    bigint: {
+        type: 'number',
+        unsigned: true
+    },
+    text: {
+        type: 'text',
+        text_type: true,
+        nullable: true
+    },
+    string: {
+        type: 'string',
+        length: true
+    },
+    float: {
+        type: 'float',
+        precision: true,
+        scale: true,
+        unsigned: true
+    },
+    double: {
+        type: 'float',
+        precision: true,
+        scale: true,
+        unsigned: true
+    },
+    decimal: {
+        type: 'float',
+        precision: true,
+        scale: true,
+        unsigned: true
+    },
+    boolean: {
+        type: 'bool'
+    },
+    date: {
+        type: 'date'
+    },
+    datetime: {
+        type: 'date',
+        precision: true
+    },
+    time: {
+        type: 'date',
+        precision: true
+    },
+    timestamp: {
+        type: 'date',
+        precision: true
+    },
+    timestamps: {
+        type: 'date'
+    },
+    binary: {
+        type: 'binary',
+        length: true
+    },
+    enu: {
+        type: 'enum'
+    },
+    json: {
+        type: 'json'
+    },
+    jsonb: {
+        type: 'json'
+    },
+    uuid: {
+        type: 'uuid'
+    },
+    geometry: {
+        type: 'geo'
+    },
+    geography: {
+        type: 'geo'
+    },
+    point: {
+        type: 'geo'
+    }
+};
+
+// 参数类型
+let schemaFieldType = [
+    //
+    'json',
+    'string',
+    'number',
+    'integer',
+    'object',
+    'array',
+    'boolean',
+    'null'
+];
+
+export const sysConfig = {
+    appDir: cwd(),
+    yiapiDir: __dirname,
+    // 内置表字段定义
+    tableFieldType: tableFieldType,
+    tableField: tableField,
+    schemaField: schemaField,
+    schemaFieldType: schemaFieldType
+};

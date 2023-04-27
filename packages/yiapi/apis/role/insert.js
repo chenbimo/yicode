@@ -1,8 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,9 +13,9 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            code: fnSchema(schemaConfig.code, '角色代号'),
+            code: fnSchema(sysConfig.schemaField.code, '角色代号'),
             name: fnSchema(null, '角色名称', 'string', 1, 20),
-            describe: fnSchema(schemaConfig.describe, '角色描述'),
+            describe: fnSchema(sysConfig.schemaField.describe, '角色描述'),
             menu_ids: fnSchema(null, '角色菜单ID组', 'string', 0, 2000)
         },
         required: ['name', 'code']
@@ -34,12 +33,12 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let roleModel = fastify.mysql //
-                    .table(mapTableConfig.sys_role)
+                    .table(appConfig.table.sys_role)
                     .modify(function (queryBuilder) {});
                 let _result = await roleModel.clone().where('name', req.body.name).first();
                 if (_result !== undefined) {
                     return {
-                        ...constantConfig.code.FAIL,
+                        ...appConfig.httpCode.FAIL,
                         msg: '角色已存在'
                     };
                 }
@@ -55,12 +54,12 @@ export default async function (fastify, opts) {
                 await fastify.cacheRoleData('file');
 
                 return {
-                    ...constantConfig.code.INSERT_SUCCESS,
+                    ...appConfig.httpCode.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.INSERT_FAIL;
+                return appConfig.httpCode.INSERT_FAIL;
             }
         }
     });

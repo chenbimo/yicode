@@ -1,8 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo, fnMD5 } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,10 +13,10 @@ export const apiSchema = {
         title: `更新${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            id: fnSchema(schemaConfig.id, '唯一ID'),
-            password: fnSchema(schemaConfig.password, '密码'),
-            nickname: fnSchema(schemaConfig.nickname, '昵称'),
-            role_codes: fnSchema(schemaConfig.role_codes, '角色代码')
+            id: fnSchema(sysConfig.schemaField.id, '唯一ID'),
+            password: fnSchema(sysConfig.schemaField.password, '密码'),
+            nickname: fnSchema(sysConfig.schemaField.nickname, '昵称'),
+            role_codes: fnSchema(sysConfig.schemaField.role_codes, '角色代码')
         },
         required: ['id']
     }
@@ -34,7 +33,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let adminModel = fastify.mysql //
-                    .table(mapTableConfig.sys_admin)
+                    .table(appConfig.table.sys_admin)
                     .where({ id: req.body.id })
                     .modify(function (queryBuilder) {});
 
@@ -47,10 +46,10 @@ export default async function (fastify, opts) {
 
                 let updateResult = await adminModel.update(fnClearUpdateData(data));
 
-                return constantConfig.code.UPDATE_SUCCESS;
+                return appConfig.httpCode.UPDATE_SUCCESS;
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.UPDATE_FAIL;
+                return appConfig.httpCode.UPDATE_FAIL;
             }
         }
     });

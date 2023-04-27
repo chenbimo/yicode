@@ -1,6 +1,6 @@
 import fp from 'fastify-plugin';
 import fastifyMultipart from '@fastify/multipart';
-import { appConfig } from '../config/app.js';
+import { appConfig } from '../config/appConfig.js';
 
 async function plugin(fastify, options) {
     await fastify.register(fastifyMultipart, {

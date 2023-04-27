@@ -1,8 +1,7 @@
 import { fnSchema, fnApiInfo, fnPageOffset } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,8 +13,8 @@ export const apiSchema = {
         title: `查询${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            page: fnSchema(schemaConfig.page, '第几页'),
-            limit: fnSchema(schemaConfig.limit, '每页数量')
+            page: fnSchema(sysConfig.schemaField.page, '第几页'),
+            limit: fnSchema(sysConfig.schemaField.limit, '每页数量')
         }
     }
 };
@@ -31,7 +30,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let model = fastify.mysql //
-                    .table(mapTableConfig.sys_tree)
+                    .table(appConfig.table.sys_tree)
                     .modify(function (queryBuilder) {});
 
                 let { total } = await model.clone().count('id', { as: 'total' }).first();
@@ -45,7 +44,7 @@ export default async function (fastify, opts) {
                     .select();
 
                 return {
-                    ...constantConfig.code.SELECT_SUCCESS,
+                    ...appConfig.httpCode.SELECT_SUCCESS,
                     data: {
                         total: total,
                         rows: rows,
@@ -55,7 +54,7 @@ export default async function (fastify, opts) {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.SELECT_FAIL;
+                return appConfig.httpCode.SELECT_FAIL;
             }
         }
     });

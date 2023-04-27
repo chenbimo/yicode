@@ -1,3 +1,0 @@
-const mapTableConfig = {};
-
-export { mapTableConfig };

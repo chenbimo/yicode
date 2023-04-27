@@ -10,10 +10,10 @@ export const apiSchema = {
         type: 'object',
         title: '查询地址列表接口',
         properties: {
-            category_id: yiapi.utils.fnSchema(yiapi.schemaConfig.pid, '资讯分类'),
-            page: yiapi.utils.fnSchema(yiapi.schemaConfig.page, '第几页'),
-            limit: yiapi.utils.fnSchema(yiapi.schemaConfig.limit, '每页数量'),
-            keywords: yiapi.utils.fnSchema(yiapi.schemaConfig.keywords, '搜索关键字')
+            category_id: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.pid, '资讯分类'),
+            page: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.page, '第几页'),
+            limit: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.limit, '每页数量'),
+            keywords: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.keywords, '搜索关键字')
         },
         required: ['category_id']
     }

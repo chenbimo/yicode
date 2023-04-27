@@ -1,9 +1,9 @@
-import path from 'path';
-import url from 'url';
+import path from 'node:path';
+import url from 'node:url';
 import fg from 'fast-glob';
 import md5 from 'blueimp-md5';
-import { customAlphabet } from 'nanoid';
 import got from 'got';
+import { customAlphabet } from 'nanoid';
 import { copy as copyAny } from 'copy-anything';
 import {
     //
@@ -20,12 +20,8 @@ import {
     isString as _isString
 } from 'lodash-es';
 
-import { appConfig } from '../config/app.js';
-import { weixinConfig } from '../config/weixin.js';
-import { systemConfig } from '../system.js';
-import { schemaConfig } from '../config/schema.js';
-import { tableConfig } from '../config/table.js';
-import { jsonSchemaTypeConfig } from '../config/jsonSchemaType.js';
+import { appConfig } from '../config/appConfig.js';
+import { sysConfig } from '../config/sysConfig.js';
 
 // 自定义初始化字符
 const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
@@ -113,9 +109,9 @@ export function getApiFileName(file) {
 
 // 获取所有接口文件
 export function fnAllApiFiles() {
-    let coreApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: systemConfig.yiapiDir });
-    let appApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: systemConfig.appDir });
-    let thirdApiFiles = fg.sync(['./addons/*/apis/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: systemConfig.appDir });
+    let coreApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
+    let appApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
+    let thirdApiFiles = fg.sync(['./addons/*/apis/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
 
     let allApiFiles = _concat(coreApiFiles, appApiFiles, thirdApiFiles);
 
@@ -124,9 +120,9 @@ export function fnAllApiFiles() {
 
 // 获取所有接口文件
 export async function fnAllApiMeta() {
-    let coreApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: systemConfig.yiapiDir });
-    let appApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: systemConfig.appDir });
-    let thirdApiMetaFiles = fg.sync('./addons/*/apis/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: systemConfig.appDir });
+    let coreApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
+    let appApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
+    let thirdApiMetaFiles = fg.sync('./addons/*/apis/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
 
     let allApiMetaFiles = _concat(coreApiMetaFiles, appApiMetaFiles, thirdApiMetaFiles);
 
@@ -355,7 +351,7 @@ export function fnApiParamsCheck(req) {
  */
 export async function fnImport(path, name, defaultValue) {
     try {
-        let data = await import(path);
+        let data = await import(fnFileProtocolPath(path));
         return fnCloneAny(data);
     } catch (err) {
         return fnCloneAny({
@@ -398,8 +394,8 @@ export function fnSchema(hash, name, type, min, max, enumValue, defaultValue, pa
 
         // 字段必须有正确的类型
         if (!fieldData.type) fieldData.type = type;
-        if (jsonSchemaTypeConfig.includes(fieldData.type) === false) {
-            throw new Error(`字段 [${name}] 类型 ${fieldData.type} 错误，只能为 ${jsonSchemaTypeConfig.join(',')} 其中之一`);
+        if (sysConfig.schemaFieldType.includes(fieldData.type) === false) {
+            throw new Error(`字段 [${name}] 类型 ${fieldData.type} 错误，只能为 ${sysConfig.schemaFieldType.join(',')} 其中之一`);
         }
 
         // 如果有枚举参数，则忽略最大，最小参数
@@ -433,8 +429,8 @@ export async function fnGetWeixinAccessToken() {
         method: 'GET',
         searchParams: {
             grant_type: 'client_credential',
-            appid: weixinConfig.appId,
-            secret: weixinConfig.appSecret
+            appid: appConfig.weixin.appId,
+            secret: appConfig.weixin.appSecret
         }
     }).json();
     return res;

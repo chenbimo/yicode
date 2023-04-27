@@ -10,7 +10,7 @@ export const apiSchema = {
         type: 'object',
         title: '查询资讯详情接口',
         properties: {
-            id: yiapi.utils.fnSchema(yiapi.schemaConfig.id, '唯一 ID')
+            id: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.id, '唯一 ID')
         },
         required: ['id']
     }

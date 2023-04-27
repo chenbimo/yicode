@@ -1,5 +1,5 @@
 import fp from 'fastify-plugin';
-import { mapTableConfig } from '../config/mapTable.js';
+
 import {
     //
     groupBy as _groupBy,
@@ -9,12 +9,12 @@ import {
 } from 'lodash-es';
 
 import { fnUUID, fnTimestamp, fnCamelCase } from '../utils/index.js';
-import { dictionaryConfig } from '../config/dictionary.js';
+import { appConfig } from '../config/appConfig.js';
 
 // 同步字典目录
 async function syncDictionary(fastify) {
     // 准备好表
-    let dictionaryModel = fastify.mysql.table(`${mapTableConfig.sys_dictionary}`);
+    let dictionaryModel = fastify.mysql.table(`${appConfig.table.sys_dict}`);
 
     // 第一次请求菜单数据，用于创建一级菜单
     // TODO: 这里还需要进一步判断字典是否已存在
@@ -27,7 +27,7 @@ async function syncDictionary(fastify) {
     // 待添加的数据
     let insertDictionaryData = [];
 
-    _forEach(dictionaryConfig, (item, index) => {
+    _forEach(appConfig.dictionary, (item, index) => {
         let rootData = _find(dictionaryParent, { code: fnCamelCase(item.code) });
         // 如果没找到父级，则添加
         if (!rootData) {

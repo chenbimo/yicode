@@ -10,11 +10,11 @@ export const apiSchema = {
         type: 'object',
         title: '添加资讯接口',
         properties: {
-            category_id: yiapi.utils.fnSchema(yiapi.schemaConfig.id, '资讯分类'),
-            title: yiapi.utils.fnSchema(yiapi.schemaConfig.title, '资讯标题'),
-            describe: yiapi.utils.fnSchema(yiapi.schemaConfig.string0to500, '资讯描述'),
-            thumbnail: yiapi.utils.fnSchema(yiapi.schemaConfig.image, '资讯缩略图'),
-            content: yiapi.utils.fnSchema(yiapi.schemaConfig.content, '资讯正文')
+            category_id: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.id, '资讯分类'),
+            title: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.title, '资讯标题'),
+            describe: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.string0to500, '资讯描述'),
+            thumbnail: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.image, '资讯缩略图'),
+            content: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.content, '资讯正文')
         },
         required: [
             //

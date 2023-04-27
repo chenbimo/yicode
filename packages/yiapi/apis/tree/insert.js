@@ -1,8 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,15 +13,15 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            pid: fnSchema(schemaConfig.pid, '父级目录ID'),
-            category: fnSchema(schemaConfig.category, '目录分类'),
+            pid: fnSchema(sysConfig.schemaField.pid, '父级目录ID'),
+            category: fnSchema(sysConfig.schemaField.category, '目录分类'),
             name: fnSchema(null, '目录名称', 'string', 1, 30),
             value: fnSchema(null, '目录值', 'string', 0, 300),
-            icon: fnSchema(schemaConfig.image, '目录图标'),
-            sort: fnSchema(schemaConfig.min1, '目录排序'),
-            describe: fnSchema(schemaConfig.describe, '目录描述'),
-            is_bool: fnSchema(schemaConfig.boolEnum, '是否虚拟目录'),
-            is_open: fnSchema(schemaConfig.boolEnum, '是否公开')
+            icon: fnSchema(sysConfig.schemaField.image, '目录图标'),
+            sort: fnSchema(sysConfig.schemaField.min1, '目录排序'),
+            describe: fnSchema(sysConfig.schemaField.describe, '目录描述'),
+            is_bool: fnSchema(sysConfig.schemaField.boolEnum, '是否虚拟目录'),
+            is_open: fnSchema(sysConfig.schemaField.boolEnum, '是否公开')
         },
         required: ['pid', 'category', 'name']
     }
@@ -39,7 +38,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let model = fastify.mysql //
-                    .table(mapTableConfig.sys_tree)
+                    .table(appConfig.table.sys_tree)
                     .modify(function (queryBuilder) {});
                 if (req.body.pid === 0) {
                     req.body.pids = '0';
@@ -47,7 +46,7 @@ export default async function (fastify, opts) {
                 } else {
                     let parentPermission = await model.clone().where('id', req.body.pid).first();
                     if (!parentPermission) {
-                        return { ...constantConfig.code.FAIL, msg: '父级树不存在' };
+                        return { ...appConfig.httpCode.FAIL, msg: '父级树不存在' };
                     }
                     req.body.pids = `${parentPermission.pids},${parentPermission.id}`;
                     req.body.level = req.body.pids.split(',').length;
@@ -74,12 +73,12 @@ export default async function (fastify, opts) {
                 await fastify.cacheTreeData();
 
                 return {
-                    ...constantConfig.code.INSERT_SUCCESS,
+                    ...appConfig.httpCode.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return constantConfig.code.INSERT_FAIL;
+                return appConfig.httpCode.INSERT_FAIL;
             }
         }
     });

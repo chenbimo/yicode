@@ -2,10 +2,8 @@ import { omit as _omit } from 'lodash-es';
 
 import { fnSchema, fnApiInfo, fnPureMD5, fnMD5 } from '../../utils/index.js';
 
-import { mapTableConfig } from '../../config/mapTable.js';
-import { constantConfig } from '../../config/constant.js';
-import { schemaConfig } from '../../config/schema.js';
-import { cacheConfig } from '../../config/cache.js';
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -17,8 +15,8 @@ export const apiSchema = {
         title: `${metaConfig.name}登录接口`,
         type: 'object',
         properties: {
-            account: fnSchema(schemaConfig.account, '账号'),
-            password: fnSchema(schemaConfig.password, '密码')
+            account: fnSchema(sysConfig.schemaField.account, '账号'),
+            password: fnSchema(sysConfig.schemaField.password, '密码')
         },
         required: ['account', 'password']
     }
@@ -35,7 +33,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let adminModel = fastify.mysql
-                    .table(mapTableConfig.sys_admin)
+                    .table(appConfig.table.sys_admin)
                     //
                     .orWhere({ username: req.body.account })
                     .orWhere({ phone: req.body.account });
@@ -45,7 +43,7 @@ export default async function (fastify, opts) {
                 // 判断用户存在
                 if (!adminData) {
                     return {
-                        ...constantConfig.code.FAIL,
+                        ...appConfig.httpCode.FAIL,
                         msg: '用户不存在'
                     };
                 }
@@ -53,12 +51,12 @@ export default async function (fastify, opts) {
                 // 判断密码
                 if (fnMD5(req.body.password) !== adminData.password) {
                     return {
-                        ...constantConfig.code.FAIL,
+                        ...appConfig.httpCode.FAIL,
                         msg: '密码错误'
                     };
                 }
 
-                let dataRoleCodes = await fastify.redisGet(cacheConfig.cacheData_role, 'json');
+                let dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role, 'json');
                 let roleCodesArray = adminData.role_codes.split(',');
                 let role_codes = [];
                 dataRoleCodes.forEach((item) => {
@@ -69,7 +67,7 @@ export default async function (fastify, opts) {
 
                 // 成功返回
                 return {
-                    ...constantConfig.code.SUCCESS,
+                    ...appConfig.httpCode.SUCCESS,
                     msg: '登录成功',
                     data: _omit(adminData, ['password']),
                     token: await fastify.jwt.sign({
@@ -81,7 +79,7 @@ export default async function (fastify, opts) {
             } catch (err) {
                 fastify.log.error(err);
                 return {
-                    ...constantConfig.code.FAIL,
+                    ...appConfig.httpCode.FAIL,
                     msg: '登录失败'
                 };
             }
