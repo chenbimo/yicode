@@ -193,18 +193,22 @@ async function syncMenuFile(fastify) {
 async function convertMenuStruct() {
     let dataArray = [];
     _forOwn(menuConfig, (item, key) => {
-        item.value = fnKebabCase(key);
-        menuDirNew.push(item.value);
-        if (_isObject(item['children'])) {
-            let childrenData = _cloneDeep(item['children']);
-            item['children'] = [];
-            _forOwn(childrenData, (item2, key2) => {
-                item2.value = fnKebabCase(key2);
-                menuFileNew.push(item2.value);
-                item['children'].push(item2);
-            });
+        if (item.disabled !== true) {
+            item.value = fnKebabCase(key);
+            menuDirNew.push(item.value);
+            if (_isObject(item['children'])) {
+                let childrenData = _cloneDeep(item['children']);
+                item['children'] = [];
+                _forOwn(childrenData, (item2, key2) => {
+                    if (item2.disabled !== true) {
+                        item2.value = fnKebabCase(key2);
+                        menuFileNew.push(item2.value);
+                        item['children'].push(item2);
+                    }
+                });
+            }
+            dataArray.push(item);
         }
-        dataArray.push(item);
     });
     return dataArray;
 }
