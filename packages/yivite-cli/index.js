@@ -51,7 +51,7 @@ program //
         'production'
     )
     .action(async (options) => {
-        let execFile = fnGetFileProtocolPath(path.resolve(cliDir, 'scripts', 'build.js'));
+        let execFile = fnFileProtocolPath(path.resolve(cliDir, 'scripts', 'build.js'));
         let { main } = await import(execFile);
         main(options);
     });
