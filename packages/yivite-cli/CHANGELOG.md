@@ -1,5 +1,11 @@
 # @yicode/yivite-cli
 
+## 1.21.2
+
+### Patch Changes
+
+-   .
+
 ## 1.21.1
 
 ### Patch Changes
