@@ -77,6 +77,10 @@ async function syncApiDir(fastify) {
 
         // 如果数据库中存在当前接口目录，则进行添加或更新
         let { metaConfig } = await fnImport(url.pathToFileURL(file), {});
+        if (!metaConfig || !metaConfig.dir) {
+            fastify.log.error(`错误文件：${file}`);
+            process.exit(1);
+        }
         let apiMeta = {};
         apiMeta.name = metaConfig.dir;
         apiMeta.uuid = fnUUID();
