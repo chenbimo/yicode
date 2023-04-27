@@ -79,7 +79,7 @@ async function plugin(fastify, opts) {
         if (!devRoleData) {
             let insertData = {
                 code: 'dev',
-                name: '开发管理员',
+                name: appConfig.devName || '开发管理员',
                 describe: '技术性相关的管理和维护',
                 menu_ids: menuIds.join(','),
                 api_ids: apiIds.join(',')
@@ -100,7 +100,7 @@ async function plugin(fastify, opts) {
         if (!devAdminData) {
             let insertData = {
                 username: 'dev',
-                nickname: '开发管理员',
+                nickname: appConfig.devName || '开发管理员',
                 role_codes: 'dev',
                 password: fnMD5(fnPureMD5(appConfig.devPassword))
             };
@@ -117,7 +117,10 @@ async function plugin(fastify, opts) {
             await adminModel
                 .clone()
                 .where('username', 'dev')
-                .update({ password: fnMD5(fnPureMD5(appConfig.devPassword)) });
+                .update({
+                    nickname: appConfig.devName || '开发管理员',
+                    password: fnMD5(fnPureMD5(appConfig.devPassword))
+                });
         }
         await fastify.cacheRoleData();
     } catch (err) {
