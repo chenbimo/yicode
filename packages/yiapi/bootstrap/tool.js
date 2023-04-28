@@ -4,9 +4,13 @@ import got from 'got';
 import { keyBy as _keyBy } from 'lodash-es';
 
 import { appConfig } from '../config/appConfig.js';
+import { fnStringify } from '../utils/index.js';
 
 async function plugin(fastify, opts) {
-    fastify.decorate('redisSet', async (key, value, type = 'text') => {
+    fastify.decorate('redisSet', async (key, value, second = -1) => {
+        await fastify.redis.set(key, fnStringify(value), 'EX', second);
+    });
+    fastify.decorate('redisSet2', async (key, value, type = 'text') => {
         if (type === 'json') {
             await fastify.redis.set(key, JSON.stringify(value));
         }
@@ -14,15 +18,9 @@ async function plugin(fastify, opts) {
             await fastify.redis.set(key, value);
         }
     });
-    fastify.decorate('redisGet', async (key, type = 'text') => {
-        if (type === 'json') {
-            let result = await fastify.redis.get(key);
-            return JSON.parse(result);
-        }
-        if (type === 'text') {
-            let result = await fastify.redis.get(key);
-            return result;
-        }
+    fastify.decorate('redisGet', async (key) => {
+        let result = await fastify.redis.get(key);
+        return JSON.parse(result);
     });
 
     // 获取当前登录用户可操作的接口列表
@@ -33,7 +31,7 @@ async function plugin(fastify, opts) {
 
         // 提取所有角色拥有的接口
         let apiIds = [];
-        let dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role, 'json');
+        let dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role);
         dataRoleCodes.forEach((item) => {
             if (userRoleCodes.includes(item.code)) {
                 apiIds = item.api_ids
@@ -47,7 +45,7 @@ async function plugin(fastify, opts) {
         // 将接口进行唯一性处理
         let uniqApiIds = [...new Set(apiIds)];
 
-        let dataApi = await fastify.redisGet(appConfig.cacheData.api, 'json');
+        let dataApi = await fastify.redisGet(appConfig.cacheData.api);
 
         // 最终的用户接口列表
         let result = dataApi
@@ -70,7 +68,7 @@ async function plugin(fastify, opts) {
             // 所有菜单 ID
             let menuIds = [];
 
-            const dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role, 'json');
+            const dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role);
             dataRoleCodes.forEach((item) => {
                 if (userRoleCodes.includes(item.code)) {
                     menuIds = item.menu_ids
@@ -82,7 +80,7 @@ async function plugin(fastify, opts) {
             });
 
             const userMenu = [...new Set(menuIds)];
-            const dataMenu = await fastify.redisGet(appConfig.cacheData.menu, 'json');
+            const dataMenu = await fastify.redisGet(appConfig.cacheData.menu);
 
             let result = dataMenu.filter((item) => {
                 if (item.state === 0 && userMenu.includes(item.id)) {
@@ -109,17 +107,17 @@ async function plugin(fastify, opts) {
         let dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
 
         // 全部树数据
-        await fastify.redisSet(appConfig.cacheData.tree, [], 'json');
-        await fastify.redisSet(appConfig.cacheData.tree, dataTree, 'json');
+        await fastify.redisSet(appConfig.cacheData.tree, []);
+        await fastify.redisSet(appConfig.cacheData.tree, dataTree);
 
         // 菜单树数据
-        await fastify.redisSet(appConfig.cacheData.menu, [], 'json');
-        await fastify.redisSet(appConfig.cacheData.menu, dataMenu, 'json');
+        await fastify.redisSet(appConfig.cacheData.menu, []);
+        await fastify.redisSet(appConfig.cacheData.menu, dataMenu);
 
         // 接口树数据
-        await fastify.redisSet(appConfig.cacheData.api, [], 'json');
-        await fastify.redisSet(appConfig.cacheData.api, dataApi, 'json');
-        await fastify.redisSet(appConfig.cacheData.apiNames, [], 'json');
+        await fastify.redisSet(appConfig.cacheData.api, []);
+        await fastify.redisSet(appConfig.cacheData.api, dataApi);
+        await fastify.redisSet(appConfig.cacheData.apiNames, []);
         await fastify.redisSet(
             appConfig.cacheData.apiNames,
             dataApi.filter((item) => item.is_bool === 1).map((item) => `/api${item.value}`),
@@ -127,8 +125,8 @@ async function plugin(fastify, opts) {
         );
 
         // 白名单接口数据
-        await fastify.redisSet(appConfig.cacheData.apiWhiteLists, [], 'json');
-        await fastify.redisSet(appConfig.cacheData.apiWhiteLists, dataApiWhiteLists, 'json');
+        await fastify.redisSet(appConfig.cacheData.apiWhiteLists, []);
+        await fastify.redisSet(appConfig.cacheData.apiWhiteLists, dataApiWhiteLists);
     });
 
     // 设置角色数据
@@ -136,12 +134,12 @@ async function plugin(fastify, opts) {
         // 角色类别
         let dataRole = await fastify.mysql.table(`${appConfig.table.sys_role}`).select();
 
-        await fastify.redisSet(appConfig.cacheData.role, [], 'json');
-        await fastify.redisSet(appConfig.cacheData.role, dataRole, 'json');
+        await fastify.redisSet(appConfig.cacheData.role, []);
+        await fastify.redisSet(appConfig.cacheData.role, dataRole);
 
         if (type === 'file') {
-            let menuData = await fastify.redisGet(appConfig.cacheData.menu, 'json');
-            let apiData = await fastify.redisGet(appConfig.cacheData.api, 'json');
+            let menuData = await fastify.redisGet(appConfig.cacheData.menu);
+            let apiData = await fastify.redisGet(appConfig.cacheData.api);
 
             let menuObject = _keyBy(menuData, 'id');
             let apiObject = _keyBy(apiData, 'id');

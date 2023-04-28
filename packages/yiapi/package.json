@@ -55,8 +55,8 @@
         "nanoid": "^4.0.2",
         "nodemailer": "^6.9.1",
         "ora": "^6.3.0",
+        "safe-stable-stringify": "^2.4.3",
         "winston": "^3.8.2",
-        "winston-daily-rotate-file": "^4.7.1",
-        "@yicode/yijson-mini": "workspace:^"
+        "winston-daily-rotate-file": "^4.7.1"
     }
 }
