@@ -2,7 +2,7 @@
 
 > 参考方案
 
-![参考方案](https://github.com/rgcl/jsonpack)
+[参考方案 https://github.com/rgcl/jsonpack](https://github.com/rgcl/jsonpack)
 
 ## 压缩
 
