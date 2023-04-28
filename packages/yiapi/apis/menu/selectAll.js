@@ -27,7 +27,7 @@ export default async function (fastify, opts) {
         },
         handler: async function (req, res) {
             try {
-                let menuData = await fastify.redisGet(appConfig.cacheData.menu, 'json');
+                let menuData = await fastify.redisGet(appConfig.cacheData.menu);
 
                 return {
                     ...appConfig.httpCode.SELECT_SUCCESS,

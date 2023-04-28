@@ -1,5 +1,11 @@
 # @yicode/yiapi
 
+## 1.23.4
+
+### Patch Changes
+
+-   .
+
 ## 1.23.3
 
 ### Patch Changes

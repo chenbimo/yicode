@@ -10,14 +10,6 @@ async function plugin(fastify, opts) {
     fastify.decorate('redisSet', async (key, value, second = -1) => {
         await fastify.redis.set(key, fnStringify(value), 'EX', second);
     });
-    fastify.decorate('redisSet2', async (key, value, type = 'text') => {
-        if (type === 'json') {
-            await fastify.redis.set(key, JSON.stringify(value));
-        }
-        if (type === 'text') {
-            await fastify.redis.set(key, value);
-        }
-    });
     fastify.decorate('redisGet', async (key) => {
         let result = await fastify.redis.get(key);
         return JSON.parse(result);

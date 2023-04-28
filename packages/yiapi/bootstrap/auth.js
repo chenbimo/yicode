@@ -53,7 +53,7 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 接口存在性判断 -------------------------------- */
-            let allApiNames = await fastify.redisGet(appConfig.cacheData.apiNames, 'json');
+            let allApiNames = await fastify.redisGet(appConfig.cacheData.apiNames);
 
             if (allApiNames.includes(req.url) === false) {
                 res.send(appConfig.httpCode.API_NOT_FOUND);
@@ -103,7 +103,7 @@ async function plugin(fastify, opts) {
 
             /* ---------------------------------- 白名单判断 --------------------------------- */
             // 从缓存获取白名单接口
-            let dataApiWhiteLists = await fastify.redisGet(appConfig.cacheData.apiWhiteLists, 'json');
+            let dataApiWhiteLists = await fastify.redisGet(appConfig.cacheData.apiWhiteLists);
             let whiteApis = dataApiWhiteLists?.map((item) => item.value);
             let allWhiteApis = _uniq(_concat(appConfig.whiteApis, whiteApis || []));
 

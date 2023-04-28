@@ -30,7 +30,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 // TODO: 优化，不同分类的目录独立的缓存
-                let treeData = await fastify.redisGet(appConfig.cacheData.tree, 'json');
+                let treeData = await fastify.redisGet(appConfig.cacheData.tree);
                 let rows = treeData.filter((item) => item.category === req.body.category);
                 // let model = fastify.mysql //
                 //     .table(appConfig.table.sys_tree)
