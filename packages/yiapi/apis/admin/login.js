@@ -56,7 +56,7 @@ export default async function (fastify, opts) {
                     };
                 }
 
-                let dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role);
+                let dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role, true);
                 let roleCodesArray = adminData.role_codes.split(',');
                 let role_codes = [];
                 dataRoleCodes.forEach((item) => {

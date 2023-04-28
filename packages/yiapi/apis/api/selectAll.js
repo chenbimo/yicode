@@ -33,7 +33,8 @@ export default async function (fastify, opts) {
                     ...appConfig.httpCode.SELECT_SUCCESS,
                     data: {
                         rows: apiData
-                    }
+                    },
+                    from: 'cache'
                 };
             } catch (err) {
                 fastify.log.error(err);

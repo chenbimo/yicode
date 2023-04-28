@@ -31,7 +31,7 @@ async function plugin(fastify, opts) {
 
         // 提取所有角色拥有的接口
         let apiIds = [];
-        let dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role);
+        let dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role, true);
         dataRoleCodes.forEach((item) => {
             if (userRoleCodes.includes(item.code)) {
                 apiIds = item.api_ids
@@ -45,7 +45,7 @@ async function plugin(fastify, opts) {
         // 将接口进行唯一性处理
         let uniqApiIds = [...new Set(apiIds)];
 
-        let dataApi = await fastify.redisGet(appConfig.cacheData.api);
+        let dataApi = await fastify.redisGet(appConfig.cacheData.api, true);
 
         // 最终的用户接口列表
         let result = dataApi
@@ -68,7 +68,7 @@ async function plugin(fastify, opts) {
             // 所有菜单 ID
             let menuIds = [];
 
-            const dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role);
+            const dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role, true);
             dataRoleCodes.forEach((item) => {
                 if (userRoleCodes.includes(item.code)) {
                     menuIds = item.menu_ids
@@ -80,7 +80,7 @@ async function plugin(fastify, opts) {
             });
 
             const userMenu = [...new Set(menuIds)];
-            const dataMenu = await fastify.redisGet(appConfig.cacheData.menu);
+            const dataMenu = await fastify.redisGet(appConfig.cacheData.menu, true);
 
             let result = dataMenu.filter((item) => {
                 if (item.state === 0 && userMenu.includes(item.id)) {
@@ -138,8 +138,8 @@ async function plugin(fastify, opts) {
         await fastify.redisSet(appConfig.cacheData.role, dataRole);
 
         if (type === 'file') {
-            let menuData = await fastify.redisGet(appConfig.cacheData.menu);
-            let apiData = await fastify.redisGet(appConfig.cacheData.api);
+            let menuData = await fastify.redisGet(appConfig.cacheData.menu, true);
+            let apiData = await fastify.redisGet(appConfig.cacheData.api, true);
 
             let menuObject = _keyBy(menuData, 'id');
             let apiObject = _keyBy(apiData, 'id');
