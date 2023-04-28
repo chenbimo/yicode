@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yijson-mini",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "json压缩",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
