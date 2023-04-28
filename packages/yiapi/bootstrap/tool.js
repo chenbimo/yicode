@@ -4,14 +4,14 @@ import got from 'got';
 import { keyBy as _keyBy } from 'lodash-es';
 
 import { appConfig } from '../config/appConfig.js';
-import { fnStringify, jsonPack } from '../utils/index.js';
+import { fnStringify, fnJsonUnpack } from '../utils/index.js';
 
 async function plugin(fastify, opts) {
     fastify.decorate('redisSet', async (key, value, second = 0) => {
         if (second > 0) {
-            await fastify.redis.set(key, jsonPack(value), 'EX', second);
+            await fastify.redis.set(key, fnJsonUnpack(value), 'EX', second);
         } else {
-            await fastify.redis.set(key, jsonPack(value));
+            await fastify.redis.set(key, fnJsonUnpack(value));
         }
     });
     fastify.decorate('redisGet', async (key) => {
