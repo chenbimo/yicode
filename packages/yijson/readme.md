@@ -2,8 +2,9 @@
 
 ## 参考方案
 
-[参考方案 https://github.com/KilledByAPixel/JSONCrush](https://github.com/KilledByAPixel/JSONCrush)
-[参考方案 https://github.com/rgcl/jsonpack](https://github.com/rgcl/jsonpack)
+-   [参考方案 https://github.com/KilledByAPixel/JSONCrush](https://github.com/KilledByAPixel/JSONCrush)
+
+-   [参考方案 https://github.com/rgcl/jsonpack](https://github.com/rgcl/jsonpack)
 
 注意：jsonCrush 的压缩效果更好，压缩速度更慢
 

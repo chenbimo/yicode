@@ -5,7 +5,6 @@ import md5 from 'blueimp-md5';
 import got from 'got';
 import { customAlphabet } from 'nanoid';
 import { copy as copyAny } from 'copy-anything';
-import { jsonPack, jsonUnpack, jsonCrush, jsonUncrush } from '@yicode/yijson';
 import {
     //
     kebabCase as _kebabCase,
@@ -26,95 +25,6 @@ import { sysConfig } from '../config/sysConfig.js';
 
 // 自定义初始化字符
 const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
-
-// pack 加密json数据
-export function fnJsonPack(data) {
-    return jsonPack(data);
-}
-
-// unpack 解密json数据
-export function fnJsonUnpack(data) {
-    return jsonUnpack(data);
-}
-
-// crush 加密json数据
-export function fnJsonCrush(data) {
-    return jsonCrush(data);
-}
-
-// uncrush 解密json数据
-export function fnJsonUncrush(data) {
-    return jsonUncrush(data);
-}
-
-// 压缩为一行json
-export function fnInlineJson(json) {
-    let tokenizer = /"|(\/\*)|(\*\/)|(\/\/)|\n|\r|\[|]/g,
-        in_string = false,
-        in_multiline_comment = false,
-        in_singleline_comment = false,
-        tmp,
-        tmp2,
-        new_str = [],
-        ns = 0,
-        from = 0,
-        lc,
-        rc,
-        prevFrom;
-
-    tokenizer.lastIndex = 0;
-
-    while ((tmp = tokenizer.exec(json))) {
-        lc = RegExp.leftContext;
-        rc = RegExp.rightContext;
-        if (!in_multiline_comment && !in_singleline_comment) {
-            tmp2 = lc.substring(from);
-            if (!in_string) {
-                tmp2 = tmp2.replace(/(\n|\r|\s)*/g, '');
-            }
-            new_str[ns++] = tmp2;
-        }
-        prevFrom = from;
-        from = tokenizer.lastIndex;
-
-        // found a " character, and we're not currently in
-        // a comment? check for previous `\` escaping immediately
-        // leftward adjacent to this match
-        if (tmp[0] === '"' && !in_multiline_comment && !in_singleline_comment) {
-            // limit left-context matching to only go back
-            // to the position of the last token match
-            //
-            // see: https://github.com/getify/JSON.minify/issues/64
-            lc.lastIndex = prevFrom;
-
-            // perform leftward adjacent escaping match
-            tmp2 = lc.match(/(\\)*$/);
-            // start of string with ", or unescaped " character found to end string?
-            if (!in_string || !tmp2 || tmp2[0].length % 2 === 0) {
-                in_string = !in_string;
-            }
-            from--; // include " character in next catch
-            rc = json.substring(from);
-        } else if (tmp[0] === '/*' && !in_string && !in_multiline_comment && !in_singleline_comment) {
-            in_multiline_comment = true;
-        } else if (tmp[0] === '*/' && !in_string && in_multiline_comment && !in_singleline_comment) {
-            in_multiline_comment = false;
-        } else if (tmp[0] === '//' && !in_string && !in_multiline_comment && !in_singleline_comment) {
-            in_singleline_comment = true;
-        } else if ((tmp[0] === '\n' || tmp[0] === '\r') && !in_string && !in_multiline_comment && in_singleline_comment) {
-            in_singleline_comment = false;
-        } else if (!in_multiline_comment && !in_singleline_comment && !/\n|\r|\s/.test(tmp[0])) {
-            new_str[ns++] = tmp[0];
-        }
-    }
-    new_str[ns++] = rc;
-    return new_str.join('');
-}
-
-// 安全字符串化
-export function fnStringify(data) {
-    return JSON.stringify(fnInlineJson(data));
-}
 
 // 转换成中划线
 export function fnKebabCase(value, delimiter = '/') {

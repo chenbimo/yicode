@@ -4,23 +4,18 @@ import got from 'got';
 import { keyBy as _keyBy } from 'lodash-es';
 
 import { appConfig } from '../config/appConfig.js';
-import { fnStringify, fnJsonUnpack, fnJsonPack, fnJsonCrush, fnJsonUncrush } from '../utils/index.js';
 
 async function plugin(fastify, opts) {
     fastify.decorate('redisSet', async (key, value, second = 0) => {
         if (second > 0) {
-            await fastify.redis.set(key, fnJsonCrush(value), 'EX', second);
+            await fastify.redis.set(key, JSON.stringify(value), 'EX', second);
         } else {
-            await fastify.redis.set(key, fnJsonCrush(value));
+            await fastify.redis.set(key, JSON.stringify(value));
         }
     });
     fastify.decorate('redisGet', async (key, unpack = false) => {
         let result = await fastify.redis.get(key);
-        if (unpack === true) {
-            return fnJsonUncrush(result);
-        } else {
-            return result;
-        }
+        return JSON.parse(result);
     });
 
     // 获取当前登录用户可操作的接口列表
@@ -31,7 +26,7 @@ async function plugin(fastify, opts) {
 
         // 提取所有角色拥有的接口
         let apiIds = [];
-        let dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role, true);
+        let dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role);
         dataRoleCodes.forEach((item) => {
             if (userRoleCodes.includes(item.code)) {
                 apiIds = item.api_ids
@@ -45,7 +40,7 @@ async function plugin(fastify, opts) {
         // 将接口进行唯一性处理
         let uniqApiIds = [...new Set(apiIds)];
 
-        let dataApi = await fastify.redisGet(appConfig.cacheData.api, true);
+        let dataApi = await fastify.redisGet(appConfig.cacheData.api);
 
         // 最终的用户接口列表
         let result = dataApi
@@ -68,7 +63,7 @@ async function plugin(fastify, opts) {
             // 所有菜单 ID
             let menuIds = [];
 
-            const dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role, true);
+            const dataRoleCodes = await fastify.redisGet(appConfig.cacheData.role);
             dataRoleCodes.forEach((item) => {
                 if (userRoleCodes.includes(item.code)) {
                     menuIds = item.menu_ids
@@ -80,7 +75,7 @@ async function plugin(fastify, opts) {
             });
 
             const userMenu = [...new Set(menuIds)];
-            const dataMenu = await fastify.redisGet(appConfig.cacheData.menu, true);
+            const dataMenu = await fastify.redisGet(appConfig.cacheData.menu);
 
             let result = dataMenu.filter((item) => {
                 if (item.state === 0 && userMenu.includes(item.id)) {
@@ -99,16 +94,11 @@ async function plugin(fastify, opts) {
     // 设置权限数据
     fastify.decorate('cacheTreeData', async () => {
         // 菜单列表
-        let dataTree = await fastify.mysql.table(appConfig.table.sys_tree).select();
         let dataMenu = await fastify.mysql.table(appConfig.table.sys_menu).select();
         let dataApi = await fastify.mysql.table(appConfig.table.sys_api).select();
 
         // 白名单接口
         let dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
-
-        // 全部树数据
-        await fastify.redisSet(appConfig.cacheData.tree, []);
-        await fastify.redisSet(appConfig.cacheData.tree, dataTree);
 
         // 菜单树数据
         await fastify.redisSet(appConfig.cacheData.menu, []);
@@ -117,11 +107,12 @@ async function plugin(fastify, opts) {
         // 接口树数据
         await fastify.redisSet(appConfig.cacheData.api, []);
         await fastify.redisSet(appConfig.cacheData.api, dataApi);
+
+        // 接口名称缓存
         await fastify.redisSet(appConfig.cacheData.apiNames, []);
         await fastify.redisSet(
             appConfig.cacheData.apiNames,
-            dataApi.filter((item) => item.is_bool === 1).map((item) => `/api${item.value}`),
-            'json'
+            dataApi.filter((item) => item.is_bool === 1).map((item) => `/api${item.value}`)
         );
 
         // 白名单接口数据
@@ -136,38 +127,14 @@ async function plugin(fastify, opts) {
 
         await fastify.redisSet(appConfig.cacheData.role, []);
         await fastify.redisSet(appConfig.cacheData.role, dataRole);
-
-        if (type === 'file') {
-            let menuData = await fastify.redisGet(appConfig.cacheData.menu, true);
-            let apiData = await fastify.redisGet(appConfig.cacheData.api, true);
-
-            let menuObject = _keyBy(menuData, 'id');
-            let apiObject = _keyBy(apiData, 'id');
-
-            let dataRoleCache = dataRole.map((item) => {
-                item.menu_ids = item.menu_ids
-                    .split(',')
-                    .filter((v) => v)
-                    .map((id) => menuObject[id]?.value || '');
-
-                item.api_ids = item.api_ids
-                    .split(',')
-                    .filter((v) => v)
-                    .map((id) => apiObject[id]?.value || '');
-                return item;
-            });
-
-            // fs.outputJsonSync('./data/roleData.json', dataRoleCache);
-        }
     });
 
     // 获取微信 access_token
     fastify.decorate('getWeixinAccessToken', async () => {
-        let cacheWeixinAccessToken = await fastify.redisGet(appConfig.cacheData.weixinAccessToken, 'text');
+        let cacheWeixinAccessToken = await fastify.redisGet(appConfig.cacheData.weixinAccessToken);
         if (cacheWeixinAccessToken) {
             return {
-                accessToken: cacheWeixinAccessToken,
-                from: 'cache'
+                accessToken: cacheWeixinAccessToken
             };
         }
         let res = await got('https://api.weixin.qq.com/cgi-bin/token', {
