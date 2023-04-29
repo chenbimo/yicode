@@ -5,7 +5,7 @@ import md5 from 'blueimp-md5';
 import got from 'got';
 import { customAlphabet } from 'nanoid';
 import { copy as copyAny } from 'copy-anything';
-import { jsonPack, jsonUnpack, jsonCrush, jsonUncrush } from '@yicode/yijson-mini';
+import { jsonPack, jsonUnpack, jsonCrush, jsonUncrush } from '@yicode/yijson';
 import {
     //
     kebabCase as _kebabCase,
