@@ -35,8 +35,15 @@ async function plugin(fastify, opts) {
         try {
             // 如果是收藏图标，则直接通过
             if (res.url === 'favicon.ico') return;
-            /* --------------------------------- 自由接口判断 --------------------------------- */
 
+            /* --------------------------------- 接口禁用检测 --------------------------------- */
+            let isMatchBlackApi = micromatch.isMatch(req.url, appConfig.blackApis);
+            if (isMatchBlackApi === true) {
+                res.send(appConfig.httpCode.API_DISABLED);
+                return;
+            }
+
+            /* --------------------------------- 自由接口判断 --------------------------------- */
             let isMatchFreeApi = micromatch.isMatch(req.url, appConfig.freeApis);
             // 如果是自由通行的接口，则直接返回
             if (isMatchFreeApi === true) return;
@@ -57,13 +64,6 @@ async function plugin(fastify, opts) {
 
             if (allApiNames.includes(req.url) === false) {
                 res.send(appConfig.httpCode.API_NOT_FOUND);
-                return;
-            }
-
-            /* --------------------------------- 接口禁用检测 --------------------------------- */
-            let isMatchBlackApi = micromatch.isMatch(req.url, appConfig.blackApis);
-            if (isMatchBlackApi === true) {
-                res.send(appConfig.httpCode.API_DISABLED);
                 return;
             }
 
