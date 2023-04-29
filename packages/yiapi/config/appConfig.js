@@ -145,7 +145,7 @@ const appConfig = mergeAndConcat(
             port: 6379,
             username: null,
             password: null,
-            keyPrefix: 'yiapi#'
+            keyPrefix: 'yiapi:'
         },
         // 角色配置
         role: {
