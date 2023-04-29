@@ -13,9 +13,9 @@
         "preinstall": "npx only-allow pnpm",
         "build": "pnpm --filter=@yicode/* run build",
         "clear": "rimraf 'packages/*/{lib,node_modules}' && rimraf node_modules",
-        "version": "changeset version",
-        "choose": "changeset",
-        "release": "changeset publish --registry=https://registry.npmjs.com/"
+        "v": "changeset version",
+        "c": "changeset",
+        "r": "changeset publish --registry=https://registry.npmjs.com/"
     },
     "keywords": [
         "yicode",
