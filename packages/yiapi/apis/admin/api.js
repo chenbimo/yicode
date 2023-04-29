@@ -19,9 +19,7 @@ export default async function (fastify, opts) {
         method: 'POST',
         url: `/${apiInfo.pureFileName}`,
         schema: apiSchema,
-        config: {
-            isLogin: true
-        },
+        config: {},
         handler: async function (req, res) {
             try {
                 const result = await fastify.getUserApis(req.session);

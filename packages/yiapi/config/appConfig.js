@@ -27,14 +27,23 @@ const appConfig = mergeAndConcat(
         reqParamsFilter: ['password'],
         // 返回参数日志过滤字段
         resParamsFilter: ['password'],
-        // 自由通行的接口，不需要鉴权
-        freeApis: ['/', '/favicon.ico', '/docs', '/docs/**', '/public/**'],
-        // 白名单接口，需要鉴权
-        whiteApis: [
+        // 自由通行的接口，不需要任何鉴权
+        freeApis: [
             //
+            '/',
+            '/favicon.ico',
+            '/docs',
+            '/docs/**',
+            '/public/**',
             '/api/admin/login',
             '/api/user/login',
             '/api/user/register'
+        ],
+        // 黑名单接口，不可访问的接口
+        blackApis: [],
+        // 白名单接口，登录后访问无限制
+        whiteApis: [
+            //
         ],
         // 缓存映射
         cacheData: {

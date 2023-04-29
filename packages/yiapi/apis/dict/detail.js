@@ -24,9 +24,7 @@ export default async function (fastify, opts) {
         method: 'POST',
         url: `/${apiInfo.pureFileName}`,
         schema: apiSchema,
-        config: {
-            isLogin: false
-        },
+        config: {},
         handler: async function (req, res) {
             try {
                 let dictionaryModel = fastify.mysql.table(appConfig.table.sys_dict);

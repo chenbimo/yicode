@@ -22,9 +22,7 @@ export default async function (fastify, opts) {
         method: 'POST',
         url: `/${apiInfo.pureFileName}`,
         schema: apiSchema,
-        config: {
-            isLogin: false
-        },
+        config: {},
         handler: async function (req, res) {
             try {
                 let apiData = await fastify.redisGet(appConfig.cacheData.api);

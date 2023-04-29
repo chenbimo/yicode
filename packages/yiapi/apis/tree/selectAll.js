@@ -24,9 +24,7 @@ export default async function (fastify, opts) {
         method: 'POST',
         url: `/${apiInfo.pureFileName}`,
         schema: apiSchema,
-        config: {
-            isLogin: false
-        },
+        config: {},
         handler: async function (req, res) {
             try {
                 // TODO: 优化，不同分类的目录独立的缓存

@@ -39,7 +39,7 @@ async function plugin(fastify, opts) {
 
             let isMatchFreeApi = micromatch.isMatch(req.url, appConfig.freeApis);
             // 如果是自由通行的接口，则直接返回
-            if (isMatchFreeApi) return;
+            if (isMatchFreeApi === true) return;
 
             /* --------------------------------- 请求资源判断 --------------------------------- */
             if (req.url.indexOf('.') !== -1) {
@@ -61,22 +61,21 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 接口禁用检测 --------------------------------- */
-            if (req.routeConfig.isDisalbed === true) {
+            let isMatchBlackApi = micromatch.isMatch(req.url, appConfig.blackApis);
+            if (isMatchBlackApi === true) {
                 res.send(appConfig.httpCode.API_DISABLED);
                 return;
             }
 
             /* --------------------------------- 接口登录检测 --------------------------------- */
-            if (req.routeConfig.isLogin !== false) {
-                try {
-                    let jwtData = await req.jwtVerify();
-                } catch (err) {
-                    res.send({
-                        ...appConfig.httpCode.NOT_LOGIN,
-                        detail: 'token 验证失败'
-                    });
-                    return;
-                }
+            try {
+                let jwtData = await req.jwtVerify();
+            } catch (err) {
+                res.send({
+                    ...appConfig.httpCode.NOT_LOGIN,
+                    detail: 'token 验证失败'
+                });
+                return;
             }
 
             /* ---------------------------------- 日志记录 ---------------------------------- */
@@ -115,29 +114,12 @@ async function plugin(fastify, opts) {
                 let userApis = await fastify.getUserApis(req.session);
                 let hasApi = _find(userApis, { value: req.url });
 
-                /**
-                 * 如果当前请求的路由，不在用户许可内
-                 * 如果会话有 ID，则表示用户已登录，没有权限
-                 * 如果没有会话 ID，则表示用户未登录
-                 * 如果有接口权限，则判断接口本身是否需要登录
-                 */
                 if (hasApi === false) {
-                    // 如果没有接口权限
-                    if (req.session.id) {
-                        // 判断是否登录，登录了就返回没有接口权限
-                        res.send({
-                            ...appConfig.httpCode.FAIL,
-                            msg: `您没有 [ ${req?.routeSchema?.summary || req.url} ] 接口的操作权限`
-                        });
-                        return;
-                    } else {
-                        // 如果没登录，则返回未登录
-                        res.send({
-                            ...appConfig.httpCode.NOT_LOGIN,
-                            detail: '没有接口权限'
-                        });
-                        return;
-                    }
+                    res.send({
+                        ...appConfig.httpCode.FAIL,
+                        msg: `您没有 [ ${req?.routeSchema?.summary || req.url} ] 接口的操作权限`
+                    });
+                    return;
                 }
             }
         } catch (err) {
