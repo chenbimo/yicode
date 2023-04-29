@@ -1,4 +1,4 @@
-# yijson-mini（JSON 压缩）
+# yijson（易 JSON，json 压缩和解压工具）
 
 > 参考方案
 
