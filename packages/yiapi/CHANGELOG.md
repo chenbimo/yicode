@@ -1,5 +1,13 @@
 # @yicode/yiapi
 
+## 1.23.7
+
+### Patch Changes
+
+-   .
+-   Updated dependencies
+    -   @yicode/yijson@1.1.2
+
 ## 1.23.6
 
 ### Patch Changes
