@@ -5,7 +5,7 @@ import md5 from 'blueimp-md5';
 import got from 'got';
 import { customAlphabet } from 'nanoid';
 import { copy as copyAny } from 'copy-anything';
-import { jsonPack, jsonUnpack } from '@yicode/yijson-mini';
+import { jsonPack, jsonUnpack, jsonCrush, jsonUncrush } from '@yicode/yijson-mini';
 import {
     //
     kebabCase as _kebabCase,
@@ -27,14 +27,24 @@ import { sysConfig } from '../config/sysConfig.js';
 // 自定义初始化字符
 const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
 
-// 加密json数据
+// pack 加密json数据
 export function fnJsonPack(data) {
     return jsonPack(data);
 }
 
-// 解密json数据
+// unpack 解密json数据
 export function fnJsonUnpack(data) {
     return jsonUnpack(data);
+}
+
+// crush 加密json数据
+export function fnJsonCrush(data) {
+    return jsonCrush(data);
+}
+
+// uncrush 解密json数据
+export function fnJsonUncrush(data) {
+    return jsonUncrush(data);
 }
 
 // 压缩为一行json

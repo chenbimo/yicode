@@ -4,20 +4,20 @@ import got from 'got';
 import { keyBy as _keyBy } from 'lodash-es';
 
 import { appConfig } from '../config/appConfig.js';
-import { fnStringify, fnJsonUnpack, fnJsonPack } from '../utils/index.js';
+import { fnStringify, fnJsonUnpack, fnJsonPack, fnJsonCrush, fnJsonUncrush } from '../utils/index.js';
 
 async function plugin(fastify, opts) {
     fastify.decorate('redisSet', async (key, value, second = 0) => {
         if (second > 0) {
-            await fastify.redis.set(key, fnJsonPack(value), 'EX', second);
+            await fastify.redis.set(key, fnJsonCrush(value), 'EX', second);
         } else {
-            await fastify.redis.set(key, fnJsonPack(value));
+            await fastify.redis.set(key, fnJsonCrush(value));
         }
     });
     fastify.decorate('redisGet', async (key, unpack = false) => {
         let result = await fastify.redis.get(key);
         if (unpack === true) {
-            return fnJsonUnpack(result);
+            return fnJsonUncrush(result);
         } else {
             return result;
         }

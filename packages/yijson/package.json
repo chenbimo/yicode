@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yijson",
-    "version": "1.1.2",
+    "version": "1.2.1",
     "description": "json压缩和解压工具",
     "scripts": {
         "preinstall": "npx only-allow pnpm"

@@ -151,7 +151,7 @@ function jsonUncrush(string) {
     }
 
     // unswap the json characters in reverse direction
-    return JSONCrushSwap(uncrushedString, 0);
+    return JSON.parse(JSONCrushSwap(uncrushedString, 0));
 }
 
 function JSONCrushSwap(string, forward = 1) {
