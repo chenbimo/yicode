@@ -272,6 +272,8 @@ export function fnClearLogData(obj, expludeFields = []) {
     _forOwn(obj, (value, key) => {
         if (_isString(value)) {
             newObj[key] = value.slice(0, 200);
+        } else {
+            newObj[key] = value;
         }
     });
     return _omit(newObj, expludeFields);
