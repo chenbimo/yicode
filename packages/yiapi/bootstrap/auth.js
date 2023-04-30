@@ -13,6 +13,7 @@ import {
 } from 'lodash-es';
 
 import { appConfig } from '../config/appConfig.js';
+import { sysConfig } from '../config/sysConfig.js';
 import { fnRouterPath, fnApiParamsCheck, fnClearLogData } from '../utils/index.js';
 
 async function plugin(fastify, opts) {
