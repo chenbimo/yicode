@@ -3,6 +3,8 @@ let appConfig = {
     appNameEn: 'yiapi-free',
     port: 3000,
     devPassword: '123456',
+    // 禁用参数检查
+    authCheck: false,
     database: {
         // 本地数据库
         db: 'test',
