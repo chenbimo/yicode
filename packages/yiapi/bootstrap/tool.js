@@ -81,7 +81,6 @@ async function plugin(fastify, opts) {
                 if (item.state === 0 && userMenu.includes(item.id)) {
                     return true;
                 } else {
-                    console.log('🚀 ~ file: tool.js:92 ~ result ~ item:', item);
                     return false;
                 }
             });
