@@ -56,7 +56,7 @@ async function plugin(fastify, opts) {
 
         let roleCodes = [];
         roleData.forEach((item) => {
-            if (roleCodes.includes(item.code) === false) {
+            if (item.code && roleCodes.includes(item.code) === false) {
                 roleCodes.push(item.code);
             } else {
                 deleteRoleData.push(item.id);
@@ -75,16 +75,17 @@ async function plugin(fastify, opts) {
                 insertRoleData.push(item);
             } else {
                 updateRoleData.push({
+                    code: key,
                     name: item.name,
                     describe: item.describe,
-                    is_system: item.is_system,
+                    is_system: item.is_system || 0,
                     updated_at: fnTimestamp()
                 });
             }
         });
 
         if (_isEmpty(deleteRoleData) === false) {
-            await roleModel.clone().whereIn('id', _uniq(deleteRoleData)).delete();
+            await roleModel.clone().whereIn('id', deleteRoleData).delete();
         }
 
         if (insertRoleData.length > 0) {
@@ -94,10 +95,10 @@ async function plugin(fastify, opts) {
         // 如果待更新接口目录大于0，则更新
         if (_isEmpty(updateRoleData) === false) {
             const updateBatchData = updateRoleData.map((item) => {
-                return menuModel
+                return roleModel
                     .clone()
-                    .where('id', item.id)
-                    .update(_omit(item, ['id']));
+                    .where('code', item.code)
+                    .update(_omit(item, ['code']));
             });
             await Promise.all(updateBatchData);
         }
