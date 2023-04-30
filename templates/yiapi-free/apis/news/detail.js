@@ -21,9 +21,7 @@ export default async function (fastify, opts) {
         method: 'POST',
         url: `/${apiInfo.pureFileName}`,
         schema: apiSchema,
-        config: {
-            isLogin: false
-        },
+        config: {},
         handler: async function (req, res) {
             const trx = await fastify.mysql.transaction();
             try {
@@ -36,13 +34,13 @@ export default async function (fastify, opts) {
                 await trx.commit();
 
                 return {
-                    ...yiapi.constantConfig.code.SELECT_SUCCESS,
+                    ...yiapi.appConfig.httpCode.SELECT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
                 await trx.rollback();
-                return yiapi.constantConfig.code.SELECT_FAIL;
+                return yiapi.appConfig.httpCode.SELECT_FAIL;
             }
         }
     });

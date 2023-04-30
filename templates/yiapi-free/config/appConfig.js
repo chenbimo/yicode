@@ -1,4 +1,4 @@
-export const appConfig = {
+let appConfig = {
     appName: '易接口免费模板',
     appNameEn: 'yiapi-free',
     port: 3000,
@@ -13,7 +13,9 @@ export const appConfig = {
         port: 3306
     },
     redis: {
-        password: process.env.NODE_ENV === 'development' ? '' : '123456',
-        keyPrefix: 'test#'
+        password: process.env.NODE_ENV === 'production' ? '123456' : '',
+        keyPrefix: 'test:'
     }
 };
+
+export { appConfig };
