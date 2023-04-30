@@ -55,7 +55,7 @@ export default async function (fastify, opts) {
                     images: req.body.images,
                     describe: req.body.describe,
                     content: req.body.content,
-                    state: req.body.content
+                    state: req.body.state
                 };
 
                 let result = await dictionaryModel.insert(fnClearInsertData(data));
