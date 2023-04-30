@@ -24,9 +24,9 @@ const appConfig = mergeAndConcat(
         // 接口超时 3 分钟
         apiTimeout: 3 * 60 * 1000,
         // 请求参数日志过滤字段
-        reqParamsFilter: ['password'],
+        reqParamsFilter: ['password', 'file'],
         // 返回参数日志过滤字段
-        resParamsFilter: ['password'],
+        resParamsFilter: ['password', 'file'],
         // 自由通行的接口，不需要任何鉴权
         freeApis: [
             //
