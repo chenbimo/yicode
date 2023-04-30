@@ -29,6 +29,7 @@ export default async function (fastify, opts) {
             try {
                 let adminModel = fastify.mysql //
                     .table(appConfig.table.sys_admin)
+                    .where('username', '<>', 'dev')
                     .modify(function (queryBuilder) {
                         if (req.body.state !== undefined) {
                             queryBuilder.where('state', req.body.state);
