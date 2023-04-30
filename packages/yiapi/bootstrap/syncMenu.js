@@ -58,6 +58,7 @@ async function syncMenuDir(fastify) {
                     pid: 0,
                     sort: item.sort || index,
                     is_open: 0,
+                    is_system: item.is_system || 0,
                     describe: item.describe || '',
                     created_at: fnTimestamp(),
                     updated_at: fnTimestamp()
@@ -68,6 +69,7 @@ async function syncMenuDir(fastify) {
                     name: item.name,
                     value: item.value,
                     sort: item.sort || index,
+                    is_system: item.is_system || 0,
                     describe: item.describe || '',
                     updated_at: fnTimestamp()
                 });
@@ -145,6 +147,7 @@ async function syncMenuFile(fastify) {
                             pid: parentMenuData.id,
                             sort: item.sort || index2,
                             is_open: 0,
+                            is_system: item.is_system || 0,
                             describe: item.describe || '',
                             created_at: fnTimestamp(),
                             updated_at: fnTimestamp()
@@ -158,6 +161,7 @@ async function syncMenuFile(fastify) {
                         pids: `0,${parentMenuData.id}`,
                         pid: parentMenuData.id,
                         sort: item.sort || index2,
+                        is_system: item.is_system || 0,
                         describe: item.describe || '',
                         updated_at: fnTimestamp()
                     });
