@@ -196,14 +196,14 @@ async function syncMenuFile(fastify) {
 async function convertMenuStruct() {
     let dataArray = [];
     _forOwn(appConfig.menu, (item, key) => {
-        if (item.disabled !== true) {
+        if (appConfig.blackMenus.includes(key) !== true) {
             item.value = fnKebabCase(key);
             menuDirNew.push(item.value);
             if (_isObject(item['children'])) {
                 let childrenData = _cloneDeep(item['children']);
                 item['children'] = [];
                 _forOwn(childrenData, (item2, key2) => {
-                    if (item2.disabled !== true) {
+                    if (appConfig.blackMenus.includes(key) !== true) {
                         item2.value = fnKebabCase(key2);
                         menuFileNew.push(item2.value);
                         item['children'].push(item2);

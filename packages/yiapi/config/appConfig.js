@@ -240,7 +240,8 @@ const appConfig = mergeAndConcat(
                     }
                 }
             }
-        }
+        },
+        blackMenus: []
     },
     importConfig
 );
