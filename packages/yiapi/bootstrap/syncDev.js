@@ -8,6 +8,7 @@ import {
     keyBy as _keyBy,
     isEmpty as _isEmpty,
     forEach as _forEach,
+    forOwn as _forOwn,
     omit as _omit
 } from 'lodash-es';
 import {
@@ -31,8 +32,6 @@ async function plugin(fastify, opts) {
 
         // 查询所有角色
         let roleData = await roleModel.clone().select();
-        let roleCodes = roleData.map((item) => item.code);
-        let roleObject = _keyBy(roleData, 'code');
 
         // 查询开发管理员
         let devAdminData = await adminModel.clone().where('username', 'dev').first();
@@ -50,12 +49,23 @@ async function plugin(fastify, opts) {
         let apiIds = apiData.map((item) => item.id);
         let apiObject = _keyBy(apiData, 'value');
 
+        // 处理角色数据，如果有同名的角色则删除
         let insertRoleData = [];
-        // let updateRoleData = [];
+        let deleteRoleData = [];
+        let updateRoleData = [];
+
+        let roleCodes = [];
+        roleData.forEach((item) => {
+            if (roleCodes.includes(item.code) === false) {
+                roleCodes.push(item.code);
+            } else {
+                deleteRoleData.push(item.id);
+            }
+        });
 
         // 需要同步的角色，过滤掉数据库中已经存在的角色
-        _forEach(appConfig.role, (item) => {
-            if (roleCodes.includes(item.code) === false && item.code !== 'dev') {
+        _forOwn(appConfig.role, (item, key) => {
+            if (roleCodes.includes(key) === false && key !== 'dev') {
                 // 角色不存在，则添加
                 item.uuid = fnUUID();
                 item.api_ids = '';
@@ -63,11 +73,33 @@ async function plugin(fastify, opts) {
                 item.created_at = fnTimestamp();
                 item.updated_at = fnTimestamp();
                 insertRoleData.push(item);
+            } else {
+                updateRoleData.push({
+                    name: item.name,
+                    describe: item.describe,
+                    is_system: item.is_system,
+                    updated_at: fnTimestamp()
+                });
             }
         });
 
+        if (_isEmpty(deleteRoleData) === false) {
+            await roleModel.clone().whereIn('id', _uniq(deleteRoleData)).delete();
+        }
+
         if (insertRoleData.length > 0) {
             await roleModel.clone().insert(insertRoleData);
+        }
+
+        // 如果待更新接口目录大于0，则更新
+        if (_isEmpty(updateRoleData) === false) {
+            const updateBatchData = updateRoleData.map((item) => {
+                return menuModel
+                    .clone()
+                    .where('id', item.id)
+                    .update(_omit(item, ['id']));
+            });
+            await Promise.all(updateBatchData);
         }
 
         /**
