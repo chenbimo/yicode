@@ -1,4 +1,8 @@
-# yidocs-auto（vitepress 导航和侧边栏自动生成工具）
+# yidocs-auto
+
+## 作用
+
+vitepress 导航和侧边栏自动生成工具
 
 ## 效果
 
