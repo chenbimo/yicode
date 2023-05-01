@@ -1,5 +1,11 @@
 # yidocs-auto（vitepress 导航和侧边栏自动生成工具）
 
+## 效果
+
+实际效果，请浏览 [易文档 https://doc.yicode.tec](https://doc.yicode.tech) 查看。
+
+本文档的顶部导航和左侧目录，均为自动生成。
+
 ## 安装
 
 以下方式，根据自己的情况，任选一种
