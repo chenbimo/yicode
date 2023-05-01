@@ -7,7 +7,7 @@ data
 .npmrc
 .cache
 lab
-docs
+cache
 .npmrc
 .VSCodeCounter
 pnpm-lock.*
