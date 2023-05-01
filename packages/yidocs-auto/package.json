@@ -1,13 +1,15 @@
 {
-    "name": "@yicode/yidocs",
-    "version": "3.2.2",
-    "description": "yidocs（易文档）文档管理",
+    "name": "@yicode/yidocs-auto",
+    "version": "1.0.0",
+    "description": "vitepress导航和侧边栏自动生成工具",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
     },
-    "main": "./index.js",
     "type": "module",
     "private": false,
+    "exports": {
+        ".": "./index.js"
+    },
     "publishConfig": {
         "access": "public"
     },
@@ -25,5 +27,7 @@
     },
     "homepage": "https://yicode.tech",
     "license": "GPL-3.0",
-    "dependencies": {}
+    "devDependencies": {
+        "fast-glob": "^3.2.12"
+    }
 }

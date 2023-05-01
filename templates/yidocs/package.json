@@ -1,0 +1,36 @@
+{
+    "name": "@yicode-template/yidocs",
+    "version": "3.2.2",
+    "description": "yidocs（易文档）文档管理",
+    "scripts": {
+        "preinstall": "npx only-allow pnpm",
+        "dev": "vitepress dev docs",
+        "build": "vitepress build docs"
+    },
+    "main": "./index.js",
+    "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "sideEffects": true,
+    "keywords": [
+        "lodash",
+        "utils",
+        "helper",
+        "help"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "license": "GPL-3.0",
+    "devDependencies": {
+        "vitepress": "1.0.0-alpha.75"
+    },
+    "dependencies": {
+        "@yicode/yidocs-auto": "workspace:^"
+    }
+}
