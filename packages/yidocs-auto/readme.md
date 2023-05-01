@@ -2,7 +2,7 @@
 
 ## 效果
 
-实际效果，请浏览 [易文档 https://doc.yicode.tec](https://doc.yicode.tech) 查看。
+实际效果，请浏览 [易文档 https://doc.yicode.tech](https://doc.yicode.tech) 查看。
 
 本文档的顶部导航和左侧目录，均为自动生成。
 
