@@ -1,5 +1,12 @@
 # @yicode/yidocs
 
+## 3.2.5
+
+### Patch Changes
+
+-   Updated dependencies
+    -   @yicode/yidocs-auto@1.0.3
+
 ## 3.2.4
 
 ### Patch Changes
