@@ -1,161 +1,110 @@
-# yijson（易 JSON，json 压缩和解压工具）
+# yidocs-auto（vitepress 导航和侧边栏自动生成工具）
 
-## 参考方案
+## 安装
 
--   [参考方案 https://github.com/KilledByAPixel/JSONCrush](https://github.com/KilledByAPixel/JSONCrush)
+以下方式，根据自己的情况，任选一种
 
--   [参考方案 https://github.com/rgcl/jsonpack](https://github.com/rgcl/jsonpack)
+```bash
+npm install @yicode/yidocs-auto -D
+pnpm add @yicode/yidocs-auto -D
+yarn add @yicode/yidocs-auto -D
+```
 
-注意：jsonCrush 的压缩效果更好，压缩速度更慢
+## 使用
 
-## jsonCrush 压缩
+参考如下案例即可
 
 ```javascript
-import { jsonCrush } from '@yicode/yijson';
-let json = {
-    type: 'world',
-    name: 'earth',
-    children: [
-        {
-            type: 'continent',
-            name: 'America',
-            children: [
-                {
-                    type: 'country',
-                    name: 'Chile',
-                    children: [
-                        {
-                            type: 'commune',
-                            name: 'Antofagasta'
-                        }
-                    ]
-                }
-            ]
+import { defineConfig } from 'vitepress';
+
+import { docsAuto } from '@yicode/yidocs-auto';
+
+let { sideBar, navBar } = docsAuto();
+
+export default defineConfig({
+    base: '/',
+    title: '易文档 - 随易科技',
+    description: '何以解忧，唯有代码。',
+    lastUpdated: true,
+    markdown: {
+        theme: 'material-theme-palenight',
+        lineNumbers: true
+    },
+    outDir: '../dist',
+    srcDir: '../markdown',
+    titleTemplate: false,
+    head: [
+        //
+        [
+            //
+            'link',
+            {
+                rel: 'stylesheet',
+                href: 'https://static.yicode.tech/vitepress/vitepress.css'
+            }
+        ],
+        [
+            'link',
+            {
+                rel: 'shortcut icon',
+                href: '/favicon.ico'
+            }
+        ]
+    ],
+    themeConfig: {
+        logo: '/logo.png',
+        lastUpdatedText: '更新时间',
+        siteTitle: '易文档',
+        outline: 'deep',
+        outlineTitle: '大纲',
+        socialLinks: [
+            //
+            { icon: 'github', link: 'https://github.com/chenbimo' }
+        ],
+        footer: {
+            message: '随易科技 - 用心做软件',
+            copyright: 'Copyright © 2019-present 随易科技'
         },
-        {
-            type: 'continent',
-            name: 'Europe'
-        }
-    ]
-};
-
-let packed = jsonCrush(json);
-
-console.log(packed);
-// 打印:
-// .world-earth*0America*untry-Chile*mmune-Antofagasta'11),.co0Europe'1)*'~children![.co-'~name!'.('type!'0ntinent-1)]10.-*_
-```
-
-## jsonUncrush 解压
-
-```javascript
-import { jsonUncrush } from '@yicode/yijson';
-let text = '.world-earth*0America*untry-Chile*mmune-Antofagasta'11),.co0Europe'1)*'~children![.co-'~name!'.('type!'0ntinent-1)]10.-*_';
-
-let unpacked = jsonUncrush(text);
-
-console.log(unpacked);
-// 打印:
-// {
-//     type: 'world',
-//     name: 'earth',
-//     children: [
-//         {
-//             type: 'continent',
-//             name: 'America',
-//             children: [
-//                 {
-//                     type: 'country',
-//                     name: 'Chile',
-//                     children: [
-//                         {
-//                             type: 'commune',
-//                             name: 'Antofagasta'
-//                         }
-//                     ]
-//                 }
-//             ]
-//         },
-//         {
-//             type: 'continent',
-//             name: 'Europe'
-//         }
-//     ]
-// }
-```
-
-## jsonPack 压缩
-
-```javascript
-import { jsonPack } from '@yicode/yijson';
-let json = {
-    type: 'world',
-    name: 'earth',
-    children: [
-        {
-            type: 'continent',
-            name: 'America',
-            children: [
-                {
-                    type: 'country',
-                    name: 'Chile',
-                    children: [
-                        {
-                            type: 'commune',
-                            name: 'Antofagasta'
-                        }
-                    ]
-                }
-            ]
+        docFooter: {
+            prev: '上一页',
+            next: '下一页'
         },
-        {
-            type: 'continent',
-            name: 'Europe'
-        }
-    ]
-};
-
-let packed = jsonPack(json);
-
-console.log(packed);
-// 打印:
-// "type|world|name|earth|children|continent|America|country|Chile|commune|Antofagasta|Europe^^^$0|1|2|3|4|@$0|5|2|6|4|@$0|7|2|8|4|@$0|9|2|A]]]]]|$0|5|2|B]]]"
+        nav: navBar,
+        sidebar: sideBar
+    }
+});
 ```
 
-## jsonUnpack 解压
+## 结构
 
-```javascript
-import { jsonUnpack } from '@yicode/yijson';
-let text = 'type|world|name|earth|children|continent|America|country|Chile|commune|Antofagasta|Europe^^^$0|1|2|3|4|@$0|5|2|6|4|@$0|7|2|8|4|@$0|9|2|A]]]]]|$0|5|2|B]]]';
+必需按照按照如下文件结构组织文档才可自动生成，所有文档和目录，都要以 `数字-文件名称` 的形式！！！
 
-let unpacked = jsonUnpack(text);
-
-console.log(unpacked);
-// 打印:
-// {
-//     type: 'world',
-//     name: 'earth',
-//     children: [
-//         {
-//             type: 'continent',
-//             name: 'America',
-//             children: [
-//                 {
-//                     type: 'country',
-//                     name: 'Chile',
-//                     children: [
-//                         {
-//                             type: 'commune',
-//                             name: 'Antofagasta'
-//                         }
-//                     ]
-//                 }
-//             ]
-//         },
-//         {
-//             type: 'continent',
-//             name: 'Europe'
-//         }
-//     ]
-// }
+```bash
+.
+├── markdown
+│   ├── 1-开源
+│   │   ├── 1-yivite-cli
+│   │   │   ├── 1-基本简介
+│   │   │   │   ├── 1-基本介绍.md
+│   │   │   │   └── 2-快速体验.md
+│   │   │   └── 2-项目架构
+│   │   │       └── 1-目录含义.md
+│   │   ├── 2-yibase-vue3
+│   │   │   └── 1-基本介绍
+│   │   │       └── 1-基本介绍.md
+│   │   └── 3-yiapi
+│   │       ├── 1-基本简介
+│   │       │   ├── 1-基本介绍.md
+│   │       │   └── 2-快速体验.md
+│   │       └── 2-项目架构
+│   │           └── 1-目录含义.md
+│   ├── 2-关于
+│   │   └── 1-站长信息
+│   │       ├── 1-关于站长.md
+│   │       └── 2-程序人生.md
+│   ├── public
+│   │   ├── favicon.ico
+│   │   └── logo.png
+│   └── index.md
+└── package.json
 ```
