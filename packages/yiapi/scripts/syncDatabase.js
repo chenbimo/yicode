@@ -67,7 +67,7 @@ let baseValidFields = [
     'notNullable'
 ];
 
-let denyFields = ['id', 'uuid', 'created_at', 'updated_at', 'deleted_at', 'state'];
+let denyFields = ['id', 'created_at', 'updated_at', 'deleted_at', 'state'];
 
 // 获取表定义
 async function fnGetTableData(filePattern, fileDir, tablePrefix) {
@@ -328,8 +328,6 @@ async function syncDatabase() {
                             // 默认每个表的ID字段自增
                             table.bigincrements('id', { primaryKey: true });
 
-                            // 设置唯一标识
-                            table['string']('uuid', 128).index().notNullable().defaultTo('').comment('唯一标识符');
                             // 设置状态
                             table['tinyint']('state').notNullable().defaultTo(0).comment('状态(0:正常,1:禁用,2)');
 
@@ -372,7 +370,7 @@ async function syncDatabase() {
                 // 如果创建的是新表，则把旧表的数据转移进来
                 if (tableDataItem._meta.tableNewName) {
                     // 获取当前的新字段
-                    let validFields = _uniq(_concat(_keys(_omit(tableDataItem, ['_meta'])), ['id', 'uuid', 'created_at', 'updated_at', 'deleted_at']));
+                    let validFields = _uniq(_concat(_keys(_omit(tableDataItem, ['_meta'])), ['id', 'created_at', 'updated_at', 'deleted_at']));
 
                     // 获取所有旧字段
                     let allOldFields = await inspector.columns(tableDataItem._meta.table);

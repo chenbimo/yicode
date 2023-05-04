@@ -197,9 +197,6 @@ export function fnClearInsertData(obj) {
             newObj[key] = value;
         }
     });
-    if (obj.uuid === null || obj.uuid === undefined) {
-        newObj.uuid = fnUUID();
-    }
     if (obj.created_at === null || obj.created_at === undefined) {
         newObj.created_at = fnTimestamp();
     }
@@ -211,7 +208,7 @@ export function fnClearInsertData(obj) {
 
 // 清洗更新数据
 export function fnClearUpdateData(obj) {
-    let excludeFields = ['id', 'uuid', 'created_at'];
+    let excludeFields = ['id', 'created_at'];
     let newObj = {};
     _forOwn(obj, (value, key) => {
         if (value !== null && value !== undefined && !excludeFields.includes(key)) {

@@ -43,12 +43,6 @@ let schemaField = {
         type: 'integer',
         minimum: 0
     },
-    // 唯一 ID
-    uuid: {
-        type: 'string',
-        minLength: 10,
-        maxLength: 100
-    },
     // 第几页
     page: {
         type: 'integer',

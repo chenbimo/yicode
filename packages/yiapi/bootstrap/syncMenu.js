@@ -11,7 +11,7 @@ import {
     uniq as _uniq
 } from 'lodash-es';
 
-import { fnUUID, fnTimestamp, fnKebabCase } from '../utils/index.js';
+import { fnTimestamp, fnKebabCase } from '../utils/index.js';
 import { appConfig } from '../config/appConfig.js';
 
 let menuConfigNew = [];
@@ -50,7 +50,6 @@ async function syncMenuDir(fastify) {
             let mapMenu = menuDirByValue[item.value];
             if (!mapMenu) {
                 insertMenuDir.push({
-                    uuid: fnUUID(),
                     name: item.name,
                     value: item.value,
                     level: 1,
@@ -139,7 +138,6 @@ async function syncMenuFile(fastify) {
                 if (!mapMenu) {
                     if (parentMenuData) {
                         insertMenuFile.push({
-                            uuid: fnUUID(),
                             name: item.name,
                             value: item.value,
                             level: 2,

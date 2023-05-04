@@ -14,7 +14,6 @@ import {
 import {
     //
     fnTimestamp,
-    fnUUID,
     fnClearInsertData,
     fnClearUpdateData,
     fnMD5,
@@ -67,7 +66,6 @@ async function plugin(fastify, opts) {
         _forOwn(appConfig.role, (item, key) => {
             if (roleCodes.includes(key) === false && key !== 'dev') {
                 // 角色不存在，则添加
-                item.uuid = fnUUID();
                 item.api_ids = '';
                 item.menu_ids = '';
                 item.created_at = fnTimestamp();

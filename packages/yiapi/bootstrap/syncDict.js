@@ -8,7 +8,7 @@ import {
     isEmpty as _isEmpty
 } from 'lodash-es';
 
-import { fnUUID, fnTimestamp, fnCamelCase } from '../utils/index.js';
+import { fnTimestamp, fnCamelCase } from '../utils/index.js';
 import { appConfig } from '../config/appConfig.js';
 
 // 同步字典目录
@@ -32,7 +32,6 @@ async function syncDictionary(fastify) {
         // 如果没找到父级，则添加
         if (!rootData) {
             insertDictionaryData.push({
-                uuid: fnUUID(),
                 symbol: 'string',
                 is_system: 1,
                 category: 'root',
@@ -48,7 +47,6 @@ async function syncDictionary(fastify) {
             });
             item.children.forEach((item2, index2) => {
                 insertDictionaryData.push({
-                    uuid: fnUUID(),
                     symbol: 'string',
                     is_system: 1,
                     category: fnCamelCase(item.code),
@@ -70,7 +68,6 @@ async function syncDictionary(fastify) {
                 let childrenData = _find(parentData, { code: fnCamelCase(item2.code) });
                 if (!childrenData) {
                     insertDictionaryData.push({
-                        uuid: fnUUID(),
                         symbol: 'string',
                         is_system: 1,
                         category: fnCamelCase(item.code),

@@ -21,8 +21,7 @@ import {
     fnAllApiMeta,
     fnAllApiFiles,
     fnImport,
-    fnCloneAny,
-    fnUUID
+    fnCloneAny
 } from '../utils/index.js';
 
 // 同步接口目录
@@ -80,7 +79,6 @@ async function syncApiDir(fastify) {
         }
         let apiMeta = {};
         apiMeta.name = metaConfig.dir;
-        apiMeta.uuid = fnUUID();
         apiMeta.value = apiDirName;
         apiMeta.is_bool = 0;
         apiMeta.pid = 0;
@@ -114,7 +112,7 @@ async function syncApiDir(fastify) {
             return apiModel
                 .clone()
                 .where('id', item.id)
-                .update(_omit(item, ['id', 'uuid', 'created_at']));
+                .update(_omit(item, ['id', 'created_at']));
         });
         await Promise.all(updateBatchData);
     }
@@ -188,7 +186,6 @@ async function syncApiFile(fastify) {
                 // 防止2个同名接口重复添加
                 autoApiObject[apiFileName] = true;
                 let apiParams = {
-                    uuid: fnUUID(),
                     pid: 0,
                     name: apiSchema?.summary || '',
                     value: apiFileName,
@@ -226,9 +223,6 @@ async function syncApiFile(fastify) {
                                 name: apiSchema?.summary || '',
                                 updated_at: fnTimestamp()
                             };
-                            if (!currentApi.uuid) {
-                                params.uuid = fnUUID();
-                            }
                             updateApiData.push(params);
                         } else {
                             let params = {
@@ -239,9 +233,6 @@ async function syncApiFile(fastify) {
                                 name: apiSchema?.summary || '',
                                 updated_at: fnTimestamp()
                             };
-                            if (!currentApi.uuid) {
-                                params.uuid = fnUUID();
-                            }
                             updateApiData.push(params);
                         }
                     }

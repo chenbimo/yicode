@@ -70,7 +70,6 @@ export default async function (fastify, opts) {
                     data: _omit(adminData, ['password']),
                     token: await fastify.jwt.sign({
                         id: adminData.id,
-                        uuid: adminData.uuid,
                         role_codes: adminData.role_codes
                     })
                 };
