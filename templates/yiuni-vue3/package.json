@@ -70,6 +70,6 @@
         "prettier": "^2.8.8",
         "rollup-plugin-copy": "^3.4.0",
         "sass": "^1.62.1",
-        "vite": "^4.3.3"
+        "vite": "^4.3.4"
     }
 }
