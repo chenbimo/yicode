@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yicode-cli",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "yicode（易编程） - 命令行实用工具",
     "author": "chensuiyi <bimostyle@qq.com>",
     "bin": {
@@ -14,7 +14,7 @@
     "dependencies": {
         "@oclif/core": "^2.8.5",
         "@oclif/plugin-help": "^5.2.9",
-        "@oclif/plugin-plugins": "^2.4.7"
+        "@oclif/plugin-plugins": "^3.0.1"
     },
     "devDependencies": {
         "oclif": "^3.9.0",

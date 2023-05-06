@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yivite-chunk",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "vite代码分割",
     "main": "lib.js",
     "private": false,
@@ -29,8 +29,8 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "license": "GPL-3.0",
     "devDependencies": {
-        "rollup": "^3.21.4",
-        "vite": "^4.3.4"
+        "rollup": "^3.21.5",
+        "vite": "^4.3.5"
     },
     "dependencies": {
         "es-module-lexer": "^1.2.1",

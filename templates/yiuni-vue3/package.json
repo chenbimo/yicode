@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiuni-vue3",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "private": false,
     "scripts": {
         "dev:app": "uni -p app",
@@ -70,6 +70,6 @@
         "prettier": "^2.8.8",
         "rollup-plugin-copy": "^3.4.0",
         "sass": "^1.62.1",
-        "vite": "^4.3.4"
+        "vite": "^4.3.5"
     }
 }
