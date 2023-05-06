@@ -22,7 +22,6 @@ export const apiSchema = {
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
-        config: {},
         handler: async function (req, res) {
             try {
                 // TODO: 优化，不同分类的目录独立的缓存

@@ -16,7 +16,6 @@ export const apiSchema = {
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
-        config: {},
         handler: async function (req, res) {
             try {
                 const result = await fastify.getUserApis(req.session);

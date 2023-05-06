@@ -31,7 +31,6 @@ export const apiSchema = {
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
-        config: {},
         handler: async function (req, res) {
             try {
                 // 如果传的值是数值类型，则判断是否为有效数值

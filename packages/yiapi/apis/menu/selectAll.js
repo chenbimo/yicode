@@ -20,7 +20,6 @@ export const apiSchema = {
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
-        config: {},
         handler: async function (req, res) {
             try {
                 let menuData = await fastify.redisGet(appConfig.cacheData.menu);
