@@ -37,7 +37,8 @@ const appConfig = mergeAndConcat(
             '/public/**',
             '/api/admin/login',
             '/api/user/login',
-            '/api/user/register'
+            '/api/user/register',
+            '/api/user/tokenCheck'
         ],
         // 黑名单接口，不可访问的接口
         blackApis: [],
