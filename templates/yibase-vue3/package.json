@@ -16,9 +16,9 @@
         "sass": "^1.62.1",
         "store2": "^2.14.2",
         "tiny-cookie": "^2.4.1",
-        "vue": "^3.2.47",
+        "vue": "^3.3.1",
         "vue-i18n": "^9.2.2",
-        "vue-router": "^4.1.6"
+        "vue-router": "^4.2.0"
     },
     "devDependencies": {
         "@yicode/yivite-cli": "workspace:^"

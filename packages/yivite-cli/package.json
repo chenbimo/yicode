@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yivite-cli",
-    "version": "1.21.3",
+    "version": "1.21.4",
     "description": "专注于vite + vue3 的项目开发脚手架",
     "main": "index.js",
     "bin": {
@@ -135,7 +135,7 @@
         "@unocss/transformer-compile-class": "^0.51.12",
         "@unocss/transformer-directives": "^0.51.12",
         "@unocss/transformer-variant-group": "^0.51.12",
-        "@vitejs/plugin-vue": "^4.2.1",
+        "@vitejs/plugin-vue": "^4.2.2",
         "@vue-macros/reactivity-transform": "^0.3.6",
         "@yicode/commander": "^10.0.3",
         "@yicode/yidash": "workspace:^",
