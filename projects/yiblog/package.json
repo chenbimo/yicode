@@ -1,5 +1,5 @@
 {
-    "name": "@yicode/yiblog",
+    "name": "@yicode-project/yiblog",
     "version": "0.0.3",
     "description": "yiblog（易博客）一个简单好用的博客",
     "scripts": {
