@@ -1,8 +1,5 @@
-import path from 'path';
-import process from 'process';
-import { rmSync } from 'node:fs';
-import { pathToFileURL } from 'node:url';
-import { defineConfig, loadEnv } from 'vite';
+import path from 'node:path';
+import { defineConfig } from 'vite';
 import viteVue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
@@ -10,20 +7,20 @@ import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
 import { visualizer as Visualizer } from 'rollup-plugin-visualizer';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode/yivite-chunk';
-// import ImageMin from 'unplugin-imagemin/vite';
-import DefineOptions from 'unplugin-vue-define-options/vite';
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import Inspect from 'vite-plugin-inspect';
 import fs from 'fs-extra';
 import portfinder from 'portfinder';
 import { createHtmlPlugin } from 'vite-plugin-html';
-import { mergeAndConcat as mergeAny } from 'merge-anything';
+import { mergeAndConcat } from 'merge-anything';
 import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
-import { createRequire } from 'module';
-import topLevelAwait from 'vite-plugin-top-level-await';
+// import topLevelAwait from 'vite-plugin-top-level-await';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
+import VueRouter from 'unplugin-vue-router/vite';
+import { VueRouterAutoImports } from 'unplugin-vue-router';
+import Layouts from 'vite-plugin-vue-layouts';
 
 // unocss相关配置
 import { defineConfig as defineUnocssConfig, presetAttributify, presetUno, presetIcons } from 'unocss';
@@ -57,31 +54,18 @@ export default defineConfig(async ({ command, mode }) => {
     }
 
     // vue 插件
-    let vuePlugin = {};
+    let viteVuePlugin = {};
 
     // 自动导入插件
-    let autoImportPlugin = mergeAny(
+    let autoImportPlugin = mergeAndConcat(
         {
             include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
             imports: [
                 'vue',
                 'vue-i18n',
                 'pinia',
+                VueRouterAutoImports,
                 {
-                    'vue-router': [
-                        //
-                        'useRouter',
-                        'useRoute',
-                        'useLink',
-                        'onBeforeRouteLeave',
-                        'onBeforeRouteUpdate',
-                        'createMemoryHistory',
-                        'createRouter',
-                        'createWebHashHistory',
-                        'createWebHistory',
-                        'isNavigationFailure',
-                        'loadRouteLocation'
-                    ],
                     'lodash-es': [
                         //
                         ['*', '_']
@@ -113,20 +97,19 @@ export default defineConfig(async ({ command, mode }) => {
         include: path.resolve(srcDir, 'i18n/**')
     };
 
-    // 定义选项
-    let DefineOptionsPlugin = {};
-
     // 自动导入组件
     let componentsPlugin = {
         dirs: [
             //
             path.resolve(srcDir, 'components')
         ],
+        dts: '.cache/components.d.ts',
+        version: 3,
         directoryAsNamespace: false,
         resolvers: [IconsResolver()]
     };
 
-    let unocssConfig = defineUnocssConfig(
+    let unocssPlugin = defineUnocssConfig(
         Object.assign(
             {
                 presets: [
@@ -179,26 +162,6 @@ export default defineConfig(async ({ command, mode }) => {
         customSplitting: Object.assign(splitDependencies, yiviteConfig?.chunkSplit || {})
     };
 
-    // 图片压缩
-    let imageMinPlugin = {
-        mode: 'sharp',
-        compress: {
-            jpg: {
-                quality: 80
-            },
-            jpeg: {
-                quality: 80
-            },
-            png: {
-                quality: 80
-            },
-            webp: {
-                quality: 80
-            }
-        },
-        cache: true
-    };
-
     // zip 压缩
     // let zipPlugin = {
     //     folderPath: path.resolve(appDir, 'dist'),
@@ -222,16 +185,13 @@ export default defineConfig(async ({ command, mode }) => {
     // 打包入口配置
     let htmlTemplatePlugin = {
         template: '/index.html',
-        entry: {
-            development: 'src/devMain.js',
-            production: 'src/main.js'
-        }[mode]
+        entry: mode === 'production' ? 'src/main.js' : 'src/devMain.js'
     };
 
     // 正式环境下，才启用自动解析，避免页面重载
     if (mode === 'production') {
         // 自动导入方法，不需要按需，只要组件按需
-        // autoImportPlugin = mergeAny(
+        // autoImportPlugin = mergeAndConcat(
         //     //
         //     autoImportPlugin,
         //     fnOmit(yiviteConfig?.autoImport || {}, ['resolvers']),
@@ -241,25 +201,21 @@ export default defineConfig(async ({ command, mode }) => {
         // );
 
         // 自动导入组件
-        componentsPlugin = mergeAny(
+        componentsPlugin = mergeAndConcat(
             //
             componentsPlugin,
             fnOmit(yiviteConfig?.autoComponent || {}, ['resolvers']),
             {
                 resolvers:
                     yiviteConfig?.autoComponent?.resolvers?.map((item) => {
-                        // if (typeof item === 'string') {
                         return ComponentResolvers[item.name](item.options);
-                        // } else {
-                        //     return item;
-                        // }
                     }) || []
             }
         );
     }
 
     let iconsPlugin = {
-        autoInstall: true
+        autoInstall: false
     };
 
     let topLevelAwaitPlugin = {
@@ -269,25 +225,35 @@ export default defineConfig(async ({ command, mode }) => {
         promiseImportName: (i) => `__tla_${i}`
     };
 
+    let vueRouterAutoPlugin = {
+        dts: '.cache/typed-router.d.ts'
+    };
+
+    let layoutPlugin = {
+        layoutsDirs: 'src/layouts',
+        defaultLayout: 'default'
+    };
+
     // 插件列表
     let allPlugins = [];
     allPlugins.push(ReactivityTransform());
-    allPlugins.push(Unocss(unocssConfig));
+    allPlugins.push(Unocss(unocssPlugin));
     allPlugins.push(Icons(iconsPlugin));
-    allPlugins.push(viteVue(vuePlugin));
+    allPlugins.push(VueRouter(vueRouterAutoPlugin));
+
     allPlugins.push(Components(componentsPlugin));
     allPlugins.push(AutoImport(autoImportPlugin));
     allPlugins.push(vueI18n(vueI18nPlugin));
-    allPlugins.push(DefineOptions(DefineOptionsPlugin));
     allPlugins.push(ChunkSplit(chunkSplitPlugin));
-    // allPlugins.push(ImageMin(imageMinPlugin));
     // allPlugins.push(ZipFile(zipPlugin));
     allPlugins.push(Visualizer(visualizerPlugin));
     allPlugins.push(Inspect(inspectPlugin));
     allPlugins.push(createHtmlPlugin(htmlTemplatePlugin));
+    allPlugins.push(viteVue(viteVuePlugin));
+    allPlugins.push(Layouts(layoutPlugin));
     // allPlugins.push(topLevelAwait.default(topLevelAwaitPlugin));
 
-    let viteConfig = mergeAny(
+    let viteConfig = mergeAndConcat(
         {
             plugins: allPlugins,
             css: {

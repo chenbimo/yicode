@@ -1,12 +1,10 @@
-import { yidash_routes_generate } from '@yicode/yidash';
-let routeFiles = import.meta.glob('@/pages/**/route.js', { eager: true });
-let pageFiles = import.meta.glob('@/pages/**/index.vue');
-let layoutFiles = import.meta.glob('@/layouts/**/index.vue');
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router/auto';
+import { setupLayouts } from 'virtual:generated-layouts';
 
 // 创建路由
 const router = createRouter({
-    history: createWebHashHistory(),
-    routes: yidash_routes_generate(routeFiles, pageFiles, layoutFiles)
+    extendRoutes: (routes) => setupLayouts(routes),
+    history: createWebHashHistory()
 });
 
 export { router };

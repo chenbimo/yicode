@@ -1,9 +1,9 @@
 <template>
-    <div class="layout-default" :style="{ backgroundImage: 'url(' + utilGetAssets('back/1.png') + ')' }">
+    <div class="layout-default">
+        default
         <div class="layout-bodyer">
             <router-view></router-view>
         </div>
-
     </div>
 </template>
 
@@ -19,15 +19,12 @@ let $Router = useRouter();
 // 数据集
 let $Data = $ref({
     // 显示和隐藏
-    isShow: {
-    },
+    isShow: {}
 });
-
 
 // 方法集
 let $Method = {
-    async initData() {},
-
+    async initData() {}
 };
 
 $Method.initData();
