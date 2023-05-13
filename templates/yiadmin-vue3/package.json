@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yiadmin-vue3",
-    "version": "3.2.4",
+    "version": "3.2.5",
     "description": "yiadmin-vue3（易管理）vue3后台管理模板",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
@@ -28,7 +28,7 @@
     "homepage": "https://yicode.tech",
     "license": "GPL-3.0",
     "dependencies": {
-        "@arco-design/web-vue": "^2.45.3",
+        "@arco-design/web-vue": "^2.46.0",
         "@intlify/unplugin-vue-i18n": "^0.10.0",
         "@yicode/yidash": "workspace:^",
         "axios": "^1.4.0",
@@ -37,7 +37,7 @@
         "pinia": "^2.0.36",
         "store2": "^2.14.2",
         "tiny-cookie": "^2.4.1",
-        "vue": "^3.3.1",
+        "vue": "^3.3.2",
         "vue-i18n": "^9.2.2",
         "vue-router": "^4.2.0"
     },

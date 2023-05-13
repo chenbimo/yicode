@@ -1,13 +1,13 @@
 {
     "name": "@yicode-template/yibase-vue3",
     "private": false,
-    "version": "1.0.4",
+    "version": "1.0.5",
     "scripts": {
         "dev": "yivite dev",
         "build": "yivite build"
     },
     "dependencies": {
-        "@arco-design/web-vue": "^2.45.3",
+        "@arco-design/web-vue": "^2.46.0",
         "@intlify/unplugin-vue-i18n": "^0.10.0",
         "@yicode/yidash": "workspace:^",
         "axios": "^1.4.0",
@@ -16,7 +16,7 @@
         "sass": "^1.62.1",
         "store2": "^2.14.2",
         "tiny-cookie": "^2.4.1",
-        "vue": "^3.3.1",
+        "vue": "^3.3.2",
         "vue-i18n": "^9.2.2",
         "vue-router": "^4.2.0"
     },

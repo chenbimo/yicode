@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiapi",
-    "version": "1.28.2",
+    "version": "1.28.3",
     "description": "yiapi(易接口)，5 分钟上手 Node.js 接口开发",
     "main": "yiapi.js",
     "type": "module",
@@ -51,9 +51,9 @@
         "log-symbols": "^5.1.0",
         "merge-anything": "^5.1.6",
         "micromatch": "^4.0.5",
-        "mysql2": "^3.3.0",
+        "mysql2": "^3.3.1",
         "nanoid": "^4.0.2",
-        "nodemailer": "^6.9.1",
+        "nodemailer": "^6.9.2",
         "ora": "^6.3.0",
         "winston": "^3.8.2",
         "winston-daily-rotate-file": "^4.7.1"
