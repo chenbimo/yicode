@@ -21,6 +21,7 @@ dist-ssr
 out
 CHANGELOG.md
 note.md
+.changeset
 
 # Editor directories and files
 .vscode/*
