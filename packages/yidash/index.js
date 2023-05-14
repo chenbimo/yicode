@@ -9,7 +9,6 @@ export { yidash_json_merge } from './lib/yidash_json_merge.js';
 export { yidash_number_thousands } from './lib/yidash_number_thousands.js';
 export { yidash_number_validNumber } from './lib/yidash_number_validNumber.js';
 export { yidash_regexp_trainNumber } from './lib/yidash_regexp_trainNumber.js';
-export { yidash_routes_generate } from './lib/yidash_routes_generate.js';
 export { yidash_string_deflate } from './lib/yidash_string_deflate.js';
 export { yidash_string_displace } from './lib/yidash_string_displace.js';
 export { yidash_string_inflate } from './lib/yidash_string_inflate.js';
