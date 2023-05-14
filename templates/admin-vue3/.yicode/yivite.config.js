@@ -1,4 +1,4 @@
-export const yiviteConfig = {
+export const yiteConfig = {
     // eslint参数
     eslint: {},
     viteZip: {},

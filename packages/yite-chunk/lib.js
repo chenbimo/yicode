@@ -195,7 +195,7 @@ function chunkSplitPlugin(
     }
 ) {
     return {
-        name: 'yivite-chunk',
+        name: 'yite-chunk',
         async config(c) {
             await esModuleLexer.init;
             const root = normalizePath(c.root || process.cwd());

@@ -25,9 +25,9 @@ features:
       details: nodejs配置可视化操作工具
       link: '/编程小册/1-vscode提效指南/1-vscode精选扩展'
     - icon: 💡
-      title: yivite-cli
+      title: yite-cli
       details: 专注于vite + vue3 的项目开发脚手架
-      link: /开源项目/1-yivite-cli/1-基本简介/1-基本介绍
+      link: /开源项目/1-yite-cli/1-基本简介/1-基本介绍
     - icon: 💡
       title: yidash
       details: 专注于解决业务问题的函数库

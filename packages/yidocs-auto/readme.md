@@ -93,7 +93,7 @@ export default defineConfig({
 .
 ├── markdown
 │   ├── 1-开源
-│   │   ├── 1-yivite-cli
+│   │   ├── 1-yite-cli
 │   │   │   ├── 1-基本简介
 │   │   │   │   ├── 1-基本介绍.md
 │   │   │   │   └── 2-快速体验.md

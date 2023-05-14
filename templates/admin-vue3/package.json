@@ -1,11 +1,11 @@
 {
     "name": "@yicode-template/admin-vue3",
-    "version": "3.2.6",
+    "version": "3.2.7",
     "description": "admin-vue3（易管理）vue3后台管理模板",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "dev": "yivite dev",
-        "build": "yivite build"
+        "dev": "yite dev",
+        "build": "yite build"
     },
     "main": "./index.js",
     "type": "module",

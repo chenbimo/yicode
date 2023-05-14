@@ -57,7 +57,7 @@ program //
     });
 
 program //
-    .name(colors.red('yivite'))
+    .name(colors.red('yite'))
     .usage(colors.red('[命令]'))
     .version(`${pkg.version}`, '-v --version', '显示版本');
 
@@ -69,7 +69,7 @@ ${colors.green('包名')}：${colors.magenta('@yicode/yite-cli')}
 ${colors.green('官网')}：${colors.blue('https://yicode.tech')}
 ${colors.green('作者')}：${colors.blue('https://chensuiyi.com')}
 ${colors.green('开源')}：${colors.blue('https://gitee.com/yicode-team')}
-${colors.green('简介')}：${colors.white('yivite-cli为 yicode 生态下专注于vite + vue3的项目开发脚手架')}
+${colors.green('简介')}：${colors.white('yite-cli为 yicode 生态下专注于vite + vue3的项目开发脚手架')}
 `
 );
 program.addHelpText(

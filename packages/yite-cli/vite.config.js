@@ -38,7 +38,7 @@ export default defineConfig(async ({ command, mode }) => {
     fs.ensureDirSync(cacheDir);
     fs.ensureDirSync(yicodeDir);
 
-    const { yiviteConfig } = await fnImport(fnFileProtocolPath(path.resolve(yicodeDir, 'yivite.config.js')), 'yiviteConfig', {});
+    const { yiteConfig } = await fnImport(fnFileProtocolPath(path.resolve(yicodeDir, 'yite.config.js')), 'yiteConfig', {});
     let pkg = fs.readJsonSync(path.resolve(appDir, 'package.json'), { throws: false }) || {};
 
     let findPort = await portfinder.getPortPromise({ port: 8000, stopPort: 9000 });
@@ -86,9 +86,9 @@ export default defineConfig(async ({ command, mode }) => {
             dts: '.cache/auto-imports.d.ts',
             resolvers: []
         },
-        fnOmit(yiviteConfig?.autoImport || {}, ['resolvers']),
+        fnOmit(yiteConfig?.autoImport || {}, ['resolvers']),
         {
-            resolvers: yiviteConfig?.autoImport?.resolvers?.map((item) => ComponentResolvers[item.name](item.options)) || []
+            resolvers: yiteConfig?.autoImport?.resolvers?.map((item) => ComponentResolvers[item.name](item.options)) || []
         }
     );
 
@@ -141,7 +141,7 @@ export default defineConfig(async ({ command, mode }) => {
                     ]
                 ]
             },
-            yiviteConfig?.unocssConfig || {}
+            yiteConfig?.unocssConfig || {}
         )
     );
 
@@ -159,14 +159,14 @@ export default defineConfig(async ({ command, mode }) => {
         //     }
         //     return null;
         // },
-        customSplitting: Object.assign(splitDependencies, yiviteConfig?.chunkSplit || {})
+        customSplitting: Object.assign(splitDependencies, yiteConfig?.chunkSplit || {})
     };
 
     // zip 压缩
     // let zipPlugin = {
     //     folderPath: path.resolve(appDir, 'dist'),
     //     outPath: cacheDir,
-    //     zipName: yiviteConfig?.viteZip?.zipName || 'dist.zip',
+    //     zipName: yiteConfig?.viteZip?.zipName || 'dist.zip',
     //     enabled: mode === 'production' ? true : false
     // };
 
@@ -194,9 +194,9 @@ export default defineConfig(async ({ command, mode }) => {
         // autoImportPlugin = mergeAndConcat(
         //     //
         //     autoImportPlugin,
-        //     fnOmit(yiviteConfig?.autoImport || {}, ['resolvers']),
+        //     fnOmit(yiteConfig?.autoImport || {}, ['resolvers']),
         //     {
-        //         resolvers: yiviteConfig?.autoImport?.resolvers?.map((item) => ComponentResolvers[item.name](item.options)) || []
+        //         resolvers: yiteConfig?.autoImport?.resolvers?.map((item) => ComponentResolvers[item.name](item.options)) || []
         //     }
         // );
 
@@ -204,10 +204,10 @@ export default defineConfig(async ({ command, mode }) => {
         componentsPlugin = mergeAndConcat(
             //
             componentsPlugin,
-            fnOmit(yiviteConfig?.autoComponent || {}, ['resolvers']),
+            fnOmit(yiteConfig?.autoComponent || {}, ['resolvers']),
             {
                 resolvers:
-                    yiviteConfig?.autoComponent?.resolvers?.map((item) => {
+                    yiteConfig?.autoComponent?.resolvers?.map((item) => {
                         return ComponentResolvers[item.name](item.options);
                     }) || []
             }
@@ -304,7 +304,7 @@ export default defineConfig(async ({ command, mode }) => {
                 port: findPort
             }
         },
-        yiviteConfig?.viteConfig || {}
+        yiteConfig?.viteConfig || {}
     );
 
     return viteConfig;

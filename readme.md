@@ -43,13 +43,13 @@ yicode（易编程）系列软件开发生态，全部由随易科技有限公�
 5. 19 年做自由职业，在老家待了大半年，开发 QQ 机器人，网页游戏，创建帮助前端初学者的问答交流群。
 6. 20 年做项目接单，给公司做前端技术顾问，业余开发开源项目。
 7. 21 年做创业半年，业余维护 yipack-cli ，yicode-cli，下半年全职在老家接单，成为自由程序员。
-8. 22 年，自由独立开发者，主要开源 yiapi 和 yivite-cli ，继续为了自由和金钱而奋斗！
+8. 22 年，自由独立开发者，主要开源 yiapi 和 yite-cli ，继续为了自由和金钱而奋斗！
 9. 23 年，自由独立开发者，注册随易科技有限公司，继续为了自由和金钱而奋斗！
 
 # 生态项目
 
-| 包名                              | 名称   | 版本                                                                                                      |
-| --------------------------------- | ------ | --------------------------------------------------------------------------------------------------------- |
-| [yiapi](packages/yiapi)           | 易接口 | [![yiapi version](https://img.shields.io/npm/v/@yicode/yiapi.svg?label=%20)](https://yicode.tech)         |
-| [yidash](packages/yidash)         | 易大师 | [![yidash version](https://img.shields.io/npm/v/@yicode/yidash.svg?label=%20)](https://yicode.tech)       |
-| [yivite-cli](packages/yivite-cli) | 易维特 | [![yivite-cli version](https://img.shields.io/npm/v/@yicode/yite-cli.svg?label=%20)](https://yicode.tech) |
+| 包名                          | 名称   | 版本                                                                                                    |
+| ----------------------------- | ------ | ------------------------------------------------------------------------------------------------------- |
+| [yiapi](packages/yiapi)       | 易接口 | [![yiapi version](https://img.shields.io/npm/v/@yicode/yiapi.svg?label=%20)](https://yicode.tech)       |
+| [yidash](packages/yidash)     | 易大师 | [![yidash version](https://img.shields.io/npm/v/@yicode/yidash.svg?label=%20)](https://yicode.tech)     |
+| [yite-cli](packages/yite-cli) | 易维特 | [![yite-cli version](https://img.shields.io/npm/v/@yicode/yite-cli.svg?label=%20)](https://yicode.tech) |
