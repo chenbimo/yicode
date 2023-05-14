@@ -53,7 +53,7 @@ function autoSideBar(path) {
             let param = {
                 id: selfPath,
                 pid: parentPath,
-                text: '📄 ' + name.replace(/\d+-/gi, '')
+                text: '📄 ' + name.replace(/\d+-/gi, '').replace('.md', '')
             };
             if (name.endsWith('.md')) {
                 param.link = `${path}${selfPath}`;
@@ -65,7 +65,8 @@ function autoSideBar(path) {
                         text: path
                             .split('/')
                             .filter((name) => name)[1]
-                            .replace(/\d+-/gi, ''),
+                            .replace(/\d+-/gi, '')
+                            .replace('.md', ''),
                         collapsible: false
                     };
                     param.pid = path;
