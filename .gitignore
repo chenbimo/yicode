@@ -7,6 +7,7 @@ data
 .npmrc
 .cache
 lab
+labs
 cache
 .npmrc
 .VSCodeCounter
