@@ -1,14 +1,14 @@
-const EventEmitter = require("events").EventEmitter;
-const childProcess = require("child_process");
-const path = require("path");
-const fs = require("fs");
-const process = require("process");
+const EventEmitter = require('events').EventEmitter;
+const childProcess = require('child_process');
+const path = require('path');
+const fs = require('fs');
+const process = require('process');
 
-const { Argument, humanReadableArgName } = require("./argument.js");
-const { CommanderError } = require("./error.js");
-const { Help } = require("./help.js");
-const { Option, splitOptionFlags, DualOptions } = require("./option.js");
-const { suggestSimilar } = require("./suggestSimilar");
+const { Argument, humanReadableArgName } = require('./argument.js');
+const { CommanderError } = require('./error.js');
+const { Help } = require('./help.js');
+const { Option, splitOptionFlags, DualOptions } = require('./option.js');
+const { suggestSimilar } = require('./suggestSimilar');
 
 // @ts-check
 
@@ -35,9 +35,9 @@ class Command extends EventEmitter {
         this.rawArgs = [];
         this.processedArgs = []; // like .args but after custom processing and collecting variadic
         this._scriptPath = null;
-        this._name = name || "";
+        this._name = name || '';
         this._optionValues = {};
-        this._optionValueSources = {}; // default < config < env < cli
+        this._optionValueSources = {}; // default, env, cli etc
         this._storeOptionsAsProperties = false;
         this._actionHandler = null;
         this._executableHandler = false;
@@ -47,8 +47,8 @@ class Command extends EventEmitter {
         this._exitCallback = null;
         this._aliases = [];
         this._combineFlagAndOptionalValue = true;
-        this._description = "";
-        this._summary = "";
+        this._description = '';
+        this._summary = '';
         this._argsDescription = undefined; // legacy
         this._enablePositionalOptions = false;
         this._passThroughOptions = false;
@@ -63,19 +63,19 @@ class Command extends EventEmitter {
             writeErr: (str) => process.stderr.write(str),
             getOutHelpWidth: () => (process.stdout.isTTY ? process.stdout.columns : undefined),
             getErrHelpWidth: () => (process.stderr.isTTY ? process.stderr.columns : undefined),
-            outputError: (str, write) => write(str),
+            outputError: (str, write) => write(str)
         };
 
         this._hidden = false;
         this._hasHelpOption = true;
-        this._helpFlags = "-h, --help";
-        this._helpDescription = "显示命令帮助";
-        this._helpShortFlag = "-h";
-        this._helpLongFlag = "--help";
+        this._helpFlags = '-h, --help';
+        this._helpDescription = '显示命令帮助';
+        this._helpShortFlag = '-h';
+        this._helpLongFlag = '--help';
         this._addImplicitHelpCommand = undefined; // Deliberately undefined, not decided whether true or false
-        this._helpCommandName = "help";
-        this._helpCommandnameAndArgs = "help [命令]";
-        this._helpCommandDescription = "显示命令帮助";
+        this._helpCommandName = 'help';
+        this._helpCommandnameAndArgs = 'help [command]';
+        this._helpCommandDescription = '显示命令帮助';
         this._helpConfiguration = {};
     }
 
@@ -137,7 +137,7 @@ class Command extends EventEmitter {
     command(nameAndArgs, actionOptsOrExecDesc, execOpts) {
         let desc = actionOptsOrExecDesc;
         let opts = execOpts;
-        if (typeof desc === "object" && desc !== null) {
+        if (typeof desc === 'object' && desc !== null) {
             opts = desc;
             desc = null;
         }
@@ -234,7 +234,7 @@ class Command extends EventEmitter {
      * @return {Command} `this` command for chaining
      */
     showHelpAfterError(displayHelp = true) {
-        if (typeof displayHelp !== "string") displayHelp = !!displayHelp;
+        if (typeof displayHelp !== 'string') displayHelp = !!displayHelp;
         this._showHelpAfterError = displayHelp;
         return this;
     }
@@ -263,7 +263,7 @@ class Command extends EventEmitter {
     addCommand(cmd, opts) {
         if (!cmd._name) {
             throw new Error(`传递给 .addCommand() 的命令必须有一个名称
-- 在 Command 构造函数中指定名称或使用 .name()`);
+            - 在 Command 构造函数中或使用 .name() 指定名称`);
         }
 
         opts = opts || {};
@@ -308,7 +308,7 @@ class Command extends EventEmitter {
      */
     argument(name, description, fn, defaultValue) {
         const argument = this.createArgument(name, description);
-        if (typeof fn === "function") {
+        if (typeof fn === 'function') {
             argument.default(defaultValue).argParser(fn);
         } else {
             argument.default(fn);
@@ -345,10 +345,10 @@ class Command extends EventEmitter {
     addArgument(argument) {
         const previousArgument = this._args.slice(-1)[0];
         if (previousArgument && previousArgument.variadic) {
-            throw new Error(`只有最后一个参数可以是可变参数 '${previousArgument.name()}'`);
+            throw new Error(`只有最后一个参数 '${previousArgument.name()}' 是可变的`);
         }
         if (argument.required && argument.defaultValue !== undefined && argument.parseArg === undefined) {
-            throw new Error(`从不使用必需参数的默认值: '${argument.name()}'`);
+            throw new Error(`必要参数 '${argument.name()}' 的默认值未被使用`);
         }
         this._args.push(argument);
         return this;
@@ -369,8 +369,8 @@ class Command extends EventEmitter {
             this._addImplicitHelpCommand = false;
         } else {
             this._addImplicitHelpCommand = true;
-            if (typeof enableOrNameAndArgs === "string") {
-                this._helpCommandName = enableOrNameAndArgs.split(" ")[0];
+            if (typeof enableOrNameAndArgs === 'string') {
+                this._helpCommandName = enableOrNameAndArgs.split(' ')[0];
                 this._helpCommandnameAndArgs = enableOrNameAndArgs;
             }
             this._helpCommandDescription = description || this._helpCommandDescription;
@@ -385,7 +385,7 @@ class Command extends EventEmitter {
 
     _hasImplicitHelpCommand() {
         if (this._addImplicitHelpCommand === undefined) {
-            return this.commands.length && !this._actionHandler && !this._findCommand("help");
+            return this.commands.length && !this._actionHandler && !this._findCommand('help');
         }
         return this._addImplicitHelpCommand;
     }
@@ -399,10 +399,10 @@ class Command extends EventEmitter {
      */
 
     hook(event, listener) {
-        const allowedValues = ["preSubcommand", "preAction", "postAction"];
+        const allowedValues = ['preSubcommand', 'preAction', 'postAction'];
         if (!allowedValues.includes(event)) {
-            throw new Error(`传递给钩子的事件的意料之外的值 : '${event}'.
-            可用值为 '${allowedValues.join("', '")}' 其中之一`);
+            throw new Error(`给钩子事件 '${event}' 传递了异常值。
+有效值为 '${allowedValues.join("', '")}' 之一`);
         }
         if (this._lifeCycleHooks[event]) {
             this._lifeCycleHooks[event].push(listener);
@@ -424,7 +424,7 @@ class Command extends EventEmitter {
             this._exitCallback = fn;
         } else {
             this._exitCallback = (err) => {
-                if (err.code !== "commander.executeSubCommandAsync") {
+                if (err.code !== 'commander.executeSubCommandAsync') {
                     throw err;
                 } else {
                     // Async callback from spawn events, not useful to throw.
@@ -513,12 +513,12 @@ class Command extends EventEmitter {
         // store default value
         if (option.negate) {
             // --no-foo is special and defaults foo to true, unless a --foo option is already defined
-            const positiveLongFlag = option.long.replace(/^--no-/, "--");
+            const positiveLongFlag = option.long.replace(/^--no-/, '--');
             if (!this._findOption(positiveLongFlag)) {
-                this.setOptionValueWithSource(name, option.defaultValue === undefined ? true : option.defaultValue, "default");
+                this.setOptionValueWithSource(name, option.defaultValue === undefined ? true : option.defaultValue, 'default');
             }
         } else if (option.defaultValue !== undefined) {
-            this.setOptionValueWithSource(name, option.defaultValue, "default");
+            this.setOptionValueWithSource(name, option.defaultValue, 'default');
         }
 
         // register the option
@@ -538,7 +538,7 @@ class Command extends EventEmitter {
                 try {
                     val = option.parseArg(val, oldValue);
                 } catch (err) {
-                    if (err.code === "commander.invalidArgument") {
+                    if (err.code === 'commander.invalidArgument') {
                         const message = `${invalidValueMessage} ${err.message}`;
                         this.error(message, { exitCode: err.exitCode, code: err.code });
                     }
@@ -555,21 +555,21 @@ class Command extends EventEmitter {
                 } else if (option.isBoolean() || option.optional) {
                     val = true;
                 } else {
-                    val = ""; // not normal, parseArg might have failed or be a mock function for testing
+                    val = ''; // not normal, parseArg might have failed or be a mock function for testing
                 }
             }
             this.setOptionValueWithSource(name, val, valueSource);
         };
 
-        this.on("option:" + oname, (val) => {
-            const invalidValueMessage = `错误: 选项 '${option.flags}' 参数 '${val}' 无效.`;
-            handleOptionValue(val, invalidValueMessage, "cli");
+        this.on('option:' + oname, (val) => {
+            const invalidValueMessage = `错误: 选项 '${option.flags}' 的参数值 '${val}' 是无效的。`;
+            handleOptionValue(val, invalidValueMessage, 'cli');
         });
 
         if (option.envVar) {
-            this.on("optionEnv:" + oname, (val) => {
-                const invalidValueMessage = `错误: 来自环境变量 '${option.envVar}' 的 '${option.flags}' 值是无效的.`;
-                handleOptionValue(val, invalidValueMessage, "env");
+            this.on('optionEnv:' + oname, (val) => {
+                const invalidValueMessage = `错误: 选项 '${option.flags}' 的值 '${val}' 来自环境变量 '${option.envVar}' 是无效的。`;
+                handleOptionValue(val, invalidValueMessage, 'env');
             });
         }
 
@@ -582,12 +582,12 @@ class Command extends EventEmitter {
      * @api private
      */
     _optionEx(config, flags, description, fn, defaultValue) {
-        if (typeof flags === "object" && flags instanceof Option) {
-            throw new Error("使用 addOption()来代替 options() 或 requiredOption() 来添加一个选项对象");
+        if (typeof flags === 'object' && flags instanceof Option) {
+            throw new Error('要添加选项对象，请使用 addOption() 而不是 option() 或 requiredOption()');
         }
         const option = this.createOption(flags, description);
         option.makeOptionMandatory(!!config.mandatory);
-        if (typeof fn === "function") {
+        if (typeof fn === 'function') {
             option.default(defaultValue).argParser(fn);
         } else if (fn instanceof RegExp) {
             // deprecated
@@ -736,7 +736,7 @@ class Command extends EventEmitter {
     passThroughOptions(passThrough = true) {
         this._passThroughOptions = !!passThrough;
         if (!!this.parent && passThrough && !this.parent._enablePositionalOptions) {
-            throw new Error("passThroughOptions 不能在在父级命未为开启位置选项时使用");
+            throw new Error('如果不为父命令打开 enablePositionalOptions，则无法使用 passThroughOptions');
         }
         return this;
     }
@@ -752,7 +752,7 @@ class Command extends EventEmitter {
     storeOptionsAsProperties(storeAsProperties = true) {
         this._storeOptionsAsProperties = !!storeAsProperties;
         if (this.options.length) {
-            throw new Error("在添加选择之前执行了 .storeOptionsAsProperties() 函数");
+            throw new Error('在添加选项之前调用 .storeOptionsAsProperties()');
         }
         return this;
     }
@@ -780,12 +780,7 @@ class Command extends EventEmitter {
      */
 
     setOptionValue(key, value) {
-        if (this._storeOptionsAsProperties) {
-            this[key] = value;
-        } else {
-            this._optionValues[key] = value;
-        }
-        return this;
+        return this.setOptionValueWithSource(key, value, undefined);
     }
 
     /**
@@ -793,19 +788,23 @@ class Command extends EventEmitter {
      *
      * @param {string} key
      * @param {Object} value
-     * @param {string} source - expected values are default/config/env/cli
+     * @param {string} source - expected values are default/config/env/cli/implied
      * @return {Command} `this` command for chaining
      */
 
     setOptionValueWithSource(key, value, source) {
-        this.setOptionValue(key, value);
+        if (this._storeOptionsAsProperties) {
+            this[key] = value;
+        } else {
+            this._optionValues[key] = value;
+        }
         this._optionValueSources[key] = source;
         return this;
     }
 
     /**
      * Get source of option value.
-     * Expected values are default | config | env | cli
+     * Expected values are default | config | env | cli | implied
      *
      * @param {string} key
      * @return {string}
@@ -813,6 +812,25 @@ class Command extends EventEmitter {
 
     getOptionValueSource(key) {
         return this._optionValueSources[key];
+    }
+
+    /**
+     * Get source of option value. See also .optsWithGlobals().
+     * Expected values are default | config | env | cli | implied
+     *
+     * @param {string} key
+     * @return {string}
+     */
+
+    getOptionValueSourceWithGlobals(key) {
+        // global overwrites local, like optsWithGlobals
+        let source;
+        getCommandAndParents(this).forEach((cmd) => {
+            if (cmd.getOptionValueSource(key) !== undefined) {
+                source = cmd.getOptionValueSource(key);
+            }
+        });
+        return source;
     }
 
     /**
@@ -824,7 +842,7 @@ class Command extends EventEmitter {
 
     _prepareUserArgs(argv, parseOptions) {
         if (argv !== undefined && !Array.isArray(argv)) {
-            throw new Error("解析的第一个参数必须是数组或undefined");
+            throw new Error('要解析的第一个参数必须是数组(array)或未定义(undefined)');
         }
         parseOptions = parseOptions || {};
 
@@ -833,7 +851,7 @@ class Command extends EventEmitter {
             argv = process.argv;
             // @ts-ignore: unknown property
             if (process.versions && process.versions.electron) {
-                parseOptions.from = "electron";
+                parseOptions.from = 'electron';
             }
         }
         this.rawArgs = argv.slice();
@@ -842,11 +860,11 @@ class Command extends EventEmitter {
         let userArgs;
         switch (parseOptions.from) {
             case undefined:
-            case "node":
+            case 'node':
                 this._scriptPath = argv[1];
                 userArgs = argv.slice(2);
                 break;
-            case "electron":
+            case 'electron':
                 // @ts-ignore: unknown property
                 if (process.defaultApp) {
                     this._scriptPath = argv[1];
@@ -855,16 +873,16 @@ class Command extends EventEmitter {
                     userArgs = argv.slice(1);
                 }
                 break;
-            case "user":
+            case 'user':
                 userArgs = argv.slice(0);
                 break;
             default:
-                throw new Error(`解析参数异常 { 来源: '${parseOptions.from}' }`);
+                throw new Error(`选项解析异常 { from: '${parseOptions.from}' }`);
         }
 
         // Find default name for program from arguments.
         if (!this._name && this._scriptPath) this.nameFromFilename(this._scriptPath);
-        this._name = this._name || "program";
+        this._name = this._name || 'program';
 
         return userArgs;
     }
@@ -928,7 +946,7 @@ class Command extends EventEmitter {
     _executeSubCommand(subcommand, args) {
         args = args.slice();
         let launchWithNode = false; // Use node for source targets so do not need to get permissions correct, and on Windows.
-        const sourceExt = [".js", ".ts", ".tsx", ".mjs", ".cjs"];
+        const sourceExt = ['.js', '.ts', '.tsx', '.mjs', '.cjs'];
 
         function findFile(baseDir, baseName) {
             // Look for specified file
@@ -951,7 +969,7 @@ class Command extends EventEmitter {
 
         // executableFile and executableDir might be full path, or just a name
         let executableFile = subcommand._executableFile || `${this._name}-${subcommand._name}`;
-        let executableDir = this._executableDir || "";
+        let executableDir = this._executableDir || '';
         if (this._scriptPath) {
             let resolvedScriptPath; // resolve possible symlink for installed npm binary
             try {
@@ -979,26 +997,26 @@ class Command extends EventEmitter {
         launchWithNode = sourceExt.includes(path.extname(executableFile));
 
         let proc;
-        if (process.platform !== "win32") {
+        if (process.platform !== 'win32') {
             if (launchWithNode) {
                 args.unshift(executableFile);
                 // add executable arguments to spawn
                 args = incrementNodeInspectorPort(process.execArgv).concat(args);
 
-                proc = childProcess.spawn(process.argv[0], args, { stdio: "inherit" });
+                proc = childProcess.spawn(process.argv[0], args, { stdio: 'inherit' });
             } else {
-                proc = childProcess.spawn(executableFile, args, { stdio: "inherit" });
+                proc = childProcess.spawn(executableFile, args, { stdio: 'inherit' });
             }
         } else {
             args.unshift(executableFile);
             // add executable arguments to spawn
             args = incrementNodeInspectorPort(process.execArgv).concat(args);
-            proc = childProcess.spawn(process.execPath, args, { stdio: "inherit" });
+            proc = childProcess.spawn(process.execPath, args, { stdio: 'inherit' });
         }
 
         if (!proc.killed) {
             // testing mainly to avoid leak warnings during unit tests with mocked spawn
-            const signals = ["SIGUSR1", "SIGUSR2", "SIGTERM", "SIGINT", "SIGHUP"];
+            const signals = ['SIGUSR1', 'SIGUSR2', 'SIGTERM', 'SIGINT', 'SIGHUP'];
             signals.forEach((signal) => {
                 // @ts-ignore
                 process.on(signal, () => {
@@ -1013,29 +1031,29 @@ class Command extends EventEmitter {
         // Suppressing the exit if exitCallback defined is a bit messy and of limited use, but does allow process to stay running!
         const exitCallback = this._exitCallback;
         if (!exitCallback) {
-            proc.on("close", process.exit.bind(process));
+            proc.on('close', process.exit.bind(process));
         } else {
-            proc.on("close", () => {
-                exitCallback(new CommanderError(process.exitCode || 0, "commander.executeSubCommandAsync", "(close)"));
+            proc.on('close', () => {
+                exitCallback(new CommanderError(process.exitCode || 0, 'commander.executeSubCommandAsync', '(close)'));
             });
         }
-        proc.on("error", (err) => {
+        proc.on('error', (err) => {
             // @ts-ignore
-            if (err.code === "ENOENT") {
-                const executableDirMessage = executableDir ? `搜索相对于 '${executableDir}' 目录的子命令` : "没有用于搜索本地命令的子目录, 使用 .executableDir() 提供自定义目录";
-                const executableMissing = `'${executableFile}' 文件不存在
- - 如果 '${subcommand._name}' 不是一个可执行命令, 从 '.command()' 中移除描述参数并且使用'.description()' 代替
- - 如果默认的可执行文件名称不合适，可以使用executableFile选项来提供一个自定义的名称或路径
+            if (err.code === 'ENOENT') {
+                const executableDirMessage = executableDir ? `搜索相对于 '${executableDir}' 目录的本地子命令` : '没有用于搜索本地子命令的目录，使用 .executableDir() 提供自定义目录';
+                const executableMissing = `'${executableFile}' 执行文件不存在
+ - 如果 '${subcommand._name}' 不是可执行命令, 请从 '.command()' 中删除描述参数并改用 '.description()' 代替
+ - 如果默认的可执行文件名称不合适，请使用 executableFile 选项提供自定义名称或路径
  - ${executableDirMessage}`;
                 throw new Error(executableMissing);
                 // @ts-ignore
-            } else if (err.code === "EACCES") {
+            } else if (err.code === 'EACCES') {
                 throw new Error(`'${executableFile}' not executable`);
             }
             if (!exitCallback) {
                 process.exit(1);
             } else {
-                const wrappedError = new CommanderError(1, "commander.executeSubCommandAsync", "(error)");
+                const wrappedError = new CommanderError(1, 'commander.executeSubCommandAsync', '(error)');
                 wrappedError.nestedError = err;
                 exitCallback(wrappedError);
             }
@@ -1054,7 +1072,7 @@ class Command extends EventEmitter {
         if (!subCommand) this.help({ error: true });
 
         let hookResult;
-        hookResult = this._chainOrCallSubCommandHook(hookResult, subCommand, "preSubcommand");
+        hookResult = this._chainOrCallSubCommandHook(hookResult, subCommand, 'preSubcommand');
         hookResult = this._chainOrCall(hookResult, () => {
             if (subCommand._executableHandler) {
                 this._executeSubCommand(subCommand, operands.concat(unknown));
@@ -1101,8 +1119,8 @@ class Command extends EventEmitter {
                 try {
                     parsedValue = argument.parseArg(value, previous);
                 } catch (err) {
-                    if (err.code === "commander.invalidArgument") {
-                        const message = `错误: '${argument.name()}' 参数的值 '${value}' 无效. ${err.message}`;
+                    if (err.code === 'commander.invalidArgument') {
+                        const message = `错误: '${argument.name()}' 的 命令-参数 值无效。 ${err.message}`;
                         this.error(message, { exitCode: err.exitCode, code: err.code });
                     }
                     throw err;
@@ -1150,7 +1168,7 @@ class Command extends EventEmitter {
 
     _chainOrCall(promise, fn) {
         // thenable
-        if (promise && promise.then && typeof promise.then === "function") {
+        if (promise && promise.then && typeof promise.then === 'function') {
             // already have a promise, chain callback
             return promise.then(() => fn());
         }
@@ -1177,7 +1195,7 @@ class Command extends EventEmitter {
                     hooks.push({ hookedCommand, callback });
                 });
             });
-        if (event === "postAction") {
+        if (event === 'postAction') {
             hooks.reverse();
         }
 
@@ -1260,14 +1278,14 @@ class Command extends EventEmitter {
             this._processArguments();
 
             let actionResult;
-            actionResult = this._chainOrCallHooks(actionResult, "preAction");
+            actionResult = this._chainOrCallHooks(actionResult, 'preAction');
             actionResult = this._chainOrCall(actionResult, () => this._actionHandler(this.processedArgs));
             if (this.parent) {
                 actionResult = this._chainOrCall(actionResult, () => {
                     this.parent.emit(commandEvent, operands, unknown); // legacy
                 });
             }
-            actionResult = this._chainOrCallHooks(actionResult, "postAction");
+            actionResult = this._chainOrCallHooks(actionResult, 'postAction');
             return actionResult;
         }
         if (this.parent && this.parent.listenerCount(commandEvent)) {
@@ -1275,13 +1293,13 @@ class Command extends EventEmitter {
             this._processArguments();
             this.parent.emit(commandEvent, operands, unknown); // legacy
         } else if (operands.length) {
-            if (this._findCommand("*")) {
+            if (this._findCommand('*')) {
                 // legacy default command
-                return this._dispatchSubcommand("*", operands, unknown);
+                return this._dispatchSubcommand('*', operands, unknown);
             }
-            if (this.listenerCount("command:*")) {
+            if (this.listenerCount('command:*')) {
                 // skip option check, emit event for possible misspelling suggestion
-                this.emit("command:*", operands, unknown);
+                this.emit('command:*', operands, unknown);
             } else if (this.commands.length) {
                 this.unknownCommand();
             } else {
@@ -1350,7 +1368,7 @@ class Command extends EventEmitter {
             if (this.getOptionValue(optionKey) === undefined) {
                 return false;
             }
-            return this.getOptionValueSource(optionKey) !== "default";
+            return this.getOptionValueSource(optionKey) !== 'default';
         });
 
         const optionsWithConflicting = definedNonDefaultOptions.filter((option) => option.conflictsWith.length > 0);
@@ -1399,7 +1417,7 @@ class Command extends EventEmitter {
         const args = argv.slice();
 
         function maybeOption(arg) {
-            return arg.length > 1 && arg[0] === "-";
+            return arg.length > 1 && arg[0] === '-';
         }
 
         // parse options
@@ -1408,7 +1426,7 @@ class Command extends EventEmitter {
             const arg = args.shift();
 
             // literal
-            if (arg === "--") {
+            if (arg === '--') {
                 if (dest === unknown) dest.push(arg);
                 dest.push(...args);
                 break;
@@ -1445,7 +1463,7 @@ class Command extends EventEmitter {
             }
 
             // Look for combo options following single dash, eat first one if known.
-            if (arg.length > 2 && arg[0] === "-" && arg[1] !== "-") {
+            if (arg.length > 2 && arg[0] === '-' && arg[1] !== '-') {
                 const option = this._findOption(`-${arg[1]}`);
                 if (option) {
                     if (option.required || (option.optional && this._combineFlagAndOptionalValue)) {
@@ -1462,7 +1480,7 @@ class Command extends EventEmitter {
 
             // Look for known long flag with value, like --foo=bar
             if (/^--[^=]+=/.test(arg)) {
-                const index = arg.indexOf("=");
+                const index = arg.indexOf('=');
                 const option = this._findOption(arg.slice(0, index));
                 if (option && (option.required || option.optional)) {
                     this.emit(`option:${option.name()}`, arg.slice(index + 1));
@@ -1551,17 +1569,17 @@ class Command extends EventEmitter {
     error(message, errorOptions) {
         // output handling
         this._outputConfiguration.outputError(`${message}\n`, this._outputConfiguration.writeErr);
-        if (typeof this._showHelpAfterError === "string") {
+        if (typeof this._showHelpAfterError === 'string') {
             this._outputConfiguration.writeErr(`${this._showHelpAfterError}\n`);
         } else if (this._showHelpAfterError) {
-            this._outputConfiguration.writeErr("\n");
+            this._outputConfiguration.writeErr('\n');
             this.outputHelp({ error: true });
         }
 
         // exit handling
         const config = errorOptions || {};
         const exitCode = config.exitCode || 1;
-        const code = config.code || "commander.error";
+        const code = config.code || 'commander.error';
         this._exit(exitCode, code, message);
     }
 
@@ -1576,7 +1594,7 @@ class Command extends EventEmitter {
             if (option.envVar && option.envVar in process.env) {
                 const optionKey = option.attributeName();
                 // Priority check. Do not overwrite cli or options from unknown source (client-code).
-                if (this.getOptionValue(optionKey) === undefined || ["default", "config", "env"].includes(this.getOptionValueSource(optionKey))) {
+                if (this.getOptionValue(optionKey) === undefined || ['default', 'config', 'env'].includes(this.getOptionValueSource(optionKey))) {
                     if (option.required || option.optional) {
                         // option can take a value
                         // keep very simple, optional always takes value
@@ -1599,7 +1617,7 @@ class Command extends EventEmitter {
     _parseOptionsImplied() {
         const dualHelper = new DualOptions(this.options);
         const hasCustomOptionValue = (optionKey) => {
-            return this.getOptionValue(optionKey) !== undefined && !["default", "implied"].includes(this.getOptionValueSource(optionKey));
+            return this.getOptionValue(optionKey) !== undefined && !['default', 'implied'].includes(this.getOptionValueSource(optionKey));
         };
         this.options
             .filter((option) => option.implied !== undefined && hasCustomOptionValue(option.attributeName()) && dualHelper.valueFromOption(this.getOptionValue(option.attributeName()), option))
@@ -1607,7 +1625,7 @@ class Command extends EventEmitter {
                 Object.keys(option.implied)
                     .filter((impliedKey) => !hasCustomOptionValue(impliedKey))
                     .forEach((impliedKey) => {
-                        this.setOptionValueWithSource(impliedKey, option.implied[impliedKey], "implied");
+                        this.setOptionValueWithSource(impliedKey, option.implied[impliedKey], 'implied');
                     });
             });
     }
@@ -1620,8 +1638,8 @@ class Command extends EventEmitter {
      */
 
     missingArgument(name) {
-        const message = `错误: 丢失必要参数 '${name}'`;
-        this.error(message, { code: "commander.missingArgument" });
+        const message = `错误: 缺少必要的 '${name}' 参数`;
+        this.error(message, { code: 'commander.missingArgument' });
     }
 
     /**
@@ -1632,8 +1650,8 @@ class Command extends EventEmitter {
      */
 
     optionMissingArgument(option) {
-        const message = `错误: 选项 '${option.flags}' 的参数丢失`;
-        this.error(message, { code: "commander.optionMissingArgument" });
+        const message = `错误: 选项 '${option.flags}' 的参数缺少`;
+        this.error(message, { code: 'commander.optionMissingArgument' });
     }
 
     /**
@@ -1644,8 +1662,8 @@ class Command extends EventEmitter {
      */
 
     missingMandatoryOptionValue(option) {
-        const message = `错误: 必要参数 '${option.flags}' 未提供`;
-        this.error(message, { code: "commander.missingMandatoryOptionValue" });
+        const message = `错误: 必要的选项标志 '${option.flags}' 未提供`;
+        this.error(message, { code: 'commander.missingMandatoryOptionValue' });
     }
 
     /**
@@ -1673,14 +1691,14 @@ class Command extends EventEmitter {
             const bestOption = findBestOptionFromValue(option);
             const optionKey = bestOption.attributeName();
             const source = this.getOptionValueSource(optionKey);
-            if (source === "env") {
-                return `环境变量 '${bestOption.envVar}'`;
+            if (source === 'env') {
+                return `environment variable '${bestOption.envVar}'`;
             }
-            return `选项 '${bestOption.flags}'`;
+            return `option '${bestOption.flags}'`;
         };
 
-        const message = `错误: ${getErrorMessage(option)} 不能和 ${getErrorMessage(conflictingOption)} 一起使用`;
-        this.error(message, { code: "commander.conflictingOption" });
+        const message = `错误: ${getErrorMessage(option)} 不能与 ${getErrorMessage(conflictingOption)} 一起使用`;
+        this.error(message, { code: 'commander.conflictingOption' });
     }
 
     /**
@@ -1692,9 +1710,9 @@ class Command extends EventEmitter {
 
     unknownOption(flag) {
         if (this._allowUnknownOption) return;
-        let suggestion = "";
+        let suggestion = '';
 
-        if (flag.startsWith("--") && this._showSuggestionAfterError) {
+        if (flag.startsWith('--') && this._showSuggestionAfterError) {
             // Looping to pick up the global options too
             let candidateFlags = [];
             let command = this;
@@ -1710,8 +1728,8 @@ class Command extends EventEmitter {
             suggestion = suggestSimilar(flag, candidateFlags);
         }
 
-        const message = `错误: 未知的选项 '${flag}'${suggestion}`;
-        this.error(message, { code: "commander.unknownOption" });
+        const message = `错误: 未知选项 '${flag}'${suggestion} `;
+        this.error(message, { code: 'commander.unknownOption' });
     }
 
     /**
@@ -1725,10 +1743,10 @@ class Command extends EventEmitter {
         if (this._allowExcessArguments) return;
 
         const expected = this._args.length;
-        const s = expected === 1 ? "" : "s";
-        const forSubcommand = this.parent ? ` for '${this.name()}'` : "";
-        const message = `错误: 参数过多 ${forSubcommand}. 需要 ${expected} 参数${s} 但是却收到了 ${receivedArgs.length}.`;
-        this.error(message, { code: "commander.excessArguments" });
+        const s = expected === 1 ? '' : 's';
+        const forSubcommand = this.parent ? ` for '${this.name()}'` : '';
+        const message = `错误: ${forSubcommand} 参数太多. 需要 ${expected} 参数${s}， 但提供的是 ${receivedArgs.length} 个.`;
+        this.error(message, { code: 'commander.excessArguments' });
     }
 
     /**
@@ -1739,7 +1757,7 @@ class Command extends EventEmitter {
 
     unknownCommand() {
         const unknownName = this.args[0];
-        let suggestion = "";
+        let suggestion = '';
 
         if (this._showSuggestionAfterError) {
             const candidateNames = [];
@@ -1753,8 +1771,8 @@ class Command extends EventEmitter {
             suggestion = suggestSimilar(unknownName, candidateNames);
         }
 
-        const message = `错误: 未知的命令 '${unknownName}'${suggestion}`;
-        this.error(message, { code: "commander.unknownCommand" });
+        const message = `错误: 未知命令 '${unknownName}'${suggestion}`;
+        this.error(message, { code: 'commander.unknownCommand' });
     }
 
     /**
@@ -1774,14 +1792,14 @@ class Command extends EventEmitter {
     version(str, flags, description) {
         if (str === undefined) return this._version;
         this._version = str;
-        flags = flags || "-V, --version";
-        description = description || "输出版本号";
+        flags = flags || '-V, --version';
+        description = description || '输出版本号';
         const versionOption = this.createOption(flags, description);
         this._versionOptionName = versionOption.attributeName();
         this.options.push(versionOption);
-        this.on("option:" + versionOption.name(), () => {
+        this.on('option:' + versionOption.name(), () => {
             this._outputConfiguration.writeOut(`${str}\n`);
-            this._exit(0, "commander.version", str);
+            this._exit(0, 'commander.version', str);
         });
         return this;
     }
@@ -1833,7 +1851,7 @@ class Command extends EventEmitter {
             command = this.commands[this.commands.length - 1];
         }
 
-        if (alias === command._name) throw new Error("命令别名不能和其名称相同");
+        if (alias === command._name) throw new Error('命令别名不能跟它的名称同名');
 
         command._aliases.push(alias);
         return this;
@@ -1870,7 +1888,7 @@ class Command extends EventEmitter {
             const args = this._args.map((arg) => {
                 return humanReadableArgName(arg);
             });
-            return [].concat(this.options.length || this._hasHelpOption ? "[选项]" : [], this.commands.length ? "[命令]" : [], this._args.length ? args : []).join(" ");
+            return [].concat(this.options.length || this._hasHelpOption ? '[options]' : [], this.commands.length ? '[command]' : [], this._args.length ? args : []).join(' ');
         }
 
         this._usage = str;
@@ -1970,7 +1988,7 @@ class Command extends EventEmitter {
 
     outputHelp(contextOptions) {
         let deprecatedCallback;
-        if (typeof contextOptions === "function") {
+        if (typeof contextOptions === 'function') {
             deprecatedCallback = contextOptions;
             contextOptions = undefined;
         }
@@ -1978,21 +1996,21 @@ class Command extends EventEmitter {
 
         getCommandAndParents(this)
             .reverse()
-            .forEach((command) => command.emit("beforeAllHelp", context));
-        this.emit("beforeHelp", context);
+            .forEach((command) => command.emit('beforeAllHelp', context));
+        this.emit('beforeHelp', context);
 
         let helpInformation = this.helpInformation(context);
         if (deprecatedCallback) {
             helpInformation = deprecatedCallback(helpInformation);
-            if (typeof helpInformation !== "string" && !Buffer.isBuffer(helpInformation)) {
-                throw new Error("outputHelp 回调函数必须犯规一个字符串或Buffer");
+            if (typeof helpInformation !== 'string' && !Buffer.isBuffer(helpInformation)) {
+                throw new Error('outputHelp 回调必须返回一个字符串或一个 Buffer');
             }
         }
         context.write(helpInformation);
 
         this.emit(this._helpLongFlag); // deprecated
-        this.emit("afterHelp", context);
-        getCommandAndParents(this).forEach((command) => command.emit("afterAllHelp", context));
+        this.emit('afterHelp', context);
+        getCommandAndParents(this).forEach((command) => command.emit('afterAllHelp', context));
     }
 
     /**
@@ -2006,7 +2024,7 @@ class Command extends EventEmitter {
      */
 
     helpOption(flags, description) {
-        if (typeof flags === "boolean") {
+        if (typeof flags === 'boolean') {
             this._hasHelpOption = flags;
             return this;
         }
@@ -2031,11 +2049,11 @@ class Command extends EventEmitter {
     help(contextOptions) {
         this.outputHelp(contextOptions);
         let exitCode = process.exitCode || 0;
-        if (exitCode === 0 && contextOptions && typeof contextOptions !== "function" && contextOptions.error) {
+        if (exitCode === 0 && contextOptions && typeof contextOptions !== 'function' && contextOptions.error) {
             exitCode = 1;
         }
         // message: do not have all displayed text available so only passing placeholder.
-        this._exit(exitCode, "commander.help", "(outputHelp)");
+        this._exit(exitCode, 'commander.help', '(outputHelp)');
     }
 
     /**
@@ -2049,15 +2067,15 @@ class Command extends EventEmitter {
      * @return {Command} `this` command for chaining
      */
     addHelpText(position, text) {
-        const allowedValues = ["beforeAll", "before", "after", "afterAll"];
+        const allowedValues = ['beforeAll', 'before', 'after', 'afterAll'];
         if (!allowedValues.includes(position)) {
-            throw new Error(`addHelpText 有意料之外的值.
-可为 '${allowedValues.join("', '")}' 其中之一`);
+            throw new Error(`addHelpText 位置的意外值.
+期望值为 '${allowedValues.join("', '")}' 之一`);
         }
         const helpEvent = `${position}Help`;
         this.on(helpEvent, (context) => {
             let helpStr;
-            if (typeof text === "function") {
+            if (typeof text === 'function') {
                 helpStr = text({ error: context.error, command: context.command });
             } else {
                 helpStr = text;
@@ -2084,7 +2102,7 @@ function outputHelpIfRequested(cmd, args) {
     if (helpOption) {
         cmd.outputHelp();
         // (Do not have all displayed text available so only passing placeholder.)
-        cmd._exit(0, "commander.helpDisplayed", "(outputHelp)");
+        cmd._exit(0, 'commander.helpDisplayed', '(outputHelp)');
     }
 }
 
@@ -2102,12 +2120,12 @@ function incrementNodeInspectorPort(args) {
     //  --inspect-brk[=[host:]port]
     //  --inspect-port=[host:]port
     return args.map((arg) => {
-        if (!arg.startsWith("--inspect")) {
+        if (!arg.startsWith('--inspect')) {
             return arg;
         }
         let debugOption;
-        let debugHost = "127.0.0.1";
-        let debugPort = "9229";
+        let debugHost = '127.0.0.1';
+        let debugPort = '9229';
         let match;
         if ((match = arg.match(/^(--inspect(-brk)?)$/)) !== null) {
             // e.g. --inspect
@@ -2128,7 +2146,7 @@ function incrementNodeInspectorPort(args) {
             debugPort = match[4];
         }
 
-        if (debugOption && debugPort !== "0") {
+        if (debugOption && debugPort !== '0') {
             return `${debugOption}=${debugHost}:${parseInt(debugPort) + 1}`;
         }
         return arg;

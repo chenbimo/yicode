@@ -53,11 +53,11 @@ function editDistance(a, b) {
  */
 
 function suggestSimilar(word, candidates) {
-    if (!candidates || candidates.length === 0) return "";
+    if (!candidates || candidates.length === 0) return '';
     // remove possible duplicates
     candidates = Array.from(new Set(candidates));
 
-    const searchingOptions = word.startsWith("--");
+    const searchingOptions = word.startsWith('--');
     if (searchingOptions) {
         word = word.slice(2);
         candidates = candidates.map((candidate) => candidate.slice(2));
@@ -89,12 +89,12 @@ function suggestSimilar(word, candidates) {
     }
 
     if (similar.length > 1) {
-        return `\n(你是指 ${similar.join(", ")} 中的某个吗？)`;
+        return `\n(你需要的是 ${similar.join(', ')} 之一吗?)`;
     }
     if (similar.length === 1) {
-        return `\n(你需要的是 ${similar[0]} 吗？)`;
+        return `\n(你需要的是 ${similar[0]} 吗?)`;
     }
-    return "";
+    return '';
 }
 
 exports.suggestSimilar = suggestSimilar;

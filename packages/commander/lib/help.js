@@ -1,4 +1,4 @@
-const { humanReadableArgName } = require("./argument.js");
+const { humanReadableArgName } = require('./argument.js');
 
 /**
  * TypeScript import types for JSDoc, used by Visual Studio Code IntelliSense and `npm run typescript-checkJS`
@@ -16,6 +16,7 @@ class Help {
         this.helpWidth = undefined;
         this.sortSubcommands = false;
         this.sortOptions = false;
+        this.showGlobalOptions = false;
     }
 
     /**
@@ -45,6 +46,21 @@ class Help {
     }
 
     /**
+     * Compare options for sort.
+     *
+     * @param {Option} a
+     * @param {Option} b
+     * @returns number
+     */
+    compareOptions(a, b) {
+        const getSortKey = (option) => {
+            // WYSIWYG for order displayed in help. Short used for comparison if present. No special handling for negated.
+            return option.short ? option.short.replace(/^-/, '') : option.long.replace(/^--/, '');
+        };
+        return getSortKey(a).localeCompare(getSortKey(b));
+    }
+
+    /**
      * Get an array of the visible options. Includes a placeholder for the implicit help option, if there is one.
      *
      * @param {Command} cmd
@@ -68,15 +84,30 @@ class Help {
             visibleOptions.push(helpOption);
         }
         if (this.sortOptions) {
-            const getSortKey = (option) => {
-                // WYSIWYG for order displayed in help with short before long, no special handling for negated.
-                return option.short ? option.short.replace(/^-/, "") : option.long.replace(/^--/, "");
-            };
-            visibleOptions.sort((a, b) => {
-                return getSortKey(a).localeCompare(getSortKey(b));
-            });
+            visibleOptions.sort(this.compareOptions);
         }
         return visibleOptions;
+    }
+
+    /**
+     * Get an array of the visible global options. (Not including help.)
+     *
+     * @param {Command} cmd
+     * @returns {Option[]}
+     */
+
+    visibleGlobalOptions(cmd) {
+        if (!this.showGlobalOptions) return [];
+
+        const globalOptions = [];
+        for (let parentCmd = cmd.parent; parentCmd; parentCmd = parentCmd.parent) {
+            const visibleOptions = parentCmd.options.filter((option) => !option.hidden);
+            globalOptions.push(...visibleOptions);
+        }
+        if (this.sortOptions) {
+            globalOptions.sort(this.compareOptions);
+        }
+        return globalOptions;
     }
 
     /**
@@ -90,7 +121,7 @@ class Help {
         // Side effect! Apply the legacy descriptions before the arguments are displayed.
         if (cmd._argsDescription) {
             cmd._args.forEach((argument) => {
-                argument.description = argument.description || cmd._argsDescription[argument.name()] || "";
+                argument.description = argument.description || cmd._argsDescription[argument.name()] || '';
             });
         }
 
@@ -110,12 +141,12 @@ class Help {
 
     subcommandTerm(cmd) {
         // Legacy. Ignores custom usage string, and nested commands.
-        const args = cmd._args.map((arg) => humanReadableArgName(arg)).join(" ");
+        const args = cmd._args.map((arg) => humanReadableArgName(arg)).join(' ');
         return (
             cmd._name +
-            (cmd._aliases[0] ? "|" + cmd._aliases[0] : "") +
-            (cmd.options.length ? " [选项]" : "") + // simplistic check for non-help option
-            (args ? " " + args : "")
+            (cmd._aliases[0] ? '|' + cmd._aliases[0] : '') +
+            (cmd.options.length ? ' [options]' : '') + // simplistic check for non-help option
+            (args ? ' ' + args : '')
         );
     }
 
@@ -170,6 +201,20 @@ class Help {
     }
 
     /**
+     * Get the longest global option term length.
+     *
+     * @param {Command} cmd
+     * @param {Help} helper
+     * @returns {number}
+     */
+
+    longestGlobalOptionTermLength(cmd, helper) {
+        return helper.visibleGlobalOptions(cmd).reduce((max, option) => {
+            return Math.max(max, helper.optionTerm(option).length);
+        }, 0);
+    }
+
+    /**
      * Get the longest argument term length.
      *
      * @param {Command} cmd
@@ -194,13 +239,13 @@ class Help {
         // Usage
         let cmdName = cmd._name;
         if (cmd._aliases[0]) {
-            cmdName = cmdName + "|" + cmd._aliases[0];
+            cmdName = cmdName + '|' + cmd._aliases[0];
         }
-        let parentCmdNames = "";
+        let parentCmdNames = '';
         for (let parentCmd = cmd.parent; parentCmd; parentCmd = parentCmd.parent) {
-            parentCmdNames = parentCmd.name() + " " + parentCmdNames;
+            parentCmdNames = parentCmd.name() + ' ' + parentCmdNames;
         }
-        return parentCmdNames + cmdName + " " + cmd.usage();
+        return parentCmdNames + cmdName + ' ' + cmd.usage();
     }
 
     /**
@@ -217,7 +262,7 @@ class Help {
 
     /**
      * Get the subcommand summary to show in the list of subcommands.
-     * (Fallback to description for backwards compatiblity.)
+     * (Fallback to description for backwards compatibility.)
      *
      * @param {Command} cmd
      * @returns {string}
@@ -241,26 +286,26 @@ class Help {
         if (option.argChoices) {
             extraInfo.push(
                 // use stringify to match the display of the default value
-                `选择项: ${option.argChoices.map((choice) => JSON.stringify(choice)).join(", ")}`
+                `choices: ${option.argChoices.map((choice) => JSON.stringify(choice)).join(', ')}`
             );
         }
         if (option.defaultValue !== undefined) {
             // default for boolean and negated more for programmer than end user,
             // but show true/false for boolean option as may be for hand-rolled env or config processing.
-            const showDefault = option.required || option.optional || (option.isBoolean() && typeof option.defaultValue === "boolean");
+            const showDefault = option.required || option.optional || (option.isBoolean() && typeof option.defaultValue === 'boolean');
             if (showDefault) {
-                extraInfo.push(`默认值: ${option.defaultValueDescription || JSON.stringify(option.defaultValue)}`);
+                extraInfo.push(`default: ${option.defaultValueDescription || JSON.stringify(option.defaultValue)}`);
             }
         }
         // preset for boolean and negated are more for programmer than end user
         if (option.presetArg !== undefined && option.optional) {
-            extraInfo.push(`预设值: ${JSON.stringify(option.presetArg)}`);
+            extraInfo.push(`preset: ${JSON.stringify(option.presetArg)}`);
         }
         if (option.envVar !== undefined) {
-            extraInfo.push(`环境变量: ${option.envVar}`);
+            extraInfo.push(`env: ${option.envVar}`);
         }
         if (extraInfo.length > 0) {
-            return `${option.description} (${extraInfo.join(", ")})`;
+            return `${option.description} (${extraInfo.join(', ')})`;
         }
 
         return option.description;
@@ -278,14 +323,14 @@ class Help {
         if (argument.argChoices) {
             extraInfo.push(
                 // use stringify to match the display of the default value
-                `选择项: ${argument.argChoices.map((choice) => JSON.stringify(choice)).join(", ")}`
+                `choices: ${argument.argChoices.map((choice) => JSON.stringify(choice)).join(', ')}`
             );
         }
         if (argument.defaultValue !== undefined) {
-            extraInfo.push(`默认值: ${argument.defaultValueDescription || JSON.stringify(argument.defaultValue)}`);
+            extraInfo.push(`default: ${argument.defaultValueDescription || JSON.stringify(argument.defaultValue)}`);
         }
         if (extraInfo.length > 0) {
-            const extraDescripton = `(${extraInfo.join(", ")})`;
+            const extraDescripton = `(${extraInfo.join(', ')})`;
             if (argument.description) {
                 return `${argument.description} ${extraDescripton}`;
             }
@@ -315,16 +360,16 @@ class Help {
             return term;
         }
         function formatList(textArray) {
-            return textArray.join("\n").replace(/^/gm, " ".repeat(itemIndentWidth));
+            return textArray.join('\n').replace(/^/gm, ' '.repeat(itemIndentWidth));
         }
 
         // Usage
-        let output = [`使用说明: ${helper.commandUsage(cmd)}`, ""];
+        let output = [`Usage: ${helper.commandUsage(cmd)}`, ''];
 
         // Description
         const commandDescription = helper.commandDescription(cmd);
         if (commandDescription.length > 0) {
-            output = output.concat([commandDescription, ""]);
+            output = output.concat([helper.wrap(commandDescription, helpWidth, 0), '']);
         }
 
         // Arguments
@@ -332,7 +377,7 @@ class Help {
             return formatItem(helper.argumentTerm(argument), helper.argumentDescription(argument));
         });
         if (argumentList.length > 0) {
-            output = output.concat(["参数:", formatList(argumentList), ""]);
+            output = output.concat(['Arguments:', formatList(argumentList), '']);
         }
 
         // Options
@@ -340,7 +385,16 @@ class Help {
             return formatItem(helper.optionTerm(option), helper.optionDescription(option));
         });
         if (optionList.length > 0) {
-            output = output.concat(["选项:", formatList(optionList), ""]);
+            output = output.concat(['Options:', formatList(optionList), '']);
+        }
+
+        if (this.showGlobalOptions) {
+            const globalOptionList = helper.visibleGlobalOptions(cmd).map((option) => {
+                return formatItem(helper.optionTerm(option), helper.optionDescription(option));
+            });
+            if (globalOptionList.length > 0) {
+                output = output.concat(['Global Options:', formatList(globalOptionList), '']);
+            }
         }
 
         // Commands
@@ -348,10 +402,10 @@ class Help {
             return formatItem(helper.subcommandTerm(cmd), helper.subcommandDescription(cmd));
         });
         if (commandList.length > 0) {
-            output = output.concat(["命令:", formatList(commandList), ""]);
+            output = output.concat(['Commands:', formatList(commandList), '']);
         }
 
-        return output.join("\n");
+        return output.join('\n');
     }
 
     /**
@@ -363,7 +417,7 @@ class Help {
      */
 
     padWidth(cmd, helper) {
-        return Math.max(helper.longestOptionTermLength(cmd, helper), helper.longestSubcommandTermLength(cmd, helper), helper.longestArgumentTermLength(cmd, helper));
+        return Math.max(helper.longestOptionTermLength(cmd, helper), helper.longestGlobalOptionTermLength(cmd, helper), helper.longestSubcommandTermLength(cmd, helper), helper.longestArgumentTermLength(cmd, helper));
     }
 
     /**
@@ -379,29 +433,32 @@ class Help {
      */
 
     wrap(str, width, indent, minColumnWidth = 40) {
-        // Detect manually wrapped and indented strings by searching for line breaks
-        // followed by multiple spaces/tabs.
-        if (str.match(/[\n]\s+/)) return str;
+        // Full \s characters, minus the linefeeds.
+        const indents = ' \\f\\t\\v\u00a0\u1680\u2000-\u200a\u202f\u205f\u3000\ufeff';
+        // Detect manually wrapped and indented strings by searching for line break followed by spaces.
+        const manualIndent = new RegExp(`[\\n][${indents}]+`);
+        if (str.match(manualIndent)) return str;
         // Do not wrap if not enough room for a wrapped column of text (as could end up with a word per line).
         const columnWidth = width - indent;
         if (columnWidth < minColumnWidth) return str;
 
         const leadingStr = str.slice(0, indent);
-        const columnText = str.slice(indent);
-
-        const indentString = " ".repeat(indent);
-        const regex = new RegExp(".{1," + (columnWidth - 1) + "}([\\s\u200B]|$)|[^\\s\u200B]+?([\\s\u200B]|$)", "g");
+        const columnText = str.slice(indent).replace('\r\n', '\n');
+        const indentString = ' '.repeat(indent);
+        const zeroWidthSpace = '\u200B';
+        const breaks = `\\s${zeroWidthSpace}`;
+        // Match line end (so empty lines don't collapse),
+        // or as much text as will fit in column, or excess text up to first break.
+        const regex = new RegExp(`\n|.{1,${columnWidth - 1}}([${breaks}]|$)|[^${breaks}]+?([${breaks}]|$)`, 'g');
         const lines = columnText.match(regex) || [];
         return (
             leadingStr +
             lines
                 .map((line, i) => {
-                    if (line.slice(-1) === "\n") {
-                        line = line.slice(0, line.length - 1);
-                    }
-                    return (i > 0 ? indentString : "") + line.trimRight();
+                    if (line === '\n') return ''; // preserve empty lines
+                    return (i > 0 ? indentString : '') + line.trimEnd();
                 })
-                .join("\n")
+                .join('\n')
         );
     }
 }

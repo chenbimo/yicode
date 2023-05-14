@@ -34,7 +34,7 @@ class InvalidArgumentError extends CommanderError {
      * @constructor
      */
     constructor(message) {
-        super(1, "commander.invalidArgument", message);
+        super(1, 'commander.invalidArgument', message);
         // properly capture stack trace in Node.js
         Error.captureStackTrace(this, this.constructor);
         this.name = this.constructor.name;

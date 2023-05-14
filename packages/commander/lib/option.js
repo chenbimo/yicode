@@ -1,4 +1,4 @@
-const { InvalidArgumentError } = require("./error.js");
+const { InvalidArgumentError } = require('./error.js');
 
 // @ts-check
 
@@ -12,10 +12,10 @@ class Option {
 
     constructor(flags, description) {
         this.flags = flags;
-        this.description = description || "";
+        this.description = description || '';
 
-        this.required = flags.includes("<"); // A value must be supplied when the option is specified.
-        this.optional = flags.includes("["); // A value is optional when the option is specified.
+        this.required = flags.includes('<'); // A value must be supplied when the option is specified.
+        this.optional = flags.includes('['); // A value is optional when the option is specified.
         // variadic test ignores <value,...> et al which might be used to describe custom splitting of single argument
         this.variadic = /\w\.\.\.[>\]]$/.test(flags); // The option can take multiple values.
         this.mandatory = false; // The option must have a value after parsing, which usually means it must be specified on command line.
@@ -24,7 +24,7 @@ class Option {
         this.long = optionFlags.longFlag;
         this.negate = false;
         if (this.long) {
-            this.negate = this.long.startsWith("--no-");
+            this.negate = this.long.startsWith('--no-');
         }
         this.defaultValue = undefined;
         this.defaultValueDescription = undefined;
@@ -99,13 +99,20 @@ class Option {
      * @return {Option}
      */
     implies(impliedOptionValues) {
-        this.implied = Object.assign(this.implied || {}, impliedOptionValues);
+        let newImplied = impliedOptionValues;
+        if (typeof impliedOptionValues === 'string') {
+            // string is not documented, but easy mistake and we can do what user probably intended.
+            newImplied = { [impliedOptionValues]: true };
+        }
+        this.implied = Object.assign(this.implied || {}, newImplied);
         return this;
     }
 
     /**
      * Set environment variable to check for option value.
-     * Priority order of option values is default < env < cli
+     *
+     * An environment variable is only used if when processed the current option value is
+     * undefined, or the source of the current value is 'default' or 'config' or 'env'.
      *
      * @param {string} name
      * @return {Option}
@@ -175,7 +182,7 @@ class Option {
         this.argChoices = values.slice();
         this.parseArg = (arg, previous) => {
             if (!this.argChoices.includes(arg)) {
-                throw new InvalidArgumentError(`允许选择的选项为 ${this.argChoices.join(", ")}.`);
+                throw new InvalidArgumentError(`允许选择的是 ${this.argChoices.join(', ')}.`);
             }
             if (this.variadic) {
                 return this._concatValue(arg, previous);
@@ -193,9 +200,9 @@ class Option {
 
     name() {
         if (this.long) {
-            return this.long.replace(/^--/, "");
+            return this.long.replace(/^--/, '');
         }
-        return this.short.replace(/^-/, "");
+        return this.short.replace(/^-/, '');
     }
 
     /**
@@ -207,7 +214,7 @@ class Option {
      */
 
     attributeName() {
-        return camelcase(this.name().replace(/^no-/, ""));
+        return camelcase(this.name().replace(/^no-/, ''));
     }
 
     /**
@@ -292,7 +299,7 @@ class DualOptions {
  */
 
 function camelcase(str) {
-    return str.split("-").reduce((str, word) => {
+    return str.split('-').reduce((str, word) => {
         return str + word[0].toUpperCase() + word.slice(1);
     });
 }

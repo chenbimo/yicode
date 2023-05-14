@@ -1,4 +1,4 @@
-const { InvalidArgumentError } = require("./error.js");
+const { InvalidArgumentError } = require('./error.js');
 
 // @ts-check
 
@@ -13,7 +13,7 @@ class Argument {
      */
 
     constructor(name, description) {
-        this.description = description || "";
+        this.description = description || '';
         this.variadic = false;
         this.parseArg = undefined;
         this.defaultValue = undefined;
@@ -21,11 +21,11 @@ class Argument {
         this.argChoices = undefined;
 
         switch (name[0]) {
-            case "<": // e.g. <required>
+            case '<': // e.g. <required>
                 this.required = true;
                 this._name = name.slice(1, -1);
                 break;
-            case "[": // e.g. [optional]
+            case '[': // e.g. [optional]
                 this.required = false;
                 this._name = name.slice(1, -1);
                 break;
@@ -35,7 +35,7 @@ class Argument {
                 break;
         }
 
-        if (this._name.length > 3 && this._name.slice(-3) === "...") {
+        if (this._name.length > 3 && this._name.slice(-3) === '...') {
             this.variadic = true;
             this._name = this._name.slice(0, -3);
         }
@@ -100,7 +100,7 @@ class Argument {
         this.argChoices = values.slice();
         this.parseArg = (arg, previous) => {
             if (!this.argChoices.includes(arg)) {
-                throw new InvalidArgumentError(`可被选择的值为 ${this.argChoices.join(", ")}.`);
+                throw new InvalidArgumentError(`允许被选择的是： ${this.argChoices.join(', ')}.`);
             }
             if (this.variadic) {
                 return this._concatValue(arg, previous);
@@ -136,9 +136,9 @@ class Argument {
  */
 
 function humanReadableArgName(arg) {
-    const nameOutput = arg.name() + (arg.variadic === true ? "..." : "");
+    const nameOutput = arg.name() + (arg.variadic === true ? '...' : '');
 
-    return arg.required ? "<" + nameOutput + ">" : "[" + nameOutput + "]";
+    return arg.required ? '<' + nameOutput + '>' : '[' + nameOutput + ']';
 }
 
 exports.Argument = Argument;

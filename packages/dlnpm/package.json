@@ -4,15 +4,16 @@
     "description": "dlnpm - npm package download tool",
     "author": "chensuiyi <bimostyle@qq.com>",
     "bin": {
-        "dlnpm": "index.js"
+        "dlnpm": "dlnpm.js"
     },
     "homepage": "https://yicode.tech",
     "license": "GPL-3.0",
-    "main": "dist/index.js",
+    "main": "dlnpm.js",
     "repository": "https://github.com/chenbimo/yicode.git",
     "files": [],
-    "dependencies": {},
-    "devDependencies": {},
+    "dependencies": {
+        "@yicode/commander": "workspace:^"
+    },
     "scripts": {},
     "engines": {},
     "keywords": [

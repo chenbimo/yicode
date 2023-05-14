@@ -2,7 +2,16 @@
 
 > 由原代码仓库进行精简和汉化，感谢原作者！
 
+# Commander.js
+
+[![Build Status](https://github.com/tj/commander.js/workflows/build/badge.svg)](https://github.com/tj/commander.js/actions?query=workflow%3A%22build%22)
+[![NPM Version](http://img.shields.io/npm/v/commander.svg?style=flat)](https://www.npmjs.org/package/commander)
+[![NPM Downloads](https://img.shields.io/npm/dm/commander.svg?style=flat)](https://npmcharts.com/compare/commander?minimal=true)
+[![Install Size](https://packagephobia.now.sh/badge?p=commander)](https://packagephobia.now.sh/result?p=commander)
+
 完整的 [node.js](http://nodejs.org) 命令行解决方案。
+
+使用其他语言阅读：[English](./Readme.md) | 简体中文
 
 -   [Commander.js](#commanderjs)
     -   [安装](#%e5%ae%89%e8%a3%85)
@@ -59,16 +68,18 @@ npm install commander
 
 ## 快速开始
 
-编写代码来描述你的命令行界面。 Commander 负责将参数解析为选项和命令参数，为问题显示使用错误，并实现一个有帮助的系统。
+编写代码来描述你的命令行界面。
+Commander 负责将参数解析为选项和命令参数，为问题显示使用错误，并实现一个有帮助的系统。
 
-Commander 是严格的，并且会针对无法识别的选项显示错误。两种最常用的选项类型是布尔选项，和从参数中获取值的选项。
+Commander 是严格的，并且会针对无法识别的选项显示错误。
+两种最常用的选项类型是布尔选项，和从参数中获取值的选项。
 
 示例代码：[split.js](./examples/split.js)
 
 ```js
-const { program } = require("commander");
+const { program } = require('commander');
 
-program.option("--first").option("-s, --separator <char>");
+program.option('--first').option('-s, --separator <char>');
 
 program.parse();
 
@@ -90,17 +101,17 @@ $ node split.js -s / --first a/b/c
 示例代码：[string-util.js](./examples/string-util.js)
 
 ```js
-const { Command } = require("commander");
+const { Command } = require('commander');
 const program = new Command();
 
-program.name("string-util").description("CLI to some JavaScript string utilities").version("0.8.0");
+program.name('string-util').description('CLI to some JavaScript string utilities').version('0.8.0');
 
 program
-    .command("split")
-    .description("Split a string into substrings and display as an array")
-    .argument("<string>", "string to split")
-    .option("--first", "display just the first substring")
-    .option("-s, --separator <char>", "separator character", ",")
+    .command('split')
+    .description('Split a string into substrings and display as an array')
+    .argument('<string>', 'string to split')
+    .option('--first', 'display just the first substring')
+    .option('-s, --separator <char>', 'separator character', ',')
     .action((str, options) => {
         const limit = options.first ? 1 : undefined;
         console.log(str.split(options.separator, limit));
@@ -135,26 +146,26 @@ $ node string-util.js split --separator=/ a/b/c
 
 ```js
 // CommonJS (.cjs)
-const { program } = require("commander");
+const { program } = require('commander');
 ```
 
 如果程序较为复杂，用户需要以多种方式来使用 Commander，如单元测试等。创建本地 Command 对象是一种更好的方式：
 
 ```js
 // CommonJS (.cjs)
-const { Command } = require("commander");
+const { Command } = require('commander');
 const program = new Command();
 ```
 
 ```js
 // ECMAScript (.mjs)
-import { Command } from "commander";
+import { Command } from 'commander';
 const program = new Command();
 ```
 
 ```ts
 // TypeScript (.ts)
-import { Command } from "commander";
+import { Command } from 'commander';
 const program = new Command();
 ```
 
@@ -192,14 +203,14 @@ serve --port=80
 示例代码：[options-common.js](./examples/options-common.js)
 
 ```js
-program.option("-d, --debug", "output extra debugging").option("-s, --small", "small pizza size").option("-p, --pizza-type <type>", "flavour of pizza");
+program.option('-d, --debug', 'output extra debugging').option('-s, --small', 'small pizza size').option('-p, --pizza-type <type>', 'flavour of pizza');
 
 program.parse(process.argv);
 
 const options = program.opts();
 if (options.debug) console.log(options);
-console.log("pizza details:");
-if (options.small) console.log("- small pizza size");
+console.log('pizza details:');
+if (options.small) console.log('- small pizza size');
 if (options.pizzaType) console.log(`- ${options.pizzaType}`);
 ```
 
@@ -216,9 +227,11 @@ pizza details:
 - cheese
 ```
 
-多个布尔短选项可以在破折号之后组合在一起，并且可以跟一个取值的单一选项。例如 `-d -s -p cheese` 可以写成 `-ds -p cheese` 甚至 `-dsp cheese`。
+多个布尔短选项可以在破折号之后组合在一起，并且可以跟一个取值的单一选项。
+例如 `-d -s -p cheese` 可以写成 `-ds -p cheese` 甚至 `-dsp cheese`。
 
-具有预期选项参数的选项是贪婪的，并且无论值如何，都会消耗参数。所以 `--id -xyz` 读取 `-xyz` 作为选项参数。
+具有预期选项参数的选项是贪婪的，并且无论值如何，都会消耗参数。
+所以 `--id -xyz` 读取 `-xyz` 作为选项参数。
 
 通过`program.parse(arguments)`方法处理参数，没有被使用的选项会存放在`program.args`数组中。该方法的参数是可选的，默认值为`process.argv`。
 
@@ -229,7 +242,7 @@ pizza details:
 示例代码：[options-defaults.js](./examples/options-defaults.js)
 
 ```js
-program.option("-c, --cheese <type>", "add the specified type of cheese", "blue");
+program.option('-c, --cheese <type>', 'add the specified type of cheese', 'blue');
 
 program.parse();
 
@@ -252,11 +265,11 @@ cheese: stilton
 示例代码：[options-negatable.js](./examples/options-negatable.js)
 
 ```js
-program.option("--no-sauce", "Remove sauce").option("--cheese <flavour>", "cheese flavour", "mozzarella").option("--no-cheese", "plain with no cheese").parse();
+program.option('--no-sauce', 'Remove sauce').option('--cheese <flavour>', 'cheese flavour', 'mozzarella').option('--no-cheese', 'plain with no cheese').parse();
 
 const options = program.opts();
-const sauceStr = options.sauce ? "sauce" : "no sauce";
-const cheeseStr = options.cheese === false ? "no cheese" : `${options.cheese} cheese`;
+const sauceStr = options.sauce ? 'sauce' : 'no sauce';
+const cheeseStr = options.cheese === false ? 'no cheese' : `${options.cheese} cheese`;
 console.log(`You ordered a pizza with ${sauceStr} and ${cheeseStr}`);
 ```
 
@@ -276,13 +289,13 @@ You ordered a pizza with no sauce and no cheese
 示例代码：[options-boolean-or-value.js](./examples/options-boolean-or-value.js)
 
 ```js
-program.option("-c, --cheese [type]", "Add cheese with optional type");
+program.option('-c, --cheese [type]', 'Add cheese with optional type');
 
 program.parse(process.argv);
 
 const options = program.opts();
-if (options.cheese === undefined) console.log("no cheese");
-else if (options.cheese === true) console.log("add cheese");
+if (options.cheese === undefined) console.log('no cheese');
+else if (options.cheese === true) console.log('add cheese');
 else console.log(`add cheese type ${options.cheese}`);
 ```
 
@@ -306,7 +319,7 @@ add cheese type mozzarella
 示例代码：[options-required.js](./examples/options-required.js)
 
 ```js
-program.requiredOption("-c, --cheese <type>", "pizza must have cheese");
+program.requiredOption('-c, --cheese <type>', 'pizza must have cheese');
 
 program.parse();
 ```
@@ -323,12 +336,12 @@ error: required option '-c, --cheese <type>' not specified
 示例代码：[options-variadic.js](./examples/options-variadic.js)
 
 ```js
-program.option("-n, --number <numbers...>", "specify numbers").option("-l, --letter [letters...]", "specify letters");
+program.option('-n, --number <numbers...>', 'specify numbers').option('-l, --letter [letters...]', 'specify letters');
 
 program.parse();
 
-console.log("Options: ", program.opts());
-console.log("Remaining arguments: ", program.args);
+console.log('Options: ', program.opts());
+console.log('Remaining arguments: ', program.args);
 ```
 
 ```console
@@ -350,7 +363,7 @@ Remaining arguments:  [ 'operand' ]
 `.version()`方法可以设置版本，其默认选项为`-V`和`--version`，设置了版本后，命令行会输出当前的版本号。
 
 ```js
-program.version("0.0.1");
+program.version('0.0.1');
 ```
 
 ```console
@@ -372,13 +385,13 @@ program.version('0.0.1', '-v, --vers', 'output the current version');
 
 ```js
 program
-    .addOption(new Option("-s, --secret").hideHelp())
-    .addOption(new Option("-t, --timeout <delay>", "timeout in seconds").default(60, "one minute"))
-    .addOption(new Option("-d, --drink <size>", "drink size").choices(["small", "medium", "large"]))
-    .addOption(new Option("-p, --port <number>", "port number").env("PORT"))
-    .addOption(new Option("--donate [amount]", "optional donation in dollars").preset("20").argParser(parseFloat))
-    .addOption(new Option("--disable-server", "disables the server").conflicts("port"))
-    .addOption(new Option("--free-drink", "small drink included free ").implies({ drink: "small" }));
+    .addOption(new Option('-s, --secret').hideHelp())
+    .addOption(new Option('-t, --timeout <delay>', 'timeout in seconds').default(60, 'one minute'))
+    .addOption(new Option('-d, --drink <size>', 'drink size').choices(['small', 'medium', 'large']))
+    .addOption(new Option('-p, --port <number>', 'port number').env('PORT'))
+    .addOption(new Option('--donate [amount]', 'optional donation in dollars').preset('20').argParser(parseFloat))
+    .addOption(new Option('--disable-server', 'disables the server').conflicts('port'))
+    .addOption(new Option('--free-drink', 'small drink included free ').implies({ drink: 'small' }));
 ```
 
 ```console
@@ -419,7 +432,7 @@ function myParseInt(value, dummyPrevious) {
     // parseInt 参数为字符串和进制数
     const parsedValue = parseInt(value, 10);
     if (isNaN(parsedValue)) {
-        throw new commander.InvalidArgumentError("Not a number.");
+        throw new commander.InvalidArgumentError('Not a number.');
     }
     return parsedValue;
 }
@@ -433,10 +446,10 @@ function collect(value, previous) {
 }
 
 function commaSeparatedList(value, dummyPrevious) {
-    return value.split(",");
+    return value.split(',');
 }
 
-program.option("-f, --float <number>", "float argument", parseFloat).option("-i, --integer <number>", "integer argument", myParseInt).option("-v, --verbose", "verbosity that can be increased", increaseVerbosity, 0).option("-c, --collect <value>", "repeatable value", collect, []).option("-l, --list <items>", "comma separated list", commaSeparatedList);
+program.option('-f, --float <number>', 'float argument', parseFloat).option('-i, --integer <number>', 'integer argument', myParseInt).option('-v, --verbose', 'verbosity that can be increased', increaseVerbosity, 0).option('-c, --collect <value>', 'repeatable value', collect, []).option('-l, --list <items>', 'comma separated list', commaSeparatedList);
 
 program.parse();
 
@@ -475,15 +488,15 @@ $ custom --list x,y,z
 // 通过绑定处理函数实现命令（这里的指令描述为放在`.command`中）
 // 返回新生成的命令（即该子命令）以供继续配置
 program
-    .command("clone <source> [destination]")
-    .description("clone a repository into a newly created directory")
+    .command('clone <source> [destination]')
+    .description('clone a repository into a newly created directory')
     .action((source, destination) => {
-        console.log("clone command called");
+        console.log('clone command called');
     });
 
 // 通过独立的的可执行文件实现命令 (注意这里指令描述是作为`.command`的第二个参数)
 // 返回最顶层的命令以供继续添加子命令
-program.command("start <service>", "start named service").command("stop [service]", "stop named service, or all if no name supplied");
+program.command('start <service>', 'start named service').command('stop [service]', 'stop named service, or all if no name supplied');
 
 // 分别装配命令
 // 返回最顶层的命令以供继续添加子命令
@@ -502,12 +515,12 @@ program.addCommand(build.makeBuildCommand());
 
 ```js
 program
-    .version("0.1.0")
-    .argument("<username>", "user to login")
-    .argument("[password]", "password for user, if required", "no password given")
+    .version('0.1.0')
+    .argument('<username>', 'user to login')
+    .argument('[password]', 'password for user, if required', 'no password given')
     .action((username, password) => {
-        console.log("username:", username);
-        console.log("password:", password);
+        console.log('username:', username);
+        console.log('password:', password);
     });
 ```
 
@@ -515,12 +528,12 @@ program
 
 ```js
 program
-    .version("0.1.0")
-    .command("rmdir")
-    .argument("<dirs...>")
+    .version('0.1.0')
+    .command('rmdir')
+    .argument('<dirs...>')
     .action(function (dirs) {
         dirs.forEach((dir) => {
-            console.log("rmdir %s", dir);
+            console.log('rmdir %s', dir);
         });
     });
 ```
@@ -528,7 +541,7 @@ program
 有一种便捷方式可以一次性指定多个参数，但不包含参数描述：
 
 ```js
-program.arguments("<username> <password>");
+program.arguments('<username> <password>');
 ```
 
 #### 其他参数配置
@@ -538,7 +551,7 @@ program.arguments("<username> <password>");
 示例代码：[arguments-extra.js](./examples/arguments-extra.js)
 
 ```js
-program.addArgument(new commander.Argument("<drink-size>", "drink cup size").choices(["small", "medium", "large"])).addArgument(new commander.Argument("[timeout]", "timeout in seconds").default(60, "one minute"));
+program.addArgument(new commander.Argument('<drink-size>', 'drink cup size').choices(['small', 'medium', 'large'])).addArgument(new commander.Argument('[timeout]', 'timeout in seconds').default(60, 'one minute'));
 ```
 
 #### 自定义参数处理
@@ -553,9 +566,9 @@ program.addArgument(new commander.Argument("<drink-size>", "drink cup size").cho
 
 ```js
 program
-    .command("add")
-    .argument("<first>", "integer argument", myParseInt)
-    .argument("[second]", "integer argument", myParseInt, 1000)
+    .command('add')
+    .argument('<first>', 'integer argument', myParseInt)
+    .argument('[second]', 'integer argument', myParseInt, 1000)
     .action((first, second) => {
         console.log(`${first} + ${second} = ${first + second}`);
     });
@@ -569,14 +582,14 @@ program
 
 ```js
 program
-    .argument("<name>")
-    .option("-t, --title <honorific>", "title to use before name")
-    .option("-d, --debug", "display some debugging")
+    .argument('<name>')
+    .option('-t, --title <honorific>', 'title to use before name')
+    .option('-d, --debug', 'display some debugging')
     .action((name, options, command) => {
         if (options.debug) {
-            console.error("Called %s with options %o", command.name(), options);
+            console.error('Called %s with options %o', command.name(), options);
         }
-        const title = options.title ? `${options.title} ` : "";
+        const title = options.title ? `${options.title} ` : '';
         console.log(`Thank-you ${title}${name}`);
     });
 ```
@@ -587,11 +600,11 @@ program
 
 ```js
 program
-    .command("serve")
-    .argument("<script>")
-    .option("-p, --port <number>", "port number", 80)
+    .command('serve')
+    .argument('<script>')
+    .option('-p, --port <number>', 'port number', 80)
     .action(function () {
-        console.error("Run script %s on port %s", this.args[0], this.opts().port);
+        console.error('Run script %s on port %s', this.args[0], this.opts().port);
     });
 ```
 
@@ -603,23 +616,27 @@ async function run() {
 }
 
 async function main() {
-    program.command("run").action(run);
+    program.command('run').action(run);
     await program.parseAsync(process.argv);
 }
 ```
 
-使用命令时，所给的选项和命令参数会被验证是否有效。凡是有未知的选项，或缺少所需的命令参数，都会报错。如要允许使用未知的选项，可以调用`.allowUnknownOption()`。默认情况下，传入过多的参数并不报错，但也可以通过调用`.allowExcessArguments(false)`来启用过多参数的报错。
+使用命令时，所给的选项和命令参数会被验证是否有效。凡是有未知的选项，或缺少所需的命令参数，都会报错。
+如要允许使用未知的选项，可以调用`.allowUnknownOption()`。默认情况下，传入过多的参数并不报错，但也可以通过调用`.allowExcessArguments(false)`来启用过多参数的报错。
 
 ### 独立的可执行（子）命令
 
-当`.command()`带有描述参数时，就意味着使用独立的可执行文件作为子命令。 Commander 会尝试在入口脚本的目录中搜索名称组合为 `command-subcommand` 的文件，如以下示例中的 `pm-install` 或 `pm-search`。搜索包括尝试常见的文件扩展名，如`.js`。你可以使用 `executableFile` 配置选项指定自定义名称（和路径）。你可以使用 `.executableDir()` 为子命令指定自定义搜索目录。
+当`.command()`带有描述参数时，就意味着使用独立的可执行文件作为子命令。
+Commander 会尝试在入口脚本的目录中搜索名称组合为 `command-subcommand` 的文件，如以下示例中的 `pm-install` 或 `pm-search`。搜索包括尝试常见的文件扩展名，如`.js`。
+你可以使用 `executableFile` 配置选项指定自定义名称（和路径）。
+你可以使用 `.executableDir()` 为子命令指定自定义搜索目录。
 
 你可以在可执行文件里处理（子）命令的选项，而不必在顶层声明它们。
 
 示例代码：[pm](./examples/pm)
 
 ```js
-program.name("pm").version("0.1.0").command("install [name]", "install one or more packages").command("search [query]", "search with optional query").command("update", "update installed packages", { executableFile: "myUpdateSubCommand" }).command("list", "list packages installed", { isDefault: true });
+program.name('pm').version('0.1.0').command('install [name]', 'install one or more packages').command('search [query]', 'search with optional query').command('update', 'update installed packages', { executableFile: 'myUpdateSubCommand' }).command('list', 'list packages installed', { isDefault: true });
 
 program.parse(process.argv);
 ```
@@ -633,11 +650,11 @@ program.parse(process.argv);
 示例代码：[hook.js](./examples/hook.js)
 
 ```js
-program.option("-t, --trace", "display trace statements for commands").hook("preAction", (thisCommand, actionCommand) => {
+program.option('-t, --trace', 'display trace statements for commands').hook('preAction', (thisCommand, actionCommand) => {
     if (thisCommand.opts().trace) {
         console.log(`About to call action handler for subcommand: ${actionCommand.name()}`);
-        console.log("arguments: %O", actionCommand.args);
-        console.log("options: %o", actionCommand.opts());
+        console.log('arguments: %O', actionCommand.args);
+        console.log('options: %o', actionCommand.opts());
     }
 });
 ```
@@ -687,10 +704,10 @@ shell spawn --help
 示例代码：[custom-help](./examples/custom-help)
 
 ```js
-program.option("-f, --foo", "enable some foo");
+program.option('-f, --foo', 'enable some foo');
 
 program.addHelpText(
-    "after",
+    'after',
     `
 
 Example call:
@@ -732,7 +749,7 @@ Example call:
 ```js
 program.showHelpAfterError();
 // 或者
-program.showHelpAfterError("(add --help for additional information)");
+program.showHelpAfterError('(add --help for additional information)');
 ```
 
 ```console
@@ -768,8 +785,8 @@ error: unknown option '--hepl'
 你可以使用 `.name()` 或在 Command 构造函数中指定程序名称。对于 program ，Commander 会使用传递给 `.parse()` 的完整参数中的脚本名称。但是，脚本名称会根据程序的启动方式而有所不同，因此您可能希望明确指定它。
 
 ```js
-program.name("pizza");
-const pm = new Command("pm");
+program.name('pizza');
+const pm = new Command('pm');
 ```
 
 使用 `.command()` 指定时，子命令会获得名称。如果您自己创建子命令以与 `.addCommand()` 一起使用，则使用 `.name()` 或在 Command 构造函数中设置名称。
@@ -779,7 +796,7 @@ const pm = new Command("pm");
 通过这个选项可以修改帮助信息的首行提示，例如：
 
 ```js
-program.name("my-command").usage("[global options] command");
+program.name('my-command').usage('[global options] command');
 ```
 
 帮助信息开头如下：
@@ -793,7 +810,7 @@ Usage: my-command [global options] command
 description 出现在命令的帮助中。当列为程序的子命令时，你可以选择提供更短的 summary 以供使用。
 
 ```js
-program.command("duplicate").summary("make a copy").description(`Make a copy of the current project.
+program.command('duplicate').summary('make a copy').description(`Make a copy of the current project.
 This may require additional disk space.
   `);
 ```
@@ -803,7 +820,7 @@ This may require additional disk space.
 每一个命令都带有一个默认的帮助选项。你可以改变 `flags` 和 `description` 参数。传入 `false` 则会禁用内建的帮助信息。
 
 ```js
-program.helpOption("-e, --HELP", "read more information");
+program.helpOption('-e, --HELP', 'read more information');
 ```
 
 ### .addHelpCommand()
@@ -813,7 +830,7 @@ program.helpOption("-e, --HELP", "read more information");
 也可以自定义名字和描述：
 
 ```js
-program.addHelpCommand("assist [command]", "show assistance");
+program.addHelpCommand('assist [command]', 'show assistance');
 ```
 
 ### 其他帮助配置
@@ -833,7 +850,7 @@ program.addHelpCommand("assist [command]", "show assistance");
 ```js
 program.configureHelp({
     sortSubcommands: true,
-    subcommandTerm: (cmd) => cmd.name(), // 显示名称，而非用法
+    subcommandTerm: (cmd) => cmd.name() // 显示名称，而非用法
 });
 ```
 
@@ -842,7 +859,7 @@ program.configureHelp({
 监听命令和选项可以执行自定义函数。
 
 ```js
-program.on("option:verbose", function () {
+program.on('option:verbose', function () {
     process.env.VERBOSE = this.opts().verbose;
 });
 ```
@@ -864,7 +881,7 @@ program.on("option:verbose", function () {
 ```js
 program.parse(process.argv); // 指明，按 node 约定
 program.parse(); // 默认，自动识别 electron
-program.parse(["-f", "filename"], { from: "user" });
+program.parse(['-f', 'filename'], { from: 'user' });
 ```
 
 ### 解析配置
@@ -882,7 +899,8 @@ program -b subcommand
 program subcommand -b
 ```
 
-默认情况下，选项在命令参数前后均可被识别。如要使选项仅在命令参数前被识别，可以使用`.passThroughOptions()`。这样可以把参数和跟随的选项传递给另一程序，而无需使用`--`来终止选项解析。如要在子命令中使用此功能，必须首先启用带顺序的选项解析。
+默认情况下，选项在命令参数前后均可被识别。如要使选项仅在命令参数前被识别，可以使用`.passThroughOptions()`。这样可以把参数和跟随的选项传递给另一程序，而无需使用`--`来终止选项解析。
+如要在子命令中使用此功能，必须首先启用带顺序的选项解析。
 
 示例代码：[pass-through-options.js](./examples/pass-through-options.js)
 
@@ -899,12 +917,13 @@ program arg --port=80
 
 ### 作为属性的遗留选项
 
-在 Commander 7 以前，选项的值是作为属性存储在命令对象上的。这种处理方式便于实现，但缺点在于，选项可能会与`Command`的已有属性相冲突。通过使用`.storeOptionsAsProperties()`，可以恢复到这种旧的处理方式，并可以不加改动地继续运行遗留代码。
+在 Commander 7 以前，选项的值是作为属性存储在命令对象上的。
+这种处理方式便于实现，但缺点在于，选项可能会与`Command`的已有属性相冲突。通过使用`.storeOptionsAsProperties()`，可以恢复到这种旧的处理方式，并可以不加改动地继续运行遗留代码。
 
 ```js
 program
     .storeOptionsAsProperties()
-    .option("-d, --debug")
+    .option('-d, --debug')
     .action((commandAndOptions) => {
         if (commandAndOptions.debug) {
             console.error(`Called ${commandAndOptions.name()}`);
@@ -953,8 +972,8 @@ const program = createCommand();
 除了错误消息，你还可以选择指定 `exitCode`（与 `process.exit` 一起使用）和 `code`（与 `CommanderError` 一起使用）
 
 ```js
-program.error("Password must be longer than four characters");
-program.error("Custom processing has failed", { exitCode: 2, code: "my.custom.error" });
+program.error('Password must be longer than four characters');
+program.error('Custom processing has failed', { exitCode: 2, code: 'my.custom.error' });
 ```
 
 ### 重写退出和输出
@@ -973,7 +992,8 @@ try {
 }
 ```
 
-Commander 默认用作命令行应用，其输出写入 stdout 和 stderr。对于其他应用类型，这一行为可以修改。并且可以修改错误信息的展示方式。
+Commander 默认用作命令行应用，其输出写入 stdout 和 stderr。
+对于其他应用类型，这一行为可以修改。并且可以修改错误信息的展示方式。
 
 示例代码：[configure-output.js](./examples/configure-output.js)
 
@@ -988,7 +1008,7 @@ program.configureOutput({
     writeOut: (str) => process.stdout.write(`[OUT] ${str}`),
     writeErr: (str) => process.stdout.write(`[ERR] ${str}`),
     // 将错误高亮显示
-    outputError: (str, write) => write(errorColor(str)),
+    outputError: (str, write) => write(errorColor(str))
 });
 ```
 
@@ -1001,7 +1021,8 @@ program.configureOutput({
 
 ## 支持
 
-当前版本的 Commander 在 LTS 版本的 Node.js 上完全支持。并且至少需要 v12.20.0。（使用更低版本 Node.js 的用户建议安装更低版本的 Commander）
+当前版本的 Commander 在 LTS 版本的 Node.js 上完全支持。并且至少需要 v14。
+（使用更低版本 Node.js 的用户建议安装更低版本的 Commander）
 
 社区支持请访问项目的 [Issues](https://github.com/tj/commander.js/issues)。
 
