@@ -48,8 +48,8 @@ yicode（易编程）系列软件开发生态，全部由随易科技有限公�
 
 # 生态项目
 
-| 包名                              | 名称   | 版本                                                                                                        |
-| --------------------------------- | ------ | ----------------------------------------------------------------------------------------------------------- |
-| [yiapi](packages/yiapi)           | 易接口 | [![yiapi version](https://img.shields.io/npm/v/@yicode/yiapi.svg?label=%20)](https://yicode.tech)           |
-| [yidash](packages/yidash)         | 易大师 | [![yidash version](https://img.shields.io/npm/v/@yicode/yidash.svg?label=%20)](https://yicode.tech)         |
-| [yivite-cli](packages/yivite-cli) | 易维特 | [![yivite-cli version](https://img.shields.io/npm/v/@yicode/yivite-cli.svg?label=%20)](https://yicode.tech) |
+| 包名                              | 名称   | 版本                                                                                                      |
+| --------------------------------- | ------ | --------------------------------------------------------------------------------------------------------- |
+| [yiapi](packages/yiapi)           | 易接口 | [![yiapi version](https://img.shields.io/npm/v/@yicode/yiapi.svg?label=%20)](https://yicode.tech)         |
+| [yidash](packages/yidash)         | 易大师 | [![yidash version](https://img.shields.io/npm/v/@yicode/yidash.svg?label=%20)](https://yicode.tech)       |
+| [yivite-cli](packages/yivite-cli) | 易维特 | [![yivite-cli version](https://img.shields.io/npm/v/@yicode/yite-cli.svg?label=%20)](https://yicode.tech) |

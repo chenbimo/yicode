@@ -19,6 +19,8 @@ dist-ssr
 .vscode-test/
 *.vsix
 out
+CHANGELOG.md
+note.md
 
 # Editor directories and files
 .vscode/*

@@ -1,0 +1,48 @@
+{
+    "name": "@yicode-template/admin-vue3",
+    "version": "3.2.6",
+    "description": "admin-vue3（易管理）vue3后台管理模板",
+    "scripts": {
+        "preinstall": "npx only-allow pnpm",
+        "dev": "yivite dev",
+        "build": "yivite build"
+    },
+    "main": "./index.js",
+    "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "sideEffects": true,
+    "keywords": [
+        "lodash",
+        "utils",
+        "helper",
+        "help"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "license": "GPL-3.0",
+    "dependencies": {
+        "@arco-design/web-vue": "^2.46.0",
+        "@intlify/unplugin-vue-i18n": "^0.10.0",
+        "@yicode/yidash": "workspace:^",
+        "axios": "^1.4.0",
+        "date-fns": "^2.30.0",
+        "lodash-es": "^4.17.21",
+        "pinia": "^2.0.36",
+        "store2": "^2.14.2",
+        "tiny-cookie": "^2.4.1",
+        "vue": "^3.3.2",
+        "vue-i18n": "^9.2.2",
+        "vue-router": "^4.2.0"
+    },
+    "devDependencies": {
+        "@yicode/yite-cli": "workspace:^",
+        "sass": "^1.62.1"
+    }
+}

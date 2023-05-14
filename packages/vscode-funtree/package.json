@@ -1,0 +1,40 @@
+{
+    "name": "@yicode/vscode-funtree",
+    "displayName": "FunTree",
+    "description": "function tree",
+    "publisher": "chensuiyi",
+    "version": "0.0.4",
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onView:yicode-funtree.embedded"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "yicode-funtree",
+                    "title": "FunTree",
+                    "icon": "resources/icons/funtree.svg"
+                }
+            ]
+        },
+        "views": {
+            "yicode-funtree": [
+                {
+                    "id": "yicode-funtree.embedded",
+                    "name": "FunTree"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile"
+    },
+    "devDependencies": {}
+}

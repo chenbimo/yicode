@@ -1,0 +1,24 @@
+{
+    "name": "@yicode/dlnpm",
+    "version": "0.0.1",
+    "description": "dlnpm - npm package download tool",
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "bin": {
+        "dlnpm": "index.js"
+    },
+    "homepage": "https://yicode.tech",
+    "license": "GPL-3.0",
+    "main": "dist/index.js",
+    "repository": "https://github.com/chenbimo/yicode.git",
+    "files": [],
+    "dependencies": {},
+    "devDependencies": {},
+    "scripts": {},
+    "engines": {},
+    "keywords": [
+        "npm",
+        "download",
+        "package",
+        "npmjs"
+    ]
+}
