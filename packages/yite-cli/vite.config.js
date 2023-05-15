@@ -6,7 +6,7 @@ import Components from 'unplugin-vue-components/vite';
 import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
 import { visualizer as Visualizer } from 'rollup-plugin-visualizer';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
-import { chunkSplitPlugin as ChunkSplit } from '@yicode/yite-chunk';
+import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import fs from 'fs-extra';
 import portfinder from 'portfinder';
