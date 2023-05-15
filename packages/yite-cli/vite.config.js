@@ -6,7 +6,7 @@ import Components from 'unplugin-vue-components/vite';
 import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
 import { visualizer as Visualizer } from 'rollup-plugin-visualizer';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
-import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
+
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import fs from 'fs-extra';
 import portfinder from 'portfinder';
@@ -20,6 +20,8 @@ import VueRouter from 'unplugin-vue-router/vite';
 import { VueRouterAutoImports } from 'unplugin-vue-router';
 import Layouts from 'vite-plugin-vue-layouts';
 import VueDevTools from 'vite-plugin-vue-devtools';
+import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
+import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
 
 // unocss相关配置
 import { defineConfig as defineUnocssConfig, presetAttributify, presetUno, presetIcons } from 'unocss';
@@ -235,6 +237,7 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(AutoImport(autoImportPlugin));
     allPlugins.push(vueI18n(vueI18nPlugin));
     allPlugins.push(ChunkSplit(chunkSplitPlugin));
+    allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
     allPlugins.push(Visualizer(visualizerPlugin));
     allPlugins.push(createHtmlPlugin(htmlTemplatePlugin));
