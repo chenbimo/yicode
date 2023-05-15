@@ -1,4 +1,4 @@
-module.exports = {
+export const yiteConfig = {
     // eslint参数
     eslint: {},
     viteZip: {},

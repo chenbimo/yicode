@@ -8,7 +8,7 @@ import { visualizer as Visualizer } from 'rollup-plugin-visualizer';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode/yite-chunk';
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
-import Inspect from 'vite-plugin-inspect';
+// import Inspect from 'vite-plugin-inspect';
 import fs from 'fs-extra';
 import portfinder from 'portfinder';
 import { createHtmlPlugin } from 'vite-plugin-html';
@@ -16,11 +16,11 @@ import { mergeAndConcat } from 'merge-anything';
 import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
-// import topLevelAwait from 'vite-plugin-top-level-await';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 import VueRouter from 'unplugin-vue-router/vite';
 import { VueRouterAutoImports } from 'unplugin-vue-router';
 import Layouts from 'vite-plugin-vue-layouts';
+import VueDevTools from 'vite-plugin-vue-devtools';
 
 // unocss相关配置
 import { defineConfig as defineUnocssConfig, presetAttributify, presetUno, presetIcons } from 'unocss';
@@ -178,9 +178,9 @@ export default defineConfig(async ({ command, mode }) => {
     };
 
     // 调试配置
-    let inspectPlugin = {
-        outputDir: cacheDir
-    };
+    // let inspectPlugin = {
+    //     outputDir: cacheDir
+    // };
 
     // 打包入口配置
     let htmlTemplatePlugin = {
@@ -234,20 +234,23 @@ export default defineConfig(async ({ command, mode }) => {
         defaultLayout: 'default'
     };
 
+    // vue devtool
+    let vueDevtoolPlugin = {};
+
     // 插件列表
     let allPlugins = [];
     allPlugins.push(ReactivityTransform());
     allPlugins.push(Unocss(unocssPlugin));
     allPlugins.push(Icons(iconsPlugin));
     allPlugins.push(VueRouter(vueRouterAutoPlugin));
-
+    allPlugins.push(VueDevTools(vueDevtoolPlugin));
     allPlugins.push(Components(componentsPlugin));
     allPlugins.push(AutoImport(autoImportPlugin));
     allPlugins.push(vueI18n(vueI18nPlugin));
     allPlugins.push(ChunkSplit(chunkSplitPlugin));
     // allPlugins.push(ZipFile(zipPlugin));
     allPlugins.push(Visualizer(visualizerPlugin));
-    allPlugins.push(Inspect(inspectPlugin));
+    // allPlugins.push(Inspect(inspectPlugin));
     allPlugins.push(createHtmlPlugin(htmlTemplatePlugin));
     allPlugins.push(viteVue(viteVuePlugin));
     allPlugins.push(Layouts(layoutPlugin));

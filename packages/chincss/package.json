@@ -1,0 +1,32 @@
+{
+    "name": "@yicode/chincss",
+    "version": "1.0.2",
+    "description": "中国风 css 资源库",
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "main": "./index.js",
+    "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "sideEffects": true,
+    "keywords": [
+        "css",
+        "style",
+        "chinese",
+        "scss",
+        "sass",
+        "less",
+        "var"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "license": "GPL-3.0",
+    "dependencies": {}
+}
