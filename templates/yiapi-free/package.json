@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yiapi-free",
-    "version": "0.5.4",
+    "version": "0.5.5",
     "description": "易接口免费模板",
     "main": "yiapi.js",
     "type": "module",
@@ -24,7 +24,7 @@
     },
     "dependencies": {
         "@yicode/yiapi": "workspace:^",
-        "cos-nodejs-sdk-v5": "^2.12.0",
+        "cos-nodejs-sdk-v5": "^2.12.1",
         "got": "^12.6.0"
     }
 }

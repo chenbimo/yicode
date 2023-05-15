@@ -1,7 +1,7 @@
 {
     "name": "@yicode/zhihu-nice",
     "private": false,
-    "version": "0.1.5",
+    "version": "0.1.6",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -13,6 +13,6 @@
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^4.2.3",
-        "vite": "^4.3.5"
+        "vite": "^4.3.6"
     }
 }

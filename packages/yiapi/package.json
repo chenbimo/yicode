@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiapi",
-    "version": "1.28.4",
+    "version": "1.28.5",
     "description": "yiapi(易接口)，5 分钟上手 Node.js 接口开发",
     "main": "yiapi.js",
     "type": "module",
@@ -31,7 +31,7 @@
         "@fastify/redis": "^6.1.1",
         "@fastify/routes": "^5.1.0",
         "@fastify/static": "^6.10.1",
-        "@fastify/swagger": "^8.3.1",
+        "@fastify/swagger": "^8.4.0",
         "@fastify/swagger-ui": "^1.8.1",
         "ajv": "^8.12.0",
         "ajv-i18n": "^4.2.0",
@@ -54,7 +54,7 @@
         "mysql2": "^3.3.1",
         "nanoid": "^4.0.2",
         "nodemailer": "^6.9.2",
-        "ora": "^6.3.0",
+        "ora": "^6.3.1",
         "winston": "^3.8.2",
         "winston-daily-rotate-file": "^4.7.1"
     }
