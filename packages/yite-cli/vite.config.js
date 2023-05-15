@@ -8,7 +8,6 @@ import { visualizer as Visualizer } from 'rollup-plugin-visualizer';
 import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode/yite-chunk';
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
-// import Inspect from 'vite-plugin-inspect';
 import fs from 'fs-extra';
 import portfinder from 'portfinder';
 import { createHtmlPlugin } from 'vite-plugin-html';
@@ -177,11 +176,6 @@ export default defineConfig(async ({ command, mode }) => {
         filename: '.cache/buildReport.html'
     };
 
-    // 调试配置
-    // let inspectPlugin = {
-    //     outputDir: cacheDir
-    // };
-
     // 打包入口配置
     let htmlTemplatePlugin = {
         template: '/index.html',
@@ -218,13 +212,6 @@ export default defineConfig(async ({ command, mode }) => {
         autoInstall: false
     };
 
-    let topLevelAwaitPlugin = {
-        // The export name of top-level await promise for each chunk module
-        promiseExportName: '__tla',
-        // The function to generate import names of top-level await promise in each chunk module
-        promiseImportName: (i) => `__tla_${i}`
-    };
-
     let vueRouterAutoPlugin = {
         dts: '.cache/typed-router.d.ts'
     };
@@ -250,11 +237,9 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(ChunkSplit(chunkSplitPlugin));
     // allPlugins.push(ZipFile(zipPlugin));
     allPlugins.push(Visualizer(visualizerPlugin));
-    // allPlugins.push(Inspect(inspectPlugin));
     allPlugins.push(createHtmlPlugin(htmlTemplatePlugin));
     allPlugins.push(viteVue(viteVuePlugin));
     allPlugins.push(Layouts(layoutPlugin));
-    // allPlugins.push(topLevelAwait.default(topLevelAwaitPlugin));
 
     let viteConfig = mergeAndConcat(
         {
