@@ -18,7 +18,7 @@ import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 import VueRouter from 'unplugin-vue-router/vite';
 import { VueRouterAutoImports } from 'unplugin-vue-router';
-import Layouts from 'vite-plugin-vue-layouts';
+import { ClientSideLayout } from 'vite-plugin-vue-layouts';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
 import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
@@ -242,7 +242,7 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(Visualizer(visualizerPlugin));
     allPlugins.push(createHtmlPlugin(htmlTemplatePlugin));
     allPlugins.push(viteVue(viteVuePlugin));
-    allPlugins.push(Layouts(layoutPlugin));
+    allPlugins.push(ClientSideLayout(layoutPlugin));
 
     let viteConfig = mergeAndConcat(
         {

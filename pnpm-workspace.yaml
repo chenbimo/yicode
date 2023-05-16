@@ -3,3 +3,4 @@ packages:
     - 'templates/*'
     - 'projects/*'
     - 'helpers/*'
+    - 'vscodes/*'

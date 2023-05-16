@@ -1,5 +1,5 @@
 {
-    "name": "@yicode/yidocs-auto",
+    "name": "@yicode-helper/yidocs-auto",
     "version": "1.0.7",
     "description": "vitepress导航和侧边栏自动生成工具",
     "scripts": {

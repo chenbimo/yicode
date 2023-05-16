@@ -1,6 +1,6 @@
 {
-    "name": "@yicode/vscode-funtree",
-    "displayName": "FunTree",
+    "name": "@yicode-vscode/funtree",
+    "displayName": "vscode 侧边栏函数列表插件",
     "description": "function tree",
     "publisher": "chensuiyi",
     "version": "0.0.4",

@@ -1,0 +1,78 @@
+{
+  "fileTypes": [
+    "js",
+    "jsx",
+    "ts",
+    "tsx",
+    "html",
+    "vue",
+    "svelte",
+    "php"
+  ],
+  "injectionSelector": "L:source.js -comment -string, L:source.jsx -comment -string,  L:source.js.jsx -comment -string, L:source.ts -comment -string, L:source.tsx -comment -string",
+  "injections": {
+    "L:source": {
+      "patterns": [
+        {
+          "match": "<",
+          "name": "invalid.illegal.bad-angle-bracket.html"
+        }
+      ]
+    }
+  },
+  "patterns": [
+    {
+      "begin": "(?i)(\\s*(sql))(`)",
+      "end": "(`)",
+      "beginCaptures": {
+        "1": {
+          "name": "variable.parameter"
+        }
+      },
+      "patterns": [
+        { "include": "source.ts#template-substitution-element" },
+        { "include": "source.ts#string-character-escape" },
+        { "include": "source.sql" },
+        { "include": "source.plpgsql.postgres" },
+        { "match": "." }
+      ]
+    },
+    {
+      "begin": "(?i)(\\s?\\/?\\*?\\s?(sql|inline-sql)\\s?\\*?\\/?\\s?)(`)",
+      "beginCaptures": {
+        "1": {
+          "name": "comment.block"
+        }
+      },
+      "end": "(`)",
+      "patterns": [
+        { "include": "source.ts#template-substitution-element" },
+        { "include": "source.ts#string-character-escape" },
+        { "include": "source.sql" },
+        { "include": "source.plpgsql.postgres" },
+        { "match": "." }
+      ]
+    },
+    {
+      "begin": "(?i)(?<=\\s|\\,|\\=|\\:|\\(|\\$\\()\\s{0,}(((\\/\\*)|(\\/\\/))\\s?(sql|inline-sql)[ ]{0,1000}\\*?\\/?)[ ]{0,1000}$",
+      "beginCaptures": {
+        "1": {
+          "name": "comment.line"
+        }
+      },
+      "end": "(`)",
+      "patterns": [
+        {
+          "begin": "(\\G)",
+          "end": "(`)"
+        },
+        { "include": "source.ts#template-substitution-element" },
+        { "include": "source.ts#string-character-escape" },
+        { "include": "source.sql" },
+        { "include": "source.plpgsql.postgres" },
+        { "match": "." }
+      ]
+    }
+  ],
+  "scopeName": "inline.es6-sql"
+}

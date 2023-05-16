@@ -31,6 +31,6 @@
         "vitepress": "1.0.0-alpha.75"
     },
     "dependencies": {
-        "@yicode/yidocs-auto": "workspace:^"
+        "@yicode-helper/yidocs-auto": "workspace:^"
     }
 }
