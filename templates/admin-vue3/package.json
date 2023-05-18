@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/admin-vue3",
-    "version": "3.2.9",
+    "version": "3.2.10",
     "description": "admin-vue3（易管理）vue3后台管理模板",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
@@ -37,7 +37,7 @@
         "pinia": "^2.1.1",
         "store2": "^2.14.2",
         "tiny-cookie": "^2.4.1",
-        "vue": "^3.3.3",
+        "vue": "^3.3.4",
         "vue-i18n": "^9.2.2",
         "vue-router": "^4.2.0"
     },

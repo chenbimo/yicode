@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/base-vue3",
     "private": false,
-    "version": "1.2.0",
+    "version": "1.2.1",
     "type": "module",
     "scripts": {
         "dev": "yite dev",
@@ -20,7 +20,7 @@
         "tiny-cookie": "^2.4.1",
         "unplugin-vue-router": "^0.6.4",
         "vite-plugin-vue-layouts": "^0.8.0",
-        "vue": "^3.3.3",
+        "vue": "^3.3.4",
         "vue-i18n": "^9.2.2",
         "vue-router": "^4.2.0"
     },

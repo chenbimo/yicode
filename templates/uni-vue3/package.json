@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/uni-vue3",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "private": false,
     "scripts": {
         "dev:app": "uni -p app",
@@ -56,20 +56,25 @@
         "luch-request": "^3.0.8",
         "mp-html": "^2.4.2",
         "pinia": "^2.1.1",
-        "vue": "^3.3.3",
+        "vue": "^3.3.4",
         "vue-i18n": "^9.2.2"
     },
     "devDependencies": {
         "@dcloudio/types": "^3.3.3",
-        "@dcloudio/uni-automator": "vue3",
         "@dcloudio/uni-cli-shared": "vue3",
         "@dcloudio/uni-stacktracey": "vue3",
         "@dcloudio/vite-plugin-uni": "vue3",
-        "husky": "^8.0.3",
         "lint-staged": "^13.2.2",
         "prettier": "^2.8.8",
         "rollup-plugin-copy": "^3.4.0",
         "sass": "^1.62.1",
-        "vite": "^4.3.7"
+        "simple-git-hooks": "^2.8.1",
+        "vite": "^4.3.8"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "pnpm lint-staged"
+    },
+    "lint-staged": {
+        "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
     }
 }
