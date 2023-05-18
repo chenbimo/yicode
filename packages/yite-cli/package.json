@@ -162,9 +162,7 @@
         "vite": "^4.3.8",
         "vite-plugin-html": "^3.2.0",
         "vite-plugin-vue-devtools": "^0.0.15",
-        "vite-plugin-vue-layouts": "^0.8.0",
         "vue-i18n": "^9.2.2",
-        "vue-router": "^4.2.0",
         "yoctocolors": "^1.0.0"
     }
 }
