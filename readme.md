@@ -21,26 +21,26 @@ yicode（易编程）系列软件开发生态，全部由随易科技有限公�
 
 ## 作者简介
 
-| 属性         | 值                                                                         |
-| ------------ | -------------------------------------------------------------------------- |
-| 姓名         | 陈随易                                                                     |
-| 性别         | 男                                                                         |
-| 出生年月     | 1993 年 10 月                                                              |
-| 职业         | 基层小码农                                                                 |
-| 就业时间     | 2015 年 9 月                                                               |
-| 性格         | 喜欢安静，喜欢分享，喜欢钻研                                               |
-| 身份         | 前端吹水专家，高级劝退师                                                   |
-| 爱好         | 敲代码，写小说，看电影，算命                                               |
-| 微信         | c91374286                                                                  |
-| 扣扣         | 24323626                                                                   |
-| 邮箱         | bimostyle@qq.com                                                           |
-| 知乎         | [知乎陈随易](https://www.zhihu.com/people/chensuiyi)                       |
-| 掘金         | [掘金陈随易](https://juejin.im/user/1239904846873326)                      |
-| 码云         | [码云陈随易](https://gitee.com/banshiweichen)                              |
-| github       | [github 陈随易](https://github.com/chenbimo)                               |
-| 交流探讨     | 创建了全球顶级程序员微信交流群，只聊技术相关，不谈其他，加入交流请加我微信 |
-| 支付宝收款码 | ![支付宝](https://static.chensuiyi.com/alipay-qrcode.png)                  |
-| 微信收款码   | ![微信收款码](https://static.chensuiyi.com/wepay-qrcode.png)               |
+| 属性         | 值                                                           |
+| ------------ | ------------------------------------------------------------ |
+| 姓名         | 陈随易                                                       |
+| 性别         | 男                                                           |
+| 出生年月     | 1993 年 10 月                                                |
+| 职业         | 基层小码农                                                   |
+| 就业时间     | 2015 年 9 月                                                 |
+| 性格         | 喜欢安静，喜欢分享，喜欢钻研                                 |
+| 身份         | 前端吹水专家，高级劝退师                                     |
+| 爱好         | 敲代码，写小说，看电影，算命                                 |
+| 微信         | c91374286                                                    |
+| 扣扣         | 24323626                                                     |
+| 邮箱         | bimostyle@qq.com                                             |
+| 知乎         | [知乎陈随易](https://www.zhihu.com/people/chensuiyi)         |
+| 掘金         | [掘金陈随易](https://juejin.im/user/1239904846873326)        |
+| 码云         | [码云陈随易](https://gitee.com/banshiweichen)                |
+| github       | [github 陈随易](https://github.com/chenbimo)                 |
+| 交流探讨     | 创建了全球顶级程序员微信交流群，加入交流请加我微信           |
+| 支付宝赞助码 | ![支付宝](https://static.chensuiyi.com/alipay-qrcode.png)    |
+| 微信赞助码   | ![微信收款码](https://static.chensuiyi.com/wepay-qrcode.png) |
 
 ## 时间线
 

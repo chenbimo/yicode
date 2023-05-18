@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/uni-vue3",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "private": false,
     "scripts": {
         "dev:app": "uni -p app",
@@ -55,8 +55,8 @@
         "lodash-es": "^4.17.21",
         "luch-request": "^3.0.8",
         "mp-html": "^2.4.2",
-        "pinia": "^2.0.36",
-        "vue": "^3.3.2",
+        "pinia": "^2.1.1",
+        "vue": "^3.3.3",
         "vue-i18n": "^9.2.2"
     },
     "devDependencies": {
@@ -70,6 +70,6 @@
         "prettier": "^2.8.8",
         "rollup-plugin-copy": "^3.4.0",
         "sass": "^1.62.1",
-        "vite": "^4.3.6"
+        "vite": "^4.3.7"
     }
 }
