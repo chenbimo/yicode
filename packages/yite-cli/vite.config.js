@@ -10,7 +10,7 @@ import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import fs from 'fs-extra';
 import portfinder from 'portfinder';
-import { createHtmlPlugin } from 'vite-plugin-html';
+import { yiteHtml } from '@yicode-helper/yite-html';
 import { mergeAndConcat } from 'merge-anything';
 import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
@@ -240,7 +240,7 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
     allPlugins.push(Visualizer(visualizerPlugin));
-    allPlugins.push(createHtmlPlugin(htmlTemplatePlugin));
+    allPlugins.push(yiteHtml(htmlTemplatePlugin));
     allPlugins.push(viteVue(viteVuePlugin));
     allPlugins.push(YiteLayout(layoutPlugin));
 
