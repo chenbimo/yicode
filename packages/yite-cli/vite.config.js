@@ -18,10 +18,11 @@ import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 import VueRouter from 'unplugin-vue-router/vite';
 import { VueRouterAutoImports } from 'unplugin-vue-router';
-import { ClientSideLayout } from 'vite-plugin-vue-layouts';
+// import { ClientSideLayout } from 'vite-plugin-vue-layouts';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
 import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
+import { yiteLayout as YiteLayout } from '@yicode-helper/yite-layout';
 
 // unocss相关配置
 import { defineConfig as defineUnocssConfig, presetAttributify, presetUno, presetIcons } from 'unocss';
@@ -242,7 +243,7 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(Visualizer(visualizerPlugin));
     allPlugins.push(createHtmlPlugin(htmlTemplatePlugin));
     allPlugins.push(viteVue(viteVuePlugin));
-    allPlugins.push(ClientSideLayout(layoutPlugin));
+    allPlugins.push(YiteLayout(layoutPlugin));
 
     let viteConfig = mergeAndConcat(
         {

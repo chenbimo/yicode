@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-layout",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "description": "yite-cli 路由骨架",
     "type": "module",
     "exports": {
