@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router/auto';
-// import { setupLayouts } from 'virtual:generated-layouts';
 import { setupLayouts } from 'virtual:yite-layout';
 
 // 创建路由

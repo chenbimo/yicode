@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/base-vue3",
     "private": false,
-    "version": "1.2.1",
+    "version": "1.3.0",
     "type": "module",
     "scripts": {
         "dev": "yite dev",
@@ -9,22 +9,28 @@
     },
     "dependencies": {
         "@arco-design/web-vue": "^2.46.0",
-        "@intlify/unplugin-vue-i18n": "^0.10.0",
         "@yicode-helper/yite-layout": "workspace:^",
         "@yicode/yidash": "workspace:^",
+        "@yicode/yite-cli": "workspace:^",
         "axios": "^1.4.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.1",
         "sass": "^1.62.1",
         "store2": "^2.14.2",
-        "tiny-cookie": "^2.4.1",
         "unplugin-vue-router": "^0.6.4",
-        "vite-plugin-vue-layouts": "^0.8.0",
         "vue": "^3.3.4",
         "vue-i18n": "^9.2.2",
         "vue-router": "^4.2.0"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "workspace:^"
+        "lint-staged": "^13.2.2",
+        "prettier": "^2.8.8",
+        "simple-git-hooks": "^2.8.1"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "pnpm lint-staged"
+    },
+    "lint-staged": {
+        "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
     }
 }

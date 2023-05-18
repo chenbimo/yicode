@@ -1,10 +1,14 @@
 {
     "name": "@yicode/yite-cli",
-    "version": "1.26.1",
+    "version": "1.27.0",
     "description": "专注于vite + vue3 的项目开发脚手架",
-    "main": "index.js",
+    "exports": {
+        ".": {
+            "import": "index.js"
+        }
+    },
     "bin": {
-        "yite": "index.js"
+        "yite": "bin.js"
     },
     "type": "module",
     "private": false,
@@ -149,6 +153,7 @@
         "merge-anything": "^5.1.6",
         "portfinder": "^1.0.32",
         "rollup-plugin-visualizer": "^5.9.0",
+        "tiny-cookie": "^2.4.1",
         "unocss": "^0.51.13",
         "unplugin-auto-import": "^0.16.0",
         "unplugin-icons": "^0.16.1",
@@ -159,6 +164,7 @@
         "vite-plugin-vue-devtools": "^0.0.15",
         "vite-plugin-vue-layouts": "^0.8.0",
         "vue-i18n": "^9.2.2",
+        "vue-router": "^4.2.0",
         "yoctocolors": "^1.0.0"
     }
 }
