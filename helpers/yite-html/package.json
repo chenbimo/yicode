@@ -1,0 +1,39 @@
+{
+    "name": "@yicode-helper/yite-html",
+    "version": "0.0.0",
+    "description": "yite-cli 自定义入口文件",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "index.js"
+        }
+    },
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "preinstall": "npx only-allow pnpm",
+        "build": "rollup -c"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "keywords": [
+        "vite",
+        "vue.js",
+        "vue-cli",
+        "webpack",
+        "cli",
+        "vue",
+        "web",
+        "qrcode"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "license": "GPL-3.0",
+    "dependencies": {
+        "qrcode-terminal": "^0.12.0"
+    }
+}
