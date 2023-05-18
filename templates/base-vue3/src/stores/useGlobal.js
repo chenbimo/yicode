@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { isCookieEnabled, getCookie, setCookie, removeCookie } from 'tiny-cookie';
+import { isCookieEnabled, getCookie, setCookie, removeCookie } from '@yicode/yite-cli';
 
 export const useGlobal = defineStore('global', () => {
     // 全局数据

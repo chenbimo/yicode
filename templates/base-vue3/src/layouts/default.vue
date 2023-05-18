@@ -10,7 +10,6 @@
 <script setup>
 // 外部集
 import { Message } from '@arco-design/web-vue';
-import { isCookieEnabled, getCookie, setCookie, removeCookie } from 'tiny-cookie';
 
 // 全局集
 let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
