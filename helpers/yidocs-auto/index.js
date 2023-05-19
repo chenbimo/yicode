@@ -67,7 +67,7 @@ function autoSideBar(path) {
                             .filter((name) => name)[1]
                             .replace(/\d+-/gi, '')
                             .replace('.md', ''),
-                        collapsible: false
+                        collapsed: false
                     };
                     param.pid = path;
                 }
@@ -79,7 +79,7 @@ function autoSideBar(path) {
     let treeSideBar = yidash_tree_array2Tree(Object.values(obj), 'id', 'pid', 'items');
     treeSideBar.forEach((item) => {
         item.text = `📁 ${item.text.replace('📄 ', '')}`;
-        if (item.collapsible !== false) item.collapsible = true;
+        if (item.collapsed !== false) item.collapsed = true;
     });
 
     return treeSideBar;
