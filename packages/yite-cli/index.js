@@ -1,5 +1,5 @@
 import messages from '@intlify/unplugin-vue-i18n/messages';
-import { isCookieEnabled, getCookie, getRawCookie, getAllCookies, setCookie } from 'tiny-cookie';
+import { isCookieEnabled, getCookie, getRawCookie, getAllCookies, setCookie, removeCookie } from 'tiny-cookie';
 
 export {
     //
@@ -8,5 +8,6 @@ export {
     getCookie,
     getRawCookie,
     getAllCookies,
-    setCookie
+    setCookie,
+    removeCookie
 };
