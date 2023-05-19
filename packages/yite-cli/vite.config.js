@@ -16,7 +16,7 @@ import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
-import VueRouter from 'unplugin-vue-router/vite';
+import VueRouterVite from 'unplugin-vue-router/vite';
 import { VueRouterAutoImports } from 'unplugin-vue-router';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
@@ -214,8 +214,12 @@ export default defineConfig(async ({ command, mode }) => {
         autoInstall: false
     };
 
-    let vueRouterAutoPlugin = {
-        dts: '.cache/typed-router.d.ts'
+    let vueRouterVitePlugin = {
+        dts: '.cache/typed-router.d.ts',
+        exclude: [
+            //
+            '**/components/**/*'
+        ]
     };
 
     let layoutPlugin = {
@@ -231,7 +235,7 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(ReactivityTransform());
     allPlugins.push(Unocss(unocssPlugin));
     allPlugins.push(Icons(iconsPlugin));
-    allPlugins.push(VueRouter(vueRouterAutoPlugin));
+    allPlugins.push(VueRouterVite(vueRouterVitePlugin));
     allPlugins.push(VueDevTools(vueDevtoolPlugin));
     allPlugins.push(Components(componentsPlugin));
     allPlugins.push(AutoImport(autoImportPlugin));
