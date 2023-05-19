@@ -10,7 +10,7 @@ import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import fs from 'fs-extra';
 import portfinder from 'portfinder';
-import { yiteHtml } from '@yicode-helper/yite-html';
+import { yiteHtml as YiteHtml } from '@yicode-helper/yite-html';
 import { mergeAndConcat } from 'merge-anything';
 import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
@@ -240,7 +240,7 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
     allPlugins.push(Visualizer(visualizerPlugin));
-    allPlugins.push(yiteHtml(htmlTemplatePlugin));
+    allPlugins.push(YiteHtml(htmlTemplatePlugin));
     allPlugins.push(viteVue(viteVuePlugin));
     allPlugins.push(YiteLayout(layoutPlugin));
 
@@ -275,6 +275,7 @@ export default defineConfig(async ({ command, mode }) => {
                 target: ['es2022'],
                 rollupOptions: {
                     plugins: [],
+                    input: {},
                     output: {
                         // TODO: 进一步研究
                         // assetFileNames: ({ name }) => {

@@ -142,6 +142,7 @@
         "@vitejs/plugin-vue": "^4.2.3",
         "@vue-macros/reactivity-transform": "^0.3.7",
         "@yicode-helper/yite-chunk": "workspace:^",
+        "@yicode-helper/yite-html": "workspace:^",
         "@yicode-helper/yite-layout": "workspace:^",
         "@yicode-helper/yite-qrcode": "workspace:^",
         "@yicode/commander": "workspace:^",
@@ -160,7 +161,6 @@
         "unplugin-vue-components": "^0.24.1",
         "unplugin-vue-router": "^0.6.4",
         "vite": "^4.3.8",
-        "vite-plugin-html": "^3.2.0",
         "vite-plugin-vue-devtools": "^0.0.15",
         "vue-i18n": "^9.2.2",
         "yoctocolors": "^1.0.0"
