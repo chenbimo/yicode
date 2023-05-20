@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router/auto';
-import { setupLayouts } from 'virtual:yite-layout';
+import { createRouter, createWebHashHistory } from 'vue-router';
+import { yiteRoutes } from 'virtual:yite-router';
 
 // 创建路由
 const router = createRouter({
-    extendRoutes: (routes) => setupLayouts(routes),
+    routes: yiteRoutes(),
     history: createWebHashHistory()
 });
 
