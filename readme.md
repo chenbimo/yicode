@@ -10,7 +10,9 @@
 
 [github - https://github.com/chenbimo/yicode](https://github.com/chenbimo/yicode)
 
-## 文档地址
+## 如何使用？
+
+请看文档
 
 [易文档 - https://doc.yicode.tech](https://doc.yicode.tech)
 
