@@ -6,13 +6,13 @@
 
 点个星星，老铁。
 
-[gitee](https://gitee.com/chenbimo/yicode)
+[gitee - https://gitee.com/chenbimo/yicode](https://gitee.com/chenbimo/yicode)
 
-[github](https://github.com/chenbimo/yicode)
+[github - https://github.com/chenbimo/yicode](https://github.com/chenbimo/yicode)
 
 ## 文档地址
 
-[易文档](https://doc.yicode.tech)
+[易文档 - https://doc.yicode.tech](https://doc.yicode.tech)
 
 该文档使用 `yidocs` 驱动
 
