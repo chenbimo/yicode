@@ -2,6 +2,20 @@
 
 何以解忧，唯有代码。
 
+## 仓库地址
+
+点个星星，老铁。
+
+[gitee](https://gitee.com/chenbimo/yicode)
+
+[github](https://github.com/chenbimo/yicode)
+
+## 文档地址
+
+[易文档](https://doc.yicode.tech)
+
+该文档使用 `yidocs` 驱动
+
 ## 这是什么？
 
 这不仅仅只有一个项目，而是多个项目的集合体，采用 `pnpm workspace` 这种 `单仓库多项目` 的方案进行管理。
