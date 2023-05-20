@@ -10,18 +10,17 @@ import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import fs from 'fs-extra';
 import portfinder from 'portfinder';
-import { yiteHtml as YiteHtml } from '@yicode-helper/yite-html';
+
 import { mergeAndConcat } from 'merge-anything';
 import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
-import VueRouterVite from 'unplugin-vue-router/vite';
-import { VueRouterAutoImports } from 'unplugin-vue-router';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
 import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
-import { yiteLayout as YiteLayout } from '@yicode-helper/yite-layout';
+import { yiteHtml as YiteHtml } from '@yicode-helper/yite-html';
+import { yiteRouter as YiteRouter } from '@yicode-helper/yite-router';
 
 // unocss相关配置
 import { defineConfig as defineUnocssConfig, presetAttributify, presetUno, presetIcons } from 'unocss';
@@ -55,18 +54,31 @@ export default defineConfig(async ({ command, mode }) => {
     }
 
     // vue 插件
-    let viteVuePlugin = {};
+    let viteVueConfig = {};
 
     // 自动导入插件
-    let autoImportPlugin = mergeAndConcat(
+    let autoImportConfig = mergeAndConcat(
         {
             include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
             imports: [
                 'vue',
                 'vue-i18n',
                 'pinia',
-                VueRouterAutoImports,
                 {
+                    'vue-router': [
+                        //
+                        'useRouter',
+                        'useRoute',
+                        'useLink',
+                        'onBeforeRouteLeave',
+                        'onBeforeRouteUpdate',
+                        'createMemoryHistory',
+                        'createRouter',
+                        'createWebHashHistory',
+                        'createWebHistory',
+                        'isNavigationFailure',
+                        'loadRouteLocation'
+                    ],
                     'lodash-es': [
                         //
                         ['*', '_']
@@ -94,12 +106,12 @@ export default defineConfig(async ({ command, mode }) => {
     );
 
     // i18n 插件
-    let vueI18nPlugin = {
+    let vueI18nConfig = {
         include: path.resolve(srcDir, 'i18n/**')
     };
 
     // 自动导入组件
-    let componentsPlugin = {
+    let componentsConfig = {
         dirs: [
             //
             path.resolve(srcDir, 'components')
@@ -110,7 +122,7 @@ export default defineConfig(async ({ command, mode }) => {
         resolvers: [IconsResolver()]
     };
 
-    let unocssPlugin = defineUnocssConfig(
+    let unocssConfig = defineUnocssConfig(
         Object.assign(
             {
                 presets: [
@@ -147,12 +159,7 @@ export default defineConfig(async ({ command, mode }) => {
     );
 
     // 代码分割
-
-    // id: 'D:/codes/chensuiyi/yicode.tech/site.yicode.tech/node_modules/.pnpm/axios@1.3.4/node_modules/axios/lib/helpers/isURLSameOrigin.js',
-    // moduleId: 'D:/codes/chensuiyi/yicode.tech/site.yicode.tech/node_modules/.pnpm/axios@1.3.4/node_modules/axios/lib/helpers/isURLSameOrigin.js',
-    // root: 'D:/codes/chensuiyi/yicode.tech/site.yicode.tech',
-    // file: 'node_modules/.pnpm/axios@1.3.4/node_modules/axios/lib/helpers/isURLSameOrigin.js'
-    let chunkSplitPlugin = {
+    let chunkSplitConfig = {
         strategy: 'default',
         // customChunk: (args) => {
         //     if (args.file.endsWith('.png')) {
@@ -172,24 +179,21 @@ export default defineConfig(async ({ command, mode }) => {
     // };
 
     // 可视化报告
-    let visualizerPlugin = {
+    let visualizerConfig = {
         open: false,
         brotliSize: true,
         filename: '.cache/buildReport.html'
     };
 
     // 打包入口配置
-    let htmlTemplatePlugin = {
-        template: '/index.html',
-        entry: mode === 'production' ? 'src/main.js' : 'src/devMain.js'
-    };
+    let yiteHtmlConfig = {};
 
     // 正式环境下，才启用自动解析，避免页面重载
     if (mode === 'production') {
         // 自动导入方法，不需要按需，只要组件按需
-        // autoImportPlugin = mergeAndConcat(
+        // autoImportConfig = mergeAndConcat(
         //     //
-        //     autoImportPlugin,
+        //     autoImportConfig,
         //     fnOmit(yiteConfig?.autoImport || {}, ['resolvers']),
         //     {
         //         resolvers: yiteConfig?.autoImport?.resolvers?.map((item) => ComponentResolvers[item.name](item.options)) || []
@@ -197,9 +201,9 @@ export default defineConfig(async ({ command, mode }) => {
         // );
 
         // 自动导入组件
-        componentsPlugin = mergeAndConcat(
+        componentsConfig = mergeAndConcat(
             //
-            componentsPlugin,
+            componentsConfig,
             fnOmit(yiteConfig?.autoComponent || {}, ['resolvers']),
             {
                 resolvers:
@@ -210,43 +214,32 @@ export default defineConfig(async ({ command, mode }) => {
         );
     }
 
-    let iconsPlugin = {
+    let iconsConfig = {
         autoInstall: false
     };
 
-    let vueRouterVitePlugin = {
-        dts: '.cache/typed-router.d.ts',
-        exclude: [
-            //
-            '**/components/**/*'
-        ]
-    };
-
-    let layoutPlugin = {
-        layoutsDirs: 'src/layouts',
-        defaultLayout: 'default'
-    };
-
     // vue devtool
-    let vueDevtoolPlugin = {};
+    let vueDevtoolConfig = {};
+
+    let yiteRouterConfig = {};
 
     // 插件列表
     let allPlugins = [];
+    allPlugins.push(YiteRouter(yiteRouterConfig));
     allPlugins.push(ReactivityTransform());
-    allPlugins.push(Unocss(unocssPlugin));
-    allPlugins.push(Icons(iconsPlugin));
-    allPlugins.push(VueRouterVite(vueRouterVitePlugin));
-    allPlugins.push(VueDevTools(vueDevtoolPlugin));
-    allPlugins.push(Components(componentsPlugin));
-    allPlugins.push(AutoImport(autoImportPlugin));
-    allPlugins.push(vueI18n(vueI18nPlugin));
-    allPlugins.push(ChunkSplit(chunkSplitPlugin));
+    allPlugins.push(Unocss(unocssConfig));
+    allPlugins.push(Icons(iconsConfig));
+    allPlugins.push(VueDevTools(vueDevtoolConfig));
+    allPlugins.push(Components(componentsConfig));
+    allPlugins.push(AutoImport(autoImportConfig));
+    allPlugins.push(vueI18n(vueI18nConfig));
+    allPlugins.push(ChunkSplit(chunkSplitConfig));
     allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
-    allPlugins.push(Visualizer(visualizerPlugin));
-    allPlugins.push(YiteHtml(htmlTemplatePlugin));
-    allPlugins.push(viteVue(viteVuePlugin));
-    allPlugins.push(YiteLayout(layoutPlugin));
+    allPlugins.push(Visualizer(visualizerConfig));
+
+    allPlugins.push(YiteHtml(yiteHtmlConfig));
+    allPlugins.push(viteVue(viteVueConfig));
 
     let viteConfig = mergeAndConcat(
         {
@@ -279,7 +272,6 @@ export default defineConfig(async ({ command, mode }) => {
                 target: ['es2022'],
                 rollupOptions: {
                     plugins: [],
-                    input: {},
                     output: {
                         // TODO: 进一步研究
                         // assetFileNames: ({ name }) => {
