@@ -1,0 +1,37 @@
+{
+    "name": "@yicode-helper/yite-i18n",
+    "version": "1.0.0",
+    "description": "yite-cli 语言国际化",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "index.js"
+        }
+    },
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "preinstall": "npx only-allow pnpm",
+        "build": "rollup -c"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "keywords": [
+        "vite",
+        "vue.js",
+        "vue-cli",
+        "webpack",
+        "cli",
+        "vue",
+        "web",
+        "qrcode"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "license": "GPL-3.0",
+    "dependencies": {}
+}
