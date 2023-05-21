@@ -30,7 +30,7 @@
     "dependencies": {
         "@arco-design/web-vue": "^2.46.0",
         "@intlify/unplugin-vue-i18n": "^0.10.0",
-        "@yicode/yidash": "workspace:^",
+        "@yicode/yidash": "workspace:*",
         "axios": "^1.4.0",
         "date-fns": "^2.30.0",
         "lodash-es": "^4.17.21",
@@ -42,7 +42,7 @@
         "vue-router": "^4.2.0"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "workspace:^",
+        "@yicode/yite-cli": "workspace:*",
         "sass": "^1.62.1"
     }
 }
