@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yite-cli",
-    "version": "1.29.4",
+    "version": "1.29.5",
     "description": "专注于vite + vue3 的项目开发脚手架",
     "exports": {
         ".": {
@@ -94,8 +94,8 @@
         "@iconify-json/ion": "^1.1.10",
         "@iconify-json/jam": "^1.1.4",
         "@iconify-json/line-md": "^1.1.24",
-        "@iconify-json/logos": "^1.1.30",
-        "@iconify-json/lucide": "^1.1.90",
+        "@iconify-json/logos": "^1.1.31",
+        "@iconify-json/lucide": "^1.1.91",
         "@iconify-json/majesticons": "^1.1.7",
         "@iconify-json/maki": "^1.1.18",
         "@iconify-json/map": "^1.1.4",
@@ -118,7 +118,7 @@
         "@iconify-json/prime": "^1.1.5",
         "@iconify-json/quill": "^1.1.6",
         "@iconify-json/radix-icons": "^1.1.10",
-        "@iconify-json/ri": "^1.1.8",
+        "@iconify-json/ri": "^1.1.9",
         "@iconify-json/simple-icons": "^1.1.53",
         "@iconify-json/skill-icons": "^1.1.2",
         "@iconify-json/svg-spinners": "^1.1.1",
@@ -156,7 +156,7 @@
         "rollup-plugin-visualizer": "^5.9.0",
         "tiny-cookie": "^2.4.1",
         "unocss": "^0.51.13",
-        "unplugin-auto-import": "^0.16.0",
+        "unplugin-auto-import": "^0.16.1",
         "unplugin-icons": "^0.16.1",
         "unplugin-vue-components": "^0.24.1",
         "vite": "^4.3.8",
