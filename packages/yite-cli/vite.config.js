@@ -231,6 +231,7 @@ export default defineConfig(async ({ command, mode }) => {
 
     // 插件列表
     let allPlugins = [];
+    allPlugins.push(YiteHtml(yiteHtmlConfig));
     allPlugins.push(YiteRouter(yiteRouterConfig));
     allPlugins.push(YiteI18n(yiteI18nConfig));
     allPlugins.push(ReactivityTransform());
@@ -243,8 +244,6 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
     allPlugins.push(Visualizer(visualizerConfig));
-
-    allPlugins.push(YiteHtml(yiteHtmlConfig));
     allPlugins.push(viteVue(viteVueConfig));
 
     let viteConfig = mergeAndConcat(

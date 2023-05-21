@@ -2,3 +2,4 @@ dist
 .cache
 pnpm-lock.yaml
 CHANGELOG.md
+index.html
