@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/base-vue3",
     "private": false,
-    "version": "1.4.1",
+    "version": "1.5.0",
     "type": "module",
     "scripts": {
         "help": "yite",
@@ -10,7 +10,6 @@
     },
     "dependencies": {
         "@arco-design/web-vue": "^2.46.0",
-        "@intlify/unplugin-vue-i18n": "^0.10.0",
         "@yicode/yidash": "workspace:^",
         "@yicode/yite-cli": "workspace:^",
         "axios": "^1.4.0",
