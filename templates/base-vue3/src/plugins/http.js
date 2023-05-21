@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { Message } from '@arco-design/web-vue';
-import { isCookieEnabled, getCookie, setCookie, removeCookie } from 'tiny-cookie';
 
 let $Http = axios.create({
     method: 'POST',
@@ -14,14 +13,13 @@ let $Http = axios.create({
 // 添加请求拦截器
 $Http.interceptors.request.use(
     function (config) {
-        let token = getCookie('token');
+        let token = yite.getCookie('token');
         if (token) {
             config.headers.authorization = 'Bearer ' + token;
         }
         return config;
     },
     function (error) {
-        // 对请求错误做些什么
         return Promise.reject(error);
     }
 );

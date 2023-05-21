@@ -1,11 +1,8 @@
-import { defineStore } from 'pinia';
-import { isCookieEnabled, getCookie, setCookie, removeCookie } from '@yicode/yite-cli';
-
-export const useGlobal = defineStore('global', () => {
+export const useGlobal = Pinia.defineStore('global', () => {
     // 全局数据
     let $GlobalData = $ref({
         // 用户令牌
-        token: getCookie('token') || '',
+        token: yite.getCookie('token') || '',
         // 用户数据
         userData: $Storage.local.get('userData') || {},
         clientWidth: '',

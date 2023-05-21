@@ -1,16 +1,12 @@
 import App from '@/App.vue';
-import * as Pinia from 'pinia';
-
-import { router } from '@/router/index.js';
-import { i18n } from '@/plugins/i18n.js';
 import 'virtual:uno.css';
-// 创建实例
+
 const app = createApp(App);
 
-const pinia = Pinia.createPinia();
+const $Pinia = Pinia.createPinia();
 
-app.use(router);
-app.use(pinia);
-app.use(i18n);
+app.use($Router);
+app.use($Pinia);
+app.use($I18n);
 
 export { app };
