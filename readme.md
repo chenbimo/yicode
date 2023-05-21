@@ -61,6 +61,7 @@ yicode（易编程）系列软件开发生态，全部由陈随易（https://yic
 -   **@yicode-helper/yite-html**（给基于 `vite` 项目开发提供不同环境下的入口文件）
 -   **@yicode-helper/yite-qrcode**（开发时显示手机调试二维码，避免手动输入地址）
 -   **@yicode-helper/yite-router**（简单、粗暴、方便的路由自动化方案）
+-   **@yicode-helper/yite-i18n**（轻量级国际化语言数据生成插件）
 -   **@yicode-helper/yite-chunk**（代码自动分割方案）
 -   **@yicode-template/base-vue3**（基本且完整的 `vue3` 项目开发模板）
 -   **@yicode-template/yidocs**（具备自动化侧边栏和导航栏的 `vitepress` 文档项目模板）
