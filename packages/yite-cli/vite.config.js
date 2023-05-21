@@ -5,7 +5,6 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
 import { visualizer as Visualizer } from 'rollup-plugin-visualizer';
-import vueI18n from '@intlify/unplugin-vue-i18n/vite';
 
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import fs from 'fs-extra';
@@ -21,6 +20,7 @@ import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
 import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
 import { yiteHtml as YiteHtml } from '@yicode-helper/yite-html';
 import { yiteRouter as YiteRouter } from '@yicode-helper/yite-router';
+import { yiteI18n as YiteI18n } from '@yicode-helper/yite-i18n';
 
 // unocss相关配置
 import { defineConfig as defineUnocssConfig, presetAttributify, presetUno, presetIcons } from 'unocss';
@@ -104,11 +104,6 @@ export default defineConfig(async ({ command, mode }) => {
             resolvers: yiteConfig?.autoImport?.resolvers?.map((item) => ComponentResolvers[item.name](item.options)) || []
         }
     );
-
-    // i18n 插件
-    let vueI18nConfig = {
-        include: path.resolve(srcDir, 'i18n/**')
-    };
 
     // 自动导入组件
     let componentsConfig = {
@@ -222,17 +217,18 @@ export default defineConfig(async ({ command, mode }) => {
     let vueDevtoolConfig = {};
 
     let yiteRouterConfig = {};
+    let yiteI18nConfig = {};
 
     // 插件列表
     let allPlugins = [];
     allPlugins.push(YiteRouter(yiteRouterConfig));
+    allPlugins.push(YiteI18n(yiteI18nConfig));
     allPlugins.push(ReactivityTransform());
     allPlugins.push(Unocss(unocssConfig));
     allPlugins.push(Icons(iconsConfig));
     allPlugins.push(VueDevTools(vueDevtoolConfig));
     allPlugins.push(Components(componentsConfig));
     allPlugins.push(AutoImport(autoImportConfig));
-    allPlugins.push(vueI18n(vueI18nConfig));
     allPlugins.push(ChunkSplit(chunkSplitConfig));
     allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
