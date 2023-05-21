@@ -62,8 +62,6 @@ export default defineConfig(async ({ command, mode }) => {
             include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
             imports: [
                 'vue',
-                'vue-i18n',
-                'pinia',
                 {
                     'vue-router': [
                         //
@@ -82,6 +80,18 @@ export default defineConfig(async ({ command, mode }) => {
                     'lodash-es': [
                         //
                         ['*', '_']
+                    ],
+                    pinia: [
+                        //
+                        ['*', 'Pinia']
+                    ],
+                    '@yicode/yite-cli': [
+                        //
+                        ['*', 'yite']
+                    ],
+                    'vue-i18n': [
+                        //
+                        ['*', 'vueI18n']
                     ],
                     '@yicode/yidash': yidashLibNames
                 }
