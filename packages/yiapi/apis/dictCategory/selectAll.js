@@ -13,7 +13,6 @@ export const apiSchema = {
         title: `查询所有${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            category: fnSchema(null, '分类代号', 'string', 1, 20, null),
             state: fnSchema(sysConfig.schemaField.state, '是否开启')
         }
     }
@@ -24,22 +23,16 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let dictModel = fastify.mysql
-                    .table(appConfig.table.sys_dict)
-                    .where('category', req.body.category)
+                let dictCategoryModel = fastify.mysql //
+                    .table(appConfig.table.sys_dict_category)
                     .modify(function (queryBuilder) {
                         if (req.body.state !== undefined) {
                             queryBuilder.where('state', req.body.state);
                         }
                     });
-                let resultData = await dictModel.clone().select();
 
-                let rows = resultData.map((item) => {
-                    if (item.symbol === 'number') {
-                        item.value = Number(item.value);
-                    }
-                    return item;
-                });
+                let rows = await dictCategoryModel.clone().select();
+
                 return {
                     ...appConfig.httpCode.SELECT_SUCCESS,
                     data: {

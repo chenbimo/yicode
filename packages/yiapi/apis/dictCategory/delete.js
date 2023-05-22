@@ -24,20 +24,20 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let dictModel = fastify.mysql //
-                    .table(appConfig.table.sys_dict)
+                let dictCategoryModel = fastify.mysql //
+                    .table(appConfig.table.sys_dict_category)
                     .where({ id: req.body.id });
 
-                let dictData = await dictModel.clone().first();
+                let dictCategoryData = await dictCategoryModel.clone().first();
 
-                if (dictData.is_system === 1) {
+                if (dictCategoryData.is_system === 1) {
                     return {
                         ...appConfig.httpCode.DELETE_FAIL,
                         msg: '默认字典，无法删除'
                     };
                 }
 
-                let result = await dictModel.clone().delete();
+                let result = await dictCategoryModel.clone().delete();
                 return {
                     ...appConfig.httpCode.DELETE_SUCCESS,
                     data: result

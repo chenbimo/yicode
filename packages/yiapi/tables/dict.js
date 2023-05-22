@@ -2,6 +2,11 @@ export default {
     _meta: {
         name: '系统字典表'
     },
+    category_id: {
+        type: 'bigint',
+        comment: '分类ID',
+        default: 0
+    },
     category: {
         type: 'string',
         comment: '分类编码',

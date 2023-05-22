@@ -123,6 +123,7 @@ const appConfig = mergeAndConcat(
         table: {
             sys_admin: 'sys_admin',
             sys_dict: 'sys_dict',
+            sys_dict_category: 'sys_dict_category',
             sys_role: 'sys_role',
             sys_tree: 'sys_tree',
             sys_user: 'sys_user',
@@ -227,7 +228,7 @@ const appConfig = mergeAndConcat(
                         is_system: 1,
                         sort: 2
                     },
-                    '/dictionary': {
+                    '/dict': {
                         name: '字典',
                         describe: '字典列表',
                         is_system: 1,

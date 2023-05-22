@@ -14,16 +14,9 @@ export const apiSchema = {
         type: 'object',
         properties: {
             id: fnSchema(sysConfig.schemaField.id, '唯一ID'),
-            category_id: fnSchema(sysConfig.schemaField.min1, '字典分类ID'),
-            category: fnSchema(sysConfig.schemaField.category, '字典分类编码'),
-            code: fnSchema(sysConfig.schemaField.code, '字典编码'),
-            name: fnSchema(null, '字典名称', 'string', 1, 20),
-            value: fnSchema(null, '字典值', 'string', 0, 500),
-            symbol: fnSchema(null, '字典符号', 'string', 0, 20),
-            thumbnail: fnSchema(sysConfig.schemaField.image, '字典缩略图'),
-            image_lists: fnSchema(sysConfig.schemaField.image_lists, '字典轮播图'),
-            describe: fnSchema(null, '字典描述', 'string', 0, 300),
-            content: fnSchema(sysConfig.schemaField.content, '字典正文'),
+            code: fnSchema(sysConfig.schemaField.code, '字典分类编码'),
+            name: fnSchema(null, '字典分类名称', 'string', 1, 20),
+            describe: fnSchema(null, '字典分类描述', 'string', 0, 300),
             state: fnSchema(sysConfig.schemaField.state, '是否启用')
         },
         required: ['id']
@@ -36,28 +29,16 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             const trx = await fastify.mysql.transaction();
             try {
-                if (req.body.type === 'number') {
-                    if (Number.isNaN(Number(req.body.value)) === true) {
-                        return { ...appConfig.httpCode.UPDATE_FAIL, msg: '字典值不是一个数字类型' };
-                    }
-                }
-                let dictModel = trx.table(appConfig.table.sys_dict).modify(function (queryBuilder) {});
+                let dictCategoryModel = trx.table(appConfig.table.sys_dict_category).modify(function (queryBuilder) {});
 
                 let updateData = {
-                    category_id: req.body.category_id,
-                    category: fnCamelCase(req.body.category),
                     code: fnCamelCase(req.body.code),
                     name: req.body.name,
-                    value: req.body.value,
-                    symbol: req.body.symbol,
-                    thumbnail: req.body.thumbnail,
-                    images: req.body.images,
                     describe: req.body.describe,
-                    content: req.body.content,
                     state: req.body.state
                 };
 
-                let result = await dictModel //
+                let result = await dictCategoryModel //
                     .clone()
                     .where({ id: req.body.id })
                     .update(fnClearUpdateData(updateData));

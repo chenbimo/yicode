@@ -13,6 +13,7 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
+            category_id: fnSchema(sysConfig.schemaField.min1, '字典分类ID'),
             category: fnSchema(sysConfig.schemaField.category, '字典分类'),
             code: fnSchema(sysConfig.schemaField.code, '字典编码'),
             name: fnSchema(null, '字典名称', 'string', 1, 20),
@@ -24,7 +25,7 @@ export const apiSchema = {
             content: fnSchema(sysConfig.schemaField.content, '字典正文'),
             state: fnSchema(sysConfig.schemaField.state, '是否启用')
         },
-        required: ['category', 'code', 'name', 'value', 'symbol']
+        required: ['category_id', 'category', 'code', 'name', 'value', 'symbol']
     }
 };
 
@@ -40,9 +41,10 @@ export default async function (fastify, opts) {
                     }
                 }
 
-                let dictionaryModel = fastify.mysql.table(appConfig.table.sys_dict);
+                let dictModel = fastify.mysql.table(appConfig.table.sys_dict);
 
                 let data = {
+                    category_id: req.body.category_id,
                     category: fnCamelCase(req.body.category),
                     code: fnCamelCase(req.body.code),
                     name: req.body.name,
@@ -55,7 +57,7 @@ export default async function (fastify, opts) {
                     state: req.body.state
                 };
 
-                let result = await dictionaryModel.insert(fnClearInsertData(data));
+                let result = await dictModel.insert(fnClearInsertData(data));
 
                 return {
                     ...appConfig.httpCode.INSERT_SUCCESS,

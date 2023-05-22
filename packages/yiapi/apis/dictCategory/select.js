@@ -15,10 +15,9 @@ export const apiSchema = {
         properties: {
             page: fnSchema(sysConfig.schemaField.page, '第几页'),
             limit: fnSchema(sysConfig.schemaField.limit, '每页数量'),
-            state: fnSchema(sysConfig.schemaField.state, '是否开启'),
-            category: fnSchema(null, '分类代号', 'string', 1, 20, null)
+            state: fnSchema(sysConfig.schemaField.state, '是否开启')
         },
-        required: ['category']
+        required: []
     }
 };
 
@@ -27,9 +26,8 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let dictModel = fastify.mysql //
-                    .table(appConfig.table.sys_dict)
-                    .where('category', req.body.category)
+                let dictCategoryModel = fastify.mysql //
+                    .table(appConfig.table.sys_dict_category)
                     .modify(function (queryBuilder) {
                         if (req.body.keywords !== undefined) {
                             queryBuilder.where('name', 'like', `%${req.body.keywords}%`);
@@ -40,28 +38,20 @@ export default async function (fastify, opts) {
                     });
 
                 // 记录总数
-                let { total } = await dictModel
+                let { total } = await dictCategoryModel
                     //
                     .clone()
                     .count('id', { as: 'total' })
                     .first();
 
                 // 记录列表
-                let resultData = await dictModel
+                let rows = await dictCategoryModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
                     .offset(fnPageOffset(req.body.page, req.body.limit))
                     .limit(req.body.limit)
                     .select();
-
-                // 处理数字符号强制转换为数字值
-                let rows = resultData.map((item) => {
-                    if (item.symbol === 'number') {
-                        item.value = Number(item.value);
-                    }
-                    return item;
-                });
 
                 return {
                     ...appConfig.httpCode.SELECT_SUCCESS,
