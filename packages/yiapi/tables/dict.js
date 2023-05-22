@@ -54,17 +54,6 @@ export default {
         length: 300,
         default: ''
     },
-    content: {
-        type: 'text',
-        comment: '正文',
-        default: ''
-    },
-    images: {
-        type: 'string',
-        comment: '图片列表',
-        length: 2000,
-        default: ''
-    },
     is_system: {
         type: 'tinyint',
         comment: '是否系统数据（不可删除）',
