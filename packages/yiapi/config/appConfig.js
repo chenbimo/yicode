@@ -238,13 +238,13 @@ const appConfig = mergeAndConcat(
                         name: '字典管理',
                         describe: '字典列表',
                         is_system: 1,
-                        sort: 3
+                        sort: 4
                     },
                     '/role': {
                         name: '角色管理',
                         describe: '角色列表',
                         is_system: 1,
-                        sort: 4
+                        sort: 5
                     }
                 }
             }
