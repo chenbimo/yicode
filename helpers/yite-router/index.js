@@ -6,15 +6,26 @@ const importGlob = async (pattern, sync = false) => {
 // 生成虚拟模块
 const createVirtualModuleCode = async (options) => {
     return `
+
     export const yiteRoutes = () => {
         let routeFiles = ${await importGlob('@/pages/**/route.js', true)};
         let pageFiles = ${await importGlob('@/pages/**/index.vue')};
         let layoutFiles = ${await importGlob('@/layouts/*/index.vue')};
 
+        let getRoutePath = (file) => {
+            return file //
+            .replace('/route.js', '')
+            .replace(/.*\\/pages/, '')
+            .replace(/([a-z])([A-Z])/g,'$1-$2')
+            .replace(/([A-Z])([z-z])/g,'$1-$2')
+            .toLowerCase()
+            .replace(/[\\s_-]+/g, '-')
+        }
+
         let routes = [];
 
         for (let file in routeFiles) {
-            let routePath = file.replace('/route.js', '').replace(/.*\\/pages/, '').toLowerCase().replace(/[\\s_-]+/g, '-');
+            let routePath = getRoutePath(file);
             let mod = routeFiles[file];
             let routeData = {
                 meta: mod.default || {}
