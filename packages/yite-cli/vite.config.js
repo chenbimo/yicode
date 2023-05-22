@@ -91,7 +91,7 @@ export default defineConfig(async ({ command, mode }) => {
                     ],
                     'vue-i18n': [
                         //
-                        ['*', 'vueI18n']
+                        'createI18n'
                     ],
                     '@yicode/yidash': yidashLibNames
                 }
