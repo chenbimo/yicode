@@ -139,7 +139,8 @@ let schemaField = {
     password: {
         type: 'string',
         minLength: 6,
-        maxLength: 300
+        maxLength: 50,
+        pattern: '^[a-zA-Z0-9_-]{6,}$'
     },
     // 昵称
     nickname: {
