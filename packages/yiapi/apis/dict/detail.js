@@ -13,7 +13,7 @@ export const apiSchema = {
         title: `查询${metaConfig.name}详情接口`,
         type: 'object',
         properties: {
-            code: fnSchema(null, '字典代号', 'string', 1, 20)
+            code: fnSchema(sysConfig.schemaField.code, '字典编码')
         },
         required: ['code']
     }

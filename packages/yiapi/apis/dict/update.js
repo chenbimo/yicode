@@ -21,9 +21,7 @@ export const apiSchema = {
             value: fnSchema(null, '字典值', 'string', 0, 500),
             symbol: fnSchema(null, '字典符号', 'string', 0, 20),
             thumbnail: fnSchema(sysConfig.schemaField.image, '字典缩略图'),
-            image_lists: fnSchema(sysConfig.schemaField.image_lists, '字典轮播图'),
             describe: fnSchema(null, '字典描述', 'string', 0, 300),
-            content: fnSchema(sysConfig.schemaField.content, '字典正文'),
             state: fnSchema(sysConfig.schemaField.state, '是否启用')
         },
         required: ['id']
@@ -51,9 +49,7 @@ export default async function (fastify, opts) {
                     value: req.body.value,
                     symbol: req.body.symbol,
                     thumbnail: req.body.thumbnail,
-                    images: req.body.images,
                     describe: req.body.describe,
-                    content: req.body.content,
                     state: req.body.state
                 };
 
