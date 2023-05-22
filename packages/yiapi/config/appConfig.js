@@ -228,7 +228,7 @@ const appConfig = mergeAndConcat(
                         is_system: 1,
                         sort: 2
                     },
-                    '/dict': {
+                    '/dictCategory': {
                         name: '字典分类',
                         describe: '字典列表',
                         is_system: 1,
