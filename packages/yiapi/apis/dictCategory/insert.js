@@ -28,6 +28,15 @@ export default async function (fastify, opts) {
             try {
                 let dictCategoryModel = fastify.mysql.table(appConfig.table.sys_dict_category);
 
+                let currentData = await dictCategoryModel.clone().where({ code: fnCamelCase(req.body.code) });
+
+                if (currentData) {
+                    return {
+                        ...appConfig.httpCode.INSERT_FAIL,
+                        msg: '当前编号已存在'
+                    };
+                }
+
                 let data = {
                     code: fnCamelCase(req.body.code),
                     name: req.body.name,

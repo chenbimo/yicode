@@ -19,7 +19,7 @@ export const apiSchema = {
             describe: fnSchema(null, '字典分类描述', 'string', 0, 300),
             state: fnSchema(sysConfig.schemaField.state, '是否启用')
         },
-        required: ['id']
+        required: ['id', 'code']
     }
 };
 
@@ -30,6 +30,15 @@ export default async function (fastify, opts) {
             const trx = await fastify.mysql.transaction();
             try {
                 let dictCategoryModel = trx.table(appConfig.table.sys_dict_category).modify(function (queryBuilder) {});
+
+                let currentData = await dictCategoryModel.clone().where({ code: fnCamelCase(req.body.code) });
+
+                if (currentData) {
+                    return {
+                        ...appConfig.httpCode.INSERT_FAIL,
+                        msg: '当前编号已存在'
+                    };
+                }
 
                 let updateData = {
                     code: fnCamelCase(req.body.code),

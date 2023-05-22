@@ -28,12 +28,22 @@ export default async function (fastify, opts) {
                     .table(appConfig.table.sys_dict_category)
                     .where({ id: req.body.id });
 
+                let dictModel = fastify.mysql.table(appConfig.table.sys_dict);
+
                 let dictCategoryData = await dictCategoryModel.clone().first();
 
-                if (dictCategoryData.is_system === 1) {
+                if (!dictCategoryData) {
                     return {
                         ...appConfig.httpCode.DELETE_FAIL,
-                        msg: '默认字典，无法删除'
+                        msg: '查无此字典分类'
+                    };
+                }
+
+                let childrenDict = await dictModel.clone().where({ category_id: req.body.id }).first();
+                if (childrenDict) {
+                    return {
+                        ...appConfig.httpCode.DELETE_FAIL,
+                        msg: '此分类下有字典，无法删除'
                     };
                 }
 
