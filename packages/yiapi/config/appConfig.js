@@ -217,25 +217,31 @@ const appConfig = mergeAndConcat(
                 sort: 6,
                 children: {
                     '/menu': {
-                        name: '菜单',
+                        name: '菜单列表',
                         describe: '菜单列表',
                         is_system: 1,
                         sort: 1
                     },
                     '/api': {
-                        name: '接口',
+                        name: '接口列表',
                         describe: '接口列表',
                         is_system: 1,
                         sort: 2
                     },
                     '/dict': {
-                        name: '字典',
+                        name: '字典分类',
+                        describe: '字典列表',
+                        is_system: 1,
+                        sort: 3
+                    },
+                    '/dict': {
+                        name: '字典管理',
                         describe: '字典列表',
                         is_system: 1,
                         sort: 3
                     },
                     '/role': {
-                        name: '角色',
+                        name: '角色管理',
                         describe: '角色列表',
                         is_system: 1,
                         sort: 4
