@@ -18,7 +18,7 @@ export const apiSchema = {
             code: fnSchema(sysConfig.schemaField.code, '字典编码'),
             name: fnSchema(null, '字典名称', 'string', 1, 20),
             value: fnSchema(null, '字典值', 'string', 0, 500),
-            symbol: fnSchema(null, '字典符号', 'string', 0, 20),
+            symbol: fnSchema(null, '字典符号', 'string', 0, 20, ['string', 'number']),
             thumbnail: fnSchema(sysConfig.schemaField.image, '字典缩略图'),
             describe: fnSchema(null, '字典描述', 'string', 0, 300),
             state: fnSchema(sysConfig.schemaField.state, '是否启用')
@@ -35,7 +35,10 @@ export default async function (fastify, opts) {
                 // 如果传的值是数值类型，则判断是否为有效数值
                 if (req.body.symbol === 'number') {
                     if (Number.isNaN(Number(req.body.value)) === true) {
-                        return { ...appConfig.httpCode.UPDATE_FAIL, msg: '字典值不是一个数字类型' };
+                        return {
+                            ...appConfig.httpCode.UPDATE_FAIL,
+                            msg: '字典值不是一个数字类型'
+                        };
                     }
                 }
 
