@@ -16,9 +16,9 @@ export const apiSchema = {
             page: fnSchema(sysConfig.schemaField.page, '第几页'),
             limit: fnSchema(sysConfig.schemaField.limit, '每页数量'),
             state: fnSchema(sysConfig.schemaField.state, '是否开启'),
-            category: fnSchema(null, '分类代号', 'string', 1, 20, null)
+            category_code: fnSchema(sysConfig.schemaField.category, '字典分类编码')
         },
-        required: ['category']
+        required: ['category_code']
     }
 };
 
@@ -29,7 +29,7 @@ export default async function (fastify, opts) {
             try {
                 let dictModel = fastify.mysql //
                     .table(appConfig.table.sys_dict)
-                    .where('category', req.body.category)
+                    .where('category_code', req.body.category_code)
                     .modify(function (queryBuilder) {
                         if (req.body.keywords !== undefined) {
                             queryBuilder.where('name', 'like', `%${req.body.keywords}%`);

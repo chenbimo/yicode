@@ -7,7 +7,7 @@ export default {
         comment: '分类ID',
         default: 0
     },
-    category: {
+    category_code: {
         type: 'string',
         comment: '分类编码',
         length: 50,

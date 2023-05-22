@@ -14,7 +14,7 @@ export const apiSchema = {
         type: 'object',
         properties: {
             category_id: fnSchema(sysConfig.schemaField.min1, '字典分类ID'),
-            category: fnSchema(sysConfig.schemaField.category, '字典分类'),
+            category_code: fnSchema(sysConfig.schemaField.category, '字典分类'),
             code: fnSchema(sysConfig.schemaField.code, '字典编码'),
             name: fnSchema(null, '字典名称', 'string', 1, 20),
             value: fnSchema(null, '字典值', 'string', 0, 500),
@@ -25,7 +25,7 @@ export const apiSchema = {
             content: fnSchema(sysConfig.schemaField.content, '字典正文'),
             state: fnSchema(sysConfig.schemaField.state, '是否启用')
         },
-        required: ['category_id', 'category', 'code', 'name', 'value', 'symbol']
+        required: ['category_id', 'category_code', 'code', 'name', 'value', 'symbol']
     }
 };
 
@@ -45,7 +45,7 @@ export default async function (fastify, opts) {
 
                 let data = {
                     category_id: req.body.category_id,
-                    category: fnCamelCase(req.body.category),
+                    category_code: fnCamelCase(req.body.category_code),
                     code: fnCamelCase(req.body.code),
                     name: req.body.name,
                     value: req.body.value,

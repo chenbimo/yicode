@@ -13,7 +13,7 @@ export const apiSchema = {
         title: `查询所有${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            category: fnSchema(null, '分类代号', 'string', 1, 20, null),
+            category_code: fnSchema(sysConfig.schemaField.category, '字典分类编码'),
             state: fnSchema(sysConfig.schemaField.state, '是否开启')
         }
     }
@@ -26,7 +26,7 @@ export default async function (fastify, opts) {
             try {
                 let dictModel = fastify.mysql
                     .table(appConfig.table.sys_dict)
-                    .where('category', req.body.category)
+                    .where('category_code', req.body.category_code)
                     .modify(function (queryBuilder) {
                         if (req.body.state !== undefined) {
                             queryBuilder.where('state', req.body.state);

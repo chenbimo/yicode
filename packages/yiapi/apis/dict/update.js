@@ -15,7 +15,7 @@ export const apiSchema = {
         properties: {
             id: fnSchema(sysConfig.schemaField.id, '唯一ID'),
             category_id: fnSchema(sysConfig.schemaField.min1, '字典分类ID'),
-            category: fnSchema(sysConfig.schemaField.category, '字典分类编码'),
+            category_code: fnSchema(sysConfig.schemaField.category, '字典分类编码'),
             code: fnSchema(sysConfig.schemaField.code, '字典编码'),
             name: fnSchema(null, '字典名称', 'string', 1, 20),
             value: fnSchema(null, '字典值', 'string', 0, 500),
@@ -45,7 +45,7 @@ export default async function (fastify, opts) {
 
                 let updateData = {
                     category_id: req.body.category_id,
-                    category: fnCamelCase(req.body.category),
+                    category_code: fnCamelCase(req.body.category_code),
                     code: fnCamelCase(req.body.code),
                     name: req.body.name,
                     value: req.body.value,
