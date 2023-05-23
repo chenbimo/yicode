@@ -16,7 +16,7 @@ export const apiSchema = {
             id: fnSchema(sysConfig.schemaField.id, '唯一ID'),
             pid: fnSchema(sysConfig.schemaField.pid, '父级目录ID'),
             name: fnSchema(null, '目录名称', 'string', 1, 30),
-            value: fnSchema(null, '目录值', 'string', 0, 300),
+            value: fnSchema(sysConfig.schemaField.route, '菜单路由'),
             icon: fnSchema(sysConfig.schemaField.image, '目录图标'),
             sort: fnSchema(sysConfig.schemaField.min0, '目录排序'),
             state: fnSchema(sysConfig.schemaField.state, '目录状态'),

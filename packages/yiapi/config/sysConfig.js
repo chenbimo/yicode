@@ -86,6 +86,13 @@ let schemaField = {
         maxLength: 20,
         pattern: '^[a-zA-Z][a-zA-Z0-9_-]*$'
     },
+    // 路由
+    route: {
+        type: 'string',
+        minLength: 0,
+        maxLength: 20,
+        pattern: '^/[a-zA-Z][a-zA-Z0-9-]*$'
+    },
     // 标题
     title: {
         type: 'string',
