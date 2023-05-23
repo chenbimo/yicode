@@ -7,17 +7,6 @@ export default {
         comment: '父级ID',
         default: 0
     },
-    pids: {
-        type: 'string',
-        comment: '父级ID链',
-        length: 2000,
-        default: '0'
-    },
-    level: {
-        type: 'tinyint',
-        comment: '目录层级',
-        default: 1
-    },
     icon: {
         type: 'string',
         comment: '菜单图标',
@@ -46,12 +35,6 @@ export default {
         comment: '描述',
         length: 500,
         default: ''
-    },
-    is_bool: {
-        type: 'tinyint',
-        comment: '真假树',
-        length: 1,
-        default: 0
     },
     is_open: {
         type: 'tinyint',

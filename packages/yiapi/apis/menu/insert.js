@@ -7,23 +7,22 @@ import { metaConfig } from './_meta.js';
 const apiInfo = await fnApiInfo(import.meta.url);
 
 export const apiSchema = {
-    summary: `更新${metaConfig.name}`,
+    summary: `添加${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
     body: {
-        title: `更新${metaConfig.name}接口`,
+        title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            id: fnSchema(sysConfig.schemaField.id, '唯一ID'),
             pid: fnSchema(sysConfig.schemaField.pid, '父级目录ID'),
             name: fnSchema(null, '目录名称', 'string', 1, 30),
-            value: fnSchema(null, '目录值', 'string', 0, 300),
+            value: fnSchema(sysConfig.schemaField.code, '菜单路由'),
             icon: fnSchema(sysConfig.schemaField.image, '目录图标'),
             sort: fnSchema(sysConfig.schemaField.min1, '目录排序'),
             state: fnSchema(sysConfig.schemaField.state, '目录状态'),
             describe: fnSchema(sysConfig.schemaField.describe, '目录描述'),
             is_open: fnSchema(sysConfig.schemaField.boolEnum, '是否公开')
         },
-        required: ['id']
+        required: ['pid', 'name', 'value']
     }
 };
 
@@ -48,16 +47,8 @@ export default async function (fastify, opts) {
                     }
                 }
 
-                let selfData = await menuModel.clone().where('id', req.body.id).first();
-                if (selfData === undefined) {
-                    return {
-                        ...appConfig.httpCode.FAIL,
-                        msg: '菜单不存在'
-                    };
-                }
-
                 // 需要更新的数据
-                let updateData = {
+                let insertData = {
                     pid: req.body.pid,
                     name: req.body.name,
                     value: req.body.value,
@@ -68,19 +59,15 @@ export default async function (fastify, opts) {
                     state: req.body.state
                 };
 
-                let res = await menuModel
-                    //
-                    .clone()
-                    .where({ id: req.body.id })
-                    .update(fnClearUpdateData(updateData));
+                await menuModel.clone().insert(fnClearInsertData(insertData));
 
                 await trx.commit();
                 await fastify.cacheTreeData();
-                return appConfig.httpCode.UPDATE_SUCCESS;
+                return appConfig.httpCode.INSERT_SUCCESS;
             } catch (err) {
                 await trx.rollback();
                 fastify.log.error(err);
-                return appConfig.httpCode.UPDATE_FAIL;
+                return appConfig.httpCode.INSERT_FAIL;
             }
         }
     });
