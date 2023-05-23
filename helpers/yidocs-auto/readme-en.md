@@ -1,28 +1,28 @@
 # yidocs-auto
 
-[english doc](./readme-en.md)
+[中文文档](./readme-en.md)
 
-## 作用
+## what?
 
-vitepress 导航栏和侧边栏自动生成工具
+`vitepress` Navbar and sidebar auto-generation tool
 
-无需手写侧边栏和顶部导航栏配置！！！
+No need to manually write sidebar and top navigation bar configuration！！！
 
-## 效果
+## Effect
 
-实际效果，请浏览 [易文档 https://doc.yicode.tech](https://doc.yicode.tech) 查看。
+For the actual effect, please browse [https://doc.yicode.tech](https://doc.yicode.tech) to view.
 
-本文档的 `顶部导航` 和 `左侧目录`，均为自动生成。
+The `Top Navigation` and `Left Table of Contents` of this document are automatically generated. .
 
-## 截图
+## screenshot
 
 ![随易科技](assets/1.png)
 
 ![随易科技](assets/2.png)
 
-## 安装
+## Install
 
-以下方式，根据自己的情况，任选一种
+Choose one of the following methods according to your own situation
 
 ```bash
 npm install @yicode/yidocs-auto -D
@@ -30,9 +30,9 @@ pnpm add @yicode/yidocs-auto -D
 yarn add @yicode/yidocs-auto -D
 ```
 
-## 使用
+## use
 
-参考如下案例即可
+Just refer to the following case
 
 ```javascript
 import { defineConfig } from 'vitepress';
@@ -89,13 +89,13 @@ export default defineConfig({
             prev: '上一页',
             next: '下一页'
         },
-        nav: navBar, // 注意：这里不需要手动配置了
-        sidebar: sideBar // 注意：这里不需要手动配置了
+        nav: navBar, // Note: No manual configuration is required here
+        sidebar: sideBar // Note: No manual configuration is required here
     }
 });
 ```
 
-## 结构
+## structure
 
 ```bash
 .
@@ -127,19 +127,19 @@ export default defineConfig({
 └── package.json
 ```
 
-## 要求
+## Require
 
-1. 必需按照按照如上文件结构组织文档才可自动生成
-2. 文件必须放到 `markdown` 目录中
-3. 所有文档和目录，都要以 `数字-文件名称` 的形式！！！
-4. 最多支持 `4` 级文件结构！！！
-5. 注意 `.vitepress` 和 `markdown` 目录的位置
+1. Documents must be organized according to the above file structure to be automatically generated
+2. Files must be placed in the `markdown` directory
+3. All documents and directories must be in the form of `number-filename`! ! !
+4. Up to `4` level file structure is supported! ! !
+5. Note the location of the `.vitepress` and `markdown` directories
 
-## 版权
+## copyright
 
-`yidocs` 请任意使用，无任何额外要求，保留原作者信息即可。
+`yidocs-auto` Please use it arbitrarily, without any additional requirements, just keep the original author information.
 
-## 反馈
+## feedback
 
--   作者微信：c91374286
--   作者邮箱：bimostyle@qq.com
+-   Author WeChat：c91374286
+-   Author Email：bimostyle@qq.com
