@@ -1,6 +1,6 @@
 {
     "name": "@yicode/dlnpm",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "dlnpm - npm package download tool",
     "author": "chensuiyi <bimostyle@qq.com>",
     "bin": {
@@ -14,7 +14,7 @@
     "files": [],
     "dependencies": {
         "got": "^12.6.0",
-        "inquirer": "^9.2.5",
+        "inquirer": "^9.2.6",
         "log-symbols": "^5.1.0",
         "pacote": "^15.2.0"
     },

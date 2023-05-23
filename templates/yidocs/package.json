@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yidocs",
-    "version": "3.2.11",
+    "version": "3.2.12",
     "description": "yidocs（易文档）文档管理",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
@@ -28,7 +28,7 @@
     "homepage": "https://yicode.tech",
     "license": "GPL-3.0",
     "devDependencies": {
-        "vitepress": "1.0.0-alpha.76"
+        "vitepress": "1.0.0-beta.1"
     },
     "dependencies": {
         "@yicode-helper/yidocs-auto": "workspace:*"
