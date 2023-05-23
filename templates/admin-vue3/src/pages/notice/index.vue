@@ -1,5 +1,5 @@
 <template>
-    <div class="page-admin page-full">
+    <div class="page-notice page-full">
         <div class="page-action">
             <div class="left">
                 <a-button type="primary">添加</a-button>
@@ -45,6 +45,11 @@
 </template>
 
 <script setup>
+// 选项集
+defineOptions({
+    name: 'notice'
+});
+
 // 全局集
 let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
@@ -70,7 +75,7 @@ let $Method = {
     async apiSelectData() {
         try {
             let res = await $Http({
-                url: '/dictionary/select',
+                url: '/notice/select',
                 data: {
                     page: $Data.pagination.page,
                     limit: $Data.pagination.limit
@@ -88,6 +93,6 @@ $Method.initData();
 </script>
 
 <style lang="scss" scoped>
-.page-admin {
+.page-notice {
 }
 </style>

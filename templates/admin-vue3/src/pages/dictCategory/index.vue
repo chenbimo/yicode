@@ -1,5 +1,5 @@
 <template>
-    <div class="page-role page-full">
+    <div class="page-admin page-full">
         <div class="page-action">
             <div class="left">
                 <a-button type="primary" @click="$Method.onDataAction('insertData', {})">添加</a-button>
@@ -13,20 +13,15 @@
         <div class="page-table">
             <a-table :data="$Data.tableData" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
                 <template #columns>
-                    <a-table-column title="名称" data-index="name"></a-table-column>
-                    <a-table-column title="编码" data-index="code"></a-table-column>
+                    <a-table-column title="名称" data-index="name" :width="200"></a-table-column>
+                    <a-table-column title="编码" data-index="code" :width="200"></a-table-column>
                     <a-table-column title="描述" data-index="describe"></a-table-column>
-                    <a-table-column title="菜单" data-index="menu_ids"></a-table-column>
-                    <a-table-column title="接口" data-index="api_ids"></a-table-column>
-                    <a-table-column title="创建时间" data-index="created_at1" :width="150"></a-table-column>
-                    <a-table-column title="更新时间" data-index="updated_at1" :width="150"></a-table-column>
                     <a-table-column title="操作" fixed="right" :width="100" align="right">
                         <template #cell="{ record }">
                             <a-dropdown position="br" @select="$Method.onDataAction($event, record)">
                                 <a-button>操作<icon-down /></a-button>
                                 <template #content>
                                     <a-doption value="updateData"><icon-edit />编辑</a-doption>
-                                    <a-doption value="permissionData"><icon-edit />权限</a-doption>
                                     <a-doption value="deleteData"> <icon-delete />删除</a-doption>
                                 </template>
                             </a-dropdown>
@@ -43,48 +38,40 @@
         </div>
 
         <!-- 编辑数据抽屉 -->
-        <editDataDrawer v-if="$Data.isShow.editDataDrawer" v-model="$Data.isShow.editDataDrawer" :pageConfig="$Data.pageConfig" :actionType="$Data.actionType" :rowData="$Data.rowData" @success="$Method.fnFreshData()"></editDataDrawer>
-
-        <!-- 编辑权限抽屉 -->
-        <editPermissionDrawer v-if="$Data.isShow.editPermissionDrawer" v-model="$Data.isShow.editPermissionDrawer" :pageConfig="$Data.pageConfig" :rowData="$Data.rowData" @success="$Method.fnFreshData()"></editPermissionDrawer>
+        <editDataDrawer v-if="$Data.isShow.editDataDrawer" v-model="$Data.isShow.editDataDrawer" :pageConfig="$Data.pageConfig" :actionType="$Data.actionType" :rowData="$Data.rowData" @success="$Method.fnFreshData"></editDataDrawer>
     </div>
 </template>
 
 <script setup>
 // 内部集
 import editDataDrawer from './components/editDataDrawer.vue';
-import editPermissionDrawer from './components/editPermissionDrawer.vue';
+
+// 外部集
 
 // 选项集
 defineOptions({
-    name: 'role'
+    name: 'dict'
 });
 
 // 全局集
 let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 工具集
-let $Router = useRouter();
 
 // 数据集
 let $Data = $ref({
     // 页面配置
     pageConfig: {
-        name: '角色',
-        name2: '权限'
+        name: '字典分类'
     },
     // 显示和隐藏
     isShow: {
         editDataDrawer: false,
-        editPermissionDrawer: false,
         deleteDataDialog: false
     },
     actionType: 'insertData',
-    // 表格数据
     tableData: [],
-    // 行数据
     rowData: {},
-    // 分页组件数据
     pagination: {
         page: 1,
         limit: 20,
@@ -94,7 +81,6 @@ let $Data = $ref({
 
 // 方法集
 let $Method = {
-    // 初始化数据
     async initData() {
         await $Method.apiSelectData();
     },
@@ -114,12 +100,6 @@ let $Method = {
             $Data.isShow.deleteDataDialog = true;
             return;
         }
-
-        // 设置权限
-        if ($Data.actionType === 'permissionData') {
-            $Data.isShow.editPermissionDrawer = true;
-            return;
-        }
     },
     // 刷新数据
     async fnFreshData() {
@@ -129,7 +109,7 @@ let $Method = {
     async apiSelectData() {
         try {
             let res = await $Http({
-                url: '/role/select',
+                url: '/dictCategory/select',
                 data: {
                     page: $Data.pagination.page,
                     limit: $Data.pagination.limit
@@ -138,7 +118,8 @@ let $Method = {
             $Data.tableData = res.data.rows;
             $Data.pagination.total = res.data.total;
         } catch (err) {
-            console.log('🚀 ~ file: index.vue:122 ~ apiSelectData ~ err:', err);
+            console.log('🚀 ~ file: index.vue:86 ~ apiSelectData ~ err:', err);
+            Message.error(err.msg || err);
         }
     }
 };
@@ -147,6 +128,6 @@ $Method.initData();
 </script>
 
 <style lang="scss" scoped>
-.page-role {
+.page-admin {
 }
 </style>

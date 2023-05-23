@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Message } from '@arco-design/web-vue';
 
 let $Http = axios.create({
     method: 'POST',
@@ -29,6 +28,9 @@ $Http.interceptors.response.use(
     function (res) {
         if (res.data.code === 0) {
             return Promise.resolve(res.data);
+        }
+        if (res.data.symbol === 'NOT_LOGIN') {
+            location.href = location.origin + '/#/login';
         }
         return Promise.reject(res.data);
     },

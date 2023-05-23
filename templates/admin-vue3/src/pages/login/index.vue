@@ -12,7 +12,7 @@
                         <div class="site-logo">
                             <img class="img" :src="utilGetAssets('logo.png')" />
                         </div>
-                        <div class="site-title">{{ $Data?.appConfig?.name }}后台管理系统</div>
+                        <div class="site-title">{{ $GlobalData?.appConfig?.name }}后台管理系统</div>
                         <div class="form-panel">
                             <a-space direction="vertical">
                                 <a-input v-model="$Data.formData.account" placeholder="请输入账号">
@@ -38,14 +38,26 @@
                     </div>
                 </div>
             </div>
-            <div class="login-tips">本项目由<a class="link" href="https://yicode.tech">随易科技</a>开发的<a class="link" href="https://gitee.com/chenbimo/yicode">易接口</a>和<a class="link" href="https://gitee.com/chenbimo/yicode">易管理</a>驱动</div>
+            <div class="login-tips">
+                本项目由
+                <!--  -->
+                <a class="link" href="https://yicode.tech" target="_blank">随易科技</a>研发的
+                <!--  -->
+                <a class="link" href="https://gitee.com/chenbimo/yicode/tree/master/packages/yiapi" target="_blank">易接口</a>和
+                <!--  -->
+                <a class="link" href="https://gitee.com/chenbimo/yicode/tree/master/templates/admin-vue3" target="_blank">易管理</a>驱动
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
+// 选项集
+defineOptions({
+    name: 'login'
+});
+
 // 外部集
-import { Message } from '@arco-design/web-vue';
 
 // 全局集
 let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
@@ -61,7 +73,6 @@ let $Is = $ref({
 
 // 数据集
 let $Data = $ref({
-    appConfig: $AppConfig,
     reqParams: {
         keywords: ''
     },

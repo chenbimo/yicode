@@ -1,9 +1,7 @@
 <template>
     <div class="page-user page-full">
         <div class="page-action">
-            <div class="left">
-                <a-button type="primary">添加</a-button>
-            </div>
+            <div class="left"></div>
             <div class="right">
                 <a-input placeholder="请输入搜索关键字" allow-clear></a-input>
                 <div class="w-10px"></div>
@@ -45,6 +43,11 @@
 </template>
 
 <script setup>
+// 选项集
+defineOptions({
+    name: 'user'
+});
+
 // 全局集
 let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 

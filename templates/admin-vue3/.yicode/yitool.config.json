@@ -1,8 +1,0 @@
-{
-    "zip": {
-        "savePath": ".cache",
-        "zipName": "yibase-vue3.zip",
-        "include": ["**/*"],
-        "exclude": ["**/node_modules/**/*", "**/.cache/**/*", "**/dist/**/*", "**/.vscode/**/*", "**/.git/**/*"]
-    }
-}

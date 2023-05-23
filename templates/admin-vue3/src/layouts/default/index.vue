@@ -1,27 +1,19 @@
 <template>
     <a-layout class="layout-default">
-        <a-layout-sider class="layout-sider" :collapsed="$Is.collapsed" collapsible hide-trigger>
+        <a-layout-sider class="layout-sider" :collapsed="$Data.collapsed" collapsible hide-trigger>
             <div class="info-area">
                 <div class="logo bg-contain" :style="{ backgroundImage: 'url(' + utilGetAssets('logo.png') + ')' }"></div>
-                <div class="name">易管理后台</div>
+                <div class="name">{{ $GlobalData.appConfig.name }}后台</div>
             </div>
             <div class="menu-area"></div>
-            <a-menu v-if="$Data.selectedItemId" :default-open-keys="[$Data.openMenuId]" :default-selected-keys="[$Data.selectedItemId]" :style="{ width: '100%' }" accordion @menu-item-click="$Method.onMenuItemClick">
-                <a-sub-menu v-for="menu in $Data.menuTree" :key="menu.id">
-                    <template #title> <icon-apps /> {{ menu.name }} </template>
-                    <a-menu-item v-for="item in menu.children" :key="item.id">
-                        <icon-file />
-                        {{ item.name }}
-                    </a-menu-item>
-                </a-sub-menu>
-            </a-menu>
+            <sideMenu v-if="$Data.isShow.sideMenu === true" :openMenuId="$Data.openMenuId" :selectedItemId="$Data.selectedItemId" :menuObject="$Data.menuObject" :menuTree="$Data.menuTree"></sideMenu>
         </a-layout-sider>
         <a-layout class="layout-main" style="height: 100%">
             <div class="layout-header">
                 <div class="left">
                     <a-button @click="$Method.onCollapse">
                         <template #icon>
-                            <icon-menu-fold v-if="$Is.collapsed" />
+                            <icon-menu-fold v-if="$Data.collapsed" />
                             <icon-menu-unfold v-else />
                         </template>
                     </a-button>
@@ -33,13 +25,13 @@
                             <!--  -->
                             <icon-caret-down size="16px" style="margin-top: 2px; margin-left: 4px" />
                         </a-button>
-                        <a-avatar class="ml-10px" :size="36" :imageUrl="$GlobalData.userData.avatar"> </a-avatar>
+                        <!-- <a-avatar class="ml-10px" :size="36" :imageUrl="$GlobalData.userData.avatar"> </a-avatar> -->
                         <template #content>
-                            <a-doption value="个人资料">
+                            <!-- <a-doption value="个人资料">
                                 <template #icon><i-bi-person class="text-12px" /></template>
                                 个人资料
-                            </a-doption>
-                            <a-doption value="退出登录">
+                            </a-doption> -->
+                            <a-doption value="退出登录" @click="$Method.onLogout">
                                 <template #icon><i-bi-x-circle class="text-12px" /></template>
                                 退出登录
                             </a-doption>
@@ -56,18 +48,25 @@
 
 <script setup>
 // 外部集
-import { Message } from '@arco-design/web-vue';
+
+// 内部集
+import sideMenu from './components/sideMenu.vue';
+
+// 选项集
+defineOptions({
+    name: 'default'
+});
 
 // 全局集
 let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
-let $Router = useRouter();
+let $Route = useRoute();
 
-// 状态集
-let $Is = $ref({
-    collapsed: false
-});
 // 数据集
 let $Data = $ref({
+    isShow: {
+        sideMenu: false
+    },
+    collapsed: false,
     menuTree: [],
     menuObject: {},
     openMenuId: 0,
@@ -81,7 +80,13 @@ let $Method = {
         $Method.apiGetAdminMenus();
     },
     async onCollapse() {
-        $Is.collapsed = !$Is.collapsed;
+        $Data.collapsed = !$Data.collapsed;
+    },
+    onLogout() {
+        $Storage.clearAll();
+        $GlobalData.token = '';
+        $GlobalData.userData = {};
+        $Router.push('/login');
     },
     // 点击菜单项
     onMenuItemClick(id) {
@@ -99,17 +104,18 @@ let $Method = {
             $Data.menuObject = _.keyBy(_.cloneDeep(res.data.rows), 'id');
             $Data.menuTree = yidash_tree_array2Tree(_.sortBy(res.data.rows, 'sort'));
             $Data.menuTree.forEach((menu, index) => {
-                if (index === 0) {
-                    $Data.openMenuId = menu.id;
-                    menu.children?.forEach((item, index2) => {
-                        if (index2 === 0) {
-                            $Data.selectedItemId = item.id;
-                            $Data.selectedItem = $Data.menuObject[item.id];
-                        }
-                    });
-                }
+                menu.children?.forEach((item, index2) => {
+                    if (item.value === $Route.path) {
+                        $Data.openMenuId = item.pid;
+                        $Data.selectedItemId = item.id;
+                        $Data.selectedItem = $Data.menuObject[item.id];
+                    }
+                });
             });
-            $Router.push($Data.selectedItem.value);
+            $Data.isShow.sideMenu = true;
+            if ($Data.selectedItem.value) {
+                $Router.push($Data.selectedItem.value);
+            }
         } catch (err) {
             console.log('🚀 ~ file: default.vue ~ line 129 ~ apiGetMenus ~ err', err);
         }

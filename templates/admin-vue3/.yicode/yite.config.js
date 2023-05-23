@@ -10,6 +10,17 @@ export const yiteConfig = {
                 name: 'ArcoResolver',
                 options: {}
             }
+        ],
+        imports: [
+            {
+                '@arco-design/web-vue': [
+                    //
+                    'Message',
+                    'Modal',
+                    'Notification',
+                    'Drawer'
+                ]
+            }
         ]
     },
     // 自动组件解析
@@ -26,7 +37,15 @@ export const yiteConfig = {
     // webpack配置
     viteConfig: {
         optimizeDeps: {
-            include: ['lodash-es', 'vue-i18n', 'axios']
+            include: [
+                //
+                'lodash-es',
+                'vue-i18n',
+                'axios',
+                '@yicode/yidash',
+                'date-fns',
+                'date-fns/locale'
+            ]
         }
     }
 };

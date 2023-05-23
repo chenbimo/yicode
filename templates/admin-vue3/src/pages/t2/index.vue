@@ -1,11 +1,11 @@
 <template>
-    <div class="page-user"></div>
+    <div class="page-user">t2</div>
 </template>
 
 <script setup>
 // 选项集
 defineOptions({
-    name: 'index'
+    name: 't2'
 });
 
 // 全局集

@@ -245,6 +245,12 @@ const appConfig = mergeAndConcat(
                         describe: '角色列表',
                         is_system: 1,
                         sort: 5
+                    },
+                    '/config': {
+                        name: '配置中心',
+                        describe: '配置中心',
+                        is_system: 1,
+                        sort: 5
                     }
                 }
             }

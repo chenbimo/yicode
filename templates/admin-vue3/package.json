@@ -1,7 +1,7 @@
 {
-    "name": "@yicode-template/admin-vue3",
-    "version": "3.2.11",
-    "description": "admin-vue3（易管理）vue3后台管理模板",
+    "name": "@yicode-tech/admin",
+    "version": "3.2.3",
+    "description": "yiadmin-vue3（易管理）vue3后台管理模板",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "dev": "yite dev",
@@ -29,20 +29,18 @@
     "license": "GPL-3.0",
     "dependencies": {
         "@arco-design/web-vue": "^2.46.0",
-        "@intlify/unplugin-vue-i18n": "^0.10.0",
-        "@yicode/yidash": "workspace:*",
+        "@yicode/yidash": "^3.2.6",
         "axios": "^1.4.0",
         "date-fns": "^2.30.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.3",
         "store2": "^2.14.2",
-        "tiny-cookie": "^2.4.1",
         "vue": "^3.3.4",
         "vue-i18n": "^9.2.2",
         "vue-router": "^4.2.1"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "workspace:*",
+        "@yicode/yite-cli": "^1.29.9",
         "sass": "^1.62.1"
     }
 }

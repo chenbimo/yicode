@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia';
-import { isCookieEnabled, getCookie, setCookie, removeCookie } from 'tiny-cookie';
-
-export const useGlobal = defineStore('global', () => {
+export const useGlobal = Pinia.defineStore('global', () => {
     // 全局数据
     let $GlobalData = $ref({
+        appConfig: {
+            name: '随易科技'
+        },
         // 用户令牌
-        token: getCookie('token') || '',
+        token: yite.getCookie('token') || '',
         // 用户数据
         userData: $Storage.local.get('userData') || {},
         clientWidth: '',
@@ -17,7 +17,8 @@ export const useGlobal = defineStore('global', () => {
         tableScroll: {
             x: '100%',
             y: '100%'
-        }
+        },
+        drawerWidth: 400
     });
 
     // 全局计算数据

@@ -1,11 +1,8 @@
-import { createI18n } from 'vue-i18n';
-import messages from '@intlify/unplugin-vue-i18n/messages';
+import { yiteMessages } from 'virtual:yite-messages';
 
-import { app } from '@/app.js';
-
-const i18n = createI18n({
+const $I18n = createI18n({
     locale: 'zh',
-    messages
+    messages: await yiteMessages()
 });
 
-export { i18n };
+export { $I18n };

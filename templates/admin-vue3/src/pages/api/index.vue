@@ -1,46 +1,34 @@
 <template>
     <div class="page-api page-full">
         <div class="page-action">
-            <div class="left">
-                <a-button type="primary">添加</a-button>
-            </div>
+            <div class="left"></div>
             <div class="right">
                 <a-input placeholder="请输入搜索关键字" allow-clear></a-input>
                 <div class="w-10px"></div>
                 <a-button type="primary">搜索</a-button>
             </div>
         </div>
-        <div class="page-table">
+        <div class="page-table no-page">
             <a-table :data="$Data.tableData" :pagination="false" :bordered="$GlobalData.tableBordered" :scroll="$GlobalData.tableScroll" row-key="id">
                 <template #columns>
-                    <a-table-column title="名称" data-index="name"></a-table-column>
-                    <a-table-column title="路由" data-index="value"></a-table-column>
+                    <a-table-column title="名称" data-index="name" :width="250"></a-table-column>
+                    <a-table-column title="路由" data-index="value" :width="300"></a-table-column>
                     <a-table-column title="描述" data-index="describe"></a-table-column>
-                    <a-table-column title="排序" data-index="sort"></a-table-column>
-                    <a-table-column title="创建时间" data-index="created_at"></a-table-column>
-                    <a-table-column title="更新时间" data-index="updated_at"></a-table-column>
-                    <a-table-column title="操作" fixed="right" :width="100" align="right">
-                        <template #cell="{ record }">
-                            <a-dropdown position="br" @select="$Method.onExecAction($event, record)">
-                                <a-button>操作<icon-down /></a-button>
-                                <template #content>
-                                    <a-doption value="updateData"><icon-edit />编辑</a-doption>
-                                    <a-doption value="deleteData"> <icon-delete />删除</a-doption>
-                                </template>
-                            </a-dropdown>
-                        </template>
-                    </a-table-column>
+                    <a-table-column title="排序" data-index="sort" :width="80"></a-table-column>
+                    <a-table-column title="创建时间" data-index="created_at2" :width="150"></a-table-column>
+                    <a-table-column title="更新时间" data-index="updated_at2" :width="150"></a-table-column>
                 </template>
             </a-table>
-        </div>
-        <div class="page-page">
-            <div class="left"></div>
-            <div class="right"></div>
         </div>
     </div>
 </template>
 
 <script setup>
+// 选项集
+defineOptions({
+    name: 'api'
+});
+
 // 全局集
 let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
@@ -72,10 +60,9 @@ let $Method = {
                     limit: $Data.pagination.limit
                 }
             });
-            $Data.tableData = yidash_tree_array2Tree(_.sortBy(res.data.rows, 'sort'));
-        } catch (err) {
-        } finally {
-        }
+
+            $Data.tableData = yidash_tree_array2Tree(_.sortBy(utilCoverRelativeTime(res.data.rows), 'sort'));
+        } catch (err) {}
     }
 };
 
