@@ -10,7 +10,7 @@ No need to manually write sidebar and top navigation bar configuration！！！
 
 ## who developed it
 
-[官网 https://yicode.tech](https://yicode.tech)
+[official website https://yicode.tech](https://yicode.tech)
 
 The yicode (easy programming) series of software development ecology, all maintained by Chen Suiyi since 2019.
 
