@@ -17,12 +17,14 @@ async function main() {
 
         console.log(logSymbols.info, '开发者：随易科技（https://yicode.tech）');
         console.log('-----------------------------------------');
-        let cwd = fs.readdirSync('.');
-        console.log('🚀 ~ file: index.js:21 ~ main ~ cwd:', cwd);
-        // if(){
 
-        // }
-        return;
+        // 判断是否为空目录
+        let dirData = fs.readdirSync('.');
+        if (dirData.length > 0) {
+            console.log(logSymbols.error('当前目录不为空，无法下载'));
+            return;
+        }
+
         // 从哪里下载
         let { registry } = await inquirer.prompt({
             type: 'list',
