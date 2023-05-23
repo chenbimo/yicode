@@ -1,0 +1,29 @@
+{
+    "name": "@yicode/dlyicode",
+    "version": "1.1.0",
+    "description": "dlyicode - yicode官方npm资源下载",
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "bin": {
+        "dlyicode": "index.js"
+    },
+    "type": "module",
+    "homepage": "https://yicode.tech",
+    "license": "GPL-3.0",
+    "main": "index.js",
+    "repository": "https://github.com/chenbimo/yicode.git",
+    "files": [],
+    "dependencies": {
+        "got": "^12.6.0",
+        "inquirer": "^9.2.6",
+        "log-symbols": "^5.1.0",
+        "pacote": "^15.2.0"
+    },
+    "scripts": {},
+    "engines": {},
+    "keywords": [
+        "npm",
+        "download",
+        "package",
+        "npmjs"
+    ]
+}
