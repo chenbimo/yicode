@@ -18,7 +18,7 @@ export const apiSchema = {
             name: fnSchema(null, '目录名称', 'string', 1, 30),
             value: fnSchema(null, '目录值', 'string', 0, 300),
             icon: fnSchema(sysConfig.schemaField.image, '目录图标'),
-            sort: fnSchema(sysConfig.schemaField.min1, '目录排序'),
+            sort: fnSchema(sysConfig.schemaField.min0, '目录排序'),
             state: fnSchema(sysConfig.schemaField.state, '目录状态'),
             describe: fnSchema(sysConfig.schemaField.describe, '目录描述'),
             is_open: fnSchema(sysConfig.schemaField.boolEnum, '是否公开')
