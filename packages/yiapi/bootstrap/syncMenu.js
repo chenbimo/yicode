@@ -52,8 +52,6 @@ async function syncMenuDir(fastify) {
                 insertMenuDir.push({
                     name: item.name,
                     value: item.value,
-                    level: 1,
-                    pids: '0',
                     pid: 0,
                     sort: item.sort || index,
                     is_open: 0,
@@ -140,8 +138,6 @@ async function syncMenuFile(fastify) {
                         insertMenuFile.push({
                             name: item.name,
                             value: item.value,
-                            level: 2,
-                            pids: `0,${parentMenuData.id}`,
                             pid: parentMenuData.id,
                             sort: item.sort || index2,
                             is_open: 0,
@@ -156,7 +152,6 @@ async function syncMenuFile(fastify) {
                         id: mapMenu.id,
                         name: item.name,
                         value: item.value,
-                        pids: `0,${parentMenuData.id}`,
                         pid: parentMenuData.id,
                         sort: item.sort || index2,
                         is_system: item.is_system || 0,
