@@ -8,6 +8,14 @@
 
 No need to manually write sidebar and top navigation bar configuration！！！
 
+## who developed it
+
+[官网 https://yicode.tech](https://yicode.tech)
+
+The yicode (easy programming) series of software development ecology, all maintained by Chen Suiyi since 2019.
+
+Committed to providing technical specifications, project templates, efficiency tools, etc. for small and medium-sized enterprises, outsourcing companies, software studios and individual developers.
+
 ## Effect
 
 For the actual effect, please browse [https://doc.yicode.tech](https://doc.yicode.tech) to view.
@@ -143,3 +151,22 @@ export default defineConfig({
 
 -   Author WeChat：c91374286
 -   Author Email：bimostyle@qq.com
+
+## others
+
+-   **@yicode/yite-cli** (Deeply encapsulated `vue3` project development scaffolding based on `vite`)
+-   **@yicode/yiapi** (Deeply encapsulated `nodejs` project interface development framework based on `fastify`)
+-   **@yicode/dlnpm** (`yicode` software ecological download tool)
+-   **@yicode/commander** (`commander v10` Chinese, more suitable for Chinese people)
+-   **@yicode/yidash** (business method library for class `lodash`)
+-   **@yicode-helper/yidocs-auto** (`vitepress` sidebar and navigation bar automatic generation tool, avoid manual configuration)
+-   **@yicode-helper/yite-html** (provide entry files in different environments for project development based on `vite`)
+-   **@yicode-helper/yite-qrcode** (during development, display the mobile phone debugging QR code, avoid manually entering the address)
+-   **@yicode-helper/yite-router** (simple, brutal and convenient routing automation solution)
+-   **@yicode-helper/yite-i18n** (lightweight internationalization language data generation plugin)
+-   **@yicode-helper/yite-chunk** (code automatic segmentation scheme)
+-   **@yicode-template/base-vue3** (basic and complete `vue3` project development template)
+-   **@yicode-template/yidocs** (`vitepress` documentation project template with automated sidebar and navbar)
+-   **@yicode-template/uni-vue3** (`uniapp vue3` project template with latest dependencies and project organization)
+-   **@yicode-template/admin-vue3** (background admin template developed by `arco-design + vue3`)
+-   **@yicode-template/yiapi-free** (`yiapi` interface development project template)
