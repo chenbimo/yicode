@@ -40,9 +40,9 @@ async function syncMenuDir(fastify) {
             } else {
                 deleteMenuDirValue.push(item.value);
             }
-            if (menuDirNew.includes(item.value) === false) {
-                deleteMenuDir.push(item.id);
-            }
+            // if (menuDirNew.includes(item.value) === false) {
+            //     deleteMenuDir.push(item.id);
+            // }
         });
 
         _forEach(menuConfigNew, (item, index) => {
@@ -124,9 +124,9 @@ async function syncMenuFile(fastify) {
             } else {
                 deleteMenuFileValue.push(item.value);
             }
-            if (menuFileNew.includes(item.value) === false) {
-                deleteMenuFile.push(item.id);
-            }
+            // if (menuFileNew.includes(item.value) === false) {
+            //     deleteMenuFile.push(item.id);
+            // }
         });
 
         _forEach(menuConfigNew, (menu, index1) => {
