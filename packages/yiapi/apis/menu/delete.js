@@ -30,6 +30,13 @@ export default async function (fastify, opts) {
 
                 let dictionaryData = await dictionaryModel.clone().first();
 
+                if (!dictionaryData) {
+                    return {
+                        ...appConfig.httpCode.DELETE_FAIL,
+                        msg: '菜单不存在'
+                    };
+                }
+
                 if (dictionaryData.is_system === 1) {
                     return {
                         ...appConfig.httpCode.DELETE_FAIL,
@@ -38,6 +45,8 @@ export default async function (fastify, opts) {
                 }
 
                 let result = await dictionaryModel.clone().delete();
+
+                await fastify.cacheTreeData();
                 return {
                     ...appConfig.httpCode.DELETE_SUCCESS,
                     data: result
