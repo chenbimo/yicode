@@ -24,28 +24,35 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let dictionaryModel = fastify.mysql //
-                    .table(appConfig.table.sys_menu)
-                    .where({ id: req.body.id });
+                let menuModel = fastify.mysql //
+                    .table(appConfig.table.sys_menu);
 
-                let dictionaryData = await dictionaryModel.clone().first();
+                let menuData = await menuModel.clone().where({ id: req.body.id }).first();
 
-                if (!dictionaryData) {
+                if (!menuData) {
                     return {
                         ...appConfig.httpCode.DELETE_FAIL,
                         msg: '菜单不存在'
                     };
                 }
 
-                if (dictionaryData.is_system === 1) {
+                let childData = await menuModel.clone().where({ pid: req.body.id }).first();
+
+                if (childData) {
+                    return {
+                        ...appConfig.httpCode.DELETE_FAIL,
+                        msg: '存在子菜单，无法删除'
+                    };
+                }
+
+                if (menuData.is_system === 1) {
                     return {
                         ...appConfig.httpCode.DELETE_FAIL,
                         msg: '默认菜单，无法删除'
                     };
                 }
 
-                let result = await dictionaryModel.clone().delete();
-
+                let result = await menuModel.clone().where({ id: req.body.id }).delete();
                 await fastify.cacheTreeData();
                 return {
                     ...appConfig.httpCode.DELETE_SUCCESS,
