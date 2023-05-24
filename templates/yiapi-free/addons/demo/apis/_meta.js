@@ -1,4 +1,4 @@
 export const metaConfig = {
-    dir: '阿里支付',
-    name: '阿里支付'
+    dir: '测试接口',
+    name: '测试接口'
 };

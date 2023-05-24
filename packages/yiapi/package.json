@@ -38,6 +38,7 @@
         "blueimp-md5": "^2.19.0",
         "bull": "^4.10.4",
         "copy-anything": "^3.0.4",
+        "dayjs": "^1.11.7",
         "fast-glob": "^3.2.12",
         "fastify": "^4.17.0",
         "fastify-plugin": "^4.5.0",

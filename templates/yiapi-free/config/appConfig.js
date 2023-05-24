@@ -18,7 +18,8 @@ let appConfig = {
         '/docs/**',
         '/public/**',
         '/api/admin/login',
-        '/api/user/tokenCheck'
+        '/api/user/tokenCheck',
+        '/api/upload/local'
     ],
     // 黑名单接口，不可访问的接口
     blackApis: [],

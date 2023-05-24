@@ -1,8 +1,8 @@
 // 初始化接口分类
 const apiConfig = [
     {
-        name: '阿里支付',
-        value: '/aliPay'
+        name: '测试插件',
+        value: '/test'
     }
 ];
 
