@@ -1,8 +1,0 @@
-{
-    "zip": {
-        "savePath": ".cache",
-        "zipName": "yiapi-free.zip",
-        "include": ["**/*"],
-        "exclude": ["**/node_modules/**/*", "**/.cache/**/*", "**/.vscode/**/*", "**/.git/**/*", "**/logs/*", "**/data/*"]
-    }
-}
