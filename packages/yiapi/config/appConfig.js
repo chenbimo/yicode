@@ -20,7 +20,7 @@ const appConfig = mergeAndConcat(
         // 监听主机
         host: '127.0.0.1',
         // 默认开发管理员密码
-        devPassword: 'dev123456!@#',
+        devPassword: 'dev123456',
         // 接口超时 3 分钟
         apiTimeout: 3 * 60 * 1000,
         // 请求参数日志过滤字段
@@ -71,11 +71,11 @@ const appConfig = mergeAndConcat(
             INFO: { symbol: 'INFO', code: 11, msg: '信息提示' },
             WARN: { symbol: 'WARN', code: 12, msg: '警告提示' },
             ERROR: { symbol: 'ERROR', code: 13, msg: '错误提示' },
-            NOT_LOGIN: { symbol: 'NOT_LOGIN', code: 14, msg: '请登录后操作' },
+            NOT_LOGIN: { symbol: 'NOT_LOGIN', code: 14, msg: '未登录' },
             API_DISABLED: { symbol: 'API_DISABLED', code: 15, msg: '接口已禁用' },
             NOT_EXISTS: { symbol: 'NOT_EXISTS', code: 16, msg: '接口不存在' },
             NO_FILE: { symbol: 'NO_FILE', code: 17, msg: '文件不存在' },
-            API_NOT_FOUND: { symbol: 'API_NOT_FOUND', code: 18, msg: '接口不存在' }
+            API_NOT_FOUND: { symbol: 'API_NOT_FOUND', code: 18, msg: '接口未找到' }
         },
         // 跨域配置
         cros: {
@@ -97,8 +97,6 @@ const appConfig = mergeAndConcat(
             dialect: 'mysql',
             port: 3306
         },
-        // 字典配置
-        dictionary: {},
         // jwt配置
         jwt: {
             secret: 'yiapi',
