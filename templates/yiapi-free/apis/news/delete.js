@@ -10,7 +10,7 @@ export const apiSchema = {
         type: 'object',
         title: '删除资讯接口',
         properties: {
-            id: yiapi.utils.fnSchema(yiapi.sysConfig.schemaField.id, '资讯ID')
+            id: yiapi.utils.fnSchema(yiapi.schemaField.id, '资讯ID')
         },
         required: [
             //

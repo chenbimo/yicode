@@ -14,8 +14,12 @@ import * as utils from './utils/index.js';
 // 配置信息
 import { appConfig } from './config/appConfig.js';
 import { codeConfig } from './config/codeConfig.js';
-import { logConfig } from './config/logConfig.js';
+import { crosConfig } from './config/crosConfig.js';
+import { fieldType } from './config/fieldType.js';
+import { schemaField } from './config/schemaField.js';
+import { schemaType } from './config/schemaType.js';
 import { sysConfig } from './config/sysConfig.js';
+import { tableField } from './config/tableField.js';
 
 // 表同步
 import { syncDatabase } from './scripts/syncDatabase.js';
@@ -232,16 +236,12 @@ export {
     // 配置
     appConfig,
     codeConfig,
-    logConfig,
+    crosConfig,
+    fieldType,
+    schemaField,
+    schemaType,
     sysConfig,
+    tableField,
     // 插件
-    syncDatabase,
-    // 数据表
-    sysAdminTable,
-    sysRoleTable,
-    sysUserTable,
-    sysTreeTable,
-    sysDictTable,
-    sysMenuTable,
-    sysApiTable
+    syncDatabase
 };
