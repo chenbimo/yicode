@@ -23,7 +23,7 @@ const appConfig = mergeAndConcat(
         freeApis: [
             //
             '/',
-            '/favicon.ico',
+            '/favicon.*',
             '/docs/**',
             '/public/**',
             '/api/admin/login',
