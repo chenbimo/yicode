@@ -38,7 +38,7 @@ let appConfig = {
     redis: {
         host: '127.0.0.1',
         port: 6379,
-        username: null,
+        username: '',
         password: process.env.NODE_ENV === 'production' ? '123456' : '',
         keyPrefix: 'test:'
     },
@@ -54,7 +54,7 @@ let appConfig = {
         pool: true,
         secure: true,
         // qq邮箱
-        user: 'demo@qq.com',
+        // user: 'demo@qq.com',
         pass: '',
         from: {
             name: '易接口',

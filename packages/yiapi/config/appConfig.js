@@ -1,10 +1,26 @@
 import { resolve } from 'node:path';
 import { mergeAndConcat } from 'merge-anything';
+import Ajv from 'ajv';
+import localize from 'ajv-i18n';
+import logSymbols from 'log-symbols';
 
 import { fnImport } from '../utils/index.js';
 import { sysConfig } from './sysConfig.js';
+import { schemaField } from './schemaField.js';
+import { appConfigSchema } from '../schema/appConfigSchema.js';
+
+const ajv = new Ajv({ strict: false, messages: false });
+
+const validate = ajv.compile(appConfigSchema);
 
 const { appConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'appConfig.js'), 'appConfig', {});
+
+const valid = validate(importConfig);
+if (!valid) {
+    localize.zh(validate.errors);
+    console.log(logSymbols.error, 'appConfig.js 文件 ' + ajv.errorsText(validate.errors, { separator: '\n' }));
+    process.exit(1);
+}
 
 const appConfig = mergeAndConcat(
     {
@@ -44,12 +60,12 @@ const appConfig = mergeAndConcat(
             dialect: 'mysql',
             port: 3306
         },
-        // redis缓存配置
+        // redis配置
         redis: {
             host: '127.0.0.1',
             port: 6379,
-            username: null,
-            password: null,
+            username: '',
+            password: '',
             keyPrefix: 'yiapi:'
         },
         // jwt配置
@@ -63,7 +79,6 @@ const appConfig = mergeAndConcat(
             port: 465,
             pool: true,
             secure: true,
-            // qq邮箱
             user: 'demo@qq.com',
             pass: '',
             from: {
