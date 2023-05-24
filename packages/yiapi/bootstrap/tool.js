@@ -128,24 +128,5 @@ async function plugin(fastify, opts) {
         await fastify.redisSet(cacheData.role, []);
         await fastify.redisSet(cacheData.role, dataRole);
     });
-
-    // 获取微信 access_token
-    fastify.decorate('getWeixinAccessToken', async () => {
-        let cacheWeixinAccessToken = await fastify.redisGet(cacheData.weixinAccessToken);
-        if (cacheWeixinAccessToken) {
-            return {
-                accessToken: cacheWeixinAccessToken
-            };
-        }
-        let res = await got('https://api.weixin.qq.com/cgi-bin/token', {
-            method: 'GET',
-            searchParams: {
-                grant_type: 'client_credential',
-                appid: weixinConfig.appId,
-                secret: weixinConfig.appSecret
-            }
-        }).json();
-        return res;
-    });
 }
 export default fp(plugin, { name: 'tool', dependencies: ['mysql', 'redis'] });

@@ -5,6 +5,5 @@ export const cacheData = {
     apiNames: 'cacheData:apiNames',
     apiWhiteLists: 'cacheData:apiWhiteLists',
     api: 'cacheData:api',
-    menu: 'cacheData:menu',
-    weixinAccessToken: 'cacheData:weixinAccessToken'
+    menu: 'cacheData:menu'
 };

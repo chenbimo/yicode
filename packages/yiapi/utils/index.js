@@ -421,17 +421,3 @@ export function fnSchema(hash, name, type, min, max, enumValue, defaultValue, pa
         throw new Error(err);
     }
 }
-
-// 获取微信 access_token
-export async function fnGetWeixinAccessToken() {
-    // https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET
-    let res = await got('https://api.weixin.qq.com/cgi-bin/token', {
-        method: 'GET',
-        searchParams: {
-            grant_type: 'client_credential',
-            appid: appConfig.weixin.appId,
-            secret: appConfig.weixin.appSecret
-        }
-    }).json();
-    return res;
-}

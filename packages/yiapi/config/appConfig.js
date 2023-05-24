@@ -17,16 +17,13 @@ const appConfig = mergeAndConcat(
         expires: '7d',
         // 监听端口
         port: 3000,
-        // 监听主机
-        host: '127.0.0.1',
         // 默认开发管理员密码
         devPassword: 'dev123456',
         // 接口超时 3 分钟
         apiTimeout: 3 * 60 * 1000,
-        // 请求参数日志过滤字段
-        reqParamsFilter: ['password', 'file'],
-        // 返回参数日志过滤字段
-        resParamsFilter: ['password', 'file'],
+        // 日志字段过滤，不打印
+        logFilter: ['password', 'file'],
+        // 任何情况下可以访问的路由
         freeApis: [
             //
             '/',
@@ -40,17 +37,8 @@ const appConfig = mergeAndConcat(
         blackApis: [],
         // 白名单接口，登录后访问无限制
         whiteApis: [],
-        // 跨域配置
-        cros: {
-            methods: ['GET', 'OPTIONS', 'POST'],
-            allowedHeaders: ['Content-Type', 'Authorization', 'authorization', 'token'],
-            exposedHeaders: ['Content-Range', 'X-Content-Range', 'Authorization', 'authorization', 'token'],
-            preflightContinue: false,
-            strictPreflight: false,
-            preflight: true,
-            optionsSuccessStatus: 204,
-            credentials: false
-        },
+        // 黑名单菜单
+        blackMenus: [],
         // 数据库配置
         database: {
             db: null,
@@ -60,11 +48,18 @@ const appConfig = mergeAndConcat(
             dialect: 'mysql',
             port: 3306
         },
+        // redis缓存配置
+        redis: {
+            host: '127.0.0.1',
+            port: 6379,
+            username: null,
+            password: null,
+            keyPrefix: 'yiapi:'
+        },
         // jwt配置
         jwt: {
             secret: 'yiapi',
-            expiresIn: '7d',
-            algorithm: 'HS256'
+            expiresIn: '7d'
         },
         // 邮件配置
         mail: {
@@ -80,31 +75,10 @@ const appConfig = mergeAndConcat(
                 address: 'demo@qq.com'
             }
         },
-        // 消息队列
-        mq: {
-            // test: (job) => {
-            //     console.log('🚀 ~ file: mq.js ~ line 3 ~ job', job.data);
-            //     return Promise.resolve();
-            // },
-            // order: (job) => {
-            //     console.log('🚀 ~ file: mq.js ~ line 4 ~ job', job.data);
-            //     return Promise.resolve();
-            // }
-        },
-        // redis缓存配置
-        redis: {
-            host: '127.0.0.1',
-            port: 6379,
-            username: null,
-            password: null,
-            keyPrefix: 'yiapi:'
-        },
         weixin: {
             appId: '',
             appSecret: ''
-        },
-
-        blackMenus: []
+        }
     },
     importConfig
 );
