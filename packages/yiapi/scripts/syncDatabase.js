@@ -6,7 +6,7 @@ import fp from 'fastify-plugin';
 import Knex from 'knex';
 import fg from 'fast-glob';
 import { SchemaInspector } from 'knex-schema-inspector';
-import enquirer from 'enquirer';
+import inquirer from 'inquirer';
 import logSymbols from 'log-symbols';
 import ora from 'ora';
 import { merge as mergeAny } from 'merge-anything';
@@ -176,13 +176,13 @@ async function fnAllTableData() {
         // 系统表数据
         let sysTableData = await fnGetTableData(['./tables/*.js', '!**/_*.js'], sysConfig.yiapiDir, 'sys_');
         let addonTableData = await fnGetTableData(['./addons/*/tables/*', '!**/_*.js'], sysConfig.appDir, 'addon_');
-        let _appTableData = await fnGetTableData(['./tables/*', '!**/_*.js'], sysConfig.appDir);
+        // let _appTableData = await fnGetTableData(['./tables/*', '!**/_*.js'], sysConfig.appDir);
 
         // 应用表跟系统表和插件表合并后的数据
-        let appTableData = await fnMergeTableData(_appTableData, sysTableData, addonTableData);
+        // let appTableData = await fnMergeTableData(sysTableData, addonTableData);
 
         // 所有表数据
-        let allTableData = _concat(sysTableData, appTableData, addonTableData);
+        let allTableData = _concat(sysTableData, addonTableData);
         return allTableData;
     } catch (err) {
         console.log('🚀 ~ file: syncDatabase.js ~ line 152 ~ fnAllTableData ~ err', err);
@@ -195,13 +195,6 @@ async function fnCheckTableData(allTableData, allTables) {
     try {
         for (let i = 0; i < allTableData.length; i++) {
             let tableDataItem = allTableData[i];
-
-            /**
-             * 表名映射转换
-             * 有时候有同名表，避免覆盖
-             */
-            let mapTable = appConfig.table[tableDataItem._meta.table];
-            tableDataItem._meta.table = mapTable ? mapTable : tableDataItem._meta.table;
 
             tableDataItem._meta.tableNewName = null;
 
@@ -276,12 +269,12 @@ async function syncDatabase() {
         // 判断是否有旧表，有则选择是否删除旧表
         let allOldTableNames = allTables.filter((table) => _endsWith(table, '_old'));
 
-        let prompt = new enquirer.Toggle({
+        let { isDone } = await inquirer.prompt({
+            type: 'confirm',
+            name: 'isDone',
             message: '请确认表结构是否已全部升级完成？（谨慎操作，选择【是】，将会删除所有旧表）',
-            enabled: '是',
-            disabled: '否'
+            default: false
         });
-        let isDone = await prompt.run();
 
         // 如果选择已升级完成，则删除掉所有旧表
         if (isDone === true) {
