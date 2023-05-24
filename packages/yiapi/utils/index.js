@@ -329,7 +329,7 @@ export function fnApiParamsCheck(req) {
         }
 
         let diffTime = Date.now() - Number(fieldsParams.t);
-        if (diffTime > appConfig.apiTimeout) {
+        if (diffTime > 3 * 60 * 1000) {
             return reject({ code: 1, msg: '接口请求时间已过期' });
         }
 

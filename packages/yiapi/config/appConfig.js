@@ -13,14 +13,10 @@ const appConfig = mergeAndConcat(
         appNameEn: 'yiapi',
         // 加密盐
         salt: 'yiapi-123456.',
-        // 过期时间
-        expires: '7d',
         // 监听端口
         port: 3000,
         // 默认开发管理员密码
         devPassword: 'dev123456',
-        // 接口超时 3 分钟
-        apiTimeout: 3 * 60 * 1000,
         // 日志字段过滤，不打印
         logFilter: ['password', 'file'],
         // 任何情况下可以访问的路由
