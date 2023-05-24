@@ -1,26 +1,19 @@
 import fs from 'fs-extra';
 import { resolve } from 'node:path';
 import winston from 'winston';
-import { merge as mergeAny } from 'merge-anything';
 import 'winston-daily-rotate-file';
 
-import { fnImport } from '../utils/index.js';
-import { appConfig } from './appConfig.js';
 import { sysConfig } from './sysConfig.js';
 
-let { logConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'logConfig.js'), 'logConfig', {});
 fs.ensureDir(resolve(sysConfig.appDir, 'logs'));
 
-let fileConfig = mergeAny(
-    {
-        dirname: resolve(sysConfig.appDir, 'logs'),
-        filename: '%DATE%.log',
-        datePattern: 'YYYY-MM-DD',
-        zippedArchive: false,
-        maxSize: '50m'
-    },
-    importConfig
-);
+let fileConfig = {
+    dirname: resolve(sysConfig.appDir, 'logs'),
+    filename: '%DATE%.log',
+    datePattern: 'YYYY-MM-DD',
+    zippedArchive: false,
+    maxSize: '50m'
+};
 
 let fileTransport = new winston.transports.DailyRotateFile(fileConfig);
 

@@ -16,6 +16,7 @@ import { appConfig } from './config/appConfig.js';
 import { codeConfig } from './config/codeConfig.js';
 import { crosConfig } from './config/crosConfig.js';
 import { fieldType } from './config/fieldType.js';
+import { logConfig } from './config/logConfig.js';
 import { schemaField } from './config/schemaField.js';
 import { schemaType } from './config/schemaType.js';
 import { sysConfig } from './config/sysConfig.js';
@@ -24,16 +25,7 @@ import { tableField } from './config/tableField.js';
 // 表同步
 import { syncDatabase } from './scripts/syncDatabase.js';
 
-// 表定义
-import sysAdminTable from './tables/admin.js';
-import sysDictTable from './tables/dict.js';
-import sysRoleTable from './tables/role.js';
-import sysTreeTable from './tables/tree.js';
-import sysUserTable from './tables/user.js';
-import sysMenuTable from './tables/menu.js';
-import sysApiTable from './tables/api.js';
-
-// 初始化项目结构
+// 确保关键目录存在
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'addons'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'config'));
