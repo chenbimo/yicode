@@ -2,7 +2,7 @@ import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo } from '../../utils
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { sysConfig } from '../../config/sysConfig.js';
+import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,14 +14,14 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            pid: fnSchema(sysConfig.schemaField.pid, '父级目录ID'),
+            pid: fnSchema(schemaField.pid, '父级目录ID'),
             name: fnSchema(null, '目录名称', 'string', 1, 30),
-            value: fnSchema(sysConfig.schemaField.route, '菜单路由'),
-            icon: fnSchema(sysConfig.schemaField.image, '目录图标'),
-            sort: fnSchema(sysConfig.schemaField.min0, '目录排序'),
-            state: fnSchema(sysConfig.schemaField.state, '目录状态'),
-            describe: fnSchema(sysConfig.schemaField.describe, '目录描述'),
-            is_open: fnSchema(sysConfig.schemaField.boolEnum, '是否公开')
+            value: fnSchema(schemaField.route, '菜单路由'),
+            icon: fnSchema(schemaField.image, '目录图标'),
+            sort: fnSchema(schemaField.min0, '目录排序'),
+            state: fnSchema(schemaField.state, '目录状态'),
+            describe: fnSchema(schemaField.describe, '目录描述'),
+            is_open: fnSchema(schemaField.boolEnum, '是否公开')
         },
         required: ['pid', 'name', 'value']
     }

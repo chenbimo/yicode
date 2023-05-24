@@ -2,7 +2,7 @@ import { fnSchema, fnApiInfo, fnPageOffset } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { sysConfig } from '../../config/sysConfig.js';
+import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,8 +14,8 @@ export const apiSchema = {
         title: `查询${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            page: fnSchema(sysConfig.schemaField.page, '第几页'),
-            limit: fnSchema(sysConfig.schemaField.limit, '每页数量')
+            page: fnSchema(schemaField.page, '第几页'),
+            limit: fnSchema(schemaField.limit, '每页数量')
         }
     }
 };

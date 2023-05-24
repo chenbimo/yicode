@@ -2,7 +2,7 @@ import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo } from '../../utils
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { sysConfig } from '../../config/sysConfig.js';
+import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,15 +14,15 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            pid: fnSchema(sysConfig.schemaField.pid, '父级目录ID'),
-            category: fnSchema(sysConfig.schemaField.category, '目录分类'),
+            pid: fnSchema(schemaField.pid, '父级目录ID'),
+            category: fnSchema(schemaField.category, '目录分类'),
             name: fnSchema(null, '目录名称', 'string', 1, 30),
             value: fnSchema(null, '目录值', 'string', 0, 300),
-            icon: fnSchema(sysConfig.schemaField.image, '目录图标'),
-            sort: fnSchema(sysConfig.schemaField.min0, '目录排序'),
-            describe: fnSchema(sysConfig.schemaField.describe, '目录描述'),
-            is_bool: fnSchema(sysConfig.schemaField.boolEnum, '是否虚拟目录'),
-            is_open: fnSchema(sysConfig.schemaField.boolEnum, '是否公开')
+            icon: fnSchema(schemaField.image, '目录图标'),
+            sort: fnSchema(schemaField.min0, '目录排序'),
+            describe: fnSchema(schemaField.describe, '目录描述'),
+            is_bool: fnSchema(schemaField.boolEnum, '是否虚拟目录'),
+            is_open: fnSchema(schemaField.boolEnum, '是否公开')
         },
         required: ['pid', 'category', 'name']
     }

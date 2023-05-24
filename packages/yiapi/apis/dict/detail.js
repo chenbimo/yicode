@@ -2,7 +2,7 @@ import { fnSchema, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { sysConfig } from '../../config/sysConfig.js';
+import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,7 +14,7 @@ export const apiSchema = {
         title: `查询${metaConfig.name}详情接口`,
         type: 'object',
         properties: {
-            code: fnSchema(sysConfig.schemaField.code, '字典编码')
+            code: fnSchema(schemaField.code, '字典编码')
         },
         required: ['code']
     }

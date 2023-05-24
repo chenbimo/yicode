@@ -34,11 +34,7 @@ fs.ensureDirSync(path.resolve(sysConfig.appDir, 'addons'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'config'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'plugins'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'scripts'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'tables'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'utils'));
 fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
 
 // 初始化项目实例
@@ -183,13 +179,13 @@ _forOwn(prefixEnum, (apis, prefix) => {
 });
 
 // 加载用户插件
-fastify.register(autoLoad, {
-    dir: path.join(sysConfig.appDir, 'plugins'),
-    matchFilter: (path) => {
-        return path.endsWith('.js') === true;
-    },
-    ignorePattern: /^[_.]/
-});
+// fastify.register(autoLoad, {
+//     dir: path.join(sysConfig.appDir, 'plugins'),
+//     matchFilter: (path) => {
+//         return path.endsWith('.js') === true;
+//     },
+//     ignorePattern: /^[_.]/
+// });
 
 // 加载三方插件
 let thirdPluginsFiles = fg.sync(['./addons/*/plugins/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });

@@ -37,6 +37,7 @@ import {
 import { fnImport, fnCloneAny } from '../utils/index.js';
 import { appConfig } from '../config/appConfig.js';
 import { sysConfig } from '../config/sysConfig.js';
+import { fieldType } from '../config/fieldType.js';
 
 // 是否全部检测通过，未通过则不进行表创建
 let isCheckPass = true;
@@ -214,7 +215,7 @@ async function fnCheckTableData(allTableData, allTables) {
                 }
                 if (['_meta'].includes(fieldName) === false) {
                     // 获取字段的类型信息
-                    let fieldInfo = sysConfig.tableFieldType[fieldData.type];
+                    let fieldInfo = fieldType[fieldData.type];
                     // 判断字段类型是否存在
                     if (!fieldInfo) {
                         console.log(`${logSymbols.error} ${tableDataItem._meta.name}（${tableDataItem._meta.table}）表 ${fieldName} 字段的 ${fieldData.type} 类型不存在`);
@@ -330,7 +331,7 @@ async function syncDatabase() {
                             table['bigint']('deleted_at').notNullable().unsigned().defaultTo(0).comment('删除时间');
                         } else {
                             // 获取字段的类型信息
-                            let fieldInfo = sysConfig.tableFieldType[fieldData.type];
+                            let fieldInfo = fieldType[fieldData.type];
                             // 字段链式调用实例
                             let fieldItem = null;
 

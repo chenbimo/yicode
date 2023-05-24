@@ -2,7 +2,7 @@ import { fnSchema, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { sysConfig } from '../../config/sysConfig.js';
+import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,7 +14,7 @@ export const apiSchema = {
         title: `删除${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            id: fnSchema(sysConfig.schemaField.id, 'ID')
+            id: fnSchema(schemaField.id, 'ID')
         },
         required: ['id']
     }

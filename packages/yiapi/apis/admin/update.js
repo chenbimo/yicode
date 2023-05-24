@@ -2,7 +2,7 @@ import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo, fnMD5 } from '../.
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { sysConfig } from '../../config/sysConfig.js';
+import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,10 +14,10 @@ export const apiSchema = {
         title: `更新${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            id: fnSchema(sysConfig.schemaField.id, '唯一ID'),
-            password: fnSchema(sysConfig.schemaField.password, '密码'),
-            nickname: fnSchema(sysConfig.schemaField.nickname, '昵称'),
-            role_codes: fnSchema(sysConfig.schemaField.role_codes, '角色代码')
+            id: fnSchema(schemaField.id, '唯一ID'),
+            password: fnSchema(schemaField.password, '密码'),
+            nickname: fnSchema(schemaField.nickname, '昵称'),
+            role_codes: fnSchema(schemaField.role_codes, '角色代码')
         },
         required: ['id']
     }

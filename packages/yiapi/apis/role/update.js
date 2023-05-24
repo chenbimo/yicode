@@ -2,7 +2,7 @@ import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo } from '../../utils
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { sysConfig } from '../../config/sysConfig.js';
+import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,10 +14,10 @@ export const apiSchema = {
         title: `更新${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            id: fnSchema(sysConfig.schemaField.id, '唯一ID'),
-            code: fnSchema(sysConfig.schemaField.code, '角色代号'),
+            id: fnSchema(schemaField.id, '唯一ID'),
+            code: fnSchema(schemaField.code, '角色代号'),
             name: fnSchema(null, '角色名称', 'string', 1, 20),
-            describe: fnSchema(sysConfig.schemaField.describe, '角色描述'),
+            describe: fnSchema(schemaField.describe, '角色描述'),
             menu_ids: fnSchema(null, '角色菜单ID组', 'string', 0, 2000)
         },
         required: ['id']

@@ -2,7 +2,6 @@ import { fnSchema, fnApiInfo, fnPageOffset } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);

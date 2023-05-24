@@ -22,6 +22,7 @@ import {
 
 import { appConfig } from '../config/appConfig.js';
 import { sysConfig } from '../config/sysConfig.js';
+import { schemaType } from '../config/schemaType.js';
 
 // 自定义初始化字符
 const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
@@ -393,8 +394,8 @@ export function fnSchema(hash, name, type, min, max, enumValue, defaultValue, pa
 
         // 字段必须有正确的类型
         if (!fieldData.type) fieldData.type = type;
-        if (sysConfig.schemaFieldType.includes(fieldData.type) === false) {
-            throw new Error(`字段 [${name}] 类型 ${fieldData.type} 错误，只能为 ${sysConfig.schemaFieldType.join(',')} 其中之一`);
+        if (schemaType.includes(fieldData.type) === false) {
+            throw new Error(`字段 [${name}] 类型 ${fieldData.type} 错误，只能为 ${schemaType.join(',')} 其中之一`);
         }
 
         // 如果有枚举参数，则忽略最大，最小参数

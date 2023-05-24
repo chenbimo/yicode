@@ -2,7 +2,7 @@ import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo, fnCamelCase } from
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { sysConfig } from '../../config/sysConfig.js';
+import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,15 +14,15 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            category_id: fnSchema(sysConfig.schemaField.min1, '字典分类ID'),
-            category_code: fnSchema(sysConfig.schemaField.category, '字典分类'),
-            code: fnSchema(sysConfig.schemaField.code, '字典编码'),
+            category_id: fnSchema(schemaField.min1, '字典分类ID'),
+            category_code: fnSchema(schemaField.category, '字典分类'),
+            code: fnSchema(schemaField.code, '字典编码'),
             name: fnSchema(null, '字典名称', 'string', 1, 20),
             value: fnSchema(null, '字典值', 'string', 0, 500),
             symbol: fnSchema(null, '字典符号', 'string', 0, 20, ['string', 'number']),
-            thumbnail: fnSchema(sysConfig.schemaField.image, '字典缩略图'),
+            thumbnail: fnSchema(schemaField.image, '字典缩略图'),
             describe: fnSchema(null, '字典描述', 'string', 0, 300),
-            state: fnSchema(sysConfig.schemaField.state, '是否启用')
+            state: fnSchema(schemaField.state, '是否启用')
         },
         required: ['category_id', 'category_code', 'code', 'name', 'value', 'symbol']
     }

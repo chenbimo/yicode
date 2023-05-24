@@ -5,7 +5,7 @@ import { fnSchema, fnApiInfo, fnPureMD5, fnMD5 } from '../../utils/index.js';
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { cacheData } from '../../config/cacheData.js';
-import { sysConfig } from '../../config/sysConfig.js';
+import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -17,8 +17,8 @@ export const apiSchema = {
         title: `${metaConfig.name}登录接口`,
         type: 'object',
         properties: {
-            account: fnSchema(sysConfig.schemaField.account, '账号'),
-            password: fnSchema(sysConfig.schemaField.password, '密码')
+            account: fnSchema(schemaField.account, '账号'),
+            password: fnSchema(schemaField.password, '密码')
         },
         required: ['account', 'password']
     }
