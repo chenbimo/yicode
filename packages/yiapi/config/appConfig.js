@@ -74,10 +74,6 @@ const appConfig = mergeAndConcat(
                 name: '易接口',
                 address: 'demo@qq.com'
             }
-        },
-        weixin: {
-            appId: '',
-            appSecret: ''
         }
     },
     importConfig
