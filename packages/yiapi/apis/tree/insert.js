@@ -1,7 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -42,7 +42,7 @@ export default async function (fastify, opts) {
                 } else {
                     let parentPermission = await model.clone().where('id', req.body.pid).first();
                     if (!parentPermission) {
-                        return { ...httpCodeConfig.FAIL, msg: '父级树不存在' };
+                        return { ...codeConfig.FAIL, msg: '父级树不存在' };
                     }
                     req.body.pids = `${parentPermission.pids},${parentPermission.id}`;
                     req.body.level = req.body.pids.split(',').length;
@@ -69,12 +69,12 @@ export default async function (fastify, opts) {
                 await fastify.cacheTreeData();
 
                 return {
-                    ...httpCodeConfig.INSERT_SUCCESS,
+                    ...codeConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpCodeConfig.INSERT_FAIL;
+                return codeConfig.INSERT_FAIL;
             }
         }
     });

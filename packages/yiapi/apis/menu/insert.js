@@ -1,7 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -42,7 +42,7 @@ export default async function (fastify, opts) {
                     parentData = await menuModel.clone().where('id', req.body.pid).first();
                     if (!parentData) {
                         return {
-                            ...httpCodeConfig.FAIL,
+                            ...codeConfig.FAIL,
                             msg: '父级菜单不存在'
                         };
                     }
@@ -64,11 +64,11 @@ export default async function (fastify, opts) {
 
                 await trx.commit();
                 await fastify.cacheTreeData();
-                return httpCodeConfig.INSERT_SUCCESS;
+                return codeConfig.INSERT_SUCCESS;
             } catch (err) {
                 await trx.rollback();
                 fastify.log.error(err);
-                return httpCodeConfig.INSERT_FAIL;
+                return codeConfig.INSERT_FAIL;
             }
         }
     });

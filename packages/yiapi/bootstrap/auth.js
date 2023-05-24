@@ -13,7 +13,8 @@ import {
 } from 'lodash-es';
 
 import { appConfig } from '../config/appConfig.js';
-import { httpCodeConfig } from '../config/httpCodeConfig.js';
+import { codeConfig } from '../config/codeConfig.js';
+import { cacheData } from '../config/cacheData.js';
 import { sysConfig } from '../config/sysConfig.js';
 import { fnRouterPath, fnApiParamsCheck, fnClearLogData } from '../utils/index.js';
 
@@ -41,7 +42,7 @@ async function plugin(fastify, opts) {
             /* --------------------------------- 接口禁用检测 --------------------------------- */
             let isMatchBlackApi = micromatch.isMatch(req.url, appConfig.blackApis);
             if (isMatchBlackApi === true) {
-                res.send(httpCodeConfig.API_DISABLED);
+                res.send(codeConfig.API_DISABLED);
                 return;
             }
 
@@ -56,16 +57,16 @@ async function plugin(fastify, opts) {
                     return;
                 } else {
                     // 文件不存在
-                    res.send(httpCodeConfig.NO_FILE);
+                    res.send(codeConfig.NO_FILE);
                     return;
                 }
             }
 
             /* --------------------------------- 接口存在性判断 -------------------------------- */
-            let allApiNames = await fastify.redisGet(appConfig.cacheData.apiNames);
+            let allApiNames = await fastify.redisGet(cacheData.apiNames);
 
             if (allApiNames.includes(req.url) === false) {
-                res.send(httpCodeConfig.NO_API);
+                res.send(codeConfig.NO_API);
                 return;
             }
 
@@ -74,7 +75,7 @@ async function plugin(fastify, opts) {
                 let jwtData = await req.jwtVerify();
             } catch (err) {
                 res.send({
-                    ...httpCodeConfig.NOT_LOGIN,
+                    ...codeConfig.NOT_LOGIN,
                     detail: 'token 验证失败'
                 });
                 return;
@@ -104,7 +105,7 @@ async function plugin(fastify, opts) {
 
             /* ---------------------------------- 白名单判断 --------------------------------- */
             // 从缓存获取白名单接口
-            let dataApiWhiteLists = await fastify.redisGet(appConfig.cacheData.apiWhiteLists);
+            let dataApiWhiteLists = await fastify.redisGet(cacheData.apiWhiteLists);
             let whiteApis = dataApiWhiteLists?.map((item) => item.value);
             let allWhiteApis = _uniq(_concat(appConfig.whiteApis, whiteApis || []));
 
@@ -118,7 +119,7 @@ async function plugin(fastify, opts) {
 
                 if (hasApi === false) {
                     res.send({
-                        ...httpCodeConfig.FAIL,
+                        ...codeConfig.FAIL,
                         msg: `您没有 [ ${req?.routeSchema?.summary || req.url} ] 接口的操作权限`
                     });
                     return;
@@ -127,7 +128,7 @@ async function plugin(fastify, opts) {
         } catch (err) {
             fastify.log.error(err);
             res.send({
-                ...httpCodeConfig.FAIL,
+                ...codeConfig.FAIL,
                 msg: err.msg || '认证异常',
                 other: err.other || ''
             });

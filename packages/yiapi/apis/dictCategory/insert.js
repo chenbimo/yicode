@@ -1,7 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -33,7 +33,7 @@ export default async function (fastify, opts) {
 
                 if (currentData) {
                     return {
-                        ...httpCodeConfig.INSERT_FAIL,
+                        ...codeConfig.INSERT_FAIL,
                         msg: '当前编号已存在'
                     };
                 }
@@ -47,12 +47,12 @@ export default async function (fastify, opts) {
                 let result = await dictCategoryModel.insert(fnClearInsertData(data));
 
                 return {
-                    ...httpCodeConfig.INSERT_SUCCESS,
+                    ...codeConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpCodeConfig.INSERT_FAIL;
+                return codeConfig.INSERT_FAIL;
             }
         }
     });

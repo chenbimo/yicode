@@ -1,7 +1,7 @@
 import { fnSchema, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -32,7 +32,7 @@ export default async function (fastify, opts) {
 
                 if (!menuData) {
                     return {
-                        ...httpCodeConfig.DELETE_FAIL,
+                        ...codeConfig.DELETE_FAIL,
                         msg: '菜单不存在'
                     };
                 }
@@ -41,14 +41,14 @@ export default async function (fastify, opts) {
 
                 if (childData) {
                     return {
-                        ...httpCodeConfig.DELETE_FAIL,
+                        ...codeConfig.DELETE_FAIL,
                         msg: '存在子菜单，无法删除'
                     };
                 }
 
                 if (menuData.is_system === 1) {
                     return {
-                        ...httpCodeConfig.DELETE_FAIL,
+                        ...codeConfig.DELETE_FAIL,
                         msg: '默认菜单，无法删除'
                     };
                 }
@@ -56,12 +56,12 @@ export default async function (fastify, opts) {
                 let result = await menuModel.clone().where({ id: req.body.id }).delete();
                 await fastify.cacheTreeData();
                 return {
-                    ...httpCodeConfig.DELETE_SUCCESS,
+                    ...codeConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpCodeConfig.DELETE_FAIL;
+                return codeConfig.DELETE_FAIL;
             }
         }
     });

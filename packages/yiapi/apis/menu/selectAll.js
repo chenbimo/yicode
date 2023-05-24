@@ -1,7 +1,8 @@
 import { fnApiInfo, fnSchema } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
+import { cacheData } from '../../config/cacheData.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -23,17 +24,17 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let menuData = await fastify.redisGet(appConfig.cacheData.menu);
+                let menuData = await fastify.redisGet(cacheData.menu);
 
                 return {
-                    ...httpCodeConfig.SELECT_SUCCESS,
+                    ...codeConfig.SELECT_SUCCESS,
                     data: {
                         rows: menuData
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpCodeConfig.SELECT_FAIL;
+                return codeConfig.SELECT_FAIL;
             }
         }
     });

@@ -171,7 +171,6 @@ async function syncApiFile(fastify) {
 
         // 遍历项目接口文件
         // 使用 for 替代 forEach 遍历，不然代码不会同步执行
-
         for (let i = 0; i < allApiFiles.length; i++) {
             let file = allApiFiles[i];
             let apiFileName = getApiFileName(file);

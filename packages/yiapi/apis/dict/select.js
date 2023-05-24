@@ -1,7 +1,7 @@
 import { fnSchema, fnApiInfo, fnPageOffset } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -65,7 +65,7 @@ export default async function (fastify, opts) {
                 });
 
                 return {
-                    ...httpCodeConfig.SELECT_SUCCESS,
+                    ...codeConfig.SELECT_SUCCESS,
                     data: {
                         total: total,
                         rows: rows,
@@ -75,7 +75,7 @@ export default async function (fastify, opts) {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpCodeConfig.SELECT_FAIL;
+                return codeConfig.SELECT_FAIL;
             }
         }
     });

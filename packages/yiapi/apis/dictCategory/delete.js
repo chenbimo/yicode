@@ -1,7 +1,7 @@
 import { fnSchema, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -35,7 +35,7 @@ export default async function (fastify, opts) {
 
                 if (!dictCategoryData) {
                     return {
-                        ...httpCodeConfig.DELETE_FAIL,
+                        ...codeConfig.DELETE_FAIL,
                         msg: '查无此字典分类'
                     };
                 }
@@ -43,19 +43,19 @@ export default async function (fastify, opts) {
                 let childrenDict = await dictModel.clone().where({ category_id: req.body.id }).first();
                 if (childrenDict) {
                     return {
-                        ...httpCodeConfig.DELETE_FAIL,
+                        ...codeConfig.DELETE_FAIL,
                         msg: '此分类下有字典，无法删除'
                     };
                 }
 
                 let result = await dictCategoryModel.clone().delete();
                 return {
-                    ...httpCodeConfig.DELETE_SUCCESS,
+                    ...codeConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpCodeConfig.DELETE_FAIL;
+                return codeConfig.DELETE_FAIL;
             }
         }
     });

@@ -1,7 +1,7 @@
 import { fnSchema, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -29,7 +29,7 @@ export default async function (fastify, opts) {
 
                 let selectResult = await model.clone().where({ pid: req.body.id }).first();
                 if (selectResult) {
-                    return { ...httpCodeConfig.FAIL, msg: '该树存在下级树，无法删除' };
+                    return { ...codeConfig.FAIL, msg: '该树存在下级树，无法删除' };
                 }
 
                 let result = await model.clone().where({ id: req.body.id }).delete();
@@ -37,12 +37,12 @@ export default async function (fastify, opts) {
                 await fastify.cacheTreeData();
 
                 return {
-                    ...httpCodeConfig.DELETE_SUCCESS,
+                    ...codeConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpCodeConfig.DELETE_FAIL;
+                return codeConfig.DELETE_FAIL;
             }
         }
     });

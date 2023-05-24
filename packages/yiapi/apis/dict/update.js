@@ -1,7 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -38,7 +38,7 @@ export default async function (fastify, opts) {
                 if (req.body.type === 'number') {
                     if (Number.isNaN(Number(req.body.value)) === true) {
                         return {
-                            ...httpCodeConfig.UPDATE_FAIL,
+                            ...codeConfig.UPDATE_FAIL,
                             msg: '字典值不是一个数字类型'
                         };
                     }
@@ -63,11 +63,11 @@ export default async function (fastify, opts) {
                     .update(fnClearUpdateData(updateData));
 
                 await trx.commit();
-                return httpCodeConfig.UPDATE_SUCCESS;
+                return codeConfig.UPDATE_SUCCESS;
             } catch (err) {
                 await trx.rollback();
                 fastify.log.error(err);
-                return httpCodeConfig.UPDATE_FAIL;
+                return codeConfig.UPDATE_FAIL;
             }
         }
     });

@@ -1,7 +1,8 @@
 import { fnApiInfo, fnSchema } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { httpCodeConfig } from '../../config/httpCodeConfig.js';
+import { codeConfig } from '../../config/codeConfig.js';
+import { cacheData } from '../../config/cacheData.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -26,7 +27,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 // TODO: 优化，不同分类的目录独立的缓存
-                let treeData = await fastify.redisGet(appConfig.cacheData.tree);
+                let treeData = await fastify.redisGet(cacheData.tree);
                 let rows = treeData.filter((item) => item.category === req.body.category);
                 // let model = fastify.mysql //
                 //     .table('sys_tree')
@@ -36,14 +37,14 @@ export default async function (fastify, opts) {
                 // let rows = await model.clone().orderBy('sort', 'asc').select();
 
                 return {
-                    ...httpCodeConfig.SELECT_SUCCESS,
+                    ...codeConfig.SELECT_SUCCESS,
                     data: {
                         rows: rows
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpCodeConfig.SELECT_FAIL;
+                return codeConfig.SELECT_FAIL;
             }
         }
     });
