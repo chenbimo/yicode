@@ -27,7 +27,7 @@ import {
 // 同步接口目录
 async function syncApiDir(fastify) {
     // 准备好表
-    let apiModel = fastify.mysql.table(appConfig.table.sys_api);
+    let apiModel = fastify.mysql.table('sys_api');
 
     // 所有的接口元数据文件，用来生成目录
     let allApiMeta = await fnAllApiMeta();
@@ -122,7 +122,7 @@ async function syncApiDir(fastify) {
 async function syncApiFile(fastify) {
     try {
         // 准备好表
-        let apiModel = fastify.mysql.table(appConfig.table.sys_api);
+        let apiModel = fastify.mysql.table('sys_api');
 
         // 所有的接口文件，用来生成接口
         let allApiFiles = await fnAllApiFiles();

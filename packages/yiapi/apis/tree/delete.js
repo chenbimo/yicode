@@ -24,7 +24,7 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let model = fastify.mysql.table(appConfig.table.sys_tree);
+                let model = fastify.mysql.table('sys_tree');
 
                 let selectResult = await model.clone().where({ pid: req.body.id }).first();
                 if (selectResult) {

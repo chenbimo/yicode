@@ -26,7 +26,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let roleModel = fastify.mysql //
-                    .table(appConfig.table.sys_role)
+                    .table('sys_role')
                     .modify(function (queryBuilder) {
                         if (req.session !== 'dev') {
                             queryBuilder.where('code', '<>', 'dev');

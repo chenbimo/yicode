@@ -33,7 +33,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let model = fastify.mysql //
-                    .table(appConfig.table.sys_tree)
+                    .table('sys_tree')
                     .modify(function (queryBuilder) {});
                 if (req.body.pid === 0) {
                     req.body.pids = '0';

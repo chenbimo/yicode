@@ -25,7 +25,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let menuModel = fastify.mysql //
-                    .table(appConfig.table.sys_menu);
+                    .table('sys_menu');
 
                 let menuData = await menuModel.clone().where({ id: req.body.id }).first();
 

@@ -25,7 +25,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let dictModel = fastify.mysql //
-                    .table(appConfig.table.sys_dict)
+                    .table('sys_dict')
                     .where({ id: req.body.id });
 
                 let dictData = await dictModel.clone().first();

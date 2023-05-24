@@ -42,7 +42,7 @@ export default async function (fastify, opts) {
                         };
                     }
                 }
-                let dictModel = trx.table(appConfig.table.sys_dict).modify(function (queryBuilder) {});
+                let dictModel = trx.table('sys_dict').modify(function (queryBuilder) {});
 
                 let updateData = {
                     category_id: req.body.category_id,

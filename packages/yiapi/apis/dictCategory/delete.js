@@ -25,10 +25,10 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let dictCategoryModel = fastify.mysql //
-                    .table(appConfig.table.sys_dict_category)
+                    .table('sys_dict_category')
                     .where({ id: req.body.id });
 
-                let dictModel = fastify.mysql.table(appConfig.table.sys_dict);
+                let dictModel = fastify.mysql.table('sys_dict');
 
                 let dictCategoryData = await dictCategoryModel.clone().first();
 

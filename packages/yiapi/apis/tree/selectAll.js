@@ -28,7 +28,7 @@ export default async function (fastify, opts) {
                 let treeData = await fastify.redisGet(appConfig.cacheData.tree);
                 let rows = treeData.filter((item) => item.category === req.body.category);
                 // let model = fastify.mysql //
-                //     .table(appConfig.table.sys_tree)
+                //     .table('sys_tree')
                 //     .where('type', req.body.type)
                 //     .modify(function (queryBuilder) {});
 

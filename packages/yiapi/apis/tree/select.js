@@ -26,7 +26,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let model = fastify.mysql //
-                    .table(appConfig.table.sys_tree)
+                    .table('sys_tree')
                     .where('category', req.body.category)
                     .modify(function (queryBuilder) {});
 

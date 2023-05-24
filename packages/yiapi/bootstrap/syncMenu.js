@@ -18,11 +18,91 @@ let menuConfigNew = [];
 let menuDirNew = [];
 let menuFileNew = [];
 
+// 菜单配置
+const menuConfig = {
+    '/home': {
+        name: '首页数据',
+        describe: '首页数据',
+        sort: 0,
+        is_system: 1,
+        children: {
+            '/': {
+                name: '首页',
+                is_system: 1,
+                sort: 1
+            }
+        }
+    },
+    '/people': {
+        name: '人员数据',
+        describe: '人员数据',
+        sort: 1000,
+        is_system: 1,
+        children: {
+            '/user': {
+                name: '用户',
+                describe: '用户列表',
+                is_system: 1,
+                sort: 1
+            },
+            '/admin': {
+                name: '管理员',
+                describe: '管理员列表',
+                is_system: 1,
+                sort: 2
+            }
+        }
+    },
+    '/permission': {
+        name: '应用数据',
+        describe: '应用数据',
+        sort: 1001,
+        children: {
+            '/menu': {
+                name: '菜单列表',
+                describe: '菜单列表',
+                is_system: 1,
+                sort: 1
+            },
+            '/api': {
+                name: '接口列表',
+                describe: '接口列表',
+                is_system: 1,
+                sort: 2
+            },
+            '/dictCategory': {
+                name: '字典分类',
+                describe: '字典列表',
+                is_system: 1,
+                sort: 3
+            },
+            '/dict': {
+                name: '字典管理',
+                describe: '字典列表',
+                is_system: 1,
+                sort: 4
+            },
+            '/role': {
+                name: '角色管理',
+                describe: '角色列表',
+                is_system: 1,
+                sort: 5
+            },
+            '/config': {
+                name: '配置中心',
+                describe: '配置中心',
+                is_system: 1,
+                sort: 5
+            }
+        }
+    }
+};
+
 // 同步菜单目录
 async function syncMenuDir(fastify) {
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table(appConfig.table.sys_menu);
+        let menuModel = fastify.mysql.table('sys_menu');
 
         // 第一次请求菜单数据，用于创建一级菜单
         let menuDir = await menuModel.clone().where({ pid: 0 }).select();
@@ -40,9 +120,6 @@ async function syncMenuDir(fastify) {
             } else {
                 deleteMenuDirValue.push(item.value);
             }
-            // if (menuDirNew.includes(item.value) === false) {
-            //     deleteMenuDir.push(item.id);
-            // }
         });
 
         _forEach(menuConfigNew, (item, index) => {
@@ -103,7 +180,7 @@ async function syncMenuDir(fastify) {
 async function syncMenuFile(fastify) {
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table(`${appConfig.table.sys_menu}`);
+        let menuModel = fastify.mysql.table('sys_menu');
 
         let menuDir = await menuModel.clone().where({ pid: 0 }).select();
         let menuDirByValue = _keyBy(menuDir, 'value');
@@ -124,9 +201,6 @@ async function syncMenuFile(fastify) {
             } else {
                 deleteMenuFileValue.push(item.value);
             }
-            // if (menuFileNew.includes(item.value) === false) {
-            //     deleteMenuFile.push(item.id);
-            // }
         });
 
         _forEach(menuConfigNew, (menu, index1) => {
@@ -188,7 +262,7 @@ async function syncMenuFile(fastify) {
 // 转换菜单结构
 async function convertMenuStruct() {
     let dataArray = [];
-    _forOwn(appConfig.menu, (item, key) => {
+    _forOwn(menuConfig, (item, key) => {
         if (appConfig.blackMenus.includes(key) !== true) {
             item.value = fnKebabCase(key);
             menuDirNew.push(item.value);

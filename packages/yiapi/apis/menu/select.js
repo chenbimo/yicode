@@ -25,7 +25,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let model = fastify.mysql //
-                    .table(appConfig.table.sys_tree)
+                    .table('sys_tree')
                     .modify(function (queryBuilder) {});
 
                 let { total } = await model.clone().count('id', { as: 'total' }).first();

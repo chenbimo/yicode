@@ -29,7 +29,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             const trx = await fastify.mysql.transaction();
             try {
-                let dictCategoryModel = trx.table(appConfig.table.sys_dict_category).modify(function (queryBuilder) {});
+                let dictCategoryModel = trx.table('sys_dict_category').modify(function (queryBuilder) {});
 
                 let currentData = await dictCategoryModel.clone().where({ code: fnCamelCase(req.body.code) });
 

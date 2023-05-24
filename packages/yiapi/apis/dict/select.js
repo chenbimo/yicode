@@ -28,7 +28,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let dictModel = fastify.mysql //
-                    .table(appConfig.table.sys_dict)
+                    .table('sys_dict')
                     .where('category_code', req.body.category_code)
                     .modify(function (queryBuilder) {
                         if (req.body.keywords !== undefined) {

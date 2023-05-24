@@ -24,7 +24,7 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let dictModel = fastify.mysql.table(appConfig.table.sys_dict);
+                let dictModel = fastify.mysql.table('sys_dict');
 
                 let result = await dictModel //
                     .clone()

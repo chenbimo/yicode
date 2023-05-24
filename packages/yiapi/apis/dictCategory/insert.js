@@ -26,7 +26,7 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let dictCategoryModel = fastify.mysql.table(appConfig.table.sys_dict_category);
+                let dictCategoryModel = fastify.mysql.table('sys_dict_category');
 
                 let currentData = await dictCategoryModel.clone().where({ code: fnCamelCase(req.body.code) });
 

@@ -24,7 +24,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let adminModel = fastify.mysql //
-                    .table(appConfig.table.sys_admin)
+                    .table('sys_admin')
                     .where({ id: req.body.id })
                     .modify(function (queryBuilder) {});
 

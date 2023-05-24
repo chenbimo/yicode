@@ -33,7 +33,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             const trx = await fastify.mysql.transaction();
             try {
-                let menuModel = trx.table(appConfig.table.sys_menu);
+                let menuModel = trx.table('sys_menu');
 
                 let parentData = undefined;
 

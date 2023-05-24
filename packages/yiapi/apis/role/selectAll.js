@@ -22,7 +22,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let roleModel = fastify.mysql //
-                    .table(appConfig.table.sys_role)
+                    .table('sys_role')
                     .modify(function (queryBuilder) {
                         // 如果不是开发管理员查询，则排除掉开发角色
                         if (req.session.role_codes !== 'dev') {

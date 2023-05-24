@@ -35,7 +35,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             const trx = await fastify.mysql.transaction();
             try {
-                let treeModel = trx.table(appConfig.table.sys_tree);
+                let treeModel = trx.table('sys_tree');
 
                 let parentData = undefined;
 

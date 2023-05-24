@@ -28,7 +28,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 let roleModel = fastify.mysql //
-                    .table(appConfig.table.sys_role)
+                    .table('sys_role')
                     .modify(function (queryBuilder) {});
                 let _result = await roleModel.clone().where('name', req.body.name).first();
                 if (_result !== undefined) {

@@ -27,7 +27,7 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let adminModel = fastify.mysql.table(appConfig.table.sys_admin);
+                let adminModel = fastify.mysql.table('sys_admin');
                 let adminExistsData = await adminModel.clone().where('username', req.body.username).first();
                 if (adminExistsData) {
                     return {

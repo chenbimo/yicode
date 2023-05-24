@@ -42,7 +42,7 @@ export default async function (fastify, opts) {
                     }
                 }
 
-                let dictModel = fastify.mysql.table(appConfig.table.sys_dict);
+                let dictModel = fastify.mysql.table('sys_dict');
 
                 let data = {
                     category_id: req.body.category_id,
