@@ -27,23 +27,26 @@ let appConfig = {
     whiteApis: [],
     // 黑名单菜单
     blackMenus: [],
+    // 数据库配置
     database: {
-        // 本地数据库
         db: 'test',
         username: 'root',
         password: 'root',
         host: '127.0.0.1',
         port: 3306
     },
+    // 缓存配置
     redis: {
         host: '127.0.0.1',
         port: 6379,
         username: '',
         password: process.env.NODE_ENV === 'production' ? '123456' : '',
+        // 第一次使用，请修改此值！！！
         keyPrefix: 'test:'
     },
     // jwt配置
     jwt: {
+        // jwt密钥，第一次使用，请修改此密钥值！！！
         secret: 'yiapi',
         expiresIn: '7d'
     },
@@ -54,7 +57,7 @@ let appConfig = {
         pool: true,
         secure: true,
         // qq邮箱
-        // user: 'demo@qq.com',
+        user: 'demo@qq.com',
         pass: '',
         from: {
             name: '易接口',
