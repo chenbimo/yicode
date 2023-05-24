@@ -26,11 +26,11 @@ async function plugin(fastify, opts) {
             complete: true
         },
         sign: {
-            algorithm: appConfig.jwt.algorithm,
+            algorithm: 'HS256',
             expiresIn: appConfig.jwt.expiresIn
         },
         verify: {
-            algorithms: [appConfig.jwt.algorithm]
+            algorithms: ['HS256']
         }
     });
 
