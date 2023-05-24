@@ -68,14 +68,13 @@ const appConfig = mergeAndConcat(
             SELECT_FAIL: { symbol: 'SELECT_FAIL', code: 1, msg: '查询失败' },
             UPDATE_FAIL: { symbol: 'UPDATE_FAIL', code: 1, msg: '更新失败' },
             DELETE_FAIL: { symbol: 'DELETE_FAIL', code: 1, msg: '删除失败' },
-            INFO: { symbol: 'INFO', code: 11, msg: '信息提示' },
-            WARN: { symbol: 'WARN', code: 12, msg: '警告提示' },
-            ERROR: { symbol: 'ERROR', code: 13, msg: '错误提示' },
+            INFO: { symbol: 'INFO', code: 11, msg: '提示' },
+            WARN: { symbol: 'WARN', code: 12, msg: '警告' },
+            ERROR: { symbol: 'ERROR', code: 13, msg: '错误' },
             NOT_LOGIN: { symbol: 'NOT_LOGIN', code: 14, msg: '未登录' },
             API_DISABLED: { symbol: 'API_DISABLED', code: 15, msg: '接口已禁用' },
-            NOT_EXISTS: { symbol: 'NOT_EXISTS', code: 16, msg: '接口不存在' },
             NO_FILE: { symbol: 'NO_FILE', code: 17, msg: '文件不存在' },
-            API_NOT_FOUND: { symbol: 'API_NOT_FOUND', code: 18, msg: '接口未找到' }
+            NO_API: { symbol: 'NO_API', code: 18, msg: '接口不存在' }
         },
         // 跨域配置
         cros: {

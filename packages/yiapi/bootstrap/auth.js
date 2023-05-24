@@ -64,7 +64,7 @@ async function plugin(fastify, opts) {
             let allApiNames = await fastify.redisGet(appConfig.cacheData.apiNames);
 
             if (allApiNames.includes(req.url) === false) {
-                res.send(appConfig.httpCode.API_NOT_FOUND);
+                res.send(appConfig.httpCode.NO_API);
                 return;
             }
 
