@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/admin-vue3",
-    "version": "3.2.3",
+    "version": "3.2.4",
     "description": "yiadmin-vue3（易管理）vue3后台管理模板",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
@@ -29,7 +29,7 @@
     "license": "GPL-3.0",
     "dependencies": {
         "@arco-design/web-vue": "^2.46.0",
-        "@yicode/yidash": "^3.2.6",
+        "@yicode/yidash": "workspace:^",
         "axios": "^1.4.0",
         "date-fns": "^2.30.0",
         "lodash-es": "^4.17.21",
@@ -40,7 +40,7 @@
         "vue-router": "^4.2.1"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "^1.29.9",
+        "@yicode/yite-cli": "workspace:^",
         "sass": "^1.62.1"
     }
 }
