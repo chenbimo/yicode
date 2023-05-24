@@ -1,6 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo, fnMD5, fnPureMD5 } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -31,7 +32,7 @@ export default async function (fastify, opts) {
                 let adminExistsData = await adminModel.clone().where('username', req.body.username).first();
                 if (adminExistsData) {
                     return {
-                        ...appConfig.httpCode.FAIL,
+                        ...httpCodeConfig.FAIL,
                         msg: '管理员账号或昵称已存在'
                     };
                 }
@@ -45,12 +46,12 @@ export default async function (fastify, opts) {
 
                 let result = await adminModel.clone().insert(fnClearInsertData(insertData));
                 return {
-                    ...appConfig.httpCode.INSERT_SUCCESS,
+                    ...httpCodeConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return appConfig.httpCode.INSERT_FAIL;
+                return httpCodeConfig.INSERT_FAIL;
             }
         }
     });

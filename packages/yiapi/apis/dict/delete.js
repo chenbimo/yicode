@@ -1,6 +1,7 @@
 import { fnSchema, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -32,19 +33,19 @@ export default async function (fastify, opts) {
 
                 if (dictData.is_system === 1) {
                     return {
-                        ...appConfig.httpCode.DELETE_FAIL,
+                        ...httpCodeConfig.DELETE_FAIL,
                         msg: '默认字典，无法删除'
                     };
                 }
 
                 let result = await dictModel.clone().delete();
                 return {
-                    ...appConfig.httpCode.DELETE_SUCCESS,
+                    ...httpCodeConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return appConfig.httpCode.DELETE_FAIL;
+                return httpCodeConfig.DELETE_FAIL;
             }
         }
     });

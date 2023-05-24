@@ -13,6 +13,7 @@ import * as utils from './utils/index.js';
 
 // 配置信息
 import { appConfig } from './config/appConfig.js';
+import { httpCodeConfig } from './config/httpCodeConfig.js';
 import { logConfig } from './config/logConfig.js';
 import { sysConfig } from './config/sysConfig.js';
 
@@ -234,6 +235,7 @@ export {
     fp,
     // 配置
     appConfig,
+    httpCodeConfig,
     logConfig,
     sysConfig,
     // 插件

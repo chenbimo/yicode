@@ -1,4 +1,5 @@
 import { fnApiInfo } from '../../utils/index.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -20,14 +21,14 @@ export default async function (fastify, opts) {
             try {
                 const result = await fastify.getUserApis(req.session);
                 return {
-                    ...appConfig.httpCode.SELECT_SUCCESS,
+                    ...httpCodeConfig.SELECT_SUCCESS,
                     data: {
                         rows: result
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return appConfig.httpCode.SELECT_FAIL;
+                return httpCodeConfig.SELECT_FAIL;
             }
         }
     });

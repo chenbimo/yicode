@@ -1,6 +1,7 @@
 import { fnApiInfo, fnSchema } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -25,14 +26,14 @@ export default async function (fastify, opts) {
                 let apiData = await fastify.redisGet(appConfig.cacheData.api);
 
                 return {
-                    ...appConfig.httpCode.SELECT_SUCCESS,
+                    ...httpCodeConfig.SELECT_SUCCESS,
                     data: {
                         rows: apiData
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return appConfig.httpCode.SELECT_FAIL;
+                return httpCodeConfig.SELECT_FAIL;
             }
         }
     });

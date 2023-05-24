@@ -1,6 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -46,12 +47,12 @@ export default async function (fastify, opts) {
                 await fastify.cacheRoleData('file');
 
                 return {
-                    ...appConfig.httpCode.UPDATE_SUCCESS,
+                    ...httpCodeConfig.UPDATE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return appConfig.httpCode.UPDATE_FAIL;
+                return httpCodeConfig.UPDATE_FAIL;
             }
         }
     });

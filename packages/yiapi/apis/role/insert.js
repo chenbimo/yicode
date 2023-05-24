@@ -1,6 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -33,7 +34,7 @@ export default async function (fastify, opts) {
                 let _result = await roleModel.clone().where('name', req.body.name).first();
                 if (_result !== undefined) {
                     return {
-                        ...appConfig.httpCode.FAIL,
+                        ...httpCodeConfig.FAIL,
                         msg: '角色已存在'
                     };
                 }
@@ -49,12 +50,12 @@ export default async function (fastify, opts) {
                 await fastify.cacheRoleData('file');
 
                 return {
-                    ...appConfig.httpCode.INSERT_SUCCESS,
+                    ...httpCodeConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return appConfig.httpCode.INSERT_FAIL;
+                return httpCodeConfig.INSERT_FAIL;
             }
         }
     });

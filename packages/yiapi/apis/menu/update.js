@@ -1,6 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -42,7 +43,7 @@ export default async function (fastify, opts) {
                     parentData = await menuModel.clone().where('id', req.body.pid).first();
                     if (!parentData) {
                         return {
-                            ...appConfig.httpCode.FAIL,
+                            ...httpCodeConfig.FAIL,
                             msg: '父级菜单不存在'
                         };
                     }
@@ -51,7 +52,7 @@ export default async function (fastify, opts) {
                 let selfData = await menuModel.clone().where('id', req.body.id).first();
                 if (selfData === undefined) {
                     return {
-                        ...appConfig.httpCode.FAIL,
+                        ...httpCodeConfig.FAIL,
                         msg: '菜单不存在'
                     };
                 }
@@ -76,11 +77,11 @@ export default async function (fastify, opts) {
 
                 await trx.commit();
                 await fastify.cacheTreeData();
-                return appConfig.httpCode.UPDATE_SUCCESS;
+                return httpCodeConfig.UPDATE_SUCCESS;
             } catch (err) {
                 await trx.rollback();
                 fastify.log.error(err);
-                return appConfig.httpCode.UPDATE_FAIL;
+                return httpCodeConfig.UPDATE_FAIL;
             }
         }
     });

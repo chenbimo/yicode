@@ -1,6 +1,7 @@
 import { fnSchema, fnApiInfo, fnPageOffset } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -24,14 +25,14 @@ export default async function (fastify, opts) {
                 try {
                     let jwtData = await req.jwtVerify();
                     return {
-                        ...appConfig.httpCode.SUCCESS,
+                        ...httpCodeConfig.SUCCESS,
                         data: {
                             state: 'yes'
                         }
                     };
                 } catch (err) {
                     return {
-                        ...appConfig.httpCode.SUCCESS,
+                        ...httpCodeConfig.SUCCESS,
                         data: {
                             state: 'no'
                         }
@@ -39,7 +40,7 @@ export default async function (fastify, opts) {
                 }
             } catch (err) {
                 fastify.log.error(err);
-                return appConfig.httpCode.FAIL;
+                return httpCodeConfig.FAIL;
             }
         }
     });

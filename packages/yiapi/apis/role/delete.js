@@ -1,6 +1,7 @@
 import { fnSchema, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -32,14 +33,14 @@ export default async function (fastify, opts) {
                 let roleData = await roleModel.clone().first();
                 if (!roleData) {
                     return {
-                        ...appConfig.httpCode.DELETE_FAIL,
+                        ...httpCodeConfig.DELETE_FAIL,
                         msg: '角色不存在'
                     };
                 }
 
                 if (roleData.is_system === 1) {
                     return {
-                        ...appConfig.httpCode.DELETE_FAIL,
+                        ...httpCodeConfig.DELETE_FAIL,
                         msg: '默认角色，无法删除'
                     };
                 }
@@ -50,11 +51,11 @@ export default async function (fastify, opts) {
                 await fastify.cacheRoleData('file');
 
                 return {
-                    ...appConfig.httpCode.DELETE_SUCCESS,
+                    ...httpCodeConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
-                return appConfig.httpCode.DELETE_FAIL;
+                return httpCodeConfig.DELETE_FAIL;
             }
         }
     });

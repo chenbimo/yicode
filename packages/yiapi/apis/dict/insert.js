@@ -1,6 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -36,7 +37,7 @@ export default async function (fastify, opts) {
                 if (req.body.symbol === 'number') {
                     if (Number.isNaN(Number(req.body.value)) === true) {
                         return {
-                            ...appConfig.httpCode.UPDATE_FAIL,
+                            ...httpCodeConfig.UPDATE_FAIL,
                             msg: '字典值不是一个数字类型'
                         };
                     }
@@ -59,12 +60,12 @@ export default async function (fastify, opts) {
                 let result = await dictModel.insert(fnClearInsertData(data));
 
                 return {
-                    ...appConfig.httpCode.INSERT_SUCCESS,
+                    ...httpCodeConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return appConfig.httpCode.INSERT_FAIL;
+                return httpCodeConfig.INSERT_FAIL;
             }
         }
     });

@@ -1,6 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -35,7 +36,7 @@ export default async function (fastify, opts) {
 
                 if (currentData) {
                     return {
-                        ...appConfig.httpCode.INSERT_FAIL,
+                        ...httpCodeConfig.INSERT_FAIL,
                         msg: '当前编号已存在'
                     };
                 }
@@ -53,11 +54,11 @@ export default async function (fastify, opts) {
                     .update(fnClearUpdateData(updateData));
 
                 await trx.commit();
-                return appConfig.httpCode.UPDATE_SUCCESS;
+                return httpCodeConfig.UPDATE_SUCCESS;
             } catch (err) {
                 await trx.rollback();
                 fastify.log.error(err);
-                return appConfig.httpCode.UPDATE_FAIL;
+                return httpCodeConfig.UPDATE_FAIL;
             }
         }
     });

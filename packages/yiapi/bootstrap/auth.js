@@ -13,6 +13,7 @@ import {
 } from 'lodash-es';
 
 import { appConfig } from '../config/appConfig.js';
+import { httpCodeConfig } from '../config/httpCodeConfig.js';
 import { sysConfig } from '../config/sysConfig.js';
 import { fnRouterPath, fnApiParamsCheck, fnClearLogData } from '../utils/index.js';
 
@@ -40,7 +41,7 @@ async function plugin(fastify, opts) {
             /* --------------------------------- 接口禁用检测 --------------------------------- */
             let isMatchBlackApi = micromatch.isMatch(req.url, appConfig.blackApis);
             if (isMatchBlackApi === true) {
-                res.send(appConfig.httpCode.API_DISABLED);
+                res.send(httpCodeConfig.API_DISABLED);
                 return;
             }
 
@@ -55,7 +56,7 @@ async function plugin(fastify, opts) {
                     return;
                 } else {
                     // 文件不存在
-                    res.send(appConfig.httpCode.NO_FILE);
+                    res.send(httpCodeConfig.NO_FILE);
                     return;
                 }
             }
@@ -64,7 +65,7 @@ async function plugin(fastify, opts) {
             let allApiNames = await fastify.redisGet(appConfig.cacheData.apiNames);
 
             if (allApiNames.includes(req.url) === false) {
-                res.send(appConfig.httpCode.NO_API);
+                res.send(httpCodeConfig.NO_API);
                 return;
             }
 
@@ -73,7 +74,7 @@ async function plugin(fastify, opts) {
                 let jwtData = await req.jwtVerify();
             } catch (err) {
                 res.send({
-                    ...appConfig.httpCode.NOT_LOGIN,
+                    ...httpCodeConfig.NOT_LOGIN,
                     detail: 'token 验证失败'
                 });
                 return;
@@ -117,7 +118,7 @@ async function plugin(fastify, opts) {
 
                 if (hasApi === false) {
                     res.send({
-                        ...appConfig.httpCode.FAIL,
+                        ...httpCodeConfig.FAIL,
                         msg: `您没有 [ ${req?.routeSchema?.summary || req.url} ] 接口的操作权限`
                     });
                     return;
@@ -126,7 +127,7 @@ async function plugin(fastify, opts) {
         } catch (err) {
             fastify.log.error(err);
             res.send({
-                ...appConfig.httpCode.FAIL,
+                ...httpCodeConfig.FAIL,
                 msg: err.msg || '认证异常',
                 other: err.other || ''
             });

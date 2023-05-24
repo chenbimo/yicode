@@ -1,6 +1,7 @@
 import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo, fnMD5 } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { httpCodeConfig } from '../../config/httpCodeConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -41,10 +42,10 @@ export default async function (fastify, opts) {
 
                 let updateResult = await adminModel.update(fnClearUpdateData(data));
 
-                return appConfig.httpCode.UPDATE_SUCCESS;
+                return httpCodeConfig.UPDATE_SUCCESS;
             } catch (err) {
                 fastify.log.error(err);
-                return appConfig.httpCode.UPDATE_FAIL;
+                return httpCodeConfig.UPDATE_FAIL;
             }
         }
     });
