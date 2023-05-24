@@ -20,14 +20,38 @@ import {
     fnPureMD5
 } from '../utils/index.js';
 
+// 内置角色配置
+const roleConfig = {
+    dev: {
+        name: '游客',
+        describe: '具备有限的权限和有限的查看内容',
+        is_system: 1
+    },
+    user: {
+        name: '用户',
+        describe: '用户权限和对于的内容查看',
+        is_system: 1
+    },
+    admin: {
+        name: '管理',
+        describe: '管理权限、除开发相关权限之外的权限等',
+        is_system: 1
+    },
+    super: {
+        name: '超级管理',
+        describe: '超级管理权限、除开发相关权限之外的权限等',
+        is_system: 1
+    }
+};
+
 async function plugin(fastify, opts) {
     // 同步接口
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table(appConfig.table.sys_menu);
-        let apiModel = fastify.mysql.table(appConfig.table.sys_api);
-        let adminModel = fastify.mysql.table(appConfig.table.sys_admin);
-        let roleModel = fastify.mysql.table(appConfig.table.sys_role);
+        let menuModel = fastify.mysql.table('sys_menu');
+        let apiModel = fastify.mysql.table('sys_api');
+        let adminModel = fastify.mysql.table('sys_admin');
+        let roleModel = fastify.mysql.table('sys_role');
 
         // 查询所有角色
         let roleData = await roleModel.clone().select();
@@ -63,7 +87,7 @@ async function plugin(fastify, opts) {
         });
 
         // 需要同步的角色，过滤掉数据库中已经存在的角色
-        _forOwn(appConfig.role, (item, key) => {
+        _forOwn(roleConfig, (item, key) => {
             if (roleCodes.includes(key) === false && key !== 'dev') {
                 // 角色不存在，则添加
                 item.api_ids = '';
