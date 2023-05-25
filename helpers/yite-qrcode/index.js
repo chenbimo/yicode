@@ -35,9 +35,8 @@ function logQrcode(server, options) {
 
     const info = server.config.logger.info;
 
-    info('\n  使用手机扫码访问本项目:');
-
     for (const url of networkUrls) {
+        info(`\n  使用手机扫码访问 ${url}:`);
         qr.generate(url, { small: true }, (result) => {
             info(`  ${result.replace(/\n/g, '\n  ')}`);
         });
