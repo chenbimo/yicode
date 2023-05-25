@@ -93,7 +93,9 @@ let $Data = $ref({
 let $Method = {
     async initData() {
         await $Method.apiSelectCategory();
-        await $Method.apiSelectData();
+        if ($Data.formData.category_code) {
+            await $Method.apiSelectData();
+        }
     },
     // 触发数据事件
     onDataAction(actionType, rowData) {
