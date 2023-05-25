@@ -11,12 +11,12 @@
         <a-layout class="layout-main" style="height: 100%">
             <div class="layout-header">
                 <div class="left">
-                    <a-button @click="$Method.onCollapse">
+                    <!-- <a-button @click="$Method.onCollapse">
                         <template #icon>
                             <icon-menu-fold v-if="$Data.collapsed" />
                             <icon-menu-unfold v-else />
                         </template>
-                    </a-button>
+                    </a-button> -->
                 </div>
                 <div class="right">
                     <a-dropdown position="br" @select="$Method.onUserAction">
