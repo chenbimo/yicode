@@ -35,6 +35,8 @@ const appConfig = mergeAndConcat(
         devPassword: 'dev123456',
         // 日志字段过滤，不打印
         logFilter: ['password', 'file'],
+        // 是否进行参数验证
+        paramsCheck: false,
         // 任何情况下可以访问的路由
         freeApis: [
             //

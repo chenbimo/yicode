@@ -21,6 +21,10 @@ export const appConfigSchema = {
             title: '开发者密码',
             type: 'string'
         },
+        paramsCheck: {
+            title: '接口参数验证',
+            type: 'boolean'
+        },
         // 日志字段过滤，不打印
         logFilter: {
             title: '日志字段过滤',

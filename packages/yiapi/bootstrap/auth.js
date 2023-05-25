@@ -99,7 +99,7 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 上传参数检测 --------------------------------- */
-            if (appConfig.authCheck !== false) {
+            if (appConfig.paramsCheck !== false) {
                 await fnApiParamsCheck(req);
             }
 
