@@ -54,8 +54,8 @@ const menuConfig = {
         }
     },
     '/permission': {
-        name: '应用数据',
-        describe: '应用数据',
+        name: '权限数据',
+        describe: '权限数据',
         sort: 1001,
         children: {
             '/menu': {
@@ -87,12 +87,44 @@ const menuConfig = {
                 describe: '角色列表',
                 is_system: 1,
                 sort: 5
-            },
-            '/config': {
-                name: '配置中心',
-                describe: '配置中心',
+            }
+        }
+    },
+    '/setup': {
+        name: '配置数据',
+        describe: '配置数据',
+        sort: 1002,
+        children: {
+            '/app-config': {
+                name: '项目配置',
+                describe: '项目配置',
                 is_system: 1,
-                sort: 5
+                sort: 1
+            },
+            '/table-config': {
+                name: '数据库表',
+                describe: '数据库表',
+                is_system: 1,
+                sort: 2
+            }
+        }
+    },
+    '/log': {
+        name: '日志数据',
+        describe: '日志数据',
+        sort: 1002,
+        children: {
+            '/login-log': {
+                name: '登录日志',
+                describe: '邮件日志',
+                is_system: 1,
+                sort: 1
+            },
+            '/email-log': {
+                name: '邮件日志',
+                describe: '邮件日志',
+                is_system: 1,
+                sort: 2
             }
         }
     }
