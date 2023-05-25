@@ -23,7 +23,8 @@ export default {
         type: 'string',
         comment: '路由',
         length: 500,
-        default: ''
+        default: '',
+        unique: true
     },
     sort: {
         type: 'bigint',
