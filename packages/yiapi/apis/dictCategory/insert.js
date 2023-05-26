@@ -29,7 +29,10 @@ export default async function (fastify, opts) {
             try {
                 let dictCategoryModel = fastify.mysql.table('sys_dict_category');
 
-                let currentData = await dictCategoryModel.clone().where({ code: fnCamelCase(req.body.code) });
+                let currentData = await dictCategoryModel
+                    .clone()
+                    .where({ code: fnCamelCase(req.body.code) })
+                    .first();
 
                 if (currentData) {
                     return {
