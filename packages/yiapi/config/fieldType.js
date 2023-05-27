@@ -2,101 +2,102 @@
 export const fieldType = {
     integer: {
         type: 'number',
-        length: true,
-        unsigned: true
+        options: ['length', 'unsigned']
     },
     bigInteger: {
         type: 'number',
-        unsigned: true
+        options: ['unsigned']
     },
     tinyint: {
         type: 'number',
-        length: true,
-        unsigned: true
+        options: ['length', 'unsigned']
     },
     smallint: {
         type: 'number',
-        unsigned: true
+        options: ['unsigned']
     },
     mediumint: {
         type: 'number',
-        unsigned: true
+        options: ['unsigned']
     },
     bigint: {
         type: 'number',
-        unsigned: true
+        options: ['unsigned']
     },
     text: {
         type: 'text',
-        text_type: true,
-        nullable: true
+        options: ['text_type', 'nullable']
     },
     string: {
         type: 'string',
-        length: true
+        options: ['length']
     },
     float: {
         type: 'float',
-        precision: true,
-        scale: true,
-        unsigned: true
+        options: ['precision', 'scale', 'unsigned']
     },
     double: {
         type: 'float',
-        precision: true,
-        scale: true,
-        unsigned: true
+        options: ['precision', 'scale', 'unsigned']
     },
     decimal: {
         type: 'float',
-        precision: true,
-        scale: true,
-        unsigned: true
+        options: ['precision', 'scale', 'unsigned']
     },
     boolean: {
-        type: 'bool'
+        type: 'bool',
+        options: []
     },
     date: {
-        type: 'date'
+        type: 'date',
+        options: []
     },
     datetime: {
         type: 'date',
-        precision: true
+        options: ['precision']
     },
     time: {
         type: 'date',
-        precision: true
+        options: ['precision']
     },
     timestamp: {
         type: 'date',
-        precision: true
+        options: ['precision']
     },
     timestamps: {
-        type: 'date'
+        type: 'date',
+        options: []
     },
     binary: {
         type: 'binary',
-        length: true
+        options: ['length']
     },
     enu: {
-        type: 'enum'
+        type: 'enum',
+        options: []
     },
     json: {
-        type: 'json'
+        type: 'json',
+        options: []
     },
     jsonb: {
-        type: 'json'
+        type: 'json',
+        options: []
     },
     uuid: {
-        type: 'uuid'
+        type: 'uuid',
+        options: []
     },
     geometry: {
-        type: 'geo'
+        type: 'geo',
+        options: []
     },
     geography: {
-        type: 'geo'
+        type: 'geo',
+        options: []
     },
     point: {
-        type: 'geo'
+        type: 'geo',
+        options: []
     }
 };
