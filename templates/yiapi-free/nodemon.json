@@ -1,6 +1,6 @@
 {
     "verbose": true,
-    "ignore": ["*.test.js", "fixtures/*", "**/node_modules/**/*", "**/logs/*", "**/data/*"],
+    "ignore": ["*.test.js", "fixtures/*", "node_modules/**/*", "logs/*", "tables/*"],
     "execMap": {
         "js": "node --trace-warnings --unhandled-rejections=strict yiapi.js"
     },
