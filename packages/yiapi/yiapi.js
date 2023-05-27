@@ -29,6 +29,7 @@ import { syncDatabase } from './scripts/syncDatabase.js';
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'addons'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'config'));
+fs.ensureDirSync(path.resolve(sysConfig.appDir, 'tables'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
 fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
