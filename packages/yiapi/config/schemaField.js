@@ -161,6 +161,14 @@ let schemaField = {
         maxLength: 30,
         pattern: '^[a-zA-Z][-_a-zA-Z0-9]{5,19}$'
     },
+    // 数据编码
+    table_code: {
+        type: 'string',
+        minLength: 1,
+        maxLength: 50,
+        // 小写开头 + [下划线|字母|数字]
+        pattern: '^[a-z][_a-z0-9]*$'
+    },
     // QQ号
     qq: {
         type: 'string',
