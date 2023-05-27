@@ -9,7 +9,7 @@
         "build": "yite build"
     },
     "dependencies": {
-        "@arco-design/web-vue": "^2.46.0",
+        "@arco-design/web-vue": "^2.46.1",
         "@yicode/yidash": "workspace:*",
         "@yicode/yite-cli": "workspace:*",
         "axios": "^1.4.0",
