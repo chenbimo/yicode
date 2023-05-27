@@ -1,21 +1,29 @@
 export const tableSchema = {
-    name: '系统字典分类表',
+    name: '应用表定义',
     fields: {
-        code: {
+        name: {
             type: 'string',
-            comment: '字典分类编码',
+            comment: '表名称',
             length: 50,
             default: ''
         },
-        name: {
+        code: {
             type: 'string',
-            comment: '字典分类名称',
-            length: 100,
+            comment: '表编码',
+            length: 50,
+            default: '',
+            options: ['unique']
+        },
+
+        value: {
+            type: 'string',
+            comment: '表字段',
+            length: 10000,
             default: ''
         },
         sort: {
             type: 'bigint',
-            comment: '字典分类排序',
+            comment: '排序',
             default: 0
         },
         describe: {
