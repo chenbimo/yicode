@@ -349,9 +349,9 @@ export function fnApiParamsCheck(req) {
  * @param {String} name 导入失败时的名称
  * @param {Any} default 默认值
  */
-export async function fnImport(path, name, defaultValue) {
+export async function fnImport(path, name, defaultValue, options = {}) {
     try {
-        let data = await import(fnFileProtocolPath(path));
+        let data = await import(fnFileProtocolPath(path), options);
         return fnCloneAny(data);
     } catch (err) {
         return fnCloneAny({

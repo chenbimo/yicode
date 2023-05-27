@@ -1,6 +1,11 @@
-import { fnSchema, fnApiInfo, fnPageOffset } from '../../utils/index.js';
+import path from 'path';
+import fg from 'fast-glob';
+import { replace as _replace, snakeCase as _snakeCase } from 'lodash-es';
+
+import { fnSchema, fnApiInfo, fnPageOffset, fnImport } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
@@ -27,37 +32,26 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let tableConfigModel = fastify.mysql //
-                    .table('sys_table_config')
-                    .modify(function (queryBuilder) {
-                        if (req.body.keywords !== undefined) {
-                            queryBuilder.where('name', 'like', `%${req.body.keywords}%`);
-                        }
-                        if (req.body.state !== undefined) {
-                            queryBuilder.where('state', req.body.state);
-                        }
-                    });
+                let tableFiles = fg.sync(['./tables/*.json'], {
+                    onlyFiles: true,
+                    dot: false,
+                    absolute: true,
+                    cwd: sysConfig.appDir
+                });
 
-                // 记录总数
-                let { total } = await tableConfigModel
-                    //
-                    .clone()
-                    .count('id', { as: 'total' })
-                    .first();
-
-                // 记录列表
-                let rows = await tableConfigModel
-                    //
-                    .clone()
-                    .orderBy('created_at', 'desc')
-                    .offset(fnPageOffset(req.body.page, req.body.limit))
-                    .limit(req.body.limit)
-                    .select();
+                let rows = [];
+                for (let i = 0; i < tableFiles.length; i++) {
+                    let tableName = _replace(_snakeCase(path.basename(tableFiles[i], '.json')), /_(\d+)/gi, '$1');
+                    // 获取表数据
+                    let { default: tableSchema } = await fnImport(tableFiles[i], 'default', { default: {} }, { assert: { type: 'json' } });
+                    tableSchema.code = tableName;
+                    rows.push(tableSchema);
+                }
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
                     data: {
-                        total: total,
+                        total: tableFiles.length,
                         rows: rows,
                         page: req.body.page,
                         limit: req.body.limit

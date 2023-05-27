@@ -73,9 +73,9 @@ let denyFields = [
 async function fnAllTableData() {
     try {
         // 系统表数据
-        let sysTableData = await fnGetTableFile(['./tables/*.js', '!**/_*.js'], sysConfig.yiapiDir, 'sys_');
-        let addonTableData = await fnGetTableFile(['./addons/*/tables/*', '!**/_*.js'], sysConfig.appDir, 'addon_');
-        let appTableData = await fnGetTableFile(['./tables/*', '!**/_*.js'], sysConfig.appDir);
+        let sysTableData = await fnGetTableFile(['./tables/*.json', '!**/_*.json'], sysConfig.yiapiDir, 'sys_');
+        let addonTableData = await fnGetTableFile(['./addons/*/tables/*.json', '!**/_*.json'], sysConfig.appDir, 'addon_');
+        let appTableData = await fnGetTableFile(['./tables/*.json', '!**/_*.json'], sysConfig.appDir);
 
         // 应用表跟系统表和插件表合并后的数据
         let tempAppTableData = [];
@@ -152,10 +152,10 @@ async function fnGetTableFile(filePattern, fileDir, tablePrefix) {
             // 路径案例：file:///D:/codes/git/chensuiyi/yiapi/tables/sysUser.js
             // 获取表名，如果是数字，则将数字跟前面的字母金挨着，保证表名是下划线风格
             // 这里不需要对表前缀进行判断，因为自定义 sys_ 和 addon_ 前缀的表会对字段进行合并，而不是替换
-            let tableName = _replace(_snakeCase(path.basename(filePath, '.js')), /_(\d+)/gi, '$1');
+            let tableName = _replace(_snakeCase(path.basename(filePath, '.json')), /_(\d+)/gi, '$1');
             tableName = tablePrefix ? tablePrefix + tableName : tableName;
             // 获取表数据
-            let { tableSchema } = await fnImport(fileUrl, { tableSchema: {} });
+            let { default: tableSchema } = await fnImport(fileUrl, 'default', { default: {} }, { assert: { type: 'json' } });
 
             // 表名称不能以 _old 结尾
             if (_isPlainObject(tableSchema) === false || _isEmpty(tableSchema)) {
