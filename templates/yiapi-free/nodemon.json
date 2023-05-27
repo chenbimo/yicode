@@ -1,8 +1,8 @@
 {
     "verbose": true,
-    "ignore": ["*.test.js", "fixtures/*", "node_modules/**/*", "logs/*", "tables/*"],
+    "ignore": ["*.test.js", "**/fixtures/*", "**/node_modules/**/*", "**/logs/*", "**/tables/*"],
     "execMap": {
-        "js": "node --trace-warnings --unhandled-rejections=strict yiapi.js"
+        "js": "node --experimental-json-modules --unhandled-rejections=strict yiapi.js"
     },
     "env": {
         "NODE_ENV": "development"
