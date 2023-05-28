@@ -1,6 +1,6 @@
 {
     "name": "@yicode/dlyicode",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "description": "dlyicode - yicode官方npm资源下载",
     "author": "chensuiyi <bimostyle@qq.com>",
     "bin": {
@@ -13,7 +13,7 @@
     "repository": "https://github.com/chenbimo/yicode.git",
     "files": [],
     "dependencies": {
-        "got": "^12.6.0",
+        "got": "^13.0.0",
         "inquirer": "^9.2.6",
         "log-symbols": "^5.1.0",
         "pacote": "^15.2.0"
