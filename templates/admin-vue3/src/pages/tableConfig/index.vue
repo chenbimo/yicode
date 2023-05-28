@@ -49,7 +49,7 @@ import editDataDrawer from './components/editDataDrawer.vue';
 
 // 选项集
 defineOptions({
-    name: 'dict'
+    name: 'tableConfig'
 });
 
 // 全局集
