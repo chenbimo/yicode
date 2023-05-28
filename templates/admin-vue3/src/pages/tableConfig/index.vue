@@ -15,7 +15,6 @@
                 <template #columns>
                     <a-table-column title="表名" data-index="code" :width="200"></a-table-column>
                     <a-table-column title="描述" data-index="name" :width="300"></a-table-column>
-                    <a-table-column title="字段" data-index="fields"></a-table-column>
                     <a-table-column title="操作" fixed="right" :width="100" align="right">
                         <template #cell="{ record }">
                             <a-dropdown position="br" @select="$Method.onDataAction($event, record)">
