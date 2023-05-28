@@ -105,11 +105,6 @@ let $Data = $ref({
         fields: []
     },
     fieldType: {
-        integer: {
-            name: '整数',
-            type: 'number',
-            options: ['length', 'unsigned']
-        },
         bigint: {
             name: '大整型',
             type: 'number',

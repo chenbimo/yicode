@@ -1,12 +1,12 @@
 // 字段类型
 export const fieldType = {
-    integer: {
-        type: 'number',
-        options: ['length', 'unsigned']
-    },
-    bigInteger: {
+    bigint: {
         type: 'number',
         options: ['unsigned']
+    },
+    string: {
+        type: 'string',
+        options: ['length']
     },
     tinyint: {
         type: 'number',
@@ -20,17 +20,9 @@ export const fieldType = {
         type: 'number',
         options: ['unsigned']
     },
-    bigint: {
-        type: 'number',
-        options: ['unsigned']
-    },
     text: {
         type: 'text',
         options: ['text_type', 'nullable']
-    },
-    string: {
-        type: 'string',
-        options: ['length']
     },
     float: {
         type: 'float',
