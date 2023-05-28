@@ -18,8 +18,9 @@ let appConfig = {
         '/docs/**',
         '/public/**',
         '/api/admin/login',
-        '/api/user/tokenCheck',
-        '/api/upload/local'
+        '/api/tool/tokenCheck',
+        '/api/upload/local',
+        '/api/tool/sendMail'
     ],
     // 黑名单接口，不可访问的接口
     blackApis: [],
@@ -52,17 +53,25 @@ let appConfig = {
     },
     // 邮件配置
     mail: {
+        // host: 'smtp.qq.com',
+        // port: 465,
+        // pool: true,
+        // secure: true,
+        // // qq邮箱
+        // user: 'demo@qq.com',
+        // pass: '',
+        // from_name: '易接口',
+        // from_email: 'demo@qq.com',
+
         host: 'smtp.qq.com',
         port: 465,
         pool: true,
         secure: true,
         // qq邮箱
-        user: 'demo@qq.com',
-        pass: '',
-        from: {
-            name: '易接口',
-            address: 'demo@qq.com'
-        }
+        user: 'yicode@qq.com',
+        pass: 'vrjkdsydfkmndgbd',
+        from_name: '随易科技',
+        from_email: 'yicode@qq.com'
     }
 };
 
