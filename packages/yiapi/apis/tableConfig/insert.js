@@ -77,10 +77,13 @@ export default async function (fastify, opts) {
                         let data = {
                             type: fieldData.type,
                             comment: fieldData.comment,
-                            length: fieldData.length,
                             default: fieldData.default,
                             options: []
                         };
+                        // 只有大于 0，才使用 length 字段
+                        if (fieldData.length > 0) {
+                            data.length = fieldData.length;
+                        }
                         if (fieldData.index === 1) {
                             data.options.push('index');
                         }

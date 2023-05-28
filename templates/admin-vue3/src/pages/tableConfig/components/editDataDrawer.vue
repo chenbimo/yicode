@@ -269,15 +269,18 @@ let $Method = {
     // 编辑
     async apiEditData() {
         try {
-            console.log('🚀 ~ file: editDataDrawer.vue:272 ~ apiEditData ~ $Data.formData:', $Data.formData);
-
+            let formData = _.cloneDeep($Data.formData);
+            formData.fields = formData.fields.map((item) => {
+                if (item.length === '') item.length = 0;
+                return item;
+            });
             let url = {
                 insertData: '/tableConfig/insert',
                 updateData: '/tableConfig/update'
             }[$Prop.actionType];
             let res = await $Http({
                 url: url,
-                data: $Data.formData
+                data: formData
             });
             // $Method.onCloseDrawer();
             // $Emit('success');
