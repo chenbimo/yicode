@@ -120,7 +120,7 @@ const menuConfig = {
                 is_system: 1,
                 sort: 1
             },
-            '/email-log': {
+            '/mail-log': {
                 name: '邮件日志',
                 describe: '邮件日志',
                 is_system: 1,
