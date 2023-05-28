@@ -19,7 +19,10 @@ async function plugin(fastify, opts) {
         return new Promise(async (resolve, reject) => {
             try {
                 let result = await mailTransport.sendMail({
-                    from: appConfig.mail.from,
+                    from: {
+                        name: appConfig.mail.from_name,
+                        address: appConfig.mail.from_email
+                    },
                     ...params
                 });
                 resolve(result);

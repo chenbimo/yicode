@@ -83,10 +83,8 @@ const appConfig = mergeAndConcat(
             secure: true,
             user: 'demo@qq.com',
             pass: '',
-            from: {
-                name: '易接口',
-                address: 'demo@qq.com'
-            }
+            from_name: '易接口',
+            from_email: 'demo@qq.com'
         }
     },
     importConfig
