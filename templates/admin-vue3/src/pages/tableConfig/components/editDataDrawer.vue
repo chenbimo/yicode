@@ -175,11 +175,6 @@ let $Data = $ref({
             type: 'binary',
             options: ['length']
         },
-        enu: {
-            name: '枚举值',
-            type: 'enum',
-            options: []
-        },
         json: {
             name: 'json',
             type: 'json',

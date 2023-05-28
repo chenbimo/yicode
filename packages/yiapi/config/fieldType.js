@@ -56,10 +56,6 @@ export const fieldType = {
         type: 'binary',
         options: ['length']
     },
-    enu: {
-        type: 'enum',
-        options: []
-    },
     json: {
         type: 'json',
         options: []
