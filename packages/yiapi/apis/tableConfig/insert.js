@@ -19,7 +19,7 @@ export const apiSchema = {
         type: 'object',
         properties: {
             code: fnSchema(schemaField.table_code, '表编码'),
-            describe: fnSchema(schemaField.describe, '表描述'),
+            name: fnSchema(schemaField.describe, '表描述'),
             fields: {
                 title: '表字段',
                 type: 'array',
@@ -27,7 +27,7 @@ export const apiSchema = {
                 items: {
                     type: 'object',
                     properties: {
-                        name: fnSchema(schemaField.string1to50, '字段名'),
+                        comment: fnSchema(schemaField.string1to50, '字段名'),
                         code: fnSchema(schemaField.table_code, '字段编码'),
                         type: fnSchema(null, '字段类型', 'string', 1, 30, Object.keys(fieldType)),
                         length: fnSchema(schemaField.min0, '长度'),
@@ -35,11 +35,11 @@ export const apiSchema = {
                         unsigned: fnSchema(schemaField.boolEnum, '无符号'),
                         unique: fnSchema(schemaField.boolEnum, '唯一值')
                     },
-                    required: ['name', 'code', 'type']
+                    required: ['comment', 'code', 'type']
                 }
             }
         },
-        required: ['code', 'describe', 'fields']
+        required: ['code', 'name', 'fields']
     }
 };
 
@@ -63,7 +63,7 @@ export default async function (fastify, opts) {
                 let isAllPass = true;
                 let checkMsg = '';
                 let tableSchema = {
-                    name: req.body.describe,
+                    name: req.body.name,
                     fields: {}
                 };
                 for (let i = 0; i < fieldsLen; i++) {
@@ -76,10 +76,20 @@ export default async function (fastify, opts) {
                         fieldNames.push(fieldData.code);
                         let data = {
                             type: fieldData.type,
-                            comment: fieldData.name,
+                            comment: fieldData.comment,
                             length: fieldData.length,
-                            default: fieldData.default
+                            default: fieldData.default,
+                            options: []
                         };
+                        if (fieldData.index === 1) {
+                            data.options.push('index');
+                        }
+                        if (fieldData.unique === 1) {
+                            data.options.push('unique');
+                        }
+                        if (fieldData.unsigned === 1) {
+                            data.options.push('unsigned');
+                        }
                         tableSchema.fields[fieldData.code] = data;
                     }
                 }

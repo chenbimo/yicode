@@ -14,7 +14,6 @@
             "default": "",
             "options": ["unique"]
         },
-
         "value": {
             "type": "string",
             "comment": "表字段",
