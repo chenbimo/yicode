@@ -1,4 +1,4 @@
-# dlnpm - （download npm）- 下载 npm 包
+# dlyicode - （download npm）- 下载 npm 包
 
 ## 用途
 
@@ -8,7 +8,7 @@
 
 ## 使用
 
-全局安装 `dlnpm` 包。
+全局安装 `dlyicode` 包。
 
 注：
 
@@ -17,13 +17,13 @@
 -   随易科技 `模板案例` 包均已 `@yicode-template` 为前缀
 
 ```bash
-pnpm add -g @yicode/dlnpm
+pnpm add -g @yicode/dlyicode
 ```
 
-安装完毕后，直接在命令行输入 `dlnpm` 并回车，按提示操作即可。
+安装完毕后，直接在命令行输入 `dlyicode` 并回车，按提示操作即可。
 
 ```bash
-> dlnpm
+> dlyicode
 
 ℹ 开发者：随易科技（https://yicode.tech）
 -----------------------------------------
