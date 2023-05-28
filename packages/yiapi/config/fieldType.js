@@ -71,9 +71,5 @@ export const fieldType = {
     uuid: {
         type: 'uuid',
         options: []
-    },
-    point: {
-        type: 'geo',
-        options: []
     }
 };
