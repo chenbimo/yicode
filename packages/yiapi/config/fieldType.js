@@ -72,10 +72,6 @@ export const fieldType = {
         type: 'uuid',
         options: []
     },
-    geometry: {
-        type: 'geo',
-        options: []
-    },
     geography: {
         type: 'geo',
         options: []
