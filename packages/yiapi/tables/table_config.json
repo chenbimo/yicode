@@ -1,5 +1,5 @@
 {
-    "name": "应用表定义",
+    "name": "数据表配置",
     "fields": {
         "name": {
             "type": "string",
