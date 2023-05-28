@@ -278,7 +278,7 @@ export default defineConfig(async ({ command, mode }) => {
                 rollupOptions: {
                     plugins: [],
                     output: {
-                        // TODO: 进一步研究
+                        // TODO: 进一步研究22
                         // assetFileNames: ({ name }) => {
                         //     if (/\.(gif|jpe?g|png|svg)$/.test(name ?? '')) {
                         //         return 'assets/images/[name]-[hash][extname]';
@@ -294,7 +294,10 @@ export default defineConfig(async ({ command, mode }) => {
             },
             server: {
                 host: '0.0.0.0',
-                port: findPort
+                port: findPort,
+                watch: {
+                    ignored: ['**/node_modules/**/*', '**/.git/**/*']
+                }
             }
         },
         yiteConfig?.viteConfig || {}
