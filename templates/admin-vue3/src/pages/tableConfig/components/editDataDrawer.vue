@@ -195,11 +195,6 @@ let $Data = $ref({
             type: 'uuid',
             options: []
         },
-        geography: {
-            name: '地理',
-            type: 'geo',
-            options: []
-        },
         point: {
             name: '坐标',
             type: 'geo',
