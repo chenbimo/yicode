@@ -1,6 +1,6 @@
 import { omit as _omit } from 'lodash-es';
 
-import { fnSchema, fnApiInfo, fnPureMD5, fnMD5 } from '../../utils/index.js';
+import { fnSchema, fnApiInfo, fnClearInsertData, fnPureMD5, fnMD5 } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -28,15 +28,18 @@ export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
+            const trx = await fastify.mysql.transaction();
             try {
-                let adminModel = fastify.mysql
-                    .table('sys_admin')
-                    //
-                    .orWhere({ username: req.body.account })
-                    .orWhere({ phone: req.body.account });
+                let adminModel = trx.table('sys_admin');
+                let loginLogModel = trx.table('sys_login_log');
 
-                // 查询用户是否存在
-                let adminData = await adminModel.clone().first();
+                // 查询管理员是否存在
+                let adminData = await adminModel //
+                    .clone()
+                    .orWhere({ username: req.body.account })
+                    .orWhere({ phone: req.body.account })
+                    .first();
+
                 // 判断用户存在
                 if (!adminData) {
                     return {
@@ -53,15 +56,17 @@ export default async function (fastify, opts) {
                     };
                 }
 
-                let dataRoleCodes = await fastify.redisGet(cacheData.role);
-                let roleCodesArray = adminData.role_codes.split(',');
-                let role_codes = [];
-                dataRoleCodes.forEach((item) => {
-                    if (roleCodesArray.includes(item.id)) {
-                        role_codes.push(item.code);
-                    }
-                });
+                let loginLogData = {
+                    username: adminData.username,
+                    nickname: adminData.nickname,
+                    role_codes: adminData.role_codes,
+                    ip: req.ip || '',
+                    ua: req.headers['user-agent'] || ''
+                };
 
+                await loginLogModel.clone().insert(fnClearInsertData(loginLogData));
+
+                await trx.commit();
                 // 成功返回
                 return {
                     ...codeConfig.SUCCESS,
@@ -74,6 +79,7 @@ export default async function (fastify, opts) {
                 };
             } catch (err) {
                 fastify.log.error(err);
+                await trx.rollback();
                 return {
                     ...codeConfig.FAIL,
                     msg: '登录失败'

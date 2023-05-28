@@ -1,0 +1,35 @@
+{
+    "name": "登录日志",
+    "fields": {
+        "username": {
+            "type": "string",
+            "comment": "用户名",
+            "length": 30,
+            "default": ""
+        },
+        "nickname": {
+            "type": "string",
+            "comment": "昵称",
+            "length": 50,
+            "default": ""
+        },
+        "role_codes": {
+            "type": "string",
+            "comment": "角色",
+            "length": 2000,
+            "default": ""
+        },
+        "ip": {
+            "type": "string",
+            "comment": "ip",
+            "length": 30,
+            "default": ""
+        },
+        "ua": {
+            "type": "string",
+            "comment": "ua",
+            "length": 500,
+            "default": ""
+        }
+    }
+}
