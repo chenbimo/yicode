@@ -52,14 +52,6 @@ export const fieldType = {
         type: 'date',
         options: ['precision']
     },
-    timestamp: {
-        type: 'date',
-        options: ['precision']
-    },
-    timestamps: {
-        type: 'date',
-        options: []
-    },
     binary: {
         type: 'binary',
         options: ['length']

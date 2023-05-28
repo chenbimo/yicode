@@ -170,16 +170,6 @@ let $Data = $ref({
             type: 'date',
             options: ['precision']
         },
-        timestamp: {
-            name: '时间戳',
-            type: 'date',
-            options: ['precision']
-        },
-        timestamps: {
-            name: '毫秒时间戳',
-            type: 'date',
-            options: []
-        },
         binary: {
             name: '二进制',
             type: 'binary',
