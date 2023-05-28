@@ -189,11 +189,6 @@ let $Data = $ref({
             name: 'jsonb',
             type: 'json',
             options: []
-        },
-        uuid: {
-            name: 'UUID',
-            type: 'uuid',
-            options: []
         }
     }
 });

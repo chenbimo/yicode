@@ -67,9 +67,5 @@ export const fieldType = {
     jsonb: {
         type: 'json',
         options: []
-    },
-    uuid: {
-        type: 'uuid',
-        options: []
     }
 };
