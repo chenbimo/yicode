@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="page-table no-page">
-            <a-table :data="$Data.tableData" :pagination="false" :bordered="$GlobalData.tableBordered" :scroll="$GlobalData.tableScroll" row-key="id">
+            <a-table :data="$Data.tableData" :scroll="$GlobalData.tableScroll" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
                 <template #columns>
                     <a-table-column title="名称" data-index="name" :width="250"></a-table-column>
                     <a-table-column title="路由" data-index="value" :width="300"></a-table-column>

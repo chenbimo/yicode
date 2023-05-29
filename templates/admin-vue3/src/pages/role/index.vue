@@ -11,22 +11,22 @@
             </div>
         </div>
         <div class="page-table">
-            <a-table :data="$Data.tableData" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
+            <a-table :data="$Data.tableData" :scroll="$GlobalData.tableScroll" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
                 <template #columns>
-                    <a-table-column title="名称" data-index="name"></a-table-column>
-                    <a-table-column title="编码" data-index="code"></a-table-column>
-                    <a-table-column title="描述" data-index="describe"></a-table-column>
-                    <a-table-column title="菜单" data-index="menu_ids"></a-table-column>
-                    <a-table-column title="接口" data-index="api_ids"></a-table-column>
-                    <a-table-column title="创建时间" data-index="created_at1" :width="150"></a-table-column>
-                    <a-table-column title="更新时间" data-index="updated_at1" :width="150"></a-table-column>
+                    <a-table-column title="名称" data-index="name" :width="200"></a-table-column>
+                    <a-table-column title="编码" data-index="code" :width="150"></a-table-column>
+                    <a-table-column title="描述" data-index="describe" :width="300" ellipsis tooltip></a-table-column>
+                    <a-table-column title="菜单" data-index="menu_ids" :width="500"></a-table-column>
+                    <a-table-column title="接口" data-index="api_ids" :width="500"></a-table-column>
+                    <a-table-column title="创建时间" data-index="created_at2" :width="150"></a-table-column>
+                    <a-table-column title="更新时间" data-index="updated_at2" :width="150"></a-table-column>
                     <a-table-column title="操作" fixed="right" :width="100" align="right">
                         <template #cell="{ record }">
                             <a-dropdown position="br" @select="$Method.onDataAction($event, record)">
                                 <a-button>操作<icon-down /></a-button>
                                 <template #content>
                                     <a-doption value="updateData"><icon-edit />编辑</a-doption>
-                                    <a-doption value="permissionData"><icon-edit />权限</a-doption>
+                                    <a-doption value="permissionData"><icon-branch />权限</a-doption>
                                     <a-doption value="deleteData"> <icon-delete />删除</a-doption>
                                 </template>
                             </a-dropdown>
@@ -135,7 +135,7 @@ let $Method = {
                     limit: $Data.pagination.limit
                 }
             });
-            $Data.tableData = res.data.rows;
+            $Data.tableData = utilCoverRelativeTime(res.data.rows);
             $Data.pagination.total = res.data.total;
         } catch (err) {
             console.log('🚀 ~ file: index.vue:122 ~ apiSelectData ~ err:', err);

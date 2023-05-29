@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="page-table">
-            <a-table :data="$Data.tableData" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
+            <a-table :data="$Data.tableData" :scroll="$GlobalData.tableScroll" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
                 <template #columns>
                     <a-table-column title="用户名" data-index="username" :width="200"></a-table-column>
                     <a-table-column title="昵称" data-index="nickname" :width="200"></a-table-column>
@@ -17,17 +17,6 @@
                     <a-table-column title="IP地址" data-index="ip" :width="200"></a-table-column>
                     <a-table-column title="登录时间" data-index="created_at2" :width="150"></a-table-column>
                     <a-table-column title="UA" data-index="ua" ellipsis></a-table-column>
-                    <a-table-column title="操作" fixed="right" :width="100" align="right">
-                        <template #cell="{ record }">
-                            <a-dropdown position="br" @select="$Method.onDataAction($event, record)">
-                                <a-button>操作<icon-down /></a-button>
-                                <template #content>
-                                    <a-doption value="updateData"><icon-edit />编辑</a-doption>
-                                    <a-doption value="deleteData"> <icon-delete />删除</a-doption>
-                                </template>
-                            </a-dropdown>
-                        </template>
-                    </a-table-column>
                 </template>
             </a-table>
         </div>

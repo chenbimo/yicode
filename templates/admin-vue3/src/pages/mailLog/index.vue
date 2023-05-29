@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="page-table">
-            <a-table :data="$Data.tableData" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
+            <a-table :data="$Data.tableData" :scroll="$GlobalData.tableScroll" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
                 <template #columns>
                     <a-table-column title="登录邮箱" data-index="login_email" :width="200"></a-table-column>
                     <a-table-column title="发送者昵称" data-index="from_name" :width="200"></a-table-column>
@@ -25,16 +25,6 @@
                     </a-table-column>
                     <a-table-column title="发送时间" data-index="created_at2" :width="150"></a-table-column>
                     <a-table-column title="发送内容" data-index="text"></a-table-column>
-                    <a-table-column title="操作" fixed="right" :width="100" align="right">
-                        <template #cell="{ record }">
-                            <a-dropdown position="br" @select="$Method.onDataAction($event, record)">
-                                <a-button>操作<icon-down /></a-button>
-                                <template #content>
-                                    <a-doption value="deleteData"> <icon-delete />删除</a-doption>
-                                </template>
-                            </a-dropdown>
-                        </template>
-                    </a-table-column>
                 </template>
             </a-table>
         </div>

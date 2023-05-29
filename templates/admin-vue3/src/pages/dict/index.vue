@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="page-table">
-            <a-table :data="$Data.tableData" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
+            <a-table :data="$Data.tableData" :scroll="$GlobalData.tableScroll" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
                 <template #columns>
                     <a-table-column title="名称" data-index="name" :width="150"></a-table-column>
                     <a-table-column title="编码" data-index="code" :width="100"></a-table-column>
