@@ -8,7 +8,7 @@ export const apiSchema = {
     description: `${apiInfo.apiPath}`,
     body: {
         type: 'object',
-        title: '查询地址列表接口',
+        title: '查询资讯列表接口',
         properties: {
             category_id: yiapi.utils.fnSchema(yiapi.schemaField.pid, '资讯分类'),
             page: yiapi.utils.fnSchema(yiapi.schemaField.page, '第几页'),
