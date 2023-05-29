@@ -65,6 +65,10 @@ async function main() {
                     value: '@yicode-template/uni-vue3'
                 },
                 {
+                    name: 'yiapi-free 易接口基础模板',
+                    value: '@yicode-template/yiapi-free'
+                },
+                {
                     name: 'yidocs 易文档基础模板',
                     value: '@yicode-template/yidocs'
                 }
