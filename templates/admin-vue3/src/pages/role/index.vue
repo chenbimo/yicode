@@ -123,7 +123,7 @@ let $Method = {
     },
     // 刷新数据
     async fnFreshData() {
-        $Method.apiSelectData();
+        await $Method.apiSelectData();
     },
     // 查询用户数据
     async apiSelectData() {

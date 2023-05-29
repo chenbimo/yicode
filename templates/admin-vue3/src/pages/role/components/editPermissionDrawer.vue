@@ -1,11 +1,21 @@
 <template>
-    <a-drawer width="100vw" :visible="$Data.isShow.editDataDrawer" unmountOnClose @cancel="$Method.onCloseDrawer" @ok="$Method.apiEditNavigation">
+    <a-drawer width="100vw" :visible="$Data.isShow.editDataDrawer" unmountOnClose @cancel="$Method.onCloseDrawer" @ok="$Method.apiRoleBindPermission">
         <template #title>
-            {{ `绑定${$Prop.pageConfig.name2}` }}
+            {{ `绑定 [ ${$Prop.rowData.name} ] ${$Prop.pageConfig.name2}` }}
         </template>
         <div class="bodyer">
-            <div class="left"></div>
-            <div class="right"></div>
+            <div class="left">
+                <div class="panel-name">
+                    <a-tag color="red" size="medium" :default-checked="true">菜单权限</a-tag>
+                </div>
+                <a-tree v-model:checked-keys="$Data.menuCheckedKeys" v-model:half-checked-keys="$Data.menuHalfCheckedKeys" :checkable="true" :data="$Data.allMenuTreeData" :field-names="$Data.fieldNames" action-on-node-click="expand" show-line block-node />
+            </div>
+            <div class="right">
+                <div class="panel-name">
+                    <a-tag color="red" size="medium" :default-checked="true">接口权限</a-tag>
+                </div>
+                <a-tree v-model:checked-keys="$Data.apiCheckedKeys" v-model:half-checked-keys="$Data.apiHalfCheckedKeys" :checkable="true" :data="$Data.allApiTreeData" :field-names="$Data.fieldNames" action-on-node-click="expand" show-line block-node />
+            </div>
         </div>
     </a-drawer>
 </template>
@@ -32,10 +42,6 @@ let $Prop = defineProps({
     rowData: {
         type: Object,
         default: {}
-    },
-    categoryItem: {
-        type: Object,
-        default: {}
     }
 });
 
@@ -55,15 +61,47 @@ let $Data = $ref({
         link: '',
         sort: 1,
         describe: ''
-    }
+    },
+    fieldNames: {
+        key: 'id',
+        title: 'name'
+    },
+    // 菜单数据
+    allMenuTableData: [],
+    allMenuTreeData: [],
+    allMenuDataObject: {},
+    // 接口数据
+    allApiTableData: [],
+    allApiTreeData: [],
+    allApiDataObject: {},
+    // 选中的菜单复选框
+    menuCheckedKeys: [],
+    // 半选的菜单复选框
+    menuHalfCheckedKeys: [],
+    // 选中的接口复选框
+    apiCheckedKeys: [],
+    // 半选的接口复选框
+    apiHalfCheckedKeys: []
 });
 
 // 方法集
 let $Method = {
     async initData() {
         $Data.isShow.editDataDrawer = $Prop.modelValue;
-        $Data.formData.pid = $Prop.categoryItem.id;
-        $Data.formData = _.merge($Data.formData, $Prop.rowData);
+        await $Method.apiSelectAllMenuData();
+        await $Method.apiSelectAllApiData();
+        $Data.apiCheckedKeys = $Prop.rowData.api_ids
+            .split(',')
+            .map((id) => Number(id))
+            .filter((id) => {
+                return $Data.allApiDataObject[id]?.is_bool === 1;
+            });
+        $Data.menuCheckedKeys = $Prop.rowData.menu_ids
+            .split(',')
+            .map((id) => Number(id))
+            .filter((id) => {
+                return $Data.allMenuDataObject[id]?.pid !== 0;
+            });
     },
     // 关闭抽屉事件
     onCloseDrawer() {
@@ -72,28 +110,63 @@ let $Method = {
             $Emit('update:modelValue', false);
         }, 300);
     },
-    // 编辑
-    async apiEditNavigation() {
+    // 查询所有菜单数据
+    async apiSelectAllMenuData() {
         try {
-            if (!$Data.formData.pid) {
-                Message.warning({
-                    content: '请先选择左侧分类'
-                });
-                return;
-            }
-            let url = {
-                insertData: '/nav/navigation/insert',
-                updateData: '/nav/navigation/update'
-            }[$Prop.actionType];
-            if (!url) {
-                Message.warning({
-                    content: '无效的操作类型'
-                });
-                return;
-            }
             let res = await $Http({
-                url: url,
-                data: $Data.formData
+                url: '/menu/selectAll',
+                data: {}
+            });
+            let data = res.data.rows.map((item) => {
+                // item.name = item.name + ' - ' + item.value;
+                return item;
+            });
+            $Data.allMenuTableData = data;
+            $Data.allMenuTreeData = yidash_tree_array2Tree(_.cloneDeep(data));
+            $Data.allMenuDataObject = _.keyBy(data, 'id');
+        } catch (err) {
+            console.log('🚀 ~ file: index.vue:201 ~ apiSelectAllMenuData ~ err', err);
+            ElMessage.error(err.msg || err);
+        }
+    },
+    // 查询所有接口数据
+    async apiSelectAllApiData() {
+        try {
+            let res = await $Http({
+                url: '/api/selectAll',
+                data: {}
+            });
+            let data = res.data.rows.map((item) => {
+                if ($Prop.rowData.api_ids.includes(item.id)) {
+                    item.checked = true;
+                } else {
+                    item.checked = false;
+                }
+                return item;
+            });
+            $Data.allApiTableData = data;
+            $Data.allApiTreeData = yidash_tree_array2Tree(_.cloneDeep(data));
+            $Data.allApiDataObject = _.keyBy(data, 'id');
+        } catch (err) {
+            console.log('🚀 ~ file: index.vue:227 ~ apiSelectAllApiData ~ err', err);
+            ElMessage.error(err.msg || err);
+        }
+    },
+    // 绑定角色权限
+    async apiRoleBindPermission() {
+        try {
+            let menuIds = _.concat($Data.menuCheckedKeys, $Data.menuHalfCheckedKeys);
+            let apiIds = _.concat($Data.apiCheckedKeys, $Data.apiHalfCheckedKeys);
+            let res = await $Http({
+                url: '/role/update',
+                data: {
+                    id: $Prop.rowData.id,
+                    menu_ids: menuIds,
+                    api_ids: apiIds
+                }
+            });
+            Message.success({
+                content: res.msg
             });
             $Method.onCloseDrawer();
             $Emit('success');
@@ -116,9 +189,16 @@ $Method.initData();
     .left {
         flex: 0 0 40%;
         border-right: 1px solid #ddd;
+        padding-right: 15px;
+        overflow-y: auto;
     }
     .right {
         flex: 0 0 60%;
+        padding-left: 15px;
+        overflow-y: auto;
+    }
+    .panel-name {
+        margin-bottom: 10px;
     }
 }
 </style>
