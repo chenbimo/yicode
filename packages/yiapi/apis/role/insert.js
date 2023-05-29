@@ -16,8 +16,7 @@ export const apiSchema = {
         properties: {
             code: fnSchema(schemaField.code, '角色代号'),
             name: fnSchema(null, '角色名称', 'string', 1, 20),
-            describe: fnSchema(schemaField.describe, '角色描述'),
-            menu_ids: fnSchema(null, '角色菜单ID组', 'string', 0, 2000)
+            describe: fnSchema(schemaField.describe, '角色描述')
         },
         required: ['name', 'code']
     }
@@ -42,8 +41,7 @@ export default async function (fastify, opts) {
                 let data = {
                     code: req.body.code,
                     name: req.body.name,
-                    describe: req.body.describe,
-                    menu_ids: req.body.menu_ids
+                    describe: req.body.describe
                 };
                 let result = await roleModel.clone().insert(fnClearInsertData(data));
 

@@ -18,7 +18,24 @@ export const apiSchema = {
             code: fnSchema(schemaField.code, '角色代号'),
             name: fnSchema(null, '角色名称', 'string', 1, 20),
             describe: fnSchema(schemaField.describe, '角色描述'),
-            menu_ids: fnSchema(null, '角色菜单ID组', 'string', 0, 2000)
+            menu_ids: {
+                title: '菜单ID组',
+                type: 'array',
+                minItems: 0,
+                maxItems: 1000,
+                items: {
+                    type: 'number'
+                }
+            },
+            api_ids: {
+                title: '接口ID组',
+                type: 'array',
+                minItems: 0,
+                maxItems: 1000,
+                items: {
+                    type: 'number'
+                }
+            }
         },
         required: ['id']
     }
@@ -31,20 +48,20 @@ export default async function (fastify, opts) {
             try {
                 let roleModel = fastify.mysql //
                     .table('sys_role')
-                    .where({ id: req.body.id })
                     .modify(function (queryBuilder) {});
 
                 // 需要更新的数据
                 let data = {
+                    code: req.body.code,
                     name: req.body.name,
                     describe: req.body.describe,
-                    menu_ids: req.body.menu_ids,
-                    api_ids: req.body.api_ids
+                    menu_ids: req.body.menu_ids.join(','),
+                    api_ids: req.body.api_ids.join(',')
                 };
 
-                let result = await roleModel.update(fnClearUpdateData(data));
+                let result = await roleModel.clone().where({ id: req.body.id }).update(fnClearUpdateData(data));
 
-                await fastify.cacheRoleData('file');
+                await fastify.cacheRoleData();
 
                 return {
                     ...codeConfig.UPDATE_SUCCESS,
