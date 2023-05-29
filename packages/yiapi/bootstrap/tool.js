@@ -121,7 +121,7 @@ async function plugin(fastify, opts) {
     });
 
     // 设置角色数据
-    fastify.decorate('cacheRoleData', async (type) => {
+    fastify.decorate('cacheRoleData', async () => {
         // 角色类别
         let dataRole = await fastify.mysql.table('sys_role').select();
 
