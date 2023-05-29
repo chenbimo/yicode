@@ -6,7 +6,7 @@
             "comment": "父级ID",
             "default": 0
         },
-        "icon": {
+        "image": {
             "type": "string",
             "comment": "菜单图标",
             "length": 300,

@@ -17,12 +17,6 @@
             "comment": "目录层级",
             "default": 1
         },
-        "icon": {
-            "type": "string",
-            "comment": "图标",
-            "length": 300,
-            "default": ""
-        },
         "name": {
             "type": "string",
             "comment": "名称",
