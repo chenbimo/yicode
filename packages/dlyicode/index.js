@@ -57,16 +57,16 @@ async function main() {
                     value: '@yicode-template/base-vue3'
                 },
                 {
-                    name: 'yite + vue3 后台项目开发模板',
-                    value: '@yicode-template/admin-vue3'
-                },
-                {
                     name: 'uniapp + vue3 基础项目开发模板',
                     value: '@yicode-template/uni-vue3'
                 },
                 {
-                    name: 'yiapi-free 易接口基础模板',
-                    value: '@yicode-template/yiapi-free'
+                    name: 'yite + vue3 后台项目开发模板',
+                    value: '@yicode-template/yiadmin'
+                },
+                {
+                    name: 'yiapi 易接口项目模板',
+                    value: '@yicode-template/yiapi'
                 },
                 {
                     name: 'yidocs 易文档基础模板',

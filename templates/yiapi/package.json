@@ -1,7 +1,7 @@
 {
-    "name": "@yicode-template/yiapi-free",
-    "version": "1.0.3",
-    "description": "易接口免费模板",
+    "name": "@yicode-template/yiapi",
+    "version": "1.0.4",
+    "description": "易接口模板",
     "main": "yiapi.js",
     "type": "module",
     "private": false,

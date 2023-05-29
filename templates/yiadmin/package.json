@@ -1,7 +1,7 @@
 {
-    "name": "@yicode-template/admin-vue3",
-    "version": "3.4.0",
-    "description": "yiadmin-vue3（易管理）vue3后台管理模板",
+    "name": "@yicode-template/yiadmin",
+    "version": "3.4.1",
+    "description": "yiadmin（易管理）前后分离的vue3后台管理",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "dev": "yite dev",
