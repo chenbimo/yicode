@@ -6,7 +6,6 @@ import { ensureDirSync, ensureFileSync } from 'fs-extra';
 import { fnSchema, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
-import { customConfig } from '../../config/customConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { fnUUID } from '../../utils/index.js';
@@ -55,7 +54,7 @@ export default async function (fastify, opts) {
                 let name = `${fnUUID()}.${extname}`;
                 let path = `${dir}/${name}`;
 
-                let localDir = resolve(sysConfig.appDir, customConfig.upload.dir || 'public', dir);
+                let localDir = resolve(sysConfig.appDir, appConfig.upload.dir || 'public', dir);
                 await ensureDirSync(localDir);
                 await writeFileSync(`${localDir}/${name}`, buffer);
 
