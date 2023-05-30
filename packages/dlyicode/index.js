@@ -53,7 +53,7 @@ async function main() {
             default: '@yicode-template/base-vue3',
             choices: [
                 {
-                    name: 'yite + vue3 基础项目开发模板',
+                    name: 'vite + vue3 基础项目开发模板',
                     value: '@yicode-template/base-vue3'
                 },
                 {
@@ -61,7 +61,7 @@ async function main() {
                     value: '@yicode-template/uni-vue3'
                 },
                 {
-                    name: 'yite + vue3 后台项目开发模板',
+                    name: 'yiadmin 后台管理开发模板',
                     value: '@yicode-template/yiadmin'
                 },
                 {
