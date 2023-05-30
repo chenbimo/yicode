@@ -1,6 +1,6 @@
 import path from 'path';
 import fg from 'fast-glob';
-import { replace as _replace, snakeCase as _snakeCase } from 'lodash-es';
+import { replace as _replace, snakeCase as _snakeCase, forOwn as _forOwn } from 'lodash-es';
 
 import { fnSchema, fnApiInfo, fnPageOffset, fnImport } from '../../utils/index.js';
 
@@ -45,6 +45,9 @@ export default async function (fastify, opts) {
                     // 获取表数据
                     let { default: tableSchema } = await fnImport(tableFiles[i], 'default', { default: {} }, { assert: { type: 'json' } });
                     tableSchema.code = tableName;
+                    _forOwn(tableSchema.fields, (item, key) => {
+                        if (!item.options) item.options = [];
+                    });
                     rows.push(tableSchema);
                 }
 
