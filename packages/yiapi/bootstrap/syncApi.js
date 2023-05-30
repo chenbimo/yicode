@@ -188,7 +188,6 @@ async function syncApiFile(fastify) {
                     pid: 0,
                     name: apiSchema?.summary || '',
                     value: apiFileName,
-                    icon: '',
                     sort: 0,
                     is_open: 0,
                     describe: '',
