@@ -218,6 +218,16 @@ export const appConfigSchema = {
                     'address'
                 ]
             }
+        },
+        upload: {
+            title: '上传配置',
+            type: 'object',
+            properties: {
+                dir: {
+                    type: 'string'
+                }
+            },
+            required: ['dir']
         }
     },
     required: [
@@ -235,7 +245,8 @@ export const appConfigSchema = {
         'database',
         'redis',
         'jwt',
-        'mail'
+        'mail',
+        'upload'
     ],
     additionalProperties: false
 };
