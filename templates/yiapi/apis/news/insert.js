@@ -45,13 +45,13 @@ export default async function (fastify) {
 
                 await trx.commit();
                 return {
-                    ...yiapi.appConfig.httpCode.INSERT_SUCCESS,
+                    ...yiapi.codeConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
                 await trx.rollback();
-                return yiapi.appConfig.httpCode.INSERT_FAIL;
+                return yiapi.codeConfig.INSERT_FAIL;
             }
         }
     });

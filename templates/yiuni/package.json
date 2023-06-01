@@ -1,6 +1,6 @@
 {
-    "name": "@yicode-template/uni-vue3",
-    "version": "0.1.11",
+    "name": "@yicode-template/yiuni",
+    "version": "1.0.0",
     "private": false,
     "scripts": {
         "dev:app": "uni -p app",
@@ -50,6 +50,7 @@
         "@dcloudio/uni-mp-weixin": "vue3",
         "@dcloudio/uni-quickapp-webview": "vue3",
         "@dcloudio/uni-ui": "^1.4.27",
+        "@vue-macros/reactivity-transform": "^0.3.9",
         "blueimp-md5": "^2.19.0",
         "dayjs": "^1.11.7",
         "lodash-es": "^4.17.21",

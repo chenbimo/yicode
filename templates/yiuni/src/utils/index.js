@@ -1,4 +1,3 @@
-import md5 from 'blueimp-md5';
 import {
     //
     forOwn as _forOwn,
@@ -19,23 +18,6 @@ export function setStorage(key, data) {
 // 获取存储
 export function getStorage(key) {
     return uni.getStorageSync(`${appConfig.namespace}.${key}`);
-}
-
-export function apiParamsSign(params) {
-    let fieldsArray = [];
-    _forOwn(_omit(params, ['sign']), (value, key) => {
-        if (value !== undefined && value !== null && String(value).length < 1000) {
-            fieldsArray.push(`${key}=${value}`);
-        }
-    });
-
-    let fieldsSort = fieldsArray.sort().join('&');
-
-    let fieldsMd5 = md5(fieldsSort);
-    return {
-        sign: fieldsMd5,
-        sort: fieldsSort
-    };
 }
 
 // 时间转换

@@ -1,7 +1,7 @@
 {
-    "name": "yiuni-vue3",
+    "name": "yiuni",
     "appid": "",
-    "description": "yiuni-vue3",
+    "description": "yiuni",
     "versionName": "1.0.0",
     "versionCode": "100",
     "transformPx": false,

@@ -53,25 +53,18 @@ let appConfig = {
     },
     // 邮件配置
     mail: {
-        // host: 'smtp.qq.com',
-        // port: 465,
-        // pool: true,
-        // secure: true,
-        // // qq邮箱
-        // user: 'demo@qq.com',
-        // pass: '',
-        // from_name: '易接口',
-        // from_email: 'demo@qq.com',
-
         host: 'smtp.qq.com',
         port: 465,
         pool: true,
         secure: true,
         // qq邮箱
-        user: 'yicode@qq.com',
-        pass: 'vrjkdsydfkmndgbd',
-        from_name: '随易科技',
-        from_email: 'yicode@qq.com'
+        user: 'demo@qq.com',
+        pass: '',
+        from_name: '易接口',
+        from_email: 'demo@qq.com'
+    },
+    upload: {
+        dir: '../static/images/'
     }
 };
 

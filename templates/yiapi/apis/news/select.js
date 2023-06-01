@@ -49,7 +49,7 @@ export default async function (fastify, opts) {
 
                 await trx.commit();
                 return {
-                    ...yiapi.appConfig.httpCode.SELECT_SUCCESS,
+                    ...yiapi.codeConfig.SELECT_SUCCESS,
                     data: {
                         total: total,
                         rows: rows,
@@ -60,7 +60,7 @@ export default async function (fastify, opts) {
             } catch (err) {
                 fastify.log.error(err);
                 await trx.rollback();
-                return yiapi.appConfig.httpCode.SELECT_FAIL;
+                return yiapi.codeConfig.SELECT_FAIL;
             }
         }
     });

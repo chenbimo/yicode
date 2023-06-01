@@ -234,7 +234,7 @@ export default async function (fastify, opts) {
 
                 // 查询成功，返回数据
                 return {
-                    ...yiapi.appConfig.httpCode.SELECT_SUCCESS,
+                    ...yiapi.codeConfig.SELECT_SUCCESS,
                     data: {
                         total: total,
                         rows: rows,
@@ -246,7 +246,7 @@ export default async function (fastify, opts) {
                 // 查询失败，回滚数据
                 fastify.log.error(err);
                 await trx.rollback();
-                return yiapi.appConfig.httpCode.SELECT_FAIL;
+                return yiapi.codeConfig.SELECT_FAIL;
             }
         }
     });

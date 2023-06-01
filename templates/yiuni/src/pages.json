@@ -1,0 +1,70 @@
+{
+    "pages": [
+        {
+            "path": "pages/auth/index",
+            "style": {
+                "navigationBarTitleText": "登录授权"
+            }
+        },
+        {
+            "path": "pages/news/index",
+            "style": {
+                "navigationBarTitleText": "资讯"
+            }
+        },
+        {
+            "path": "pages/index/index",
+            "style": {
+                "navigationBarTitleText": "首页"
+            }
+        },
+
+        {
+            "path": "pages/mine/index",
+            "style": {
+                "navigationBarTitleText": "我的"
+            }
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "yiuni",
+        "navigationBarBackgroundColor": "#5d79f7",
+        "backgroundColor": "#5d79f7"
+    },
+    "easycom": {
+        "autoscan": true,
+        "custom": {
+            "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+        }
+    },
+    "tabBar": {
+        "color": "#7A7E83",
+        "selectedColor": "#5d79f7",
+        "borderStyle": "black",
+        "backgroundColor": "#F8F8F8",
+        "fontSize": "12px",
+        "spacing": "2px",
+        "height": "50px",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "首页",
+                "iconPath": "/static/images/tabbar/1-0.png",
+                "selectedIconPath": "/static/images/tabbar/1-1.png"
+            },
+            {
+                "pagePath": "pages/news/index",
+                "text": "资讯",
+                "iconPath": "/static/images/tabbar/3-0.png",
+                "selectedIconPath": "/static/images/tabbar/3-1.png"
+            },
+            {
+                "pagePath": "pages/mine/index",
+                "text": "我的",
+                "iconPath": "/static/images/tabbar/5-0.png",
+                "selectedIconPath": "/static/images/tabbar/5-1.png"
+            }
+        ]
+    }
+}

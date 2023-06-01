@@ -1,6 +1,6 @@
 import Request from 'luch-request';
 
-import { getStorage, apiParamsSign } from '@/utils/index.js';
+import { getStorage } from '@/utils/index.js';
 
 let $Http = new Request({
     baseURL: import.meta.env.VITE_HOST,
@@ -9,15 +9,6 @@ let $Http = new Request({
 // 添加请求拦截器
 $Http.interceptors.request.use(
     async (config) => {
-        if (!config.data) {
-            config.data = {};
-        }
-        config.data.t = Date.now();
-
-        let paramsValid = apiParamsSign(config.data);
-
-        config.data.sign = paramsValid.sign;
-
         if (getStorage('token')) {
             config.header.authorization = 'Bearer ' + getStorage('token');
         }

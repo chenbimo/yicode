@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/base-vue3",
     "private": false,
-    "version": "1.5.11",
+    "version": "1.5.13",
     "type": "module",
     "scripts": {
         "help": "yite",
@@ -9,7 +9,7 @@
         "build": "yite build"
     },
     "dependencies": {
-        "@arco-design/web-vue": "^2.46.1",
+        "@arco-design/web-vue": "^2.46.2",
         "@yicode/yidash": "workspace:*",
         "@yicode/yite-cli": "workspace:*",
         "axios": "^1.4.0",
@@ -19,7 +19,7 @@
         "store2": "^2.14.2",
         "vue": "^3.3.4",
         "vue-i18n": "^9.2.2",
-        "vue-router": "^4.2.1"
+        "vue-router": "^4.2.2"
     },
     "devDependencies": {
         "lint-staged": "^13.2.2",
