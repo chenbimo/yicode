@@ -81,7 +81,7 @@ export default async function (fastify, opts) {
                 // 发送验证码
                 if (req.body.verify_name) {
                     // 如果已经发送过
-                    let existsVerifyCode = await fastify.redisGet(`${req.body.type}:${req.body.email}`);
+                    let existsVerifyCode = await fastify.redisGet(`${req.body.verify_name}:${req.body.to_email}`);
                     if (existsVerifyCode) {
                         await trx.commit();
                         return {
@@ -93,7 +93,7 @@ export default async function (fastify, opts) {
 
                     // 如果没有发送过
                     let cacheVerifyCode = fnRandom6Number();
-                    await fastify.redisSet(`${req.body.type}:${req.body.email}`, cacheVerifyCode, 60 * 3);
+                    await fastify.redisSet(`${req.body.verify_name}:${req.body.to_email}`, cacheVerifyCode, 60 * 3);
                     let result = await fastify.sendEmail({
                         to: req.body.to_email,
                         subject: req.body.subject,
