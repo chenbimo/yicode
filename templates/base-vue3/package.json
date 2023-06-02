@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/base-vue3",
     "private": false,
-    "version": "1.5.13",
+    "version": "1.5.14",
     "type": "module",
     "scripts": {
         "help": "yite",
@@ -9,7 +9,7 @@
         "build": "yite build"
     },
     "dependencies": {
-        "@arco-design/web-vue": "^2.46.2",
+        "@arco-design/web-vue": "^2.47.0",
         "@yicode/yidash": "workspace:*",
         "@yicode/yite-cli": "workspace:*",
         "axios": "^1.4.0",

@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yiadmin",
-    "version": "3.4.3",
+    "version": "3.4.4",
     "description": "yiadmin（易管理）前后分离的vue3后台管理",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
@@ -28,7 +28,7 @@
     "homepage": "https://yicode.tech",
     "license": "GPL-3.0",
     "dependencies": {
-        "@arco-design/web-vue": "^2.46.2",
+        "@arco-design/web-vue": "^2.47.0",
         "@yicode/yidash": "workspace:^",
         "axios": "^1.4.0",
         "date-fns": "^2.30.0",
