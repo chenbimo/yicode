@@ -30,6 +30,17 @@ export const apiSchema = {
                         enum: ['file']
                     }
                 }
+            },
+            dir: {
+                type: 'object',
+                title: '目录',
+                properties: {
+                    value: {
+                        title: '目录名称',
+                        type: 'string',
+                        pattern: '^[a-z][a-z0-9_-]*$'
+                    }
+                }
             }
         },
         required: ['file']
@@ -50,7 +61,7 @@ export default async function (fastify, opts) {
                 let dd = dayjs();
                 let year = dd.format('YYYY');
                 let month = dd.format('MM');
-                let dir = `${year}/${month}`;
+                let dir = `static/${req.body.dir.value}/${year}-${month}`.replace('//', '');
                 let name = `${fnUUID()}.${extname}`;
                 let path = `${dir}/${name}`;
 
