@@ -118,7 +118,7 @@ async function fnAllTableData() {
                 } else {
                     for (let i = 0; i < sameTableData.length; i++) {
                         if (sameTableData[i].tableName === appTableItem.tableName) {
-                            sameTableData[i] = mergeAny(sameTableItem, appTableItem.fields);
+                            sameTableData[i].fields = mergeAny(sameTableItem.fields, appTableItem.fields);
                             break;
                         }
                     }
