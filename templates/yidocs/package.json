@@ -1,11 +1,11 @@
 {
     "name": "@yicode-template/yidocs",
-    "version": "3.2.15",
+    "version": "3.2.16",
     "description": "yidocs（易文档）文档管理",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "dev": "vitepress dev docs",
-        "build": "vitepress build docs"
+        "dev": "vitepress dev",
+        "build": "vitepress build"
     },
     "main": "./index.js",
     "type": "module",

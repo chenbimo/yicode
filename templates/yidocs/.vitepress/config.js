@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress';
 
-import { docsAuto } from '@yicode/yidocs-auto';
+import { docsAuto } from '@yicode-helper/yidocs-auto';
 
 let { sideBar, navBar } = docsAuto();
 
@@ -18,14 +18,6 @@ export default defineConfig({
     titleTemplate: false,
     head: [
         //
-        [
-            //
-            'link',
-            {
-                rel: 'stylesheet',
-                href: 'https://static.yicode.tech/vitepress/vitepress.css'
-            }
-        ],
         [
             'link',
             {
