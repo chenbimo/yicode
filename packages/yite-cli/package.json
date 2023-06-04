@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yite-cli",
-    "version": "1.29.14",
+    "version": "1.29.15",
     "description": "专注于vite + vue3 的项目开发脚手架",
     "exports": {
         ".": {
@@ -158,7 +158,7 @@
         "unocss": "^0.52.7",
         "unplugin-auto-import": "^0.16.4",
         "unplugin-icons": "^0.16.2",
-        "unplugin-vue-components": "^0.24.1",
+        "unplugin-vue-components": "^0.25.0",
         "vite": "^4.3.9",
         "vite-plugin-vue-devtools": "^0.0.22",
         "vue-i18n": "^9.2.2",

@@ -1,4 +1,5 @@
 import fg from 'fast-glob';
+import { sortBy } from 'lodash-es';
 /**
  * 一维数组生成无限级树结构
  * @param {Array} arrs - 传入的一维数组
@@ -78,8 +79,17 @@ function autoSideBar(path) {
 
     let treeSideBar = yidash_tree_array2Tree(Object.values(obj), 'id', 'pid', 'items');
     treeSideBar.forEach((item) => {
+        // console.log("🚀 ~ file: index.js:83 ~ treeSideBar.forEach ~ item:", item);
         item.text = `📁 ${item.text.replace('📄 ', '')}`;
         if (item.collapsed !== false) item.collapsed = true;
+        // if (item.items) {
+        //     item.items = sortBy(item.items, (item2) => {
+        //         let d = Number(item2.id.split('-')[0]);
+        //         console.log('🚀 ~ file: index.js:90 ~ item.items=sortBy ~ d:', d);
+        //         return d;
+        //     });
+        //     console.log('🚀 ~ file: index.js:91 ~ item.items=sortBy ~ item.items:', item.items);
+        // }
     });
 
     return treeSideBar;
@@ -87,7 +97,7 @@ function autoSideBar(path) {
 
 // 设置侧边栏
 function setSideBar() {
-    let files = fg.sync(`markdown/**/*.md`, { onlyFiles: true, ignore: ['markdown/public/**/*'] });
+    let files = fg.sync(`markdown/**/[[:digit:]]-*.md`, { onlyFiles: true, ignore: ['markdown/public/**/*'] });
     let obj = {};
     files.sort().forEach((file) => {
         let fileEnd = file.replace(/^markdown/gi, '');
