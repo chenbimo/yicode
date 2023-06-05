@@ -1,5 +1,5 @@
 import fg from 'fast-glob';
-import { sortBy } from 'lodash-es';
+import { sortBy, orderBy, cloneDeep } from 'lodash-es';
 /**
  * 一维数组生成无限级树结构
  * @param {Array} arrs - 传入的一维数组
@@ -39,11 +39,11 @@ function yidash_tree_array2Tree(arrs, id = 'id', pid = 'pid', children = 'childr
 }
 
 // 自动生成侧边栏
-function autoSideBar(path) {
-    let files = fg.sync(`markdown${path}/**/*.md`, { onlyFiles: true });
+function autoSideBar(dirPath) {
+    let files = fg.sync(`markdown${dirPath}/**/*.md`, { onlyFiles: true });
     let obj = {};
     files.forEach((file) => {
-        let fileEnd = file.replace(`markdown${path}`, '');
+        let fileEnd = file.replace(`markdown${dirPath}`, '');
         let fileArrs = fileEnd.split('/');
 
         // 过滤掉
@@ -57,39 +57,40 @@ function autoSideBar(path) {
                 text: '📄 ' + name.replace(/\d+-/gi, '').replace('.md', '')
             };
             if (name.endsWith('.md')) {
-                param.link = `${path}${selfPath}`;
+                param.link = `${dirPath}${selfPath}`;
 
                 if (index === 0) {
-                    obj[path] = {
-                        id: path,
+                    obj[dirPath] = {
+                        id: dirPath,
                         pid: '',
-                        text: path
+                        text: dirPath
                             .split('/')
                             .filter((name) => name)[1]
                             .replace(/\d+-/gi, '')
                             .replace('.md', ''),
                         collapsed: false
                     };
-                    param.pid = path;
+                    param.pid = dirPath;
                 }
             }
             obj[selfPath] = param;
         });
     });
 
-    let treeSideBar = yidash_tree_array2Tree(Object.values(obj), 'id', 'pid', 'items');
+    let treeSideBar = orderBy(yidash_tree_array2Tree(Object.values(obj), 'id', 'pid', 'items'), (item) => {
+        return Number(item.id.split('-')[0]);
+    });
     treeSideBar.forEach((item) => {
-        // console.log("🚀 ~ file: index.js:83 ~ treeSideBar.forEach ~ item:", item);
         item.text = `📁 ${item.text.replace('📄 ', '')}`;
         if (item.collapsed !== false) item.collapsed = true;
-        // if (item.items) {
-        //     item.items = sortBy(item.items, (item2) => {
-        //         let d = Number(item2.id.split('-')[0]);
-        //         console.log('🚀 ~ file: index.js:90 ~ item.items=sortBy ~ d:', d);
-        //         return d;
-        //     });
-        //     console.log('🚀 ~ file: index.js:91 ~ item.items=sortBy ~ item.items:', item.items);
-        // }
+
+        item.items = orderBy(cloneDeep(item.items), (item) => {
+            let nameSp = item.id.split('/');
+
+            // 使用最后一个文件名称进行排序
+            let lastName = nameSp?.[1] || nameSp?.[0];
+            return Number(lastName.split('-')[0]);
+        });
     });
 
     return treeSideBar;
@@ -97,15 +98,21 @@ function autoSideBar(path) {
 
 // 设置侧边栏
 function setSideBar() {
-    let files = fg.sync(`markdown/**/[[:digit:]]-*.md`, { onlyFiles: true, ignore: ['markdown/public/**/*'] });
+    let files = fg.sync(`markdown/**/[0-9]+-*.md`, { onlyFiles: true, ignore: ['markdown/public/**/*'] });
     let obj = {};
     files.sort().forEach((file) => {
         let fileEnd = file.replace(/^markdown/gi, '');
         let fileSplit = fileEnd.split('/').filter((name) => name);
 
-        if (fileSplit.length <= 2) return false;
-        let path = `/${fileSplit[0]}/${fileSplit[1]}/`;
-        obj[path] = autoSideBar(path);
+        if (fileSplit.length < 3 && fileSplit.length > 4) {
+            console.log(`${fileEnd} 请按照 分类-[项目]-目录-文章 的方式组织文件`);
+            return false;
+        }
+        let dirPath = `/${fileSplit[0]}/${fileSplit[1]}/`;
+
+        if (obj[dirPath] === undefined) {
+            obj[dirPath] = autoSideBar(dirPath);
+        }
     });
     return obj;
 }
