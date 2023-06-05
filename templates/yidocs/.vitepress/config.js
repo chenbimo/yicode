@@ -13,8 +13,8 @@ export default defineConfig({
         theme: 'material-theme-palenight',
         lineNumbers: true
     },
-    outDir: '../dist',
-    srcDir: '../markdown',
+    outDir: './dist',
+    srcDir: './markdown',
     titleTemplate: false,
     head: [
         //
