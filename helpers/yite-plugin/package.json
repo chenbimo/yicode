@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-plugin",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "yite-cli 实验插件",
     "type": "module",
     "exports": {
@@ -34,7 +34,7 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "license": "GPL-3.0",
     "devDependencies": {
-        "rollup": "^3.23.0",
+        "rollup": "^3.23.1",
         "vite": "^4.3.9"
     }
 }
