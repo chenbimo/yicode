@@ -281,4 +281,4 @@ npm run build
 
 `yiapi` 的详细使用文档，也将围绕着这 `2` 个核心概念，进行展开，让我们的接口开发，充满欢声笑语。
 
-详细文档地址 [易文档](https://doc.yicode.tech)
+详细文档地址 [官方文档](https://yicode.tech)

@@ -18,7 +18,7 @@ yicode（易编程）系列软件开发生态，全部由陈随易自 2019 年�
 
 ## 效果
 
-实际效果，请浏览 [易文档 https://doc.yicode.tech](https://doc.yicode.tech) 查看。
+实际效果，请浏览 [易文档 https://yicode.tech](https://yicode.tech) 查看。
 
 本文档的 `顶部导航` 和 `左侧目录`，均为自动生成。
 
@@ -193,7 +193,7 @@ Committed to providing technical specifications, project templates, efficiency t
 
 ## Effect
 
-For the actual effect, please browse [https://doc.yicode.tech](https://doc.yicode.tech) to view.
+For the actual effect, please browse [https://yicode.tech](https://yicode.tech) to view.
 
 The `Top Navigation` and `Left Table of Contents` of this document are automatically generated. .
 

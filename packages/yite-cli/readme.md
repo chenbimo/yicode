@@ -6,12 +6,6 @@
 
 [yite-cli 文档教程](http://goto.yicode.tech/5cMDRs)
 
-### 待办计划
-
--   [ ] 使用自定义代码风格配置
--   [ ] 增加 icon 的自定义功能
--   [ ] 尝试把路由集成到 yite-cli 中
-
 ### 本项目依赖于以下 iconify 项目 5000 个图标以下的所有维护状态的子集
 
 ```bash

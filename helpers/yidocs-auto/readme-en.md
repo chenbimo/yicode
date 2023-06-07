@@ -18,7 +18,7 @@ Committed to providing technical specifications, project templates, efficiency t
 
 ## Effect
 
-For the actual effect, please browse [https://doc.yicode.tech](https://doc.yicode.tech) to view.
+For the actual effect, please browse [https://yicode.tech](https://yicode.tech) to view.
 
 The `Top Navigation` and `Left Table of Contents` of this document are automatically generated. .
 

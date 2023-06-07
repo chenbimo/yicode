@@ -14,7 +14,7 @@
 
 请看文档
 
-[易文档 - https://doc.yicode.tech](https://doc.yicode.tech)
+[https://yicode.tech](https://yicode.tech)
 
 该文档使用 `yidocs` 驱动
 
