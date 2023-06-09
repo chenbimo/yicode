@@ -2,7 +2,7 @@
     "name": "@yicode-vscode/es6-template-syntax",
     "displayName": "es6-template-syntax",
     "description": "es6 string template syntax highlight",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "publisher": "chensuiyi",
     "engines": {
         "vscode": "^1.78.0"

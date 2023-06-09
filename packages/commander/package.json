@@ -1,6 +1,6 @@
 {
     "name": "@yicode/commander",
-    "version": "10.1.0",
+    "version": "10.1.1",
     "description": "Node.js的命令行工具commander（汉化版）",
     "keywords": [
         "commander",
@@ -34,6 +34,5 @@
             "import": "./esm.mjs"
         },
         "./esm.mjs": "./esm.mjs"
-    },
-    "devDependencies": {}
+    }
 }
