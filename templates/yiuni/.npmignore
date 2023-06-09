@@ -1,4 +1,3 @@
 dist
 .cache
-pnpm-lock.yaml
 CHANGELOG.md
