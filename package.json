@@ -12,9 +12,7 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "build": "pnpm --filter=@yicode/* run build",
-        "v": "changeset version",
-        "c": "changeset",
-        "r": "changeset publish --registry=https://registry.npmjs.com/"
+        "r": "lerna publish"
     },
     "keywords": [
         "yicode",
@@ -40,6 +38,6 @@
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
     },
     "dependencies": {
-        "@changesets/cli": "^2.26.1"
+        "lerna": "^7.0.0"
     }
 }
