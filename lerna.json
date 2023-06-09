@@ -8,7 +8,7 @@
             "changelog": false
         },
         "publish": {
-            "message": "release",
+            "message": "【发布版本】发布版本",
             "registry": "https://registry.npmjs.org/",
             "yes": true
         }
