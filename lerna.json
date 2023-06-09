@@ -12,6 +12,5 @@
             "registry": "https://registry.npmjs.org/",
             "yes": true
         }
-    },
-    "loglevel": "silly"
+    }
 }
