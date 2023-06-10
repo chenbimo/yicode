@@ -50,7 +50,7 @@
         "@dcloudio/uni-mp-weixin": "vue3",
         "@dcloudio/uni-quickapp-webview": "vue3",
         "@dcloudio/uni-ui": "^1.4.27",
-        "@vue-macros/reactivity-transform": "^0.3.9",
+        "@vue-macros/reactivity-transform": "^0.3.10",
         "blueimp-md5": "^2.19.0",
         "dayjs": "^1.11.8",
         "lodash-es": "^4.17.21",
@@ -68,7 +68,7 @@
         "lint-staged": "^13.2.2",
         "prettier": "^2.8.8",
         "rollup-plugin-copy": "^3.4.0",
-        "sass": "^1.63.2",
+        "sass": "^1.63.3",
         "simple-git-hooks": "^2.8.1",
         "vite": "^4.3.9"
     },
