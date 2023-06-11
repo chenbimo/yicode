@@ -237,7 +237,10 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(ReactivityTransform());
     allPlugins.push(Unocss(unocssConfig));
     allPlugins.push(Icons(iconsConfig));
-    allPlugins.push(VueDevTools(vueDevtoolConfig));
+    if (yiteConfig?.devtool !== false) {
+        allPlugins.push(VueDevTools(vueDevtoolConfig));
+    }
+
     allPlugins.push(Components(componentsConfig));
     allPlugins.push(AutoImport(autoImportConfig));
     allPlugins.push(ChunkSplit(chunkSplitConfig));
