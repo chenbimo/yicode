@@ -8,6 +8,18 @@
         "dev": "yite dev",
         "build": "yite build"
     },
+    "files": [
+        ".yicode/*",
+        "public/**/*",
+        "src/**/*",
+        ".gitignore",
+        ".npmignore",
+        ".prettierrc",
+        "index.html",
+        "jsconfig.json",
+        "package.json",
+        "readme.md"
+    ],
     "dependencies": {
         "@arco-design/web-vue": "^2.47.1",
         "@yicode/yidash": "workspace:*",
