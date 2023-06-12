@@ -644,7 +644,7 @@ importers:
                 specifier: 3.2.8
                 version: link:../../packages/yidash
             '@yicode/yite-cli':
-                specifier: 1.29.24
+                specifier: ^1.29.25
                 version: link:../../packages/yite-cli
             axios:
                 specifier: ^1.4.0
