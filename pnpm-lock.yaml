@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -642,10 +642,10 @@ importers:
         specifier: ^2.47.1
         version: 2.47.1(vue@3.3.4)
       '@yicode/yidash':
-        specifier: workspace:*
+        specifier: 3.2.8
         version: link:../../packages/yidash
       '@yicode/yite-cli':
-        specifier: workspace:*
+        specifier: 1.29.24
         version: link:../../packages/yite-cli
       axios:
         specifier: ^1.4.0

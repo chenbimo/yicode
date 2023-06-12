@@ -1,3 +1,3 @@
 ## yibase-vue3
 
-vite + vue3 基础项目开发模板
+vite + vue3 项目基础开发模板
