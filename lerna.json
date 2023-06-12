@@ -6,7 +6,5 @@
     "registry": "https://registry.npmjs.org/",
     "allowBranch": ["main", "master"],
     "changelog": false,
-    "yes": true,
-    "gitTagVersion": true,
-    "push": true
+    "yes": true
 }
