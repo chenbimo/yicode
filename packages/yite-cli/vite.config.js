@@ -264,6 +264,10 @@ export default defineConfig(async ({ command, mode }) => {
                     {
                         find: '@',
                         replacement: path.resolve(srcDir)
+                    },
+                    {
+                        find: 'vue-i18n',
+                        replacement: 'vue-i18n/dist/vue-i18n.cjs.js'
                     }
                 ]
             },
