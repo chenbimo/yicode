@@ -7,5 +7,6 @@
     "allowBranch": ["main", "master"],
     "changelog": false,
     "yes": true,
-    "gitTagVersion": false
+    "gitTagVersion": false,
+    "push": false
 }
