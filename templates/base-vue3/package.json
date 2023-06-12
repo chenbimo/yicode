@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/base-vue3",
     "private": false,
-    "version": "1.5.26",
+    "version": "1.5.27",
     "type": "module",
     "scripts": {
         "help": "yite",
@@ -22,8 +22,8 @@
     ],
     "dependencies": {
         "@arco-design/web-vue": "^2.47.1",
-        "@yicode/yidash": "workspace:*",
-        "@yicode/yite-cli": "workspace:*",
+        "@yicode/yidash": "3.2.8",
+        "@yicode/yite-cli": "1.29.24",
         "axios": "^1.4.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.3",
@@ -43,5 +43,6 @@
     },
     "lint-staged": {
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
-    }
+    },
+    "gitHead": "79a0bc685600a009154f63de1daadaa766a6f14d"
 }
