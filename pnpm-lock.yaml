@@ -641,10 +641,10 @@ importers:
                 specifier: ^2.47.1
                 version: 2.47.1(vue@3.3.4)
             '@yicode/yidash':
-                specifier: 3.2.8
+                specifier: workspace:*
                 version: link:../../packages/yidash
             '@yicode/yite-cli':
-                specifier: ^1.29.25
+                specifier: workspace:*
                 version: link:../../packages/yite-cli
             axios:
                 specifier: ^1.4.0
@@ -687,7 +687,7 @@ importers:
                 specifier: ^2.47.1
                 version: 2.47.1(vue@3.3.4)
             '@yicode/yidash':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../../packages/yidash
             axios:
                 specifier: ^1.4.0
@@ -715,7 +715,7 @@ importers:
                 version: 4.2.2(vue@3.3.4)
         devDependencies:
             '@yicode/yite-cli':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../../packages/yite-cli
             sass:
                 specifier: ^1.63.3
