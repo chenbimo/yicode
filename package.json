@@ -38,6 +38,6 @@
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
     },
     "dependencies": {
-        "lerna": "^7.0.0"
+        "lerna": "^7.0.1"
     }
 }
