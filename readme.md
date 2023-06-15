@@ -49,20 +49,6 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 
 致力于为中小企业、外包公司、软件工作室和个人开发者，提供技术规范、项目模板、效率工具等。
 
-## 作者简介
-
-| 属性     | 值                                                    |
-| -------- | ----------------------------------------------------- |
-| 姓名     | `陈随易`                                              |
-| 微信     | `c91374286` 或 `nolimitluandou`                       |
-| 扣扣     | `24323626(用得少)`                                    |
-| 邮箱     | `bimostyle@qq.com`                                    |
-| 知乎     | [知乎陈随易](https://www.zhihu.com/people/chensuiyi)  |
-| 掘金     | [掘金陈随易](https://juejin.im/user/1239904846873326) |
-| 码云     | [码云陈随易](https://gitee.com/banshiweichen)         |
-| github   | [github 陈随易](https://github.com/chenbimo)          |
-| 交流探讨 | 创建了 `全球顶级程序员微信交流群`，加入交流请加我微信 |
-
 ## 项目介绍
 
 主要开源项目
@@ -89,6 +75,26 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 -   **@yicode-template/uni-vue3**（具备最新的依赖和项目组织的`uniapp vue3`项目模板）
 -   **@yicode-template/admin-vue3**（`arco-design + vue3` 研发的后台管理模板）
 -   **@yicode-template/yiapi-free**（`yiapi` 接口开发项目模板）
+
+## 代码贡献
+
+为了防止潜在的版权纠纷问题，本仓库不接受任何人的代码 `PR`，但是非常欢迎任何人的，有效的建议和反馈。
+
+如有功能问题，设计问题等，请提 `issur` 或者联系作者，由其本人修复问题，实现功能。
+
+## 作者简介
+
+| 属性     | 值                                                    |
+| -------- | ----------------------------------------------------- |
+| 姓名     | `陈随易`                                              |
+| 微信     | `c91374286` 或 `nolimitluandou`                       |
+| 扣扣     | `24323626(用得少)`                                    |
+| 邮箱     | `bimostyle@qq.com`                                    |
+| 知乎     | [知乎陈随易](https://www.zhihu.com/people/chensuiyi)  |
+| 掘金     | [掘金陈随易](https://juejin.im/user/1239904846873326) |
+| 码云     | [码云陈随易](https://gitee.com/banshiweichen)         |
+| github   | [github 陈随易](https://github.com/chenbimo)          |
+| 交流探讨 | 创建了 `全球顶级程序员微信交流群`，加入交流请加我微信 |
 
 ## 作者时间线
 
