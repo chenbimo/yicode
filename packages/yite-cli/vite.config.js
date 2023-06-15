@@ -237,7 +237,7 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(ReactivityTransform());
     allPlugins.push(Unocss(unocssConfig));
     allPlugins.push(Icons(iconsConfig));
-    if (yiteConfig?.devtool !== false) {
+    if (yiteConfig?.devtool === true) {
         allPlugins.push(VueDevTools(vueDevtoolConfig));
     }
 
