@@ -6,7 +6,7 @@
 
 ## 文档教程
 
-[文档地址 https://yicode.tech](https://yicode.tech)
+[文档地址 https://yicode.tech](https://yicode.tech/2-开源/3-yiapi/1-基本简介/1-基本介绍.html)
 
 ## 功能特点
 
