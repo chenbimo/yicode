@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-html",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "yite-cli 自定义入口文件",
     "type": "module",
     "exports": {
@@ -32,6 +32,5 @@
         "qrcode"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "license": "GPL-3.0",
-    "dependencies": {}
+    "license": "GPL-3.0"
 }

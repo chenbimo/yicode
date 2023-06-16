@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yiuni",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "private": false,
     "scripts": {
         "dev:app": "uni -p app",

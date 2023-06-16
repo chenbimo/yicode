@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/base-vue3",
     "private": false,
-    "version": "1.5.38",
+    "version": "1.5.39",
     "type": "module",
     "scripts": {
         "help": "yite",

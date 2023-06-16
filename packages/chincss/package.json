@@ -1,6 +1,6 @@
 {
     "name": "@yicode/chincss",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "中国风 css 资源库",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
@@ -27,6 +27,5 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "homepage": "https://yicode.tech",
-    "license": "GPL-3.0",
-    "dependencies": {}
+    "license": "GPL-3.0"
 }

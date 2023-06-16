@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-i18n",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "yite-cli 语言国际化",
     "type": "module",
     "exports": {
@@ -32,6 +32,5 @@
         "qrcode"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "license": "GPL-3.0",
-    "dependencies": {}
+    "license": "GPL-3.0"
 }

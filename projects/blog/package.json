@@ -1,6 +1,6 @@
 {
     "name": "@yicode-project/blog",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "yiblog（易博客）一个简单好用的博客",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
@@ -24,6 +24,5 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "homepage": "https://yicode.tech",
-    "license": "GPL-3.0",
-    "dependencies": {}
+    "license": "GPL-3.0"
 }

@@ -1,6 +1,6 @@
 {
     "name": "@yicode/bigscreen-box",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "bigscreen-box（易大屏）大屏边框库",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
@@ -24,6 +24,5 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "homepage": "https://yicode.tech",
-    "license": "GPL-3.0",
-    "dependencies": {}
+    "license": "GPL-3.0"
 }
