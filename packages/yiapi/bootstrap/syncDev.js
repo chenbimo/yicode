@@ -90,6 +90,7 @@ async function plugin(fastify, opts) {
         _forOwn(roleConfig, (item, key) => {
             if (roleCodes.includes(key) === false && key !== 'dev') {
                 // 角色不存在，则添加
+                item.code = key;
                 item.api_ids = '';
                 item.menu_ids = '';
                 item.created_at = fnTimestamp();
