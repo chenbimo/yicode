@@ -1,0 +1,38 @@
+{
+    "name": "@yicode/yigezi",
+    "version": "1.0.2",
+    "description": "易格子-纯粹的 CSS 栅格布局库",
+    "main": "index.js",
+    "scripts": {
+        "dev": "cross-env RELEASE_TYPE=dev gulp"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yigezi"
+    },
+    "keywords": [
+        "css",
+        "scss",
+        "pure",
+        "framework",
+        "layout",
+        "responsive",
+        "grid",
+        "flex"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "autoprefixer": "^10.4.14",
+        "cross-env": "^7.0.3",
+        "del": "^6.1.1",
+        "gulp": "^4.0.2",
+        "gulp-postcss": "^9.0.1",
+        "gulp-rename": "^2.0.0",
+        "gulp-sass": "^5.1.0",
+        "lodash": "^4.17.21",
+        "postcss": "^8.4.24",
+        "release-it": "^15.11.0",
+        "sass": "^1.63.4"
+    }
+}

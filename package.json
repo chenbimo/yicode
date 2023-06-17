@@ -25,7 +25,6 @@
         "nodejs"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "license": "GPL 3.0",
     "devDependencies": {
         "lint-staged": "^13.2.2",
         "prettier": "^2.8.8",

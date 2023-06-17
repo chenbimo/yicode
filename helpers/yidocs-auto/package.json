@@ -26,7 +26,6 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "homepage": "https://yicode.tech",
-    "license": "GPL-3.0",
     "dependencies": {
         "fast-glob": "^3.2.12",
         "lodash-es": "^4.17.21"

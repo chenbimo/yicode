@@ -27,7 +27,6 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "homepage": "https://yicode.tech",
-    "license": "GPL-3.0",
     "dependencies": {
         "blueimp-md5": "^2.19.0",
         "copy-to-clipboard": "^3.3.3",

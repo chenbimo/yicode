@@ -7,5 +7,8 @@
     "allowBranch": ["main", "master"],
     "changelog": false,
     "yes": true,
-    "gitHead": false
+    "gitHead": false,
+    "signGitTag": false,
+    "signGitCommit": false,
+    "gitTagVersion": false
 }

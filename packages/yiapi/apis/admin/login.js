@@ -42,6 +42,7 @@ export default async function (fastify, opts) {
 
                 // 判断用户存在
                 if (!adminData) {
+                    await trx.rollback();
                     return {
                         ...codeConfig.FAIL,
                         msg: '用户不存在'
@@ -50,6 +51,7 @@ export default async function (fastify, opts) {
 
                 // 判断密码
                 if (fnMD5(req.body.password) !== adminData.password) {
+                    await trx.rollback();
                     return {
                         ...codeConfig.FAIL,
                         msg: '密码错误'

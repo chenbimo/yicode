@@ -32,7 +32,6 @@
         "qrcode"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "license": "GPL-3.0",
     "dependencies": {
         "qrcode-terminal": "^0.12.0"
     }

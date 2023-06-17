@@ -23,6 +23,5 @@
         "type": "git",
         "url": "https://github.com/chenbimo/yicode.git"
     },
-    "homepage": "https://yicode.tech",
-    "license": "GPL-3.0"
+    "homepage": "https://yicode.tech"
 }

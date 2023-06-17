@@ -1,0 +1,24 @@
+{
+    "name": "@yicode-template/yihtml-cli",
+    "version": "1.0.0",
+    "description": "基于 yihtml-cli 的静态页面开发模板",
+    "main": "index.js",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "https://gitee.com/banshiweichen/yihtml-template.git"
+    },
+    "keywords": [
+        "gulp",
+        "static page"
+    ],
+    "browserslist": [
+        "> 1%",
+        "ie > 8",
+        "last 2 versions",
+        "last 3 iOS versions"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {}
+}

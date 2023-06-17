@@ -34,7 +34,6 @@
         "脚手架"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "license": "GPL-3.0",
     "dependencies": {
         "@iconify-json/academicons": "^1.1.9",
         "@iconify-json/akar-icons": "^1.1.17",
@@ -103,14 +102,14 @@
         "@iconify-json/medical-icon": "^1.1.4",
         "@iconify-json/memory": "^1.1.1",
         "@iconify-json/mi": "^1.1.4",
-        "@iconify-json/mingcute": "^1.1.6",
+        "@iconify-json/mingcute": "^1.1.7",
         "@iconify-json/nimbus": "^1.1.7",
         "@iconify-json/nonicons": "^1.1.3",
         "@iconify-json/noto": "^1.1.11",
         "@iconify-json/noto-v1": "^1.1.7",
-        "@iconify-json/octicon": "^1.1.42",
+        "@iconify-json/octicon": "^1.1.43",
         "@iconify-json/ooui": "^1.1.22",
-        "@iconify-json/openmoji": "^1.1.27",
+        "@iconify-json/openmoji": "^1.1.28",
         "@iconify-json/pajamas": "^1.1.27",
         "@iconify-json/pepicons-pop": "^1.1.5",
         "@iconify-json/pepicons-print": "^1.1.5",
@@ -160,7 +159,7 @@
         "unplugin-icons": "^0.16.3",
         "unplugin-vue-components": "^0.25.1",
         "vite": "^4.3.9",
-        "vite-plugin-vue-devtools": "^0.2.0",
+        "vite-plugin-vue-devtools": "^0.2.1",
         "vue-i18n": "^9.2.2",
         "yoctocolors": "^1.0.0"
     }

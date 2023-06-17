@@ -1,0 +1,57 @@
+{
+    "name": "@yicode/yihtml-cli",
+    "version": "1.2.0",
+    "description": "基于 gulp 的静态页面开发脚手架",
+    "bin": {
+        "yihtml": "bin/yihtml-cli.js"
+    },
+    "main": "index.js",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "https://e.coding.net/chensuiyi/chensuiyi/yihtml-cli.git"
+    },
+    "keywords": [
+        "gulp",
+        "static page"
+    ],
+    "browserslist": [
+        "> 1%",
+        "ie > 8",
+        "last 2 versions",
+        "last 3 iOS versions"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "dependencies": {
+        "@babel/core": "^7.22.5",
+        "@babel/plugin-transform-runtime": "^7.22.5",
+        "@babel/preset-env": "^7.22.5",
+        "@babel/runtime": "^7.22.5",
+        "@babel/runtime-corejs3": "^7.22.5",
+        "@yicode/commander": "workspace:^",
+        "@yicode/yihtml-cli": "workspace:^",
+        "autoprefixer": "^10.4.14",
+        "babelify": "^10.0.0",
+        "browser-sync": "^2.29.3",
+        "browserify": "^17.0.0",
+        "core-js": "^3.31.0",
+        "del": "^6.1.1",
+        "fs-extra": "^10.1.0",
+        "gulp": "^4.0.2",
+        "gulp-babel": "^8.0.0",
+        "gulp-cli": "^2.3.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-if": "^3.0.0",
+        "gulp-include": "^2.4.1",
+        "gulp-postcss": "^9.0.1",
+        "gulp-rename": "^2.0.0",
+        "gulp-sass": "^5.1.0",
+        "gulp-sourcemaps": "^3.0.0",
+        "gulp-uglify-es": "^3.0.0",
+        "lodash": "^4.17.21",
+        "postcss": "^8.4.24",
+        "release-it": "^15.11.0",
+        "sass": "^1.63.4",
+        "through2": "^4.0.2"
+    }
+}

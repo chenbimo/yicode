@@ -27,7 +27,6 @@
         "脚手架"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "license": "GPL-3.0",
     "devDependencies": {
         "rollup": "^3.25.1",
         "vite": "^4.3.9"

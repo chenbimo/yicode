@@ -1,5 +1,5 @@
 {
-    "name": "@yicode/dlnpm",
+    "name": "@yicode-tool/dlnpm",
     "version": "1.0.7",
     "description": "dlnpm - npm package download tool",
     "author": "chensuiyi <bimostyle@qq.com>",
@@ -8,7 +8,7 @@
     },
     "type": "module",
     "homepage": "https://yicode.tech",
-    "license": "GPL-3.0",
+    "license": "Apache-2.0",
     "main": "dlnpm.js",
     "repository": "https://github.com/chenbimo/yicode.git",
     "files": [],
