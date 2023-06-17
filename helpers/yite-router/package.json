@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-router",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "yite-cli 路由自动生成",
     "type": "module",
     "exports": {

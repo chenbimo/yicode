@@ -1,6 +1,6 @@
 {
     "name": "@yicode/commander",
-    "version": "10.1.4",
+    "version": "10.1.5",
     "description": "Node.js的命令行工具commander（汉化版）",
     "keywords": [
         "commander",
