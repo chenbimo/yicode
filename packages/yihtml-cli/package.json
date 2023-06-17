@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yihtml-cli",
-    "version": "1.2.8",
+    "version": "1.2.9",
     "description": "基于 gulp 的静态页面开发脚手架",
     "private": false,
     "publishConfig": {
@@ -32,7 +32,7 @@
         "@babel/preset-env": "^7.22.5",
         "@babel/runtime": "^7.22.5",
         "@babel/runtime-corejs3": "^7.22.5",
-        "@yicode-other/commander": "^10.1.7",
+        "@yicode-other/commander": "^10.1.8",
         "autoprefixer": "^10.4.14",
         "babelify": "^10.0.0",
         "browser-sync": "^2.29.3",
