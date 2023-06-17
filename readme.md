@@ -16,7 +16,7 @@
 
 [https://yicode.tech](https://yicode.tech)
 
-该文档使用 `yidocs` 驱动
+该文档使用 `yidocs` 驱动。
 
 ## 这是什么？
 
