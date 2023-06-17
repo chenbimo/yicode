@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yihtml-cli",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "基于 yihtml-cli 的静态页面开发模板",
     "main": "index.js",
     "scripts": {},
@@ -20,5 +20,5 @@
     ],
     "author": "",
     "license": "ISC",
-    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
+    "gitHead": "341c1681e62c4aaae499c6790a2f947f7082b569"
 }

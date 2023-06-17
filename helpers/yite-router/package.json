@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-router",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "yite-cli 路由自动生成",
     "type": "module",
     "exports": {
@@ -32,5 +32,5 @@
         "qrcode"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
+    "gitHead": "341c1681e62c4aaae499c6790a2f947f7082b569"
 }

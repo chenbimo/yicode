@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yihtml-cli",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "基于 gulp 的静态页面开发脚手架",
     "bin": {
         "yihtml": "bin/yihtml-cli.js"
@@ -54,5 +54,5 @@
         "sass": "^1.63.4",
         "through2": "^4.0.2"
     },
-    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
+    "gitHead": "341c1681e62c4aaae499c6790a2f947f7082b569"
 }

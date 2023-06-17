@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yiapi",
-    "version": "1.0.31",
+    "version": "1.0.32",
     "description": "易接口模板",
     "main": "yiapi.js",
     "type": "module",
@@ -23,9 +23,9 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "^2.2.28",
+        "@yicode/yiapi": "^2.2.29",
         "cos-nodejs-sdk-v5": "^2.12.1",
         "got": "^13.0.0"
     },
-    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
+    "gitHead": "341c1681e62c4aaae499c6790a2f947f7082b569"
 }
