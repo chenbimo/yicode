@@ -8,8 +8,8 @@
     },
     "scripts": {
         "help": "yite",
-        "dev": "yite dev",
-        "build": "yite build"
+        "dev": "yite --command=dev --env-file=development",
+        "build": "yite --command=build"
     },
     "files": [
         ".yicode/*",
@@ -25,8 +25,8 @@
     ],
     "dependencies": {
         "@arco-design/web-vue": "^2.47.1",
-        "@yicode/yidash": "^3.2.15",
-        "@yicode/yite-cli": "^1.29.34",
+        "@yicode/yidash": "workspace:*",
+        "@yicode/yite-cli": "workspace:*",
         "axios": "^1.4.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.4",

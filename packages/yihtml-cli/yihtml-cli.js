@@ -19,7 +19,7 @@ let autoprefixer = require('autoprefixer');
 
 let gulpBabel = require('gulp-babel');
 let gulpUglifyEs = require('gulp-uglify-es').default;
-let commander = require('@yicode/commander');
+let commander = require('@yicode-other/commander');
 let browserSync = require('browser-sync').create('yihtml');
 let through2 = require('through2');
 let browserify = require('browserify');
