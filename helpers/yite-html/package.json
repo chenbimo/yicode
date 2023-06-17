@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-html",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "description": "yite-cli 自定义入口文件",
     "type": "module",
     "exports": {

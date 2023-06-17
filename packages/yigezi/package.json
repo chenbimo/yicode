@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yigezi",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "易格子-纯粹的 CSS 栅格布局库",
     "main": "index.js",
     "private": false,

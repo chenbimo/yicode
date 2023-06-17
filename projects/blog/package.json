@@ -1,6 +1,6 @@
 {
     "name": "@yicode-project/blog",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "yiblog（易博客）一个简单好用的博客",
     "scripts": {
         "preinstall": "npx only-allow pnpm"

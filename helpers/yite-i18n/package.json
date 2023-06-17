@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-i18n",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "yite-cli 语言国际化",
     "type": "module",
     "exports": {

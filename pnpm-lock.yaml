@@ -256,7 +256,7 @@ importers:
                 specifier: ^7.22.5
                 version: 7.22.5
             '@yicode/commander':
-                specifier: ^10.1.3
+                specifier: ^10.1.4
                 version: link:../commander
             '@yicode/yihtml-cli':
                 specifier: workspace:^
@@ -646,25 +646,25 @@ importers:
                 specifier: ^0.3.10
                 version: 0.3.10(vue@3.3.4)
             '@yicode-helper/yite-chunk':
-                specifier: ^1.1.20
+                specifier: ^1.1.21
                 version: link:../../helpers/yite-chunk
             '@yicode-helper/yite-html':
-                specifier: ^1.1.5
+                specifier: ^1.1.6
                 version: link:../../helpers/yite-html
             '@yicode-helper/yite-i18n':
-                specifier: ^1.0.6
+                specifier: ^1.0.7
                 version: link:../../helpers/yite-i18n
             '@yicode-helper/yite-qrcode':
-                specifier: ^1.0.9
+                specifier: ^1.0.10
                 version: link:../../helpers/yite-qrcode
             '@yicode-helper/yite-router':
-                specifier: ^1.0.6
+                specifier: ^1.0.7
                 version: link:../../helpers/yite-router
             '@yicode/commander':
-                specifier: ^10.1.3
+                specifier: ^10.1.4
                 version: link:../commander
             '@yicode/yidash':
-                specifier: ^3.2.13
+                specifier: ^3.2.14
                 version: link:../yidash
             copy-anything:
                 specifier: ^3.0.5
@@ -736,7 +736,7 @@ importers:
                 specifier: ^2.47.1
                 version: 2.47.1(vue@3.3.4)
             '@yicode/yidash':
-                specifier: ^3.2.13
+                specifier: ^3.2.14
                 version: link:../../packages/yidash
             axios:
                 specifier: ^1.4.0
@@ -764,7 +764,7 @@ importers:
                 version: 4.2.2(vue@3.3.4)
         devDependencies:
             '@yicode/yite-cli':
-                specifier: ^1.29.32
+                specifier: ^1.29.33
                 version: link:../../packages/yite-cli
             sass:
                 specifier: ^1.63.4
@@ -773,7 +773,7 @@ importers:
     templates/yiapi:
         dependencies:
             '@yicode/yiapi':
-                specifier: ^2.2.30
+                specifier: ^2.2.31
                 version: link:../../packages/yiapi
             cos-nodejs-sdk-v5:
                 specifier: ^2.12.1
@@ -788,10 +788,10 @@ importers:
                 specifier: ^2.47.1
                 version: 2.47.1(vue@3.3.4)
             '@yicode/yidash':
-                specifier: ^3.2.13
+                specifier: ^3.2.14
                 version: link:../../packages/yidash
             '@yicode/yite-cli':
-                specifier: ^1.29.32
+                specifier: ^1.29.33
                 version: link:../../packages/yite-cli
             axios:
                 specifier: ^1.4.0
@@ -831,7 +831,7 @@ importers:
     templates/yidocs:
         dependencies:
             '@yicode-helper/yidocs-auto':
-                specifier: ^1.3.9
+                specifier: ^1.3.10
                 version: link:../../helpers/yidocs-auto
         devDependencies:
             vitepress:
