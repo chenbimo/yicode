@@ -2,6 +2,11 @@ import simpleGit from 'simple-git';
 import dayjs from 'dayjs';
 import Table from 'cli-table3';
 import ora from 'ora';
+import relativeTime from 'dayjs/plugin/relativeTime.js';
+import 'dayjs/locale/zh-cn.js';
+dayjs.locale('zh-cn');
+dayjs.extend(relativeTime);
+
 import {
     //
     forOwn as _forOwn,
@@ -9,10 +14,6 @@ import {
     forEach as _forEach,
     orderBy as _orderBy
 } from 'lodash-es';
-import relativeTime from 'dayjs/plugin/relativeTime.js';
-import 'dayjs/locale/zh-cn.js';
-dayjs.locale('zh-cn');
-dayjs.extend(relativeTime);
 
 export async function statistics(options) {
     try {

@@ -2,8 +2,6 @@
 import path from 'path';
 import { merge as _merge } from 'lodash-es';
 import inquirer from 'inquirer';
-import ora from 'ora';
-import { fileURLToPath } from 'url';
 
 import { statistics } from './scripts/statistics.js';
 
