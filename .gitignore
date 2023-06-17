@@ -4,12 +4,10 @@ logs
 npm-debug.log*
 esdata
 data
-.npmrc
 .cache
 lab
 labs
 cache
-.npmrc
 .VSCodeCounter
 oclif.manifest.json
 dist
