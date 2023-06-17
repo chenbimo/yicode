@@ -29,5 +29,6 @@
     "dependencies": {
         "fast-glob": "^3.2.12",
         "lodash-es": "^4.17.21"
-    }
+    },
+    "gitHead": "3b4295ff4070b621858031a85a478d8c9a8c1f9b"
 }
