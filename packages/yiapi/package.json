@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiapi",
-    "version": "2.2.26",
+    "version": "2.2.27",
     "description": "yiapi(易接口)，5 分钟上手 Node.js 接口开发",
     "main": "yiapi.js",
     "type": "module",
@@ -58,5 +58,6 @@
         "ora": "^6.3.1",
         "winston": "^3.9.0",
         "winston-daily-rotate-file": "^4.7.1"
-    }
+    },
+    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
 }

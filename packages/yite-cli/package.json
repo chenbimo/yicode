@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yite-cli",
-    "version": "1.29.28",
+    "version": "1.29.29",
     "description": "专注于vite + vue3 的项目开发脚手架",
     "exports": {
         ".": {
@@ -139,13 +139,13 @@
         "@unocss/transformer-variant-group": "^0.53.1",
         "@vitejs/plugin-vue": "^4.2.3",
         "@vue-macros/reactivity-transform": "^0.3.10",
-        "@yicode-helper/yite-chunk": "workspace:*",
-        "@yicode-helper/yite-html": "workspace:*",
-        "@yicode-helper/yite-i18n": "workspace:*",
-        "@yicode-helper/yite-qrcode": "workspace:*",
-        "@yicode-helper/yite-router": "workspace:*",
-        "@yicode/commander": "workspace:*",
-        "@yicode/yidash": "workspace:*",
+        "@yicode-helper/yite-chunk": "1.1.17",
+        "@yicode-helper/yite-html": "1.1.2",
+        "@yicode-helper/yite-i18n": "1.0.3",
+        "@yicode-helper/yite-qrcode": "1.0.6",
+        "@yicode-helper/yite-router": "1.0.3",
+        "@yicode/commander": "10.1.2",
+        "@yicode/yidash": "3.2.10",
         "copy-anything": "^3.0.5",
         "fast-glob": "^3.2.12",
         "fs-extra": "^11.1.1",
@@ -162,5 +162,6 @@
         "vite-plugin-vue-devtools": "^0.2.1",
         "vue-i18n": "^9.2.2",
         "yoctocolors": "^1.0.0"
-    }
+    },
+    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
 }

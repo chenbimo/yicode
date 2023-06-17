@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yigezi",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "易格子-纯粹的 CSS 栅格布局库",
     "main": "index.js",
     "scripts": {
@@ -34,5 +34,6 @@
         "postcss": "^8.4.24",
         "release-it": "^15.11.0",
         "sass": "^1.63.4"
-    }
+    },
+    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
 }

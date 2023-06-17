@@ -1,6 +1,6 @@
 {
     "name": "@yicode-project/blog",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "yiblog（易博客）一个简单好用的博客",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
@@ -23,5 +23,6 @@
         "type": "git",
         "url": "https://github.com/chenbimo/yicode.git"
     },
-    "homepage": "https://yicode.tech"
+    "homepage": "https://yicode.tech",
+    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
 }

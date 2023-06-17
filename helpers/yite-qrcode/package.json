@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-qrcode",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "yite-cli 控制台二维码生成",
     "type": "module",
     "exports": {
@@ -34,5 +34,6 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "dependencies": {
         "qrcode-terminal": "^0.12.0"
-    }
+    },
+    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
 }

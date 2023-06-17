@@ -10,5 +10,6 @@
     "gitHead": false,
     "signGitTag": false,
     "signGitCommit": false,
-    "gitTagVersion": false
+    "gitTagVersion": false,
+    "push": true
 }

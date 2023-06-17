@@ -731,52 +731,6 @@ importers:
 
   projects/blog: {}
 
-  templates/base-vue3:
-    dependencies:
-      '@arco-design/web-vue':
-        specifier: ^2.47.1
-        version: 2.47.1(vue@3.3.4)
-      '@yicode/yidash':
-        specifier: workspace:*
-        version: link:../../packages/yidash
-      '@yicode/yite-cli':
-        specifier: workspace:*
-        version: link:../../packages/yite-cli
-      axios:
-        specifier: ^1.4.0
-        version: 1.4.0
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
-      pinia:
-        specifier: ^2.1.4
-        version: 2.1.4(vue@3.3.4)
-      sass:
-        specifier: ^1.63.4
-        version: 1.63.4
-      store2:
-        specifier: ^2.14.2
-        version: 2.14.2
-      vue:
-        specifier: ^3.3.4
-        version: 3.3.4
-      vue-i18n:
-        specifier: ^9.2.2
-        version: 9.2.2(vue@3.3.4)
-      vue-router:
-        specifier: ^4.2.2
-        version: 4.2.2(vue@3.3.4)
-    devDependencies:
-      lint-staged:
-        specifier: ^13.2.2
-        version: 13.2.2
-      prettier:
-        specifier: ^2.8.8
-        version: 2.8.8
-      simple-git-hooks:
-        specifier: ^2.8.1
-        version: 2.8.1
-
   templates/yiadmin:
     dependencies:
       '@arco-design/web-vue':
@@ -828,6 +782,52 @@ importers:
       got:
         specifier: ^13.0.0
         version: 13.0.0
+
+  templates/yibase:
+    dependencies:
+      '@arco-design/web-vue':
+        specifier: ^2.47.1
+        version: 2.47.1(vue@3.3.4)
+      '@yicode/yidash':
+        specifier: workspace:*
+        version: link:../../packages/yidash
+      '@yicode/yite-cli':
+        specifier: workspace:*
+        version: link:../../packages/yite-cli
+      axios:
+        specifier: ^1.4.0
+        version: 1.4.0
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      pinia:
+        specifier: ^2.1.4
+        version: 2.1.4(vue@3.3.4)
+      sass:
+        specifier: ^1.63.4
+        version: 1.63.4
+      store2:
+        specifier: ^2.14.2
+        version: 2.14.2
+      vue:
+        specifier: ^3.3.4
+        version: 3.3.4
+      vue-i18n:
+        specifier: ^9.2.2
+        version: 9.2.2(vue@3.3.4)
+      vue-router:
+        specifier: ^4.2.2
+        version: 4.2.2(vue@3.3.4)
+    devDependencies:
+      lint-staged:
+        specifier: ^13.2.2
+        version: 13.2.2
+      prettier:
+        specifier: ^2.8.8
+        version: 2.8.8
+      simple-git-hooks:
+        specifier: ^2.8.1
+        version: 2.8.1
 
   templates/yidocs:
     dependencies:

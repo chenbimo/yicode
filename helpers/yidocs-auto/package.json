@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yidocs-auto",
-    "version": "1.3.5",
+    "version": "1.3.6",
     "description": "vitepress导航和侧边栏自动生成工具",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
@@ -29,5 +29,6 @@
     "dependencies": {
         "fast-glob": "^3.2.12",
         "lodash-es": "^4.17.21"
-    }
+    },
+    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
 }

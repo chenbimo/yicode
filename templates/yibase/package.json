@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/yibase",
     "private": false,
-    "version": "1.5.39",
+    "version": "1.5.40",
     "type": "module",
     "scripts": {
         "help": "yite",
@@ -22,8 +22,8 @@
     ],
     "dependencies": {
         "@arco-design/web-vue": "^2.47.1",
-        "@yicode/yidash": "workspace:*",
-        "@yicode/yite-cli": "workspace:*",
+        "@yicode/yidash": "3.2.10",
+        "@yicode/yite-cli": "1.29.29",
         "axios": "^1.4.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.4",
@@ -43,5 +43,6 @@
     },
     "lint-staged": {
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
-    }
+    },
+    "gitHead": "985955934eeaf55937898a6c047eef9eb40e1dff"
 }
