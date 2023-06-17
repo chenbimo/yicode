@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-qrcode",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "yite-cli 控制台二维码生成",
     "type": "module",
     "exports": {
