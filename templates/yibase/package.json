@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/yibase",
     "private": false,
-    "version": "1.5.48",
+    "version": "1.5.49",
     "type": "module",
     "publishConfig": {
         "access": "public"
@@ -25,8 +25,8 @@
     ],
     "dependencies": {
         "@arco-design/web-vue": "^2.47.1",
-        "@yicode/yidash": "^3.2.18",
-        "@yicode/yite-cli": "^1.30.2",
+        "@yicode/yidash": "^3.2.19",
+        "@yicode/yite-cli": "^1.30.3",
         "axios": "^1.4.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.4",
