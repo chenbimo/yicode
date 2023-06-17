@@ -1,1 +1,1 @@
-console.log('yes monolage2!');
+console.log('yes monolage!');

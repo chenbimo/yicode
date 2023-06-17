@@ -5,7 +5,7 @@ import inquirer from 'inquirer';
 import pacote from 'pacote';
 import logSymbols from 'log-symbols';
 
-// 仓库地址配置2
+// 仓库地址配置
 let registryConfig = {
     'npmmirror.com': 'https://registry.npmmirror.com',
     'npmjs.com': 'https://registry.npmjs.com'
