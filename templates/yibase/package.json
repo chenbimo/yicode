@@ -3,6 +3,9 @@
     "private": false,
     "version": "1.5.43",
     "type": "module",
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "help": "yite",
         "dev": "yite dev",
@@ -44,5 +47,5 @@
     "lint-staged": {
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
     },
-    "gitHead": "341c1681e62c4aaae499c6790a2f947f7082b569"
+    "gitHead": "87d4e3ab096d7dce1595c63c4beed26ed3af7bc2"
 }
