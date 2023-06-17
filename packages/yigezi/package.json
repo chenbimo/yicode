@@ -3,6 +3,10 @@
     "version": "1.0.5",
     "description": "易格子-纯粹的 CSS 栅格布局库",
     "main": "index.js",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "dev": "cross-env RELEASE_TYPE=dev gulp"
     },
@@ -21,7 +25,6 @@
         "flex"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "license": "MIT",
     "devDependencies": {
         "autoprefixer": "^10.4.14",
         "cross-env": "^7.0.3",

@@ -8,7 +8,6 @@
     },
     "type": "module",
     "homepage": "https://yicode.tech",
-    "license": "Apache-2.0",
     "main": "dlnpm.js",
     "repository": "https://github.com/chenbimo/yicode.git",
     "files": [],

@@ -2,6 +2,10 @@
     "name": "@yicode/yihtml-cli",
     "version": "1.2.3",
     "description": "基于 gulp 的静态页面开发脚手架",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "bin": {
         "yihtml": "bin/yihtml-cli.js"
     },

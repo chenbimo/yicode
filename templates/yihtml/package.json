@@ -3,6 +3,10 @@
     "version": "1.0.3",
     "description": "基于 yihtml-cli 的静态页面开发模板",
     "main": "index.js",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {},
     "repository": {
         "type": "git",
@@ -19,6 +23,5 @@
         "last 3 iOS versions"
     ],
     "author": "",
-    "license": "ISC",
     "gitHead": "341c1681e62c4aaae499c6790a2f947f7082b569"
 }

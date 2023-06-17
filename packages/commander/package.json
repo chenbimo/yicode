@@ -13,7 +13,6 @@
         "argv"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "https://github.com/chenbimo/yicode.git"
