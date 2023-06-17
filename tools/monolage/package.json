@@ -1,0 +1,30 @@
+{
+    "name": "@yicode-tool/monolage",
+    "version": "1.0.0",
+    "description": "monorepo 多仓库 package.json 字段检测与补全工具",
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "main": "./index.js",
+    "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "sideEffects": true,
+    "keywords": [
+        "lodash",
+        "utils",
+        "helper",
+        "help"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "dependencies": {
+        "@manypkg/get-packages": "^2.2.0"
+    }
+}

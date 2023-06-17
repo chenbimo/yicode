@@ -2,6 +2,7 @@
     "name": "root",
     "version": "0.0.0",
     "private": true,
+    "type": "module",
     "repository": {
         "type": "git",
         "url": "https://github.com/chenbimo/yicode.git"
@@ -12,6 +13,7 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "build": "pnpm --filter=@yicode/* run build",
+        "c": "lerna clean",
         "r": "lerna publish"
     },
     "keywords": [
@@ -37,6 +39,8 @@
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
     },
     "dependencies": {
+        "@manypkg/get-packages": "^2.2.0",
+        "del": "^6.1.1",
         "lerna": "^7.0.2"
     }
 }

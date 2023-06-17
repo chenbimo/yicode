@@ -7,7 +7,7 @@
         "access": "public"
     },
     "bin": {
-        "yihtml": "bin/yihtml-cli.js"
+        "yihtml": "yihtml-cli.js"
     },
     "main": "index.js",
     "scripts": {},
@@ -33,13 +33,11 @@
         "@babel/runtime": "^7.22.5",
         "@babel/runtime-corejs3": "^7.22.5",
         "@yicode/commander": "^10.1.4",
-        "@yicode/yihtml-cli": "workspace:^",
         "autoprefixer": "^10.4.14",
         "babelify": "^10.0.0",
         "browser-sync": "^2.29.3",
         "browserify": "^17.0.0",
         "core-js": "^3.31.0",
-        "del": "^6.1.1",
         "fs-extra": "^10.1.0",
         "gulp": "^4.0.2",
         "gulp-babel": "^8.0.0",
@@ -50,11 +48,9 @@
         "gulp-postcss": "^9.0.1",
         "gulp-rename": "^2.0.0",
         "gulp-sass": "^5.1.0",
-        "gulp-sourcemaps": "^3.0.0",
         "gulp-uglify-es": "^3.0.0",
         "lodash": "^4.17.21",
         "postcss": "^8.4.24",
-        "release-it": "^15.11.0",
         "sass": "^1.63.4",
         "through2": "^4.0.2"
     }
