@@ -30,5 +30,6 @@
         ".": {
             "import": "./index.js"
         }
-    }
+    },
+    "gitHead": "e105ac39e614f78c88ca8ee5a61afa160e36c6c7"
 }

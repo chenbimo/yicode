@@ -7,12 +7,12 @@
     },
     "type": "module",
     "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "exports": {
         ".": "./index.js",
         "./yidashLibNames.js": "./yidashLibNames.js"
-    },
-    "publishConfig": {
-        "access": "public"
     },
     "sideEffects": true,
     "keywords": [
@@ -34,5 +34,6 @@
         "merge-anything": "^5.1.7",
         "nanoid": "^4.0.2",
         "pako": "^2.1.0"
-    }
+    },
+    "gitHead": "e105ac39e614f78c88ca8ee5a61afa160e36c6c7"
 }

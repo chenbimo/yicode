@@ -7,11 +7,11 @@
     },
     "type": "module",
     "private": false,
-    "exports": {
-        ".": "./index.js"
-    },
     "publishConfig": {
         "access": "public"
+    },
+    "exports": {
+        ".": "./index.js"
     },
     "sideEffects": true,
     "keywords": [

@@ -32,7 +32,7 @@
         "@babel/preset-env": "^7.22.5",
         "@babel/runtime": "^7.22.5",
         "@babel/runtime-corejs3": "^7.22.5",
-        "@yicode-other/commander": "workspace:*",
+        "@yicode-other/commander": "10.1.6",
         "autoprefixer": "^10.4.14",
         "babelify": "^10.0.0",
         "browser-sync": "^2.29.3",
@@ -53,5 +53,6 @@
         "postcss": "^8.4.24",
         "sass": "^1.63.4",
         "through2": "^4.0.2"
-    }
+    },
+    "gitHead": "e105ac39e614f78c88ca8ee5a61afa160e36c6c7"
 }

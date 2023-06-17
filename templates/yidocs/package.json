@@ -30,6 +30,7 @@
         "vitepress": "1.0.0-beta.2"
     },
     "dependencies": {
-        "@yicode-helper/yidocs-auto": "workspace:*"
-    }
+        "@yicode-helper/yidocs-auto": "1.3.11"
+    },
+    "gitHead": "e105ac39e614f78c88ca8ee5a61afa160e36c6c7"
 }

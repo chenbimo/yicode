@@ -25,8 +25,8 @@
     ],
     "dependencies": {
         "@arco-design/web-vue": "^2.47.1",
-        "@yicode/yidash": "workspace:*",
-        "@yicode/yite-cli": "workspace:*",
+        "@yicode/yidash": "3.2.16",
+        "@yicode/yite-cli": "1.30.0",
         "axios": "^1.4.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.4",
@@ -46,5 +46,6 @@
     },
     "lint-staged": {
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
-    }
+    },
+    "gitHead": "e105ac39e614f78c88ca8ee5a61afa160e36c6c7"
 }

@@ -5,6 +5,9 @@
     "main": "yiapi.js",
     "type": "module",
     "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "dev": "nodemon --config=nodemon.json",
@@ -23,8 +26,9 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "workspace:*",
+        "@yicode/yiapi": "2.2.32",
         "cos-nodejs-sdk-v5": "^2.12.1",
         "got": "^13.0.0"
-    }
+    },
+    "gitHead": "e105ac39e614f78c88ca8ee5a61afa160e36c6c7"
 }
