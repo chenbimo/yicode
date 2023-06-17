@@ -3,13 +3,20 @@ import path from 'node:path';
 import fg from 'fast-glob';
 import { copy as copyAny } from 'copy-anything';
 import { cloneDeep, startsWith } from 'lodash-es';
-// import { createRequire } from 'node:module';
-// const require = createRequire(import.meta.url);
 
-// 使用require方式加载模块
-// export function requireFrom(path, dv = {}) {
-//     return require(path) || dv;
-// }
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { cwd } from 'node:process';
+
+// 系统路径
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(dirname(__filename));
+
+export const sysConfig = {
+    appDir: cwd(),
+    yiapiDir: __dirname
+    // 内置表字段定义
+};
 
 export function fnFilename(metaUrl) {
     return url.fileURLToPath(metaUrl);
@@ -71,7 +78,7 @@ export function fnGetEnvNames(promptParams) {
         .sync('.env.*', {
             dot: true,
             absolute: false,
-            cwd: path.resolve(srcDir, 'env'),
+            cwd: path.resolve(sysConfig.appDir, 'src/env'),
             onlyFiles: true,
             ignore: ['.env.*.local']
         })
