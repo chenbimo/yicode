@@ -1,0 +1,34 @@
+{
+    "name": "@yicode-other/minimist",
+    "version": "1.0.0",
+    "description": "解析命令行参数工具",
+    "keywords": [
+        "commander",
+        "command",
+        "option",
+        "parser",
+        "cli",
+        "argument",
+        "args",
+        "argv"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "scripts": {},
+    "files": [
+        "index.js",
+        "LICENSE",
+        "package.json",
+        "readme.md"
+    ],
+    "type": "module",
+    "main": "./index.js",
+    "exports": {
+        ".": {
+            "import": "./index.js"
+        }
+    }
+}
