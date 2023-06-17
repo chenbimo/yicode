@@ -2,6 +2,10 @@
     "name": "@yicode-other/minimist",
     "version": "1.0.3",
     "description": "解析命令行参数工具",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "keywords": [
         "commander",
         "command",
@@ -31,5 +35,5 @@
             "import": "./index.js"
         }
     },
-    "gitHead": "3b4295ff4070b621858031a85a478d8c9a8c1f9b"
+    "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f"
 }
