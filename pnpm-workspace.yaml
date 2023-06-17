@@ -5,3 +5,6 @@ packages:
     - 'helpers/*'
     - 'vscodes/*'
     - 'desktops/*'
+    - 'tools/*'
+    - 'others/*'
+    - 'browsers/*'

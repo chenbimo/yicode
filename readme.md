@@ -32,14 +32,17 @@
 -   降低项目管理难度
 -   减少项目维护麻烦
 
-## 有哪些项目类型？
+## 开源项目类型
 
--   packages (独立的功能)
--   templates (生态项目模板)
--   projects (完整的项目)
--   helpers (辅助帮助插件)
--   vscodes (vscode 插件项目)
--   desktops (桌面类项目)
+-   packages (独立的功能 `8个`)
+-   templates (生态项目模板 `6个`)
+-   projects (完整的项目 `1个`)
+-   helpers (辅助帮助插件 `8个`)
+-   vscodes (vscode 插件项目 `2个`)
+-   desktops (桌面类项目 `1个`)
+-   tools (工具类项目 `3个`)
+-   others (其他类项目 `2个`)
+-   browsers (浏览器类项目 `1个`)
 
 ## 谁开发的？
 
