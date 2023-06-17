@@ -34,6 +34,5 @@
     "dependencies": {
         "es-module-lexer": "^1.3.0",
         "magic-string": "^0.30.0"
-    },
-    "gitHead": "87d4e3ab096d7dce1595c63c4beed26ed3af7bc2"
+    }
 }

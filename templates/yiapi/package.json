@@ -26,6 +26,5 @@
         "@yicode/yiapi": "^2.2.31",
         "cos-nodejs-sdk-v5": "^2.12.1",
         "got": "^13.0.0"
-    },
-    "gitHead": "87d4e3ab096d7dce1595c63c4beed26ed3af7bc2"
+    }
 }

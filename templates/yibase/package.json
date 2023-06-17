@@ -46,6 +46,5 @@
     },
     "lint-staged": {
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
-    },
-    "gitHead": "87d4e3ab096d7dce1595c63c4beed26ed3af7bc2"
+    }
 }

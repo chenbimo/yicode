@@ -37,6 +37,5 @@
         "postcss": "^8.4.24",
         "release-it": "^15.11.0",
         "sass": "^1.63.4"
-    },
-    "gitHead": "87d4e3ab096d7dce1595c63c4beed26ed3af7bc2"
+    }
 }

@@ -31,6 +31,5 @@
     },
     "dependencies": {
         "@yicode-helper/yidocs-auto": "^1.3.10"
-    },
-    "gitHead": "87d4e3ab096d7dce1595c63c4beed26ed3af7bc2"
+    }
 }

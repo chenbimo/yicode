@@ -34,6 +34,5 @@
         "merge-anything": "^5.1.7",
         "nanoid": "^4.0.2",
         "pako": "^2.1.0"
-    },
-    "gitHead": "87d4e3ab096d7dce1595c63c4beed26ed3af7bc2"
+    }
 }

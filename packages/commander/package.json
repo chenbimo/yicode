@@ -33,6 +33,5 @@
             "import": "./esm.mjs"
         },
         "./esm.mjs": "./esm.mjs"
-    },
-    "gitHead": "87d4e3ab096d7dce1595c63c4beed26ed3af7bc2"
+    }
 }
