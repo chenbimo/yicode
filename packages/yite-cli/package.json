@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yite-cli",
-    "version": "1.30.0",
+    "version": "1.30.1",
     "description": "专注于vite + vue3 的项目开发脚手架",
     "exports": {
         ".": {
@@ -144,8 +144,8 @@
         "@yicode-helper/yite-i18n": "1.0.8",
         "@yicode-helper/yite-qrcode": "1.0.11",
         "@yicode-helper/yite-router": "1.0.8",
-        "@yicode-other/minimist": "1.0.1",
-        "@yicode/yidash": "3.2.16",
+        "@yicode-other/minimist": "^1.0.2",
+        "@yicode/yidash": "^3.2.17",
         "colorette": "^2.0.20",
         "copy-anything": "^3.0.5",
         "fast-glob": "^3.2.12",
