@@ -5,13 +5,15 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm"
     },
+    "bin": {
+        "monolage": "index.js"
+    },
     "main": "./index.js",
     "type": "module",
     "private": false,
     "publishConfig": {
         "access": "public"
     },
-    "sideEffects": true,
     "keywords": [
         "lodash",
         "utils",
@@ -25,6 +27,9 @@
     },
     "homepage": "https://yicode.tech",
     "dependencies": {
-        "@manypkg/get-packages": "^2.2.0"
+        "@manypkg/get-packages": "^2.2.0",
+        "ajv": "^8.12.0",
+        "ajv-i18n": "^4.2.0",
+        "colorette": "^2.0.20"
     }
 }

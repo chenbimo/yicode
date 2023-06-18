@@ -989,6 +989,15 @@ importers:
             '@manypkg/get-packages':
                 specifier: ^2.2.0
                 version: 2.2.0
+            ajv:
+                specifier: ^8.12.0
+                version: 8.12.0
+            ajv-i18n:
+                specifier: ^4.2.0
+                version: 4.2.0(ajv@8.12.0)
+            colorette:
+                specifier: ^2.0.20
+                version: 2.0.20
 
     vscodes/es6-template-syntax:
         dependencies:
