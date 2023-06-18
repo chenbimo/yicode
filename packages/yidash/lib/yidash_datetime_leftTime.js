@@ -2,7 +2,6 @@
  * 计算剩余时间
  * @param {Integer} second 剩余时间秒数
  */
-// 计算剩余时间
 export function yidash_datetime_leftTime(seconds) {
     let absTime = Math.abs(seconds);
     let parsed = {
@@ -14,14 +13,7 @@ export function yidash_datetime_leftTime(seconds) {
         minutes: 0,
         seconds: 0,
         text: '',
-        type: '',
-        years2: 0,
-        months2: 0,
-        weeks2: 0,
-        days2: 0,
-        hours2: 0,
-        minutes2: 0,
-        seconds2: 0
+        type: ''
     };
 
     // 年
@@ -58,19 +50,9 @@ export function yidash_datetime_leftTime(seconds) {
     }
     if (seconds > 0) {
         parsed.type = '还剩';
-        parsed.type2 = '还有';
     } else {
         parsed.type = '已过';
     }
-
-    // 原始时间
-    parsed.years2 = parsed.years;
-    parsed.months2 = parsed.months;
-    parsed.weeks2 = parsed.weeks;
-    parsed.days2 = parsed.days;
-    parsed.hours2 = parsed.hours;
-    parsed.minutes2 = parsed.minutes;
-    parsed.seconds2 = parsed.seconds;
 
     return parsed;
 }
