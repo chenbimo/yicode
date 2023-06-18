@@ -13,6 +13,7 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "build": "pnpm --filter=@yicode/* run build",
+        "s": "monolage",
         "c": "lerna clean",
         "r": "lerna publish"
     },
@@ -28,6 +29,7 @@
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
+        "@yicode-tool/monolage": "workspace:^",
         "lint-staged": "^13.2.2",
         "prettier": "^2.8.8",
         "simple-git-hooks": "^2.8.1"

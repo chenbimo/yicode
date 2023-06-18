@@ -9,7 +9,10 @@
     "type": "module",
     "homepage": "https://yicode.tech",
     "main": "index.js",
-    "repository": "https://github.com/chenbimo/yicode.git",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
     "files": [],
     "dependencies": {
         "got": "^13.0.0",
@@ -24,5 +27,9 @@
         "download",
         "package",
         "npmjs"
-    ]
+    ],
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    }
 }

@@ -35,5 +35,6 @@
             "import": "./index.js"
         }
     },
-    "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f"
+    "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f",
+    "homepage": "https://yicode.tech"
 }

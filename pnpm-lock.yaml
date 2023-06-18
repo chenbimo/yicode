@@ -11,6 +11,9 @@ importers:
                 specifier: ^7.0.2
                 version: 7.0.2
         devDependencies:
+            '@yicode-tool/monolage':
+                specifier: workspace:^
+                version: link:tools/monolage
             lint-staged:
                 specifier: ^13.2.2
                 version: 13.2.2

@@ -10,7 +10,7 @@
     "scripts": {},
     "repository": {
         "type": "git",
-        "url": "https://gitee.com/banshiweichen/yihtml-template.git"
+        "url": "https://github.com/chenbimo/yicode.git"
     },
     "keywords": [
         "gulp",
@@ -22,5 +22,7 @@
         "last 2 versions",
         "last 3 iOS versions"
     ],
-    "author": ""
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "type": "module",
+    "homepage": "https://yicode.tech"
 }

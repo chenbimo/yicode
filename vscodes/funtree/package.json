@@ -1,7 +1,7 @@
 {
     "name": "@yicode-vscode/funtree",
     "displayName": "vscode 侧边栏函数列表插件",
-    "description": "function tree",
+    "description": "monorepo 多仓库 package.json 字段检测与补全工具",
     "publisher": "chensuiyi",
     "version": "0.1.1",
     "engines": {
@@ -35,5 +35,16 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile"
-    }
+    },
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "type": "module",
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech"
 }
