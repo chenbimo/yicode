@@ -1,8 +1,7 @@
 import { resolve } from 'node:path';
 import { getPackagesSync } from '@manypkg/get-packages';
 import * as colors from 'colorette';
-import fs from 'fs-extra';
-import prettier from 'prettier';
+import { writeFileSync } from 'fs';
 import {
     //
     omit as _omit,
@@ -95,6 +94,6 @@ packages.forEach((project) => {
     }
     let scopeFields = _omit(monolageConfig.packages[project?.packageJson?.name] || {}, scopeExcludes);
     let resultFields = _merge(project.packageJson, _merge(globalFields, scopeFields));
-    fs.writeJsonSync(resolve(project.dir, 'package.json'), prettier.format(JSON.stringify(resultFields), prettierConfig));
+    writeFileSync(resolve(project.dir, 'package.json'), JSON.stringify(resultFields, null, 4));
     console.log(`${colors.green('[ 对齐成功 ]')}  ${colors.blue(project?.packageJson?.name)} 已处理完毕`);
 });

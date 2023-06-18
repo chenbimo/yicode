@@ -3,11 +3,13 @@ let monolageConfig = {
     publishConfig: {
         access: 'public'
     },
+    type: 'module',
     author: 'chensuiyi <bimostyle@qq.com>',
     repository: {
         type: 'git',
         url: 'https://github.com/chenbimo/yicode.git'
     },
+
     homepage: 'https://yicode.tech',
     packages: {
         '@yicode-tool/monolage': {
