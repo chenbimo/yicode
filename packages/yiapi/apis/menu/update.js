@@ -32,9 +32,8 @@ export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
             try {
-                let menuModel = trx.table('sys_menu');
+                let menuModel = fastify.mysql.table('sys_menu');
 
                 let parentData = undefined;
 
@@ -75,11 +74,9 @@ export default async function (fastify, opts) {
                     .where({ id: req.body.id })
                     .update(fnClearUpdateData(updateData));
 
-                await trx.commit();
                 await fastify.cacheTreeData();
                 return codeConfig.UPDATE_SUCCESS;
             } catch (err) {
-                await trx.rollback();
                 fastify.log.error(err);
                 return codeConfig.UPDATE_FAIL;
             }

@@ -28,9 +28,8 @@ export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
             try {
-                let dictCategoryModel = trx.table('sys_dict_category').modify(function (queryBuilder) {});
+                let dictCategoryModel = fastify.table.table('sys_dict_category').modify(function (queryBuilder) {});
 
                 let currentData = await dictCategoryModel.clone().where({ code: fnCamelCase(req.body.code) });
 
@@ -53,10 +52,8 @@ export default async function (fastify, opts) {
                     .where({ id: req.body.id })
                     .update(fnClearUpdateData(updateData));
 
-                await trx.commit();
                 return codeConfig.UPDATE_SUCCESS;
             } catch (err) {
-                await trx.rollback();
                 fastify.log.error(err);
                 return codeConfig.UPDATE_FAIL;
             }

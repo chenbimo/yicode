@@ -50,9 +50,8 @@ export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
             try {
-                let mailLogModel = trx.table('sys_mail_log');
+                let mailLogModel = fastify.mysql.table('sys_mail_log');
                 // 普通发送
                 if (req.body.content) {
                     let result = await fastify.sendEmail({
@@ -70,7 +69,6 @@ export default async function (fastify, opts) {
                             text: req.body.content
                         })
                     );
-                    await trx.commit();
                     return {
                         ...codeConfig.SUCCESS,
                         msg: '邮件已发送',
@@ -83,7 +81,6 @@ export default async function (fastify, opts) {
                     // 如果已经发送过
                     let existsVerifyCode = await fastify.redisGet(`${req.body.verify_name}:${req.body.to_email}`);
                     if (existsVerifyCode) {
-                        await trx.commit();
                         return {
                             ...codeConfig.SUCCESS,
                             msg: '邮箱验证码已发送（3分钟有效）',
@@ -110,7 +107,6 @@ export default async function (fastify, opts) {
                             text: '******'
                         })
                     );
-                    await trx.commit();
                     return {
                         ...codeConfig.SUCCESS,
                         msg: '邮箱验证码已发送（3分钟有效）',
@@ -119,7 +115,6 @@ export default async function (fastify, opts) {
                 }
             } catch (err) {
                 fastify.log.error(err);
-                await trx.rollback();
                 return codeConfig.FAIL;
             }
         }

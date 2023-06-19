@@ -33,7 +33,6 @@ export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
             try {
                 if (req.body.type === 'number') {
                     if (Number.isNaN(Number(req.body.value)) === true) {
@@ -43,7 +42,7 @@ export default async function (fastify, opts) {
                         };
                     }
                 }
-                let dictModel = trx.table('sys_dict').modify(function (queryBuilder) {});
+                let dictModel = fastify.mysql.table('sys_dict').modify(function (queryBuilder) {});
 
                 let updateData = {
                     category_id: req.body.category_id,
@@ -62,10 +61,8 @@ export default async function (fastify, opts) {
                     .where({ id: req.body.id })
                     .update(fnClearUpdateData(updateData));
 
-                await trx.commit();
                 return codeConfig.UPDATE_SUCCESS;
             } catch (err) {
-                await trx.rollback();
                 fastify.log.error(err);
                 return codeConfig.UPDATE_FAIL;
             }

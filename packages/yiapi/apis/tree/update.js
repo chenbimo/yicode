@@ -34,9 +34,8 @@ export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
             try {
-                let treeModel = trx.table('sys_tree');
+                let treeModel = fastify.mysql.table('sys_tree');
 
                 let parentData = undefined;
 
@@ -44,13 +43,19 @@ export default async function (fastify, opts) {
                 if (req.body.pid) {
                     parentData = await treeModel.clone().where('id', req.body.pid).first();
                     if (parentData === undefined) {
-                        return { ...codeConfig.FAIL, msg: '父级树不存在' };
+                        return {
+                            ...codeConfig.FAIL,
+                            msg: '父级树不存在'
+                        };
                     }
                 }
 
                 let selfData = await treeModel.clone().where('id', req.body.id).first();
                 if (selfData === undefined) {
-                    return { ...codeConfig.FAIL, msg: '菜单不存在' };
+                    return {
+                        ...codeConfig.FAIL,
+                        msg: '菜单不存在'
+                    };
                 }
 
                 // 需要更新的数据
@@ -90,11 +95,9 @@ export default async function (fastify, opts) {
                         });
                 }
 
-                await trx.commit();
                 await fastify.cacheTreeData();
                 return codeConfig.UPDATE_SUCCESS;
             } catch (err) {
-                await trx.rollback();
                 fastify.log.error(err);
                 return codeConfig.UPDATE_FAIL;
             }

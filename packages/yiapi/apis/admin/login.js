@@ -28,10 +28,9 @@ export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
             try {
-                let adminModel = trx.table('sys_admin');
-                let loginLogModel = trx.table('sys_login_log');
+                let adminModel = fastify.mysql.table('sys_admin');
+                let loginLogModel = fastify.mysql.table('sys_login_log');
 
                 // 查询管理员是否存在
                 let adminData = await adminModel //
@@ -68,7 +67,6 @@ export default async function (fastify, opts) {
 
                 await loginLogModel.clone().insert(fnClearInsertData(loginLogData));
 
-                await trx.commit();
                 // 成功返回
                 return {
                     ...codeConfig.SUCCESS,
@@ -81,7 +79,6 @@ export default async function (fastify, opts) {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                await trx.rollback();
                 return {
                     ...codeConfig.FAIL,
                     msg: '登录失败'
