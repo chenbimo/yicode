@@ -687,6 +687,9 @@ importers:
             lodash-es:
                 specifier: ^4.17.21
                 version: 4.17.21
+            log-symbols:
+                specifier: ^5.1.0
+                version: 5.1.0
             merge-anything:
                 specifier: ^5.1.7
                 version: 5.1.7
@@ -4397,7 +4400,7 @@ packages:
         resolution: { integrity: sha512-15lMrNBL/pvREMJPSfIPieaBtyyapDco/TNjALLEL53JGzO9g8rj5PipfE9h5ILx8aq/GaP17XCh209aVCun/w== }
         engines: { node: ^14.17.0 || >=16.0.0 }
         dependencies:
-            chalk: 4.1.0
+            chalk: 4.1.2
             execa: 5.0.0
             strong-log-transformer: 2.1.0
         dev: false
@@ -4983,7 +4986,6 @@ packages:
 
     /@types/node@18.16.18:
         resolution: { integrity: sha512-/aNaQZD0+iSBAGnvvN2Cx92HqE5sZCPZtx2TsK+4nvV23fFe09jVDvpArXr2j9DnYlzuU9WuoykDDc6wqvpNcw== }
-        dev: false
 
     /@types/node@20.3.1:
         resolution: { integrity: sha512-EhcH/wvidPy1WeML3TtYFGR83UzjxeWRen9V402T8aUGYsCHOmfoisV3ZSg03gAFIbLq8TnWOJ0f4cALtnSEUg== }
@@ -5231,7 +5233,7 @@ packages:
             vite: ^4.0.0
             vue: ^3.2.25
         dependencies:
-            vite: 4.3.9(sass@1.63.4)(terser@5.18.0)
+            vite: 4.3.9(@types/node@18.16.18)
             vue: 3.3.4
 
     /@vue-macros/common@1.4.0(vue@3.3.4):
@@ -10632,7 +10634,7 @@ packages:
         resolution: { integrity: sha512-LtxijLLZBduXnHSniy0WMdaHjmQnt3g5sa16W4p0HqukYTTsyTW3GD1q41TyGl5YFXj/5B2U6dlh5FM1LIMgxw== }
         engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
         dependencies:
-            chalk: 4.1.0
+            chalk: 4.1.2
             diff-sequences: 29.4.3
             jest-get-type: 29.4.3
             pretty-format: 29.5.0
@@ -16121,7 +16123,6 @@ packages:
             rollup: 3.25.1
         optionalDependencies:
             fsevents: 2.3.2
-        dev: false
 
     /vite@4.3.9(sass@1.63.4)(terser@5.18.0):
         resolution: { integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg== }
@@ -16155,6 +16156,7 @@ packages:
             terser: 5.18.0
         optionalDependencies:
             fsevents: 2.3.2
+        dev: true
 
     /vitepress@1.0.0-beta.2(@algolia/client-search@4.17.2)(search-insights@2.6.0):
         resolution: { integrity: sha512-DBXYjtYbm3W1IPPJ2TiCaK/XK+o/2XmL2+jslOGKm+txcbmG0kbeB+vadC5tCUZA9NdA+9Ywj3M4548c7t/SDg== }

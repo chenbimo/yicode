@@ -4,8 +4,8 @@
     "description": "yiadmin（易管理）前后分离的vue3后台管理",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "dev": "yite dev",
-        "build": "yite build"
+        "dev": "yite --command=dev --env-file=development",
+        "build": "yite --command=build"
     },
     "main": "./index.js",
     "type": "module",
