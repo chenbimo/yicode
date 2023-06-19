@@ -1,10 +1,10 @@
 'use strict';
 
-var assert = require('assert');
-var path = require('path');
-var esModuleLexer = require('es-module-lexer');
-var MagicString = require('magic-string');
-var os = require('os');
+import assert from 'assert';
+import path from 'path';
+import { init as esModuleLexer_init, parse as esModuleLexer_parse } from 'es-module-lexer';
+import MagicString from 'magic-string';
+import os from 'os';
 
 function staticImportedScan(id, getModuleInfo, cache, importChain) {
     if (cache.has(id)) {
@@ -189,7 +189,7 @@ const generateManualChunks = async (splitOptions, root) => {
     );
 };
 
-function chunkSplitPlugin(
+export function chunkSplitPlugin(
     splitOptions = {
         strategy: 'default'
     }
@@ -197,7 +197,7 @@ function chunkSplitPlugin(
     return {
         name: 'yite-chunk',
         async config(c) {
-            await esModuleLexer.init;
+            await esModuleLexer_init;
             const root = normalizePath(c.root || process.cwd());
             const manualChunks = await generateManualChunks(splitOptions, root);
             return {
@@ -215,7 +215,7 @@ function chunkSplitPlugin(
         async renderChunk(code, chunk) {
             const s = new MagicString(code);
             if (chunk.fileName.includes('__commonjsHelpers__')) {
-                const [imports] = esModuleLexer.parse(code);
+                const [imports] = esModuleLexer_parse(code);
                 for (const { ss: start, se: end } of imports) {
                     s.remove(start, end);
                 }
@@ -231,5 +231,3 @@ function chunkSplitPlugin(
         }
     };
 }
-
-exports.chunkSplitPlugin = chunkSplitPlugin;
