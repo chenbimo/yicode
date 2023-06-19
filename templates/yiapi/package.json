@@ -26,7 +26,7 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "2.2.32",
+        "@yicode/yiapi": "workspace:*",
         "cos-nodejs-sdk-v5": "^2.12.1",
         "got": "^13.0.0"
     },

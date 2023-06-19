@@ -32,7 +32,7 @@
         "@babel/preset-env": "^7.22.5",
         "@babel/runtime": "^7.22.5",
         "@babel/runtime-corejs3": "^7.22.5",
-        "@yicode-other/commander": "^10.1.9",
+        "@yicode-other/commander": "workspace:^",
         "autoprefixer": "^10.4.14",
         "babelify": "^10.0.0",
         "browser-sync": "^2.29.3",

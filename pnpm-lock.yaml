@@ -115,8 +115,8 @@ importers:
                 specifier: ^6.10.2
                 version: 6.10.2
             '@fastify/swagger':
-                specifier: ^8.5.1
-                version: 8.5.1
+                specifier: ^8.6.0
+                version: 8.6.0
             '@fastify/swagger-ui':
                 specifier: ^1.9.0
                 version: 1.9.0
@@ -274,7 +274,7 @@ importers:
                 specifier: ^7.22.5
                 version: 7.22.5
             '@yicode-other/commander':
-                specifier: ^10.1.9
+                specifier: workspace:^
                 version: link:../../others/commander
             autoprefixer:
                 specifier: ^10.4.14
@@ -652,25 +652,25 @@ importers:
                 specifier: ^0.3.10
                 version: 0.3.10(vue@3.3.4)
             '@yicode-helper/yite-chunk':
-                specifier: 1.1.22
+                specifier: workspace:*
                 version: link:../../helpers/yite-chunk
             '@yicode-helper/yite-html':
-                specifier: 1.1.7
+                specifier: workspace:*
                 version: link:../../helpers/yite-html
             '@yicode-helper/yite-i18n':
-                specifier: 1.0.8
+                specifier: workspace:*
                 version: link:../../helpers/yite-i18n
             '@yicode-helper/yite-qrcode':
-                specifier: 1.0.11
+                specifier: workspace:*
                 version: link:../../helpers/yite-qrcode
             '@yicode-helper/yite-router':
-                specifier: 1.0.8
+                specifier: workspace:*
                 version: link:../../helpers/yite-router
             '@yicode-other/minimist':
-                specifier: ^1.0.4
+                specifier: workspace:^
                 version: link:../../others/minimist
             '@yicode/yidash':
-                specifier: ^3.2.19
+                specifier: workspace:^
                 version: link:../yidash
             colorette:
                 specifier: ^2.0.20
@@ -732,7 +732,7 @@ importers:
                 specifier: ^2.47.1
                 version: 2.47.1(vue@3.3.4)
             '@yicode/yidash':
-                specifier: ^3.2.19
+                specifier: workspace:^
                 version: link:../../packages/yidash
             axios:
                 specifier: ^1.4.0
@@ -760,7 +760,7 @@ importers:
                 version: 4.2.2(vue@3.3.4)
         devDependencies:
             '@yicode/yite-cli':
-                specifier: ^1.30.3
+                specifier: workspace:^
                 version: link:../../packages/yite-cli
             sass:
                 specifier: ^1.63.4
@@ -769,7 +769,7 @@ importers:
     templates/yiapi:
         dependencies:
             '@yicode/yiapi':
-                specifier: 2.2.32
+                specifier: workspace:*
                 version: link:../../packages/yiapi
             cos-nodejs-sdk-v5:
                 specifier: ^2.12.1
@@ -784,10 +784,10 @@ importers:
                 specifier: ^2.47.1
                 version: 2.47.1(vue@3.3.4)
             '@yicode/yidash':
-                specifier: ^3.2.19
+                specifier: workspace:^
                 version: link:../../packages/yidash
             '@yicode/yite-cli':
-                specifier: ^1.30.3
+                specifier: workspace:^
                 version: link:../../packages/yite-cli
             axios:
                 specifier: ^1.4.0
@@ -827,7 +827,7 @@ importers:
     templates/yidocs:
         dependencies:
             '@yicode-helper/yidocs-auto':
-                specifier: ^1.3.14
+                specifier: workspace:^
                 version: link:../../helpers/yidocs-auto
         devDependencies:
             vitepress:
@@ -969,23 +969,23 @@ importers:
     tools/gitlook:
         dependencies:
             cli-table3:
-                specifier: 0.6.3
+                specifier: ^0.6.3
                 version: 0.6.3
             dayjs:
-                specifier: 1.11.7
-                version: 1.11.7
+                specifier: ^1.11.8
+                version: 1.11.8
             inquirer:
-                specifier: 9.1.4
-                version: 9.1.4
+                specifier: ^9.2.7
+                version: 9.2.7
             lodash-es:
-                specifier: 4.17.21
+                specifier: ^4.17.21
                 version: 4.17.21
             ora:
-                specifier: 6.1.2
-                version: 6.1.2
+                specifier: ^6.3.1
+                version: 6.3.1
             simple-git:
-                specifier: 3.16.0
-                version: 3.16.0
+                specifier: ^3.19.0
+                version: 3.19.0
 
     tools/monolage:
         dependencies:
@@ -3143,7 +3143,7 @@ packages:
             '@fastify/busboy': 1.2.1
             '@fastify/deepmerge': 1.3.0
             '@fastify/error': 3.2.1
-            '@fastify/swagger': 8.5.1
+            '@fastify/swagger': 8.6.0
             '@fastify/swagger-ui': 1.9.0
             end-of-stream: 1.4.4
             fastify-plugin: 4.5.0
@@ -3200,8 +3200,8 @@ packages:
             yaml: 2.3.1
         dev: false
 
-    /@fastify/swagger@8.5.1:
-        resolution: { integrity: sha512-tP8nRndpHKE48yhH67nuGxB0Dp1w8/nTpFfKfix4finfTDnMPu1YuevlcupIHWr/+9v6h+TQlY4/7UKFXSGfaA== }
+    /@fastify/swagger@8.6.0:
+        resolution: { integrity: sha512-PGde7ryn0nsX/BpSrjP4Ade8RK2M0uBIU4Iow3Qt3kWa/70p1fM7AW28kS3dKERnwT0VwrUdxU3ftrRI+DsNTw== }
         dependencies:
             fastify-plugin: 4.5.0
             json-schema-resolver: 2.0.0
@@ -4397,7 +4397,7 @@ packages:
         resolution: { integrity: sha512-15lMrNBL/pvREMJPSfIPieaBtyyapDco/TNjALLEL53JGzO9g8rj5PipfE9h5ILx8aq/GaP17XCh209aVCun/w== }
         engines: { node: ^14.17.0 || >=16.0.0 }
         dependencies:
-            chalk: 4.1.2
+            chalk: 4.1.0
             execa: 5.0.0
             strong-log-transformer: 2.1.0
         dev: false
@@ -5731,13 +5731,6 @@ packages:
         dependencies:
             type-fest: 0.21.3
 
-    /ansi-escapes@6.2.0:
-        resolution: { integrity: sha512-kzRaCqXnpzWs+3z5ABPQiVke+iq0KXkHo8xiWV4RPTi5Yli0l97BEQuhXV1s7+aSU/fu1kUuxgS4MsQ0fRuygw== }
-        engines: { node: '>=14.16' }
-        dependencies:
-            type-fest: 3.12.0
-        dev: false
-
     /ansi-gray@0.1.1:
         resolution: { integrity: sha512-HrgGIZUl8h2EHuZaU9hTR/cU5nhKxpVE1V6kdGsQ8e4zirElJ5fvtfc8N7Q1oq1aatO275i8pUFUCpNWCAnVWw== }
         engines: { node: '>=0.10.0' }
@@ -6064,7 +6057,7 @@ packages:
             postcss: ^8.1.0
         dependencies:
             browserslist: 4.21.9
-            caniuse-lite: 1.0.30001503
+            caniuse-lite: 1.0.30001504
             fraction.js: 4.2.0
             normalize-range: 0.1.2
             picocolors: 1.0.0
@@ -6562,7 +6555,7 @@ packages:
         engines: { node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7 }
         hasBin: true
         dependencies:
-            caniuse-lite: 1.0.30001503
+            caniuse-lite: 1.0.30001504
             electron-to-chromium: 1.4.433
             node-releases: 2.0.12
             update-browserslist-db: 1.0.11(browserslist@4.21.9)
@@ -6675,7 +6668,7 @@ packages:
             minipass-pipeline: 1.2.4
             p-map: 4.0.0
             ssri: 10.0.4
-            tar: 6.1.11
+            tar: 6.1.15
             unique-filename: 3.0.0
         dev: false
 
@@ -6757,8 +6750,8 @@ packages:
         engines: { node: '>=14.16' }
         dev: true
 
-    /caniuse-lite@1.0.30001503:
-        resolution: { integrity: sha512-Sf9NiF+wZxPfzv8Z3iS0rXM1Do+iOy2Lxvib38glFX+08TCYYYGR5fRJXk4d77C4AYwhUjgYgMsMudbh2TqCKw== }
+    /caniuse-lite@1.0.30001504:
+        resolution: { integrity: sha512-5uo7eoOp2mKbWyfMXnGO9rJWOGU8duvzEiYITW+wivukL7yHH4gX9yuRaobu6El4jPxo6jKZfG+N6fB621GD/Q== }
 
     /capital-case@1.0.4:
         resolution: { integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A== }
@@ -7596,10 +7589,6 @@ packages:
         resolution: { integrity: sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q== }
         dev: false
 
-    /dayjs@1.11.7:
-        resolution: { integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ== }
-        dev: false
-
     /dayjs@1.11.8:
         resolution: { integrity: sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ== }
         dev: false
@@ -8362,7 +8351,7 @@ packages:
         engines: { node: '>=10' }
         dependencies:
             cross-spawn: 7.0.3
-            get-stream: 6.0.1
+            get-stream: 6.0.0
             human-signals: 2.1.0
             is-stream: 2.0.0
             merge-stream: 2.0.0
@@ -9276,7 +9265,7 @@ packages:
             foreground-child: 3.1.1
             jackspeak: 2.2.1
             minimatch: 9.0.1
-            minipass: 6.0.2
+            minipass: 5.0.0
             path-scurry: 1.9.2
         dev: false
 
@@ -10031,27 +10020,6 @@ packages:
             wrap-ansi: 7.0.0
         dev: false
 
-    /inquirer@9.1.4:
-        resolution: { integrity: sha512-9hiJxE5gkK/cM2d1mTEnuurGTAoHebbkX0BYl3h7iEg7FYfuNIom+nDfBCSWtvSnoSrWCeBxqqBZu26xdlJlXA== }
-        engines: { node: '>=12.0.0' }
-        dependencies:
-            ansi-escapes: 6.2.0
-            chalk: 5.2.0
-            cli-cursor: 4.0.0
-            cli-width: 4.0.0
-            external-editor: 3.1.0
-            figures: 5.0.0
-            lodash: 4.17.21
-            mute-stream: 0.0.8
-            ora: 6.3.1
-            run-async: 2.4.1
-            rxjs: 7.8.1
-            string-width: 5.1.2
-            strip-ansi: 7.1.0
-            through: 2.3.8
-            wrap-ansi: 8.1.0
-        dev: false
-
     /inquirer@9.2.6:
         resolution: { integrity: sha512-y71l237eJJKS4rl7sQcEUiMhrR0pB/ZnRMMTxLpjJhWL4hdWCT03a6jJnC1w6qIPSRZWEozuieGt3v7XaEJYFw== }
         engines: { node: '>=14.18.0' }
@@ -10664,7 +10632,7 @@ packages:
         resolution: { integrity: sha512-LtxijLLZBduXnHSniy0WMdaHjmQnt3g5sa16W4p0HqukYTTsyTW3GD1q41TyGl5YFXj/5B2U6dlh5FM1LIMgxw== }
         engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
         dependencies:
-            chalk: 4.1.2
+            chalk: 4.1.0
             diff-sequences: 29.4.3
             jest-get-type: 29.4.3
             pretty-format: 29.5.0
@@ -11812,11 +11780,6 @@ packages:
         engines: { node: '>=8' }
         dev: false
 
-    /minipass@6.0.2:
-        resolution: { integrity: sha512-MzWSV5nYVT7mVyWCwn2o7JH13w2TBRmmSqSRCKzTw+lmft9X4z+3wjvs06Tzijo5z4W/kahUCDpRXTF+ZrmF/w== }
-        engines: { node: '>=16 || 14 >=14.17' }
-        dev: false
-
     /minisearch@6.1.0:
         resolution: { integrity: sha512-PNxA/X8pWk+TiqPbsoIYH0GQ5Di7m6326/lwU/S4mlo4wGQddIcf/V//1f9TB0V4j59b57b+HZxt8h3iMROGvg== }
         dev: true
@@ -12112,7 +12075,7 @@ packages:
             npmlog: 6.0.2
             rimraf: 3.0.2
             semver: 7.5.2
-            tar: 6.1.11
+            tar: 6.1.15
             which: 2.0.2
         transitivePeerDependencies:
             - supports-color
@@ -12562,21 +12525,6 @@ packages:
             strip-ansi: 6.0.1
             wcwidth: 1.0.1
 
-    /ora@6.1.2:
-        resolution: { integrity: sha512-EJQ3NiP5Xo94wJXIzAyOtSb0QEIAUu7m8t6UZ9krbz0vAJqr92JpcK/lEXg91q6B9pEGqrykkd2EQplnifDSBw== }
-        engines: { node: ^12.20.0 || ^14.13.1 || >=16.0.0 }
-        dependencies:
-            bl: 5.1.0
-            chalk: 5.2.0
-            cli-cursor: 4.0.0
-            cli-spinners: 2.9.0
-            is-interactive: 2.0.0
-            is-unicode-supported: 1.3.0
-            log-symbols: 5.1.0
-            strip-ansi: 7.1.0
-            wcwidth: 1.0.1
-        dev: false
-
     /ora@6.3.1:
         resolution: { integrity: sha512-ERAyNnZOfqM+Ao3RAvIXkYh5joP220yf59gVe2X/cI6SiCxIdi4c9HZKZD8R6q/RDXEje1THBju6iExiSsgJaQ== }
         engines: { node: ^12.20.0 || ^14.13.1 || >=16.0.0 }
@@ -12766,7 +12714,7 @@ packages:
             got: 12.6.1
             registry-auth-token: 5.0.2
             registry-url: 6.0.1
-            semver: 7.5.2
+            semver: 7.5.1
         dev: true
 
     /pacote@15.2.0:
@@ -12791,7 +12739,7 @@ packages:
             read-package-json-fast: 3.0.2
             sigstore: 1.6.0
             ssri: 10.0.4
-            tar: 6.1.11
+            tar: 6.1.15
         transitivePeerDependencies:
             - bluebird
             - supports-color
@@ -12994,7 +12942,7 @@ packages:
         engines: { node: '>=16 || 14 >=14.17' }
         dependencies:
             lru-cache: 9.1.2
-            minipass: 6.0.2
+            minipass: 5.0.0
         dev: false
 
     /path-to-regexp@0.1.7:
@@ -14298,7 +14246,7 @@ packages:
         resolution: { integrity: sha512-0Ju4+6A8iOnpL/Thra7dZsSlOHYAHIeMxfhWQRI1/VLcT3WDBZKKtQt/QkBOsiIN9ZpuvHE6cGZ0x4glCMmfiA== }
         engines: { node: '>=12' }
         dependencies:
-            semver: 7.5.2
+            semver: 7.5.1
         dev: true
 
     /semver-greatest-satisfied-range@1.1.0:
@@ -14337,6 +14285,7 @@ packages:
         hasBin: true
         dependencies:
             lru-cache: 6.0.0
+        dev: false
 
     /send@0.16.2:
         resolution: { integrity: sha512-E64YFPUssFHEFBvpbbjr44NCLtI1AohxQ8ZSiJjQLskAdKuriYEP6VyGEsRDH8ScozGpkaX1BGvhanqCwkcEZw== }
@@ -14550,8 +14499,8 @@ packages:
         requiresBuild: true
         dev: true
 
-    /simple-git@3.16.0:
-        resolution: { integrity: sha512-zuWYsOLEhbJRWVxpjdiXl6eyAyGo/KzVW+KFhhw9MqEEJttcq+32jTWSGyxTdf9e/YCohxRE+9xpWFj9FdiJNw== }
+    /simple-git@3.19.0:
+        resolution: { integrity: sha512-hyH2p9Ptxjf/xPuL7HfXbpYt9gKhC1yWDh3KYIAYJJePAKV7AEjLN4xhp7lozOdNiaJ9jlVvAbBymVlcS2jRiA== }
         dependencies:
             '@kwsites/file-exists': 1.1.1
             '@kwsites/promise-deferred': 1.1.1
@@ -15195,6 +15144,18 @@ packages:
             yallist: 4.0.0
         dev: false
 
+    /tar@6.1.15:
+        resolution: { integrity: sha512-/zKt9UyngnxIT/EAGYuxaMYgOIJiP81ab9ZfkILq4oNLPFX50qyYmu7jRj9qeXoxmJHjGlbH0+cm2uy1WCs10A== }
+        engines: { node: '>=10' }
+        dependencies:
+            chownr: 2.0.0
+            fs-minipass: 2.1.0
+            minipass: 5.0.0
+            minizlib: 2.1.2
+            mkdirp: 1.0.4
+            yallist: 4.0.0
+        dev: false
+
     /tarn@3.0.2:
         resolution: { integrity: sha512-51LAVKUSZSVfI05vjPESNc5vwqqZpbXCsU+/+wxlOrUjk2SnFTt97v9ZgQrD4YmxYW1Px6w2KjaDitCfkvgxMQ== }
         engines: { node: '>=8.0.0' }
@@ -15491,11 +15452,6 @@ packages:
         resolution: { integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA== }
         engines: { node: '>=12.20' }
         dev: true
-
-    /type-fest@3.12.0:
-        resolution: { integrity: sha512-qj9wWsnFvVEMUDbESiilKeXeHL7FwwiFcogfhfyjmvT968RXSvnl23f1JOClTHYItsi7o501C/7qVllscUP3oA== }
-        engines: { node: '>=14.16' }
-        dev: false
 
     /type-is@1.6.18:
         resolution: { integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g== }
