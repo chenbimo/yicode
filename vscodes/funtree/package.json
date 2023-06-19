@@ -3,7 +3,7 @@
     "displayName": "vscode 侧边栏函数列表插件",
     "description": "monorepo 多仓库 package.json 字段检测与补全工具",
     "publisher": "chensuiyi",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "engines": {
         "vscode": "^1.60.0"
     },
