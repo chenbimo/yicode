@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yite-plugin",
-    "version": "1.0.17",
+    "version": "1.0.18",
     "description": "yite-cli 实验插件",
     "type": "module",
     "exports": {

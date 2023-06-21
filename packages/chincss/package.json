@@ -1,6 +1,6 @@
 {
     "name": "@yicode/chincss",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "中国风 css 资源库",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
