@@ -59,7 +59,7 @@
         "lodash-es": "^4.17.21",
         "luch-request": "^3.1.0",
         "mp-html": "^2.4.2",
-        "pinia": "^2.1.4",
+        "pinia": "^2.0.36",
         "vue": "^3.3.4",
         "vue-i18n": "^9.2.2"
     },
@@ -82,11 +82,10 @@
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
     },
     "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f",
-    "type": "module",
     "author": "chensuiyi <bimostyle@qq.com>",
     "repository": {
         "type": "git",
-        "url": "https://github.com/chenbimo/yicode.git"
+        "url": "https://github.com/yicode-team/yicode.git"
     },
     "homepage": "https://yicode.tech"
 }

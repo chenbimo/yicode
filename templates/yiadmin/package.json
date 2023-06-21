@@ -23,7 +23,7 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "repository": {
         "type": "git",
-        "url": "https://github.com/chenbimo/yicode.git"
+        "url": "https://github.com/yicode-team/yicode.git"
     },
     "homepage": "https://yicode.tech",
     "dependencies": {

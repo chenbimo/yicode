@@ -5,7 +5,7 @@
     "type": "module",
     "repository": {
         "type": "git",
-        "url": "https://github.com/chenbimo/yicode.git"
+        "url": "https://github.com/yicode-team/yicode.git"
     },
     "description": "随易科技（yicode.tech） - 软件开发生态",
     "homepage": "https://yicode.tech",

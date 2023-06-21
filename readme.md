@@ -6,9 +6,9 @@
 
 点个星星，老铁。
 
-[gitee - https://gitee.com/chenbimo/yicode](https://gitee.com/chenbimo/yicode)
+[gitee - https://gitee.com/yicode-team/yicode](https://gitee.com/yicode-team/yicode)
 
-[github - https://github.com/chenbimo/yicode](https://github.com/chenbimo/yicode)
+[github - https://github.com/yicode-team/yicode](https://github.com/yicode-team/yicode)
 
 ## 如何使用？
 

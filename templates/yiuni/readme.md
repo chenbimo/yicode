@@ -6,9 +6,9 @@
 
 ## 开源仓库
 
-[gitee 仓库](https://gitee.com/chenbimo/yicode)
+[gitee 仓库](https://gitee.com/yicode-team/yicode)
 
-[github 仓库](https://github.com/chenbimo/yicode)
+[github 仓库](https://github.com/yicode-team/yicode)
 
 笔者自 `2019` 年开源至今，坚持不懈，默默耕耘。
 
