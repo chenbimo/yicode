@@ -1,5 +1,7 @@
 # vite-plugin-chunk-split
 
+本插件改编自 [vite-plugin-chunk-split](https://github.com/sanyuan0704/vite-plugin-chunk-split)
+
 English | [中文](./README-CN.md)
 
 A vite plugin for better chunk splitting.
@@ -16,37 +18,41 @@ pnpm i vite-plugin-chunk-split -D
 ```
 
 Then you can use it in vite.config.ts:
+
 ```ts
 // vite.config.ts
 import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 
 {
-  plugins: [
-    // ...
-    chunkSplitPlugin()
-  ]
+    plugins: [
+        // ...
+        chunkSplitPlugin()
+    ];
 }
 ```
 
 ## Options
+
 ```ts
 type packageInfo = string | RegExp;
 type Strategy =
-  // split by default
-  | 'default'
-  // all files will be together
-  | 'all-in-one'
-  // unbundle for your source files，vite will generate one chunk for every file
-  | 'unbundle';
+    // split by default
+    | 'default'
+    // all files will be together
+    | 'all-in-one'
+    // unbundle for your source files，vite will generate one chunk for every file
+    | 'unbundle';
 
 export type CustomSplitting = Record<string, packageInfo[]>;
 
 export interface ChunkSplitOptions {
-  strategy?: Strategy;
-  customSplitting?: CustomSplitting;
+    strategy?: Strategy;
+    customSplitting?: CustomSplitting;
 }
 ```
+
 You can use the options to customize your splitting strategy, for example：
+
 ```ts
 // vite.config.ts
 import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
@@ -78,21 +84,22 @@ import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 ```
 
 By the way, you can achieve bundleless by the `unbundle` strategy:
+
 ```ts
 // vite.config.ts
 import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 
 {
-  plugins: [
-    // ...
-    chunkSplitPlugin({
-      strategy: 'unbundle',
-      customSplitting: {
-        // All files in `src/container` will be merged together in `container` chunk
-        'container': [/src\/container/]
-      }
-    })
-  ]
+    plugins: [
+        // ...
+        chunkSplitPlugin({
+            strategy: 'unbundle',
+            customSplitting: {
+                // All files in `src/container` will be merged together in `container` chunk
+                container: [/src\/container/]
+            }
+        })
+    ];
 }
 ```
 
