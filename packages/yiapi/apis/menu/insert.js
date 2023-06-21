@@ -32,7 +32,7 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let menuModel = fastify.table.table('sys_menu');
+                let menuModel = fastify.mysql.table('sys_menu');
 
                 let parentData = undefined;
 
