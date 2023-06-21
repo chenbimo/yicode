@@ -16,6 +16,9 @@ let monolageConfig = {
             description: 'monorepo 多仓库 package.json 字段检测与补全工具',
             // 依赖相关的字段不会被覆盖
             dependencies: []
+        },
+        '@yicode-template/yiuni': {
+            type: 'commonjs'
         }
     }
 };
