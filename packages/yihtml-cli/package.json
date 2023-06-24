@@ -38,7 +38,7 @@
         "browser-sync": "^2.29.3",
         "browserify": "^17.0.0",
         "core-js": "^3.31.0",
-        "fs-extra": "^10.1.0",
+        "fs-extra": "^11.1.1",
         "gulp": "^4.0.2",
         "gulp-babel": "^8.0.0",
         "gulp-cli": "^2.3.0",
@@ -51,7 +51,7 @@
         "gulp-uglify-es": "^3.0.0",
         "lodash": "^4.17.21",
         "postcss": "^8.4.24",
-        "sass": "^1.63.4",
+        "sass": "^1.63.6",
         "through2": "^4.0.2"
     },
     "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f",
