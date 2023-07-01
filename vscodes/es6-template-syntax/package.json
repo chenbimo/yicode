@@ -2,7 +2,7 @@
     "name": "@yicode-vscode/es6-template-syntax",
     "displayName": "es6-template-syntax",
     "description": "monorepo 多仓库 package.json 字段检测与补全工具",
-    "version": "0.1.14",
+    "version": "0.1.15",
     "publisher": "chensuiyi",
     "engines": {
         "vscode": "^1.78.0"
