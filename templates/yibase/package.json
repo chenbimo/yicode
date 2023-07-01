@@ -24,7 +24,7 @@
         "readme.md"
     ],
     "dependencies": {
-        "@arco-design/web-vue": "^2.47.1",
+        "@arco-design/web-vue": "^2.48.0",
         "@yicode/yidash": "workspace:^",
         "@yicode/yite-cli": "workspace:^",
         "axios": "^1.4.0",
@@ -37,7 +37,7 @@
         "vue-router": "^4.2.2"
     },
     "devDependencies": {
-        "lint-staged": "^13.2.2",
+        "lint-staged": "^13.2.3",
         "prettier": "^2.8.8",
         "simple-git-hooks": "^2.8.1"
     },
