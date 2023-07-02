@@ -276,7 +276,8 @@ export const appConfigSchema = {
         'redis',
         'jwt',
         'mail',
-        'upload'
+        'upload',
+        'rate'
     ],
     additionalProperties: false
 };
