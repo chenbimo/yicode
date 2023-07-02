@@ -105,6 +105,9 @@ importers:
             '@fastify/multipart':
                 specifier: ^7.7.0
                 version: 7.7.0
+            '@fastify/rate-limit':
+                specifier: ^8.0.1
+                version: 8.0.1
             '@fastify/redis':
                 specifier: ^6.1.1
                 version: 6.1.1
@@ -159,6 +162,9 @@ importers:
             got:
                 specifier: ^13.0.0
                 version: 13.0.0
+            http-graceful-shutdown:
+                specifier: ^3.1.13
+                version: 3.1.13
             inquirer:
                 specifier: ^9.2.7
                 version: 9.2.7
@@ -3354,6 +3360,14 @@ packages:
             - supports-color
         dev: false
 
+    /@fastify/rate-limit@8.0.1:
+        resolution: { integrity: sha512-sKztox9tAhKYJadS7yD7mBamNs8sLP/OlBjX6prGzlL3+q4cxPE2UafW8QF5s4+BuUyssQ7FabSlgieqyk4JZg== }
+        dependencies:
+            fastify-plugin: 4.5.0
+            ms: 2.1.3
+            tiny-lru: 11.0.1
+        dev: false
+
     /@fastify/redis@6.1.1:
         resolution: { integrity: sha512-NZpHK+d3uJJ+w1iHx5n1woFvrHhhG52XjM9byWvU81KSsQpO0N/OikgQvz83frLV7UD4UQtTUgPvVbLxW0X81w== }
         dependencies:
@@ -6515,7 +6529,7 @@ packages:
         dependencies:
             ansi-align: 3.0.1
             camelcase: 7.0.1
-            chalk: 5.2.0
+            chalk: 5.3.0
             cli-boxes: 3.0.0
             string-width: 5.1.2
             type-fest: 2.19.0
@@ -10053,6 +10067,15 @@ packages:
             statuses: 2.0.1
             toidentifier: 1.0.1
 
+    /http-graceful-shutdown@3.1.13:
+        resolution: { integrity: sha512-Ci5LRufQ8AtrQ1U26AevS8QoMXDOhnAHCJI3eZu1com7mZGHxREmw3dNj85ftpQokQCvak8nI2pnFS8zyM1M+Q== }
+        engines: { node: '>=4.0.0' }
+        dependencies:
+            debug: 4.3.4
+        transitivePeerDependencies:
+            - supports-color
+        dev: false
+
     /http-proxy-agent@5.0.0:
         resolution: { integrity: sha512-n2hY8YdoRE1i7r6M0w9DIw5GgZN0G25P8zLCRQ8rjXtTU3vsNFBI/vWK/UIeE6g5MUUz6avwAPXmL6Fy9D/90w== }
         engines: { node: '>= 6' }
@@ -12997,7 +13020,7 @@ packages:
             got: 12.6.1
             registry-auth-token: 5.0.2
             registry-url: 6.0.1
-            semver: 7.5.1
+            semver: 7.5.3
         dev: true
 
     /pacote@15.2.0:
@@ -14529,7 +14552,7 @@ packages:
         resolution: { integrity: sha512-0Ju4+6A8iOnpL/Thra7dZsSlOHYAHIeMxfhWQRI1/VLcT3WDBZKKtQt/QkBOsiIN9ZpuvHE6cGZ0x4glCMmfiA== }
         engines: { node: '>=12' }
         dependencies:
-            semver: 7.5.1
+            semver: 7.5.3
         dev: true
 
     /semver-greatest-satisfied-range@1.1.0:
@@ -14560,7 +14583,6 @@ packages:
         hasBin: true
         dependencies:
             lru-cache: 6.0.0
-        dev: false
 
     /send@0.16.2:
         resolution: { integrity: sha512-E64YFPUssFHEFBvpbbjr44NCLtI1AohxQ8ZSiJjQLskAdKuriYEP6VyGEsRDH8ScozGpkaX1BGvhanqCwkcEZw== }
@@ -16103,7 +16125,7 @@ packages:
             is-yarn-global: 0.4.1
             latest-version: 7.0.0
             pupa: 3.1.0
-            semver: 7.5.1
+            semver: 7.5.3
             semver-diff: 4.0.0
             xdg-basedir: 5.1.0
         dev: true

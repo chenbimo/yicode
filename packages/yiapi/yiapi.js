@@ -7,6 +7,7 @@ import localize from 'ajv-i18n';
 import { forOwn as _forOwn } from 'lodash-es';
 import fg from 'fast-glob';
 import fastifyStatic from '@fastify/static';
+import gracefulShutdown from 'http-graceful-shutdown';
 
 // 工具函数
 import * as utils from './utils/index.js';
@@ -197,6 +198,7 @@ thirdPluginsFiles.forEach((file) => {
     });
 });
 
+// 初始化服务
 function initServer() {
     return new Promise(async (resolve, reject) => {
         // 启动服务！
@@ -215,6 +217,13 @@ function initServer() {
                 throw err;
             } else {
                 return resolve(fastify);
+            }
+        });
+
+        // 监听服务停止
+        gracefulShutdown(fastify.server, {
+            finally: function () {
+                fastify.log.warn('服务已停止');
             }
         });
     });
