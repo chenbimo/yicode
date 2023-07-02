@@ -64,6 +64,9 @@ fastify.setErrorHandler(function (err, req, res) {
     if (err.statusCode >= 500) {
         fastify.log.error(err);
         // 发送错误响应
+    } else if (err.statusCode === 429) {
+        fastify.log.warn(err);
+        err.message = '请求过快，请降低请求频率。';
     } else if (err.statusCode >= 400) {
         fastify.log.warn(err);
     } else {
@@ -71,7 +74,11 @@ fastify.setErrorHandler(function (err, req, res) {
     }
 
     // 发送错误响应
-    res.status(200).send({ code: 1, msg: err.message, symbol: 'GLOBAL_ERROR' });
+    res.status(200).send({
+        code: 1,
+        msg: err.message,
+        symbol: 'GLOBAL_ERROR'
+    });
 });
 
 // 处理未找到路由
