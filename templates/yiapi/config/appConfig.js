@@ -65,6 +65,9 @@ let appConfig = {
     },
     upload: {
         dir: '../static/images/'
+    },
+    rate: {
+        allowList: []
     }
 };
 

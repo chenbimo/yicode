@@ -65,7 +65,6 @@ fastify.setErrorHandler(function (err, req, res) {
         fastify.log.error(err);
         // 发送错误响应
     } else if (err.statusCode === 429) {
-        fastify.log.warn(err);
         err.message = '请求过快，请降低请求频率。';
     } else if (err.statusCode >= 400) {
         fastify.log.warn(err);
