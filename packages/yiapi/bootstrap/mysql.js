@@ -24,7 +24,14 @@ async function plugin(fastify, options) {
             }
         });
 
-        fastify.decorate('mysql', mysql);
+        fastify.decorate('mysql', mysql).addHook('onClose', (instance, done) => {
+            if (instance.knex === handler) {
+                instance.knex.destroy();
+                delete instance.knex;
+            }
+
+            done();
+        });
     } catch (err) {
         fastify.log.error(err);
     }
