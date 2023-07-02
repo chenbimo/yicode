@@ -257,8 +257,7 @@ export const appConfigSchema = {
                     type: 'array',
                     title: '白名单'
                 }
-            },
-            required: ['dir']
+            }
         }
     },
     required: [
