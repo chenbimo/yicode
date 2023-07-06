@@ -72,39 +72,20 @@ export function fnCloneAny(data) {
 
 // 获取接口目录名称
 export function getApiDirName(file) {
-    let apiDirName = '';
-    if (file.indexOf('addons') === -1) {
-        // 如果不是插件接口
-        apiDirName = file //
-            .replace(/\\+/gi, '/')
-            .replace('/_meta.js', '')
-            .replace(/.+\/apis/, '');
-    } else {
-        // 如果是插件接口
-        apiDirName = file //
-            .replace(/\\+/gi, '/')
-            .replace('/_meta.js', '')
-            .replace(/.+\/addons/, '')
-            .replace('/apis', '');
-    }
+    // 如果不是插件接口
+    const apiDirName = file //
+        .replace(/\\+/gi, '/')
+        .replace('/_meta.js', '')
+        .replace(/.+\/apis/, '');
     return apiDirName;
 }
 
 // 获取接口文件名称
 export function getApiFileName(file) {
-    let apiFileName = '';
-    if (file.indexOf('addons') === -1) {
-        apiFileName = file //
-            .replace(/\\+/, '/')
-            .replace('.js', '')
-            .replace(/.+\/apis/, '');
-    } else {
-        apiFileName = file //
-            .replace(/\\+/, '/')
-            .replace('.js', '')
-            .replace(/.+\/addons/, '')
-            .replace('/apis', '');
-    }
+    const apiFileName = file //
+        .replace(/\\+/, '/')
+        .replace('.js', '')
+        .replace(/.+\/apis/, '');
     return apiFileName;
 }
 
@@ -112,9 +93,8 @@ export function getApiFileName(file) {
 export function fnAllApiFiles() {
     let coreApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
     let appApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
-    let thirdApiFiles = fg.sync(['./addons/*/apis/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
 
-    let allApiFiles = _concat(coreApiFiles, appApiFiles, thirdApiFiles);
+    let allApiFiles = _concat(coreApiFiles, appApiFiles);
 
     return allApiFiles;
 }
@@ -123,9 +103,8 @@ export function fnAllApiFiles() {
 export async function fnAllApiMeta() {
     let coreApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
     let appApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
-    let thirdApiMetaFiles = fg.sync('./addons/*/apis/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
 
-    let allApiMetaFiles = _concat(coreApiMetaFiles, appApiMetaFiles, thirdApiMetaFiles);
+    let allApiMetaFiles = _concat(coreApiMetaFiles, appApiMetaFiles);
 
     return allApiMetaFiles;
 }
@@ -137,15 +116,7 @@ export async function fnApiInfo(metaUrl) {
 
     const pureFileName = path.basename(_filename, '.js');
 
-    let parentDirName = '';
-    if (_dirname.indexOf('addons') === -1) {
-        parentDirName = _dirname.replace(/\\+/gi, '/').replace(/.+\/apis/, '');
-    } else {
-        parentDirName = _dirname
-            .replace(/\\+/gi, '/')
-            .replace(/.+\/addons/, '')
-            .replace('/apis', '');
-    }
+    let parentDirName = _dirname.replace(/\\+/gi, '/').replace(/.+\/apis/, '');
 
     let metaFile = path.dirname(metaUrl) + '/_meta.js';
 

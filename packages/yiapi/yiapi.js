@@ -23,14 +23,9 @@ import { schemaType } from './config/schemaType.js';
 import { sysConfig } from './config/sysConfig.js';
 import { tableField } from './config/tableField.js';
 
-// 表同步
-import { syncDatabase } from './scripts/syncDatabase.js';
-
 // 确保关键目录存在
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'addons'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'config'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'tables'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
 fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
@@ -153,57 +148,6 @@ fastify.register(autoLoad, {
     }
 });
 
-// 加载三方接口
-let thirdApiFiles = fg.sync(['./addons/*/apis/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
-let prefixEnum = {};
-for (let i = 0; i < thirdApiFiles.length; i++) {
-    let file = thirdApiFiles[i];
-    // let prefix = path.basename(path.dirname(path.dirname(file)));
-
-    let prefix = path
-        .dirname(file)
-        .replace(/\\+/gi, '/')
-        .replace(/.+\/addons/, '')
-        .replace('/apis', '');
-
-    prefixEnum[prefix] = path.dirname(file);
-}
-
-_forOwn(prefixEnum, (apis, prefix) => {
-    fastify.register(autoLoad, {
-        dir: apis,
-        options: {
-            prefix: prefix
-        },
-        matchFilter: (path) => {
-            return path.endsWith('.js') === true;
-        },
-        ignorePattern: /^[_.]/
-    });
-});
-
-// 加载用户插件
-// fastify.register(autoLoad, {
-//     dir: path.join(sysConfig.appDir, 'plugins'),
-//     matchFilter: (path) => {
-//         return path.endsWith('.js') === true;
-//     },
-//     ignorePattern: /^[_.]/
-// });
-
-// 加载三方插件
-let thirdPluginsFiles = fg.sync(['./addons/*/plugins/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
-
-thirdPluginsFiles.forEach((file) => {
-    fastify.register(autoLoad, {
-        dir: path.dirname(file),
-        matchFilter: (path) => {
-            return path.endsWith('.js') === true;
-        },
-        ignorePattern: /^[_.]/
-    });
-});
-
 // 初始化服务
 function initServer() {
     return new Promise(async (resolve, reject) => {
@@ -249,7 +193,6 @@ export {
     schemaField,
     schemaType,
     sysConfig,
-    tableField,
+    tableField
     // 插件
-    syncDatabase
 };
