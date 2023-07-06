@@ -34,11 +34,11 @@
         "store2": "^2.14.2",
         "vue": "^3.3.4",
         "vue-i18n": "^9.2.2",
-        "vue-router": "^4.2.2"
+        "vue-router": "^4.2.3"
     },
     "devDependencies": {
         "lint-staged": "^13.2.3",
-        "prettier": "^2.8.8",
+        "prettier": "^3.0.0",
         "simple-git-hooks": "^2.8.1"
     },
     "simple-git-hooks": {

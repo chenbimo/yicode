@@ -31,7 +31,7 @@
     "devDependencies": {
         "@yicode-tool/monolage": "workspace:^",
         "lint-staged": "^13.2.3",
-        "prettier": "^2.8.8",
+        "prettier": "^3.0.0",
         "simple-git-hooks": "^2.8.1"
     },
     "simple-git-hooks": {
