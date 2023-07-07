@@ -5,7 +5,7 @@ const _convertTime = (obj) => {
     try {
         let item = {};
         for (let key in obj) {
-            if (obj.hasOwnProperty(prop)) {
+            if (obj.hasOwnProperty(key)) {
                 let value = obj[key];
                 if (key.endsWith('_at')) {
                     let key1 = key.replace('_at', '_at1');
