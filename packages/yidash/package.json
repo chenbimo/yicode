@@ -30,6 +30,7 @@
     "dependencies": {
         "blueimp-md5": "^2.19.0",
         "copy-to-clipboard": "^3.3.3",
+        "date-fns": "^2.30.0",
         "lodash-es": "^4.17.21",
         "merge-anything": "^5.1.7",
         "nanoid": "^4.0.2",

@@ -5,6 +5,7 @@ export { yidash_browser_openFullscreen } from './lib/yidash_browser_openFullscre
 export { yidash_crypto_md5 } from './lib/yidash_crypto_md5.js';
 export { yidash_crypty_uuid } from './lib/yidash_crypty_uuid.js';
 export { yidash_datetime_leftTime } from './lib/yidash_datetime_leftTime.js';
+export { yidash_datetime_relativeTime } from './lib/yidash_datetime_relativeTime.js';
 export { yidash_json_merge } from './lib/yidash_json_merge.js';
 export { yidash_number_thousands } from './lib/yidash_number_thousands.js';
 export { yidash_number_validNumber } from './lib/yidash_number_validNumber.js';

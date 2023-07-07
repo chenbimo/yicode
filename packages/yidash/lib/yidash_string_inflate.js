@@ -1,5 +1,5 @@
 import pako from 'pako';
-// 解压
+// zip解压
 export function yidash_string_inflate(b64Data) {
     const strData = atob(b64Data);
     const charData = strData.split('').map(function (x) {
