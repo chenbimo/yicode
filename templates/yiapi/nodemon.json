@@ -2,7 +2,7 @@
     "verbose": true,
     "ignore": ["*.test.js", "**/fixtures/*", "**/node_modules/**/*", "**/logs/*", "**/tables/*"],
     "execMap": {
-        "js": "node --experimental-json-modules --unhandled-rejections=strict yiapi.js"
+        "js": "node yiapi.js"
     },
     "env": {
         "NODE_ENV": "development"
