@@ -99,6 +99,14 @@ fastify.get('/', function (req, res) {
     });
 });
 
+// 同步数据库
+fastify.register(autoLoad, {
+    dir: path.join(sysConfig.yiapiDir, 'plugins'),
+    matchFilter: (path) => {
+        return path === '/database.js';
+    }
+});
+
 // 路由映射列表
 // fastify.register(autoLoad, {
 //     dir: path.join(sysConfig.yiapiDir, 'plugins'),

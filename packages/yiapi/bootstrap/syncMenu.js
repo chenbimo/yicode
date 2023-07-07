@@ -20,7 +20,7 @@ let menuFileNew = [];
 
 // 菜单配置
 const menuConfig = {
-    '/home': {
+    '/internal/home': {
         name: '首页数据',
         describe: '首页数据',
         sort: 0,
@@ -33,19 +33,19 @@ const menuConfig = {
             }
         }
     },
-    '/people': {
+    '/internal/people': {
         name: '人员数据',
         describe: '人员数据',
         sort: 1000,
         is_system: 1,
         children: {
-            '/user': {
+            '/internal/user': {
                 name: '用户',
                 describe: '用户列表',
                 is_system: 1,
                 sort: 1
             },
-            '/admin': {
+            '/internal/admin': {
                 name: '管理员',
                 describe: '管理员列表',
                 is_system: 1,
@@ -53,36 +53,36 @@ const menuConfig = {
             }
         }
     },
-    '/permission': {
+    '/internal/permission': {
         name: '权限数据',
         describe: '权限数据',
         sort: 1001,
         children: {
-            '/menu': {
+            '/internal/menu': {
                 name: '菜单列表',
                 describe: '菜单列表',
                 is_system: 1,
                 sort: 1
             },
-            '/api': {
+            '/internal/api': {
                 name: '接口列表',
                 describe: '接口列表',
                 is_system: 1,
                 sort: 2
             },
-            '/dictCategory': {
+            '/internal/dictCategory': {
                 name: '字典分类',
                 describe: '字典列表',
                 is_system: 1,
                 sort: 3
             },
-            '/dict': {
+            '/internal/dict': {
                 name: '字典管理',
                 describe: '字典列表',
                 is_system: 1,
                 sort: 4
             },
-            '/role': {
+            '/internal/role': {
                 name: '角色管理',
                 describe: '角色列表',
                 is_system: 1,
@@ -90,18 +90,18 @@ const menuConfig = {
             }
         }
     },
-    '/setup': {
+    '/internal/setup': {
         name: '配置数据',
         describe: '配置数据',
         sort: 1002,
         children: {
-            '/app-config': {
+            '/internal/app-config': {
                 name: '项目配置',
                 describe: '项目配置',
                 is_system: 1,
                 sort: 1
             },
-            '/table-config': {
+            '/internal/table-config': {
                 name: '数据库表',
                 describe: '数据库表',
                 is_system: 1,
@@ -109,18 +109,18 @@ const menuConfig = {
             }
         }
     },
-    '/log': {
+    '/internal/log': {
         name: '日志数据',
         describe: '日志数据',
         sort: 1002,
         children: {
-            '/login-log': {
+            '/internal/login-log': {
                 name: '登录日志',
                 describe: '邮件日志',
                 is_system: 1,
                 sort: 1
             },
-            '/mail-log': {
+            '/internal/mail-log': {
                 name: '邮件日志',
                 describe: '邮件日志',
                 is_system: 1,
