@@ -86,7 +86,7 @@ let $Method = {
         $Storage.clearAll();
         $GlobalData.token = '';
         $GlobalData.userData = {};
-        $Router.push('/login');
+        $Router.push('/internal/login');
     },
     // 点击菜单项
     onMenuItemClick(id) {

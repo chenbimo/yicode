@@ -30,7 +30,7 @@ $Http.interceptors.response.use(
             return Promise.resolve(res.data);
         }
         if (res.data.symbol === 'NOT_LOGIN') {
-            location.href = location.origin + '/#/login';
+            location.href = location.origin + '/#/internal/login';
         }
         return Promise.reject(res.data);
     },
