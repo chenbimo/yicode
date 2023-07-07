@@ -22,7 +22,7 @@ export const apiSchema = {
                 title: '菜单ID组',
                 type: 'array',
                 minItems: 0,
-                maxItems: 1000,
+                maxItems: 10000,
                 items: {
                     type: 'number'
                 }
@@ -31,7 +31,7 @@ export const apiSchema = {
                 title: '接口ID组',
                 type: 'array',
                 minItems: 0,
-                maxItems: 1000,
+                maxItems: 10000,
                 items: {
                     type: 'number'
                 }
@@ -49,6 +49,16 @@ export default async function (fastify, opts) {
                 let roleModel = fastify.mysql //
                     .table('sys_role')
                     .modify(function (queryBuilder) {});
+
+                let _result = await roleModel.clone().where('name', req.body.name).orWhere('code', req.body.code).first();
+
+                // 编码存在且 id 不等于当前角色
+                if (_result && _result.id !== req.body.id) {
+                    return {
+                        ...codeConfig.INSERT_FAIL,
+                        msg: '角色名称或编码已存在'
+                    };
+                }
 
                 // 需要更新的数据
                 let data = {

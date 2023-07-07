@@ -48,7 +48,7 @@ export default async function (fastify, opts) {
                 let result = await roleModel.clone().delete();
 
                 // 生成新的权限
-                await fastify.cacheRoleData('file');
+                await fastify.cacheRoleData();
 
                 return {
                     ...codeConfig.DELETE_SUCCESS,

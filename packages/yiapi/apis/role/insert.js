@@ -16,7 +16,25 @@ export const apiSchema = {
         properties: {
             code: fnSchema(schemaField.code, '角色代号'),
             name: fnSchema(null, '角色名称', 'string', 1, 20),
-            describe: fnSchema(schemaField.describe, '角色描述')
+            describe: fnSchema(schemaField.describe, '角色描述'),
+            menu_ids: {
+                title: '菜单ID组',
+                type: 'array',
+                minItems: 0,
+                maxItems: 10000,
+                items: {
+                    type: 'number'
+                }
+            },
+            api_ids: {
+                title: '接口ID组',
+                type: 'array',
+                minItems: 0,
+                maxItems: 10000,
+                items: {
+                    type: 'number'
+                }
+            }
         },
         required: ['name', 'code']
     }
@@ -30,22 +48,25 @@ export default async function (fastify, opts) {
                 let roleModel = fastify.mysql //
                     .table('sys_role')
                     .modify(function (queryBuilder) {});
-                let _result = await roleModel.clone().where('name', req.body.name).first();
-                if (_result !== undefined) {
+
+                let _result = await roleModel.clone().where('name', req.body.name).orWhere('code', req.body.code).first();
+                if (_result) {
                     return {
-                        ...codeConfig.FAIL,
-                        msg: '角色已存在'
+                        ...codeConfig.INSERT_FAIL,
+                        msg: '角色名称或编码已存在'
                     };
                 }
 
                 let data = {
                     code: req.body.code,
                     name: req.body.name,
-                    describe: req.body.describe
+                    describe: req.body.describe,
+                    menu_ids: req.body.menu_ids.join(','),
+                    api_ids: req.body.api_ids.join(',')
                 };
                 let result = await roleModel.clone().insert(fnClearInsertData(data));
 
-                await fastify.cacheRoleData('file');
+                await fastify.cacheRoleData();
 
                 return {
                     ...codeConfig.INSERT_SUCCESS,
