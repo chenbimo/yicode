@@ -29,7 +29,7 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
         "rollup": "^3.26.2",
-        "vite": "^4.4.0"
+        "vite": "^4.4.1"
     },
     "dependencies": {
         "es-module-lexer": "^1.3.0",
