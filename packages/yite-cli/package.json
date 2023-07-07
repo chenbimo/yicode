@@ -160,7 +160,7 @@
         "unplugin-auto-import": "^0.16.6",
         "unplugin-icons": "^0.16.3",
         "unplugin-vue-components": "^0.25.1",
-        "vite": "^4.4.1",
+        "vite": "^4.4.2",
         "vite-plugin-vue-devtools": "^0.4.14",
         "vue-i18n": "^9.2.2"
     },

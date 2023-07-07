@@ -16,7 +16,7 @@
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^4.2.3",
-        "vite": "^4.4.1"
+        "vite": "^4.4.2"
     },
     "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f",
     "author": "chensuiyi <bimostyle@qq.com>",
