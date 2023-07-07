@@ -1,6 +1,6 @@
 <template>
     <a-layout class="layout-default">
-        <a-layout-sider class="layout-sider" :collapsed="$Data.collapsed" collapsible hide-trigger>
+        <a-layout-sider class="layout-sider" :collapsed="$Data.collapsed" width="240px" collapsible hide-trigger>
             <div class="info-area">
                 <div class="logo bg-contain" :style="{ backgroundImage: 'url(' + utilInternalAssets('logo.png') + ')' }"></div>
                 <div class="name">{{ $GlobalData.appConfig.name }}后台</div>
