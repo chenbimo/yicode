@@ -148,7 +148,7 @@ let $Method = {
                     limit: $Data.pagination.limit
                 }
             });
-            $Data.tableData = yidash_tree_array2Tree(_.sortBy(utilCoverRelativeTime(res.data.rows), 'sort'));
+            $Data.tableData = yidash_tree_array2Tree(_.sortBy(yidash_datetime_relativeTime(res.data.rows), 'sort'));
         } catch (err) {
             Message.error({
                 content: err.msg || err

@@ -213,6 +213,9 @@ importers:
             copy-to-clipboard:
                 specifier: ^3.3.3
                 version: 3.3.3
+            date-fns:
+                specifier: ^2.30.0
+                version: 2.30.0
             lodash-es:
                 specifier: ^4.17.21
                 version: 4.17.21
@@ -4125,6 +4128,7 @@ packages:
         engines: { node: '>= 10' }
         cpu: [arm64]
         os: [linux]
+        libc: [glibc]
         requiresBuild: true
         dev: false
         optional: true
@@ -4134,6 +4138,7 @@ packages:
         engines: { node: '>= 10' }
         cpu: [arm64]
         os: [linux]
+        libc: [musl]
         requiresBuild: true
         dev: false
         optional: true
@@ -4143,6 +4148,7 @@ packages:
         engines: { node: '>= 10' }
         cpu: [x64]
         os: [linux]
+        libc: [glibc]
         requiresBuild: true
         dev: false
         optional: true
@@ -4152,6 +4158,7 @@ packages:
         engines: { node: '>= 10' }
         cpu: [x64]
         os: [linux]
+        libc: [musl]
         requiresBuild: true
         dev: false
         optional: true

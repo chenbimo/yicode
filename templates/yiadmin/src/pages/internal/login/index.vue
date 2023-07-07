@@ -1,16 +1,16 @@
 <template>
-    <div class="page-login" :style="{ backgroundImage: 'url(' + utilGetAssets('login-back.png') + ')' }">
+    <div class="page-login" :style="{ backgroundImage: 'url(' + utilInternalAssets('login-back.png') + ')' }">
         <!-- 用于防止浏览器自动填充密码 -->
         <input type="password" clearable hidden autocomplete="new-password" style="display: none" />
         <div class="form-area">
             <div class="login-panel">
                 <div class="left-media">
-                    <img class="img" :src="utilGetAssets('login-left-image.png')" />
+                    <img class="img" :src="utilInternalAssets('login-left-image.png')" />
                 </div>
                 <div class="right-content">
                     <div class="right-content-wrapper">
                         <div class="site-logo">
-                            <img class="img" :src="utilGetAssets('logo.png')" />
+                            <img class="img" :src="utilInternalAssets('logo.png')" />
                         </div>
                         <div class="site-title">{{ $GlobalData?.appConfig?.name }}后台管理系统</div>
                         <div class="form-panel">

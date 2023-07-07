@@ -135,7 +135,7 @@ let $Method = {
                     limit: $Data.pagination.limit
                 }
             });
-            $Data.tableData = utilCoverRelativeTime(res.data.rows);
+            $Data.tableData = yidash_datetime_relativeTime(res.data.rows);
             $Data.pagination.total = res.data.total;
         } catch (err) {
             console.log('🚀 ~ file: index.vue:122 ~ apiSelectData ~ err:', err);

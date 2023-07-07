@@ -61,7 +61,7 @@ let $Method = {
                 }
             });
 
-            $Data.tableData = yidash_tree_array2Tree(_.sortBy(utilCoverRelativeTime(res.data.rows), 'sort'));
+            $Data.tableData = yidash_tree_array2Tree(_.sortBy(yidash_datetime_relativeTime(res.data.rows), 'sort'));
         } catch (err) {}
     }
 };
