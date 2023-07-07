@@ -26,7 +26,6 @@
                                 <a-button>操作<icon-down /></a-button>
                                 <template #content>
                                     <a-doption value="updateData"><icon-edit />编辑</a-doption>
-                                    <a-doption value="permissionData"><icon-branch />权限</a-doption>
                                     <a-doption value="deleteData"> <icon-delete />删除</a-doption>
                                 </template>
                             </a-dropdown>
@@ -44,16 +43,12 @@
 
         <!-- 编辑数据抽屉 -->
         <editDataDrawer v-if="$Data.isShow.editDataDrawer" v-model="$Data.isShow.editDataDrawer" :pageConfig="$Data.pageConfig" :actionType="$Data.actionType" :rowData="$Data.rowData" @success="$Method.fnFreshData()"></editDataDrawer>
-
-        <!-- 编辑权限抽屉 -->
-        <editPermissionDrawer v-if="$Data.isShow.editPermissionDrawer" v-model="$Data.isShow.editPermissionDrawer" :pageConfig="$Data.pageConfig" :rowData="$Data.rowData" @success="$Method.fnFreshData()"></editPermissionDrawer>
     </div>
 </template>
 
 <script setup>
 // 内部集
 import editDataDrawer from './components/editDataDrawer.vue';
-import editPermissionDrawer from './components/editPermissionDrawer.vue';
 
 // 选项集
 defineOptions({
@@ -70,8 +65,7 @@ let $Router = useRouter();
 let $Data = $ref({
     // 页面配置
     pageConfig: {
-        name: '角色',
-        name2: '权限'
+        name: '角色'
     },
     // 显示和隐藏
     isShow: {
@@ -112,12 +106,6 @@ let $Method = {
         // 删除数据
         if ($Data.actionType === 'deleteData') {
             $Data.isShow.deleteDataDialog = true;
-            return;
-        }
-
-        // 设置权限
-        if ($Data.actionType === 'permissionData') {
-            $Data.isShow.editPermissionDrawer = true;
             return;
         }
     },

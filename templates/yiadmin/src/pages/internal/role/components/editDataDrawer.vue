@@ -1,21 +1,37 @@
 <template>
-    <a-drawer :width="$GlobalData.drawerWidth" :visible="$Data.isShow.editDataDrawer" unmountOnClose @cancel="$Method.onCloseDrawer" @ok="$Method.apiEditNavigation">
+    <a-drawer width="600px" :visible="$Data.isShow.editDataDrawer" unmountOnClose @cancel="$Method.onCloseDrawer" @ok="$Method.apiRoleBindPermission">
         <template #title>
             <template v-if="$Prop.actionType === 'insertData'">{{ `添加${$Prop.pageConfig.name}` }}</template>
             <template v-if="$Prop.actionType === 'updateData'">{{ `编辑${$Prop.pageConfig.name}` }}</template>
         </template>
         <div class="bodyer">
-            <a-form :model="$Data.formData" layout="vertical">
-                <a-form-item field="name" label="角色名称">
-                    <a-input v-model="$Data.formData.name" placeholder="请输入角色名称..." />
-                </a-form-item>
-                <a-form-item field="link" label="菜单权限">
-                    <a-input v-model="$Data.formData.link" placeholder="请输入菜单权限..." />
-                </a-form-item>
-                <a-form-item field="describe" label="接口权限">
-                    <a-input v-model="$Data.formData.describe" placeholder="请输入接口权限..." />
-                </a-form-item>
-            </a-form>
+            <div class="top">
+                <a-form :model="$Data.formData" layout="horizontal" label-align="left" auto-label-width>
+                    <a-form-item field="code" label="角色编码">
+                        <a-input v-model="$Data.formData.code" placeholder="请输入角色编码" />
+                    </a-form-item>
+                    <a-form-item field="name" label="角色名称">
+                        <a-input v-model="$Data.formData.name" placeholder="请输入角色名称" />
+                    </a-form-item>
+                    <a-form-item field="describe" label="角色描述">
+                        <a-input v-model="$Data.formData.describe" placeholder="请输入角色描述" />
+                    </a-form-item>
+                </a-form>
+            </div>
+            <div class="bottom">
+                <div class="left">
+                    <div class="panel-name">
+                        <a-tag color="red" size="medium" :default-checked="true">菜单权限</a-tag>
+                    </div>
+                    <a-tree v-model:checked-keys="$Data.menuCheckedKeys" v-model:half-checked-keys="$Data.menuHalfCheckedKeys" :checkable="true" :data="$Data.allMenuTreeData" :field-names="$Data.fieldNames" action-on-node-click="expand" show-line block-node />
+                </div>
+                <div class="right">
+                    <div class="panel-name">
+                        <a-tag color="red" size="medium" :default-checked="true">接口权限</a-tag>
+                    </div>
+                    <a-tree v-model:checked-keys="$Data.apiCheckedKeys" v-model:half-checked-keys="$Data.apiHalfCheckedKeys" :checkable="true" :data="$Data.allApiTreeData" :field-names="$Data.fieldNames" action-on-node-click="expand" show-line block-node />
+                </div>
+            </div>
         </div>
     </a-drawer>
 </template>
@@ -42,10 +58,6 @@ let $Prop = defineProps({
     rowData: {
         type: Object,
         default: {}
-    },
-    categoryItem: {
-        type: Object,
-        default: {}
     }
 });
 
@@ -60,26 +72,48 @@ let $Data = $ref({
     },
     // 表单数据
     formData: {
-        pid: '',
         name: '',
-        link: '',
-        sort: 1,
+        code: '',
         describe: ''
     },
-    menuData: [],
-    menuTree: [],
-    apiData: [],
-    apiTree: []
+    fieldNames: {
+        key: 'id',
+        title: 'name'
+    },
+    // 菜单数据
+    allMenuTableData: [],
+    allMenuTreeData: [],
+    allMenuDataObject: {},
+    // 接口数据
+    allApiTableData: [],
+    allApiTreeData: [],
+    allApiDataObject: {},
+    // 选中的菜单复选框
+    menuCheckedKeys: [],
+    // 半选的菜单复选框
+    menuHalfCheckedKeys: [],
+    // 选中的接口复选框
+    apiCheckedKeys: [],
+    // 半选的接口复选框
+    apiHalfCheckedKeys: []
 });
 
 // 方法集
 let $Method = {
     async initData() {
         $Data.isShow.editDataDrawer = $Prop.modelValue;
-        $Data.formData.pid = $Prop.categoryItem.id;
-        $Data.formData = _.merge($Data.formData, $Prop.rowData);
-        $Method.apiGetAllApi();
-        $Method.apiGetAllMenu();
+        $Data.formData = Object.assign($Data.formData, $Prop.rowData, {
+            api_ids: $Prop.rowData?.api_ids?.split(',')?.map((id) => Number(id)) || [],
+            menu_ids: $Prop.rowData?.menu_ids?.split(',')?.map((id) => Number(id)) || []
+        });
+        await $Method.apiSelectAllMenuData();
+        await $Method.apiSelectAllApiData();
+        $Data.apiCheckedKeys = $Data.formData.api_ids.filter((id) => {
+            return $Data.allApiDataObject[id]?.is_bool === 1;
+        });
+        $Data.menuCheckedKeys = $Data.formData.menu_ids.filter((id) => {
+            return $Data.allMenuDataObject[id]?.pid !== 0;
+        });
     },
     // 关闭抽屉事件
     onCloseDrawer() {
@@ -88,52 +122,73 @@ let $Method = {
             $Emit('update:modelValue', false);
         }, 300);
     },
-    // 获取所有菜单
-    async apiGetAllMenu() {
+    // 查询所有菜单数据
+    async apiSelectAllMenuData() {
         try {
             let res = await $Http({
                 url: '/menu/selectAll',
                 data: {}
             });
-            $Data.menuData = res.data.rows;
+            let data = res.data.rows.map((item) => {
+                if ($Data.formData.menu_ids.includes(item.id)) {
+                    item.checked = true;
+                } else {
+                    item.checked = false;
+                }
+                return item;
+            });
+            $Data.allMenuTableData = data;
+            $Data.allMenuTreeData = yidash_tree_array2Tree(_.cloneDeep(data));
+            $Data.allMenuDataObject = _.keyBy(data, 'id');
         } catch (err) {
-            console.log('🚀 ~ file: editDataDrawer.vue:90 ~ apiGetAllMenu ~ err:', err);
+            console.log('🚀 ~ file: index.vue:201 ~ apiSelectAllMenuData ~ err', err);
+            Message.error(err.msg || err);
         }
     },
-    // 获取所有接口
-    async apiGetAllApi() {
+    // 查询所有接口数据
+    async apiSelectAllApiData() {
         try {
             let res = await $Http({
                 url: '/api/selectAll',
                 data: {}
             });
-            $Data.apiData = res.data.rows;
+            let data = res.data.rows.map((item) => {
+                if ($Data.formData.api_ids.includes(item.id)) {
+                    item.checked = true;
+                } else {
+                    item.checked = false;
+                }
+                return item;
+            });
+            $Data.allApiTableData = data;
+            $Data.allApiTreeData = yidash_tree_array2Tree(_.cloneDeep(data));
+            $Data.allApiDataObject = _.keyBy(data, 'id');
         } catch (err) {
-            console.log('🚀 ~ file: editDataDrawer.vue:90 ~ apiGetAllMenu ~ err:', err);
+            console.log('🚀 ~ file: index.vue:227 ~ apiSelectAllApiData ~ err', err);
+            Message.error(err.msg || err);
         }
     },
-    // 编辑
-    async apiEditNavigation() {
+    // 绑定角色权限
+    async apiRoleBindPermission() {
         try {
-            if (!$Data.formData.pid) {
-                Message.warning({
-                    content: '请先选择左侧分类'
-                });
-                return;
-            }
             let url = {
-                insertData: '/nav/navigation/insert',
-                updateData: '/nav/navigation/update'
+                insertData: '/role/insert',
+                updateData: '/role/update'
             }[$Prop.actionType];
-            if (!url) {
-                Message.warning({
-                    content: '无效的操作类型'
-                });
-                return;
-            }
+
+            let menuIds = _.concat($Data.menuCheckedKeys, $Data.menuHalfCheckedKeys);
+            let apiIds = _.concat($Data.apiCheckedKeys, $Data.apiHalfCheckedKeys);
+
             let res = await $Http({
                 url: url,
-                data: $Data.formData
+                data: {
+                    ...$Data.formData,
+                    menu_ids: menuIds,
+                    api_ids: apiIds
+                }
+            });
+            Message.success({
+                content: res.msg
             });
             $Method.onCloseDrawer();
             $Emit('success');
@@ -147,3 +202,36 @@ let $Method = {
 
 $Method.initData();
 </script>
+
+<style lang="scss" scoped>
+.bodyer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .top {
+        flex: 0 0 auto;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+    .bottom {
+        display: flex;
+        flex: 1 1 100%;
+        .left {
+            flex: 0 0 40%;
+            border-right: 1px solid #ddd;
+            padding-right: 15px;
+            overflow-y: auto;
+        }
+        .right {
+            flex: 0 0 60%;
+            padding-left: 15px;
+            overflow-y: auto;
+        }
+    }
+
+    .panel-name {
+        margin-bottom: 10px;
+    }
+}
+</style>
