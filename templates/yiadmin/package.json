@@ -5,7 +5,8 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "dev": "yite --command=dev --env-file=development",
-        "build": "yite --command=build"
+        "build": "yite --command=build",
+        "yite:update": "yite --command=update --project-type=yiadmin"
     },
     "main": "./index.js",
     "type": "module",

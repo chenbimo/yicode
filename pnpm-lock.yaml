@@ -690,6 +690,9 @@ importers:
             fs-extra:
                 specifier: ^11.1.1
                 version: 11.1.1
+            got:
+                specifier: ^13.0.0
+                version: 13.0.0
             lodash-es:
                 specifier: ^4.17.21
                 version: 4.17.21
@@ -699,6 +702,9 @@ importers:
             merge-anything:
                 specifier: ^5.1.7
                 version: 5.1.7
+            pacote:
+                specifier: ^15.2.0
+                version: 15.2.0
             portfinder:
                 specifier: ^1.0.32
                 version: 1.0.32
@@ -4128,6 +4134,7 @@ packages:
         engines: { node: '>= 10' }
         cpu: [arm64]
         os: [linux]
+        libc: [glibc]
         requiresBuild: true
         dev: false
         optional: true
@@ -4137,6 +4144,7 @@ packages:
         engines: { node: '>= 10' }
         cpu: [arm64]
         os: [linux]
+        libc: [musl]
         requiresBuild: true
         dev: false
         optional: true
@@ -4146,6 +4154,7 @@ packages:
         engines: { node: '>= 10' }
         cpu: [x64]
         os: [linux]
+        libc: [glibc]
         requiresBuild: true
         dev: false
         optional: true
@@ -4155,6 +4164,7 @@ packages:
         engines: { node: '>= 10' }
         cpu: [x64]
         os: [linux]
+        libc: [musl]
         requiresBuild: true
         dev: false
         optional: true
@@ -4445,7 +4455,6 @@ packages:
 
     /@types/node@18.16.19:
         resolution: { integrity: sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA== }
-        dev: false
 
     /@types/node@20.4.0:
         resolution: { integrity: sha512-jfT7iTf/4kOQ9S7CHV9BIyRaQqHu67mOjsIQBC3BKZvzvUB6zLxEwJ6sBE3ozcvP8kF6Uk5PXN0Q+c0dfhGX0g== }
@@ -4677,7 +4686,7 @@ packages:
             vite: ^4.0.0
             vue: ^3.2.25
         dependencies:
-            vite: 4.4.2(sass@1.63.6)
+            vite: 4.4.2(@types/node@18.16.19)
             vue: 3.3.4
 
     /@vue-macros/common@1.4.0(vue@3.3.4):
@@ -14618,7 +14627,6 @@ packages:
             rollup: 3.26.2
         optionalDependencies:
             fsevents: 2.3.2
-        dev: false
 
     /vite@4.4.2(sass@1.63.6):
         resolution: { integrity: sha512-zUcsJN+UvdSyHhYa277UHhiJ3iq4hUBwHavOpsNUGsTgjBeoBlK8eDt+iT09pBq0h9/knhG/SPrZiM7cGmg7NA== }
@@ -14654,6 +14662,7 @@ packages:
             sass: 1.63.6
         optionalDependencies:
             fsevents: 2.3.2
+        dev: true
 
     /vitepress@1.0.0-beta.5(@algolia/client-search@4.18.0)(search-insights@2.6.0):
         resolution: { integrity: sha512-/RjqqRsSEKkzF6HhK5e5Ij+bZ7ETb9jNCRRgIMm10gJ+ZLC3D1OqkE465lEqCeJUgt2HZ6jmWjDqIBfrJSpv7w== }
