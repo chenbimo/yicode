@@ -10,7 +10,7 @@ import { fnFileProtocolPath, fnGetEnvNames, sysConfig } from './utils.js';
 
 // 命令行参数
 const options = minimist(process.argv.slice(2));
-const docSite = `${colors.green('[ 使用文档请访问网址 ]')} ${colors.blue('https://yicode.tech')}`;
+const docSite = `${colors.green('[ 使用文档请访问网址 ]')} ${colors.white('https://yicode.tech')}`;
 
 if (['dev', 'build', 'update'].includes(options['command']) === false) {
     console.log(`${colors.red('[ 命令错误 ]')} 只能为 dev 或 build，如：--command=dev`);
