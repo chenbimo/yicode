@@ -1,5 +1,5 @@
 <template>
-    <a-drawer width="100vw" :visible="$Data.isShow.editDataDrawer" unmountOnClose @cancel="$Method.onCloseDrawer" @ok="$Method.apiRoleBindPermission">
+    <a-drawer width="600px" :visible="$Data.isShow.editDataDrawer" unmountOnClose @cancel="$Method.onCloseDrawer" @ok="$Method.apiRoleBindPermission">
         <template #title>
             {{ `绑定 [ ${$Prop.rowData.name} ] ${$Prop.pageConfig.name2}` }}
         </template>
