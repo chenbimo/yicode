@@ -258,6 +258,39 @@ export const appConfigSchema = {
                     title: '白名单'
                 }
             }
+        },
+        cron: {
+            title: '定时器',
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    timer: {
+                        title: '定时器',
+                        type: 'string'
+                    },
+                    name: {
+                        title: '定时器名称',
+                        type: 'string'
+                    },
+                    code: {
+                        title: '定时器代号',
+                        type: 'string'
+                    },
+                    maxRuns: {
+                        title: '最大运行次数',
+                        type: 'number'
+                    },
+                    timezone: {
+                        title: '时区',
+                        type: 'string'
+                    },
+                    hander: {
+                        title: '处理函数'
+                    }
+                },
+                required: ['timer', 'handler', 'name', 'code']
+            }
         }
     },
     required: [
@@ -277,7 +310,8 @@ export const appConfigSchema = {
         'jwt',
         'mail',
         'upload',
-        'rate'
+        'rate',
+        'cron'
     ],
     additionalProperties: false
 };

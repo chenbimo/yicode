@@ -86,7 +86,8 @@ const appConfig = mergeAndConcat(
             from_name: '易接口',
             from_email: 'demo@qq.com'
         },
-        rate: {}
+        rate: {},
+        cron: []
     },
     importConfig
 );
