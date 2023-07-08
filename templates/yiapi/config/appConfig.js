@@ -68,7 +68,18 @@ let appConfig = {
     },
     rate: {
         allowList: []
-    }
+    },
+    // 定时处理
+    cron: [
+        // {
+        //     timer: '*/5 * * * * *',
+        //     name: '测试定时器',
+        //     code: 'test',
+        //     handler: (yiapi) => {
+        //         console.log('定时器打印');
+        //     }
+        // }
+    ]
 };
 
 export { appConfig };
