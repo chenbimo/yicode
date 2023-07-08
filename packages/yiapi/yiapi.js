@@ -26,6 +26,7 @@ import { tableField } from './config/tableField.js';
 // 确保关键目录存在
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'config'));
+fs.ensureDirSync(path.resolve(sysConfig.appDir, 'plugins'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
 fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
@@ -126,6 +127,15 @@ fastify.register(autoLoad, {
 // 加载启动插件
 fastify.register(autoLoad, {
     dir: path.join(sysConfig.yiapiDir, 'bootstrap'),
+    matchFilter: (path) => {
+        return path.endsWith('.js') === true;
+    },
+    ignorePattern: /^[_.]/
+});
+
+// 加载用户插件
+fastify.register(autoLoad, {
+    dir: path.join(sysConfig.appDir, 'plugins'),
     matchFilter: (path) => {
         return path.endsWith('.js') === true;
     },
