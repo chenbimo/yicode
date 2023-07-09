@@ -13,7 +13,7 @@ export const apiSchema = {
             category_id: yiapi.utils.fnSchema(yiapi.schemaField.pid, '资讯分类'),
             page: yiapi.utils.fnSchema(yiapi.schemaField.page, '第几页'),
             limit: yiapi.utils.fnSchema(yiapi.schemaField.limit, '每页数量'),
-            keywords: yiapi.utils.fnSchema(yiapi.schemaField.keywords, '搜索关键字')
+            keyword: yiapi.utils.fnSchema(yiapi.schemaField.keyword, '搜索关键字')
         },
         required: ['category_id']
     }
