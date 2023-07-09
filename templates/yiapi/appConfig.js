@@ -1,3 +1,4 @@
+// 默认配置
 let appConfig = {
     // 应用名称
     appName: '易接口',
@@ -115,5 +116,13 @@ let appConfig = {
     // 自定义配置
     custom: {}
 };
+
+// 正式环境配置，仅需填写对应的不同配置
+let buildConfig = {};
+
+// 如果是正式环境，则使用正式环境的配置覆盖默认配置
+if (process.env.NODE_ENV === 'production') {
+    appConfig = Object.assign(appConfig, buildConfig);
+}
 
 export { appConfig };
