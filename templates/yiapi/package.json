@@ -27,8 +27,7 @@
     },
     "dependencies": {
         "@yicode/yiapi": "workspace:*",
-        "cos-nodejs-sdk-v5": "^2.12.1",
-        "got": "^13.0.0"
+        "cos-nodejs-sdk-v5": "^2.12.1"
     },
     "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f"
 }

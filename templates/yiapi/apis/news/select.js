@@ -1,4 +1,5 @@
 import * as yiapi from '@yicode/yiapi';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await yiapi.utils.fnApiInfo(import.meta.url);
 
@@ -10,10 +11,10 @@ export const apiSchema = {
         type: 'object',
         title: '查询资讯列表接口',
         properties: {
-            category_id: yiapi.utils.fnSchema(yiapi.schemaField.pid, '资讯分类'),
-            page: yiapi.utils.fnSchema(yiapi.schemaField.page, '第几页'),
-            limit: yiapi.utils.fnSchema(yiapi.schemaField.limit, '每页数量'),
-            keyword: yiapi.utils.fnSchema(yiapi.schemaField.keyword, '搜索关键字')
+            category_id: metaConfig.schema.category_id,
+            page: metaConfig.schema.page,
+            limit: metaConfig.schema.limit,
+            keyword: metaConfig.schema.keyword
         },
         required: ['category_id']
     }

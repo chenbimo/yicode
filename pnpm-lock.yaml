@@ -799,9 +799,6 @@ importers:
             cos-nodejs-sdk-v5:
                 specifier: ^2.12.1
                 version: 2.12.1
-            got:
-                specifier: ^13.0.0
-                version: 13.0.0
 
     templates/yibase:
         dependencies:
