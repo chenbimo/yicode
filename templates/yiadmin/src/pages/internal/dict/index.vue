@@ -84,7 +84,7 @@ let $Data = $ref({
     },
     pagination: {
         page: 1,
-        limit: 20,
+        limit: 30,
         total: 0
     }
 });
