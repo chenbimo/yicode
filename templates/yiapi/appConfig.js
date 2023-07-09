@@ -1,3 +1,4 @@
+import { merge } from 'lodash-es';
 // 默认配置
 let appConfig = {
     // 应用名称
@@ -122,7 +123,7 @@ let buildConfig = {};
 
 // 如果是正式环境，则使用正式环境的配置覆盖默认配置
 if (process.env.NODE_ENV === 'production') {
-    appConfig = Object.assign(appConfig, buildConfig);
+    appConfig = merge(appConfig, buildConfig);
 }
 
 export { appConfig };
