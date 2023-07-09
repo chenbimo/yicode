@@ -74,7 +74,7 @@ async function fnGetTableData(allTableName) {
             tableDataItem.tableName = tableName;
             tableDataItem.tableComment = tableDataItem.name;
             tableDataItem.tableNewName = null;
-            tableDataItem.tableOldName = tableDataItem.name + '_old';
+            tableDataItem.tableOldName = tableDataItem.tableName + '_old';
             // 使用自带的字段覆盖扩展的字段
             tableDataItem.fields = _merge(appConfig.table[tableName] || {}, tableDataItem.fields);
             // 如果存在表，则创建新表
@@ -193,16 +193,10 @@ async function syncDatabase() {
         // 合并表参数
         for (let i = 0; i < allTableData.length; i++) {
             let tableDataItem = allTableData[i];
-
             // 删除新表
-            if (tableDataItem.tableNewName) {
-                await trx.schema.dropTableIfExists(tableDataItem.tableNewName);
-            }
+            await trx.schema.dropTableIfExists(tableDataItem.tableNewName);
             // 删除旧表
-            if (tableDataItem.tableOldName) {
-                await trx.schema.dropTableIfExists(tableDataItem.tableOldName);
-            }
-
+            await trx.schema.dropTableIfExists(tableDataItem.tableOldName);
             // 如果不存在表，则直接创建
             await trx.schema.createTable(tableDataItem.tableNewName || tableDataItem.tableName, (table) => {
                 // 设置数据表的字符集和编码
