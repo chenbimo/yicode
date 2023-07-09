@@ -23,6 +23,9 @@ import { schemaType } from './config/schemaType.js';
 import { sysConfig } from './config/sysConfig.js';
 import { tableField } from './config/tableField.js';
 
+// 插件信息
+import { syncDatabase } from './scripts/syncDatabase.js';
+
 // 确保关键目录存在
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'config'));
@@ -98,14 +101,6 @@ fastify.get('/', function (req, res) {
         code: 0,
         msg: `${appConfig.appName} 接口程序已启动`
     });
-});
-
-// 同步数据库
-fastify.register(autoLoad, {
-    dir: path.join(sysConfig.yiapiDir, 'plugins'),
-    matchFilter: (path) => {
-        return path === '/database.js';
-    }
 });
 
 // 路由映射列表
@@ -211,6 +206,7 @@ export {
     schemaField,
     schemaType,
     sysConfig,
-    tableField
-    // 插件
+    tableField,
+    // 脚本
+    syncDatabase
 };

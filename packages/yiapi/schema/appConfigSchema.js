@@ -219,6 +219,7 @@ export const appConfigSchema = {
                 ]
             }
         },
+        // 文件上传
         upload: {
             title: '上传配置',
             type: 'object',
@@ -229,6 +230,7 @@ export const appConfigSchema = {
             },
             required: ['dir']
         },
+        // 请求限速
         rate: {
             title: '请求频率',
             type: 'object',
@@ -259,6 +261,7 @@ export const appConfigSchema = {
                 }
             }
         },
+        // 定时器配置
         cron: {
             title: '定时器',
             type: 'array',
@@ -291,6 +294,149 @@ export const appConfigSchema = {
                 },
                 required: ['timer', 'handler', 'name', 'code']
             }
+        },
+        // 扩展系统表字段
+        table: {
+            title: '系统表扩展字段',
+            type: 'object',
+            properties: {
+                sys_admin: {
+                    title: '系统管理表',
+                    type: 'object',
+                    additionalProperties: true
+                },
+                sys_api: {
+                    title: '系统接口表',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {},
+                            additionalProperties: true
+                        }
+                    },
+                    additionalProperties: true
+                },
+                sys_app_config: {
+                    title: '系统配置表',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {},
+                            additionalProperties: true
+                        }
+                    },
+                    additionalProperties: true
+                },
+                sys_dict_category: {
+                    title: '系统字典分类表',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {},
+                            additionalProperties: true
+                        }
+                    },
+                    additionalProperties: true
+                },
+                sys_dict: {
+                    title: '系统字典表',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {},
+                            additionalProperties: true
+                        }
+                    },
+                    additionalProperties: true
+                },
+                sys_login_log: {
+                    title: '系统登录日志表',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {},
+                            additionalProperties: true
+                        }
+                    },
+                    additionalProperties: true
+                },
+                sys_mail_log: {
+                    title: '系统邮件日志表',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {},
+                            additionalProperties: true
+                        }
+                    },
+                    additionalProperties: true
+                },
+                sys_menu: {
+                    title: '系统菜单表',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {},
+                            additionalProperties: true
+                        }
+                    },
+                    additionalProperties: true
+                },
+                sys_role: {
+                    title: '系统角色表',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {},
+                            additionalProperties: true
+                        }
+                    },
+                    additionalProperties: true
+                },
+                sys_user: {
+                    title: '系统用户表',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {},
+                            additionalProperties: true
+                        }
+                    },
+                    additionalProperties: true
+                }
+            }
+        },
+        // 自定义扩展配置
+        custom: {
+            title: '自定义配置',
+            type: 'object',
+            properties: {
+                '*': {
+                    title: '任意字段',
+                    type: 'object',
+                    properties: {},
+                    additionalProperties: true
+                }
+            },
+            additionalProperties: true
         }
     },
     required: [
@@ -311,7 +457,9 @@ export const appConfigSchema = {
         'mail',
         'upload',
         'rate',
-        'cron'
+        'cron',
+        'table',
+        'custom'
     ],
     additionalProperties: false
 };

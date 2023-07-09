@@ -13,7 +13,7 @@ const ajv = new Ajv({ strict: false, messages: false });
 
 const validate = ajv.compile(appConfigSchema);
 
-const { appConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'appConfig.js'), 'appConfig', {});
+const { appConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'appConfig.js'), 'appConfig', {});
 
 const valid = validate(importConfig);
 if (!valid) {
@@ -86,8 +86,14 @@ const appConfig = mergeAndConcat(
             from_name: '易接口',
             from_email: 'demo@qq.com'
         },
+        // 请求速率
         rate: {},
-        cron: []
+        // 定时器
+        cron: [],
+        // 扩展表字段
+        table: {},
+        // 自定义配置
+        custom: {}
     },
     importConfig
 );
