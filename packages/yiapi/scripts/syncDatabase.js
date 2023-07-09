@@ -2,7 +2,6 @@
 import fs from 'fs-extra';
 import url from 'node:url';
 import path from 'node:path';
-import fp from 'fastify-plugin';
 import Knex from 'knex';
 import fg from 'fast-glob';
 import { SchemaInspector } from 'knex-schema-inspector';
@@ -269,10 +268,13 @@ async function syncDatabase() {
         }
         await trx.commit();
         await trx.destroy();
+        console.log(`${logSymbols.success} 同步完成`);
+        process.exit();
     } catch (err) {
-        fastify.log.error(err);
+        console.log('🚀 ~ file: syncDatabase.js:274 ~ syncDatabase ~ err:', err);
         await trx.rollback();
         await trx.destroy();
+        console.log(`${logSymbols.success} 同步失败`);
         process.exit();
     }
 }
