@@ -39,7 +39,6 @@ let $Router = useRouter();
 let $Data = $ref({
     pagination: {
         page: 1,
-        limit: 30,
         total: 0
     },
     tableData: []
@@ -57,7 +56,7 @@ let $Method = {
                 url: '/api/selectAll',
                 data: {
                     page: $Data.pagination.page,
-                    limit: $Data.pagination.limit
+                    limit: $GlobalData.pageLimit
                 }
             });
 
