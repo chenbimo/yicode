@@ -12,7 +12,7 @@ importers:
                 version: 7.1.1
         devDependencies:
             '@yicode-tool/monolage':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:tools/monolage
             lint-staged:
                 specifier: ^13.2.3
@@ -283,7 +283,7 @@ importers:
                 specifier: ^7.22.6
                 version: 7.22.6
             '@yicode-other/commander':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../../others/commander
             autoprefixer:
                 specifier: ^10.4.14
@@ -676,10 +676,10 @@ importers:
                 specifier: workspace:*
                 version: link:../../helpers/yite-router
             '@yicode-other/minimist':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../../others/minimist
             '@yicode/yidash':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../yidash
             colorette:
                 specifier: ^2.0.20
@@ -741,13 +741,23 @@ importers:
 
     projects/blog: {}
 
+    projects/site:
+        dependencies:
+            '@yicode-helper/yidocs-auto':
+                specifier: workspace:*
+                version: link:../../helpers/yidocs-auto
+        devDependencies:
+            vitepress:
+                specifier: 1.0.0-beta.5
+                version: 1.0.0-beta.5(@algolia/client-search@4.18.0)(search-insights@2.6.0)
+
     templates/yiadmin:
         dependencies:
             '@arco-design/web-vue':
                 specifier: ^2.48.0
                 version: 2.48.0(vue@3.3.4)
             '@yicode/yidash':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../../packages/yidash
             axios:
                 specifier: ^1.4.0
@@ -775,7 +785,7 @@ importers:
                 version: 4.2.4(vue@3.3.4)
         devDependencies:
             '@yicode/yite-cli':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../../packages/yite-cli
             sass:
                 specifier: ^1.63.6
@@ -799,10 +809,10 @@ importers:
                 specifier: ^2.48.0
                 version: 2.48.0(vue@3.3.4)
             '@yicode/yidash':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../../packages/yidash
             '@yicode/yite-cli':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../../packages/yite-cli
             axios:
                 specifier: ^1.4.0
@@ -842,7 +852,7 @@ importers:
     templates/yidocs:
         dependencies:
             '@yicode-helper/yidocs-auto':
-                specifier: workspace:^
+                specifier: workspace:*
                 version: link:../../helpers/yidocs-auto
         devDependencies:
             vitepress:
