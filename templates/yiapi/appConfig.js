@@ -63,23 +63,53 @@ let appConfig = {
         from_name: '易接口',
         from_email: 'demo@qq.com'
     },
+    // 上传目录
     upload: {
         dir: '../static/images/'
     },
-    rate: {
-        allowList: []
-    },
+    // 请求速率
+    rate: {},
     // 定时处理
     cron: [
+        // 示例如下：
         // {
         //     timer: '*/5 * * * * *',
         //     name: '测试定时器',
         //     code: 'test',
         //     handler: (yiapi) => {
-        //         console.log('定时器打印');
+        //         if (cluster.isPrimary) {
+        //             console.log(`主进程 ${process.pid}`);
+        //         } else {
+        //             console.log(`客进程 ${process.pid}`);
+        //         }
         //     }
         // }
-    ]
+    ],
+    // 扩展系统表字段
+    table: {
+        // sys_user: {
+        //     openid: {
+        //         type: 'string',
+        //         comment: '微信 openid',
+        //         length: 50,
+        //         default: ''
+        //     },
+        //     nav_level: {
+        //         type: 'string',
+        //         comment: '导航用户等级 (vip0:普通会员，vip1:白银会员，vip2:黄金会员，vip3:钻石会员)',
+        //         length: 20,
+        //         default: 'vip0'
+        //     },
+        //     todo_level: {
+        //         type: 'string',
+        //         comment: '待办用户等级 (vip0:普通会员，vip1:白银会员，vip2:黄金会员，vip3:钻石会员)',
+        //         length: 20,
+        //         default: 'vip0'
+        //     }
+        // }
+    },
+    // 自定义配置
+    custom: {}
 };
 
 export { appConfig };
