@@ -2,12 +2,11 @@ import path from 'path';
 import fg from 'fast-glob';
 import { replace as _replace, snakeCase as _snakeCase, forOwn as _forOwn } from 'lodash-es';
 
-import { fnSchema, fnApiInfo, fnPageOffset, fnImport } from '../../utils/index.js';
+import { fnApiInfo, fnPageOffset, fnImport } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -19,9 +18,8 @@ export const apiSchema = {
         title: `查询${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            page: fnSchema(schemaField.page, '第几页'),
-            limit: fnSchema(schemaField.limit, '每页数量'),
-            state: fnSchema(schemaField.state, '是否开启')
+            page: metaConfig.schema.page,
+            limit: metaConfig.schema.limit
         },
         required: []
     }

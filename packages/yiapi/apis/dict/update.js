@@ -1,8 +1,7 @@
-import { fnSchema, fnTimestamp, fnClearUpdateData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
+import { fnTimestamp, fnClearUpdateData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,16 +13,16 @@ export const apiSchema = {
         title: `更新${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            id: fnSchema(schemaField.id, '唯一ID'),
-            category_id: fnSchema(schemaField.min1, '字典分类ID'),
-            category_code: fnSchema(schemaField.category, '字典分类编码'),
-            code: fnSchema(schemaField.code, '字典编码'),
-            name: fnSchema(null, '字典名称', 'string', 1, 20),
-            value: fnSchema(null, '字典值', 'string', 0, 500),
-            symbol: fnSchema(null, '字典符号', 'string', 0, 20, ['string', 'number']),
-            thumbnail: fnSchema(schemaField.image, '字典缩略图'),
-            describe: fnSchema(null, '字典描述', 'string', 0, 300),
-            state: fnSchema(schemaField.state, '是否启用')
+            id: metaConfig.schema.id,
+            category_id: metaConfig.schema.category_id,
+            category_code: metaConfig.schema.category_code,
+            code: metaConfig.schema.code,
+            name: metaConfig.schema.name,
+            value: metaConfig.schema.value,
+            symbol: metaConfig.schema.symbol,
+            thumbnail: metaConfig.schema.thumbnail,
+            describe: metaConfig.schema.describe,
+            state: metaConfig.schema.state
         },
         required: ['id']
     }

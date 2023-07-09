@@ -1,4 +1,4 @@
-import { fnApiInfo, fnSchema } from '../../utils/index.js';
+import { fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';

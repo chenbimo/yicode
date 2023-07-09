@@ -1,11 +1,10 @@
 import { omit as _omit } from 'lodash-es';
 
-import { fnSchema, fnApiInfo, fnClearInsertData, fnPureMD5, fnMD5 } from '../../utils/index.js';
+import { fnApiInfo, fnClearInsertData, fnPureMD5, fnMD5 } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { cacheData } from '../../config/cacheData.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -17,8 +16,8 @@ export const apiSchema = {
         title: `${metaConfig.name}登录接口`,
         type: 'object',
         properties: {
-            account: fnSchema(schemaField.account, '账号'),
-            password: fnSchema(schemaField.password, '密码')
+            account: metaConfig.schema.account,
+            password: metaConfig.schema.password
         },
         required: ['account', 'password']
     }
@@ -33,6 +32,7 @@ export default async function (fastify, opts) {
                 let loginLogModel = fastify.mysql.table('sys_login_log');
 
                 // 查询管理员是否存在
+                // TODO: 增加邮箱注册和邮箱登录
                 let adminData = await adminModel //
                     .clone()
                     .orWhere({ username: req.body.account })

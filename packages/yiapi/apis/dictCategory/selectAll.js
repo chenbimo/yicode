@@ -1,8 +1,7 @@
-import { fnApiInfo, fnSchema } from '../../utils/index.js';
+import { fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,7 +13,7 @@ export const apiSchema = {
         title: `查询所有${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            state: fnSchema(schemaField.state, '是否开启')
+            state: metaConfig.schema.state
         }
     }
 };

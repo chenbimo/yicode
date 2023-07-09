@@ -3,12 +3,11 @@ import { resolve } from 'node:path';
 import { writeFileSync } from 'node:fs';
 import { ensureDirSync, ensureFileSync } from 'fs-extra';
 
-import { fnSchema, fnApiInfo } from '../../utils/index.js';
+import { fnApiInfo, fnUUID } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { fnUUID } from '../../utils/index.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);

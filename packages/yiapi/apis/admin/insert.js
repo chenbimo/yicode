@@ -14,10 +14,10 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            username: fnSchema(schemaField.username, '用户名'),
-            password: fnSchema(schemaField.password, '密码'),
-            nickname: fnSchema(schemaField.nickname, '昵称'),
-            role_codes: fnSchema(schemaField.role_codes, '角色代码')
+            username: metaConfig.schema.username,
+            password: metaConfig.schema.password,
+            nickname: metaConfig.schema.nickname,
+            role_codes: metaConfig.schema.role_codes
         },
         required: ['username', 'password', 'nickname', 'role_codes']
     }

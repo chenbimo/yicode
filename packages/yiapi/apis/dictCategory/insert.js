@@ -1,8 +1,7 @@
-import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
+import { fnClearInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,9 +13,9 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            code: fnSchema(schemaField.code, '字典分类编码'),
-            name: fnSchema(null, '字典分类名称', 'string', 1, 20),
-            describe: fnSchema(null, '字典分类描述', 'string', 0, 300)
+            code: metaConfig.schema.code,
+            name: metaConfig.schema.name,
+            describe: metaConfig.schema.describe
         },
         required: ['code', 'name']
     }

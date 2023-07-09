@@ -1,8 +1,7 @@
-import { fnSchema, fnApiInfo, fnPageOffset } from '../../utils/index.js';
+import { fnApiInfo, fnPageOffset } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,10 +13,10 @@ export const apiSchema = {
         title: `查询${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            page: fnSchema(schemaField.page, '第几页'),
-            limit: fnSchema(schemaField.limit, '每页数量'),
-            state: fnSchema(schemaField.state, '是否开启'),
-            category_code: fnSchema(schemaField.category, '字典分类编码')
+            page: metaConfig.schema.page,
+            limit: metaConfig.schema.limit,
+            state: metaConfig.schema.state,
+            category_code: metaConfig.schema.category_code
         },
         required: ['category_code']
     }
@@ -32,8 +31,8 @@ export default async function (fastify, opts) {
                     .table('sys_dict')
                     .where('category_code', req.body.category_code)
                     .modify(function (queryBuilder) {
-                        if (req.body.keywords !== undefined) {
-                            queryBuilder.where('name', 'like', `%${req.body.keywords}%`);
+                        if (req.body.keyword !== undefined) {
+                            queryBuilder.where('name', 'like', `%${req.body.keyword}%`);
                         }
                         if (req.body.state !== undefined) {
                             queryBuilder.where('state', req.body.state);

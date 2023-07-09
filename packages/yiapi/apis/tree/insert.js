@@ -1,8 +1,7 @@
-import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo } from '../../utils/index.js';
+import { fnClearInsertData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,15 +13,15 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            pid: fnSchema(schemaField.pid, '父级目录ID'),
-            category: fnSchema(schemaField.category, '目录分类'),
-            name: fnSchema(null, '目录名称', 'string', 1, 30),
-            value: fnSchema(null, '目录值', 'string', 0, 300),
-            icon: fnSchema(schemaField.image, '目录图标'),
-            sort: fnSchema(schemaField.min0, '目录排序'),
-            describe: fnSchema(schemaField.describe, '目录描述'),
-            is_bool: fnSchema(schemaField.boolEnum, '是否虚拟目录'),
-            is_open: fnSchema(schemaField.boolEnum, '是否公开')
+            pid: metaConfig.schema.pid,
+            category: metaConfig.schema.category,
+            name: metaConfig.schema.name,
+            value: metaConfig.schema.value,
+            icon: metaConfig.schema.icon,
+            sort: metaConfig.schema.sort,
+            describe: metaConfig.schema.describe,
+            is_bool: metaConfig.schema.is_bool,
+            is_open: metaConfig.schema.is_open
         },
         required: ['pid', 'category', 'name']
     }
@@ -36,6 +35,7 @@ export default async function (fastify, opts) {
                 let model = fastify.mysql //
                     .table('sys_tree')
                     .modify(function (queryBuilder) {});
+
                 if (req.body.pid === 0) {
                     req.body.pids = '0';
                     req.body.level = 1;

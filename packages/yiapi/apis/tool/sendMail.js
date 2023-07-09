@@ -1,8 +1,7 @@
-import { fnApiInfo, fnRandom6Number, fnSchema, fnClearInsertData } from '../../utils/index.js';
+import { fnApiInfo, fnRandom6Number, fnClearInsertData } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -11,23 +10,15 @@ export const apiSchema = {
     summary: `发送邮箱注册验证码`,
     tags: [apiInfo.parentDirName],
     body: {
-        // title: '发送邮箱注册验证码接口',
-        // type: 'object',
         oneOf: [
             {
                 title: '发送验证码邮件',
                 type: 'object',
                 properties: {
-                    to_email: fnSchema(schemaField.email, '邮箱地址'),
-                    email_type: fnSchema(null, '邮件类型', 'string', null, null, ['common', 'verify']),
-                    subject: fnSchema(schemaField.string1to200, '邮件标题'),
-                    verify_name: {
-                        title: '验证码名称',
-                        type: 'string',
-                        minLength: 2,
-                        maxLength: 30,
-                        pattern: '^[a-z][a-zA-Z0-9]*$'
-                    }
+                    to_email: metaConfig.schema.to_email,
+                    email_type: metaConfig.schema.email_type,
+                    subject: metaConfig.schema.subject,
+                    verify_name: metaConfig.schema.verify_name
                 },
                 required: ['to_email', 'email_type', 'subject', 'verify_name']
             },
@@ -35,10 +26,10 @@ export const apiSchema = {
                 title: '发送普通邮件',
                 type: 'object',
                 properties: {
-                    to_email: fnSchema(schemaField.email, '邮箱地址'),
-                    email_type: fnSchema(null, '邮件类型', 'string', null, null, ['common', 'verify']),
-                    subject: fnSchema(schemaField.string1to200, '邮件标题'),
-                    content: fnSchema(schemaField.string1to100, '邮件内容')
+                    to_email: metaConfig.schema.to_email,
+                    email_type: metaConfig.schema.email_type,
+                    subject: metaConfig.schema.subject,
+                    content: metaConfig.schema.content
                 },
                 required: ['to_email', 'email_type', 'subject', 'content']
             }

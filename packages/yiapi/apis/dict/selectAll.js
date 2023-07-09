@@ -1,8 +1,7 @@
-import { fnApiInfo, fnSchema } from '../../utils/index.js';
+import { fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -14,8 +13,8 @@ export const apiSchema = {
         title: `查询所有${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            category_code: fnSchema(schemaField.category, '字典分类编码'),
-            state: fnSchema(schemaField.state, '是否开启')
+            category_code: metaConfig.schema.category_code,
+            state: metaConfig.schema.state
         }
     }
 };

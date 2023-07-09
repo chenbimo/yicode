@@ -1,12 +1,12 @@
 import fs from 'fs-extra';
 import path from 'path';
 
+import { fnClearInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
+
 import { appConfig } from '../../config/appConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
-import { fieldType } from '../../config/fieldType.js';
-import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
+
 import { metaConfig } from './_meta.js';
 
 const apiInfo = await fnApiInfo(import.meta.url);
@@ -18,26 +18,9 @@ export const apiSchema = {
         title: `添加${metaConfig.name}接口`,
         type: 'object',
         properties: {
-            code: fnSchema(schemaField.table_code, '表编码'),
-            name: fnSchema(schemaField.describe, '表描述'),
-            fields: {
-                title: '表字段',
-                type: 'array',
-                minItems: 1,
-                items: {
-                    type: 'object',
-                    properties: {
-                        comment: fnSchema(schemaField.string1to50, '字段名'),
-                        code: fnSchema(schemaField.table_code, '字段编码'),
-                        type: fnSchema(null, '字段类型', 'string', 1, 30, Object.keys(fieldType)),
-                        length: fnSchema(schemaField.min0, '长度'),
-                        index: fnSchema(schemaField.boolEnum, '索引'),
-                        unsigned: fnSchema(schemaField.boolEnum, '无符号'),
-                        unique: fnSchema(schemaField.boolEnum, '唯一值')
-                    },
-                    required: ['comment', 'code', 'type']
-                }
-            }
+            code: metaConfig.schema.code,
+            name: metaConfig.schema.name,
+            fields: metaConfig.schema.fields
         },
         required: ['code', 'name', 'fields']
     }
