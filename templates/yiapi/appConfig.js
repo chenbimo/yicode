@@ -8,6 +8,8 @@ let appConfig = {
     port: 3000,
     // 默认开发管理员密码
     devPassword: 'dev123456',
+    // 是否验证参数
+    paramsCheck: false,
     // 日志字段过滤，不打印
     logFilter: ['password', 'file'],
     // 是否开启 swagger 文档

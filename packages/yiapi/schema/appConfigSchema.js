@@ -23,7 +23,8 @@ export const appConfigSchema = {
         },
         paramsCheck: {
             title: '接口参数验证',
-            type: 'boolean'
+            type: 'boolean',
+            default: false
         },
         isSwagger: {
             title: '是否开启swagger文档',
@@ -451,7 +452,9 @@ export const appConfigSchema = {
         'salt',
         'port',
         'devPassword',
+        'paramsCheck',
         'logFilter',
+        'isSwagger',
         'freeApis',
         'blackApis',
         'whiteApis',
