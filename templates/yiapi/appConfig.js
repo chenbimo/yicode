@@ -10,6 +10,8 @@ let appConfig = {
     devPassword: 'dev123456',
     // 日志字段过滤，不打印
     logFilter: ['password', 'file'],
+    // 是否开启 swagger 文档
+    isSwagger: false,
     // 任何情况下可以访问的路由
     freeApis: [
         //

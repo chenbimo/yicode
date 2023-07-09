@@ -37,6 +37,7 @@ const appConfig = mergeAndConcat(
         logFilter: ['password', 'file'],
         // 是否进行参数验证
         paramsCheck: false,
+        isSwagger: false,
         // 任何情况下可以访问的路由
         freeApis: [
             //

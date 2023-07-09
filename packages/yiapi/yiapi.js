@@ -111,12 +111,14 @@ fastify.get('/', function (req, res) {
 // });
 
 // 接口文档生成
-fastify.register(autoLoad, {
-    dir: path.join(sysConfig.yiapiDir, 'plugins'),
-    matchFilter: (path) => {
-        return path === '/swagger.js';
-    }
-});
+if (appConfig.isSwagger === true) {
+    fastify.register(autoLoad, {
+        dir: path.join(sysConfig.yiapiDir, 'plugins'),
+        matchFilter: (path) => {
+            return path === '/swagger.js';
+        }
+    });
+}
 
 // 加载启动插件
 fastify.register(autoLoad, {

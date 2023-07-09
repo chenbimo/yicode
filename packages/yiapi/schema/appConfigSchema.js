@@ -25,6 +25,11 @@ export const appConfigSchema = {
             title: '接口参数验证',
             type: 'boolean'
         },
+        isSwagger: {
+            title: '是否开启swagger文档',
+            type: 'boolean',
+            default: false
+        },
         // 日志字段过滤，不打印
         logFilter: {
             title: '日志字段过滤',
