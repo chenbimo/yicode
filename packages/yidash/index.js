@@ -15,4 +15,5 @@ export { yidash_string_displace } from './lib/yidash_string_displace.js';
 export { yidash_string_inflate } from './lib/yidash_string_inflate.js';
 export { yidash_tool_copyData } from './lib/yidash_tool_copyData.js';
 export { yidash_tree_array2Tree } from './lib/yidash_tree_array2Tree.js';
+export { yidash_tree_traverse } from './lib/yidash_tree_traverse.js';
 export { yidash_vue_setRef } from './lib/yidash_vue_setRef.js';
