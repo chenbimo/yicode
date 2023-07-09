@@ -12,7 +12,7 @@
         "preinstall": "npx only-allow pnpm",
         "dev": "nodemon --config=nodemon.json",
         "build": "pm2 start pm2.config.cjs",
-        "sync:db": "node syncDatabase.js"
+        "sync:db": "cross-env NODE_ENV=production node syncDatabase.js"
     },
     "keywords": [
         "api",
@@ -26,7 +26,9 @@
         "url": "https://github.com/yicode-team/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "workspace:*"
+        "@yicode/yiapi": "workspace:*",
+        "cross-env": "^7.0.3",
+        "lodash-es": "^4.17.21"
     },
     "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f"
 }
