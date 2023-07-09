@@ -33,7 +33,7 @@
         <div class="page-page">
             <div class="left"></div>
             <div class="right">
-                <a-pagination :total="$Data.pagination.total" show-total />
+                <a-pagination :total="$Data.pagination.total" show-total show-jumper />
             </div>
         </div>
 
