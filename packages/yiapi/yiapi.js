@@ -28,7 +28,6 @@ import { syncDatabase } from './scripts/syncDatabase.js';
 
 // 确保关键目录存在
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'config'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'plugins'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
