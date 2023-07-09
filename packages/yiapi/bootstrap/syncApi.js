@@ -73,10 +73,24 @@ async function syncApiDir(fastify) {
 
         // 如果数据库中存在当前接口目录，则进行添加或更新
         let { metaConfig } = await fnImport(url.pathToFileURL(file), {});
-        if (!metaConfig || !metaConfig.name) {
-            fastify.log.error(`错误文件：${file}`);
+
+        if (!metaConfig) {
+            fastify.log.error(`缺少文件：${file}`);
             process.exit(1);
         }
+
+        // 判断有无 name 字段
+        if (!metaConfig?.name) {
+            fastify.log.error(`错误文件：${file} 缺少 name 字段`);
+            process.exit(1);
+        }
+
+        // 判断有无 schema 字段
+        if (!metaConfig?.schema) {
+            fastify.log.error(`错误文件：${file} 缺少 schema 字段`);
+            process.exit(1);
+        }
+
         let apiMeta = {};
         apiMeta.name = metaConfig.name;
         apiMeta.value = apiDirName;
