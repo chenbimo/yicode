@@ -1,0 +1,21 @@
+{
+    "name": "@yicode-tech/site",
+    "version": "1.0.0",
+    "description": "随易科技",
+    "main": "index.js",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vitepress dev",
+        "build": "vitepress build"
+    },
+    "keywords": [],
+    "author": "陈随易 <bimostyle@qq.com>",
+    "license": "ISC",
+    "devDependencies": {
+        "vitepress": "1.0.0-beta.5"
+    },
+    "dependencies": {
+        "@yicode-helper/yidocs-auto": "workspace:*"
+    }
+}

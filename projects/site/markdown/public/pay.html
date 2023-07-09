@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>微信支付 - 随易科技</title>
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+        <link rel="icon" href="/logo.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+        <script src="./jweixin-1.6.0.js"></script>
+        <script src="./config.js"></script>
+        <script src="./axios.min.js"></script>
+        <script src="./eruda.js"></script>
+        <script>
+            window.wx = wx;
+            axios
+                .post('https://api.yicode.tech/api/weixin/getConfig', {
+                    url: window.location.origin + '/' + window.location.search
+                })
+                .then((res) => {
+                    console.log('🚀 ~ file: pay.html:20 ~ .then ~ res:', res);
+                    if (res.data.code === 0) {
+                        window.wx.config({
+                            debug: false,
+                            appId: res.data.appId,
+                            timestamp: res.data.timestamp,
+                            nonceStr: res.data.nonceStr,
+                            signature: res.data.signature,
+                            jsApiList: res.data.jsApiList
+                        });
+                        window.wx.error(function (res) {
+                            console.log('🚀 ~ file: index.vue:177 ~ res', res);
+                        });
+                        window.wx.ready(function () {
+                            window.wx.chooseWXPay({
+                                timestamp: res.data.timestamp,
+                                nonceStr: res.data.noncestr,
+                                package: res.data.packagedata,
+                                signType: res.data.signType,
+                                paySign: res.data.paysign,
+                                success: function (res) {
+                                    console.log('🚀 ~ file: pay.html:41 ~ res:', res);
+                                },
+                                fail: function (err) {
+                                    console.log('🚀 ~ file: pay.html:44 ~ err:', err);
+                                }
+                            });
+
+                            jweixin.error(function (res) {
+                                console.log('🚀 ~ file: personalDetails.vue ~ line 395 ~ 微信 SDK 错误信息', res);
+                            });
+                        });
+                    }
+                });
+
+            eruda.init();
+        </script>
+    </head>
+    <body></body>
+</html>
