@@ -21,7 +21,7 @@
                             <div class="thumbnail">易待办</div>
                             <div class="describe">简单好用的待办事项管理工具</div>
                             <div class="status">
-                                <img class="img" alt="npm" src="https://img.shields.io/badge/版本-3.3.1-brightgreen" />
+                                <!-- <img class="img" alt="npm" src="https://img.shields.io/badge/版本-3.3.1-brightgreen" /> -->
                                 <a class="doc" target="_blank" href="https://yicode.tech/1-产品/1-易待办/1-基本简介.html">文档</a>
                             </div>
                         </div>
@@ -31,7 +31,6 @@
                             <div class="thumbnail">易导航</div>
                             <div class="describe">简单好用的网址管理</div>
                             <div class="status">
-                                <img class="img" alt="npm" src="https://img.shields.io/badge/版本-1.0.0-brightgreen" />
                                 <a class="doc" target="_blank" href="https://yicode.tech/1-产品/3-易导航/1-使用教程.html">文档</a>
                             </div>
                         </div>
@@ -217,6 +216,17 @@
                                 <img class="img" alt="npm" src="https://img.shields.io/npm/v/@yicode-helper/yidocs-auto?label=版本" />
                                 <div class="w-10px"></div>
                                 <img class="img" alt="npm" src="https://img.shields.io/npm/dm/@yicode-helper/yidocs-auto?label=下载" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line">
+                        <div class="line-inner">
+                            <div class="thumbnail">yiapi-env</div>
+                            <div class="describe">yiapi内置的环境变量插件</div>
+                            <div class="status">
+                                <img class="img" alt="npm" src="https://img.shields.io/npm/v/@yicode-helper/yiapi-env?label=版本" />
+                                <div class="w-10px"></div>
+                                <img class="img" alt="npm" src="https://img.shields.io/npm/dm/@yicode-helper/yiapi-env?label=下载" />
                             </div>
                         </div>
                     </div>
