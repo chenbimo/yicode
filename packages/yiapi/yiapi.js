@@ -8,6 +8,7 @@ import { forOwn as _forOwn } from 'lodash-es';
 import fg from 'fast-glob';
 import fastifyStatic from '@fastify/static';
 import gracefulShutdown from 'http-graceful-shutdown';
+import '@yicode-helper/yiapi-env';
 
 // 工具函数
 import * as utils from './utils/index.js';
@@ -23,7 +24,7 @@ import { schemaType } from './config/schemaType.js';
 import { sysConfig } from './config/sysConfig.js';
 import { tableField } from './config/tableField.js';
 
-// 插件信息
+// 脚本
 import { syncDatabase } from './scripts/syncDatabase.js';
 
 // 确保关键目录存在
