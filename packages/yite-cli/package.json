@@ -138,7 +138,7 @@
         "@unocss/transformer-directives": "^0.53.5",
         "@unocss/transformer-variant-group": "^0.53.5",
         "@vitejs/plugin-vue": "^4.2.3",
-        "@vue-macros/reactivity-transform": "^0.3.12",
+        "@vue-macros/reactivity-transform": "^0.3.14",
         "@yicode-helper/yite-chunk": "workspace:*",
         "@yicode-helper/yite-html": "workspace:*",
         "@yicode-helper/yite-i18n": "workspace:*",

@@ -53,7 +53,7 @@
         "@dcloudio/uni-mp-weixin": "2.0.2-3080720230703001",
         "@dcloudio/uni-quickapp-webview": "2.0.2-3080720230703001",
         "@dcloudio/uni-ui": "^1.4.28",
-        "@vue-macros/reactivity-transform": "^0.3.12",
+        "@vue-macros/reactivity-transform": "^0.3.14",
         "blueimp-md5": "^2.19.0",
         "dayjs": "^1.11.9",
         "lodash-es": "^4.17.21",

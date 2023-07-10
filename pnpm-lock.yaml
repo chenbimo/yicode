@@ -37,6 +37,18 @@ importers:
                 specifier: ^4.4.2
                 version: 4.4.2(sass@1.63.6)
 
+    helpers/yiapi-env:
+        dependencies:
+            dotenv:
+                specifier: ^16.3.1
+                version: 16.3.1
+            dotenv-expand:
+                specifier: ^10.0.0
+                version: 10.0.0
+            lodash-es:
+                specifier: ^4.17.21
+                version: 4.17.21
+
     helpers/yidocs-auto:
         dependencies:
             fast-glob:
@@ -120,6 +132,9 @@ importers:
             '@fastify/swagger-ui':
                 specifier: ^1.9.2
                 version: 1.9.2
+            '@yicode-helper/yiapi-env':
+                specifier: workspace:*
+                version: link:../../helpers/yiapi-env
             ajv:
                 specifier: ^8.12.0
                 version: 8.12.0
@@ -658,8 +673,8 @@ importers:
                 specifier: ^4.2.3
                 version: 4.2.3(vite@4.4.2)(vue@3.3.4)
             '@vue-macros/reactivity-transform':
-                specifier: ^0.3.12
-                version: 0.3.12(vue@3.3.4)
+                specifier: ^0.3.14
+                version: 0.3.14(vue@3.3.4)
             '@yicode-helper/yite-chunk':
                 specifier: workspace:*
                 version: link:../../helpers/yite-chunk
@@ -771,6 +786,9 @@ importers:
             pinia:
                 specifier: ^2.1.4
                 version: 2.1.4(@vue/composition-api@1.7.1)(vue@3.3.4)
+            sass:
+                specifier: ^1.63.6
+                version: 1.63.6
             store2:
                 specifier: ^2.14.2
                 version: 2.14.2
@@ -787,9 +805,6 @@ importers:
             '@yicode/yite-cli':
                 specifier: workspace:*
                 version: link:../../packages/yite-cli
-            sass:
-                specifier: ^1.63.6
-                version: 1.63.6
 
     templates/yiapi:
         dependencies:
@@ -903,8 +918,8 @@ importers:
                 specifier: ^1.4.28
                 version: 1.4.28
             '@vue-macros/reactivity-transform':
-                specifier: ^0.3.12
-                version: 0.3.12(vue@3.3.4)
+                specifier: ^0.3.14
+                version: 0.3.14(vue@3.3.4)
             blueimp-md5:
                 specifier: ^2.19.0
                 version: 2.19.0
@@ -2595,7 +2610,7 @@ packages:
         resolution: { integrity: sha512-EXi8de5njxgP6TV3N9ytnGRLG9zmBNTEZjR4VzwPcpPLbZxxTLG2gaFyJyKiFVQxHW/DPlMrDJA3qoRRGEkgZw== }
         dependencies:
             '@docsearch/react': 3.5.1(@algolia/client-search@4.18.0)(search-insights@2.6.0)
-            preact: 10.15.1
+            preact: 10.16.0
         transitivePeerDependencies:
             - '@algolia/client-search'
             - '@types/react'
@@ -4699,8 +4714,8 @@ packages:
             vite: 4.4.2(sass@1.63.6)
             vue: 3.3.4
 
-    /@vue-macros/common@1.4.1(vue@3.3.4):
-        resolution: { integrity: sha512-guxdL0TrAPRaRtbR5iWMkX9ojcyQQ0NBVGvl9ZSxk9ugArQB1z3dCyTCirhHAo5GJZBFJ8FlrqNmpVspZV0MEw== }
+    /@vue-macros/common@1.5.0(vue@3.3.4):
+        resolution: { integrity: sha512-/Xtmxigolh4NwyLQfrBv+8PAIhlB3doBH7JcA0WuSMmi5LzGOK3YzDCp5jMzpXB6OoUGmm1ZaDkJcBsEmijFPw== }
         engines: { node: '>=16.14.0' }
         peerDependencies:
             vue: ^2.7.0 || ^3.2.25
@@ -4711,7 +4726,7 @@ packages:
             '@babel/types': 7.22.5
             '@rollup/pluginutils': 5.0.2
             '@vue/compiler-sfc': 3.3.4
-            ast-kit: 0.6.6
+            ast-kit: 0.6.7
             local-pkg: 0.4.3
             magic-string-ast: 0.1.3
             vue: 3.3.4
@@ -4719,14 +4734,14 @@ packages:
             - rollup
         dev: false
 
-    /@vue-macros/reactivity-transform@0.3.12(vue@3.3.4):
-        resolution: { integrity: sha512-Mzr8Kf+ThKScU4Sf+R1A/GfVPbN6I8joSvIYaVHjaFS/XdqcF7t2wMYsGhgZVLCxk2VHxTPkhivKt4U+VSftAg== }
+    /@vue-macros/reactivity-transform@0.3.14(vue@3.3.4):
+        resolution: { integrity: sha512-JiC09q/qlj69hLJ20zNFTlI8y45NwMe1bmC6IIr4FJ1/6uth/U9SE/zcVG0TLnAaykiRaU7OMU4qI0wQx8e3OA== }
         engines: { node: '>=16.14.0' }
         peerDependencies:
             vue: ^2.7.0 || ^3.2.25
         dependencies:
             '@babel/parser': 7.22.7
-            '@vue-macros/common': 1.4.1(vue@3.3.4)
+            '@vue-macros/common': 1.5.0(vue@3.3.4)
             '@vue/compiler-core': 3.3.4
             '@vue/shared': 3.3.4
             magic-string: 0.30.1
@@ -5317,8 +5332,8 @@ packages:
         resolution: { integrity: sha512-Q+JC7Whu8HhmTdBph/Tq59IoRtoy6KAm5zzPv00WdujX82lbAL8K7WVjne7vdCsAmbF4AYaDOPyO3k0kl8qIrw== }
         engines: { node: '>=0.10.0' }
 
-    /ast-kit@0.6.6:
-        resolution: { integrity: sha512-6ll5hw2+hcAlWQdccjiUuOCSCaMc5C1ySuhfu2gxKLK6VC9zaz3M7XGIr96bz6eCn7OU6Ax58M9UxbBum6Awbw== }
+    /ast-kit@0.6.7:
+        resolution: { integrity: sha512-7GoEgHg2AwQWDW199FYp9KKvxHh+zAsXipjrOWvn1uorAd+48XcY4Rj01iet/PwnEymTtilDp8XT07xMajk6sw== }
         engines: { node: '>=16.14.0' }
         dependencies:
             '@babel/parser': 7.22.7
@@ -5393,7 +5408,7 @@ packages:
             postcss: ^8.1.0
         dependencies:
             browserslist: 4.21.9
-            caniuse-lite: 1.0.30001513
+            caniuse-lite: 1.0.30001514
             fraction.js: 4.2.0
             normalize-range: 0.1.2
             picocolors: 1.0.0
@@ -5865,7 +5880,7 @@ packages:
         engines: { node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7 }
         hasBin: true
         dependencies:
-            caniuse-lite: 1.0.30001513
+            caniuse-lite: 1.0.30001514
             electron-to-chromium: 1.4.454
             node-releases: 2.0.13
             update-browserslist-db: 1.0.11(browserslist@4.21.9)
@@ -6051,8 +6066,8 @@ packages:
         engines: { node: '>=10' }
         dev: false
 
-    /caniuse-lite@1.0.30001513:
-        resolution: { integrity: sha512-pnjGJo7SOOjAGytZZ203Em95MRM8Cr6jhCXNF/FAXTpCTRTECnqQWLpiTRqrFtdYcth8hf4WECUpkezuYsMVww== }
+    /caniuse-lite@1.0.30001514:
+        resolution: { integrity: sha512-ENcIpYBmwAAOm/V2cXgM7rZUrKKaqisZl4ZAI520FIkqGXUxJjmaIssbRW5HVVR5tyV6ygTLIm15aU8LUmQSaQ== }
 
     /capital-case@1.0.4:
         resolution: { integrity: sha512-ds37W8CytHgwnhGGTi88pcPyR15qoNkOpYwmMMfnWqqWgESapLqvDx6huFjQ5vqWSn2Z06173XNA7LtMOeUh1A== }
@@ -6538,13 +6553,13 @@ packages:
         engines: { node: '>=14' }
         dependencies:
             add-stream: 1.0.0
-            conventional-changelog-writer: 6.0.0
+            conventional-changelog-writer: 6.0.1
             conventional-commits-parser: 4.0.0
             dateformat: 3.0.3
             get-pkg-repo: 4.2.1
             git-raw-commits: 3.0.0
             git-remote-origin-url: 2.0.0
-            git-semver-tags: 5.0.0
+            git-semver-tags: 5.0.1
             normalize-package-data: 3.0.3
             read-pkg: 3.0.0
             read-pkg-up: 3.0.0
@@ -6555,8 +6570,8 @@ packages:
         engines: { node: '>=14' }
         dev: false
 
-    /conventional-changelog-writer@6.0.0:
-        resolution: { integrity: sha512-8PyWTnn7zBIt9l4hj4UusFs1TyG+9Ulu1zlOAc72L7Sdv9Hsc8E86ot7htY3HXCVhXHB/NO0pVGvZpwsyJvFfw== }
+    /conventional-changelog-writer@6.0.1:
+        resolution: { integrity: sha512-359t9aHorPw+U+nHzUXHS5ZnPBOizRxfQsWT5ZDHBfvfxQOAik+yfuhKXG66CN5LEWPpMNnIMHUTCKeYNprvHQ== }
         engines: { node: '>=14' }
         hasBin: true
         dependencies:
@@ -6565,7 +6580,7 @@ packages:
             handlebars: 4.7.7
             json-stringify-safe: 5.0.1
             meow: 8.1.2
-            semver: 6.3.0
+            semver: 7.5.4
             split: 1.0.1
         dev: false
 
@@ -6598,7 +6613,7 @@ packages:
             conventional-commits-filter: 3.0.0
             conventional-commits-parser: 4.0.0
             git-raw-commits: 3.0.0
-            git-semver-tags: 5.0.0
+            git-semver-tags: 5.0.1
             meow: 8.1.2
         dev: false
 
@@ -7101,9 +7116,19 @@ packages:
             is-obj: 2.0.0
         dev: false
 
+    /dotenv-expand@10.0.0:
+        resolution: { integrity: sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A== }
+        engines: { node: '>=12' }
+        dev: false
+
     /dotenv@10.0.0:
         resolution: { integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q== }
         engines: { node: '>=10' }
+        dev: false
+
+    /dotenv@16.3.1:
+        resolution: { integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ== }
+        engines: { node: '>=12' }
         dev: false
 
     /duplexer2@0.1.4:
@@ -8214,13 +8239,13 @@ packages:
             pify: 2.3.0
         dev: false
 
-    /git-semver-tags@5.0.0:
-        resolution: { integrity: sha512-fZ+tmZ1O5aXW/T5nLzZLbxWAHdQTLLXalOECMNAmhoEQSfqZjtaeMjpsXH4C5qVhrICTkVQeQFujB1lKzIHljA== }
+    /git-semver-tags@5.0.1:
+        resolution: { integrity: sha512-hIvOeZwRbQ+7YEUmCkHqo8FOLQZCEn18yevLHADlFPZY02KJGsu5FZt9YW/lybfK2uhWFI7Qg/07LekJiTv7iA== }
         engines: { node: '>=14' }
         hasBin: true
         dependencies:
             meow: 8.1.2
-            semver: 6.3.0
+            semver: 7.5.4
         dev: false
 
     /git-up@7.0.0:
@@ -8748,7 +8773,7 @@ packages:
             depd: 1.1.2
             inherits: 2.0.3
             setprototypeof: 1.1.0
-            statuses: 1.5.0
+            statuses: 1.4.0
         dev: false
 
     /http-errors@2.0.0:
@@ -11772,8 +11797,8 @@ packages:
             picocolors: 1.0.0
             source-map-js: 1.0.2
 
-    /preact@10.15.1:
-        resolution: { integrity: sha512-qs2ansoQEwzNiV5eAcRT1p1EC/dmEzaATVDJNiB3g2sRDWdA7b7MurXdJjB2+/WQktGWZwxvDrnuRFbWuIr64g== }
+    /preact@10.16.0:
+        resolution: { integrity: sha512-XTSj3dJ4roKIC93pald6rWuB2qQJO9gO2iLLyTe87MrjQN+HklueLsmskbywEWqCHlclgz3/M4YLL2iBr9UmMA== }
         dev: true
 
     /prettier@3.0.0:
@@ -13151,11 +13176,6 @@ packages:
 
     /statuses@1.4.0:
         resolution: { integrity: sha512-zhSCtt8v2NDrRlPQpCNtw/heZLtfUDqxBM1udqikb/Hbk52LK4nQSwr10u77iopCW5LsyHpuXS0GnEc48mLeew== }
-        engines: { node: '>= 0.6' }
-        dev: false
-
-    /statuses@1.5.0:
-        resolution: { integrity: sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA== }
         engines: { node: '>= 0.6' }
         dev: false
 
