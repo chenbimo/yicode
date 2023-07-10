@@ -1,4 +1,3 @@
-import { merge } from 'lodash-es';
 // 默认配置
 let appConfig = {
     // 应用名称
@@ -36,26 +35,25 @@ let appConfig = {
     blackMenus: [],
     // 数据库配置
     database: {
-        db: 'test',
-        username: 'root',
-        password: 'root',
-        host: '127.0.0.1',
-        port: 3306
+        db: process.env.YIAPI_DB_NAME,
+        username: process.env.YIAPI_DB_USER,
+        password: process.env.YIAPI_DB_PASS,
+        host: process.env.YIAPI_DB_HOST,
+        port: Number(process.env.YIAPI_DB_PORT)
     },
     // 缓存配置
     redis: {
-        host: '127.0.0.1',
-        port: 6379,
-        username: '',
-        password: process.env.NODE_ENV === 'production' ? '123456' : '',
-        // 第一次使用，请修改此值！！！
-        keyPrefix: 'test:'
+        host: process.env.YIAPI_REDIS_HOST,
+        port: Number(process.env.YIAPI_REDIS_PORT),
+        username: process.env.YIAPI_REDIS_USER,
+        password: process.env.YIAPI_REDIS_USER,
+        keyPrefix: process.env.YIAPI_REDIS_PREFIX
     },
     // jwt配置
     jwt: {
         // jwt密钥，第一次使用，请修改此密钥值！！！
-        secret: 'yiapi',
-        expiresIn: '7d'
+        secret: process.env.YIAPI_JWT_SECRET,
+        expiresIn: process.env.YIAPI_JWT_EXPIRES_IN
     },
     // 邮件配置
     mail: {
@@ -71,7 +69,7 @@ let appConfig = {
     },
     // 上传目录
     upload: {
-        dir: '../static/images/'
+        dir: process.env.YIAPI_UPLOAD_DIR
     },
     // 请求速率
     rate: {},
@@ -117,13 +115,5 @@ let appConfig = {
     // 自定义配置
     custom: {}
 };
-
-// 正式环境配置，仅需填写对应的不同配置
-let buildConfig = {};
-
-// 如果是正式环境，则使用正式环境的配置覆盖默认配置
-if (process.env.NODE_ENV === 'production') {
-    appConfig = merge(appConfig, buildConfig);
-}
 
 export { appConfig };
