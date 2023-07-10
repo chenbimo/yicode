@@ -1,6 +1,6 @@
 {
     "name": "@yicode-tech/site",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "随易科技",
     "main": "index.js",
     "private": true,
