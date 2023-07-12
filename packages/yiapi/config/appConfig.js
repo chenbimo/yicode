@@ -69,6 +69,7 @@ const appConfig = mergeAndConcat(
             port: 6379,
             username: '',
             password: '',
+            db: 0,
             keyPrefix: 'yiapi:'
         },
         // jwt配置

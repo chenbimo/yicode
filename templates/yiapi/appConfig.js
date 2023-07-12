@@ -46,7 +46,8 @@ let appConfig = {
         host: process.env.YIAPI_REDIS_HOST,
         port: Number(process.env.YIAPI_REDIS_PORT),
         username: process.env.YIAPI_REDIS_USER,
-        password: process.env.YIAPI_REDIS_USER,
+        password: process.env.YIAPI_REDIS_PASS,
+        db: Number(process.env.YIAPI_REDIS_DB),
         keyPrefix: process.env.YIAPI_REDIS_PREFIX
     },
     // jwt配置
