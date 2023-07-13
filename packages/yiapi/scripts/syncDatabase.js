@@ -194,9 +194,9 @@ async function syncDatabase() {
         for (let i = 0; i < allTableData.length; i++) {
             let tableDataItem = allTableData[i];
             // 删除新表
-            await trx.schema.dropTableIfExists(tableDataItem.tableNewName);
+            // await trx.schema.dropTableIfExists(tableDataItem.tableNewName);
             // 删除旧表
-            await trx.schema.dropTableIfExists(tableDataItem.tableOldName);
+            // await trx.schema.dropTableIfExists(tableDataItem.tableOldName);
             // 如果不存在表，则直接创建
             await trx.schema.createTable(tableDataItem.tableNewName || tableDataItem.tableName, (table) => {
                 // 设置数据表的字符集和编码

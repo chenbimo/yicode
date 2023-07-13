@@ -1,4 +1,5 @@
 import * as yiapi from '@yicode/yiapi';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await yiapi.utils.fnApiInfo(import.meta.url);
 
@@ -10,7 +11,7 @@ export const apiSchema = {
         type: 'object',
         title: '查询资讯详情接口',
         properties: {
-            id: yiapi.utils.fnSchema(yiapi.schemaField.id, '唯一 ID')
+            id: metaConfig.schema.id
         },
         required: ['id']
     }

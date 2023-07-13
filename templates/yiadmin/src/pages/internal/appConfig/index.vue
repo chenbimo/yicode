@@ -123,7 +123,7 @@ let $Method = {
                 url: '/tableConfig/select',
                 data: {
                     page: $Data.pagination.page,
-                    limit: $Data.pagination.limit
+                    limit: $GlobalData.pageLimit
                 }
             });
             $Data.tableData = res.data.rows;

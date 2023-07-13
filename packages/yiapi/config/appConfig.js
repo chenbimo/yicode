@@ -12,7 +12,6 @@ import { appConfigSchema } from '../schema/appConfigSchema.js';
 const ajv = new Ajv({ strict: false, messages: false });
 
 const validate = ajv.compile(appConfigSchema);
-
 const { appConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'appConfig.js'), 'appConfig', {});
 
 const valid = validate(importConfig);
@@ -70,6 +69,7 @@ const appConfig = mergeAndConcat(
             port: 6379,
             username: '',
             password: '',
+            db: 0,
             keyPrefix: 'yiapi:'
         },
         // jwt配置

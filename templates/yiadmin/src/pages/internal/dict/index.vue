@@ -39,7 +39,7 @@
         <div class="page-page">
             <div class="left"></div>
             <div class="right">
-                <a-pagination :total="$Data.pagination.total" show-total />
+                <a-pagination v-model:current="$Data.pagination.page" :total="$Data.pagination.total" show-total />
             </div>
         </div>
 
@@ -84,7 +84,6 @@ let $Data = $ref({
     },
     pagination: {
         page: 1,
-        limit: 20,
         total: 0
     }
 });
@@ -147,7 +146,7 @@ let $Method = {
                 url: '/dict/select',
                 data: {
                     page: $Data.pagination.page,
-                    limit: $Data.pagination.limit,
+                    limit: $GlobalData.pageLimit,
                     category_code: $Data.formData.category_code
                 }
             });

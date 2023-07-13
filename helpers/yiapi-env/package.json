@@ -1,0 +1,40 @@
+{
+    "name": "@yicode-helper/yiapi-env",
+    "version": "1.2.0",
+    "description": "yiapi 环境变量自动加载插件",
+    "type": "module",
+    "main": "./index.js",
+    "exports": {
+        ".": {
+            "import": "./index.js"
+        }
+    },
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yicode-team/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "keywords": [
+        "vite",
+        "vue.js",
+        "vue-cli",
+        "webpack",
+        "cli",
+        "vue",
+        "web",
+        "qrcode"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "dependencies": {
+        "dotenv": "^16.3.1",
+        "dotenv-expand": "^10.0.0",
+        "lodash-es": "^4.17.21"
+    }
+}

@@ -77,8 +77,8 @@ let $Data = $ref({
         keywords: ''
     },
     formData: {
-        account: '',
-        password: ''
+        account: 'dev',
+        password: '123456'
     },
     formRules: {
         account: { type: 'string', required: true, min: 1, max: 30, message: '请输入账号' },

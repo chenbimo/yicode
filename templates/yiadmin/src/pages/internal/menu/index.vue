@@ -81,7 +81,6 @@ let $Data = $ref({
     rowData: {},
     pagination: {
         page: 1,
-        limit: 20,
         total: 0
     }
 });
@@ -145,7 +144,7 @@ let $Method = {
                 url: '/menu/selectAll',
                 data: {
                     page: $Data.pagination.page,
-                    limit: $Data.pagination.limit
+                    limit: $GlobalData.pageLimit
                 }
             });
             $Data.tableData = yidash_tree_array2Tree(_.sortBy(yidash_datetime_relativeTime(res.data.rows), 'sort'));

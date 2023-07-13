@@ -8,6 +8,7 @@ import { forOwn as _forOwn } from 'lodash-es';
 import fg from 'fast-glob';
 import fastifyStatic from '@fastify/static';
 import gracefulShutdown from 'http-graceful-shutdown';
+import '@yicode-helper/yiapi-env';
 
 // 工具函数
 import * as utils from './utils/index.js';
@@ -23,12 +24,13 @@ import { schemaType } from './config/schemaType.js';
 import { sysConfig } from './config/sysConfig.js';
 import { tableField } from './config/tableField.js';
 
-// 插件信息
+// 脚本
 import { syncDatabase } from './scripts/syncDatabase.js';
 
 // 确保关键目录存在
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'plugins'));
+fs.ensureDirSync(path.resolve(sysConfig.appDir, 'env'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
 fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));

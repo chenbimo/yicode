@@ -1,4 +1,5 @@
 import * as yiapi from '@yicode/yiapi';
+import { metaConfig } from './_meta.js';
 
 const apiInfo = await yiapi.utils.fnApiInfo(import.meta.url);
 
@@ -10,11 +11,11 @@ export const apiSchema = {
         type: 'object',
         title: '添加资讯接口',
         properties: {
-            category_id: yiapi.utils.fnSchema(yiapi.schemaField.id, '资讯分类'),
-            title: yiapi.utils.fnSchema(yiapi.schemaField.title, '资讯标题'),
-            describe: yiapi.utils.fnSchema(yiapi.schemaField.string0to500, '资讯描述'),
-            thumbnail: yiapi.utils.fnSchema(yiapi.schemaField.image, '资讯缩略图'),
-            content: yiapi.utils.fnSchema(yiapi.schemaField.content, '资讯正文')
+            category_id: metaConfig.schema.category_id,
+            title: metaConfig.schema.title,
+            describe: metaConfig.schema.describe,
+            thumbnail: metaConfig.schema.thumbnail,
+            content: metaConfig.schema.content
         },
         required: [
             //

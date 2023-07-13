@@ -132,6 +132,10 @@ export const appConfigSchema = {
                     title: '主机地址',
                     type: 'string'
                 },
+                db: {
+                    title: '库序号',
+                    type: 'number'
+                },
                 port: {
                     title: '监听端口',
                     type: 'number'

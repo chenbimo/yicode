@@ -38,7 +38,7 @@
         <div class="page-page">
             <div class="left"></div>
             <div class="right">
-                <a-pagination :total="$Data.pagination.total" show-total />
+                <a-pagination v-model:current="$Data.pagination.page" :total="$Data.pagination.total" :default-page-size="$GlobalData.pageLimit" show-total show-jumper @change="$Method.apiSelectData()" />
             </div>
         </div>
 
@@ -79,7 +79,6 @@ let $Data = $ref({
     rowData: {},
     pagination: {
         page: 1,
-        limit: 20,
         total: 0
     }
 });
@@ -117,7 +116,7 @@ let $Method = {
                 url: '/admin/select',
                 data: {
                     page: $Data.pagination.page,
-                    limit: $Data.pagination.limit
+                    limit: $GlobalData.pageLimit
                 }
             });
             $Data.tableData = res.data.rows;
