@@ -73,7 +73,7 @@
         "rollup-plugin-copy": "^3.4.0",
         "sass": "^1.63.6",
         "simple-git-hooks": "^2.8.1",
-        "vite": "^4.4.2"
+        "vite": "^4.4.3"
     },
     "simple-git-hooks": {
         "pre-commit": "pnpm lint-staged"
