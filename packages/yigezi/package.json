@@ -34,7 +34,7 @@
         "gulp-rename": "^2.0.0",
         "gulp-sass": "^5.1.0",
         "lodash": "^4.17.21",
-        "postcss": "^8.4.25",
+        "postcss": "^8.4.26",
         "sass": "^1.63.6"
     },
     "type": "module",
