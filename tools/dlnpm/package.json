@@ -1,6 +1,6 @@
 {
     "name": "@yicode-tool/dlnpm",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "dlnpm - npm package download tool",
     "author": "chensuiyi <bimostyle@qq.com>",
     "bin": {

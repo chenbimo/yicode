@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yidash",
-    "version": "3.4.0",
+    "version": "3.4.1",
     "description": "yidash（易大师）实用业务方法库",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
