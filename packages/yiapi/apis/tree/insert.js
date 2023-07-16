@@ -42,7 +42,10 @@ export default async function (fastify, opts) {
                 } else {
                     let parentPermission = await model.clone().where('id', req.body.pid).first();
                     if (!parentPermission) {
-                        return { ...codeConfig.FAIL, msg: '父级树不存在' };
+                        return {
+                            ...codeConfig.FAIL,
+                            msg: '父级树不存在'
+                        };
                     }
                     req.body.pids = `${parentPermission.pids},${parentPermission.id}`;
                     req.body.level = req.body.pids.split(',').length;
