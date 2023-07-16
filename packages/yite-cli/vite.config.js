@@ -17,7 +17,7 @@ import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
-import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
+// import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
 import { yiteHtml as YiteHtml } from '@yicode-helper/yite-html';
 import { yiteRouter as YiteRouter } from '@yicode-helper/yite-router';
 import { yiteI18n as YiteI18n } from '@yicode-helper/yite-i18n';
@@ -244,7 +244,8 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(Components(componentsConfig));
     allPlugins.push(AutoImport(autoImportConfig));
     allPlugins.push(ChunkSplit(chunkSplitConfig));
-    allPlugins.push(YiteQrcode());
+    // 默认不使用二维码，多个网卡情况下会很乱
+    // allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
     allPlugins.push(Visualizer(visualizerConfig));
     allPlugins.push(viteVue(viteVueConfig));
@@ -300,7 +301,7 @@ export default defineConfig(async ({ command, mode }) => {
                 }
             },
             server: {
-                host: '0.0.0.0',
+                host: '127.0.0.1',
                 port: findPort,
                 watch: {
                     ignored: ['**/node_modules/**/*', '**/.git/**/*']
