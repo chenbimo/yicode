@@ -53,7 +53,7 @@
         "@dcloudio/uni-mp-weixin": "2.0.2-3080720230703001",
         "@dcloudio/uni-quickapp-webview": "2.0.2-3080720230703001",
         "@dcloudio/uni-ui": "^1.4.28",
-        "@vue-macros/reactivity-transform": "^0.3.14",
+        "@vue-macros/reactivity-transform": "^0.3.15",
         "blueimp-md5": "^2.19.0",
         "dayjs": "^1.11.9",
         "lodash-es": "^4.17.21",
@@ -73,7 +73,7 @@
         "rollup-plugin-copy": "^3.4.0",
         "sass": "^1.63.6",
         "simple-git-hooks": "^2.8.1",
-        "vite": "^4.4.3"
+        "vite": "^4.4.4"
     },
     "simple-git-hooks": {
         "pre-commit": "pnpm lint-staged"
