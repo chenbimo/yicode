@@ -65,14 +65,14 @@ export default defineConfig({
                         text: 'yiuni 基础项目开发模板',
                         link: 'https://npmmirror.com/@yicode-template/yiuni'
                     },
-                    {
-                        text: 'yiadmin 后台管理开发模板',
-                        link: 'https://npmmirror.com/@yicode-template/yiadmin'
-                    },
-                    {
-                        text: 'yiapi 易接口项目模板',
-                        link: 'https://npmmirror.com/@yicode-template/yiapi'
-                    },
+                    // {
+                    //     text: 'yiadmin 后台管理开发模板',
+                    //     link: 'https://npmmirror.com/@yicode-template/yiadmin'
+                    // },
+                    // {
+                    //     text: 'yiapi 易接口项目模板',
+                    //     link: 'https://npmmirror.com/@yicode-template/yiapi'
+                    // },
                     {
                         text: 'yidocs 易文档基础模板',
                         link: 'https://npmmirror.com/@yicode-template/yidocs'

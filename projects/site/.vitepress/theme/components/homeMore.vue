@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel document">
+        <!-- <div class="panel document">
             <div class="wrapper">
                 <div class="common-title">
                     <div class="inner">
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="panel opensource">
             <div class="wrapper">
                 <div class="common-title">
@@ -107,17 +107,6 @@
                                 <img class="img" alt="npm" src="https://img.shields.io/npm/v/@yicode/yite-cli?label=版本" />
                                 <img class="img" alt="npm" src="https://img.shields.io/npm/dm/@yicode/yite-cli?label=下载" />
                                 <a class="doc" target="_blank" href="https://yicode.tech/2-开源/1-yite-cli/1-基本简介/1-基本介绍.html">文档</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="box-inner">
-                            <div class="thumbnail">yiapi</div>
-                            <div class="describe">专业的 nodejs 接口开发框架</div>
-                            <div class="status">
-                                <img class="img" alt="npm" src="https://img.shields.io/npm/v/@yicode/yiapi?label=版本" />
-                                <img class="img" alt="npm" src="https://img.shields.io/npm/dm/@yicode/yiapi?label=下载" />
-                                <a class="doc" target="_blank" href="https://yicode.tech/2-开源/3-yiapi/1-基本简介/1-基本介绍.html">文档</a>
                             </div>
                         </div>
                     </div>
@@ -156,28 +145,6 @@
                             <div class="status">
                                 <img class="img" alt="npm" src="https://img.shields.io/npm/v/@yicode-template/yibase?label=版本" />
                                 <img class="img" alt="npm" src="https://img.shields.io/npm/dm/@yicode-template/yibase?label=下载" />
-                                <a class="doc" target="_blank" href="#">文档</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="box-inner">
-                            <div class="thumbnail">yiapi</div>
-                            <div class="describe">好用的 yiapi 接口开发模板</div>
-                            <div class="status">
-                                <img class="img" alt="npm" src="https://img.shields.io/npm/v/@yicode-template/yiadmin?label=版本" />
-                                <img class="img" alt="npm" src="https://img.shields.io/npm/dm/@yicode-template/yiadmin?label=下载" />
-                                <a class="doc" target="_blank" href="#">文档</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="box-inner">
-                            <div class="thumbnail">yiadmin</div>
-                            <div class="describe">好用的 vue3 后台管理模板</div>
-                            <div class="status">
-                                <img class="img" alt="npm" src="https://img.shields.io/npm/v/@yicode-template/yiadmin?label=版本" />
-                                <img class="img" alt="npm" src="https://img.shields.io/npm/dm/@yicode-template/yiadmin?label=下载" />
                                 <a class="doc" target="_blank" href="#">文档</a>
                             </div>
                         </div>
