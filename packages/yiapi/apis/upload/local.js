@@ -60,7 +60,7 @@ export default async function (fastify, opts) {
                 let year = format(new Date(), 'YYYY');
                 let month = format(new Date(), 'MM');
 
-                let dir = req.body.dir.value ? `static/${req.body.dir.value}/${year}-${month}` : `static/${year}-${month}`;
+                let dir = req.body.dir.value ? `${req.body.dir.value}/${year}-${month}` : `${year}-${month}`;
                 let name = `${fnUUID()}.${extname}`;
                 let path = `${dir}/${name}`;
 
