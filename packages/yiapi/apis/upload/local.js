@@ -57,7 +57,7 @@ export default async function (fastify, opts) {
 
                 let buffer = await data.toBuffer();
 
-                let year = format(new Date(), 'YYYY');
+                let year = format(new Date(), 'yyyy');
                 let month = format(new Date(), 'MM');
 
                 let dir = req.body.dir.value ? `${req.body.dir.value}/${year}-${month}` : `${year}-${month}`;
