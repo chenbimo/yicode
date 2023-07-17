@@ -55,31 +55,6 @@ export default defineConfig({
         nav: [
             ...navBar,
             {
-                text: '下载',
-                items: [
-                    {
-                        text: 'vite + vue3 基础项目开发模板',
-                        link: 'https://npmmirror.com/@yicode-template/base-vue3'
-                    },
-                    {
-                        text: 'yiuni 基础项目开发模板',
-                        link: 'https://npmmirror.com/@yicode-template/yiuni'
-                    },
-                    // {
-                    //     text: 'yiadmin 后台管理开发模板',
-                    //     link: 'https://npmmirror.com/@yicode-template/yiadmin'
-                    // },
-                    // {
-                    //     text: 'yiapi 易接口项目模板',
-                    //     link: 'https://npmmirror.com/@yicode-template/yiapi'
-                    // },
-                    {
-                        text: 'yidocs 易文档基础模板',
-                        link: 'https://npmmirror.com/@yicode-template/yidocs'
-                    }
-                ]
-            },
-            {
                 text: '直达',
                 items: [
                     // {
