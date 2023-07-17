@@ -40,7 +40,7 @@
         "colorette": "^2.0.20",
         "copy-anything": "^3.0.5",
         "croner": "^6.0.6",
-        "dayjs": "^1.11.9",
+        "date-fns": "^2.30.0",
         "fast-glob": "^3.3.0",
         "fastify": "^4.20.0",
         "fastify-plugin": "^4.5.0",

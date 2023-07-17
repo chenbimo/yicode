@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import { format } from 'date-fns';
 import { resolve } from 'node:path';
 import { writeFileSync } from 'node:fs';
 import { ensureDirSync, ensureFileSync } from 'fs-extra';
@@ -57,10 +57,10 @@ export default async function (fastify, opts) {
 
                 let buffer = await data.toBuffer();
 
-                let dd = dayjs();
-                let year = dd.format('YYYY');
-                let month = dd.format('MM');
-                let dir = `static/${req.body.dir.value}/${year}-${month}`.replace('//', '');
+                let year = format(new Date(), 'YYYY');
+                let month = format(new Date(), 'MM');
+
+                let dir = req.body.dir.value ? `static/${req.body.dir.value}/${year}-${month}` : `static/${year}-${month}`;
                 let name = `${fnUUID()}.${extname}`;
                 let path = `${dir}/${name}`;
 

@@ -156,9 +156,9 @@ importers:
             croner:
                 specifier: ^6.0.6
                 version: 6.0.6
-            dayjs:
-                specifier: ^1.11.9
-                version: 1.11.9
+            date-fns:
+                specifier: ^2.30.0
+                version: 2.30.0
             fast-glob:
                 specifier: ^3.3.0
                 version: 3.3.0
