@@ -68,8 +68,8 @@ importers:
                 version: 0.30.1
         devDependencies:
             rollup:
-                specifier: ^3.26.2
-                version: 3.26.2
+                specifier: ^3.26.3
+                version: 3.26.3
             vite:
                 specifier: ^4.4.4
                 version: 4.4.4(sass@1.63.6)
@@ -81,8 +81,8 @@ importers:
     helpers/yite-plugin:
         devDependencies:
             rollup:
-                specifier: ^3.26.2
-                version: 3.26.2
+                specifier: ^3.26.3
+                version: 3.26.3
             vite:
                 specifier: ^4.4.4
                 version: 4.4.4(sass@1.63.6)
@@ -115,8 +115,8 @@ importers:
                 specifier: ^7.2.0
                 version: 7.2.0
             '@fastify/multipart':
-                specifier: ^7.7.0
-                version: 7.7.0
+                specifier: ^7.7.1
+                version: 7.7.1
             '@fastify/rate-limit':
                 specifier: ^8.0.3
                 version: 8.0.3
@@ -163,8 +163,8 @@ importers:
                 specifier: ^3.3.0
                 version: 3.3.0
             fastify:
-                specifier: ^4.19.2
-                version: 4.19.2
+                specifier: ^4.20.0
+                version: 4.20.0
             fastify-plugin:
                 specifier: ^4.5.0
                 version: 4.5.0
@@ -1042,8 +1042,8 @@ importers:
     vscodes/es6-template-syntax:
         dependencies:
             rollup:
-                specifier: ^3.26.2
-                version: 3.26.2
+                specifier: ^3.26.3
+                version: 3.26.3
 
     vscodes/funtree: {}
 
@@ -3056,8 +3056,8 @@ packages:
             steed: 1.1.3
         dev: false
 
-    /@fastify/multipart@7.7.0:
-        resolution: { integrity: sha512-lE5v6+MVbLYmPL8yUHrvyezEOLQbZulEPL8itwGqPbNxL2pWdAN1HWEZ7f3VdwyR6wmQdOcpfZ0zdCU4BbWKzw== }
+    /@fastify/multipart@7.7.1:
+        resolution: { integrity: sha512-D2S6XH8pbQj0GxfSP10G/MaQye3UACVNUH/D4ssw3ne9pcQ4DSKqojVIGcwa5XI7pdR91gXRHSWXFx8koCzBlg== }
         dependencies:
             '@fastify/busboy': 1.2.1
             '@fastify/deepmerge': 1.3.0
@@ -4362,8 +4362,8 @@ packages:
         resolution: { integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA== }
         dev: false
 
-    /@sindresorhus/is@5.5.0:
-        resolution: { integrity: sha512-3rO1QIz6mL0MvFVTOxqhDJRVsLfG/vK2VSlKKPghALA6FhJqU7L+RUHnFvH5BP5HhkWiMQqq514i9ZFTcqoGCQ== }
+    /@sindresorhus/is@5.5.1:
+        resolution: { integrity: sha512-wTsEUhqTXg1NDW+o9aWANj4LxELwWjqN0F3ltsWwpYoh0NSlMWo+u7FluRrSF2E2uaPYx7dJ3FnTf69git/0ug== }
         engines: { node: '>=14.16' }
         dev: false
 
@@ -4707,7 +4707,7 @@ packages:
             '@vue/compiler-core': 3.3.4
             '@vue/shared': 3.3.4
             magic-string: 0.30.1
-            unplugin: 1.3.2
+            unplugin: 1.4.0
             vue: 3.3.4
         transitivePeerDependencies:
             - rollup
@@ -5977,7 +5977,7 @@ packages:
             '@types/http-cache-semantics': 4.0.1
             get-stream: 6.0.1
             http-cache-semantics: 4.1.1
-            keyv: 4.5.2
+            keyv: 4.5.3
             mimic-response: 4.0.0
             normalize-url: 8.0.0
             responselike: 3.0.0
@@ -7710,8 +7710,8 @@ packages:
             fastify-plugin: 3.0.1
         dev: false
 
-    /fastify@4.19.2:
-        resolution: { integrity: sha512-2unheeIRWFf9/Jjcz7djOpKuXCTzZjlyFfiBwKqpldkHMN2rfTLu/f9pYTdwlhzC9Cdj0S2H12zlug0Kd5uZ1w== }
+    /fastify@4.20.0:
+        resolution: { integrity: sha512-zWWi5KGAb1YZ6fyrnFnA1CA1EZHkGM6YuELgB3QpS3l4lLRy14W1cc16b4KGPH/zQ98WCSdS+T41JkHY3eq1oA== }
         dependencies:
             '@fastify/ajv-compiler': 3.5.0
             '@fastify/error': 3.3.0
@@ -8405,7 +8405,7 @@ packages:
         resolution: { integrity: sha512-XfBk1CxOOScDcMr9O1yKkNaQyy865NbYs+F7dr4H0LZMVgCj2Le59k6PqbNHoL5ToeaEQUYh6c6yMfVcc6SJxA== }
         engines: { node: '>=16' }
         dependencies:
-            '@sindresorhus/is': 5.5.0
+            '@sindresorhus/is': 5.5.1
             '@szmarczak/http-timer': 5.0.1
             cacheable-lookup: 7.0.0
             cacheable-request: 10.2.12
@@ -9567,8 +9567,8 @@ packages:
     /just-debounce@1.1.0:
         resolution: { integrity: sha512-qpcRocdkUmf+UTNBYx5w6dexX5J31AKK1OmPwH630a83DdVVUIngk55RSAiIGpQyoH0dlr872VHfPjnQnK1qDQ== }
 
-    /keyv@4.5.2:
-        resolution: { integrity: sha512-5MHbFaKn8cNSmVW7BYnijeAVlE4cYA/SVkifVgrh7yotnfhKmjuXpDKjrABLnT0SfHWV21P8ow07OGfRrNDg8g== }
+    /keyv@4.5.3:
+        resolution: { integrity: sha512-QCiSav9WaX1PgETJ+SpNnx2PRRapJ/oRSXM4VO5OGYGSjrxbKPVFVhB3l2OCbLCk329N8qyAtsJjSjvVBWzEug== }
         dependencies:
             json-buffer: 3.0.1
         dev: false
@@ -12493,8 +12493,8 @@ packages:
             yargs: 17.7.2
         dev: false
 
-    /rollup@3.26.2:
-        resolution: { integrity: sha512-6umBIGVz93er97pMgQO08LuH3m6PUb3jlDUUGFsNJB6VgTCUaDFpupf5JfU30529m/UKOgmiX+uY6Sx8cOYpLA== }
+    /rollup@3.26.3:
+        resolution: { integrity: sha512-7Tin0C8l86TkpcMtXvQu6saWH93nhG3dGQ1/+l5V2TDMceTxO7kDiK6GzbfLWNNxqJXm591PcEZUozZm51ogwQ== }
         engines: { node: '>=14.18.0', npm: '>=8.0.0' }
         hasBin: true
         optionalDependencies:
@@ -13797,7 +13797,7 @@ packages:
             pkg-types: 1.0.3
             scule: 1.0.0
             strip-literal: 1.0.1
-            unplugin: 1.3.2
+            unplugin: 1.4.0
         transitivePeerDependencies:
             - rollup
         dev: false
@@ -13902,7 +13902,7 @@ packages:
             magic-string: 0.30.1
             minimatch: 9.0.3
             unimport: 3.0.14
-            unplugin: 1.3.2
+            unplugin: 1.4.0
         transitivePeerDependencies:
             - rollup
         dev: false
@@ -13933,7 +13933,7 @@ packages:
             debug: 4.3.4
             kolorist: 1.8.0
             local-pkg: 0.4.3
-            unplugin: 1.3.2
+            unplugin: 1.4.0
         transitivePeerDependencies:
             - supports-color
         dev: false
@@ -13960,15 +13960,15 @@ packages:
             magic-string: 0.30.1
             minimatch: 9.0.3
             resolve: 1.22.2
-            unplugin: 1.3.2
+            unplugin: 1.4.0
             vue: 3.3.4
         transitivePeerDependencies:
             - rollup
             - supports-color
         dev: false
 
-    /unplugin@1.3.2:
-        resolution: { integrity: sha512-Lh7/2SryjXe/IyWqx9K7IKwuKhuOFZEhotiBquOODsv2IVyDkI9lv/XhgfjdXf/xdbv32txmnBNnC/JVTDJlsA== }
+    /unplugin@1.4.0:
+        resolution: { integrity: sha512-5x4eIEL6WgbzqGtF9UV8VEC/ehKptPXDS6L2b0mv4FRMkJxRtjaJfOWDd6a8+kYbqsjklix7yWP0N3SUepjXcg== }
         dependencies:
             acorn: 8.10.0
             chokidar: 3.5.3
@@ -14291,7 +14291,7 @@ packages:
         dependencies:
             esbuild: 0.18.13
             postcss: 8.4.26
-            rollup: 3.26.2
+            rollup: 3.26.3
         optionalDependencies:
             fsevents: 2.3.2
         dev: true
@@ -14327,7 +14327,7 @@ packages:
             '@types/node': 18.16.19
             esbuild: 0.18.13
             postcss: 8.4.26
-            rollup: 3.26.2
+            rollup: 3.26.3
         optionalDependencies:
             fsevents: 2.3.2
         dev: false
@@ -14362,7 +14362,7 @@ packages:
         dependencies:
             esbuild: 0.18.13
             postcss: 8.4.26
-            rollup: 3.26.2
+            rollup: 3.26.3
             sass: 1.63.6
         optionalDependencies:
             fsevents: 2.3.2
