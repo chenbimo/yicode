@@ -80,9 +80,12 @@ async function fnGetTableData(allTableName) {
             tableDataItem.tableOldName = tableDataItem.tableName + '_old';
             // 使用自带的字段覆盖扩展的字段
             tableDataItem.fields = _merge(appConfig.table[tableName] || {}, tableDataItem.fields);
-            if (tableName === 'sys_user' && appConfig.table[tableName]?.test_field?.type) {
-                console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表必须存在 test_field 字段，用于检测自定义字段是否生效，避免同步时删除已有字段`);
-                isCustomTablePass = true;
+            if (tableName === 'sys_user') {
+                if (appConfig.table[tableName]?.test_field?.type) {
+                    isCustomTablePass = true;
+                } else {
+                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表必须存在 test_field 字段，用于检测自定义字段是否生效，避免同步时删除已有字段`);
+                }
             }
             // 如果存在表，则创建新表
             if (allTableName.includes(tableDataItem.tableName)) {
@@ -186,6 +189,7 @@ async function syncDatabase() {
     try {
         // 重置校验默认值
         isCheckPass = true;
+        isCustomTablePass = false;
 
         // 检测校验表字段是否都正确
         let allTableData = await fnGetTableData(allTableName);
