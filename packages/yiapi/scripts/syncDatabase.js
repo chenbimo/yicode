@@ -151,8 +151,6 @@ async function fnGetTableData(allTableName) {
             });
             allTableData.push(tableDataItem);
         }
-        if (isPass === false) {
-        }
         return allTableData;
     } catch (err) {
         console.log('🚀 ~ file: syncDatabase.js:279 ~ fnCheckTableField ~ err:', err);
