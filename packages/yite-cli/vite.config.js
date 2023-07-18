@@ -301,7 +301,7 @@ export default defineConfig(async ({ command, mode }) => {
                 }
             },
             server: {
-                host: '127.0.0.1',
+                host: '0.0.0.0',
                 port: findPort,
                 watch: {
                     ignored: ['**/node_modules/**/*', '**/.git/**/*']
