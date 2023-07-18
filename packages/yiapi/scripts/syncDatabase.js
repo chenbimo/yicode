@@ -30,6 +30,8 @@ import { fieldType } from '../config/fieldType.js';
 
 // 是否全部检测通过，未通过则不进行表创建
 let isCheckPass = true;
+// 判断自定义字段是否生效
+let isCustomTablePass = false;
 
 // 名称限制
 let nameLimit = /^[a-z][a-z_0-9]*$/;
@@ -64,6 +66,7 @@ async function fnGetTableData(allTableName) {
             cwd: sysConfig.yiapiDir
         });
         let allTableData = [];
+
         for (let i = 0; i < tableFiles.length; i++) {
             let filePath = tableFiles[i];
             let fileUrl = url.pathToFileURL(filePath);
@@ -77,6 +80,10 @@ async function fnGetTableData(allTableName) {
             tableDataItem.tableOldName = tableDataItem.tableName + '_old';
             // 使用自带的字段覆盖扩展的字段
             tableDataItem.fields = _merge(appConfig.table[tableName] || {}, tableDataItem.fields);
+            if (tableName === 'sys_user' && appConfig.table[tableName]?.test_field?.type) {
+                console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表必须存在 test_field 字段，用于检测自定义字段是否生效，避免同步时删除已有字段`);
+                isCustomTablePass = true;
+            }
             // 如果存在表，则创建新表
             if (allTableName.includes(tableDataItem.tableName)) {
                 tableDataItem.tableNewName = tableDataItem.tableName + '_new';
@@ -144,6 +151,8 @@ async function fnGetTableData(allTableName) {
             });
             allTableData.push(tableDataItem);
         }
+        if (isPass === false) {
+        }
         return allTableData;
     } catch (err) {
         console.log('🚀 ~ file: syncDatabase.js:279 ~ fnCheckTableField ~ err:', err);
@@ -184,7 +193,7 @@ async function syncDatabase() {
         let allTableData = await fnGetTableData(allTableName);
 
         // 如果检测没有通过，则不进行表相关操作
-        if (isCheckPass === false) {
+        if (isCheckPass === false || isCustomTablePass === false) {
             console.log(`${logSymbols.warning} ${color.red('请先处理完毕所有的错误提示内容')}`);
             process.exit();
             return;
