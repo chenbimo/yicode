@@ -56,7 +56,7 @@
         "log-symbols": "^5.1.0",
         "merge-anything": "^5.1.7",
         "micromatch": "^4.0.5",
-        "mysql2": "^3.5.1",
+        "mysql2": "^3.5.2",
         "nanoid": "^4.0.2",
         "nodemailer": "^6.9.3",
         "ora": "^6.3.1",
