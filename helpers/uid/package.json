@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/uid",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "生成安全的唯一字符",
     "type": "module",
     "exports": {
@@ -31,6 +31,5 @@
         "web",
         "qrcode"
     ],
-    "author": "chensuiyi <bimostyle@qq.com>",
-    "dependencies": {}
+    "author": "chensuiyi <bimostyle@qq.com>"
 }
