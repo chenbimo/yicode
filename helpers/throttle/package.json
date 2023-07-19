@@ -1,0 +1,38 @@
+{
+    "name": "@yicode-helper/throttle",
+    "version": "1.0.0",
+    "description": "节流循环函数",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./index.mjs",
+            "require": "./index.cjs"
+        }
+    },
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yicode-team/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "keywords": [
+        "vite",
+        "vue.js",
+        "vue-cli",
+        "webpack",
+        "cli",
+        "vue",
+        "web",
+        "qrcode"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "dependencies": {
+        "javascript-obfuscator": "^4.0.2"
+    }
+}
