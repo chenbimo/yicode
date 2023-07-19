@@ -43,7 +43,7 @@
         "date-fns": "^2.30.0",
         "fast-glob": "^3.3.0",
         "fastify": "^4.20.0",
-        "fastify-plugin": "^4.5.0",
+        "fastify-plugin": "^4.5.1",
         "fastify-xml-body-parser": "^2.2.0",
         "fs-extra": "^11.1.1",
         "got": "^13.0.0",
@@ -58,7 +58,7 @@
         "micromatch": "^4.0.5",
         "mysql2": "^3.5.2",
         "nanoid": "^4.0.2",
-        "nodemailer": "^6.9.3",
+        "nodemailer": "^6.9.4",
         "ora": "^6.3.1",
         "winston": "^3.10.0",
         "winston-daily-rotate-file": "^4.7.1"
