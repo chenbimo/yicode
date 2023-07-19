@@ -37,7 +37,19 @@ importers:
                 specifier: ^4.4.4
                 version: 4.4.4(sass@1.63.6)
 
+    helpers/delay:
+        dependencies:
+            javascript-obfuscator:
+                specifier: ^4.0.2
+                version: 4.0.2
+
     helpers/rollup-obfuscator:
+        dependencies:
+            javascript-obfuscator:
+                specifier: ^4.0.2
+                version: 4.0.2
+
+    helpers/throttle:
         dependencies:
             javascript-obfuscator:
                 specifier: ^4.0.2
@@ -3909,7 +3921,7 @@ packages:
         resolution: { integrity: sha512-cSiMDx9oI9vvVT+V/WHcbqrksNoc9PIPFiks1lPS7zrVWkEbgA6REQyYmRd2H71kihzqhX5TJ20f2dWv6oEPdA== }
         engines: { node: ^14.17.0 || >=16.0.0 }
         dependencies:
-            chalk: 4.1.0
+            chalk: 4.1.2
             execa: 5.0.0
             strong-log-transformer: 2.1.0
         dev: false
@@ -8399,7 +8411,7 @@ packages:
             fs.realpath: 1.0.0
             inflight: 1.0.6
             inherits: 2.0.4
-            minimatch: 3.0.5
+            minimatch: 3.1.2
             once: 1.4.0
             path-is-absolute: 1.0.1
         dev: false
@@ -9513,7 +9525,7 @@ packages:
         hasBin: true
         dependencies:
             async: 3.2.4
-            chalk: 4.1.0
+            chalk: 4.1.2
             filelist: 1.0.4
             minimatch: 3.1.2
         dev: false
@@ -9553,7 +9565,7 @@ packages:
         resolution: { integrity: sha512-FsNCvinvl8oVxpNLttNQX7FAq7vR+gMDGj90tiP7siWw1UdakWUGqrylpsYrpvj908IYckm5Y0Q7azNAozU1Kg== }
         engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
         dependencies:
-            chalk: 4.1.0
+            chalk: 4.1.2
             diff-sequences: 29.4.3
             jest-get-type: 29.4.3
             pretty-format: 29.6.1
@@ -11083,7 +11095,7 @@ packages:
             '@yarnpkg/parsers': 3.0.0-rc.46
             '@zkochan/js-yaml': 0.0.6
             axios: 1.4.0
-            chalk: 4.1.0
+            chalk: 4.1.2
             cli-cursor: 3.1.0
             cli-spinners: 2.6.1
             cliui: 7.0.4
