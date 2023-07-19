@@ -252,6 +252,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="line">
+                        <div class="line-inner">
+                            <div class="thumbnail">rollup-obfuscator</div>
+                            <div class="describe">rollup 代码混淆插件</div>
+                            <div class="status">
+                                <img class="img" alt="npm" src="https://img.shields.io/npm/v/@yicode-helper/rollup-obfuscator?label=版本" />
+                                <div class="w-10px"></div>
+                                <img class="img" alt="npm" src="https://img.shields.io/npm/dm/@yicode-helper/rollup-obfuscator?label=下载" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="common-sub-title">工具开源</div>
                 <div class="common-sub-describe">独立的工具项目，有趣，好玩，有用</div>
