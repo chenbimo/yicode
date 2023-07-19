@@ -1,5 +1,5 @@
 import JavaScriptObfuscator from 'javascript-obfuscator';
-export const rollupObfuscator = (options) => {
+const rollupObfuscator = (options) => {
     return {
         name: 'rollup-obfuscator',
         transform(source, id) {
@@ -8,3 +8,4 @@ export const rollupObfuscator = (options) => {
         }
     };
 };
+export { rollupObfuscator };

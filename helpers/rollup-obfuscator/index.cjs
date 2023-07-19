@@ -9,4 +9,4 @@ const rollupObfuscator = (options) => {
     };
 };
 
-module.exports = rollupObfuscator;
+module.exports = { rollupObfuscator };
