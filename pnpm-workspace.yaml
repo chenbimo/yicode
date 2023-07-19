@@ -8,3 +8,4 @@ packages:
     - 'tools/*'
     - 'others/*'
     - 'browsers/*'
+    - 'labs/*'
