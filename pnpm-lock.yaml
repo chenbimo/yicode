@@ -37,11 +37,7 @@ importers:
                 specifier: ^4.4.4
                 version: 4.4.4(sass@1.63.6)
 
-    helpers/delay:
-        dependencies:
-            javascript-obfuscator:
-                specifier: ^4.0.2
-                version: 4.0.2
+    helpers/delay: {}
 
     helpers/rollup-obfuscator:
         dependencies:
@@ -49,11 +45,9 @@ importers:
                 specifier: ^4.0.2
                 version: 4.0.2
 
-    helpers/throttle:
-        dependencies:
-            javascript-obfuscator:
-                specifier: ^4.0.2
-                version: 4.0.2
+    helpers/throttle: {}
+
+    helpers/uid: {}
 
     helpers/yiapi-env:
         dependencies:
