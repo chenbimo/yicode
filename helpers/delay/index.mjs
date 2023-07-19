@@ -1,3 +1,5 @@
+const clearMethods = new WeakMap();
+
 export const delay = ({ clearTimeout: defaultClear, setTimeout: defaultSet } = {}) => {
     // We cannot use `async` here as we need the promise identity.
     return (milliseconds, { value, signal } = {}) => {
