@@ -1,10 +1,13 @@
+import crypto from 'node:crypto';
 import path from 'node:path';
 import url from 'node:url';
+
 import fg from 'fast-glob';
 import md5 from 'blueimp-md5';
 import got from 'got';
 import { customAlphabet } from 'nanoid';
 import { copy as copyAny } from 'copy-anything';
+import { luhn } from '@yicode-helper/luhn';
 import {
     //
     kebabCase as _kebabCase,
@@ -68,6 +71,14 @@ export function fnMergeArray(target, source) {
 export function fnCloneAny(data) {
     let result = copyAny(data);
     return result;
+}
+
+// 创建顺序自增唯一ID
+export function fnIncrUID() {
+    let timestamp = Date.now();
+    let random = crypto.randomInt(100000, 999999);
+    let check = luhn(`${timestamp}${random}`);
+    return `${timestamp}${random}${check}`;
 }
 
 // 获取接口目录名称
