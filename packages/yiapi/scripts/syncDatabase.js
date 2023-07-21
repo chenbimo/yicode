@@ -47,6 +47,7 @@ let baseFields = {
 // 可用的选项值
 let optionFields = ['unique', 'index', 'unsigned'];
 
+// 不能设置的字段
 let denyFields = [
     //
     'id',
@@ -55,6 +56,19 @@ let denyFields = [
     'deleted_at',
     'state'
 ];
+
+// 文本类型可用的值，
+let textType = [
+    //
+    'text', // 默认 16KB
+    'mediumtext', // 16MB
+    'longtext' // 4GB
+];
+
+// 数字类型的选项
+let numberOptions = ['unsigned', 'index', 'unique'];
+// 字符类型的选项
+let stringOptions = ['index', 'unique'];
 
 // 检测校验表格数据
 async function fnGetTableData(allTableName) {
@@ -213,16 +227,13 @@ async function syncDatabase() {
                 // 设置数据表的字符集和编码
                 table.charset('utf8mb4');
                 table.collate('utf8mb4_general_ci');
-
-                // 默认每个表的ID字段自增
-                table.bigincrements('id', { primaryKey: true });
-
+                // 默认每个表的ID为自增流水号
+                table.bigInteger('id').primary().index().notNullable().unsigned().defaultTo(0).comment('主键ID');
                 // 设置状态
-                table['tinyint']('state').notNullable().defaultTo(0).comment('状态(0:正常,1:禁用)');
-
+                table.tinyint('state').index().notNullable().defaultTo(0).comment('状态(0:正常,1:禁用,2:其他)');
                 // 设置时间
-                table['bigint']('created_at').notNullable().unsigned().defaultTo(0).comment('创建时间');
-                table['bigint']('updated_at').notNullable().unsigned().defaultTo(0).comment('更新时间');
+                table.bigInteger('created_at').index().notNullable().unsigned().defaultTo(0).comment('创建时间');
+                table.bigInteger('updated_at').index().notNullable().unsigned().defaultTo(0).comment('更新时间');
 
                 // 处理每个字段
                 _forOwn(tableDataItem.fields, (fieldData, fieldName) => {
@@ -247,7 +258,9 @@ async function syncDatabase() {
 
                     fieldData.options.forEach((option) => {
                         if (fieldInfo.options.includes(option)) {
-                            fieldItem[option]();
+                            if (option !== 'length') {
+                                fieldItem[option]();
+                            }
                         }
                     });
                 });
