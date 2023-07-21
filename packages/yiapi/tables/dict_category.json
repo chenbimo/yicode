@@ -14,7 +14,7 @@
             "default": ""
         },
         "sort": {
-            "type": "bigint",
+            "type": "bigInteger",
             "comment": "字典分类排序",
             "default": 0
         },

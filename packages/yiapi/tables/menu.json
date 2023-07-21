@@ -2,7 +2,7 @@
     "name": "系统菜单表",
     "fields": {
         "pid": {
-            "type": "bigint",
+            "type": "bigInteger",
             "comment": "父级ID",
             "default": 0
         },
@@ -26,7 +26,7 @@
             "options": ["unique"]
         },
         "sort": {
-            "type": "bigint",
+            "type": "bigInteger",
             "comment": "字典排序",
             "default": 0
         },

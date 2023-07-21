@@ -32,7 +32,7 @@
             "default": ""
         },
         "sort": {
-            "type": "bigint",
+            "type": "bigInteger",
             "comment": "角色排序",
             "default": 0
         },
