@@ -1,0 +1,27 @@
+{
+    "name": "@yicode/bigscreen-box",
+    "version": "1.0.9",
+    "description": "bigscreen-box（易大屏）大屏边框库",
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "main": "./index.js",
+    "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "sideEffects": true,
+    "keywords": [
+        "lodash",
+        "utils",
+        "helper",
+        "help"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yicode-team/yicode.git"
+    },
+    "homepage": "https://yicode.tech"
+}
