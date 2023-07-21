@@ -51,7 +51,7 @@
         "gulp-uglify-es": "^3.0.0",
         "lodash": "^4.17.21",
         "postcss": "^8.4.26",
-        "sass": "^1.63.6",
+        "sass": "^1.64.0",
         "through2": "^4.0.2"
     },
     "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f",
