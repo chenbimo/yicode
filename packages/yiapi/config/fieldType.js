@@ -1,67 +1,44 @@
 // 字段类型
 export const fieldType = {
-    bigint: {
-        type: 'number',
-        options: ['unsigned']
-    },
+    // 字符串
     string: {
         type: 'string',
-        options: ['length']
-    },
-    tinyint: {
-        type: 'number',
-        options: ['length', 'unsigned']
-    },
-    smallint: {
-        type: 'number',
-        options: ['unsigned']
-    },
-    mediumint: {
-        type: 'number',
-        options: ['unsigned']
+        args: ['length']
     },
     text: {
         type: 'text',
-        options: ['text_type', 'nullable']
+        args: ['text_type']
+    },
+    bigInteger: {
+        type: 'number',
+        args: []
+    },
+    tinyint: {
+        type: 'number',
+        args: ['length']
+    },
+    smallint: {
+        type: 'number',
+        args: []
+    },
+    mediumint: {
+        type: 'number',
+        args: []
+    },
+    integer: {
+        type: 'number',
+        args: ['length']
     },
     float: {
-        type: 'float',
-        options: ['precision', 'scale', 'unsigned']
+        type: 'number',
+        args: ['precision', 'scale']
     },
     double: {
-        type: 'float',
-        options: ['precision', 'scale', 'unsigned']
+        type: 'number',
+        args: ['precision', 'scale']
     },
     decimal: {
-        type: 'float',
-        options: ['precision', 'scale', 'unsigned']
-    },
-    boolean: {
-        type: 'bool',
-        options: []
-    },
-    date: {
-        type: 'date',
-        options: []
-    },
-    datetime: {
-        type: 'date',
-        options: ['precision']
-    },
-    time: {
-        type: 'date',
-        options: ['precision']
-    },
-    binary: {
-        type: 'binary',
-        options: ['length']
-    },
-    json: {
-        type: 'json',
-        options: []
-    },
-    jsonb: {
-        type: 'json',
-        options: []
+        type: 'number',
+        args: ['precision', 'scale']
     }
 };
