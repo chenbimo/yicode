@@ -1,0 +1,35 @@
+{
+    "name": "@yicode-helper/luhn",
+    "version": "1.0.0",
+    "description": "信用卡校验位生成算法",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./index.mjs",
+            "require": "./index.cjs"
+        }
+    },
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yicode-team/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "keywords": [
+        "vite",
+        "vue.js",
+        "vue-cli",
+        "webpack",
+        "cli",
+        "vue",
+        "web",
+        "qrcode"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>"
+}
