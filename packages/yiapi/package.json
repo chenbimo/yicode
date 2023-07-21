@@ -32,6 +32,7 @@
         "@fastify/static": "^6.10.2",
         "@fastify/swagger": "^8.8.0",
         "@fastify/swagger-ui": "^1.9.2",
+        "@yicode-helper/luhn": "workspace:^",
         "@yicode-helper/yiapi-env": "workspace:*",
         "ajv": "^8.12.0",
         "ajv-i18n": "^4.2.0",
