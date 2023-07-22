@@ -243,7 +243,6 @@ async function syncDatabase() {
 
         // 检测校验表字段是否都正确
         let allTableData = await fnGetTableData(allTableName);
-        return;
 
         // 如果检测没有通过，则不进行表相关操作
         if (isCheckPass === false || isCustomTablePass === false) {
