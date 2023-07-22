@@ -109,15 +109,6 @@ importers:
 
     helpers/yite-router: {}
 
-    labs/test:
-        dependencies:
-            '@yicode-helper/rollup-obfuscator':
-                specifier: workspace:^
-                version: link:../../helpers/rollup-obfuscator
-            rollup:
-                specifier: ^3.26.3
-                version: 3.26.3
-
     others/commander: {}
 
     others/minimist: {}
@@ -665,18 +656,6 @@ importers:
             vue-i18n:
                 specifier: ^9.2.2
                 version: 9.2.2(vue@3.3.4)
-
-    projects/blog: {}
-
-    projects/site:
-        dependencies:
-            '@yicode-helper/yidocs-auto':
-                specifier: workspace:*
-                version: link:../../helpers/yidocs-auto
-        devDependencies:
-            vitepress:
-                specifier: 1.0.0-beta.5
-                version: 1.0.0-beta.5(@algolia/client-search@4.19.1)(search-insights@2.7.0)
 
     templates/yiadmin:
         dependencies:
