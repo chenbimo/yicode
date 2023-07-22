@@ -20,15 +20,15 @@
             "default": ""
         },
         "menu_ids": {
-            "type": "string",
+            "type": "text",
             "comment": "角色菜单",
-            "length": 50000,
+            "textType": ["mediumtext"],
             "default": ""
         },
         "api_ids": {
-            "type": "string",
+            "type": "text",
             "comment": "角色接口",
-            "length": 50000,
+            "textType": ["mediumtext"],
             "default": ""
         },
         "sort": {

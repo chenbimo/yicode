@@ -261,7 +261,7 @@ async function syncDatabase() {
                     // 设置默认值
                     if (fieldData.default !== undefined) fieldItem.defaultTo(fieldData.default);
                     // 如果是 text 类型，则允许其为 null
-                    if (fieldData.type === 'text') fieldItem.nullable();
+                    // if (fieldData.type === 'text') fieldItem.nullable();
 
                     fieldData.options.forEach((option) => {
                         if (fieldOption.includes(option)) {
