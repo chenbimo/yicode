@@ -22,13 +22,13 @@
         "menu_ids": {
             "type": "string",
             "comment": "角色菜单",
-            "length": 5000,
+            "length": 50000,
             "default": ""
         },
         "api_ids": {
             "type": "string",
             "comment": "角色接口",
-            "length": 5000,
+            "length": 50000,
             "default": ""
         },
         "sort": {

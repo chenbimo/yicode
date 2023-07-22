@@ -17,7 +17,8 @@ import {
     fnClearInsertData,
     fnClearUpdateData,
     fnMD5,
-    fnPureMD5
+    fnPureMD5,
+    fnIncrUID
 } from '../utils/index.js';
 
 // 内置角色配置
@@ -90,6 +91,7 @@ async function plugin(fastify, opts) {
         _forOwn(roleConfig, (item, key) => {
             if (roleCodes.includes(key) === false && key !== 'dev') {
                 // 角色不存在，则添加
+                item.id = fnIncrUID();
                 item.code = key;
                 item.api_ids = '';
                 item.menu_ids = '';
@@ -132,6 +134,7 @@ async function plugin(fastify, opts) {
          */
         if (!devRoleData) {
             let insertData = {
+                id: fnIncrUID(),
                 code: 'dev',
                 name: appConfig.devName || '开发管理员',
                 describe: '技术性相关的管理和维护',

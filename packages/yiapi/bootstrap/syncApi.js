@@ -21,7 +21,8 @@ import {
     fnAllApiMeta,
     fnAllApiFiles,
     fnImport,
-    fnCloneAny
+    fnCloneAny,
+    fnIncrUID
 } from '../utils/index.js';
 
 // 同步接口目录
@@ -105,6 +106,7 @@ async function syncApiDir(fastify) {
             updateApiDirData.push(apiMeta);
         } else {
             // 如果数据库中没有此目录，则添加目录
+            apiMeta.id = fnIncrUID();
             apiMeta.created_at = fnTimestamp();
             insertApiDirData.push(apiMeta);
         }
@@ -199,6 +201,7 @@ async function syncApiFile(fastify) {
                 // 防止2个同名接口重复添加
                 autoApiObject[apiFileName] = true;
                 let apiParams = {
+                    id: fnIncrUID(),
                     pid: 0,
                     name: apiSchema?.summary || '',
                     value: apiFileName,
