@@ -298,16 +298,16 @@ async function syncDatabase() {
                     // 数字类型，默认为有符号
                     if (fieldData.type === 'number' || fieldData.type === 'float') {
                         if (fieldData.unsigned !== false) {
-                            fieldItem = fieldItem().unsigned();
+                            fieldItem = fieldItem.unsigned();
                         }
                     }
                     // 设置索引
                     if (fieldData.index === true) {
-                        fieldItem = fieldItem().index();
+                        fieldItem = fieldItem.index();
                     }
                     // 设置唯一性
                     if (fieldData.unique === true) {
-                        fieldItem = fieldItem().unique();
+                        fieldItem = fieldItem.unique();
                     }
                 });
             });
