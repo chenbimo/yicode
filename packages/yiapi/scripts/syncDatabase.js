@@ -55,18 +55,18 @@ let textType = [
 ];
 
 // 一个字段全部属性
-let oneField = {
-    type: 'integer',
-    comment: '字段',
-    length: 100,
-    default: 0,
-    index: true,
-    unique: true,
-    unsigned: true,
-    precision: 5,
-    scale: 5,
-    capacity: 'mediumtext'
-};
+// let oneField = {
+//     type: 'integer',
+//     comment: '字段',
+//     length: 100,
+//     default: 0,
+//     index: true,
+//     unique: true,
+//     unsigned: true,
+//     precision: 5,
+//     scale: 5,
+//     capacity: 'mediumtext'
+// };
 
 // 检测校验表格数据
 async function fnGetTableData(allTableName) {
@@ -139,18 +139,23 @@ async function fnGetTableData(allTableName) {
                     console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段定义缺少 ${color.yellowBright('type')} 属性，请检查`);
                     isCheckPass = false;
                 }
+                // 不能为不存在的类型
+                if (fieldType[fieldData.type] === undefined) {
+                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright(fieldData.type)} 类型不存在`);
+                    isCheckPass = false;
+                }
                 // 索引只能为布尔值
-                if (fieldData.index === undefined && [true, false].includes(fieldData.index) === false) {
+                if (fieldData.index !== undefined && [true, false].includes(fieldData.index) === false) {
                     console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('index')} 属性只能为 true 或 false`);
                     isCheckPass = false;
                 }
                 // 唯一只能为布尔值
-                if (fieldData.unique === undefined && [true, false].includes(fieldData.unique) === false) {
+                if (fieldData.unique !== undefined && [true, false].includes(fieldData.unique) === false) {
                     console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('unique')} 属性只能为 true 或 false`);
                     isCheckPass = false;
                 }
                 // 无符号只能为布尔值
-                if (fieldData.unsigned === undefined && [true, false].includes(fieldData.unsigned) === false) {
+                if (fieldData.unsigned !== undefined && [true, false].includes(fieldData.unsigned) === false) {
                     console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('unsigned')} 属性只能为 true 或 false`);
                     isCheckPass = false;
                 }
@@ -161,11 +166,7 @@ async function fnGetTableData(allTableName) {
                         isCheckPass = false;
                     }
                 }
-                // 不能为不存在的类型
-                if (fieldType[fieldData.type] === undefined) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright(fieldData.type)} 类型不存在`);
-                    isCheckPass = false;
-                }
+
                 // 字符串类型必须设置 length 长度
                 if (fieldData.type === 'string' && (_isInteger(fieldData.length) === false || fieldData.length < 0)) {
                     console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段必须有 ${color.yellowBright('length')} 属性，且其值必须为大于或等于 0 的整数`);
