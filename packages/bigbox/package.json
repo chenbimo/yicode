@@ -1,7 +1,7 @@
 {
-    "name": "@yicode/bigscreen-box",
+    "name": "@yicode/bigbox",
     "version": "1.0.9",
-    "description": "bigscreen-box（易大屏）大屏边框库",
+    "description": "bigbox（易大屏）大屏边框库",
     "scripts": {
         "preinstall": "npx only-allow pnpm"
     },
