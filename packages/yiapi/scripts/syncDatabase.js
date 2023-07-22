@@ -57,6 +57,13 @@ let denyFields = [
     'state'
 ];
 
+// 字段类型
+const fieldOptions = {
+    number: ['unsigned', 'index', 'unique'],
+    string: ['index', 'unique'],
+    text: []
+};
+
 // 文本类型可用的值，
 let textType = [
     //
@@ -64,11 +71,6 @@ let textType = [
     'mediumtext', // 16MB
     'longtext' // 4GB
 ];
-
-// 数字类型的选项
-let numberOptions = ['unsigned', 'index', 'unique'];
-// 字符类型的选项
-let stringOptions = ['index', 'unique'];
 
 // 检测校验表格数据
 async function fnGetTableData(allTableName) {
@@ -228,7 +230,7 @@ async function syncDatabase() {
                 table.charset('utf8mb4');
                 table.collate('utf8mb4_general_ci');
                 // 默认每个表的ID为自增流水号
-                table.bigInteger('id').primary().index().notNullable().unsigned().defaultTo(0).comment('主键ID');
+                table.bigInteger('id').primary().notNullable().unsigned().comment('主键ID');
                 // 设置状态
                 table.tinyint('state').index().notNullable().defaultTo(0).comment('状态(0:正常,1:禁用,2:其他)');
                 // 设置时间
@@ -238,29 +240,32 @@ async function syncDatabase() {
                 // 处理每个字段
                 _forOwn(tableDataItem.fields, (fieldData, fieldName) => {
                     // 获取字段的类型信息
-                    let fieldInfo = fieldType[fieldData.type];
+                    let fieldInfo = fieldType[fieldData.type] || {};
+                    let fieldOption = fieldOptions[fieldInfo.type] || [];
                     // 字段链式调用实例
                     let fieldItem = {};
-
-                    // 根据是否有length属性，获得对应的字段定义实例
-                    if (fieldInfo.options.includes('length') === true) {
-                        fieldItem = table[fieldData.type](fieldName, fieldData.length);
+                    // 产生实例
+                    if (fieldData[fieldInfo.args?.[0]] !== undefined && fieldData[fieldInfo.args?.[1]] !== undefined) {
+                        // 如果有2个参数
+                        fieldItem = table[fieldData.type](fieldName, fieldData[fieldInfo.args[0]], fieldData[fieldInfo.args[1]]);
+                    } else if (fieldData[fieldInfo.args?.[0]] !== undefined) {
+                        // 如果有1个参数
+                        fieldItem = table[fieldData.type](fieldName, fieldData[fieldInfo.args[0]]);
                     } else {
+                        // 如果没有参数
                         fieldItem = table[fieldData.type](fieldName);
                     }
-
+                    // 设置编码
                     fieldItem.collate('utf8mb4_general_ci');
                     fieldItem.comment(fieldData.comment);
+                    // 设置默认值
                     if (fieldData.default !== undefined) fieldItem.defaultTo(fieldData.default);
-
                     // 如果是 text 类型，则允许其为 null
                     if (fieldData.type === 'text') fieldItem.nullable();
 
                     fieldData.options.forEach((option) => {
-                        if (fieldInfo.options.includes(option)) {
-                            if (option !== 'length') {
-                                fieldItem[option]();
-                            }
+                        if (fieldOption.includes(option)) {
+                            fieldItem[option]();
                         }
                     });
                 });
