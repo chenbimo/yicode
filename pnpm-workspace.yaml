@@ -1,11 +1,9 @@
 packages:
     - 'packages/*'
     - 'templates/*'
-    - 'projects/*'
     - 'helpers/*'
     - 'vscodes/*'
     - 'desktops/*'
     - 'tools/*'
     - 'others/*'
     - 'browsers/*'
-    - 'labs/*'

@@ -42,7 +42,7 @@
         "copy-anything": "^3.0.5",
         "croner": "^6.0.6",
         "date-fns": "^2.30.0",
-        "fast-glob": "^3.3.0",
+        "fast-glob": "^3.3.1",
         "fastify": "^4.20.0",
         "fastify-plugin": "^4.5.1",
         "fastify-xml-body-parser": "^2.2.0",
