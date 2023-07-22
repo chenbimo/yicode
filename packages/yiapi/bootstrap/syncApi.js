@@ -27,110 +27,115 @@ import {
 
 // 同步接口目录
 async function syncApiDir(fastify) {
-    // 准备好表
-    let apiModel = fastify.mysql.table('sys_api');
+    try {
+        // 准备好表
+        let apiModel = fastify.mysql.table('sys_api');
 
-    // 所有的接口元数据文件，用来生成目录
-    let allApiMeta = await fnAllApiMeta();
+        // 所有的接口元数据文件，用来生成目录
+        let allApiMeta = await fnAllApiMeta();
 
-    // 所有目录路径的数组
-    let allApiMetaByValue = allApiMeta.map((file) => {
-        return getApiDirName(file);
-    });
+        // 所有目录路径的数组
+        let allApiMetaByValue = allApiMeta.map((file) => {
+            return getApiDirName(file);
+        });
 
-    // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
-    let apis = await apiModel.clone().select();
+        // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
+        let apis = await apiModel.clone().select();
 
-    // 所有接口目录数据
-    let apisDir = apis.filter((item) => item.is_bool === 0);
-    let apiDirValue = apisDir.map((item) => item.value);
-    let apiDirByValue = _keyBy(apisDir, 'value');
+        // 所有接口目录数据
+        let apisDir = apis.filter((item) => item.is_bool === 0);
+        let apiDirValue = apisDir.map((item) => item.value);
+        let apiDirByValue = _keyBy(apisDir, 'value');
 
-    // 从数据库查出的，明确保留的接口
-    let keepApiDataObject = [];
-    // 将要删除的接口数据
-    let deleteApiDirData = [];
-    // 将要添加的接口数据
-    let insertApiDirData = [];
-    // 将要修改的数据
-    let updateApiDirData = [];
+        // 从数据库查出的，明确保留的接口
+        let keepApiDataObject = [];
+        // 将要删除的接口数据
+        let deleteApiDirData = [];
+        // 将要添加的接口数据
+        let insertApiDirData = [];
+        // 将要修改的数据
+        let updateApiDirData = [];
 
-    // 找出所有需要删除的接口目录
-    apisDir.forEach((item) => {
-        if (allApiMetaByValue.includes(item.value) === false) {
-            deleteApiDirData.push(item.id);
-        } else {
-            if (keepApiDataObject.includes(item.value)) {
+        // 找出所有需要删除的接口目录
+        apisDir.forEach((item) => {
+            if (allApiMetaByValue.includes(item.value) === false) {
                 deleteApiDirData.push(item.id);
             } else {
-                keepApiDataObject.push(item.value);
+                if (keepApiDataObject.includes(item.value)) {
+                    deleteApiDirData.push(item.id);
+                } else {
+                    keepApiDataObject.push(item.value);
+                }
+            }
+        });
+
+        for (let i = 0; i < allApiMeta.length; i++) {
+            let file = allApiMeta[i];
+            let apiDirName = getApiDirName(file);
+
+            // 如果数据库中存在当前接口目录，则进行添加或更新
+            let { metaConfig } = await fnImport(url.pathToFileURL(file), {});
+
+            if (!metaConfig) {
+                fastify.log.error(`缺少文件：${file}`);
+                process.exit(1);
+            }
+
+            // 判断有无 name 字段
+            if (!metaConfig?.name) {
+                fastify.log.error(`错误文件：${file} 缺少 name 字段`);
+                process.exit(1);
+            }
+
+            // 判断有无 schema 字段
+            if (!metaConfig?.schema) {
+                fastify.log.error(`错误文件：${file} 缺少 schema 字段`);
+                process.exit(1);
+            }
+
+            let apiMeta = {};
+            apiMeta.name = metaConfig.name;
+            apiMeta.value = apiDirName;
+            apiMeta.is_bool = 0;
+            apiMeta.pid = 0;
+            apiMeta.pids = '0';
+
+            if (apiDirByValue[apiDirName]) {
+                // 如果数据库中已有此目录，则更新目录
+                apiMeta.id = apiDirByValue[apiDirName].id;
+                apiMeta.updated_at = fnTimestamp();
+                updateApiDirData.push(apiMeta);
+            } else {
+                // 如果数据库中没有此目录，则添加目录
+                apiMeta.id = fnIncrUID();
+                apiMeta.created_at = fnTimestamp();
+                insertApiDirData.push(apiMeta);
             }
         }
-    });
 
-    for (let i = 0; i < allApiMeta.length; i++) {
-        let file = allApiMeta[i];
-        let apiDirName = getApiDirName(file);
-
-        // 如果数据库中存在当前接口目录，则进行添加或更新
-        let { metaConfig } = await fnImport(url.pathToFileURL(file), {});
-
-        if (!metaConfig) {
-            fastify.log.error(`缺少文件：${file}`);
-            process.exit(1);
+        // 如果待删除接口目录大于0，则删除
+        if (_isEmpty(deleteApiDirData) === false) {
+            await apiModel.clone().whereIn('id', deleteApiDirData).delete();
         }
 
-        // 判断有无 name 字段
-        if (!metaConfig?.name) {
-            fastify.log.error(`错误文件：${file} 缺少 name 字段`);
-            process.exit(1);
+        // 如果待增加接口目录大于0，则增加
+        if (_isEmpty(insertApiDirData) === false) {
+            await apiModel.clone().insert(insertApiDirData);
         }
 
-        // 判断有无 schema 字段
-        if (!metaConfig?.schema) {
-            fastify.log.error(`错误文件：${file} 缺少 schema 字段`);
-            process.exit(1);
+        // 如果待更新接口目录大于0，则更新
+        if (_isEmpty(updateApiDirData) === false) {
+            const updateBatchData = updateApiDirData.map((item) => {
+                return apiModel
+                    .clone()
+                    .where('id', item.id)
+                    .update(_omit(item, ['id', 'created_at']));
+            });
+            await Promise.all(updateBatchData);
         }
-
-        let apiMeta = {};
-        apiMeta.name = metaConfig.name;
-        apiMeta.value = apiDirName;
-        apiMeta.is_bool = 0;
-        apiMeta.pid = 0;
-        apiMeta.pids = '0';
-
-        if (apiDirByValue[apiDirName]) {
-            // 如果数据库中已有此目录，则更新目录
-            apiMeta.id = apiDirByValue[apiDirName].id;
-            apiMeta.updated_at = fnTimestamp();
-            updateApiDirData.push(apiMeta);
-        } else {
-            // 如果数据库中没有此目录，则添加目录
-            apiMeta.id = fnIncrUID();
-            apiMeta.created_at = fnTimestamp();
-            insertApiDirData.push(apiMeta);
-        }
-    }
-
-    // 如果待删除接口目录大于0，则删除
-    if (_isEmpty(deleteApiDirData) === false) {
-        await apiModel.clone().whereIn('id', deleteApiDirData).delete();
-    }
-
-    // 如果待增加接口目录大于0，则增加
-    if (_isEmpty(insertApiDirData) === false) {
-        await apiModel.clone().insert(insertApiDirData);
-    }
-
-    // 如果待更新接口目录大于0，则更新
-    if (_isEmpty(updateApiDirData) === false) {
-        const updateBatchData = updateApiDirData.map((item) => {
-            return apiModel
-                .clone()
-                .where('id', item.id)
-                .update(_omit(item, ['id', 'created_at']));
-        });
-        await Promise.all(updateBatchData);
+    } catch (err) {
+        fastify.log.error(err);
+        process.exit();
     }
 }
 
@@ -274,6 +279,7 @@ async function syncApiFile(fastify) {
         }
     } catch (err) {
         fastify.log.error(err);
+        process.exit();
     }
 }
 

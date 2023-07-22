@@ -205,6 +205,7 @@ async function syncMenuDir(fastify) {
         }
     } catch (err) {
         fastify.log.error(err);
+        process.exit();
     }
 }
 // TODO: 需要进一步处理相同父级菜单下的同名子菜单去重问题
@@ -290,6 +291,7 @@ async function syncMenuFile(fastify) {
         }
     } catch (err) {
         fastify.log.error(err);
+        process.exit();
     }
 }
 

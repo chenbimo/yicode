@@ -156,6 +156,7 @@ async function plugin(fastify, opts) {
         // 如果没有开发管理员，则创建之
         if (!devAdminData) {
             let insertData = {
+                id: fnIncrUID(),
                 username: 'dev',
                 nickname: appConfig.devName || '开发管理员',
                 role_codes: 'dev',
@@ -182,6 +183,7 @@ async function plugin(fastify, opts) {
         await fastify.cacheRoleData();
     } catch (err) {
         fastify.log.error(err);
+        process.exit();
     }
 }
 export default fp(plugin, { name: 'sync', dependencies: ['mysql', 'redis', 'tool', 'syncApi', 'syncMenu'] });
