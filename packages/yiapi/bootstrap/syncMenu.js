@@ -116,7 +116,7 @@ const menuConfig = {
         children: {
             '/internal/login-log': {
                 name: '登录日志',
-                describe: '邮件日志',
+                describe: '登录日志',
                 is_system: 1,
                 sort: 1
             },
