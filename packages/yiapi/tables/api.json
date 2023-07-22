@@ -10,7 +10,7 @@
         "pids": {
             "type": "string",
             "comment": "父级ID链",
-            "length": 2000,
+            "length": 10000,
             "default": "0"
         },
         "level": {
