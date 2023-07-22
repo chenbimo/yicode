@@ -1,4 +1,4 @@
-import { fnClearInsertData, fnApiInfo } from '../../utils/index.js';
+import { fnDbInsertData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -58,7 +58,7 @@ export default async function (fastify, opts) {
                     state: req.body.state
                 };
 
-                await menuModel.clone().insert(fnClearInsertData(insertData));
+                await menuModel.clone().insert(fnDbInsertData(insertData));
 
                 await fastify.cacheTreeData();
                 return codeConfig.INSERT_SUCCESS;

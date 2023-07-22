@@ -172,8 +172,8 @@ export function fnClearLogData(obj, expludeFields = []) {
     return _omit(newObj, expludeFields);
 }
 
-// 清洗添加数据
-export function fnClearInsertData(obj) {
+// 数据库添加数据
+export function fnDbInsertData(obj) {
     let newObj = {};
     _forOwn(obj, (value, key) => {
         if (value !== null && value !== undefined) {
@@ -186,11 +186,14 @@ export function fnClearInsertData(obj) {
     if (obj.updated_at === null || obj.updated_at === undefined) {
         newObj.updated_at = fnTimestamp();
     }
+    if (obj.id === null || obj.id === undefined) {
+        newObj.id = fnIncrUID();
+    }
     return newObj;
 }
 
-// 清洗更新数据
-export function fnClearUpdateData(obj) {
+// 数据库更新数据
+export function fnDbUpdateData(obj) {
     let excludeFields = ['id', 'created_at'];
     let newObj = {};
     _forOwn(obj, (value, key) => {

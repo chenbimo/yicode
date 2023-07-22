@@ -1,4 +1,4 @@
-import { fnClearInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
+import { fnDbInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -46,7 +46,7 @@ export default async function (fastify, opts) {
                     describe: req.body.describe
                 };
 
-                let result = await dictCategoryModel.insert(fnClearInsertData(data));
+                let result = await dictCategoryModel.insert(fnDbInsertData(data));
 
                 return {
                     ...codeConfig.INSERT_SUCCESS,

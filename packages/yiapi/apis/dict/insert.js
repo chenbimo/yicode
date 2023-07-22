@@ -1,4 +1,4 @@
-import { fnTimestamp, fnClearInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
+import { fnTimestamp, fnDbInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -64,7 +64,7 @@ export default async function (fastify, opts) {
                     state: req.body.state
                 };
 
-                let result = await dictModel.insert(fnClearInsertData(data));
+                let result = await dictModel.insert(fnDbInsertData(data));
 
                 return {
                     ...codeConfig.INSERT_SUCCESS,

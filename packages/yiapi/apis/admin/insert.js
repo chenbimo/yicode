@@ -1,4 +1,4 @@
-import { fnSchema, fnTimestamp, fnClearInsertData, fnApiInfo, fnMD5, fnPureMD5 } from '../../utils/index.js';
+import { fnSchema, fnTimestamp, fnDbInsertData, fnApiInfo, fnMD5, fnPureMD5 } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -44,7 +44,7 @@ export default async function (fastify, opts) {
                     role_codes: req.body.role_codes
                 };
 
-                let result = await adminModel.clone().insert(fnClearInsertData(insertData));
+                let result = await adminModel.clone().insert(fnDbInsertData(insertData));
                 return {
                     ...codeConfig.INSERT_SUCCESS,
                     data: result

@@ -41,7 +41,7 @@ export default async function (fastify) {
                     content: req.body.content
                 };
 
-                let result = await newsModel.clone().insert(yiapi.utils.fnClearInsertData(insertData));
+                let result = await newsModel.clone().insert(yiapi.utils.fnDbInsertData(insertData));
 
                 await trx.commit();
                 return {

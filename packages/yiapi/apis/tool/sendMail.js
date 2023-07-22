@@ -1,4 +1,4 @@
-import { fnApiInfo, fnRandom6Number, fnClearInsertData } from '../../utils/index.js';
+import { fnApiInfo, fnRandom6Number, fnDbInsertData } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -51,7 +51,7 @@ export default async function (fastify, opts) {
                         text: req.body.content
                     });
                     await mailLogModel.clone().insert(
-                        fnClearInsertData({
+                        fnDbInsertData({
                             login_email: appConfig.mail.user,
                             from_name: appConfig.mail.from_name,
                             from_email: appConfig.mail.from_email,
@@ -89,7 +89,7 @@ export default async function (fastify, opts) {
                     });
 
                     await mailLogModel.clone().insert(
-                        fnClearInsertData({
+                        fnDbInsertData({
                             login_email: appConfig.mail.user,
                             from_name: appConfig.mail.from_name,
                             from_email: appConfig.mail.from_email,

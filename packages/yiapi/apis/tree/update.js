@@ -1,4 +1,4 @@
-import { fnTimestamp, fnClearUpdateData, fnApiInfo } from '../../utils/index.js';
+import { fnTimestamp, fnDbUpdateData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -78,7 +78,7 @@ export default async function (fastify, opts) {
                     //
                     .clone()
                     .where({ id: req.body.id })
-                    .update(fnClearUpdateData(data));
+                    .update(fnDbUpdateData(data));
 
                 // 如果更新成功，则更新所有子级
                 if (updateResult) {

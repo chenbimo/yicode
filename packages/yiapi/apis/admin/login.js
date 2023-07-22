@@ -1,6 +1,6 @@
 import { omit as _omit } from 'lodash-es';
 
-import { fnApiInfo, fnClearInsertData, fnPureMD5, fnMD5 } from '../../utils/index.js';
+import { fnApiInfo, fnDbInsertData, fnPureMD5, fnMD5 } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -63,7 +63,7 @@ export default async function (fastify, opts) {
                     ua: req.headers['user-agent'] || ''
                 };
 
-                await loginLogModel.clone().insert(fnClearInsertData(loginLogData));
+                await loginLogModel.clone().insert(fnDbInsertData(loginLogData));
 
                 // 成功返回
                 return {

@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 
-import { fnClearInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
+import { fnDbInsertData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';

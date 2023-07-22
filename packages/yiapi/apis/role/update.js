@@ -1,4 +1,4 @@
-import { fnClearUpdateData, fnApiInfo } from '../../utils/index.js';
+import { fnDbUpdateData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -52,7 +52,7 @@ export default async function (fastify, opts) {
                     api_ids: req.body.api_ids.join(',')
                 };
 
-                let result = await roleModel.clone().where({ id: req.body.id }).update(fnClearUpdateData(data));
+                let result = await roleModel.clone().where({ id: req.body.id }).update(fnDbUpdateData(data));
 
                 await fastify.cacheRoleData();
 

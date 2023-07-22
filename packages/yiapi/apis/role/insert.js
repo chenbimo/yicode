@@ -1,4 +1,4 @@
-import { fnClearInsertData, fnApiInfo } from '../../utils/index.js';
+import { fnDbInsertData, fnApiInfo } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -47,7 +47,7 @@ export default async function (fastify, opts) {
                     menu_ids: req.body.menu_ids.join(','),
                     api_ids: req.body.api_ids.join(',')
                 };
-                let result = await roleModel.clone().insert(fnClearInsertData(data));
+                let result = await roleModel.clone().insert(fnDbInsertData(data));
 
                 await fastify.cacheRoleData();
 

@@ -1,4 +1,4 @@
-import { fnTimestamp, fnClearUpdateData, fnApiInfo, fnMD5 } from '../../utils/index.js';
+import { fnTimestamp, fnDbUpdateData, fnApiInfo, fnMD5 } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -39,7 +39,7 @@ export default async function (fastify, opts) {
                     role_codes: req.body.role_codes
                 };
 
-                let updateResult = await adminModel.update(fnClearUpdateData(data));
+                let updateResult = await adminModel.update(fnDbUpdateData(data));
 
                 return codeConfig.UPDATE_SUCCESS;
             } catch (err) {

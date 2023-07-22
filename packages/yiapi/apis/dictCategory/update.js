@@ -1,4 +1,4 @@
-import { fnClearUpdateData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
+import { fnDbUpdateData, fnApiInfo, fnCamelCase } from '../../utils/index.js';
 
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
@@ -49,7 +49,7 @@ export default async function (fastify, opts) {
                 let result = await dictCategoryModel //
                     .clone()
                     .where({ id: req.body.id })
-                    .update(fnClearUpdateData(updateData));
+                    .update(fnDbUpdateData(updateData));
 
                 return codeConfig.UPDATE_SUCCESS;
             } catch (err) {

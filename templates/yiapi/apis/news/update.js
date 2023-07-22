@@ -41,7 +41,7 @@ export default async function (fastify) {
                     content: req.body.content
                 };
 
-                let result = await newsModel.clone().update(yiapi.utils.fnClearUpdateData(updateData));
+                let result = await newsModel.clone().update(yiapi.utils.fnDbUpdateData(updateData));
 
                 await trx.commit();
                 return {

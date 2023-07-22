@@ -14,8 +14,8 @@ import {
 import {
     //
     fnTimestamp,
-    fnClearInsertData,
-    fnClearUpdateData,
+    fnDbInsertData,
+    fnDbUpdateData,
     fnMD5,
     fnPureMD5,
     fnIncrUID
@@ -141,7 +141,7 @@ async function plugin(fastify, opts) {
                 menu_ids: menuIds.join(','),
                 api_ids: apiIds.join(',')
             };
-            await roleModel.clone().insert(fnClearInsertData(insertData));
+            await roleModel.clone().insert(fnDbInsertData(insertData));
         } else {
             await roleModel
                 .clone()
@@ -162,7 +162,7 @@ async function plugin(fastify, opts) {
                 role_codes: 'dev',
                 password: fnMD5(fnPureMD5(appConfig.devPassword))
             };
-            await adminModel.clone().insert(fnClearInsertData(insertData));
+            await adminModel.clone().insert(fnDbInsertData(insertData));
         } else {
             await roleModel
                 .clone()
