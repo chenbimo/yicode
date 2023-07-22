@@ -5,7 +5,8 @@
             "type": "string",
             "comment": "字典分类编码",
             "length": 50,
-            "default": ""
+            "default": "",
+            "index": true
         },
         "name": {
             "type": "string",

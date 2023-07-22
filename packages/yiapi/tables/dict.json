@@ -4,7 +4,8 @@
         "category_id": {
             "type": "bigInteger",
             "comment": "分类ID",
-            "default": 0
+            "default": 0,
+            "index": true
         },
         "category_code": {
             "type": "string",

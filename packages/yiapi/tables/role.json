@@ -22,13 +22,13 @@
         "menu_ids": {
             "type": "text",
             "comment": "角色菜单",
-            "textType": ["mediumtext"],
+            "capacity": "mediumtext",
             "default": ""
         },
         "api_ids": {
             "type": "text",
             "comment": "角色接口",
-            "textType": ["mediumtext"],
+            "capacity": "mediumtext",
             "default": ""
         },
         "sort": {

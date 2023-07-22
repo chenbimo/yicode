@@ -31,7 +31,7 @@
             "length": 20,
             "default": "common"
         },
-        "text": {
+        "content": {
             "type": "string",
             "comment": "发送内容",
             "length": 10000,

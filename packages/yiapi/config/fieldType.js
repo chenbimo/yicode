@@ -7,7 +7,7 @@ export const fieldType = {
     },
     text: {
         type: 'text',
-        args: ['textType']
+        args: ['capacity']
     },
     bigInteger: {
         type: 'number',
@@ -30,11 +30,11 @@ export const fieldType = {
         args: ['length']
     },
     float: {
-        type: 'number',
+        type: 'float',
         args: ['precision', 'scale']
     },
     double: {
-        type: 'number',
+        type: 'float',
         args: ['precision', 'scale']
     }
 };
