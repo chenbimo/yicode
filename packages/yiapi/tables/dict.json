@@ -11,13 +11,15 @@
             "type": "string",
             "comment": "分类编码",
             "length": 50,
-            "default": ""
+            "default": "",
+            "index": true
         },
         "code": {
             "type": "string",
             "comment": "字典编码",
             "length": 50,
-            "default": ""
+            "default": "",
+            "index": true
         },
         "name": {
             "type": "string",
