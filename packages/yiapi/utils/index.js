@@ -75,7 +75,7 @@ export function fnCloneAny(data) {
 
 // 创建顺序自增唯一ID
 export function fnIncrUID() {
-    let timestamp = Date.now();
+    let timestamp = Math.floor(Date.now() / 1000);
     let random = crypto.randomInt(10000, 99999);
     let check = luhn(`${timestamp}${random}`);
     return `${timestamp}${random}${check}`;
