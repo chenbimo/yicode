@@ -1,11 +1,14 @@
+// 工具函数
 import { fnApiInfo } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 选择字段
+const selectKeys = fnSelectFields('./tables/dictCategory.json');
+// 传参验证
 export const apiSchema = {
     summary: `查询所有${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
@@ -17,13 +20,13 @@ export const apiSchema = {
         }
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let dictCategoryModel = fastify.mysql //
+                const dictCategoryModel = fastify.mysql //
                     .table('sys_dict_category')
                     .modify(function (queryBuilder) {
                         if (req.body.state !== undefined) {
@@ -31,7 +34,7 @@ export default async function (fastify, opts) {
                         }
                     });
 
-                let rows = await dictCategoryModel.clone().select();
+                const rows = await dictCategoryModel.clone().select(selectKeys);
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
