@@ -1,11 +1,12 @@
+// 工具函数
 import { fnApiInfo, fnPageOffset } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参校验
 export const apiSchema = {
     summary: `查询${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
@@ -21,13 +22,13 @@ export const apiSchema = {
         required: ['category_code']
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let dictModel = fastify.mysql //
+                const dictModel = fastify.mysql //
                     .table('sys_dict')
                     .where('category_code', req.body.category_code)
                     .modify(function (queryBuilder) {
@@ -40,14 +41,14 @@ export default async function (fastify, opts) {
                     });
 
                 // 记录总数
-                let { total } = await dictModel
+                const { total } = await dictModel
                     //
                     .clone()
                     .count('id', { as: 'total' })
-                    .first();
+                    .first('id');
 
                 // 记录列表
-                let resultData = await dictModel
+                const resultData = await dictModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
@@ -56,7 +57,7 @@ export default async function (fastify, opts) {
                     .select();
 
                 // 处理数字符号强制转换为数字值
-                let rows = resultData.map((item) => {
+                const rows = resultData.map((item) => {
                     if (item.symbol === 'number') {
                         item.value = Number(item.value);
                     }
