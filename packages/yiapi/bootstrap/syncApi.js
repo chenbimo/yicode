@@ -1,10 +1,9 @@
+// 内部模块
 import url from 'node:url';
 import path from 'node:path';
+// 外部模块
 import fg from 'fast-glob';
 import fp from 'fastify-plugin';
-
-import { appConfig } from '../config/appConfig.js';
-
 import {
     //
     concat as _concat,
@@ -12,7 +11,7 @@ import {
     isEmpty as _isEmpty,
     omit as _omit
 } from 'lodash-es';
-
+// 工具函数
 import {
     //
     getApiDirName,
@@ -24,28 +23,30 @@ import {
     fnCloneAny,
     fnIncrUID
 } from '../utils/index.js';
+// 配置文件
+import { appConfig } from '../config/appConfig.js';
 
 // 同步接口目录
 async function syncApiDir(fastify) {
     try {
         // 准备好表
-        let apiModel = fastify.mysql.table('sys_api');
+        const apiModel = fastify.mysql.table('sys_api');
 
         // 所有的接口元数据文件，用来生成目录
-        let allApiMeta = await fnAllApiMeta();
+        const allApiMeta = await fnAllApiMeta();
 
         // 所有目录路径的数组
-        let allApiMetaByValue = allApiMeta.map((file) => {
+        const allApiMetaByValue = allApiMeta.map((file) => {
             return getApiDirName(file);
         });
 
         // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
-        let apis = await apiModel.clone().select();
+        const apis = await apiModel.clone().select();
 
         // 所有接口目录数据
-        let apisDir = apis.filter((item) => item.is_bool === 0);
-        let apiDirValue = apisDir.map((item) => item.value);
-        let apiDirByValue = _keyBy(apisDir, 'value');
+        const apisDir = apis.filter((item) => item.is_bool === 0);
+        const apiDirValue = apisDir.map((item) => item.value);
+        const apiDirByValue = _keyBy(apisDir, 'value');
 
         // 从数据库查出的，明确保留的接口
         let keepApiDataObject = [];
@@ -70,11 +71,11 @@ async function syncApiDir(fastify) {
         });
 
         for (let i = 0; i < allApiMeta.length; i++) {
-            let file = allApiMeta[i];
-            let apiDirName = getApiDirName(file);
+            const file = allApiMeta[i];
+            const apiDirName = getApiDirName(file);
 
             // 如果数据库中存在当前接口目录，则进行添加或更新
-            let { metaConfig } = await fnImport(url.pathToFileURL(file), {});
+            const { metaConfig } = await fnImport(url.pathToFileURL(file), {});
 
             if (!metaConfig) {
                 fastify.log.error(`缺少文件：${file}`);
@@ -143,28 +144,28 @@ async function syncApiDir(fastify) {
 async function syncApiFile(fastify) {
     try {
         // 准备好表
-        let apiModel = fastify.mysql.table('sys_api');
+        const apiModel = fastify.mysql.table('sys_api');
 
         // 所有的接口文件，用来生成接口
-        let allApiFiles = await fnAllApiFiles();
+        const allApiFiles = await fnAllApiFiles();
 
         // 所有接口路径的数组
-        let allApiFileByValue = allApiFiles.map((file) => {
+        const allApiFileByValue = allApiFiles.map((file) => {
             return getApiFileName(file);
         });
 
         // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
-        let apis = await apiModel.clone().select();
+        const apis = await apiModel.clone().select();
 
         // 所有接口目录数据
-        let apisDir = apis.filter((item) => item.is_bool === 0);
-        let apiDirValue = apisDir.map((item) => item.value);
-        let apiDirByValue = _keyBy(apisDir, 'value');
+        const apisDir = apis.filter((item) => item.is_bool === 0);
+        const apiDirValue = apisDir.map((item) => item.value);
+        const apiDirByValue = _keyBy(apisDir, 'value');
 
         // 所有的接口数据
-        let apisFile = apis.filter((item) => item.is_bool === 1);
-        let apiFileValue = apisFile.map((item) => item.value);
-        let apiFileByValue = _keyBy(apisFile, 'value');
+        const apisFile = apis.filter((item) => item.is_bool === 1);
+        const apiFileValue = apisFile.map((item) => item.value);
+        const apiFileByValue = _keyBy(apisFile, 'value');
 
         // 从数据库查出的，明确保留的接口
         let keepApiDataObject = [];
@@ -193,13 +194,13 @@ async function syncApiFile(fastify) {
         // 遍历项目接口文件
         // 使用 for 替代 forEach 遍历，不然代码不会同步执行
         for (let i = 0; i < allApiFiles.length; i++) {
-            let file = allApiFiles[i];
-            let apiFileName = getApiFileName(file);
+            const file = allApiFiles[i];
+            const apiFileName = getApiFileName(file);
 
             // 获得父级数据
-            let parentApiData = apiDirByValue[path.dirname(apiFileName)] || {};
+            const parentApiData = apiDirByValue[path.dirname(apiFileName)] || {};
 
-            let { apiSchema } = await fnImport(file, {});
+            const { apiSchema } = await fnImport(file, {});
 
             if (apiFileValue.includes(apiFileName) === false && !autoApiObject[apiFileName]) {
                 // 如果当前接口在数据库中不存在，且没有添加过，则添加接口
