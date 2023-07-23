@@ -24,30 +24,28 @@ export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
             try {
                 // 查询用户是否存在
-                let newsCategoryModel = trx.table('news').modify(function (db) {
+                const newsModel = fastify.mysql.table('news').modify(function (db) {
                     if (req.body.category_id > 0) {
                         db.where('category_id', req.body.category_id);
                     }
                 });
 
                 // 记录总数
-                let { total } = await newsCategoryModel
+                const { total } = await newsModel
                     .clone() //
                     .count('id', { as: 'total' })
-                    .first();
+                    .first('id');
 
                 // 记录列表
-                let rows = await newsCategoryModel
+                const rows = await newsModel
                     .clone() //
                     .orderBy('created_at', 'desc')
                     .offset(yiapi.utils.fnPageOffset(req.body.page, req.body.limit))
                     .limit(req.body.limit)
                     .select();
 
-                await trx.commit();
                 return {
                     ...yiapi.codeConfig.SELECT_SUCCESS,
                     data: {
@@ -59,7 +57,6 @@ export default async function (fastify, opts) {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                await trx.rollback();
                 return yiapi.codeConfig.SELECT_FAIL;
             }
         }

@@ -21,15 +21,13 @@ export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
             try {
-                let newsModel = trx.table('news');
+                let newsModel = fastify.mysql.table('news');
 
                 let result = await newsModel //
                     .clone()
                     .where({ id: req.body.id })
                     .first();
-                await trx.commit();
 
                 return {
                     ...yiapi.codeConfig.SELECT_SUCCESS,
@@ -37,7 +35,6 @@ export default async function (fastify, opts) {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                await trx.rollback();
                 return yiapi.codeConfig.SELECT_FAIL;
             }
         }
