@@ -1,11 +1,12 @@
+// 工具函数
 import { fnTimestamp, fnDbUpdateData, fnApiInfo, fnMD5 } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参校验
 export const apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `更新${metaConfig.name}`,
@@ -21,25 +22,24 @@ export const apiSchema = {
         required: ['id']
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let adminModel = fastify.mysql //
+                const adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where({ id: req.body.id })
                     .modify(function (queryBuilder) {});
 
-                // 需要更新的数据
-                let data = {
+                const updateData = {
                     password: fnMD5(req.body.password),
                     nickname: req.body.nickname,
                     role_codes: req.body.role_codes
                 };
 
-                let updateResult = await adminModel.update(fnDbUpdateData(data));
+                await adminModel.update(fnDbUpdateData(updateData));
 
                 return codeConfig.UPDATE_SUCCESS;
             } catch (err) {
