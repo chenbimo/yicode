@@ -1,11 +1,14 @@
-import { fnApiInfo, fnPageOffset } from '../../utils/index.js';
-
+// 工具函数
+import { fnApiInfo, fnPageOffset, fnSelectFields } from '../../utils/index.js';
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 查询字段
+const selectKeys = fnSelectFields('./tables/admin.json', ['password']);
+// 传参校验
 export const apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `查询${metaConfig.name}`,
@@ -18,13 +21,13 @@ export const apiSchema = {
         }
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let adminModel = fastify.mysql //
+                const adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where('username', '<>', 'dev')
                     .modify(function (queryBuilder) {
@@ -33,14 +36,14 @@ export default async function (fastify, opts) {
                         }
                     });
 
-                let { total } = await adminModel.clone().count('id', { as: 'total' }).first();
-                let rows = await adminModel
+                const { total } = await adminModel.clone().count('id', { as: 'total' }).first('id');
+                const rows = await adminModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
                     .offset(fnPageOffset(req.body.page, req.body.limit))
                     .limit(req.body.limit)
-                    .select();
+                    .select(selectKeys);
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
