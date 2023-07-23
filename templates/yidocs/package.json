@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yidocs",
-    "version": "3.2.42",
+    "version": "3.2.43",
     "description": "yidocs（易文档）文档管理",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
