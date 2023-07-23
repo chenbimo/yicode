@@ -1,11 +1,14 @@
+// 工具函数
 import { fnApiInfo, fnPageOffset } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 选择字段
+const selectKeys = fnSelectFields('./tables/api.json');
+// 传参校验
 export const apiSchema = {
     summary: `查询${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
@@ -18,25 +21,25 @@ export const apiSchema = {
         }
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let model = fastify.mysql //
+                const apiModel = fastify.mysql //
                     .table('sys_tree')
                     .modify(function (queryBuilder) {});
 
-                let { total } = await model.clone().count('id', { as: 'total' }).first();
+                let { total } = await apiModel.clone().count('id', { as: 'total' }).first('id');
 
-                let rows = await model
+                let rows = await apiModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
                     .offset(fnPageOffset(req.body.page, req.body.limit))
                     .limit(req.body.limit)
-                    .select();
+                    .select(selectKeys);
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
