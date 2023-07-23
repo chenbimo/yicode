@@ -1,5 +1,5 @@
 // 工具函数
-import { fnApiInfo, fnPageOffset } from '../../utils/index.js';
+import { fnApiInfo, fnPageOffset, fnSelectFields } from '../../utils/index.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
