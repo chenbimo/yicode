@@ -1,17 +1,19 @@
+// 内部模块
 import { format } from 'date-fns';
 import { resolve } from 'node:path';
 import { writeFileSync } from 'node:fs';
+// 外部模块
 import { ensureDirSync, ensureFileSync } from 'fs-extra';
-
+// 工具函数
 import { fnApiInfo, fnUUID } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参验证
 export const apiSchema = {
     summary: `文件上传到本地`,
     tags: [apiInfo.parentDirName],
@@ -45,26 +47,26 @@ export const apiSchema = {
         required: ['file']
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let data = req.body.file;
+                const data = req.body.file;
 
-                let extname = data.mimetype.split('/')[1];
+                const extname = data.mimetype.split('/')[1];
 
-                let buffer = await data.toBuffer();
+                const buffer = await data.toBuffer();
 
-                let year = format(new Date(), 'yyyy');
-                let month = format(new Date(), 'MM');
+                const year = format(new Date(), 'yyyy');
+                const month = format(new Date(), 'MM');
 
-                let dir = req.body.dir.value ? `${req.body.dir.value}/${year}-${month}` : `${year}-${month}`;
-                let name = `${fnUUID()}.${extname}`;
-                let path = `${dir}/${name}`;
+                const dir = req.body.dir.value ? `${req.body.dir.value}/${year}-${month}` : `${year}-${month}`;
+                const name = `${fnUUID()}.${extname}`;
+                const path = `${dir}/${name}`;
 
-                let localDir = resolve(sysConfig.appDir, appConfig.upload.dir || 'public', dir);
+                const localDir = resolve(sysConfig.appDir, appConfig.upload.dir || 'public', dir);
                 await ensureDirSync(localDir);
                 await writeFileSync(`${localDir}/${name}`, buffer);
 
