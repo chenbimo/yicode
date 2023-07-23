@@ -28,23 +28,23 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let adminModel = fastify.mysql.table('sys_admin');
-                let adminExistsData = await adminModel.clone().where('username', req.body.username).first();
-                if (adminExistsData) {
+                const adminModel = fastify.mysql.table('sys_admin');
+                const adminData = await adminModel.clone().where('username', req.body.username).first('id');
+                if (adminData?.id) {
                     return {
                         ...codeConfig.FAIL,
                         msg: '管理员账号或昵称已存在'
                     };
                 }
 
-                let insertData = {
+                const insertData = {
                     username: req.body.username,
                     password: fnMD5(fnPureMD5(req.body.password)),
                     nickname: req.body.nickname,
                     role_codes: req.body.role_codes
                 };
 
-                let result = await adminModel.clone().insert(fnDbInsertData(insertData));
+                const result = await adminModel.clone().insert(fnDbInsertData(insertData));
                 return {
                     ...codeConfig.INSERT_SUCCESS,
                     data: result
