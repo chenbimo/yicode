@@ -1,12 +1,13 @@
+// 工具函数
 import { fnApiInfo } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { cacheData } from '../../config/cacheData.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参校验
 export const apiSchema = {
     summary: `查询所有${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
@@ -17,13 +18,13 @@ export const apiSchema = {
         required: []
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let apiData = await fastify.redisGet(cacheData.api);
+                const apiData = await fastify.redisGet(cacheData.api);
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
