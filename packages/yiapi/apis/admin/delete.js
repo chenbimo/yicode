@@ -30,6 +30,11 @@ export default async function (fastify, opts) {
                     .where({ id: req.body.id })
                     .modify(function (queryBuilder) {});
 
+                const adminData = await adminModel.clone().first('id');
+                if (!adminData?.id) {
+                    return codeConfig.NO_DATA;
+                }
+
                 const result = await adminModel.delete();
 
                 return {
