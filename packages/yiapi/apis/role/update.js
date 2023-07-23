@@ -1,11 +1,12 @@
+// 工具函数
 import { fnDbUpdateData, fnApiInfo } from '../../utils/index.js';
-
+// 配置文件夹
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参验证
 export const apiSchema = {
     summary: `更新${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
@@ -23,20 +24,18 @@ export const apiSchema = {
         required: ['id']
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let roleModel = fastify.mysql //
-                    .table('sys_role')
-                    .modify(function (queryBuilder) {});
+                const roleModel = fastify.mysql.table('sys_role').modify(function (queryBuilder) {});
 
-                let _result = await roleModel.clone().where('name', req.body.name).orWhere('code', req.body.code).first();
+                const roleData = await roleModel.clone().where('name', req.body.name).orWhere('code', req.body.code).first('id');
 
                 // 编码存在且 id 不等于当前角色
-                if (_result && _result.id !== req.body.id) {
+                if (roleData?.id !== req.body.id) {
                     return {
                         ...codeConfig.INSERT_FAIL,
                         msg: '角色名称或编码已存在'
@@ -44,7 +43,7 @@ export default async function (fastify, opts) {
                 }
 
                 // 需要更新的数据
-                let data = {
+                const updateData = {
                     code: req.body.code,
                     name: req.body.name,
                     describe: req.body.describe,
@@ -52,7 +51,7 @@ export default async function (fastify, opts) {
                     api_ids: req.body.api_ids.join(',')
                 };
 
-                let result = await roleModel.clone().where({ id: req.body.id }).update(fnDbUpdateData(data));
+                const result = await roleModel.clone().where({ id: req.body.id }).update(fnDbUpdateData(updateData));
 
                 await fastify.cacheRoleData();
 
