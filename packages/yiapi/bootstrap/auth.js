@@ -1,5 +1,7 @@
+// 内部模块
 import fs from 'node:fs';
 import path from 'node:path';
+外部模块;
 import fp from 'fastify-plugin';
 import fastifyJwt from '@fastify/jwt';
 import micromatch from 'micromatch';
@@ -11,13 +13,13 @@ import {
     find as _find,
     omit as _omit
 } from 'lodash-es';
-
+// 配置文件
 import { appConfig } from '../config/appConfig.js';
 import { codeConfig } from '../config/codeConfig.js';
 import { cacheData } from '../config/cacheData.js';
 import { sysConfig } from '../config/sysConfig.js';
 import { fnRouterPath, fnApiParamsCheck, fnClearLogData } from '../utils/index.js';
-
+// 插件定义
 async function plugin(fastify, opts) {
     await fastify.register(fastifyJwt, {
         secret: appConfig.jwt.secret,
@@ -40,14 +42,14 @@ async function plugin(fastify, opts) {
             if (res.url === 'favicon.ico') return;
 
             /* --------------------------------- 接口禁用检测 --------------------------------- */
-            let isMatchBlackApi = micromatch.isMatch(req.url, appConfig.blackApis);
+            const isMatchBlackApi = micromatch.isMatch(req.url, appConfig.blackApis);
             if (isMatchBlackApi === true) {
                 res.send(codeConfig.API_DISABLED);
                 return;
             }
 
             /* --------------------------------- 自由接口判断 --------------------------------- */
-            let isMatchFreeApi = micromatch.isMatch(req.url, appConfig.freeApis);
+            const isMatchFreeApi = micromatch.isMatch(req.url, appConfig.freeApis);
             // 如果是自由通行的接口，则直接返回
             if (isMatchFreeApi === true) return;
 
@@ -63,7 +65,7 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 接口存在性判断 -------------------------------- */
-            let allApiNames = await fastify.redisGet(cacheData.apiNames);
+            const allApiNames = await fastify.redisGet(cacheData.apiNames);
 
             if (allApiNames.includes(req.url) === false) {
                 res.send(codeConfig.NO_API);
@@ -72,7 +74,7 @@ async function plugin(fastify, opts) {
 
             /* --------------------------------- 接口登录检测 --------------------------------- */
             try {
-                let jwtData = await req.jwtVerify();
+                await req.jwtVerify();
             } catch (err) {
                 res.send({
                     ...codeConfig.NOT_LOGIN,
@@ -105,17 +107,17 @@ async function plugin(fastify, opts) {
 
             /* ---------------------------------- 白名单判断 --------------------------------- */
             // 从缓存获取白名单接口
-            let dataApiWhiteLists = await fastify.redisGet(cacheData.apiWhiteLists);
-            let whiteApis = dataApiWhiteLists?.map((item) => item.value);
-            let allWhiteApis = _uniq(_concat(appConfig.whiteApis, whiteApis || []));
+            const dataApiWhiteLists = await fastify.redisGet(cacheData.apiWhiteLists);
+            const whiteApis = dataApiWhiteLists?.map((item) => item.value);
+            const allWhiteApis = _uniq(_concat(appConfig.whiteApis, whiteApis || []));
 
             // 是否匹配白名单
-            let isMatchWhiteApi = micromatch.isMatch(req.url, allWhiteApis);
+            const isMatchWhiteApi = micromatch.isMatch(req.url, allWhiteApis);
 
             // 如果接口不在白名单中，则判断用户是否有接口访问权限
             if (isMatchWhiteApi === false) {
-                let userApis = await fastify.getUserApis(req.session);
-                let hasApi = _find(userApis, { value: req.url });
+                const userApis = await fastify.getUserApis(req.session);
+                const hasApi = _find(userApis, { value: req.url });
 
                 if (hasApi === false) {
                     res.send({
