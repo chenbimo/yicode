@@ -1,11 +1,14 @@
+// 工具函数
 import { fnApiInfo, fnPageOffset } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 选择字段
+const selectKeys = fnSelectFields('./tables/mailLog.json');
+// 传参验证
 export const apiSchema = {
     summary: `查询${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
@@ -19,13 +22,13 @@ export const apiSchema = {
         required: []
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let mailLogModel = fastify.mysql //
+                const mailLogModel = fastify.mysql //
                     .table('sys_mail_log')
                     .modify(function (queryBuilder) {
                         if (req.body.keyword !== undefined) {
@@ -34,20 +37,20 @@ export default async function (fastify, opts) {
                     });
 
                 // 记录总数
-                let { total } = await mailLogModel
+                const { total } = await mailLogModel
                     //
                     .clone()
                     .count('id', { as: 'total' })
-                    .first();
+                    .first('id');
 
                 // 记录列表
-                let rows = await mailLogModel
+                const rows = await mailLogModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
                     .offset(fnPageOffset(req.body.page, req.body.limit))
                     .limit(req.body.limit)
-                    .select();
+                    .select(selectKeys);
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
