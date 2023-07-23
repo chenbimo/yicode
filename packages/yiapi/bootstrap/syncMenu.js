@@ -1,3 +1,4 @@
+// 外部插件
 import fp from 'fastify-plugin';
 import {
     //
@@ -10,8 +11,9 @@ import {
     cloneDeep as _cloneDeep,
     uniq as _uniq
 } from 'lodash-es';
-
+// 工具函数
 import { fnTimestamp, fnKebabCase, fnIncrUID } from '../utils/index.js';
+// 配置文件
 import { appConfig } from '../config/appConfig.js';
 
 let menuConfigNew = [];
@@ -134,11 +136,11 @@ const menuConfig = {
 async function syncMenuDir(fastify) {
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table('sys_menu');
+        const menuModel = fastify.mysql.table('sys_menu');
 
         // 第一次请求菜单数据，用于创建一级菜单
-        let menuDir = await menuModel.clone().where({ pid: 0 }).select();
-        let menuDirByValue = _keyBy(menuDir, 'value');
+        const menuDir = await menuModel.clone().where({ pid: 0 }).select();
+        const menuDirByValue = _keyBy(menuDir, 'value');
 
         let deleteMenuDirValue = [];
         let insertMenuDir = [];
@@ -214,14 +216,14 @@ async function syncMenuDir(fastify) {
 async function syncMenuFile(fastify) {
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table('sys_menu');
+        const menuModel = fastify.mysql.table('sys_menu');
 
-        let menuDir = await menuModel.clone().where({ pid: 0 }).select();
-        let menuDirByValue = _keyBy(menuDir, 'value');
+        const menuDir = await menuModel.clone().where({ pid: 0 }).select();
+        const menuDirByValue = _keyBy(menuDir, 'value');
 
         // 第二次请求菜单数据，用于创建二级菜单
-        let menuData = await menuModel.clone().andWhere('pid', '<>', 0).select();
-        let menuByValue = _keyBy(menuData, 'value');
+        const menuData = await menuModel.clone().andWhere('pid', '<>', 0).select();
+        const menuByValue = _keyBy(menuData, 'value');
 
         let deleteMenuFileValue = [];
         let insertMenuFile = [];
