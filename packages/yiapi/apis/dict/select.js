@@ -6,6 +6,8 @@ import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
+// 选择字段
+const selectKeys = fnSelectFields('./tables/dict.json');
 // 传参校验
 export const apiSchema = {
     summary: `查询${metaConfig.name}`,
@@ -54,7 +56,7 @@ export default async function (fastify, opts) {
                     .orderBy('created_at', 'desc')
                     .offset(fnPageOffset(req.body.page, req.body.limit))
                     .limit(req.body.limit)
-                    .select();
+                    .select(selectKeys);
 
                 // 处理数字符号强制转换为数字值
                 const rows = resultData.map((item) => {
