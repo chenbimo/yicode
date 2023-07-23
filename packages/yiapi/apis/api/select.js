@@ -28,12 +28,12 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 const apiModel = fastify.mysql //
-                    .table('sys_tree')
+                    .table('sys_api')
                     .modify(function (queryBuilder) {});
 
-                let { total } = await apiModel.clone().count('id', { as: 'total' }).first('id');
+                const { total } = await apiModel.clone().count('id', { as: 'total' }).first('id');
 
-                let rows = await apiModel
+                const rows = await apiModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
