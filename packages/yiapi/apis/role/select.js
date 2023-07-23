@@ -1,11 +1,14 @@
+// 工具函数
 import { fnApiInfo, fnPageOffset } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 选择字段
+const selectKeys = fnSelectFields('./tables/role.json');
+// 传参验证
 export const apiSchema = {
     summary: `查询${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
@@ -19,13 +22,13 @@ export const apiSchema = {
         }
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let roleModel = fastify.mysql //
+                const roleModel = fastify.mysql //
                     .table('sys_role')
                     .modify(function (queryBuilder) {
                         if (req.session !== 'dev') {
@@ -33,14 +36,14 @@ export default async function (fastify, opts) {
                         }
                     });
 
-                let { total } = await roleModel.clone().count('id', { as: 'total' }).first();
-                let rows = await roleModel
+                const { total } = await roleModel.clone().count('id', { as: 'total' }).first('id');
+                const rows = await roleModel
                     .clone()
                     //
                     .orderBy('created_at', 'desc')
                     .offset(fnPageOffset(req.body.page, req.body.limit))
                     .limit(req.body.limit)
-                    .select();
+                    .select(selectKeys);
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
