@@ -1,8 +1,6 @@
+// 外部模块
 import fp from 'fastify-plugin';
 import fs from 'fs-extra';
-
-import { appConfig } from '../config/appConfig.js';
-
 import {
     //
     keyBy as _keyBy,
@@ -11,6 +9,7 @@ import {
     forOwn as _forOwn,
     omit as _omit
 } from 'lodash-es';
+// 工具函数
 import {
     //
     fnTimestamp,
@@ -20,6 +19,8 @@ import {
     fnPureMD5,
     fnIncrUID
 } from '../utils/index.js';
+// 配置文件
+import { appConfig } from '../config/appConfig.js';
 
 // 内置角色配置
 const roleConfig = {
@@ -49,29 +50,29 @@ async function plugin(fastify, opts) {
     // 同步接口
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table('sys_menu');
-        let apiModel = fastify.mysql.table('sys_api');
-        let adminModel = fastify.mysql.table('sys_admin');
-        let roleModel = fastify.mysql.table('sys_role');
+        const menuModel = fastify.mysql.table('sys_menu');
+        const apiModel = fastify.mysql.table('sys_api');
+        const adminModel = fastify.mysql.table('sys_admin');
+        const roleModel = fastify.mysql.table('sys_role');
 
         // 查询所有角色
-        let roleData = await roleModel.clone().select();
+        const roleData = await roleModel.clone().select();
 
         // 查询开发管理员
-        let devAdminData = await adminModel.clone().where('username', 'dev').first();
+        const devAdminData = await adminModel.clone().where('username', 'dev').first('id');
 
         // 查询开发角色
-        let devRoleData = await roleModel.clone().where('code', 'dev').first();
+        const devRoleData = await roleModel.clone().where('code', 'dev').first('id');
 
         // 请求菜单数据，用于给开发管理员绑定菜单
-        let menuData = await menuModel.clone().select();
-        let menuIds = menuData.map((item) => item.id);
-        let menuObject = _keyBy(menuData, 'value');
+        const menuData = await menuModel.clone().select();
+        const menuIds = menuData.map((item) => item.id);
+        const menuObject = _keyBy(menuData, 'value');
 
         // 请求接口数据，用于给开发管理员绑定接口
-        let apiData = await apiModel.clone().select();
-        let apiIds = apiData.map((item) => item.id);
-        let apiObject = _keyBy(apiData, 'value');
+        const apiData = await apiModel.clone().select();
+        const apiIds = apiData.map((item) => item.id);
+        const apiObject = _keyBy(apiData, 'value');
 
         // 处理角色数据，如果有同名的角色则删除
         let insertRoleData = [];
@@ -132,8 +133,8 @@ async function plugin(fastify, opts) {
          * 如果没有开发角色，则创建之
          * 如果有开发角色，则更新之
          */
-        if (!devRoleData) {
-            let insertData = {
+        if (!devRoleData?.id) {
+            const insertData = {
                 id: fnIncrUID(),
                 code: 'dev',
                 name: appConfig.devName || '开发管理员',
@@ -143,19 +144,16 @@ async function plugin(fastify, opts) {
             };
             await roleModel.clone().insert(fnDbInsertData(insertData));
         } else {
-            await roleModel
-                .clone()
-                .where('code', 'dev')
-                .update({
-                    menu_ids: menuIds.join(','),
-                    api_ids: apiIds.join(','),
-                    updated_at: fnTimestamp()
-                });
+            const updateData = {
+                menu_ids: menuIds.join(','),
+                api_ids: apiIds.join(',')
+            };
+            await roleModel.clone().where('code', 'dev').update(fnDbUpdateData(updateData));
         }
 
         // 如果没有开发管理员，则创建之
-        if (!devAdminData) {
-            let insertData = {
+        if (!devAdminData?.id) {
+            const insertData = {
                 id: fnIncrUID(),
                 username: 'dev',
                 nickname: appConfig.devName || '开发管理员',
@@ -164,21 +162,16 @@ async function plugin(fastify, opts) {
             };
             await adminModel.clone().insert(fnDbInsertData(insertData));
         } else {
-            await roleModel
-                .clone()
-                .where('code', 'dev')
-                .update({
-                    menu_ids: menuIds.join(','),
-                    api_ids: apiIds.join(','),
-                    updated_at: fnTimestamp()
-                });
-            await adminModel
-                .clone()
-                .where('username', 'dev')
-                .update({
-                    nickname: appConfig.devName || '开发管理员',
-                    password: fnMD5(fnPureMD5(appConfig.devPassword))
-                });
+            const updateData = {
+                menu_ids: menuIds.join(','),
+                api_ids: apiIds.join(',')
+            };
+            await roleModel.clone().where('code', 'dev').update(fnDbUpdateData(updateData));
+            const updateData2 = {
+                nickname: appConfig.devName || '开发管理员',
+                password: fnMD5(fnPureMD5(appConfig.devPassword))
+            };
+            await adminModel.clone().where('username', 'dev').update(fnDbUpdateData(updateData2));
         }
         await fastify.cacheRoleData();
     } catch (err) {
