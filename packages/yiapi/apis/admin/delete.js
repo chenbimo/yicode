@@ -23,12 +23,12 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let adminModel = fastify.mysql //
+                const adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where({ id: req.body.id })
                     .modify(function (queryBuilder) {});
 
-                let result = await adminModel.delete();
+                const result = await adminModel.delete();
 
                 return {
                     ...codeConfig.DELETE_SUCCESS,
