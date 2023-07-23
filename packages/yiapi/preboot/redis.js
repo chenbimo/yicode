@@ -115,6 +115,5 @@ function close(fastify) {
 }
 
 export default fp(fastifyRedis, {
-    fastify: '4.x',
     name: '@fastify/redis'
 });
