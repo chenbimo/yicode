@@ -1,7 +1,7 @@
 // 内部模块
 import fs from 'node:fs';
 import path from 'node:path';
-外部模块;
+// 外部模块
 import fp from 'fastify-plugin';
 import fastifyJwt from '@fastify/jwt';
 import micromatch from 'micromatch';
