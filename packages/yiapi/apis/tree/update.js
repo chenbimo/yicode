@@ -1,11 +1,12 @@
+// 工具函数
 import { fnTimestamp, fnDbUpdateData, fnApiInfo } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参验证
 export const apiSchema = {
     summary: `更新${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
@@ -27,20 +28,19 @@ export const apiSchema = {
         required: ['id']
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
+            // TODO: 此处需要使用事务
             try {
-                let treeModel = fastify.mysql.table('sys_tree');
-
-                let parentData = undefined;
-
+                const treeModel = fastify.mysql.table('sys_tree');
+                const parentData = null;
                 // 如果传了pid值
                 if (req.body.pid) {
-                    parentData = await treeModel.clone().where('id', req.body.pid).first();
-                    if (parentData === undefined) {
+                    parentData = await treeModel.clone().where('id', req.body.pid).first('id', 'pids');
+                    if (!parentData?.id) {
                         return {
                             ...codeConfig.FAIL,
                             msg: '父级树不存在'
@@ -48,16 +48,15 @@ export default async function (fastify, opts) {
                     }
                 }
 
-                let selfData = await treeModel.clone().where('id', req.body.id).first();
-                if (selfData === undefined) {
+                const selfData = await treeModel.clone().where('id', req.body.id).first('id');
+                if (!selfData?.id) {
                     return {
                         ...codeConfig.FAIL,
                         msg: '菜单不存在'
                     };
                 }
 
-                // 需要更新的数据
-                let data = {
+                const updateData = {
                     pid: req.body.pid,
                     category: req.body.category,
                     name: req.body.name,
@@ -71,30 +70,30 @@ export default async function (fastify, opts) {
                     pids: req.body.pids
                 };
 
-                if (parentData !== undefined) {
-                    data.pids = [parentData.pids, parentData.id].join(',');
+                if (parentData !== null) {
+                    updateData.pids = [parentData.pids, parentData.id].join(',');
                 }
-                let updateResult = await treeModel
+                const result = await treeModel
                     //
                     .clone()
                     .where({ id: req.body.id })
-                    .update(fnDbUpdateData(data));
+                    .update(fnDbUpdateData(updateData));
 
                 // 如果更新成功，则更新所有子级
-                if (updateResult) {
-                    let childrenPids = [data.pids || selfData.pid, selfData.id];
-                    await treeModel
-                        .clone()
-                        .where({ pid: selfData.id })
-                        .update({
-                            pids: childrenPids.join(','),
-                            level: childrenPids.length,
-                            updated_at: fnTimestamp()
-                        });
+                if (result) {
+                    const childrenPids = [updateData.pids || selfData.pid, selfData.id];
+                    let updateData2 = {
+                        pids: childrenPids.join(','),
+                        level: childrenPids.length
+                    };
+                    await treeModel.clone().where({ pid: selfData.id }).update(fnDbUpdateData(updateData2));
                 }
 
                 await fastify.cacheTreeData();
-                return codeConfig.UPDATE_SUCCESS;
+                return {
+                    ...codeConfig.UPDATE_SUCCESS,
+                    data: result
+                };
             } catch (err) {
                 fastify.log.error(err);
                 return codeConfig.UPDATE_FAIL;
