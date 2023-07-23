@@ -1,11 +1,12 @@
+// 工具函数
 import { fnApiInfo } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参校验
 export const apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `删除${metaConfig.name}`,
@@ -18,29 +19,26 @@ export const apiSchema = {
         required: ['id']
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let dictCategoryModel = fastify.mysql //
+                const dictCategoryModel = fastify.mysql //
                     .table('sys_dict_category')
                     .where({ id: req.body.id });
 
-                let dictModel = fastify.mysql.table('sys_dict');
+                const dictModel = fastify.mysql.table('sys_dict');
 
-                let dictCategoryData = await dictCategoryModel.clone().first();
+                const dictCategoryData = await dictCategoryModel.clone().first('id');
 
-                if (!dictCategoryData) {
-                    return {
-                        ...codeConfig.DELETE_FAIL,
-                        msg: '查无此字典分类'
-                    };
+                if (!dictCategoryData?.id) {
+                    return codeConfig.NO_DATA;
                 }
 
-                let childrenDict = await dictModel.clone().where({ category_id: req.body.id }).first();
-                if (childrenDict) {
+                let childrenDict = await dictModel.clone().where({ category_id: req.body.id }).first('id');
+                if (childrenDict?.id) {
                     return {
                         ...codeConfig.DELETE_FAIL,
                         msg: '此分类下有字典，无法删除'
