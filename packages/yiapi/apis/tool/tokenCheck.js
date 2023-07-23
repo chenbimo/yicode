@@ -1,10 +1,11 @@
+// 工具函数
 import { fnApiInfo } from '../../utils/index.js';
-
+// 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参验证
 export const apiSchema = {
     summary: `令牌检测`,
     tags: [apiInfo.parentDirName],
@@ -14,14 +15,14 @@ export const apiSchema = {
         properties: {}
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
                 try {
-                    let jwtData = await req.jwtVerify();
+                    const jwtData = await req.jwtVerify();
                     return {
                         ...codeConfig.SUCCESS,
                         data: {
