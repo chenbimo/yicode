@@ -6,6 +6,8 @@ import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
+// 选择字段
+const selectKeys = fnSelectFields('./tables/dict.json');
 // 传参校验
 export const apiSchema = {
     summary: `查询所有${metaConfig.name}`,
@@ -33,7 +35,7 @@ export default async function (fastify, opts) {
                             queryBuilder.where('state', req.body.state);
                         }
                     });
-                const resultData = await dictModel.clone().select();
+                const resultData = await dictModel.clone().select(selectKeys);
 
                 const rows = resultData.map((item) => {
                     if (item.symbol === 'number') {
