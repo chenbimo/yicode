@@ -1,6 +1,7 @@
 import crypto from 'node:crypto';
 import path from 'node:path';
 import url from 'node:url';
+import { createRequire } from 'node:module';
 
 import fg from 'fast-glob';
 import md5 from 'blueimp-md5';
@@ -352,6 +353,31 @@ export function fnFileProtocolPath(_path) {
     } else {
         return 'file:///' + _path.replace(/\\+/gi, '/');
     }
+}
+
+/**
+ * require函数
+ * @param {String} filePath 文件路径，以根目录为基准
+ * @param {any} defaultValue 任何默认值
+ * @param {String} fromType 从哪里加载，值为 core 或 user
+ * @returns 返回结果或默认值
+ */
+export function fnRequire(filePath, defaultValue, fromType = 'core') {
+    try {
+        const require = createRequire(fnFileProtocolPath(path.resolve(fromType === 'core' ? sysConfig.yiapiDir : sysConfig.appDir, 'yiapi.js')));
+        const result = require(filePath);
+        return result;
+    } catch (err) {
+        return defaultValue;
+    }
+}
+
+// 获取查询字段
+export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) {
+    const tableJson = fnRequire(filePath, {}, fromType);
+    const allKeys = Object.keys(tableJson?.fields || {});
+    const passKeys = _omit(allKeys, excludeFields);
+    return passKeys;
 }
 
 /**
