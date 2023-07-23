@@ -1,11 +1,12 @@
+// 工具函数
 import { fnDbInsertData, fnApiInfo } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参验证
 export const apiSchema = {
     summary: `添加${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
@@ -26,32 +27,30 @@ export const apiSchema = {
         required: ['pid', 'category', 'name']
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let model = fastify.mysql //
-                    .table('sys_tree')
-                    .modify(function (queryBuilder) {});
+                const treeModel = fastify.mysql.table('sys_tree').modify(function (queryBuilder) {});
 
                 if (req.body.pid === 0) {
                     req.body.pids = '0';
                     req.body.level = 1;
                 } else {
-                    let parentPermission = await model.clone().where('id', req.body.pid).first();
-                    if (!parentPermission) {
+                    const parentData = await treeModel.clone().where('id', req.body.pid).first('id', 'pids');
+                    if (!parentData?.id) {
                         return {
                             ...codeConfig.FAIL,
                             msg: '父级树不存在'
                         };
                     }
-                    req.body.pids = `${parentPermission.pids},${parentPermission.id}`;
+                    req.body.pids = `${parentData.pids},${parentData.id}`;
                     req.body.level = req.body.pids.split(',').length;
                 }
 
-                let data = {
+                const insertData = {
                     pid: req.body.pid,
                     category: req.body.category,
                     name: req.body.name,
@@ -64,10 +63,10 @@ export default async function (fastify, opts) {
                     pids: req.body.pids,
                     level: req.body.level
                 };
-                let result = await model
+                const result = await treeModel
                     //
                     .clone()
-                    .insert(fnDbInsertData(data));
+                    .insert(fnDbInsertData(insertData));
 
                 await fastify.cacheTreeData();
 
