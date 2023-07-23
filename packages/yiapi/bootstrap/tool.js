@@ -1,8 +1,9 @@
+// 外部模块
 import fp from 'fastify-plugin';
 import fs from 'fs-extra';
 import got from 'got';
 import { keyBy as _keyBy } from 'lodash-es';
-
+// 配置文件
 import { appConfig } from '../config/appConfig.js';
 import { cacheData } from '../config/cacheData.js';
 
@@ -15,7 +16,7 @@ async function plugin(fastify, opts) {
         }
     });
     fastify.decorate('redisGet', async (key, unpack = false) => {
-        let result = await fastify.redis.get(key);
+        const result = await fastify.redis.get(key);
         return JSON.parse(result);
     });
 
@@ -23,11 +24,11 @@ async function plugin(fastify, opts) {
     fastify.decorate('getUserApis', async (session) => {
         if (session === null || session === undefined) return [];
         // 提取当前用户的角色码组
-        let userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
+        const userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
 
         // 提取所有角色拥有的接口
         let apiIds = [];
-        let dataRoleCodes = await fastify.redisGet(cacheData.role);
+        const dataRoleCodes = await fastify.redisGet(cacheData.role);
         dataRoleCodes.forEach((item) => {
             if (userRoleCodes.includes(item.code)) {
                 apiIds = item.api_ids
@@ -39,12 +40,12 @@ async function plugin(fastify, opts) {
         });
 
         // 将接口进行唯一性处理
-        let uniqApiIds = [...new Set(apiIds)];
+        const uniqApiIds = [...new Set(apiIds)];
 
-        let dataApi = await fastify.redisGet(cacheData.api);
+        const dataApi = await fastify.redisGet(cacheData.api);
 
         // 最终的用户接口列表
-        let result = dataApi
+        const result = dataApi
             .filter((item) => {
                 return uniqApiIds.includes(item.id);
             })
@@ -59,7 +60,7 @@ async function plugin(fastify, opts) {
         try {
             if (session === null || session === undefined) return [];
             // 所有角色数组
-            let userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
+            const userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
 
             // 所有菜单 ID
             let menuIds = [];
@@ -78,7 +79,7 @@ async function plugin(fastify, opts) {
             const userMenu = [...new Set(menuIds)];
             const dataMenu = await fastify.redisGet(cacheData.menu);
 
-            let result = dataMenu.filter((item) => {
+            const result = dataMenu.filter((item) => {
                 if (item.state === 0 && userMenu.includes(item.id)) {
                     return true;
                 } else {
@@ -94,11 +95,11 @@ async function plugin(fastify, opts) {
     // 设置权限数据
     fastify.decorate('cacheTreeData', async () => {
         // 菜单列表
-        let dataMenu = await fastify.mysql.table('sys_menu').select();
-        let dataApi = await fastify.mysql.table('sys_api').select();
+        const dataMenu = await fastify.mysql.table('sys_menu').select();
+        const dataApi = await fastify.mysql.table('sys_api').select();
 
         // 白名单接口
-        let dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
+        const dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
 
         // 菜单树数据
         await fastify.redisSet(cacheData.menu, []);
@@ -123,7 +124,7 @@ async function plugin(fastify, opts) {
     // 设置角色数据
     fastify.decorate('cacheRoleData', async () => {
         // 角色类别
-        let dataRole = await fastify.mysql.table('sys_role').select();
+        const dataRole = await fastify.mysql.table('sys_role').select();
 
         await fastify.redisSet(cacheData.role, []);
         await fastify.redisSet(cacheData.role, dataRole);
