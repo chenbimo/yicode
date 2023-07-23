@@ -1,11 +1,12 @@
+// 工具函数
 import { fnApiInfo } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参验证
 export const apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `删除${metaConfig.name}`,
@@ -18,20 +19,23 @@ export const apiSchema = {
         required: ['id']
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let model = fastify.mysql.table('sys_tree');
+                const treeModel = fastify.mysql.table('sys_tree');
 
-                let selectResult = await model.clone().where({ pid: req.body.id }).first();
-                if (selectResult) {
-                    return { ...codeConfig.FAIL, msg: '该树存在下级树，无法删除' };
+                const treeData = await treeModel.clone().where({ pid: req.body.id }).first('id');
+                if (treeData?.id) {
+                    return {
+                        ...codeConfig.FAIL,
+                        msg: '该树存在下级树，无法删除'
+                    };
                 }
 
-                let result = await model.clone().where({ id: req.body.id }).delete();
+                const result = await treeModel.clone().where({ id: req.body.id }).delete();
 
                 await fastify.cacheTreeData();
 
