@@ -17,5 +17,6 @@ export const codeConfig = {
     API_DISABLED: { symbol: 'API_DISABLED', code: 15, msg: '接口已禁用' },
     NO_FILE: { symbol: 'NO_FILE', code: 17, msg: '文件不存在' },
     NO_API: { symbol: 'NO_API', code: 18, msg: '接口不存在' },
-    NO_USER: { symbol: 'NO_USER', code: 19, msg: '用户不存在' }
+    NO_USER: { symbol: 'NO_USER', code: 19, msg: '用户不存在' },
+    NO_DATA: { symbol: 'NO_DATA', code: 20, msg: '数据不存在' }
 };
