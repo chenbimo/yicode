@@ -1,11 +1,12 @@
+// 工具函数
 import { fnApiInfo, fnRandom6Number, fnDbInsertData } from '../../utils/index.js';
-
+// 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-
+// 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
-
+// 传参验证
 export const apiSchema = {
     summary: `发送邮箱注册验证码`,
     tags: [apiInfo.parentDirName],
@@ -36,30 +37,29 @@ export const apiSchema = {
         ]
     }
 };
-
+// 处理函数
 export default async function (fastify, opts) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                let mailLogModel = fastify.mysql.table('sys_mail_log');
+                const mailLogModel = fastify.mysql.table('sys_mail_log');
                 // 普通发送
                 if (req.body.content) {
-                    let result = await fastify.sendEmail({
+                    const result = await fastify.sendEmail({
                         to: req.body.to_email,
                         subject: req.body.subject,
                         text: req.body.content
                     });
-                    await mailLogModel.clone().insert(
-                        fnDbInsertData({
-                            login_email: appConfig.mail.user,
-                            from_name: appConfig.mail.from_name,
-                            from_email: appConfig.mail.from_email,
-                            to_email: req.body.to_email,
-                            email_type: req.body.email_type,
-                            text: req.body.content
-                        })
-                    );
+                    const insertData = {
+                        login_email: appConfig.mail.user,
+                        from_name: appConfig.mail.from_name,
+                        from_email: appConfig.mail.from_email,
+                        to_email: req.body.to_email,
+                        email_type: req.body.email_type,
+                        text: req.body.content
+                    };
+                    await mailLogModel.clone().insert(fnDbInsertData(insertData));
                     return {
                         ...codeConfig.SUCCESS,
                         msg: '邮件已发送',
@@ -70,7 +70,7 @@ export default async function (fastify, opts) {
                 // 发送验证码
                 if (req.body.verify_name) {
                     // 如果已经发送过
-                    let existsVerifyCode = await fastify.redisGet(`${req.body.verify_name}:${req.body.to_email}`);
+                    const existsVerifyCode = await fastify.redisGet(`${req.body.verify_name}:${req.body.to_email}`);
                     if (existsVerifyCode) {
                         return {
                             ...codeConfig.SUCCESS,
@@ -80,24 +80,22 @@ export default async function (fastify, opts) {
                     }
 
                     // 如果没有发送过
-                    let cacheVerifyCode = fnRandom6Number();
+                    const cacheVerifyCode = fnRandom6Number();
                     await fastify.redisSet(`${req.body.verify_name}:${req.body.to_email}`, cacheVerifyCode, 60 * 3);
-                    let result = await fastify.sendEmail({
+                    const result = await fastify.sendEmail({
                         to: req.body.to_email,
                         subject: req.body.subject,
                         text: req.body.subject + '：' + cacheVerifyCode
                     });
-
-                    await mailLogModel.clone().insert(
-                        fnDbInsertData({
-                            login_email: appConfig.mail.user,
-                            from_name: appConfig.mail.from_name,
-                            from_email: appConfig.mail.from_email,
-                            to_email: req.body.to_email,
-                            email_type: req.body.email_type,
-                            text: '******'
-                        })
-                    );
+                    const insertData = {
+                        login_email: appConfig.mail.user,
+                        from_name: appConfig.mail.from_name,
+                        from_email: appConfig.mail.from_email,
+                        to_email: req.body.to_email,
+                        email_type: req.body.email_type,
+                        text: '******'
+                    };
+                    await mailLogModel.clone().insert(fnDbInsertData(insertData));
                     return {
                         ...codeConfig.SUCCESS,
                         msg: '邮箱验证码已发送（3分钟有效）',
