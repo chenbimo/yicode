@@ -10,7 +10,6 @@ import got from 'got';
 import { customAlphabet } from 'nanoid';
 import { copy as copyAny } from 'copy-anything';
 import { luhn } from '@yicode-helper/luhn';
-import { traverse } from 'ast-monkey-traverse';
 import {
     //
     kebabCase as _kebabCase,
