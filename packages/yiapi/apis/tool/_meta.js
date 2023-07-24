@@ -14,6 +14,6 @@ export const metaConfig = {
             maxLength: 30,
             pattern: '^[a-z][a-zA-Z0-9]*$'
         },
-        content: fnSchema(schemaField.string1to100, '邮件内容')
+        content: fnSchema(schemaField.string1to1000, '邮件内容')
     }
 };

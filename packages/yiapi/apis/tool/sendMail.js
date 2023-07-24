@@ -17,22 +17,20 @@ export const apiSchema = {
                 type: 'object',
                 properties: {
                     to_email: metaConfig.schema.to_email,
-                    email_type: metaConfig.schema.email_type,
                     subject: metaConfig.schema.subject,
                     verify_name: metaConfig.schema.verify_name
                 },
-                required: ['to_email', 'email_type', 'subject', 'verify_name']
+                required: ['to_email', 'subject', 'verify_name']
             },
             {
                 title: '发送普通邮件',
                 type: 'object',
                 properties: {
                     to_email: metaConfig.schema.to_email,
-                    email_type: metaConfig.schema.email_type,
                     subject: metaConfig.schema.subject,
                     content: metaConfig.schema.content
                 },
-                required: ['to_email', 'email_type', 'subject', 'content']
+                required: ['to_email', 'subject', 'content']
             }
         ]
     }
@@ -56,7 +54,7 @@ export default async function (fastify, opts) {
                         from_name: appConfig.mail.from_name,
                         from_email: appConfig.mail.from_email,
                         to_email: req.body.to_email,
-                        email_type: req.body.email_type,
+                        email_type: 'common',
                         text: req.body.content
                     };
                     await mailLogModel.clone().insert(fnDbInsertData(insertData));
@@ -92,7 +90,7 @@ export default async function (fastify, opts) {
                         from_name: appConfig.mail.from_name,
                         from_email: appConfig.mail.from_email,
                         to_email: req.body.to_email,
-                        email_type: req.body.email_type,
+                        email_type: 'verify',
                         text: '******'
                     };
                     await mailLogModel.clone().insert(fnDbInsertData(insertData));
