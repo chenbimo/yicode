@@ -72,14 +72,14 @@ export default async function (fastify, opts) {
                     if (existsVerifyCode) {
                         return {
                             ...codeConfig.SUCCESS,
-                            msg: '邮箱验证码已发送（3分钟有效）',
+                            msg: '邮箱验证码已发送（5分钟有效）',
                             from: 'cache'
                         };
                     }
 
                     // 如果没有发送过
                     const cacheVerifyCode = fnRandom6Number();
-                    await fastify.redisSet(`${req.body.verify_name}:${req.body.to_email}`, cacheVerifyCode, 60 * 3);
+                    await fastify.redisSet(`${req.body.verify_name}:${req.body.to_email}`, cacheVerifyCode, 60 * 5);
                     const result = await fastify.sendEmail({
                         to: req.body.to_email,
                         subject: req.body.subject,
@@ -96,7 +96,7 @@ export default async function (fastify, opts) {
                     await mailLogModel.clone().insert(fnDbInsertData(insertData));
                     return {
                         ...codeConfig.SUCCESS,
-                        msg: '邮箱验证码已发送（3分钟有效）',
+                        msg: '邮箱验证码已发送（5分钟有效）',
                         from: 'new'
                     };
                 }
