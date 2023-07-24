@@ -21,8 +21,8 @@ importers:
                 specifier: ^3.0.0
                 version: 3.0.0
             simple-git-hooks:
-                specifier: ^2.8.1
-                version: 2.8.1
+                specifier: ^2.9.0
+                version: 2.9.0
 
     browsers/zhihu-nice:
         dependencies:
@@ -129,8 +129,8 @@ importers:
                 specifier: ^7.2.0
                 version: 7.2.0
             '@fastify/multipart':
-                specifier: ^7.7.2
-                version: 7.7.2
+                specifier: ^7.7.3
+                version: 7.7.3
             '@fastify/rate-limit':
                 specifier: ^8.0.3
                 version: 8.0.3
@@ -444,8 +444,8 @@ importers:
                 specifier: ^1.1.33
                 version: 1.1.33
             '@iconify-json/lucide':
-                specifier: ^1.1.112
-                version: 1.1.112
+                specifier: ^1.1.113
+                version: 1.1.113
             '@iconify-json/majesticons':
                 specifier: ^1.1.7
                 version: 1.1.7
@@ -516,8 +516,8 @@ importers:
                 specifier: ^1.1.10
                 version: 1.1.10
             '@iconify-json/simple-icons':
-                specifier: ^1.1.61
-                version: 1.1.61
+                specifier: ^1.1.62
+                version: 1.1.62
             '@iconify-json/skill-icons':
                 specifier: ^1.1.2
                 version: 1.1.2
@@ -528,8 +528,8 @@ importers:
                 specifier: ^1.1.8
                 version: 1.1.8
             '@iconify-json/tabler':
-                specifier: ^1.1.83
-                version: 1.1.83
+                specifier: ^1.1.84
+                version: 1.1.84
             '@iconify-json/teenyicons':
                 specifier: ^1.1.5
                 version: 1.1.5
@@ -576,8 +576,8 @@ importers:
                 specifier: ^4.2.3
                 version: 4.2.3(vite@4.4.6)(vue@3.3.4)
             '@vue-macros/reactivity-transform':
-                specifier: ^0.3.15
-                version: 0.3.15(vue@3.3.4)
+                specifier: ^0.3.16
+                version: 0.3.16(vue@3.3.4)
             '@yicode-helper/yite-chunk':
                 specifier: workspace:*
                 version: link:../../helpers/yite-chunk
@@ -660,8 +660,8 @@ importers:
     templates/yiadmin:
         dependencies:
             '@arco-design/web-vue':
-                specifier: ^2.49.0
-                version: 2.49.0(vue@3.3.4)
+                specifier: ^2.49.1
+                version: 2.49.1(vue@3.3.4)
             '@yicode/yidash':
                 specifier: workspace:*
                 version: link:../../packages/yidash
@@ -712,8 +712,8 @@ importers:
     templates/yibase:
         dependencies:
             '@arco-design/web-vue':
-                specifier: ^2.49.0
-                version: 2.49.0(vue@3.3.4)
+                specifier: ^2.49.1
+                version: 2.49.1(vue@3.3.4)
             '@yicode/yidash':
                 specifier: workspace:*
                 version: link:../../packages/yidash
@@ -752,8 +752,8 @@ importers:
                 specifier: ^3.0.0
                 version: 3.0.0
             simple-git-hooks:
-                specifier: ^2.8.1
-                version: 2.8.1
+                specifier: ^2.9.0
+                version: 2.9.0
 
     templates/yidocs:
         dependencies:
@@ -809,8 +809,8 @@ importers:
                 specifier: ^1.4.28
                 version: 1.4.28
             '@vue-macros/reactivity-transform':
-                specifier: ^0.3.15
-                version: 0.3.15(vue@3.3.4)
+                specifier: ^0.3.16
+                version: 0.3.16(vue@3.3.4)
             blueimp-md5:
                 specifier: ^2.19.0
                 version: 2.19.0
@@ -861,8 +861,8 @@ importers:
                 specifier: ^1.64.1
                 version: 1.64.1
             simple-git-hooks:
-                specifier: ^2.8.1
-                version: 2.8.1
+                specifier: ^2.9.0
+                version: 2.9.0
             vite:
                 specifier: ^4.4.6
                 version: 4.4.6(sass@1.64.1)
@@ -1098,8 +1098,8 @@ packages:
             color: 3.2.1
         dev: false
 
-    /@arco-design/web-vue@2.49.0(vue@3.3.4):
-        resolution: { integrity: sha512-aBSEnV2qeTnpkxMa2AVxQxYKEX34nOjGSwJA+3/WAY1yEpumLx+ykn3x8ur8KomS4PqFQBto1FbPHjFZaZkviQ== }
+    /@arco-design/web-vue@2.49.1(vue@3.3.4):
+        resolution: { integrity: sha512-KuYMbEhcKS4kv6T3OOqpPMVpiXR6q8YYFCA4ibckrJTvWxc5zAG/FDJJyCDP91KNB4PW2RxKBnTSQMDd3C5Wjw== }
         peerDependencies:
             vue: ^3.1.0
         dependencies:
@@ -2039,8 +2039,8 @@ packages:
             steed: 1.1.3
         dev: false
 
-    /@fastify/multipart@7.7.2:
-        resolution: { integrity: sha512-hkD/fPdOhz3fOwYFo9OJU/QPFeu975JxRPKaTstDbjChSXRd1ptxrIhE4zV3ufrBFPcqBnsqYNfGt5VURGbkIg== }
+    /@fastify/multipart@7.7.3:
+        resolution: { integrity: sha512-MG4Gd9FNEXc8qx0OgqoXM10EGO/dN/0iVQ8SrpFMU3d6F6KUfcqD2ZyoQhkm9LWrbiMgdHv5a43x78lASdn5GA== }
         dependencies:
             '@fastify/busboy': 1.2.1
             '@fastify/deepmerge': 1.3.0
@@ -2472,8 +2472,8 @@ packages:
             '@iconify/types': 2.0.0
         dev: false
 
-    /@iconify-json/lucide@1.1.112:
-        resolution: { integrity: sha512-Vc2aZnsdq1EB/rTjuN5hQroLEslM1IeS48EPmxlZX1nHob0VRI6l6wNRZ9P8MH3VpQeW3a1RV6tqDD8LV6CCdg== }
+    /@iconify-json/lucide@1.1.113:
+        resolution: { integrity: sha512-Jd1lZcQl/1c+xgfCh74w3WQi4PZAQ27MMaLgZg9KXMXxla43z0HeCHtiyNnQRDofWbCmwC2vLz58oPmZzEIFDA== }
         dependencies:
             '@iconify/types': 2.0.0
         dev: false
@@ -2616,8 +2616,8 @@ packages:
             '@iconify/types': 2.0.0
         dev: false
 
-    /@iconify-json/simple-icons@1.1.61:
-        resolution: { integrity: sha512-n1UWME41sSm7AexhVLAfuPwwmjHXiNsHU88KhJBwrZGL47s4GzmADbGobms7EmKwehC8RlMJq3hj7j8jYNqWjQ== }
+    /@iconify-json/simple-icons@1.1.62:
+        resolution: { integrity: sha512-idHWbDrd9HKtZq9XBJyVN5+QCxJ+oO4BJeJtNNi9GfFSgoA2ig0LZt7adj9uZ/zzEX0i5OY37OpuotkeFRCWfg== }
         dependencies:
             '@iconify/types': 2.0.0
         dev: false
@@ -2640,8 +2640,8 @@ packages:
             '@iconify/types': 2.0.0
         dev: false
 
-    /@iconify-json/tabler@1.1.83:
-        resolution: { integrity: sha512-mOwTDVs391RALlVoYxtCU5Pb6PlSCt0KpOO6Y/3Ps8SJ2YHiSvTlcAiDhAUah6pIZ92vf8RGMUHSV0e/oYH47w== }
+    /@iconify-json/tabler@1.1.84:
+        resolution: { integrity: sha512-XliiqnH4M6tS+qIbabnqTjgfT0PiEYy+93EWgx8hKiJyKGihfiGpWBKstNGfGc785T3uR9D+jjL9GXikDOnlug== }
         dependencies:
             '@iconify/types': 2.0.0
         dev: false
@@ -3665,8 +3665,8 @@ packages:
             vite: 4.4.6(sass@1.64.1)
             vue: 3.3.4
 
-    /@vue-macros/common@1.5.0(vue@3.3.4):
-        resolution: { integrity: sha512-/Xtmxigolh4NwyLQfrBv+8PAIhlB3doBH7JcA0WuSMmi5LzGOK3YzDCp5jMzpXB6OoUGmm1ZaDkJcBsEmijFPw== }
+    /@vue-macros/common@1.6.0(vue@3.3.4):
+        resolution: { integrity: sha512-sgDo9qN5DI0y7FJ+E0qOxhcsrBlVNp0erW5mfLzYtGYRFfuuIS5hEanNao7QZWVmK39kvmNOPbPOV1oiWBMrng== }
         engines: { node: '>=16.14.0' }
         peerDependencies:
             vue: ^2.7.0 || ^3.2.25
@@ -3677,22 +3677,22 @@ packages:
             '@babel/types': 7.22.5
             '@rollup/pluginutils': 5.0.2
             '@vue/compiler-sfc': 3.3.4
-            ast-kit: 0.6.9
+            ast-kit: 0.9.4
             local-pkg: 0.4.3
-            magic-string-ast: 0.1.3
+            magic-string-ast: 0.2.0
             vue: 3.3.4
         transitivePeerDependencies:
             - rollup
         dev: false
 
-    /@vue-macros/reactivity-transform@0.3.15(vue@3.3.4):
-        resolution: { integrity: sha512-gDer+sjmKX2wxHNR/epv6RolmRwVuMszoaQ5bZEivrE9LLVEoQwy9RGYVtGR5sAzvSJ2wokb4beHh7f8+l6Rbw== }
+    /@vue-macros/reactivity-transform@0.3.16(vue@3.3.4):
+        resolution: { integrity: sha512-GiuWLd/tAOtBSYFCu5XicrTCCr9pMTaDLGEzVUu+BMmJS3lqgz8gYWs88tiY+/Stgt77HbXJEAhh1pw/Gaf+IA== }
         engines: { node: '>=16.14.0' }
         peerDependencies:
             vue: ^2.7.0 || ^3.2.25
         dependencies:
             '@babel/parser': 7.22.7
-            '@vue-macros/common': 1.5.0(vue@3.3.4)
+            '@vue-macros/common': 1.6.0(vue@3.3.4)
             '@vue/compiler-core': 3.3.4
             '@vue/shared': 3.3.4
             magic-string: 0.30.1
@@ -4177,8 +4177,8 @@ packages:
             util: 0.12.5
         dev: false
 
-    /ast-kit@0.6.9:
-        resolution: { integrity: sha512-2XZi+wqlluYQcxJ1G8qE/U0IeO5CbxUyv1lnSdD7ByJtd5Z3+1063Q6IHbRaYkka1Kb6WgGqEkBrSMaBtbHuFQ== }
+    /ast-kit@0.9.4:
+        resolution: { integrity: sha512-UrZHsdj87OS6NM+IXRii+asdAUA/P0SMa4r1NrZvsUy72hDvCYwk8c9PsbKf1MvJ0BvP+rF1B8tFP54eT370Tg== }
         engines: { node: '>=16.14.0' }
         dependencies:
             '@babel/parser': 7.22.7
@@ -7356,8 +7356,8 @@ packages:
         engines: { node: '>=12' }
         dev: false
 
-    /magic-string-ast@0.1.3:
-        resolution: { integrity: sha512-nnNhBSh8QAd90n3CQeyxKlXY4TKJ4PNjFRi7Ofs1dAr239k6H4CYAaAR4ZKRrWZNBvh1IUTl5dYP91t9dKDjig== }
+    /magic-string-ast@0.2.0:
+        resolution: { integrity: sha512-GHev7SFZZrIFy+ZyNJOJpK88KoGSn6FUOhGJXSdHhPt7Q6htJKTiKkdGcJFKp9Tt3P4SIL/P+ro0jZ7BSV8KMw== }
         engines: { node: '>=16.14.0' }
         dependencies:
             magic-string: 0.30.1
@@ -9377,8 +9377,8 @@ packages:
             - supports-color
         dev: false
 
-    /simple-git-hooks@2.8.1:
-        resolution: { integrity: sha512-DYpcVR1AGtSfFUNzlBdHrQGPsOhuuEJ/FkmPOOlFysP60AHd3nsEpkGq/QEOdtUyT1Qhk7w9oLmFoMG+75BDog== }
+    /simple-git-hooks@2.9.0:
+        resolution: { integrity: sha512-waSQ5paUQtyGC0ZxlHmcMmD9I1rRXauikBwX31bX58l5vTOhCEcBC5Bi+ZDkPXTjDnZAF8TbCqKBY+9+sVPScw== }
         hasBin: true
         requiresBuild: true
         dev: true
@@ -10293,7 +10293,7 @@ packages:
             sirv: 2.0.3
             vite: 4.4.6(@types/node@18.17.0)
             vite-plugin-inspect: 0.7.33(vite@4.4.6)
-            vite-plugin-vue-inspector: 3.4.2(vite@4.4.6)
+            vite-plugin-vue-inspector: 3.5.0(vite@4.4.6)
         transitivePeerDependencies:
             - '@types/node'
             - pug
@@ -10301,8 +10301,8 @@ packages:
             - supports-color
         dev: false
 
-    /vite-plugin-vue-inspector@3.4.2(vite@4.4.6):
-        resolution: { integrity: sha512-q5OTkcZJqL78bwGJl1Zk8CNqtxZ9wP2udJYqyFIZzL1lTax0/oq7DhNkLrnPTxkJuf0QPZKdunb1vDyCByn4dQ== }
+    /vite-plugin-vue-inspector@3.5.0(vite@4.4.6):
+        resolution: { integrity: sha512-dDoxEi5VWkfsKflVUYxElC3XD/MOn8s/6mjCqWRDlFIQ+OsY0cW5PNTbqxGllbBBCr5SDnDmPWFS1vMJxrLVEw== }
         peerDependencies:
             vite: ^3.0.0-0 || ^4.0.0-0
         dependencies:

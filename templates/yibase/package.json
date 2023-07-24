@@ -24,7 +24,7 @@
         "readme.md"
     ],
     "dependencies": {
-        "@arco-design/web-vue": "^2.49.0",
+        "@arco-design/web-vue": "^2.49.1",
         "@yicode/yidash": "workspace:*",
         "@yicode/yite-cli": "workspace:*",
         "axios": "^1.4.0",
@@ -39,7 +39,7 @@
     "devDependencies": {
         "lint-staged": "^13.2.3",
         "prettier": "^3.0.0",
-        "simple-git-hooks": "^2.8.1"
+        "simple-git-hooks": "^2.9.0"
     },
     "simple-git-hooks": {
         "pre-commit": "pnpm lint-staged"
