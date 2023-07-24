@@ -1,14 +1,16 @@
+// 内部模块
 import crypto from 'node:crypto';
 import path from 'node:path';
 import url from 'node:url';
 import { createRequire } from 'node:module';
-
+// 外部模块
 import fg from 'fast-glob';
 import md5 from 'blueimp-md5';
 import got from 'got';
 import { customAlphabet } from 'nanoid';
 import { copy as copyAny } from 'copy-anything';
 import { luhn } from '@yicode-helper/luhn';
+import { traverse } from 'ast-monkey-traverse';
 import {
     //
     kebabCase as _kebabCase,
@@ -21,9 +23,10 @@ import {
     concat as _concat,
     mergeWith as _mergeWith,
     random as _random,
-    isString as _isString
+    isString as _isString,
+    cloneDeep as _cloneDeep
 } from 'lodash-es';
-
+// 配置文件
 import { appConfig } from '../config/appConfig.js';
 import { sysConfig } from '../config/sysConfig.js';
 import { schemaType } from '../config/schemaType.js';
@@ -162,15 +165,15 @@ export function fnClearEmptyData(obj, expludeFields = ['id']) {
 
 // 减少日志过长的内容
 export function fnClearLogData(obj, expludeFields = []) {
-    let newObj = {};
-    _forOwn(obj, (value, key) => {
-        if (_isString(value)) {
-            newObj[key] = value.slice(0, 200);
-        } else {
-            newObj[key] = value;
+    let objNew = _cloneDeep(_omit(obj, expludeFields));
+    fnObjTraverse(objNew, {
+        processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
+            if (_isString(value)) {
+                cbSetValue(value.slice(0, 100));
+            }
         }
     });
-    return _omit(newObj, expludeFields);
+    return objNew;
 }
 
 // 数据库添加数据
@@ -296,6 +299,62 @@ export function fnApiParamsSign(params) {
     let fieldsMd5 = md5(fieldsSort);
     return { sign: fieldsMd5, sort: fieldsSort };
 }
+
+// 深度遍历对象节点
+export const fnObjTraverse = (obj, callbacks = null, flattenArray = false, level = 0, path = []) => {
+    let processValue = null;
+    if (callbacks && callbacks.processValue) {
+        processValue = callbacks.processValue;
+    }
+    if (callbacks && callbacks.enterLevel) {
+        callbacks.enterLevel(level, path);
+    }
+    Object.entries(obj).forEach(([key, val]) => {
+        if (val !== null && typeof val == 'object' && (!Array.isArray(val) || !flattenArray)) {
+            if (Array.isArray(val)) {
+                for (let i = 0; i < val.length; i++) {
+                    let elem = val[i];
+                    let itemKey = '_' + i;
+                    let currentPath = Array.from(path);
+                    currentPath.push(key);
+                    if (elem !== null && typeof elem == 'object') {
+                        if (processValue) {
+                            processValue(itemKey, elem, level, currentPath, true, true, (newElem) => {
+                                obj[key][i] = newElem;
+                            });
+                        }
+                        currentPath.push(itemKey);
+                        fnObjTraverse(elem, callbacks, flattenArray, level + 1, currentPath);
+                    } else {
+                        if (processValue) {
+                            processValue(itemKey, elem, level, currentPath, false, true, (newElem) => {
+                                obj[key][i] = newElem;
+                            });
+                        }
+                    }
+                }
+            } else {
+                if (processValue) {
+                    processValue(key, val, level, path, true, false, (newVal) => {
+                        obj[key] = newVal;
+                    });
+                }
+                let currentPath = Array.from(path);
+                currentPath.push(key);
+                fnObjTraverse(val, callbacks, flattenArray, level + 1, currentPath);
+            }
+        } else {
+            if (processValue) {
+                processValue(key, val, level, path, false, false, (newVal) => {
+                    obj[key] = newVal;
+                });
+            }
+        }
+    });
+    if (callbacks && callbacks.exitLevel) {
+        callbacks.exitLevel(level, path);
+    }
+};
 
 /**
  * 检查传参有效性
