@@ -55,7 +55,7 @@ export default async function (fastify, opts) {
                         from_email: appConfig.mail.from_email,
                         to_email: req.body.to_email,
                         email_type: 'common',
-                        text: req.body.content
+                        text_content: req.body.content
                     };
                     await mailLogModel.clone().insert(fnDbInsertData(insertData));
                     return {
@@ -91,7 +91,7 @@ export default async function (fastify, opts) {
                         from_email: appConfig.mail.from_email,
                         to_email: req.body.to_email,
                         email_type: 'verify',
-                        text: '******'
+                        text_content: '******'
                     };
                     await mailLogModel.clone().insert(fnDbInsertData(insertData));
                     return {
