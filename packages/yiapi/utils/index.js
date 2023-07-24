@@ -439,7 +439,6 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
         'id',
         'created_at',
         'updated_at',
-        'deleted_at',
         'state'
     ];
     const tableJson = fnRequire(filePath, {}, fromType);
