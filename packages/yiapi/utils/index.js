@@ -23,7 +23,8 @@ import {
     mergeWith as _mergeWith,
     random as _random,
     isString as _isString,
-    cloneDeep as _cloneDeep
+    cloneDeep as _cloneDeep,
+    uniq as _uniq
 } from 'lodash-es';
 // 配置文件
 import { appConfig } from '../config/appConfig.js';
@@ -432,10 +433,19 @@ export function fnRequire(filePath, defaultValue, fromType = 'core') {
 
 // 获取查询字段
 export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) {
+    // 内置的字段
+    const innerFields = [
+        //
+        'id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'state'
+    ];
     const tableJson = fnRequire(filePath, {}, fromType);
-    const allKeys = Object.keys(tableJson?.fields || {});
-    const passKeys = _omit(allKeys, excludeFields);
-    return passKeys;
+    const includeKeys = _omit(tableJson?.fields || {}, excludeFields);
+    const allKeys = _uniq(_concat(innerFields, Object.keys(includeKeys)));
+    return allKeys;
 }
 
 /**
