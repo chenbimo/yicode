@@ -447,6 +447,14 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
     return allKeys;
 }
 
+// rsa-sha256加密
+export function fnRsaSha256(data, privateKey) {
+    const sign = crypto.createSign('RSA-SHA256');
+    sign.update(data);
+    const signature = sign.sign(privateKey, 'base64');
+    return signature;
+}
+
 /**
  * 协议生成函数
  * @param {String} field 字段
