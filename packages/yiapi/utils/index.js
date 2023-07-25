@@ -442,6 +442,10 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
         'state'
     ];
     const tableJson = fnRequire(filePath, {}, fromType);
+    // 如果没有fields子弹
+    if (!tableJson?.fields) {
+        process.exit();
+    }
     const includeKeys = _omit(tableJson?.fields || {}, excludeFields);
     const allKeys = _uniq(_concat(innerFields, Object.keys(includeKeys)));
     return allKeys;
