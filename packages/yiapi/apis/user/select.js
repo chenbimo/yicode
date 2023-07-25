@@ -7,7 +7,7 @@ import { metaConfig } from './_meta.js';
 // 接口信息
 const apiInfo = await fnApiInfo(import.meta.url);
 // 选择字段
-const selectKeys = fnSelectFields('./tables/user.json', ['password']);
+const selectKeys = fnSelectFields('./tables/user.json', 'core', ['password']);
 // 传参验证
 export const apiSchema = {
     tags: [apiInfo.parentDirName],
