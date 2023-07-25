@@ -10,6 +10,8 @@ import got from 'got';
 import { customAlphabet } from 'nanoid';
 import { copy as copyAny } from 'copy-anything';
 import { luhn } from '@yicode-helper/luhn';
+import logSymbols from 'log-symbols';
+import * as color from 'colorette';
 import {
     //
     kebabCase as _kebabCase,
@@ -444,6 +446,7 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
     const tableJson = fnRequire(filePath, {}, fromType);
     // 如果没有fields子弹
     if (!tableJson?.fields) {
+        console.log(`${logSymbols.warning} ${color.blueBright(filePath)} 字段定义不合法，请检查`);
         process.exit();
     }
     const includeKeys = _omit(tableJson?.fields || {}, excludeFields);
