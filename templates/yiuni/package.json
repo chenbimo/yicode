@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yiuni",
-    "version": "1.0.24",
+    "version": "1.0.25",
     "private": false,
     "publishConfig": {
         "access": "public"
