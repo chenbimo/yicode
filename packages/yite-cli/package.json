@@ -162,7 +162,7 @@
         "unplugin-auto-import": "^0.16.6",
         "unplugin-icons": "^0.16.5",
         "unplugin-vue-components": "^0.25.1",
-        "vite": "^4.4.6",
+        "vite": "^4.4.7",
         "vite-plugin-vue-devtools": "1.0.0-beta.2",
         "vue-i18n": "^9.2.2"
     },
