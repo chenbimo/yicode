@@ -29,7 +29,7 @@ export default async function (fastify, opts) {
             try {
                 const menuModel = fastify.mysql.table('sys_tree').modify(function (queryBuilder) {});
 
-                const { total } = await menuModel.clone().count('id', { as: 'total' }).first('id');
+                const { total } = await menuModel.clone().count('id', { as: 'total' }).first();
 
                 const rows = await menuModel
                     //

@@ -36,7 +36,7 @@ export default async function (fastify, opts) {
                         }
                     });
 
-                const { total } = await roleModel.clone().count('id', { as: 'total' }).first('id');
+                const { total } = await roleModel.clone().count('id', { as: 'total' }).first();
                 const rows = await roleModel
                     .clone()
                     //

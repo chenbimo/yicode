@@ -33,7 +33,7 @@ export default async function (fastify, opts) {
                     .where('category', req.body.category)
                     .modify(function (queryBuilder) {});
 
-                const { total } = await treeModel.clone().count('id', { as: 'total' }).first('id');
+                const { total } = await treeModel.clone().count('id', { as: 'total' }).first();
 
                 const rows = await treeModel
                     //

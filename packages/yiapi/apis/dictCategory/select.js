@@ -41,11 +41,7 @@ export default async function (fastify, opts) {
                     });
 
                 // 记录总数
-                const { total } = await dictCategoryModel
-                    //
-                    .clone()
-                    .count('id', { as: 'total' })
-                    .first('id');
+                const { total } = await dictCategoryModel.clone().count('id', { as: 'total' }).first();
 
                 // 记录列表
                 const rows = await dictCategoryModel
