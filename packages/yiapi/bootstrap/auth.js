@@ -39,7 +39,7 @@ async function plugin(fastify, opts) {
     fastify.addHook('preHandler', async (req, res) => {
         try {
             // 如果是收藏图标，则直接通过
-            if (res.url === 'favicon.ico') return;
+            if (req.url === 'favicon.ico') return;
 
             /* --------------------------------- 接口禁用检测 --------------------------------- */
             const isMatchBlackApi = micromatch.isMatch(req.url, appConfig.blackApis);
