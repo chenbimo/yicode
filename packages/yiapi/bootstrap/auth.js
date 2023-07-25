@@ -39,23 +39,23 @@ async function plugin(fastify, opts) {
     fastify.addHook('preHandler', async (req, res) => {
         try {
             // 如果是收藏图标，则直接通过
-            if (req.url === 'favicon.ico') return;
+            if (req.routeConfig.url === 'favicon.ico') return;
 
             /* --------------------------------- 接口禁用检测 --------------------------------- */
-            const isMatchBlackApi = micromatch.isMatch(req.url, appConfig.blackApis);
+            const isMatchBlackApi = micromatch.isMatch(req.routeConfig.url, appConfig.blackApis);
             if (isMatchBlackApi === true) {
                 res.send(codeConfig.API_DISABLED);
                 return;
             }
 
             /* --------------------------------- 自由接口判断 --------------------------------- */
-            const isMatchFreeApi = micromatch.isMatch(req.url, appConfig.freeApis);
+            const isMatchFreeApi = micromatch.isMatch(req.routeConfig.url, appConfig.freeApis);
             // 如果是自由通行的接口，则直接返回
             if (isMatchFreeApi === true) return;
 
             /* --------------------------------- 请求资源判断 --------------------------------- */
-            if (req.url.indexOf('.') !== -1) {
-                if (fs.existsSync(path.join(sysConfig.appDir, 'public', req.url)) === true) {
+            if (req.routeConfig.url.indexOf('.') !== -1) {
+                if (fs.existsSync(path.join(sysConfig.appDir, 'public', req.routeConfig.url)) === true) {
                     return;
                 } else {
                     // 文件不存在
@@ -67,7 +67,7 @@ async function plugin(fastify, opts) {
             /* --------------------------------- 接口存在性判断 -------------------------------- */
             const allApiNames = await fastify.redisGet(cacheData.apiNames);
 
-            if (allApiNames.includes(req.url) === false) {
+            if (allApiNames.includes(req.routeConfig.url) === false) {
                 res.send(codeConfig.NO_API);
                 return;
             }
@@ -89,7 +89,7 @@ async function plugin(fastify, opts) {
              * 才进行日志记录
              * 减少无意义的日志
              */
-            if (_startsWith(req.url, '/docs') === false) {
+            if (_startsWith(req.routeConfig.url, '/docs') === false) {
                 fastify.log.warn(
                     fnClearLogData({
                         apiPath: req?.url,
@@ -112,17 +112,17 @@ async function plugin(fastify, opts) {
             const allWhiteApis = _uniq(_concat(appConfig.whiteApis, whiteApis || []));
 
             // 是否匹配白名单
-            const isMatchWhiteApi = micromatch.isMatch(req.url, allWhiteApis);
+            const isMatchWhiteApi = micromatch.isMatch(req.routeConfig.url, allWhiteApis);
 
             // 如果接口不在白名单中，则判断用户是否有接口访问权限
             if (isMatchWhiteApi === false) {
                 const userApis = await fastify.getUserApis(req.session);
-                const hasApi = _find(userApis, { value: req.url });
+                const hasApi = _find(userApis, { value: req.routeConfig.url });
 
                 if (hasApi === false) {
                     res.send({
                         ...codeConfig.FAIL,
-                        msg: `您没有 [ ${req?.routeSchema?.summary || req.url} ] 接口的操作权限`
+                        msg: `您没有 [ ${req?.routeSchema?.summary || req.routeConfig.url} ] 接口的操作权限`
                     });
                     return;
                 }
