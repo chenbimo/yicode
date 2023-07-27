@@ -29,7 +29,7 @@
         "@yicode/yite-cli": "workspace:*",
         "axios": "^1.4.0",
         "lodash-es": "^4.17.21",
-        "pinia": "^2.1.4",
+        "pinia": "^2.1.6",
         "sass": "^1.64.1",
         "store2": "^2.14.2",
         "vue": "^3.3.4",
