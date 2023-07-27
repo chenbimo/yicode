@@ -446,7 +446,7 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
     const tableJson = fnRequire(filePath, {}, fromType);
     // 如果没有fields子弹
     if (!tableJson?.fields) {
-        console.log(`${logSymbols.warning} ${color.blueBright(filePath)} 字段定义不合法，请检查`);
+        console.log(`${logSymbols.warning} ${color.blueBright(filePath)} 没有fields属性，请检查`);
         process.exit();
     }
     const includeKeys = _omit(tableJson?.fields || {}, excludeFields);
