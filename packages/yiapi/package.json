@@ -43,7 +43,7 @@
         "croner": "^6.0.7",
         "date-fns": "^2.30.0",
         "fast-glob": "^3.3.1",
-        "fastify": "^4.20.0",
+        "fastify": "^4.21.0",
         "fastify-plugin": "^4.5.1",
         "fastify-xml-body-parser": "^2.2.0",
         "fs-extra": "^11.1.1",
