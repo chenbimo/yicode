@@ -30,6 +30,8 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
         "@yicode-tool/monolage": "workspace:*",
+        "@yicode/yite-cli": "workspace:^",
+        "lerna": "^7.1.4",
         "lint-staged": "^13.2.3",
         "prettier": "^3.0.0",
         "simple-git-hooks": "^2.9.0"
@@ -39,8 +41,5 @@
     },
     "lint-staged": {
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
-    },
-    "dependencies": {
-        "lerna": "^7.1.4"
     }
 }

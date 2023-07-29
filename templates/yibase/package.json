@@ -24,7 +24,7 @@
         "readme.md"
     ],
     "dependencies": {
-        "@arco-design/web-vue": "^2.49.1",
+        "@arco-design/web-vue": "^2.49.2",
         "@yicode/yidash": "workspace:*",
         "@yicode/yite-cli": "workspace:*",
         "axios": "^1.4.0",

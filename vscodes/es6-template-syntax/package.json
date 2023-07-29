@@ -136,7 +136,7 @@
         "build": "rollup --config rollup.config.mjs"
     },
     "dependencies": {
-        "rollup": "^3.26.3"
+        "rollup": "^3.27.0"
     },
     "private": false,
     "publishConfig": {

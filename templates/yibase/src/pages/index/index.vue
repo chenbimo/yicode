@@ -1,5 +1,5 @@
 <template>
-    <div>index</div>
+    <div class="bg">index</div>
     <div>{{ $t('name') }}</div>
 </template>
 <script setup></script>

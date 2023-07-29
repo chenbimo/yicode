@@ -21,17 +21,11 @@ import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
 import { yiteHtml as YiteHtml } from '@yicode-helper/yite-html';
 import { yiteRouter as YiteRouter } from '@yicode-helper/yite-router';
 import { yiteI18n as YiteI18n } from '@yicode-helper/yite-i18n';
-
-// unocss相关配置
-import { defineConfig as defineUnocssConfig, presetAttributify, presetUno, presetIcons } from 'unocss';
-import transformerVariantGroup from '@unocss/transformer-variant-group';
-import transformerCompileClass from '@unocss/transformer-compile-class';
-import transformerDirectives from '@unocss/transformer-directives';
-
 import { yidashLibNames } from '@yicode/yidash/yidashLibNames.js';
 
 import { cliDir, appDir, srcDir, yicodeDir, cacheDir } from './config.js';
 import { fnFileProtocolPath, fnOmit, fnImport } from './utils.js';
+import { unocssConfig } from './unocss.js';
 
 export default defineConfig(async ({ command, mode }) => {
     // 没有则生成目录
@@ -127,41 +121,7 @@ export default defineConfig(async ({ command, mode }) => {
         resolvers: [IconsResolver()]
     };
 
-    let unocssConfig = defineUnocssConfig(
-        Object.assign(
-            {
-                presets: [
-                    //
-                    presetUno(),
-                    presetAttributify()
-                ],
-                transformers: [
-                    //
-                    transformerDirectives(),
-                    transformerVariantGroup(),
-                    transformerCompileClass()
-                ],
-                rules: [
-                    //
-                    [
-                        //
-                        'absolute',
-                        {
-                            position: 'absolute'
-                        }
-                    ],
-                    [
-                        //
-                        'relative',
-                        {
-                            position: 'relative'
-                        }
-                    ]
-                ]
-            },
-            yiteConfig?.unocssConfig || {}
-        )
-    );
+    let unocssConfig = defineUnocssConfig(unocssConfig);
 
     // 代码分割
     let chunkSplitConfig = {
