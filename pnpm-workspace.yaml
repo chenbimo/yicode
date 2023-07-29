@@ -2,8 +2,5 @@ packages:
     - 'packages/*'
     - 'templates/*'
     - 'helpers/*'
-    - 'vscodes/*'
-    - 'desktops/*'
     - 'tools/*'
     - 'others/*'
-    - 'browsers/*'

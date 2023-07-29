@@ -30,7 +30,6 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
         "@yicode-tool/monolage": "workspace:*",
-        "@yicode/yite-cli": "workspace:^",
         "lerna": "^7.1.4",
         "lint-staged": "^13.2.3",
         "prettier": "^3.0.0",

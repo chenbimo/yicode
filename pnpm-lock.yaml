@@ -10,9 +10,6 @@ importers:
             '@yicode-tool/monolage':
                 specifier: workspace:*
                 version: link:tools/monolage
-            '@yicode/yite-cli':
-                specifier: workspace:^
-                version: link:packages/yite-cli
             lerna:
                 specifier: ^7.1.4
                 version: 7.1.4
@@ -719,9 +716,6 @@ importers:
             '@yicode/yidash':
                 specifier: workspace:*
                 version: link:../../packages/yidash
-            '@yicode/yite-cli':
-                specifier: workspace:*
-                version: link:../../packages/yite-cli
             axios:
                 specifier: ^1.4.0
                 version: 1.4.0
@@ -747,6 +741,9 @@ importers:
                 specifier: ^4.2.4
                 version: 4.2.4(vue@3.3.4)
         devDependencies:
+            '@yicode/yite-cli':
+                specifier: workspace:*
+                version: link:../../packages/yite-cli
             lint-staged:
                 specifier: ^13.2.3
                 version: 13.2.3
@@ -3416,7 +3413,6 @@ packages:
 
     /@types/node@18.17.1:
         resolution: { integrity: sha512-xlR1jahfizdplZYRU59JlUx9uzF1ARa8jbhM11ccpCJya8kvos5jwdm2ZAgxSCwOl0fq21svP18EVwPBXMQudw== }
-        dev: false
 
     /@types/node@20.4.5:
         resolution: { integrity: sha512-rt40Nk13II9JwQBdeYqmbn2Q6IVTA5uPhvSO+JVqdXw/6/4glI6oR9ezty/A9Hg5u7JH4OmYmuQ+XvjKm0Datg== }
@@ -3656,7 +3652,7 @@ packages:
             vite: ^4.0.0
             vue: ^3.2.25
         dependencies:
-            vite: 4.4.7(sass@1.64.1)
+            vite: 4.4.7(@types/node@18.17.1)
             vue: 3.3.4
 
     /@vue-macros/common@1.6.0(vue@3.3.4):
@@ -10177,7 +10173,6 @@ packages:
             rollup: 3.27.0
         optionalDependencies:
             fsevents: 2.3.2
-        dev: false
 
     /vite@4.4.7(sass@1.64.1):
         resolution: { integrity: sha512-6pYf9QJ1mHylfVh39HpuSfMPojPSKVxZvnclX1K1FyZ1PXDOcLBibdq5t1qxJSnL63ca8Wf4zts6mD8u8oc9Fw== }
@@ -10213,6 +10208,7 @@ packages:
             sass: 1.64.1
         optionalDependencies:
             fsevents: 2.3.2
+        dev: true
 
     /vitepress@1.0.0-beta.6(@algolia/client-search@4.19.1)(search-insights@2.7.0):
         resolution: { integrity: sha512-xK/ulKgQpKZVbvlL4+/vW49VG7ySi5nmSoKUNH1G4kM+Cj9JwYM+PDJO7jSJROv8zW99G0ise+maDYnaLlbGBQ== }
