@@ -41,6 +41,12 @@ async function plugin(fastify, opts) {
             // 如果是收藏图标，则直接通过
             if (req.routeConfig.url === 'favicon.ico') return;
 
+            // 接口未定义情况
+            if (!req.routeConfig?.url) {
+                res.send(codeConfig.NO_API);
+                return;
+            }
+
             /* --------------------------------- 接口禁用检测 --------------------------------- */
             const isMatchBlackApi = micromatch.isMatch(req.routeConfig.url, appConfig.blackApis);
             if (isMatchBlackApi === true) {
