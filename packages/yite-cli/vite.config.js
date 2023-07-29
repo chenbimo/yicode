@@ -122,8 +122,6 @@ export default defineConfig(async ({ command, mode }) => {
         resolvers: [IconsResolver()]
     };
 
-    let unocssConfig = defineUnocssConfig(unocssConfig);
-
     // 代码分割
     let chunkSplitConfig = {
         strategy: 'default',
@@ -196,7 +194,7 @@ export default defineConfig(async ({ command, mode }) => {
     allPlugins.push(YiteRouter(yiteRouterConfig));
     allPlugins.push(YiteI18n(yiteI18nConfig));
     allPlugins.push(ReactivityTransform());
-    allPlugins.push(Unocss(unocssConfig));
+    allPlugins.push(Unocss(defineUnocssConfig(unocssConfig)));
     allPlugins.push(Icons(iconsConfig));
     if (yiteConfig?.devtool === true) {
         allPlugins.push(VueDevTools(vueDevtoolConfig));
