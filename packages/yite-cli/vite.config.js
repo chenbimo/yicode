@@ -16,6 +16,7 @@ import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 import VueDevTools from 'vite-plugin-vue-devtools';
+import { defineConfig as defineUnocssConfig } from 'unocss';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
 // import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
 import { yiteHtml as YiteHtml } from '@yicode-helper/yite-html';
