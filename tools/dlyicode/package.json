@@ -1,6 +1,6 @@
 {
     "name": "@yicode-tool/dlyicode",
-    "version": "1.1.12",
+    "version": "1.1.13",
     "description": "dlyicode - yicode官方npm资源下载",
     "author": "chensuiyi <bimostyle@qq.com>",
     "bin": {
