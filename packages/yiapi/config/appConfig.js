@@ -18,7 +18,7 @@ const valid = validate(importConfig);
 if (!valid) {
     localize.zh(validate.errors);
     console.log(logSymbols.error, 'appConfig.js 文件 ' + ajv.errorsText(validate.errors, { separator: '\n' }));
-    process.exit(1);
+    process.exit();
 }
 
 const appConfig = mergeAndConcat(

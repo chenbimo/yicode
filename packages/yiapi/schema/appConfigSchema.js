@@ -434,6 +434,51 @@ export const appConfigSchema = {
                 }
             }
         },
+        // 扩展菜单字段
+        menu: {
+            title: '扩展菜单字段',
+            type: 'object',
+            properties: {
+                '*': {
+                    title: '主菜单',
+                    type: 'object',
+                    properties: {
+                        name: {
+                            title: '菜单名称',
+                            type: 'string'
+                        },
+                        sort: {
+                            title: '菜单排序',
+                            type: 'integer',
+                            minimum: 0,
+                            maximum: 999
+                        },
+                        children: {
+                            title: '子菜单',
+                            type: 'object',
+                            properties: {
+                                '*': {
+                                    name: {
+                                        title: '菜单名称',
+                                        type: 'string'
+                                    },
+                                    sort: {
+                                        title: '菜单排序',
+                                        type: 'integer',
+                                        minimum: 0,
+                                        maximum: 999
+                                    }
+                                },
+                                additionalProperties: true,
+                                required: ['name', 'sort']
+                            }
+                        }
+                    },
+                    required: ['name', 'children', 'sort']
+                },
+                additionalProperties: true
+            }
+        },
         // 自定义扩展配置
         custom: {
             title: '自定义配置',
@@ -471,6 +516,7 @@ export const appConfigSchema = {
         'rate',
         'cron',
         'table',
+        'menu',
         'custom'
     ],
     additionalProperties: false

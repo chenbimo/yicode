@@ -9,7 +9,8 @@ import {
     forOwn as _forOwn,
     isObject as _isObject,
     cloneDeep as _cloneDeep,
-    uniq as _uniq
+    uniq as _uniq,
+    merge as _merge
 } from 'lodash-es';
 // 工具函数
 import { fnTimestamp, fnKebabCase, fnIncrUID } from '../utils/index.js';
@@ -21,10 +22,9 @@ let menuDirNew = [];
 let menuFileNew = [];
 
 // 菜单配置
-const menuConfig = {
+const menuConfig = _merge(appConfig.menu, {
     '/internal/home': {
         name: '首页数据',
-        describe: '首页数据',
         sort: 0,
         is_system: 1,
         children: {
@@ -37,19 +37,16 @@ const menuConfig = {
     },
     '/internal/people': {
         name: '人员数据',
-        describe: '人员数据',
         sort: 1000,
         is_system: 1,
         children: {
             '/internal/user': {
                 name: '用户',
-                describe: '用户列表',
                 is_system: 1,
                 sort: 1
             },
             '/internal/admin': {
                 name: '管理员',
-                describe: '管理员列表',
                 is_system: 1,
                 sort: 2
             }
@@ -57,36 +54,30 @@ const menuConfig = {
     },
     '/internal/permission': {
         name: '权限数据',
-        describe: '权限数据',
         sort: 1001,
         children: {
             '/internal/menu': {
                 name: '菜单列表',
-                describe: '菜单列表',
                 is_system: 1,
                 sort: 1
             },
             '/internal/api': {
                 name: '接口列表',
-                describe: '接口列表',
                 is_system: 1,
                 sort: 2
             },
             '/internal/dictCategory': {
                 name: '字典分类',
-                describe: '字典列表',
                 is_system: 1,
                 sort: 3
             },
             '/internal/dict': {
                 name: '字典管理',
-                describe: '字典列表',
                 is_system: 1,
                 sort: 4
             },
             '/internal/role': {
                 name: '角色管理',
-                describe: '角色列表',
                 is_system: 1,
                 sort: 5
             }
@@ -94,37 +85,37 @@ const menuConfig = {
     },
     '/internal/setup': {
         name: '配置数据',
-        describe: '配置数据',
         sort: 1002,
         children: {
             '/internal/app-config': {
                 name: '项目配置',
-                describe: '项目配置',
                 is_system: 1,
                 sort: 1
+            },
+            '/internal/table-config': {
+                name: '数据库表',
+                is_system: 1,
+                sort: 2
             }
         }
     },
     '/internal/log': {
         name: '日志数据',
-        describe: '日志数据',
         sort: 1002,
         children: {
             '/internal/login-log': {
                 name: '登录日志',
-                describe: '登录日志',
                 is_system: 1,
                 sort: 1
             },
             '/internal/mail-log': {
                 name: '邮件日志',
-                describe: '邮件日志',
                 is_system: 1,
                 sort: 2
             }
         }
     }
-};
+});
 
 // 同步菜单目录
 async function syncMenuDir(fastify) {
@@ -162,7 +153,6 @@ async function syncMenuDir(fastify) {
                     sort: item.sort || index,
                     is_open: 0,
                     is_system: item.is_system || 0,
-                    describe: item.describe || '',
                     created_at: fnTimestamp(),
                     updated_at: fnTimestamp()
                 });
@@ -173,7 +163,6 @@ async function syncMenuDir(fastify) {
                     value: item.value,
                     sort: item.sort || index,
                     is_system: item.is_system || 0,
-                    describe: item.describe || '',
                     updated_at: fnTimestamp()
                 });
             }
@@ -247,7 +236,6 @@ async function syncMenuFile(fastify) {
                             sort: item.sort || index2,
                             is_open: 0,
                             is_system: item.is_system || 0,
-                            describe: item.describe || '',
                             created_at: fnTimestamp(),
                             updated_at: fnTimestamp()
                         });
@@ -260,7 +248,6 @@ async function syncMenuFile(fastify) {
                         pid: parentMenuData.id,
                         sort: item.sort || index2,
                         is_system: item.is_system || 0,
-                        describe: item.describe || '',
                         updated_at: fnTimestamp()
                     });
                 }
