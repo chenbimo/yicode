@@ -163,6 +163,7 @@ let $Method = {
                     id: $Data.rowData.id
                 }
             });
+            await $Method.apiSelectData();
             Message.success({
                 content: res.msg
             });
