@@ -450,7 +450,7 @@ export const appConfigSchema = {
                         sort: {
                             title: '菜单排序',
                             type: 'integer',
-                            minimum: 0,
+                            minimum: 1,
                             maximum: 999
                         },
                         children: {
@@ -465,7 +465,7 @@ export const appConfigSchema = {
                                     sort: {
                                         title: '菜单排序',
                                         type: 'integer',
-                                        minimum: 0,
+                                        minimum: 1,
                                         maximum: 999
                                     }
                                 },
