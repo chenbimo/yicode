@@ -469,9 +469,9 @@ export const appConfigSchema = {
                                         maximum: 999
                                     }
                                 },
-                                additionalProperties: true,
-                                required: ['name', 'sort']
-                            }
+                                additionalProperties: true
+                            },
+                            required: ['name', 'sort']
                         }
                     },
                     required: ['name', 'children', 'sort']
