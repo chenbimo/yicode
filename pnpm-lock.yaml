@@ -25,6 +25,8 @@ importers:
 
     helpers/delay: {}
 
+    helpers/font-wenkaitc-regular: {}
+
     helpers/luhn: {}
 
     helpers/rollup-obfuscator:

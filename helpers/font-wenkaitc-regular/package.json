@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/font-wenkaitc-regular",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "霞鹜文楷（只包含了 tc-regular）",
     "type": "module",
     "exports": {
