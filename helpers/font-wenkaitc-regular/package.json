@@ -1,0 +1,28 @@
+{
+    "name": "@yicode-helper/font-wenkaitc-regular",
+    "version": "1.0.0",
+    "description": "霞鹜文楷（只包含了 tc-regular）",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./index.css",
+            "require": "./index.css"
+        }
+    },
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yicode-team/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "keywords": [
+        "font",
+        "wenkai",
+        "tc"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>"
+}
