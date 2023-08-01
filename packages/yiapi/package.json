@@ -60,7 +60,7 @@
         "mysql2": "^3.5.2",
         "nanoid": "^4.0.2",
         "nodemailer": "^6.9.4",
-        "ora": "^7.0.0",
+        "ora": "^7.0.1",
         "winston": "^3.10.0",
         "winston-daily-rotate-file": "^4.7.1"
     }
