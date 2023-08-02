@@ -80,15 +80,6 @@ importers:
 
     helpers/yite-i18n: {}
 
-    helpers/yite-plugin:
-        devDependencies:
-            rollup:
-                specifier: ^3.27.0
-                version: 3.27.0
-            vite:
-                specifier: ^4.4.8
-                version: 4.4.8(sass@1.64.2)
-
     helpers/yite-qrcode:
         dependencies:
             qrcode-terminal:
@@ -100,8 +91,6 @@ importers:
     others/commander: {}
 
     others/minimist: {}
-
-    packages/bigbox: {}
 
     packages/yiapi:
         dependencies:
