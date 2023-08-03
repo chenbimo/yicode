@@ -28,7 +28,7 @@
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
-        "rollup": "^3.27.0",
+        "rollup": "^3.27.1",
         "vite": "^4.4.8"
     },
     "dependencies": {
