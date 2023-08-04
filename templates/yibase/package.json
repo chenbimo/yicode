@@ -24,7 +24,7 @@
         "readme.md"
     ],
     "dependencies": {
-        "@arco-design/web-vue": "^2.49.2",
+        "@arco-design/web-vue": "^2.49.3",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.4.0",
         "lodash-es": "^4.17.21",
