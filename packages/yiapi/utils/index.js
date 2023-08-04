@@ -449,7 +449,12 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
         console.log(`${logSymbols.warning} ${color.blueBright(filePath)} 没有fields属性，请检查`);
         process.exit();
     }
-    const includeKeys = _omit(tableJson?.fields || {}, excludeFields);
+    let extraFields = {};
+    if (fromType === 'core') {
+        let basename = path.basename(filePath, '.json');
+        extraFields = appConfig?.table[`sys_${basename}`] || {};
+    }
+    const includeKeys = _omit(_merge(tableJson?.fields || {}, extraFields), excludeFields);
     const allKeys = _uniq(_concat(innerFields, Object.keys(includeKeys)));
     return allKeys;
 }
