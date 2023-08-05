@@ -8,10 +8,10 @@
 
 ```bash
 # 全局安装
-npm install --global yidash
+npm install --global @yicode/yidash
 
 # 局部安装
-npm install yidash
+npm install @yicode/yidash
 ```
 
 ## 使用
@@ -19,7 +19,7 @@ npm install yidash
 ### import 方式
 
 ```javascript
-import { math_Plus, tree_Array2Tree, regexp_TrainNumber, number_ValidNumber } from 'yidash';
+import { math_Plus, tree_Array2Tree, regexp_TrainNumber, number_ValidNumber } from '@yicode/yidash';
 console.dir(math_Plus(3, 4));
 console.dir(
     tree_Array2Tree([
@@ -42,7 +42,7 @@ console.log(validNumber('1.2.')); // 1.20
 ### require 方式
 
 ```javascript
-const { math_Plus, tree_Array2Tree, regexp_TrainNumber, number_ValidNumber } = require('yidash');
+const { math_Plus, tree_Array2Tree, regexp_TrainNumber, number_ValidNumber } = require('@yicode/yidash');
 console.dir(math_Plus(3, 4));
 console.dir(
     tree_Array2Tree([
@@ -73,6 +73,6 @@ console.log(validNumber('1.2.')); // 1.20
 
 ## 仓库
 
-> [github https://github.com/chenbimo/yidash](https://github.com/chenbimo/yidash)
+> [github https://github.com/chenbimo/yicode](https://github.com/chenbimo/yicode)
 
-> [gitee https://gitee.com/banshiweichen/yidash](https://gitee.com/banshiweichen/yidash)
+> [gitee https://gitee.com/yicode-team/yicode](https://gitee.com/banshiweichen/yicode)
