@@ -23,6 +23,7 @@ import {
     isArray as _isArray,
     concat as _concat,
     mergeWith as _mergeWith,
+    merge as _merge,
     random as _random,
     isString as _isString,
     cloneDeep as _cloneDeep,
