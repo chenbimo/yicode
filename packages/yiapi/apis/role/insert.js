@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     summary: `添加${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
     body: {
@@ -29,9 +29,9 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const roleModel = fastify.mysql.table('sys_role').modify(function (queryBuilder) {});
+                let roleModel = fastify.mysql.table('sys_role').modify(function (queryBuilder) {});
 
-                const roleData = await roleModel.clone().where('name', req.body.name).orWhere('code', req.body.code).first('id');
+                let roleData = await roleModel.clone().where('name', req.body.name).orWhere('code', req.body.code).first('id');
 
                 if (roleData?.id) {
                     return {
@@ -40,14 +40,14 @@ export default async function (fastify, opts) {
                     };
                 }
 
-                const insertData = {
+                let insertData = {
                     code: req.body.code,
                     name: req.body.name,
                     describe: req.body.describe,
                     menu_ids: req.body.menu_ids.join(','),
                     api_ids: req.body.api_ids.join(',')
                 };
-                const result = await roleModel.clone().update(fnDbUpdateData(insertData));
+                let result = await roleModel.clone().update(fnDbUpdateData(insertData));
 
                 await fastify.cacheRoleData();
 

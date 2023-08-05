@@ -1,5 +1,5 @@
 // 自定义配置
-const customConfig = {
+let customConfig = {
     weixin: {
         appId: '',
         mchId: '',

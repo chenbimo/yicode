@@ -5,11 +5,11 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 查询字段
-const selectKeys = fnSelectFields('./tables/admin.json', 'core', ['password']);
+let selectKeys = fnSelectFields('./tables/admin.json', 'core', ['password']);
 // 传参校验
-export const apiSchema = {
+export let apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `查询${metaConfig.name}`,
     body: {
@@ -27,7 +27,7 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const adminModel = fastify.mysql //
+                let adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where('username', '<>', 'dev')
                     .modify(function (queryBuilder) {
@@ -36,8 +36,8 @@ export default async function (fastify, opts) {
                         }
                     });
 
-                const { total } = await adminModel.clone().count('id', { as: 'total' }).first();
-                const rows = await adminModel
+                let { total } = await adminModel.clone().count('id', { as: 'total' }).first();
+                let rows = await adminModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')

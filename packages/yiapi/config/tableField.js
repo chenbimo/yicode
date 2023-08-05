@@ -1,5 +1,5 @@
 // 表字段定义
-export const tableField = {
+export let tableField = {
     phone: {
         comment: '手机号',
         type: 'string',

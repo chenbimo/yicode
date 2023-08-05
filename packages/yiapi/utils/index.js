@@ -35,7 +35,7 @@ import { sysConfig } from '../config/sysConfig.js';
 import { schemaType } from '../config/schemaType.js';
 
 // 自定义初始化字符
-const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
+let nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
 
 // 转换成中划线
 export function fnKebabCase(value, delimiter = '/') {
@@ -91,7 +91,7 @@ export function fnIncrUID() {
 // 获取接口目录名称
 export function getApiDirName(file) {
     // 如果不是插件接口
-    const apiDirName = file //
+    let apiDirName = file //
         .replace(/\\+/gi, '/')
         .replace('/_meta.js', '')
         .replace(/.+\/apis/, '');
@@ -100,7 +100,7 @@ export function getApiDirName(file) {
 
 // 获取接口文件名称
 export function getApiFileName(file) {
-    const apiFileName = file //
+    let apiFileName = file //
         .replace(/\\+/, '/')
         .replace('.js', '')
         .replace(/.+\/apis/, '');
@@ -132,7 +132,7 @@ export async function fnApiInfo(metaUrl) {
     let _filename = fnFilename(metaUrl);
     let _dirname = fnDirname(metaUrl);
 
-    const pureFileName = path.basename(_filename, '.js');
+    let pureFileName = path.basename(_filename, '.js');
 
     let parentDirName = _dirname.replace(/\\+/gi, '/').replace(/.+\/apis/, '');
 
@@ -273,7 +273,7 @@ export function fnFilename(metaUrl) {
 }
 
 export function fnDirname(metaUrl) {
-    const filename = url.fileURLToPath(metaUrl);
+    let filename = url.fileURLToPath(metaUrl);
     return path.dirname(filename);
 }
 
@@ -304,7 +304,7 @@ export function fnApiParamsSign(params) {
 }
 
 // 深度遍历对象节点
-export const fnObjTraverse = (obj, callbacks = null, flattenArray = false, level = 0, path = []) => {
+export let fnObjTraverse = (obj, callbacks = null, flattenArray = false, level = 0, path = []) => {
     let processValue = null;
     if (callbacks && callbacks.processValue) {
         processValue = callbacks.processValue;
@@ -426,8 +426,8 @@ export function fnFileProtocolPath(_path) {
  */
 export function fnRequire(filePath, defaultValue, fromType = 'core') {
     try {
-        const require = createRequire(fnFileProtocolPath(path.resolve(fromType === 'core' ? sysConfig.yiapiDir : sysConfig.appDir, 'yiapi.js')));
-        const result = require(filePath);
+        let require = createRequire(fnFileProtocolPath(path.resolve(fromType === 'core' ? sysConfig.yiapiDir : sysConfig.appDir, 'yiapi.js')));
+        let result = require(filePath);
         return result;
     } catch (err) {
         return defaultValue;
@@ -437,14 +437,14 @@ export function fnRequire(filePath, defaultValue, fromType = 'core') {
 // 获取查询字段
 export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) {
     // 内置的字段
-    const innerFields = [
+    let innerFields = [
         //
         'id',
         'created_at',
         'updated_at',
         'state'
     ];
-    const tableJson = fnRequire(filePath, {}, fromType);
+    let tableJson = fnRequire(filePath, {}, fromType);
     // 如果没有fields子弹
     if (!tableJson?.fields) {
         console.log(`${logSymbols.warning} ${color.blueBright(filePath)} 没有fields属性，请检查`);
@@ -455,16 +455,16 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
         let basename = path.basename(filePath, '.json');
         extraFields = appConfig?.table[`sys_${basename}`] || {};
     }
-    const includeKeys = _omit(_merge(tableJson?.fields || {}, extraFields), excludeFields);
-    const allKeys = _uniq(_concat(innerFields, Object.keys(includeKeys)));
+    let includeKeys = _omit(_merge(tableJson?.fields || {}, extraFields), excludeFields);
+    let allKeys = _uniq(_concat(innerFields, Object.keys(includeKeys)));
     return allKeys;
 }
 
 // rsa-sha256加密
 export function fnRsaSha256(data, privateKey) {
-    const sign = crypto.createSign('RSA-SHA256');
+    let sign = crypto.createSign('RSA-SHA256');
     sign.update(data);
-    const signature = sign.sign(privateKey, 'base64');
+    let signature = sign.sign(privateKey, 'base64');
     return signature;
 }
 

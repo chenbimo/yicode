@@ -5,11 +5,11 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 选择字段
-const selectKeys = fnSelectFields('./tables/api.json');
+let selectKeys = fnSelectFields('./tables/api.json');
 // 传参校验
-export const apiSchema = {
+export let apiSchema = {
     summary: `查询${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
     body: {
@@ -27,13 +27,13 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const apiModel = fastify.mysql //
+                let apiModel = fastify.mysql //
                     .table('sys_api')
                     .modify(function (queryBuilder) {});
 
-                const { total } = await apiModel.clone().count('id', { as: 'total' }).first();
+                let { total } = await apiModel.clone().count('id', { as: 'total' }).first();
 
-                const rows = await apiModel
+                let rows = await apiModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')

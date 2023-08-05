@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     summary: `更新${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
     body: {
@@ -35,8 +35,8 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             // TODO: 此处需要使用事务
             try {
-                const treeModel = fastify.mysql.table('sys_tree');
-                const parentData = null;
+                let treeModel = fastify.mysql.table('sys_tree');
+                let parentData = null;
                 // 如果传了pid值
                 if (req.body.pid) {
                     parentData = await treeModel.clone().where('id', req.body.pid).first('id', 'pids');
@@ -48,7 +48,7 @@ export default async function (fastify, opts) {
                     }
                 }
 
-                const selfData = await treeModel.clone().where('id', req.body.id).first('id');
+                let selfData = await treeModel.clone().where('id', req.body.id).first('id');
                 if (!selfData?.id) {
                     return {
                         ...codeConfig.FAIL,
@@ -56,7 +56,7 @@ export default async function (fastify, opts) {
                     };
                 }
 
-                const updateData = {
+                let updateData = {
                     pid: req.body.pid,
                     category: req.body.category,
                     name: req.body.name,
@@ -73,7 +73,7 @@ export default async function (fastify, opts) {
                 if (parentData !== null) {
                     updateData.pids = [parentData.pids, parentData.id].join(',');
                 }
-                const result = await treeModel
+                let result = await treeModel
                     //
                     .clone()
                     .where({ id: req.body.id })
@@ -81,7 +81,7 @@ export default async function (fastify, opts) {
 
                 // 如果更新成功，则更新所有子级
                 if (result) {
-                    const childrenPids = [updateData.pids || selfData.pid, selfData.id];
+                    let childrenPids = [updateData.pids || selfData.pid, selfData.id];
                     let updateData2 = {
                         pids: childrenPids.join(','),
                         level: childrenPids.length

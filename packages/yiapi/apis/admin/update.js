@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参校验
-export const apiSchema = {
+export let apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `更新${metaConfig.name}`,
     body: {
@@ -28,12 +28,12 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const adminModel = fastify.mysql //
+                let adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where({ id: req.body.id })
                     .modify(function (queryBuilder) {});
 
-                const updateData = {
+                let updateData = {
                     password: fnMD5(req.body.password),
                     nickname: req.body.nickname,
                     role_codes: req.body.role_codes

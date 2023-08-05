@@ -2,7 +2,7 @@ import fp from 'fastify-plugin';
 import Redis from 'ioredis';
 
 function fastifyRedis(fastify, options, next) {
-    const { namespace, url, closeClient = false, ...redisOptions } = options;
+    let { namespace, url, closeClient = false, ...redisOptions } = options;
 
     let client = options.client || null;
 
@@ -15,7 +15,7 @@ function fastifyRedis(fastify, options, next) {
             return next(new Error(`Redis '${namespace}' 命名空间已被注册`));
         }
 
-        const closeNamedInstance = (fastify) => {
+        let closeNamedInstance = (fastify) => {
             return fastify.redis[namespace].quit();
         };
 
@@ -66,13 +66,13 @@ function fastifyRedis(fastify, options, next) {
 
     // Testing this make the process crash on latest TAP :(
     /* istanbul ignore next */
-    const onEnd = function (err) {
+    let onEnd = function (err) {
         client.off('ready', onReady).off('error', onError).off('end', onEnd).quit();
 
         next(err);
     };
 
-    const onReady = function () {
+    let onReady = function () {
         client.off('end', onEnd).off('error', onError).off('ready', onReady);
 
         next();
@@ -80,7 +80,7 @@ function fastifyRedis(fastify, options, next) {
 
     // Testing this make the process crash on latest TAP :(
     /* istanbul ignore next */
-    const onError = function (err) {
+    let onError = function (err) {
         if (err.code === 'ENOTFOUND') {
             onEnd(err);
             return;

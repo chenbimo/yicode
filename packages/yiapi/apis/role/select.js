@@ -5,11 +5,11 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 选择字段
-const selectKeys = fnSelectFields('./tables/role.json');
+let selectKeys = fnSelectFields('./tables/role.json');
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     summary: `查询${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
     body: {
@@ -28,7 +28,7 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const roleModel = fastify.mysql //
+                let roleModel = fastify.mysql //
                     .table('sys_role')
                     .modify(function (queryBuilder) {
                         if (req.session !== 'dev') {
@@ -36,8 +36,8 @@ export default async function (fastify, opts) {
                         }
                     });
 
-                const { total } = await roleModel.clone().count('id', { as: 'total' }).first();
-                const rows = await roleModel
+                let { total } = await roleModel.clone().count('id', { as: 'total' }).first();
+                let rows = await roleModel
                     .clone()
                     //
                     .orderBy('created_at', 'desc')

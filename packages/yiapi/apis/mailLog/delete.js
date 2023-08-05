@@ -4,9 +4,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 
-export const apiSchema = {
+export let apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `删除${metaConfig.name}`,
     body: {

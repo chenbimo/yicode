@@ -22,7 +22,7 @@ let menuDirNew = [];
 let menuFileNew = [];
 
 // 菜单配置
-const menuConfig = _merge(appConfig.menu, {
+let menuConfig = _merge(appConfig.menu, {
     '/internal/home': {
         name: '首页数据',
         sort: 0,
@@ -121,11 +121,11 @@ const menuConfig = _merge(appConfig.menu, {
 async function syncMenuDir(fastify) {
     try {
         // 准备好表
-        const menuModel = fastify.mysql.table('sys_menu');
+        let menuModel = fastify.mysql.table('sys_menu');
 
         // 第一次请求菜单数据，用于创建一级菜单
-        const menuDir = await menuModel.clone().where({ pid: 0 }).select();
-        const menuDirByValue = _keyBy(menuDir, 'value');
+        let menuDir = await menuModel.clone().where({ pid: 0 }).select();
+        let menuDirByValue = _keyBy(menuDir, 'value');
 
         let deleteMenuDirValue = [];
         let insertMenuDir = [];
@@ -180,7 +180,7 @@ async function syncMenuDir(fastify) {
 
         // 如果待更新接口目录大于0，则更新
         if (_isEmpty(updateMenuDir) === false) {
-            const updateBatch = updateMenuDir.map((item) => {
+            let updateBatch = updateMenuDir.map((item) => {
                 return menuModel
                     .clone()
                     .where('id', item.id)
@@ -199,14 +199,14 @@ async function syncMenuDir(fastify) {
 async function syncMenuFile(fastify) {
     try {
         // 准备好表
-        const menuModel = fastify.mysql.table('sys_menu');
+        let menuModel = fastify.mysql.table('sys_menu');
 
-        const menuDir = await menuModel.clone().where({ pid: 0 }).select();
-        const menuDirByValue = _keyBy(menuDir, 'value');
+        let menuDir = await menuModel.clone().where({ pid: 0 }).select();
+        let menuDirByValue = _keyBy(menuDir, 'value');
 
         // 第二次请求菜单数据，用于创建二级菜单
-        const menuData = await menuModel.clone().andWhere('pid', '<>', 0).select();
-        const menuByValue = _keyBy(menuData, 'value');
+        let menuData = await menuModel.clone().andWhere('pid', '<>', 0).select();
+        let menuByValue = _keyBy(menuData, 'value');
 
         let deleteMenuFileValue = [];
         let insertMenuFile = [];
@@ -264,7 +264,7 @@ async function syncMenuFile(fastify) {
 
         // 如果待更新接口目录大于0，则更新
         if (_isEmpty(updateMenuFile) === false) {
-            const updateBatchData = updateMenuFile.map((item) => {
+            let updateBatchData = updateMenuFile.map((item) => {
                 return menuModel
                     .clone()
                     .where('id', item.id)

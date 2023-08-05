@@ -5,11 +5,11 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 选择字段
-const selectKeys = fnSelectFields('./tables/role.json');
+let selectKeys = fnSelectFields('./tables/role.json');
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     summary: `查询所有${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
     body: {
@@ -24,7 +24,7 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const roleModel = fastify.mysql //
+                let roleModel = fastify.mysql //
                     .table('sys_role')
                     .modify(function (queryBuilder) {
                         // 如果不是开发管理员查询，则排除掉开发角色
@@ -33,7 +33,7 @@ export default async function (fastify, opts) {
                         }
                     });
 
-                const rows = await roleModel.clone().select(selectKeys);
+                let rows = await roleModel.clone().select(selectKeys);
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

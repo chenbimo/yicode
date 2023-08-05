@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     summary: `添加${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
     body: {
@@ -33,13 +33,13 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const treeModel = fastify.mysql.table('sys_tree').modify(function (queryBuilder) {});
+                let treeModel = fastify.mysql.table('sys_tree').modify(function (queryBuilder) {});
 
                 if (req.body.pid === 0) {
                     req.body.pids = '0';
                     req.body.level = 1;
                 } else {
-                    const parentData = await treeModel.clone().where('id', req.body.pid).first('id', 'pids');
+                    let parentData = await treeModel.clone().where('id', req.body.pid).first('id', 'pids');
                     if (!parentData?.id) {
                         return {
                             ...codeConfig.FAIL,
@@ -50,7 +50,7 @@ export default async function (fastify, opts) {
                     req.body.level = req.body.pids.split(',').length;
                 }
 
-                const insertData = {
+                let insertData = {
                     pid: req.body.pid,
                     category: req.body.category,
                     name: req.body.name,
@@ -63,7 +63,7 @@ export default async function (fastify, opts) {
                     pids: req.body.pids,
                     level: req.body.level
                 };
-                const result = await treeModel
+                let result = await treeModel
                     //
                     .clone()
                     .insert(fnDbInsertData(insertData));

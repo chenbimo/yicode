@@ -9,19 +9,19 @@ import { sysConfig } from './sysConfig.js';
 import { schemaField } from './schemaField.js';
 import { appConfigSchema } from '../schema/appConfigSchema.js';
 
-const ajv = new Ajv({ strict: false, messages: false });
+let ajv = new Ajv({ strict: false, messages: false });
 
-const validate = ajv.compile(appConfigSchema);
-const { appConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'appConfig.js'), 'appConfig', {});
+let validate = ajv.compile(appConfigSchema);
+let { appConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'appConfig.js'), 'appConfig', {});
 
-const valid = validate(importConfig);
+let valid = validate(importConfig);
 if (!valid) {
     localize.zh(validate.errors);
     console.log(logSymbols.error, 'appConfig.js 文件 ' + ajv.errorsText(validate.errors, { separator: '\n' }));
     process.exit();
 }
 
-const appConfig = mergeAndConcat(
+let appConfig = mergeAndConcat(
     {
         // 应用名称
         appName: '易接口',

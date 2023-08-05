@@ -1,9 +1,9 @@
 import * as yiapi from '@yicode/yiapi';
 import { metaConfig } from './_meta.js';
 
-const apiInfo = await yiapi.utils.fnApiInfo(import.meta.url);
+let apiInfo = await yiapi.utils.fnApiInfo(import.meta.url);
 
-export const apiSchema = {
+export let apiSchema = {
     summary: `查询资讯详情`,
     tags: [apiInfo.parentDirName],
     description: `${apiInfo.apiPath}`,

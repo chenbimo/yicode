@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `删除${metaConfig.name}`,
     body: {
@@ -25,9 +25,9 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const menuModel = fastify.mysql.table('sys_menu');
+                let menuModel = fastify.mysql.table('sys_menu');
 
-                const menuData = await menuModel.clone().where({ id: req.body.id }).first('id');
+                let menuData = await menuModel.clone().where({ id: req.body.id }).first('id');
 
                 if (!menuData?.id) {
                     return {
@@ -43,7 +43,7 @@ export default async function (fastify, opts) {
                     };
                 }
 
-                const childData = await menuModel.clone().where({ pid: req.body.id }).first('id');
+                let childData = await menuModel.clone().where({ pid: req.body.id }).first('id');
 
                 if (childData?.id) {
                     return {
@@ -52,7 +52,7 @@ export default async function (fastify, opts) {
                     };
                 }
 
-                const result = await menuModel.clone().where({ id: req.body.id }).delete();
+                let result = await menuModel.clone().where({ id: req.body.id }).delete();
                 await fastify.cacheTreeData();
                 return {
                     ...codeConfig.DELETE_SUCCESS,

@@ -1,4 +1,4 @@
-export const appConfigSchema = {
+export let appConfigSchema = {
     type: 'object',
     properties: {
         appName: {

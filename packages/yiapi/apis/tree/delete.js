@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `删除${metaConfig.name}`,
     body: {
@@ -25,9 +25,9 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const treeModel = fastify.mysql.table('sys_tree');
+                let treeModel = fastify.mysql.table('sys_tree');
 
-                const treeData = await treeModel.clone().where({ pid: req.body.id }).first('id');
+                let treeData = await treeModel.clone().where({ pid: req.body.id }).first('id');
                 if (treeData?.id) {
                     return {
                         ...codeConfig.FAIL,
@@ -35,7 +35,7 @@ export default async function (fastify, opts) {
                     };
                 }
 
-                const result = await treeModel.clone().where({ id: req.body.id }).delete();
+                let result = await treeModel.clone().where({ id: req.body.id }).delete();
 
                 await fastify.cacheTreeData();
 

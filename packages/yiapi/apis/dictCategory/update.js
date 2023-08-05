@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     summary: `更新${metaConfig.name}`,
     tags: [apiInfo.parentDirName],
     body: {
@@ -29,9 +29,9 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const dictCategoryModel = fastify.mysql.table('sys_dict_category').modify(function (queryBuilder) {});
+                let dictCategoryModel = fastify.mysql.table('sys_dict_category').modify(function (queryBuilder) {});
 
-                const dictCategoryData = await dictCategoryModel
+                let dictCategoryData = await dictCategoryModel
                     .clone()
                     .where({ code: fnCamelCase(req.body.code) })
                     .first('id');
@@ -43,14 +43,14 @@ export default async function (fastify, opts) {
                     };
                 }
 
-                const updateData = {
+                let updateData = {
                     code: fnCamelCase(req.body.code),
                     name: req.body.name,
                     describe: req.body.describe,
                     state: req.body.state
                 };
 
-                const result = await dictCategoryModel //
+                let result = await dictCategoryModel //
                     .clone()
                     .where({ id: req.body.id })
                     .update(fnDbUpdateData(updateData));

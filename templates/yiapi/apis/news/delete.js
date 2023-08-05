@@ -1,9 +1,9 @@
 import * as yiapi from '@yicode/yiapi';
 import { metaConfig } from './_meta.js';
 
-const apiInfo = await yiapi.utils.fnApiInfo(import.meta.url);
+let apiInfo = await yiapi.utils.fnApiInfo(import.meta.url);
 
-export const apiSchema = {
+export let apiSchema = {
     summary: `删除资讯`,
     tags: [apiInfo.parentDirName],
     description: `${apiInfo.apiPath}`,
@@ -24,7 +24,7 @@ export default async function (fastify) {
     fastify.post(`/${apiInfo.pureFileName}`, {
         schema: apiSchema,
         handler: async function (req, res) {
-            const trx = await fastify.mysql.transaction();
+            let trx = await fastify.mysql.transaction();
             try {
                 let newsModel = trx.table('news');
 

@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import { appConfig } from '../config/appConfig.js';
 
 async function plugin(fastify, opts) {
-    const mailTransport = await nodemailer.createTransport({
+    let mailTransport = await nodemailer.createTransport({
         host: appConfig.mail.host,
         port: appConfig.mail.post,
         pool: appConfig.mail.pool,
@@ -18,7 +18,7 @@ async function plugin(fastify, opts) {
     function sendMail(params) {
         return new Promise(async (resolve, reject) => {
             try {
-                const result = await mailTransport.sendMail({
+                let result = await mailTransport.sendMail({
                     from: {
                         name: appConfig.mail.from_name,
                         address: appConfig.mail.from_email

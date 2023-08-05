@@ -6,7 +6,7 @@ import { appConfig } from '../config/appConfig.js';
 async function plugin(fastify, options) {
     try {
         // 定义数据库链接
-        const mysql = await new Knex({
+        let mysql = await new Knex({
             client: 'mysql2',
             connection: {
                 host: appConfig.database.host,

@@ -37,7 +37,7 @@ fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
 fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
 
 // 初始化项目实例
-const fastify = Fastify({
+let fastify = Fastify({
     logger: logConfig,
     pluginTimeout: 0,
     genReqId: () => utils.fnUUID(),

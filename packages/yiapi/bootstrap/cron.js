@@ -23,8 +23,8 @@ async function plugin(fastify, opts) {
             console.log(logSymbols.error, `${item.name} 定时器 handler 必须为一个函数`);
             process.exit();
         }
-        const options = { name: item.name, maxRuns: item.maxRuns, timezone: item.timezone };
-        const yiapi = {
+        let options = { name: item.name, maxRuns: item.maxRuns, timezone: item.timezone };
+        let yiapi = {
             fastify,
             utils,
             appConfig,
@@ -36,7 +36,7 @@ async function plugin(fastify, opts) {
             sysConfig,
             tableField
         };
-        const job = Cron(item.timer, options, () => {
+        let job = Cron(item.timer, options, () => {
             item.handler(yiapi);
         });
         fastify.decorate(item.code, job);

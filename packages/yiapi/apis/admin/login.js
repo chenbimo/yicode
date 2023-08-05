@@ -8,9 +8,9 @@ import { codeConfig } from '../../config/codeConfig.js';
 import { cacheData } from '../../config/cacheData.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参校验
-export const apiSchema = {
+export let apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `${metaConfig.name}登录`,
     body: {
@@ -29,12 +29,12 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const adminModel = fastify.mysql.table('sys_admin');
-                const loginLogModel = fastify.mysql.table('sys_login_log');
+                let adminModel = fastify.mysql.table('sys_admin');
+                let loginLogModel = fastify.mysql.table('sys_login_log');
 
                 // 查询管理员是否存在
                 // TODO: 增加邮箱注册和邮箱登录
-                const adminData = await adminModel //
+                let adminData = await adminModel //
                     .clone()
                     .orWhere({ username: req.body.account })
                     .first('id', 'password', 'username', 'nickname', 'role_codes');
@@ -55,7 +55,7 @@ export default async function (fastify, opts) {
                     };
                 }
                 // 登录日志数据
-                const loginLogData = {
+                let loginLogData = {
                     username: adminData.username,
                     nickname: adminData.nickname,
                     role_codes: adminData.role_codes,

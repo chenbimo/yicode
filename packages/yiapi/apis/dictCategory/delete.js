@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参校验
-export const apiSchema = {
+export let apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `删除${metaConfig.name}`,
     body: {
@@ -25,13 +25,13 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const dictCategoryModel = fastify.mysql //
+                let dictCategoryModel = fastify.mysql //
                     .table('sys_dict_category')
                     .where({ id: req.body.id });
 
-                const dictModel = fastify.mysql.table('sys_dict');
+                let dictModel = fastify.mysql.table('sys_dict');
 
-                const dictCategoryData = await dictCategoryModel.clone().first('id');
+                let dictCategoryData = await dictCategoryModel.clone().first('id');
 
                 if (!dictCategoryData?.id) {
                     return codeConfig.NO_DATA;

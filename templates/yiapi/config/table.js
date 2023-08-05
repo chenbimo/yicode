@@ -1,5 +1,5 @@
 // 系统表字段扩展
-const tableConfig = {
+let tableConfig = {
     sys_user: {
         openid: {
             type: 'string',

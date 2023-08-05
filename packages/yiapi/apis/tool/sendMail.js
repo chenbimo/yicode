@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     summary: `发送邮箱注册验证码`,
     tags: [apiInfo.parentDirName],
     body: {
@@ -41,15 +41,15 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const mailLogModel = fastify.mysql.table('sys_mail_log');
+                let mailLogModel = fastify.mysql.table('sys_mail_log');
                 // 普通发送
                 if (req.body.content) {
-                    const result = await fastify.sendEmail({
+                    let result = await fastify.sendEmail({
                         to: req.body.to_email,
                         subject: req.body.subject,
                         text: req.body.content
                     });
-                    const insertData = {
+                    let insertData = {
                         login_email: appConfig.mail.user,
                         from_name: appConfig.mail.from_name,
                         from_email: appConfig.mail.from_email,
@@ -68,7 +68,7 @@ export default async function (fastify, opts) {
                 // 发送验证码
                 if (req.body.verify_name) {
                     // 如果已经发送过
-                    const existsVerifyCode = await fastify.redisGet(`${req.body.verify_name}:${req.body.to_email}`);
+                    let existsVerifyCode = await fastify.redisGet(`${req.body.verify_name}:${req.body.to_email}`);
                     if (existsVerifyCode) {
                         return {
                             ...codeConfig.SUCCESS,
@@ -78,14 +78,14 @@ export default async function (fastify, opts) {
                     }
 
                     // 如果没有发送过
-                    const cacheVerifyCode = fnRandom6Number();
+                    let cacheVerifyCode = fnRandom6Number();
                     await fastify.redisSet(`${req.body.verify_name}:${req.body.to_email}`, cacheVerifyCode, 60 * 5);
-                    const result = await fastify.sendEmail({
+                    let result = await fastify.sendEmail({
                         to: req.body.to_email,
                         subject: req.body.subject,
                         text: req.body.subject + '：' + cacheVerifyCode
                     });
-                    const insertData = {
+                    let insertData = {
                         login_email: appConfig.mail.user,
                         from_name: appConfig.mail.from_name,
                         from_email: appConfig.mail.from_email,

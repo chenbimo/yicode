@@ -1,7 +1,7 @@
 import { fnSchema } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
 
-export const metaConfig = {
+export let metaConfig = {
     name: '菜单',
     schema: {
         id: fnSchema(schemaField.id, '唯一ID'),

@@ -1,5 +1,5 @@
 // 跨域配置
-export const crosConfig = {
+export let crosConfig = {
     methods: ['GET', 'OPTIONS', 'POST'],
     allowedHeaders: ['Content-Type', 'Authorization', 'authorization', 'token'],
     exposedHeaders: ['Content-Range', 'X-Content-Range', 'Authorization', 'authorization', 'token'],

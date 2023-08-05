@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参校验
-export const apiSchema = {
+export let apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `查询${metaConfig.name}菜单权限`,
     body: {
@@ -22,7 +22,7 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const userMenus = await fastify.getUserMenus(req.session);
+                let userMenus = await fastify.getUserMenus(req.session);
                 return {
                     ...codeConfig.SELECT_SUCCESS,
                     data: {

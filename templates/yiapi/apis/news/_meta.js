@@ -1,6 +1,6 @@
 import * as yiapi from '@yicode/yiapi';
 
-export const metaConfig = {
+export let metaConfig = {
     name: '资讯新闻',
     schema: {
         id: yiapi.utils.fnSchema(yiapi.schemaField.id, '资讯 ID'),

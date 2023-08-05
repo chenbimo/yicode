@@ -4,9 +4,9 @@ import { fnApiInfo } from '../../utils/index.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     summary: `令牌检测`,
     tags: [apiInfo.parentDirName],
     body: {
@@ -22,7 +22,7 @@ export default async function (fastify, opts) {
         handler: async function (req, res) {
             try {
                 try {
-                    const jwtData = await req.jwtVerify();
+                    let jwtData = await req.jwtVerify();
                     return {
                         ...codeConfig.SUCCESS,
                         data: {

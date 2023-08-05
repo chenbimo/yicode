@@ -39,6 +39,6 @@ if (process.env.NODE_ENV === 'production') {
     configParams.transports = [new winston.transports.Console()];
 }
 
-const logConfig = winston.createLogger(configParams);
+let logConfig = winston.createLogger(configParams);
 
 export { logConfig };

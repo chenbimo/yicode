@@ -5,9 +5,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-const apiInfo = await fnApiInfo(import.meta.url);
+let apiInfo = await fnApiInfo(import.meta.url);
 // 传参验证
-export const apiSchema = {
+export let apiSchema = {
     tags: [apiInfo.parentDirName],
     summary: `删除${metaConfig.name}`,
     body: {
@@ -25,9 +25,9 @@ export default async function (fastify, opts) {
         schema: apiSchema,
         handler: async function (req, res) {
             try {
-                const loginLogModel = fastify.mysql.table('sys_login_log');
+                let loginLogModel = fastify.mysql.table('sys_login_log');
 
-                const result = await loginLogModel.clone().where({ id: req.body.id }).delete();
+                let result = await loginLogModel.clone().where({ id: req.body.id }).delete();
 
                 return {
                     ...codeConfig.DELETE_SUCCESS,

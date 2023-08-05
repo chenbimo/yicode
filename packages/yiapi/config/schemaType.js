@@ -1,5 +1,5 @@
 // 参数类型
-export const schemaType = [
+export let schemaType = [
     //
     'json',
     'string',

@@ -235,7 +235,7 @@ async function syncDatabase() {
     let inspector = SchemaInspector(mysql);
     // 获取所有的表
     let allTableName = await inspector.tables();
-    const trx = await mysql.transaction();
+    let trx = await mysql.transaction();
 
     try {
         // 重置校验默认值
