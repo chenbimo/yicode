@@ -26,7 +26,7 @@
     },
     "homepage": "https://yicode.tech",
     "devDependencies": {
-        "vitepress": "1.0.0-beta.6"
+        "vitepress": "1.0.0-beta.7"
     },
     "dependencies": {
         "@yicode-helper/yidocs-auto": "workspace:*"
