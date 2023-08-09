@@ -50,7 +50,9 @@ export default defineConfig(async ({ command, mode }) => {
     }
 
     // vue 插件
-    let viteVueConfig = {};
+    let viteVueConfig = {
+        include: [/\.vue$/, /\.md$/]
+    };
 
     // 自动导入插件
     let autoImportConfig = mergeAndConcat(
