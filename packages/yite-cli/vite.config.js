@@ -17,6 +17,7 @@ import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { defineConfig as defineUnocssConfig } from 'unocss';
+import Markdown from 'vite-plugin-md';
 import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
 // import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
 import { yiteHtml as YiteHtml } from '@yicode-helper/yite-html';
@@ -191,6 +192,7 @@ export default defineConfig(async ({ command, mode }) => {
     // 插件列表
     let allPlugins = [];
     allPlugins.push(YiteHtml(yiteHtmlConfig));
+    allPlugins.push(Markdown());
     allPlugins.push(YiteRouter(yiteRouterConfig));
     allPlugins.push(YiteI18n(yiteI18nConfig));
     allPlugins.push(ReactivityTransform());
