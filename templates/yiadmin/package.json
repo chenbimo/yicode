@@ -1,6 +1,6 @@
 {
     "name": "@yicode-template/yiadmin",
-    "version": "3.6.27",
+    "version": "3.6.28",
     "description": "yiadmin（易管理）前后分离的vue3后台管理",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
