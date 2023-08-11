@@ -57,7 +57,7 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 主要开源项目
 
 -   **@yicode/yite-cli**（基于 `vite` 进行深度封装的 `vue3` 项目开发脚手架）
--   **@yicode/yiapi**（基于 `fastify` 进行深度封装的 `nodejs` 项目接口开发框架）
+-   **@yicode/yiapi**（基于 `fastify` 进行深度封装的 `nodejs` 项目接口开发框架-内部使用，不对外）
 -   **@yicode/dlnpm**（`yicode` 软件生态下载工具）
 -   **@yicode/commander**（`commander v10` 汉化，更符合国人使用）
 -   **@yicode/yidash**（类 `lodash` 的业务方法库）
