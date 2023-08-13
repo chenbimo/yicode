@@ -155,7 +155,7 @@
         "lodash-es": "^4.17.21",
         "log-symbols": "^5.1.0",
         "merge-anything": "^5.1.7",
-        "pacote": "^15.2.0",
+        "pacote": "^16.0.0",
         "portfinder": "^1.0.32",
         "rollup-plugin-visualizer": "^5.9.2",
         "tiny-cookie": "^2.4.1",
@@ -165,7 +165,7 @@
         "unplugin-vue-components": "^0.25.1",
         "vite": "^4.4.9",
         "vite-plugin-md": "^0.21.5",
-        "vite-plugin-vue-devtools": "1.0.0-rc.0",
+        "vite-plugin-vue-devtools": "1.0.0-rc.2",
         "vue-i18n": "^9.2.2"
     },
     "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f"

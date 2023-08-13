@@ -37,7 +37,7 @@
     },
     "devDependencies": {
         "@yicode/yite-cli": "workspace:*",
-        "lint-staged": "^13.3.0",
+        "lint-staged": "^14.0.0",
         "prettier": "^3.0.1",
         "simple-git-hooks": "^2.9.0"
     },
