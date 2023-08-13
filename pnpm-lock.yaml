@@ -512,46 +512,6 @@ importers:
                 specifier: ^9.2.2
                 version: 9.2.2(vue@3.3.4)
 
-    templates/yiadmin:
-        dependencies:
-            '@arco-design/web-vue':
-                specifier: ^2.50.0
-                version: 2.50.0(vue@3.3.4)
-            '@yicode/yidash':
-                specifier: workspace:*
-                version: link:../../packages/yidash
-            axios:
-                specifier: ^1.4.0
-                version: 1.4.0
-            date-fns:
-                specifier: ^2.30.0
-                version: 2.30.0
-            lodash-es:
-                specifier: ^4.17.21
-                version: 4.17.21
-            pinia:
-                specifier: ^2.1.6
-                version: 2.1.6(vue@3.3.4)
-            sass:
-                specifier: ^1.65.1
-                version: 1.65.1
-            store2:
-                specifier: ^2.14.2
-                version: 2.14.2
-            vue:
-                specifier: ^3.3.4
-                version: 3.3.4
-            vue-i18n:
-                specifier: ^9.2.2
-                version: 9.2.2(vue@3.3.4)
-            vue-router:
-                specifier: ^4.2.4
-                version: 4.2.4(vue@3.3.4)
-        devDependencies:
-            '@yicode/yite-cli':
-                specifier: workspace:*
-                version: link:../../packages/yite-cli
-
     templates/yibase:
         dependencies:
             '@arco-design/web-vue':
