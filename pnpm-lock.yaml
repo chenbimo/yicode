@@ -25,6 +25,8 @@ importers:
 
     helpers/delay: {}
 
+    helpers/font-wenkaitc-bold: {}
+
     helpers/font-wenkaitc-regular: {}
 
     helpers/luhn: {}
