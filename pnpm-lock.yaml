@@ -17,8 +17,8 @@ importers:
                 specifier: ^14.0.1
                 version: 14.0.1
             prettier:
-                specifier: ^3.0.2
-                version: 3.0.2
+                specifier: ^3.0.3
+                version: 3.0.3
             simple-git-hooks:
                 specifier: ^2.9.0
                 version: 2.9.0
@@ -554,8 +554,8 @@ importers:
                 specifier: ^14.0.1
                 version: 14.0.1
             prettier:
-                specifier: ^3.0.2
-                version: 3.0.2
+                specifier: ^3.0.3
+                version: 3.0.3
             simple-git-hooks:
                 specifier: ^2.9.0
                 version: 2.9.0
@@ -567,8 +567,8 @@ importers:
                 version: link:../../helpers/yidocs-auto
         devDependencies:
             vitepress:
-                specifier: 1.0.0-rc.4
-                version: 1.0.0-rc.4(@algolia/client-search@4.19.1)(search-insights@2.7.0)
+                specifier: 1.0.0-rc.10
+                version: 1.0.0-rc.10(@algolia/client-search@4.19.1)(search-insights@2.7.0)
 
     tools/dlnpm:
         dependencies:
@@ -2956,6 +2956,7 @@ packages:
         dependencies:
             vite: 4.4.9(@types/node@20.5.7)
             vue: 3.3.4
+        dev: false
 
     /@vue-macros/common@1.7.2(vue@3.3.4):
         resolution: { integrity: sha512-0/2A4kWLTCNEx+DDQKLvs7zXpfjgAbGBZ58SIvDN1DjGXhG4WaIUZtgMqzA6bvc5dNN7RaOatZYubkVumwmjWA== }
@@ -3567,10 +3568,6 @@ packages:
     /blueimp-md5@2.19.0:
         resolution: { integrity: sha512-DRQrD6gJyy8FbiE4s+bDoXS9hiW3Vbx5uCdwvcCf3zLHL+Iv7LtGHLpr+GZV8rHG8tK766FGYBwRbu8pELTt+w== }
         dev: false
-
-    /body-scroll-lock@4.0.0-beta.0:
-        resolution: { integrity: sha512-a7tP5+0Mw3YlUJcGAKUqIBkYYGlYxk2fnCasq/FUph1hadxlTRjF+gAcZksxANnaMnALjxEddmSi/H3OR8ugcQ== }
-        dev: true
 
     /bplist-parser@0.2.0:
         resolution: { integrity: sha512-z0M+byMThzQmD9NILRniCUXYsYpjwnlO8N5uCFaCqIOpqRsJCrQL9NK3JsD67CN5a08nF5oIL2bD6loTdHOuKw== }
@@ -7265,8 +7262,8 @@ packages:
         engines: { node: '>= 0.8.0' }
         dev: false
 
-    /prettier@3.0.2:
-        resolution: { integrity: sha512-o2YR9qtniXvwEZlOKbveKfDQVyqxbEIWn48Z8m3ZJjBjcCmUy3xZGIv+7AkaeuaTr6yPXJjwv07ZWlsWbEy1rQ== }
+    /prettier@3.0.3:
+        resolution: { integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg== }
         engines: { node: '>=14' }
         hasBin: true
         dev: true
@@ -8784,17 +8781,15 @@ packages:
         optionalDependencies:
             fsevents: 2.3.3
 
-    /vitepress@1.0.0-rc.4(@algolia/client-search@4.19.1)(search-insights@2.7.0):
-        resolution: { integrity: sha512-JCQ89Bm6ECUTnyzyas3JENo00UDJeK8q1SUQyJYou+4Yz5BKEc/F3O21cu++DnUT2zXc0kvQ2Aj4BZCc/nioXQ== }
+    /vitepress@1.0.0-rc.10(@algolia/client-search@4.19.1)(search-insights@2.7.0):
+        resolution: { integrity: sha512-+MsahIWqq5WUEmj6MR4obcKYbT7im07jZPCQPdNJExkeOSbOAJ4xypSLx88x7rvtzWHhHc5aXbOhCRvGEGjFrw== }
         hasBin: true
         dependencies:
             '@docsearch/css': 3.5.2
             '@docsearch/js': 3.5.2(@algolia/client-search@4.19.1)(search-insights@2.7.0)
-            '@vitejs/plugin-vue': 4.3.4(vite@4.4.9)(vue@3.3.4)
             '@vue/devtools-api': 6.5.0
             '@vueuse/core': 10.4.1(vue@3.3.4)
             '@vueuse/integrations': 10.4.1(focus-trap@7.5.2)(vue@3.3.4)
-            body-scroll-lock: 4.0.0-beta.0
             focus-trap: 7.5.2
             mark.js: 8.11.1
             minisearch: 6.1.0
