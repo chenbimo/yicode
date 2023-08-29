@@ -8,7 +8,7 @@
 
 [gitee - https://gitee.com/yicode-team/yicode](https://gitee.com/yicode-team/yicode)
 
-[github - https://github.com/yicode-team/yicode](https://github.com/yicode-team/yicode)
+[github - https://github.com/chenbimo/yicode](https://github.com/chenbimo/yicode)
 
 ## 如何使用？
 

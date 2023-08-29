@@ -5,7 +5,7 @@
     "type": "module",
     "repository": {
         "type": "git",
-        "url": "https://github.com/yicode-team/yicode.git"
+        "url": "https://github.com/chenbimo/yicode.git"
     },
     "description": "随易科技（yicode.tech） - 软件开发生态",
     "homepage": "https://yicode.tech",
@@ -30,8 +30,8 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
         "@yicode-tool/monolage": "workspace:*",
-        "lerna": "^7.1.5",
-        "lint-staged": "^14.0.0",
+        "lerna": "^7.2.0",
+        "lint-staged": "^14.0.1",
         "prettier": "^3.0.2",
         "simple-git-hooks": "^2.9.0"
     },

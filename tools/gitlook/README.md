@@ -18,7 +18,7 @@ npm install -g @yicode/gitlook
 
 [gitee - https://gitee.com/yicode-team/yicode](https://gitee.com/yicode-team/yicode)
 
-[github - https://github.com/yicode-team/yicode](https://github.com/yicode-team/yicode)
+[github - https://github.com/chenbimo/yicode](https://github.com/chenbimo/yicode)
 
 ## 概述说明
 
