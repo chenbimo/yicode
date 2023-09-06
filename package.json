@@ -13,9 +13,15 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "build": "pnpm --filter=@yicode/* run build",
+        "changelog:init": "lerna exec --concurrency 1 --stream -- 'conventional-changelog --preset angular --release-count 0 --commit-path $PWD --pkg $PWD/package.json --outfile $PWD/CHANGELOG.md --verbose'",
         "s": "monolage",
         "c": "lerna clean",
         "r": "lerna publish"
+    },
+    "config": {
+        "commitizen": {
+            "path": "node_modules/cz-git"
+        }
     },
     "keywords": [
         "yicode",
@@ -29,6 +35,7 @@
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
+        "@commitlint/cli": "^17.7.1",
         "@yicode-tool/monolage": "workspace:*",
         "lerna": "^7.2.0",
         "lint-staged": "^14.0.1",
@@ -36,6 +43,7 @@
         "simple-git-hooks": "^2.9.0"
     },
     "simple-git-hooks": {
+        "commit-msg": "commitlint",
         "pre-commit": "pnpm lint-staged"
     },
     "lint-staged": {
