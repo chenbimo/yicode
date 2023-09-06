@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/yiapi-env",
-    "version": "1.2.2",
+    "version": "1.2.3",
     "description": "yiapi 环境变量自动加载插件",
     "type": "module",
     "main": "./index.js",

@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/uid",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "生成安全的唯一字符",
     "type": "module",
     "exports": {

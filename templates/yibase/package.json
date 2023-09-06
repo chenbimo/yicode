@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/yibase",
     "private": false,
-    "version": "1.7.31",
+    "version": "1.7.32",
     "type": "module",
     "publishConfig": {
         "access": "public"
@@ -25,7 +25,7 @@
     ],
     "dependencies": {
         "@arco-design/web-vue": "^2.51.0",
-        "@yicode/yidash": "3.5.3",
+        "@yicode/yidash": "^3.5.4",
         "axios": "^1.5.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.6",
@@ -36,7 +36,7 @@
         "vue-router": "^4.2.4"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "1.33.7",
+        "@yicode/yite-cli": "^1.33.8",
         "lint-staged": "^14.0.1",
         "prettier": "^3.0.3",
         "simple-git-hooks": "^2.9.0"

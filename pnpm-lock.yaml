@@ -433,25 +433,25 @@ importers:
                 specifier: ^0.3.22
                 version: 0.3.22(vue@3.3.4)
             '@yicode-helper/yite-chunk':
-                specifier: workspace:*
+                specifier: ^1.1.42
                 version: link:../../helpers/yite-chunk
             '@yicode-helper/yite-html':
-                specifier: workspace:*
+                specifier: ^1.1.10
                 version: link:../../helpers/yite-html
             '@yicode-helper/yite-i18n':
-                specifier: workspace:*
+                specifier: ^1.0.11
                 version: link:../../helpers/yite-i18n
             '@yicode-helper/yite-qrcode':
-                specifier: workspace:*
+                specifier: ^1.0.14
                 version: link:../../helpers/yite-qrcode
             '@yicode-helper/yite-router':
-                specifier: workspace:*
+                specifier: ^1.0.11
                 version: link:../../helpers/yite-router
             '@yicode-other/minimist':
-                specifier: workspace:*
+                specifier: ^1.0.8
                 version: link:../../others/minimist
             '@yicode/yidash':
-                specifier: workspace:*
+                specifier: ^3.5.4
                 version: link:../yidash
             colorette:
                 specifier: ^2.0.20
@@ -520,7 +520,7 @@ importers:
                 specifier: ^2.51.0
                 version: 2.51.0(vue@3.3.4)
             '@yicode/yidash':
-                specifier: workspace:*
+                specifier: ^3.5.4
                 version: link:../../packages/yidash
             axios:
                 specifier: ^1.5.0
@@ -548,7 +548,7 @@ importers:
                 version: 4.2.4(vue@3.3.4)
         devDependencies:
             '@yicode/yite-cli':
-                specifier: workspace:*
+                specifier: ^1.33.8
                 version: link:../../packages/yite-cli
             lint-staged:
                 specifier: ^14.0.1
@@ -563,7 +563,7 @@ importers:
     templates/yidocs:
         dependencies:
             '@yicode-helper/yidocs-auto':
-                specifier: workspace:*
+                specifier: ^1.3.19
                 version: link:../../helpers/yidocs-auto
         devDependencies:
             vitepress:
