@@ -33,6 +33,6 @@
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
     "dependencies": {
-        "javascript-obfuscator": "^4.0.2"
+        "javascript-obfuscator": "^4.1.0"
     }
 }
