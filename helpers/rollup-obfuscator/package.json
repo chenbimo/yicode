@@ -34,5 +34,6 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "dependencies": {
         "javascript-obfuscator": "^4.1.0"
-    }
+    },
+    "gitHead": "a1b28f5981b48da36b99dfb9300d670b2c3c5b94"
 }

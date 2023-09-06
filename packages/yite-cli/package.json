@@ -140,13 +140,13 @@
         "@unocss/transformer-variant-group": "^0.55.7",
         "@vitejs/plugin-vue": "^4.3.4",
         "@vue-macros/reactivity-transform": "^0.3.22",
-        "@yicode-helper/yite-chunk": "workspace:*",
-        "@yicode-helper/yite-html": "workspace:*",
-        "@yicode-helper/yite-i18n": "workspace:*",
-        "@yicode-helper/yite-qrcode": "workspace:*",
-        "@yicode-helper/yite-router": "workspace:*",
-        "@yicode-other/minimist": "workspace:*",
-        "@yicode/yidash": "workspace:*",
+        "@yicode-helper/yite-chunk": "1.1.41",
+        "@yicode-helper/yite-html": "1.1.9",
+        "@yicode-helper/yite-i18n": "1.0.10",
+        "@yicode-helper/yite-qrcode": "1.0.13",
+        "@yicode-helper/yite-router": "1.0.10",
+        "@yicode-other/minimist": "1.0.7",
+        "@yicode/yidash": "3.5.3",
         "colorette": "^2.0.20",
         "copy-anything": "^3.0.5",
         "fast-glob": "^3.3.1",
@@ -168,5 +168,5 @@
         "vite-plugin-vue-devtools": "1.0.0-rc.3",
         "vue-i18n": "^9.3.0"
     },
-    "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f"
+    "gitHead": "a1b28f5981b48da36b99dfb9300d670b2c3c5b94"
 }

@@ -25,7 +25,7 @@
     ],
     "dependencies": {
         "@arco-design/web-vue": "^2.51.0",
-        "@yicode/yidash": "workspace:*",
+        "@yicode/yidash": "3.5.3",
         "axios": "^1.5.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.6",
@@ -36,7 +36,7 @@
         "vue-router": "^4.2.4"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "workspace:*",
+        "@yicode/yite-cli": "1.33.7",
         "lint-staged": "^14.0.1",
         "prettier": "^3.0.3",
         "simple-git-hooks": "^2.9.0"
@@ -47,7 +47,7 @@
     "lint-staged": {
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
     },
-    "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f",
+    "gitHead": "a1b28f5981b48da36b99dfb9300d670b2c3c5b94",
     "author": "chensuiyi <bimostyle@qq.com>",
     "repository": {
         "type": "git",
