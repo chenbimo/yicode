@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/rollup-obfuscator",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "rollup 代码混淆插件",
     "type": "module",
     "exports": {

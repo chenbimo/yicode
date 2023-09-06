@@ -1,6 +1,6 @@
 {
     "name": "@yicode-other/minimist",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "解析命令行参数工具",
     "private": false,
     "publishConfig": {

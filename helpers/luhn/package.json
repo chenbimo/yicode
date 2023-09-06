@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/luhn",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "信用卡校验位生成算法",
     "type": "module",
     "exports": {

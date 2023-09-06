@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/delay",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "睡眠延迟函数",
     "type": "module",
     "exports": {

@@ -1,6 +1,6 @@
 {
     "name": "@yicode-helper/throttle",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "节流循环函数",
     "type": "module",
     "exports": {
