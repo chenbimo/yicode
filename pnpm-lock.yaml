@@ -10,6 +10,9 @@ importers:
             '@commitlint/cli':
                 specifier: ^17.7.1
                 version: 17.7.1
+            '@yicode-helper/commitlint':
+                specifier: workspace:^
+                version: link:helpers/commitlint
             '@yicode-tool/monolage':
                 specifier: workspace:*
                 version: link:tools/monolage
@@ -25,6 +28,8 @@ importers:
             simple-git-hooks:
                 specifier: ^2.9.0
                 version: 2.9.0
+
+    helpers/commitlint: {}
 
     helpers/delay: {}
 

@@ -17,6 +17,6 @@ let monolageConfig = {
             // 依赖相关的字段不会被覆盖
             dependencies: []
         }
-    }1
+    }
 };
 export { monolageConfig };
