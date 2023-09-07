@@ -1,0 +1,30 @@
+{
+    "name": "conventional-changelog-yicode",
+    "version": "1.0.0",
+    "description": "git提交信息校验",
+    "type": "commonjs",
+    "main": "index.js",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "keywords": [
+        "vite",
+        "vue.js",
+        "vue-cli",
+        "webpack",
+        "cli",
+        "vue",
+        "web",
+        "qrcode"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>"
+}
