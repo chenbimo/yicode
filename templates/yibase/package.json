@@ -25,7 +25,7 @@
     ],
     "dependencies": {
         "@arco-design/web-vue": "^2.51.0",
-        "@yicode/yidash": "^3.5.4",
+        "@yicode/yidash": "workspace:^",
         "axios": "^1.5.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.6",
@@ -36,7 +36,7 @@
         "vue-router": "^4.2.4"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "^1.33.8",
+        "@yicode/yite-cli": "workspace:^",
         "lint-staged": "^14.0.1",
         "prettier": "^3.0.3",
         "simple-git-hooks": "^2.9.0"
