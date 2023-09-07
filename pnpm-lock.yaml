@@ -31,6 +31,8 @@ importers:
 
     helpers/commitlint: {}
 
+    helpers/conventional-changelog-yicode: {}
+
     helpers/delay: {}
 
     helpers/font-wenkaitc-bold: {}
