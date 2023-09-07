@@ -2,7 +2,7 @@
     "$schema": "node_modules/lerna/schemas/lerna-schema.json",
     "version": "independent",
     "npmClient": "pnpm",
-    "message": "【发布版本】发布版本",
+    "message": "发布版本: 发布版本",
     "registry": "https://registry.npmjs.org/",
     "allowBranch": ["main", "master"],
     "changelog": false,
