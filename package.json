@@ -14,6 +14,7 @@
         "preinstall": "npx only-allow pnpm",
         "monolage": "monolage",
         "lerna:clean": "lerna clean",
+        "lerna:version": "lerna version",
         "lerna:publish": "lerna publish"
     },
     "keywords": [
