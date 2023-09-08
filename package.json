@@ -12,11 +12,9 @@
     "main": "index.js",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "build": "pnpm --filter=@yicode/* run build",
-        "changelog:init": "lerna exec --concurrency 1 --stream -- 'conventional-changelog --preset angular --release-count 0 --commit-path $PWD --pkg $PWD/package.json --outfile $PWD/CHANGELOG.md --verbose'",
-        "s": "monolage",
-        "c": "lerna clean",
-        "r": "lerna publish"
+        "monolage": "monolage",
+        "lerna:clean": "lerna clean",
+        "lerna:publish": "lerna publish"
     },
     "keywords": [
         "yicode",
