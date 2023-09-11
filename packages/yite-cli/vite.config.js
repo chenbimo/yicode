@@ -231,7 +231,7 @@ export default defineConfig(async ({ command, mode }) => {
                     },
                     {
                         find: 'vue-i18n',
-                        replacement: 'vue-i18n/dist/vue-i18n.cjs.js'
+                        replacement: 'vue-i18n/dist/vue-i18n.esm-bundler.js'
                     }
                 ]
             },
