@@ -17,8 +17,8 @@ importers:
                 specifier: workspace:*
                 version: link:tools/monolage
             lerna:
-                specifier: ^7.2.0
-                version: 7.2.0
+                specifier: ^7.3.0
+                version: 7.3.0
             lint-staged:
                 specifier: ^14.0.1
                 version: 14.0.1
@@ -122,8 +122,8 @@ importers:
                 specifier: ^5.1.7
                 version: 5.1.7
             nanoid:
-                specifier: ^4.0.2
-                version: 4.0.2
+                specifier: ^5.0.1
+                version: 5.0.1
             pako:
                 specifier: ^2.1.0
                 version: 2.1.0
@@ -146,8 +146,8 @@ importers:
                 specifier: ^1.1.2
                 version: 1.1.2
             '@iconify-json/bi':
-                specifier: ^1.1.18
-                version: 1.1.18
+                specifier: ^1.1.19
+                version: 1.1.19
             '@iconify-json/brandico':
                 specifier: ^1.1.5
                 version: 1.1.5
@@ -242,8 +242,8 @@ importers:
                 specifier: ^1.1.9
                 version: 1.1.9
             '@iconify-json/fluent':
-                specifier: ^1.1.34
-                version: 1.1.34
+                specifier: ^1.1.35
+                version: 1.1.35
             '@iconify-json/fluent-emoji':
                 specifier: ^1.1.14
                 version: 1.1.14
@@ -326,8 +326,8 @@ importers:
                 specifier: ^1.1.5
                 version: 1.1.5
             '@iconify-json/memory':
-                specifier: ^1.1.2
-                version: 1.1.2
+                specifier: ^1.1.3
+                version: 1.1.3
             '@iconify-json/mi':
                 specifier: ^1.1.5
                 version: 1.1.5
@@ -347,8 +347,8 @@ importers:
                 specifier: ^1.1.8
                 version: 1.1.8
             '@iconify-json/octicon':
-                specifier: ^1.1.48
-                version: 1.1.48
+                specifier: ^1.1.49
+                version: 1.1.49
             '@iconify-json/ooui':
                 specifier: ^1.1.26
                 version: 1.1.26
@@ -518,11 +518,11 @@ importers:
                 specifier: ^0.21.5
                 version: 0.21.5(@vitejs/plugin-vue@4.3.4)(vite@4.4.9)
             vite-plugin-vue-devtools:
-                specifier: 1.0.0-rc.3
-                version: 1.0.0-rc.3(pug@3.0.2)(vite@4.4.9)
+                specifier: 1.0.0-rc.4
+                version: 1.0.0-rc.4(pug@3.0.2)(vite@4.4.9)
             vue-i18n:
-                specifier: ^9.3.0
-                version: 9.3.0(vue@3.3.4)
+                specifier: ^9.4.0
+                version: 9.4.0(vue@3.3.4)
 
     templates/yibase:
         dependencies:
@@ -551,8 +551,8 @@ importers:
                 specifier: ^3.3.4
                 version: 3.3.4
             vue-i18n:
-                specifier: ^9.3.0
-                version: 9.3.0(vue@3.3.4)
+                specifier: ^9.4.0
+                version: 9.4.0(vue@3.3.4)
             vue-router:
                 specifier: ^4.2.4
                 version: 4.2.4(vue@3.3.4)
@@ -577,8 +577,8 @@ importers:
                 version: link:../../helpers/yidocs-auto
         devDependencies:
             vitepress:
-                specifier: 1.0.0-rc.10
-                version: 1.0.0-rc.10(@algolia/client-search@4.19.1)(@types/node@20.4.7)(search-insights@2.8.2)
+                specifier: 1.0.0-rc.13
+                version: 1.0.0-rc.13(@algolia/client-search@4.20.0)(@types/node@20.4.7)(search-insights@2.8.2)
 
     tools/dlnpm:
         dependencies:
@@ -629,138 +629,138 @@ importers:
                 version: 4.17.21
 
 packages:
-    /@algolia/autocomplete-core@1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.2):
+    /@algolia/autocomplete-core@1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.8.2):
         resolution: { integrity: sha512-009HdfugtGCdC4JdXUbVJClA0q0zh24yyePn+KUGk3rP7j8FEe/m5Yo/z65gn6nP/cM39PxpzqKrL7A6fP6PPw== }
         dependencies:
-            '@algolia/autocomplete-plugin-algolia-insights': 1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.2)
-            '@algolia/autocomplete-shared': 1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
+            '@algolia/autocomplete-plugin-algolia-insights': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.8.2)
+            '@algolia/autocomplete-shared': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)
         transitivePeerDependencies:
             - '@algolia/client-search'
             - algoliasearch
             - search-insights
         dev: true
 
-    /@algolia/autocomplete-plugin-algolia-insights@1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.2):
+    /@algolia/autocomplete-plugin-algolia-insights@1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.8.2):
         resolution: { integrity: sha512-a/yTUkcO/Vyy+JffmAnTWbr4/90cLzw+CC3bRbhnULr/EM0fGNvM13oQQ14f2moLMcVDyAx/leczLlAOovhSZg== }
         peerDependencies:
             search-insights: '>= 1 < 3'
         dependencies:
-            '@algolia/autocomplete-shared': 1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
+            '@algolia/autocomplete-shared': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)
             search-insights: 2.8.2
         transitivePeerDependencies:
             - '@algolia/client-search'
             - algoliasearch
         dev: true
 
-    /@algolia/autocomplete-preset-algolia@1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1):
+    /@algolia/autocomplete-preset-algolia@1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0):
         resolution: { integrity: sha512-d4qlt6YmrLMYy95n5TB52wtNDr6EgAIPH81dvvvW8UmuWRgxEtY0NJiPwl/h95JtG2vmRM804M0DSwMCNZlzRA== }
         peerDependencies:
             '@algolia/client-search': '>= 4.9.1 < 6'
             algoliasearch: '>= 4.9.1 < 6'
         dependencies:
-            '@algolia/autocomplete-shared': 1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
-            '@algolia/client-search': 4.19.1
-            algoliasearch: 4.19.1
+            '@algolia/autocomplete-shared': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)
+            '@algolia/client-search': 4.20.0
+            algoliasearch: 4.20.0
         dev: true
 
-    /@algolia/autocomplete-shared@1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1):
+    /@algolia/autocomplete-shared@1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0):
         resolution: { integrity: sha512-Wnm9E4Ye6Rl6sTTqjoymD+l8DjSTHsHboVRYrKgEt8Q7UHm9nYbqhN/i0fhUYA3OAEH7WA8x3jfpnmJm3rKvaQ== }
         peerDependencies:
             '@algolia/client-search': '>= 4.9.1 < 6'
             algoliasearch: '>= 4.9.1 < 6'
         dependencies:
-            '@algolia/client-search': 4.19.1
-            algoliasearch: 4.19.1
+            '@algolia/client-search': 4.20.0
+            algoliasearch: 4.20.0
         dev: true
 
-    /@algolia/cache-browser-local-storage@4.19.1:
-        resolution: { integrity: sha512-FYAZWcGsFTTaSAwj9Std8UML3Bu8dyWDncM7Ls8g+58UOe4XYdlgzXWbrIgjaguP63pCCbMoExKr61B+ztK3tw== }
+    /@algolia/cache-browser-local-storage@4.20.0:
+        resolution: { integrity: sha512-uujahcBt4DxduBTvYdwO3sBfHuJvJokiC3BP1+O70fglmE1ShkH8lpXqZBac1rrU3FnNYSUs4pL9lBdTKeRPOQ== }
         dependencies:
-            '@algolia/cache-common': 4.19.1
+            '@algolia/cache-common': 4.20.0
         dev: true
 
-    /@algolia/cache-common@4.19.1:
-        resolution: { integrity: sha512-XGghi3l0qA38HiqdoUY+wvGyBsGvKZ6U3vTiMBT4hArhP3fOGLXpIINgMiiGjTe4FVlTa5a/7Zf2bwlIHfRqqg== }
+    /@algolia/cache-common@4.20.0:
+        resolution: { integrity: sha512-vCfxauaZutL3NImzB2G9LjLt36vKAckc6DhMp05An14kVo8F1Yofb6SIl6U3SaEz8pG2QOB9ptwM5c+zGevwIQ== }
         dev: true
 
-    /@algolia/cache-in-memory@4.19.1:
-        resolution: { integrity: sha512-+PDWL+XALGvIginigzu8oU6eWw+o76Z8zHbBovWYcrtWOEtinbl7a7UTt3x3lthv+wNuFr/YD1Gf+B+A9V8n5w== }
+    /@algolia/cache-in-memory@4.20.0:
+        resolution: { integrity: sha512-Wm9ak/IaacAZXS4mB3+qF/KCoVSBV6aLgIGFEtQtJwjv64g4ePMapORGmCyulCFwfePaRAtcaTbMcJF+voc/bg== }
         dependencies:
-            '@algolia/cache-common': 4.19.1
+            '@algolia/cache-common': 4.20.0
         dev: true
 
-    /@algolia/client-account@4.19.1:
-        resolution: { integrity: sha512-Oy0ritA2k7AMxQ2JwNpfaEcgXEDgeyKu0V7E7xt/ZJRdXfEpZcwp9TOg4TJHC7Ia62gIeT2Y/ynzsxccPw92GA== }
+    /@algolia/client-account@4.20.0:
+        resolution: { integrity: sha512-GGToLQvrwo7am4zVkZTnKa72pheQeez/16sURDWm7Seyz+HUxKi3BM6fthVVPUEBhtJ0reyVtuK9ArmnaKl10Q== }
         dependencies:
-            '@algolia/client-common': 4.19.1
-            '@algolia/client-search': 4.19.1
-            '@algolia/transporter': 4.19.1
+            '@algolia/client-common': 4.20.0
+            '@algolia/client-search': 4.20.0
+            '@algolia/transporter': 4.20.0
         dev: true
 
-    /@algolia/client-analytics@4.19.1:
-        resolution: { integrity: sha512-5QCq2zmgdZLIQhHqwl55ZvKVpLM3DNWjFI4T+bHr3rGu23ew2bLO4YtyxaZeChmDb85jUdPDouDlCumGfk6wOg== }
+    /@algolia/client-analytics@4.20.0:
+        resolution: { integrity: sha512-EIr+PdFMOallRdBTHHdKI3CstslgLORQG7844Mq84ib5oVFRVASuuPmG4bXBgiDbcsMLUeOC6zRVJhv1KWI0ug== }
         dependencies:
-            '@algolia/client-common': 4.19.1
-            '@algolia/client-search': 4.19.1
-            '@algolia/requester-common': 4.19.1
-            '@algolia/transporter': 4.19.1
+            '@algolia/client-common': 4.20.0
+            '@algolia/client-search': 4.20.0
+            '@algolia/requester-common': 4.20.0
+            '@algolia/transporter': 4.20.0
         dev: true
 
-    /@algolia/client-common@4.19.1:
-        resolution: { integrity: sha512-3kAIVqTcPrjfS389KQvKzliC559x+BDRxtWamVJt8IVp7LGnjq+aVAXg4Xogkur1MUrScTZ59/AaUd5EdpyXgA== }
+    /@algolia/client-common@4.20.0:
+        resolution: { integrity: sha512-P3WgMdEss915p+knMMSd/fwiHRHKvDu4DYRrCRaBrsfFw7EQHon+EbRSm4QisS9NYdxbS04kcvNoavVGthyfqQ== }
         dependencies:
-            '@algolia/requester-common': 4.19.1
-            '@algolia/transporter': 4.19.1
+            '@algolia/requester-common': 4.20.0
+            '@algolia/transporter': 4.20.0
         dev: true
 
-    /@algolia/client-personalization@4.19.1:
-        resolution: { integrity: sha512-8CWz4/H5FA+krm9HMw2HUQenizC/DxUtsI5oYC0Jxxyce1vsr8cb1aEiSJArQT6IzMynrERif1RVWLac1m36xw== }
+    /@algolia/client-personalization@4.20.0:
+        resolution: { integrity: sha512-N9+zx0tWOQsLc3K4PVRDV8GUeOLAY0i445En79Pr3zWB+m67V+n/8w4Kw1C5LlbHDDJcyhMMIlqezh6BEk7xAQ== }
         dependencies:
-            '@algolia/client-common': 4.19.1
-            '@algolia/requester-common': 4.19.1
-            '@algolia/transporter': 4.19.1
+            '@algolia/client-common': 4.20.0
+            '@algolia/requester-common': 4.20.0
+            '@algolia/transporter': 4.20.0
         dev: true
 
-    /@algolia/client-search@4.19.1:
-        resolution: { integrity: sha512-mBecfMFS4N+yK/p0ZbK53vrZbL6OtWMk8YmnOv1i0LXx4pelY8TFhqKoTit3NPVPwoSNN0vdSN9dTu1xr1XOVw== }
+    /@algolia/client-search@4.20.0:
+        resolution: { integrity: sha512-zgwqnMvhWLdpzKTpd3sGmMlr4c+iS7eyyLGiaO51zDZWGMkpgoNVmltkzdBwxOVXz0RsFMznIxB9zuarUv4TZg== }
         dependencies:
-            '@algolia/client-common': 4.19.1
-            '@algolia/requester-common': 4.19.1
-            '@algolia/transporter': 4.19.1
+            '@algolia/client-common': 4.20.0
+            '@algolia/requester-common': 4.20.0
+            '@algolia/transporter': 4.20.0
         dev: true
 
-    /@algolia/logger-common@4.19.1:
-        resolution: { integrity: sha512-i6pLPZW/+/YXKis8gpmSiNk1lOmYCmRI6+x6d2Qk1OdfvX051nRVdalRbEcVTpSQX6FQAoyeaui0cUfLYW5Elw== }
+    /@algolia/logger-common@4.20.0:
+        resolution: { integrity: sha512-xouigCMB5WJYEwvoWW5XDv7Z9f0A8VoXJc3VKwlHJw/je+3p2RcDXfksLI4G4lIVncFUYMZx30tP/rsdlvvzHQ== }
         dev: true
 
-    /@algolia/logger-console@4.19.1:
-        resolution: { integrity: sha512-jj72k9GKb9W0c7TyC3cuZtTr0CngLBLmc8trzZlXdfvQiigpUdvTi1KoWIb2ZMcRBG7Tl8hSb81zEY3zI2RlXg== }
+    /@algolia/logger-console@4.20.0:
+        resolution: { integrity: sha512-THlIGG1g/FS63z0StQqDhT6bprUczBI8wnLT3JWvfAQDZX5P6fCg7dG+pIrUBpDIHGszgkqYEqECaKKsdNKOUA== }
         dependencies:
-            '@algolia/logger-common': 4.19.1
+            '@algolia/logger-common': 4.20.0
         dev: true
 
-    /@algolia/requester-browser-xhr@4.19.1:
-        resolution: { integrity: sha512-09K/+t7lptsweRTueHnSnmPqIxbHMowejAkn9XIcJMLdseS3zl8ObnS5GWea86mu3vy4+8H+ZBKkUN82Zsq/zg== }
+    /@algolia/requester-browser-xhr@4.20.0:
+        resolution: { integrity: sha512-HbzoSjcjuUmYOkcHECkVTwAelmvTlgs48N6Owt4FnTOQdwn0b8pdht9eMgishvk8+F8bal354nhx/xOoTfwiAw== }
         dependencies:
-            '@algolia/requester-common': 4.19.1
+            '@algolia/requester-common': 4.20.0
         dev: true
 
-    /@algolia/requester-common@4.19.1:
-        resolution: { integrity: sha512-BisRkcWVxrDzF1YPhAckmi2CFYK+jdMT60q10d7z3PX+w6fPPukxHRnZwooiTUrzFe50UBmLItGizWHP5bDzVQ== }
+    /@algolia/requester-common@4.20.0:
+        resolution: { integrity: sha512-9h6ye6RY/BkfmeJp7Z8gyyeMrmmWsMOCRBXQDs4mZKKsyVlfIVICpcSibbeYcuUdurLhIlrOUkH3rQEgZzonng== }
         dev: true
 
-    /@algolia/requester-node-http@4.19.1:
-        resolution: { integrity: sha512-6DK52DHviBHTG2BK/Vv2GIlEw7i+vxm7ypZW0Z7vybGCNDeWzADx+/TmxjkES2h15+FZOqVf/Ja677gePsVItA== }
+    /@algolia/requester-node-http@4.20.0:
+        resolution: { integrity: sha512-ocJ66L60ABSSTRFnCHIEZpNHv6qTxsBwJEPfYaSBsLQodm0F9ptvalFkHMpvj5DfE22oZrcrLbOYM2bdPJRHng== }
         dependencies:
-            '@algolia/requester-common': 4.19.1
+            '@algolia/requester-common': 4.20.0
         dev: true
 
-    /@algolia/transporter@4.19.1:
-        resolution: { integrity: sha512-nkpvPWbpuzxo1flEYqNIbGz7xhfhGOKGAZS7tzC+TELgEmi7z99qRyTfNSUlW7LZmB3ACdnqAo+9A9KFBENviQ== }
+    /@algolia/transporter@4.20.0:
+        resolution: { integrity: sha512-Lsii1pGWOAISbzeyuf+r/GPhvHMPHSPrTDWNcIzOE1SG1inlJHICaVe2ikuoRjcpgxZNU54Jl+if15SUCsaTUg== }
         dependencies:
-            '@algolia/cache-common': 4.19.1
-            '@algolia/logger-common': 4.19.1
-            '@algolia/requester-common': 4.19.1
+            '@algolia/cache-common': 4.20.0
+            '@algolia/logger-common': 4.20.0
+            '@algolia/requester-common': 4.20.0
         dev: true
 
     /@ampproject/remapping@2.2.1:
@@ -1226,8 +1226,8 @@ packages:
             '@commitlint/types': 17.4.4
             '@types/node': 20.4.7
             chalk: 4.1.2
-            cosmiconfig: 8.3.5(typescript@5.2.2)
-            cosmiconfig-typescript-loader: 4.4.0(@types/node@20.4.7)(cosmiconfig@8.3.5)(ts-node@10.9.1)(typescript@5.2.2)
+            cosmiconfig: 8.3.6(typescript@5.2.2)
+            cosmiconfig-typescript-loader: 4.4.0(@types/node@20.4.7)(cosmiconfig@8.3.6)(ts-node@10.9.1)(typescript@5.2.2)
             lodash.isplainobject: 4.0.6
             lodash.merge: 4.6.2
             lodash.uniq: 4.5.0
@@ -1320,10 +1320,10 @@ packages:
         resolution: { integrity: sha512-SPiDHaWKQZpwR2siD0KQUwlStvIAnEyK6tAE2h2Wuoq8ue9skzhlyVQ1ddzOxX6khULnAALDiR/isSF3bnuciA== }
         dev: true
 
-    /@docsearch/js@3.5.2(@algolia/client-search@4.19.1)(search-insights@2.8.2):
+    /@docsearch/js@3.5.2(@algolia/client-search@4.20.0)(search-insights@2.8.2):
         resolution: { integrity: sha512-p1YFTCDflk8ieHgFJYfmyHBki1D61+U9idwrLh+GQQMrBSP3DLGKpy0XUJtPjAOPltcVbqsTjiPFfH7JImjUNg== }
         dependencies:
-            '@docsearch/react': 3.5.2(@algolia/client-search@4.19.1)(search-insights@2.8.2)
+            '@docsearch/react': 3.5.2(@algolia/client-search@4.20.0)(search-insights@2.8.2)
             preact: 10.17.1
         transitivePeerDependencies:
             - '@algolia/client-search'
@@ -1333,7 +1333,7 @@ packages:
             - search-insights
         dev: true
 
-    /@docsearch/react@3.5.2(@algolia/client-search@4.19.1)(search-insights@2.8.2):
+    /@docsearch/react@3.5.2(@algolia/client-search@4.20.0)(search-insights@2.8.2):
         resolution: { integrity: sha512-9Ahcrs5z2jq/DcAvYtvlqEBHImbm4YJI8M9y0x6Tqg598P40HTEkX7hsMcIuThI+hTFxRGZ9hll0Wygm2yEjng== }
         peerDependencies:
             '@types/react': '>= 16.8.0 < 19.0.0'
@@ -1350,10 +1350,10 @@ packages:
             search-insights:
                 optional: true
         dependencies:
-            '@algolia/autocomplete-core': 1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)(search-insights@2.8.2)
-            '@algolia/autocomplete-preset-algolia': 1.9.3(@algolia/client-search@4.19.1)(algoliasearch@4.19.1)
+            '@algolia/autocomplete-core': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)(search-insights@2.8.2)
+            '@algolia/autocomplete-preset-algolia': 1.9.3(@algolia/client-search@4.20.0)(algoliasearch@4.20.0)
             '@docsearch/css': 3.5.2
-            algoliasearch: 4.19.1
+            algoliasearch: 4.20.0
             search-insights: 2.8.2
         transitivePeerDependencies:
             - '@algolia/client-search'
@@ -1373,8 +1373,8 @@ packages:
             source-map-support: 0.5.21
         dev: false
 
-    /@esbuild-kit/esm-loader@2.5.5:
-        resolution: { integrity: sha512-Qwfvj/qoPbClxCRNuac1Du01r9gvNOT+pMYtJDapfB1eoGN1YlJ1BixLyL9WVENRx5RXgNLdfYdx/CuswlGhMw== }
+    /@esbuild-kit/esm-loader@2.6.3:
+        resolution: { integrity: sha512-lUziJdacVDQrg65DwQ+OOQR9B1LQE2/pY77H+oVT0KQDLtsT2XfbHz7O+f0zUvexSWPKxMXa8h4RXT5PFAlv/g== }
         dependencies:
             '@esbuild-kit/core-utils': 3.3.0
             get-tsconfig: 4.7.0
@@ -1591,8 +1591,8 @@ packages:
             '@iconify/types': 2.0.0
         dev: false
 
-    /@iconify-json/bi@1.1.18:
-        resolution: { integrity: sha512-nAQd+4Eb2SuYKg/5oa/dlvIudgF5d57VYGkF7P0JbuUipFHk0l2vAQ0CdKYaz0L66PO0rabWDln449lhBE2UJQ== }
+    /@iconify-json/bi@1.1.19:
+        resolution: { integrity: sha512-awbOuIu3hAKckicuCBKvuODk9hJ9Qi5gP6cz6AATWKmFiFb/prvX9LNNgWNP/EgxoQQbSsuzXIEivDMMmsb65w== }
         dependencies:
             '@iconify/types': 2.0.0
         dev: false
@@ -1801,8 +1801,8 @@ packages:
             '@iconify/types': 2.0.0
         dev: false
 
-    /@iconify-json/fluent@1.1.34:
-        resolution: { integrity: sha512-nyBNbhObRVRDMmiGtI2m0pysNM8/+Fp3cW7kgjxlmi24zAeQVQ819utFJpsCFjZrQUE++PG2AhCSq96wspXB/A== }
+    /@iconify-json/fluent@1.1.35:
+        resolution: { integrity: sha512-WqrkFv/HtXjrsLfBBICYn6du2s9lPADvN3pO1evqLdEMgfEvaX1fd5x3RVakFeLeivIkKHVLrKAz8JwmfpSq4g== }
         dependencies:
             '@iconify/types': 2.0.0
         dev: false
@@ -1951,8 +1951,8 @@ packages:
             '@iconify/types': 2.0.0
         dev: false
 
-    /@iconify-json/memory@1.1.2:
-        resolution: { integrity: sha512-dKsNwdQ1euyH98XlJs/9Nky3mKX0IEFuaswep1RE9zAns951yAxyN5FYnQthqvP01qgbESm7PCKptXZM3dP9Aw== }
+    /@iconify-json/memory@1.1.3:
+        resolution: { integrity: sha512-jkB0V5Kx7NDIdtwTs2aDndXRx+marrpwqBhryYqoWv4nbIJ79xsT43CNDLJfkM1Q49dpdVqTPIwz37+jtg2WOQ== }
         dependencies:
             '@iconify/types': 2.0.0
         dev: false
@@ -1993,8 +1993,8 @@ packages:
             '@iconify/types': 2.0.0
         dev: false
 
-    /@iconify-json/octicon@1.1.48:
-        resolution: { integrity: sha512-A5VRo/C3yfe0IoDUX1Mw5igYmO0iBrjFgPptGIDYRMu+d8QfHWs+DWG9v47KHfWDA/ayBImOdM1msgdEbqMqjg== }
+    /@iconify-json/octicon@1.1.49:
+        resolution: { integrity: sha512-wv/uSwSkxk4O0VituCjiFkHVhKVHM7MdE4vvRmyAutK+EcBemThJlQcCJR8CX9/LdRKKboC6K0t75a/KVKdjOg== }
         dependencies:
             '@iconify/types': 2.0.0
         dev: false
@@ -2172,42 +2172,25 @@ packages:
             - supports-color
         dev: false
 
-    /@intlify/core-base@9.3.0:
-        resolution: { integrity: sha512-SRzn8TMnPZ6MY8OFrgouRq4DGaf01SHcJEF6FglYFYvRkgPzziEcQe+v2PD+O5lUp/rJafP4dabm1CmsVAA7rA== }
+    /@intlify/core-base@9.4.0:
+        resolution: { integrity: sha512-bIvtuEjLES35l39R0OccYbmr/fatSr4VSRThhouvFc05mnoAZyJGgj3st1iLaHGlFTmvd507uww1427o56r36Q== }
         engines: { node: '>= 16' }
         dependencies:
-            '@intlify/devtools-if': 9.3.0
-            '@intlify/message-compiler': 9.3.0
-            '@intlify/shared': 9.3.0
-            '@intlify/vue-devtools': 9.3.0
+            '@intlify/message-compiler': 9.4.0
+            '@intlify/shared': 9.4.0
         dev: false
 
-    /@intlify/devtools-if@9.3.0:
-        resolution: { integrity: sha512-5aKZnqj0Ff4dfwBX2Oo+MheVs00CBnC0RzWK26aT2M4AF0cxdFLOJAs51/eHT01jmzrxSvfBMjdArUWHwgetfg== }
+    /@intlify/message-compiler@9.4.0:
+        resolution: { integrity: sha512-EdjqOH3bQqEjZcUOwo90wuW4ZuFr41FDxVni6WNKS0V0myKgwz9EuvLDcnEbjJMIX8vKAWPjWfnSTt5fMwKHLA== }
         engines: { node: '>= 16' }
         dependencies:
-            '@intlify/shared': 9.3.0
-        dev: false
-
-    /@intlify/message-compiler@9.3.0:
-        resolution: { integrity: sha512-D8tSJEhTCSFcCzkThjE4Sbk1tIdvzkYa1FaVIzUtZ8hKPATvokNrOiDw1i/h671m8A80l9Ywq594i/LPTB6EJA== }
-        engines: { node: '>= 16' }
-        dependencies:
-            '@intlify/shared': 9.3.0
+            '@intlify/shared': 9.4.0
             source-map-js: 1.0.2
         dev: false
 
-    /@intlify/shared@9.3.0:
-        resolution: { integrity: sha512-MMGRz6zWxtz7rHtxIIdnyb8SYOIaaseN1IvUhAEs9tOW4u77RD4DFp4qgPXesp2Gxo/5QitH9kwSs0jnxGUNEw== }
+    /@intlify/shared@9.4.0:
+        resolution: { integrity: sha512-AFqymip2kToqA0B6KZPg5jSrdcVHoli9t/VhGKE2iiMq9utFuMoGdDC/JOCIZgwxo6aXAk86QyU2XtzEoMuZ6A== }
         engines: { node: '>= 16' }
-        dev: false
-
-    /@intlify/vue-devtools@9.3.0:
-        resolution: { integrity: sha512-kEaxIz1VEgsz2q5RhoS+fBGTkXr/4+pxmK9mN14+speVGb82HPRntKBmz0GO18I1JisD4Z0vAva+KCTHGeAqbQ== }
-        engines: { node: '>= 16' }
-        dependencies:
-            '@intlify/core-base': 9.3.0
-            '@intlify/shared': 9.3.0
         dev: false
 
     /@isaacs/cliui@8.0.2:
@@ -2303,8 +2286,8 @@ packages:
         resolution: { integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw== }
         dev: false
 
-    /@lerna/child-process@7.2.0:
-        resolution: { integrity: sha512-8cRsYYX8rGZTXL1KcLBv0RHD9PMvphWZay8yg4qf2giX6x86dQyTetSU4SplG2LBGVClilmNHJa/CQwvPQNUFA== }
+    /@lerna/child-process@7.3.0:
+        resolution: { integrity: sha512-rA+fGUo2j/LEq6w1w8s6oVikLbJTWoIDVpYMc7bUCtwDOUuZKMQiRtjmpavY3fTm7ltu42f4AKflc2A70K4wvA== }
         engines: { node: ^14.17.0 || >=16.0.0 }
         dependencies:
             chalk: 4.1.0
@@ -2312,11 +2295,11 @@ packages:
             strong-log-transformer: 2.1.0
         dev: true
 
-    /@lerna/create@7.2.0(typescript@5.2.2):
-        resolution: { integrity: sha512-bBypNfwqOQNcfR2nXJ3mWUeIAIoSFpXg8MjuFSf87PzIiyeTEKa3Z57vAa3bDbHQtcB7x6f0rWysK1eQZSH15Q== }
+    /@lerna/create@7.3.0(typescript@5.2.2):
+        resolution: { integrity: sha512-fjgiKjg9VXwQ4ZKKsrXICEKRiC3yo6+FprR0mc55uz0s5e9xupoSGLobUTTBdE7ncNB3ibqml8dfaAn/+ESajQ== }
         engines: { node: ^14.17.0 || >=16.0.0 }
         dependencies:
-            '@lerna/child-process': 7.2.0
+            '@lerna/child-process': 7.3.0
             '@npmcli/run-script': 6.0.2
             '@nx/devkit': 16.8.1(nx@16.8.1)
             '@octokit/plugin-enterprise-rest': 6.0.1
@@ -2328,7 +2311,7 @@ packages:
             columnify: 1.6.0
             conventional-changelog-core: 5.0.1
             conventional-recommended-bump: 7.0.1
-            cosmiconfig: 8.3.5(typescript@5.2.2)
+            cosmiconfig: 8.3.6(typescript@5.2.2)
             dedent: 0.7.0
             execa: 5.0.0
             fs-extra: 11.1.1
@@ -2347,7 +2330,7 @@ packages:
             libnpmpublish: 7.3.0
             load-json-file: 6.2.0
             lodash: 4.17.21
-            make-dir: 3.1.0
+            make-dir: 4.0.0
             minimatch: 3.0.5
             multimatch: 5.0.0
             node-fetch: 2.6.7
@@ -2374,7 +2357,7 @@ packages:
             tar: 6.1.11
             temp-dir: 1.0.0
             upath: 2.0.1
-            uuid: 9.0.0
+            uuid: 9.0.1
             validate-npm-package-license: 3.0.4
             validate-npm-package-name: 5.0.0
             write-file-atomic: 5.0.1
@@ -2619,7 +2602,6 @@ packages:
         engines: { node: '>= 10' }
         cpu: [arm64]
         os: [linux]
-        libc: [glibc]
         requiresBuild: true
         dev: true
         optional: true
@@ -2629,7 +2611,6 @@ packages:
         engines: { node: '>= 10' }
         cpu: [arm64]
         os: [linux]
-        libc: [musl]
         requiresBuild: true
         dev: true
         optional: true
@@ -2639,7 +2620,6 @@ packages:
         engines: { node: '>= 10' }
         cpu: [x64]
         os: [linux]
-        libc: [glibc]
         requiresBuild: true
         dev: true
         optional: true
@@ -2649,7 +2629,6 @@ packages:
         engines: { node: '>= 10' }
         cpu: [x64]
         os: [linux]
-        libc: [musl]
         requiresBuild: true
         dev: true
         optional: true
@@ -3213,8 +3192,8 @@ packages:
             - rollup
         dev: false
 
-    /@vite-plugin-vue-devtools/core@1.0.0-rc.3(vite@4.4.9):
-        resolution: { integrity: sha512-6RyECkxxFEN7h652mX80LO2Ws4C69AdMYNZVOpjxZ+B6bSyfWeu4s8IDLHVp/kfbeftWNXaSdJbGW8Z/j+QdqA== }
+    /@vite-plugin-vue-devtools/core@1.0.0-rc.4(vite@4.4.9):
+        resolution: { integrity: sha512-UE1+SGkSSI5SL7wujLNKXPw1f2xLhmXUvwfsaKUaQDulafHbD+/1Xs/gsVGGzrJiwE3e2TU+BU1HiPFCXHhTiA== }
         peerDependencies:
             vite: ^3.1.0 || ^4.0.0-0
         dependencies:
@@ -3631,23 +3610,23 @@ packages:
             uri-js: 4.4.1
         dev: true
 
-    /algoliasearch@4.19.1:
-        resolution: { integrity: sha512-IJF5b93b2MgAzcE/tuzW0yOPnuUyRgGAtaPv5UUywXM8kzqfdwZTO4sPJBzoGz1eOy6H9uEchsJsBFTELZSu+g== }
+    /algoliasearch@4.20.0:
+        resolution: { integrity: sha512-y+UHEjnOItoNy0bYO+WWmLWBlPwDjKHW6mNHrPi0NkuhpQOOEbrkwQH/wgKFDLh7qlKjzoKeiRtlpewDPDG23g== }
         dependencies:
-            '@algolia/cache-browser-local-storage': 4.19.1
-            '@algolia/cache-common': 4.19.1
-            '@algolia/cache-in-memory': 4.19.1
-            '@algolia/client-account': 4.19.1
-            '@algolia/client-analytics': 4.19.1
-            '@algolia/client-common': 4.19.1
-            '@algolia/client-personalization': 4.19.1
-            '@algolia/client-search': 4.19.1
-            '@algolia/logger-common': 4.19.1
-            '@algolia/logger-console': 4.19.1
-            '@algolia/requester-browser-xhr': 4.19.1
-            '@algolia/requester-common': 4.19.1
-            '@algolia/requester-node-http': 4.19.1
-            '@algolia/transporter': 4.19.1
+            '@algolia/cache-browser-local-storage': 4.20.0
+            '@algolia/cache-common': 4.20.0
+            '@algolia/cache-in-memory': 4.20.0
+            '@algolia/client-account': 4.20.0
+            '@algolia/client-analytics': 4.20.0
+            '@algolia/client-common': 4.20.0
+            '@algolia/client-personalization': 4.20.0
+            '@algolia/client-search': 4.20.0
+            '@algolia/logger-common': 4.20.0
+            '@algolia/logger-console': 4.20.0
+            '@algolia/requester-browser-xhr': 4.20.0
+            '@algolia/requester-common': 4.20.0
+            '@algolia/requester-node-http': 4.20.0
+            '@algolia/transporter': 4.20.0
         dev: true
 
     /ansi-colors@4.1.3:
@@ -3945,8 +3924,8 @@ packages:
         engines: { node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7 }
         hasBin: true
         dependencies:
-            caniuse-lite: 1.0.30001532
-            electron-to-chromium: 1.4.513
+            caniuse-lite: 1.0.30001534
+            electron-to-chromium: 1.4.520
             node-releases: 2.0.13
             update-browserslist-db: 1.0.11(browserslist@4.21.10)
         dev: false
@@ -4099,8 +4078,8 @@ packages:
         engines: { node: '>=10' }
         dev: false
 
-    /caniuse-lite@1.0.30001532:
-        resolution: { integrity: sha512-FbDFnNat3nMnrROzqrsg314zhqN5LGQ1kyyMk2opcrwGbVGpHRhgCWtAgD5YJUqNAiQ+dklreil/c3Qf1dfCTw== }
+    /caniuse-lite@1.0.30001534:
+        resolution: { integrity: sha512-vlPVrhsCS7XaSh2VvWluIQEzVhefrUQcEsQWSS5A5V+dM07uv1qHeQzAOTGIMy9i3e9bH15+muvI/UHojVgS/Q== }
         dev: false
 
     /chai@4.3.8:
@@ -4222,8 +4201,8 @@ packages:
         engines: { node: '>=6' }
         dev: true
 
-    /cli-spinners@2.9.0:
-        resolution: { integrity: sha512-4/aL9X3Wh0yiMQlE+eeRhWP6vclO3QRtw1JHKIT0FFUs5FjpFmESqtMvYZ0+lbzBw900b95mS0hohy+qn2VK/g== }
+    /cli-spinners@2.9.1:
+        resolution: { integrity: sha512-jHgecW0pxkonBJdrKsqxgRX9AcG+u/5k0Q7WPDfi8AogLAdwxEkyYYNWwZ5GvVFoFx2uiY1eNcSK00fh+1+FyQ== }
         engines: { node: '>=6' }
 
     /cli-table3@0.6.3:
@@ -4485,7 +4464,7 @@ packages:
         resolution: { integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ== }
         dev: true
 
-    /cosmiconfig-typescript-loader@4.4.0(@types/node@20.4.7)(cosmiconfig@8.3.5)(ts-node@10.9.1)(typescript@5.2.2):
+    /cosmiconfig-typescript-loader@4.4.0(@types/node@20.4.7)(cosmiconfig@8.3.6)(ts-node@10.9.1)(typescript@5.2.2):
         resolution: { integrity: sha512-BabizFdC3wBHhbI4kJh0VkQP9GkBfoHPydD0COMce1nJ1kJAB3F2TmJ/I7diULBKtmEWSwEbuN/KDtgnmUUVmw== }
         engines: { node: '>=v14.21.3' }
         requiresBuild: true
@@ -4496,13 +4475,13 @@ packages:
             typescript: '>=4'
         dependencies:
             '@types/node': 20.4.7
-            cosmiconfig: 8.3.5(typescript@5.2.2)
+            cosmiconfig: 8.3.6(typescript@5.2.2)
             ts-node: 10.9.1(@types/node@20.4.7)(typescript@5.2.2)
             typescript: 5.2.2
         dev: true
 
-    /cosmiconfig@8.3.5(typescript@5.2.2):
-        resolution: { integrity: sha512-A5Xry3xfS96wy2qbiLkQLAg4JUrR2wvfybxj6yqLmrUfMAvhS3MZxIP2oQn0grgYIvJqzpeTEWu4vK0t+12NNw== }
+    /cosmiconfig@8.3.6(typescript@5.2.2):
+        resolution: { integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA== }
         engines: { node: '>=14' }
         peerDependencies:
             typescript: '>=4.9.5'
@@ -4658,6 +4637,15 @@ packages:
         engines: { node: '>=10' }
         dev: false
 
+    /define-data-property@1.1.0:
+        resolution: { integrity: sha512-UzGwzcjyv3OtAvolTj1GoyNYzfFR+iqbGjcnBEENZVCpM4/Ng1yhGNvS3lR/xDS74Tb2wGG9WzNSNIOS9UVb2g== }
+        engines: { node: '>= 0.4' }
+        dependencies:
+            get-intrinsic: 1.2.1
+            gopd: 1.0.1
+            has-property-descriptors: 1.0.0
+        dev: false
+
     /define-lazy-prop@2.0.0:
         resolution: { integrity: sha512-Ds09qNh8yw3khSjiJjiUInaGX9xlqZDY7JVryGxdxV7NPeuqQfplOpQ66yJFZut3jLa5zOwkXw1g9EI2uKh4Og== }
         engines: { node: '>=8' }
@@ -4667,10 +4655,11 @@ packages:
         engines: { node: '>=12' }
         dev: false
 
-    /define-properties@1.2.0:
-        resolution: { integrity: sha512-xvqAVKGfT1+UAvPwKTVw/njhdQ8ZhXK4lI0bCIuCMrp2up9nPnaDftrLtmpTazqd1o+UY4zgzU+avtMbDP+ldA== }
+    /define-properties@1.2.1:
+        resolution: { integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg== }
         engines: { node: '>= 0.4' }
         dependencies:
+            define-data-property: 1.1.0
             has-property-descriptors: 1.0.0
             object-keys: 1.1.1
         dev: false
@@ -4749,8 +4738,8 @@ packages:
             jake: 10.8.7
         dev: true
 
-    /electron-to-chromium@1.4.513:
-        resolution: { integrity: sha512-cOB0xcInjm+E5qIssHeXJ29BaUyWpMyFKT5RB3bsLENDheCja0wMkHJyiPl0NBE/VzDI7JDuNEQWhe6RitEUcw== }
+    /electron-to-chromium@1.4.520:
+        resolution: { integrity: sha512-Frfus2VpYADsrh1lB3v/ft/WVFlVzOIm+Q0p7U7VqHI6qr7NWHYKe+Wif3W50n7JAFoBsWVsoU0+qDks6WQ60g== }
         dev: false
 
     /emoji-regex@10.2.1:
@@ -4878,7 +4867,7 @@ packages:
         resolution: { integrity: sha512-6slSBEV1lMKcX13DBifvnDFpNno5WXhw4j/ff7RI0y51BZiDqEe5dNhhjhIQ3iCOQuzsm2MbVzmwqbN78BBhPg== }
         hasBin: true
         dependencies:
-            tsx: 3.12.8
+            tsx: 3.12.10
         dev: false
 
     /esprima@4.0.1:
@@ -5514,8 +5503,8 @@ packages:
             lru-cache: 7.18.3
         dev: true
 
-    /hosted-git-info@7.0.0:
-        resolution: { integrity: sha512-ICclEpTLhHj+zCuSb2/usoNXSVkxUSIopre+b1w8NDY9Dntp9LO4vLdHYI336TH8sAqwrRgnSfdkBG2/YpisHA== }
+    /hosted-git-info@7.0.1:
+        resolution: { integrity: sha512-+K84LB1DYwMHoHSgaOY/Jfhw3ucPmSET5v98Ke/HdNSw4a0UktWzyW1mjhjpuxxTqOOsfWT/7iVshHmVZ4IpOA== }
         engines: { node: ^16.14.0 || >=18.0.0 }
         dependencies:
             lru-cache: 10.0.1
@@ -5887,7 +5876,7 @@ packages:
         engines: { node: '>= 0.4' }
         dependencies:
             call-bind: 1.0.2
-            define-properties: 1.2.0
+            define-properties: 1.2.1
         dev: false
 
     /is-number@7.0.0:
@@ -6048,14 +6037,14 @@ packages:
             tslib: 2.5.0
         dev: false
 
-    /jest-diff@29.6.4:
-        resolution: { integrity: sha512-9F48UxR9e4XOEZvoUXEHSWY4qC4zERJaOfrbBg9JpbJOO43R1vN76REt/aMGZoY6GD5g84nnJiBIVlscegefpw== }
+    /jest-diff@29.7.0:
+        resolution: { integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw== }
         engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
         dependencies:
             chalk: 4.1.0
             diff-sequences: 29.6.3
             jest-get-type: 29.6.3
-            pretty-format: 29.6.3
+            pretty-format: 29.7.0
         dev: true
 
     /jest-get-type@29.6.3:
@@ -6184,13 +6173,13 @@ packages:
         resolution: { integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ== }
         dev: false
 
-    /lerna@7.2.0:
-        resolution: { integrity: sha512-E13iAY4Tdo+86m4ClAe0j0bP7f8QG2neJReglILPOe+gAOoX17TGqEWanmkDELlUXOrTTwnte0ewc6I6/NOqpg== }
+    /lerna@7.3.0:
+        resolution: { integrity: sha512-Dt8TH+J+c9+3MhTYcm5OxnNzXb87WG7GPNj3kidjYJjJY7KxIMDNU37qBTYRWA1h3wAeNKBplXVQYUPkGcYgkQ== }
         engines: { node: ^14.17.0 || >=16.0.0 }
         hasBin: true
         dependencies:
-            '@lerna/child-process': 7.2.0
-            '@lerna/create': 7.2.0(typescript@5.2.2)
+            '@lerna/child-process': 7.3.0
+            '@lerna/create': 7.3.0(typescript@5.2.2)
             '@npmcli/run-script': 6.0.2
             '@nx/devkit': 16.8.1(nx@16.8.1)
             '@octokit/plugin-enterprise-rest': 6.0.1
@@ -6203,7 +6192,7 @@ packages:
             conventional-changelog-angular: 6.0.0
             conventional-changelog-core: 5.0.1
             conventional-recommended-bump: 7.0.1
-            cosmiconfig: 8.3.5(typescript@5.2.2)
+            cosmiconfig: 8.3.6(typescript@5.2.2)
             dedent: 0.7.0
             envinfo: 7.8.1
             execa: 5.0.0
@@ -6221,13 +6210,13 @@ packages:
             inquirer: 8.2.6
             is-ci: 3.0.1
             is-stream: 2.0.0
-            jest-diff: 29.6.4
+            jest-diff: 29.7.0
             js-yaml: 4.1.0
             libnpmaccess: 7.0.2
             libnpmpublish: 7.3.0
             load-json-file: 6.2.0
             lodash: 4.17.21
-            make-dir: 3.1.0
+            make-dir: 4.0.0
             minimatch: 3.0.5
             multimatch: 5.0.0
             node-fetch: 2.6.7
@@ -6257,7 +6246,7 @@ packages:
             temp-dir: 1.0.0
             typescript: 5.2.2
             upath: 2.0.1
-            uuid: 9.0.0
+            uuid: 9.0.1
             validate-npm-package-license: 3.0.4
             validate-npm-package-name: 5.0.0
             write-file-atomic: 5.0.1
@@ -6546,11 +6535,11 @@ packages:
             semver: 5.7.2
         dev: true
 
-    /make-dir@3.1.0:
-        resolution: { integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw== }
-        engines: { node: '>=8' }
+    /make-dir@4.0.0:
+        resolution: { integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw== }
+        engines: { node: '>=10' }
         dependencies:
-            semver: 6.3.1
+            semver: 7.5.4
         dev: true
 
     /make-error@1.3.6:
@@ -6890,9 +6879,9 @@ packages:
         engines: { node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1 }
         hasBin: true
 
-    /nanoid@4.0.2:
-        resolution: { integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw== }
-        engines: { node: ^14 || ^16 || >=18 }
+    /nanoid@5.0.1:
+        resolution: { integrity: sha512-vWeVtV5Cw68aML/QaZvqN/3QQXc6fBfIieAlu05m7FZW2Dgb+3f0xc0TTxuJW+7u30t7iSDTV/j3kVI0oJqIfQ== }
+        engines: { node: ^18 || >=20 }
         hasBin: true
         dev: false
 
@@ -7028,7 +7017,7 @@ packages:
         resolution: { integrity: sha512-UL7ELRVxYBHBgYEtZCXjxuD5vPxnmvMGq0jp/dGPKKrN7tfsBh2IY7TlJ15WWwdjRWD3RJbnsygUurTK3xkPkg== }
         engines: { node: ^16.14.0 || >=18.0.0 }
         dependencies:
-            hosted-git-info: 7.0.0
+            hosted-git-info: 7.0.1
             is-core-module: 2.13.0
             semver: 7.5.4
             validate-npm-package-license: 3.0.4
@@ -7084,7 +7073,7 @@ packages:
         resolution: { integrity: sha512-M7s1BD4NxdAvBKUPqqRW957Xwcl/4Zvo8Aj+ANrzvIPzGJZElrH7Z//rSaec2ORcND6FHHLnZeY8qgTpXDMFQQ== }
         engines: { node: ^16.14.0 || >=18.0.0 }
         dependencies:
-            hosted-git-info: 7.0.0
+            hosted-git-info: 7.0.1
             proc-log: 3.0.0
             semver: 7.5.4
             validate-npm-package-name: 5.0.0
@@ -7273,7 +7262,7 @@ packages:
         engines: { node: '>= 0.4' }
         dependencies:
             call-bind: 1.0.2
-            define-properties: 1.2.0
+            define-properties: 1.2.1
         dev: false
 
     /object-keys@1.1.1:
@@ -7348,7 +7337,7 @@ packages:
             bl: 4.1.0
             chalk: 4.1.2
             cli-cursor: 3.1.0
-            cli-spinners: 2.9.0
+            cli-spinners: 2.9.1
             is-interactive: 1.0.0
             is-unicode-supported: 0.1.0
             log-symbols: 4.1.0
@@ -7361,7 +7350,7 @@ packages:
         dependencies:
             chalk: 5.3.0
             cli-cursor: 4.0.0
-            cli-spinners: 2.9.0
+            cli-spinners: 2.9.1
             is-interactive: 2.0.0
             is-unicode-supported: 1.3.0
             log-symbols: 5.1.0
@@ -7724,8 +7713,8 @@ packages:
         hasBin: true
         dev: true
 
-    /pretty-format@29.6.3:
-        resolution: { integrity: sha512-ZsBgjVhFAj5KeK+nHfF1305/By3lechHQSMWCTl8iHSbfOm2TN5nHEtFc/+W7fAyUeCs2n5iow72gld4gW0xDw== }
+    /pretty-format@29.7.0:
+        resolution: { integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ== }
         engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
         dependencies:
             '@jest/schemas': 29.6.3
@@ -8239,6 +8228,7 @@ packages:
     /semver@6.3.1:
         resolution: { integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA== }
         hasBin: true
+        dev: false
 
     /semver@7.5.3:
         resolution: { integrity: sha512-QBlUtyVk/5EeHbi7X0fw6liDZc7BBmEaSYn01fMU1OUYbf6GPsbTtd8WmnqbI20SeycoHSeiybkE/q1Q+qlThQ== }
@@ -8680,8 +8670,8 @@ packages:
         resolution: { integrity: sha512-h8ueaMyvUd/9ZfRqCfa1t+0tXqfVFhdK8WpLHz8VXMqsiaj3Sqg64AOCH/xevLQGZk0ZV+/75ouITdkvp3taVA== }
         dev: false
 
-    /tinybench@2.5.0:
-        resolution: { integrity: sha512-kRwSG8Zx4tjF9ZiyH4bhaebu+EDz1BOx9hOigYHlUW4xxI/wKIUQUqo018UlU4ar6ATPBsaMrdbKZ+tmPdohFA== }
+    /tinybench@2.5.1:
+        resolution: { integrity: sha512-65NKvSuAVDP/n4CqH+a9w2kTlLReS9vhsAP06MWx+/89nMinJyB2icyl58RIcqCmIggpojIGeuJGhjU1aGMBSg== }
         dev: false
 
     /tinypool@0.3.1:
@@ -8791,13 +8781,13 @@ packages:
     /tslib@2.6.2:
         resolution: { integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q== }
 
-    /tsx@3.12.8:
-        resolution: { integrity: sha512-Lt9KYaRGF023tlLInPj8rgHwsZU8qWLBj4iRXNWxTfjIkU7canGL806AqKear1j722plHuiYNcL2ZCo6uS9UJA== }
+    /tsx@3.12.10:
+        resolution: { integrity: sha512-2+46h4xvUt1aLDNvk5YBT8Uzw+b7BolGbn7iSMucYqCXZiDc+1IMghLVdw8kKjING32JFOeO+Am9posvjkeclA== }
         hasBin: true
         dependencies:
             '@esbuild-kit/cjs-loader': 2.4.2
             '@esbuild-kit/core-utils': 3.3.0
-            '@esbuild-kit/esm-loader': 2.5.5
+            '@esbuild-kit/esm-loader': 2.6.3
         optionalDependencies:
             fsevents: 2.3.3
         dev: false
@@ -9115,8 +9105,8 @@ packages:
             which-typed-array: 1.1.11
         dev: false
 
-    /uuid@9.0.0:
-        resolution: { integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg== }
+    /uuid@9.0.1:
+        resolution: { integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA== }
         hasBin: true
         dev: true
 
@@ -9241,13 +9231,13 @@ packages:
             - terser
         dev: false
 
-    /vite-plugin-vue-devtools@1.0.0-rc.3(pug@3.0.2)(vite@4.4.9):
-        resolution: { integrity: sha512-Fw2b9DsU8E/D3pNjxXwHzfdCKCuTJA7m1y4qZOeNN5DTgkiBC7bDMX1aGDG7/Y7TaoYs3vvAoK1xZKm+OIvh1w== }
+    /vite-plugin-vue-devtools@1.0.0-rc.4(pug@3.0.2)(vite@4.4.9):
+        resolution: { integrity: sha512-9u41T95ZxXr1qxeoaxUsR2bHGMQNitvmU22ZX6nhsTG6loqmeMSRYGLQR3zZ4AsG0jJAvg1q8BzemUmoAaBGZA== }
         engines: { node: '>=v14.21.3' }
         peerDependencies:
             vite: ^3.1.0 || ^4.0.0-0
         dependencies:
-            '@vite-plugin-vue-devtools/core': 1.0.0-rc.3(vite@4.4.9)
+            '@vite-plugin-vue-devtools/core': 1.0.0-rc.4(vite@4.4.9)
             '@webfansplz/vuedoc-parser': 0.0.4(pug@3.0.2)
             birpc: 0.2.14
             execa: 8.0.1
@@ -9354,12 +9344,12 @@ packages:
             fsevents: 2.3.3
         dev: false
 
-    /vitepress@1.0.0-rc.10(@algolia/client-search@4.19.1)(@types/node@20.4.7)(search-insights@2.8.2):
-        resolution: { integrity: sha512-+MsahIWqq5WUEmj6MR4obcKYbT7im07jZPCQPdNJExkeOSbOAJ4xypSLx88x7rvtzWHhHc5aXbOhCRvGEGjFrw== }
+    /vitepress@1.0.0-rc.13(@algolia/client-search@4.20.0)(@types/node@20.4.7)(search-insights@2.8.2):
+        resolution: { integrity: sha512-TnVydQOZE38rtXu9gHCb7EGdN03jTcmYkDdhCqox6+pfKYgiyfm1qk2Uy8BZatnM9wXpa64f+T5p30R8P/9Z+A== }
         hasBin: true
         dependencies:
             '@docsearch/css': 3.5.2
-            '@docsearch/js': 3.5.2(@algolia/client-search@4.19.1)(search-insights@2.8.2)
+            '@docsearch/js': 3.5.2(@algolia/client-search@4.20.0)(search-insights@2.8.2)
             '@vue/devtools-api': 6.5.0
             '@vueuse/core': 10.4.1(vue@3.3.4)
             '@vueuse/integrations': 10.4.1(focus-trap@7.5.2)(vue@3.3.4)
@@ -9429,7 +9419,7 @@ packages:
             local-pkg: 0.4.3
             source-map: 0.6.1
             strip-literal: 1.3.0
-            tinybench: 2.5.0
+            tinybench: 2.5.1
             tinypool: 0.3.1
             tinyspy: 1.1.1
             vite: 4.4.9(@types/node@20.6.0)
@@ -9470,15 +9460,14 @@ packages:
         dependencies:
             vue: 3.3.4
 
-    /vue-i18n@9.3.0(vue@3.3.4):
-        resolution: { integrity: sha512-+2L+ae/e4+fixhjym3lgzGCGQG8wVGlGrDHzjfdgUudheHvbVHu5i6tn6FF+buH75UFA7T5ZO2ZO7zrh6CzuaA== }
+    /vue-i18n@9.4.0(vue@3.3.4):
+        resolution: { integrity: sha512-701V7wv6m/Fesbu58rRJv9Rd3en/9F7Nxyn/NiwcR7bJkEfwflMJg5wVezkeHy1tIqjXME1e1zbHhK1dNaR8mg== }
         engines: { node: '>= 16' }
         peerDependencies:
             vue: ^3.0.0
         dependencies:
-            '@intlify/core-base': 9.3.0
-            '@intlify/shared': 9.3.0
-            '@intlify/vue-devtools': 9.3.0
+            '@intlify/core-base': 9.4.0
+            '@intlify/shared': 9.4.0
             '@vue/devtools-api': 6.5.0
             vue: 3.3.4
         dev: false

@@ -33,7 +33,7 @@
         "date-fns": "^2.30.0",
         "lodash-es": "^4.17.21",
         "merge-anything": "^5.1.7",
-        "nanoid": "^4.0.2",
+        "nanoid": "^5.0.1",
         "pako": "^2.1.0"
     },
     "gitHead": "a1b28f5981b48da36b99dfb9300d670b2c3c5b94"
