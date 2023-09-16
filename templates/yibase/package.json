@@ -1,7 +1,7 @@
 {
     "name": "@yicode-template/yibase",
     "private": false,
-    "version": "1.7.35",
+    "version": "1.7.36",
     "type": "module",
     "publishConfig": {
         "access": "public"
