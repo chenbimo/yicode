@@ -28,11 +28,11 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "dependencies": {
         "cli-table3": "^0.6.3",
-        "dayjs": "^1.11.9",
+        "dayjs": "^1.11.10",
         "inquirer": "^9.2.11",
         "lodash-es": "^4.17.21",
         "ora": "^7.0.1",
-        "simple-git": "^3.19.1"
+        "simple-git": "^3.20.0"
     },
     "gitHead": "a1b28f5981b48da36b99dfb9300d670b2c3c5b94"
 }

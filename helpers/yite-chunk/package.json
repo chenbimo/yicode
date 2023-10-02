@@ -29,7 +29,7 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "dependencies": {
         "es-module-lexer": "^1.3.1",
-        "magic-string": "^0.30.3"
+        "magic-string": "^0.30.4"
     },
     "type": "module",
     "gitHead": "a1b28f5981b48da36b99dfb9300d670b2c3c5b94"
