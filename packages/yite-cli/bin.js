@@ -8,7 +8,7 @@ import logSymbols from 'log-symbols';
 import { appDir, cliDir, srcDir } from './config.js';
 import { fnFileProtocolPath, fnGetEnvNames, sysConfig } from './utils.js';
 
-// 命令行参数
+// 命令行参数2
 const options = minimist(process.argv.slice(2));
 const docSite = `${colors.green('[ 使用文档请访问网址 ]')} ${colors.white('https://yicode.tech')}`;
 
