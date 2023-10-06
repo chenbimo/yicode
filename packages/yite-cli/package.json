@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yite-cli",
-    "version": "1.34.0",
+    "version": "1.34.1",
     "description": "专注于vite + vue3 的项目开发脚手架",
     "main": "./index.js",
     "exports": {
@@ -140,7 +140,7 @@
         "@unocss/transformer-variant-group": "^0.56.5",
         "@vitejs/plugin-vue": "^4.4.0",
         "@vue-macros/reactivity-transform": "^0.3.23",
-        "@yicode/yidash": "^3.6.0",
+        "@yicode/yidash": "^3.6.1",
         "colorette": "^2.0.20",
         "copy-anything": "^3.0.5",
         "fast-glob": "^3.3.1",
