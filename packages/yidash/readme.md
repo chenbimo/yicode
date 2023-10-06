@@ -1,6 +1,6 @@
 ### yidash（易大师）
 
-> 基于 lodash 函数库扩展的实用业务方法库
+> 实用方法库
 
 ![logo](https://static.chensuiyi.com/images/yidash-logo.png)
 
@@ -19,8 +19,7 @@ npm install @yicode/yidash
 ### import 方式
 
 ```javascript
-import { math_Plus, tree_Array2Tree, regexp_TrainNumber, number_ValidNumber } from '@yicode/yidash';
-console.dir(math_Plus(3, 4));
+import { tree_Array2Tree, regexp_TrainNumber, number_ValidNumber } from '@yicode/yidash';
 console.dir(
     tree_Array2Tree([
         { id: 1, pid: 0 },
@@ -42,8 +41,7 @@ console.log(validNumber('1.2.')); // 1.20
 ### require 方式
 
 ```javascript
-const { math_Plus, tree_Array2Tree, regexp_TrainNumber, number_ValidNumber } = require('@yicode/yidash');
-console.dir(math_Plus(3, 4));
+const { tree_Array2Tree, regexp_TrainNumber, number_ValidNumber } = require('@yicode/yidash');
 console.dir(
     tree_Array2Tree([
         { id: 1, pid: 0 },
@@ -75,4 +73,4 @@ console.log(validNumber('1.2.')); // 1.20
 
 > [github https://github.com/chenbimo/yicode](https://github.com/chenbimo/yicode)
 
-> [gitee https://gitee.com/yicode-team/yicode](https://gitee.com/banshiweichen/yicode)
+> [gitee https://gitee.com/yicode-team/yicode](https://gitee.com/yicode-team/yicode)

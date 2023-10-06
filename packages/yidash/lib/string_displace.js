@@ -7,7 +7,7 @@
  * @param {String} placeholder 占位符
  * @returns String 返回置换后的字符串
  */
-export function yidash_string_displace(strs = '', start = 0, end = 0, placeholder = '*') {
+export function string_displace(strs = '', start = 0, end = 0, placeholder = '*') {
     let strArray = strs.split('');
     let startStrs = strArray.slice(0, start).join('');
     let endStrs = strArray.slice(end, 0).join('');

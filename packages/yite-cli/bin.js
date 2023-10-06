@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { minimist } from '@yicode-other/minimist';
+import { minimist } from './libs/minimist.js';
 import * as colors from 'colorette';
 import path from 'path';
 import fs from 'fs-extra';

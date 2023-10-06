@@ -9,7 +9,7 @@ import { keyBy } from 'lodash-es';
  * @returns {Array} 返回一个无限级数组结构
  * @summary 应用场景：用于生成无限级菜单结构
  */
-export function yidash_tree_array2Tree(arrs, id = 'id', pid = 'pid', children = 'children', forceChildren = true) {
+export function tree_array2Tree(arrs, id = 'id', pid = 'pid', children = 'children', forceChildren = true) {
     // id 对象，用于通过映射 ID 取得对应的对象数据
     let idObject = keyBy(arrs, id);
 

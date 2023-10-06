@@ -6,7 +6,7 @@
  * @returns {Number} 如果数字有效，则返回当前值，否则返回上一个有效值
  * @summary 应用场景：强制输入框必须输入有效值，如果值无效，则显示上一步的值
  */
-export function yidash_number_validNumber(number, symbol = '-0+', decimalPlaces = 2) {
+export function number_validNumber(number, symbol = '-0+', decimalPlaces = 2) {
     // 最后一个数字
     let lastNumber = '';
     return function (number) {

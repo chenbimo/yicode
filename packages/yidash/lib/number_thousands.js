@@ -41,7 +41,7 @@ function format(number, separator) {
  * @param {boolean} [options.formatFourDigits=true]
  * @returns {string}
  */
-export function yidash_number_thousands(number, options) {
+export function number_thousands(number, options) {
     let result = '';
     let separator = ',';
     let formatFourDigits = true;

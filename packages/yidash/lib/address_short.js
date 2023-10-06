@@ -1,7 +1,7 @@
 /**
  * 地址转换为短地址形式
  */
-export function yidash_address_short(address) {
+export function address_short(address) {
     let addressSplit = address.split('');
     let result = [
         //

@@ -2,7 +2,7 @@
  * 计算剩余时间
  * @param {Integer} second 剩余时间秒数
  */
-export function yidash_datetime_leftTime(seconds) {
+export function datetime_leftTime(seconds) {
     let absTime = Math.abs(seconds);
     let parsed = {
         years: 0,

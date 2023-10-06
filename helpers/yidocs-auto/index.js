@@ -9,7 +9,7 @@ import { sortBy, orderBy, cloneDeep } from 'lodash-es';
  * @returns {Array} 返回一个无限级数组结构
  * @summary 应用场景：用于生成无限级菜单结构
  */
-function yidash_tree_array2Tree(arrs, id = 'id', pid = 'pid', children = 'children') {
+function tree_array2Tree(arrs, id = 'id', pid = 'pid', children = 'children') {
     // id 对象，用于通过映射 ID 取得对应的对象数据
     let idObject = {};
     arrs.forEach((item) => {
@@ -77,7 +77,7 @@ function autoSideBar(dirPath) {
         });
     });
 
-    let treeSideBar = orderBy(yidash_tree_array2Tree(Object.values(obj), 'id', 'pid', 'items'), (item) => {
+    let treeSideBar = orderBy(tree_array2Tree(Object.values(obj), 'id', 'pid', 'items'), (item) => {
         return Number(item.id.split('-')[0]);
     });
     treeSideBar.forEach((item) => {

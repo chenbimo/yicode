@@ -18,11 +18,11 @@ import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { defineConfig as defineUnocssConfig } from 'unocss';
 import Markdown from 'vite-plugin-md';
-import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
+// import { chunkSplitPlugin as ChunkSplit } from '@yicode-helper/yite-chunk';
 // import { yiteQrcode as YiteQrcode } from '@yicode-helper/yite-qrcode';
-import { yiteHtml as YiteHtml } from '@yicode-helper/yite-html';
-import { yiteRouter as YiteRouter } from '@yicode-helper/yite-router';
-import { yiteI18n as YiteI18n } from '@yicode-helper/yite-i18n';
+import { yiteHtml as YiteHtml } from './plugins/html.js';
+import { yiteRouter as YiteRouter } from './plugins/router.js';
+import { yiteI18n as YiteI18n } from './plugins/i18n.js';
 import { yidashLibNames } from '@yicode/yidash/yidashLibNames.js';
 
 import { cliDir, appDir, srcDir, yicodeDir, cacheDir } from './config.js';
@@ -40,14 +40,14 @@ export default defineConfig(async ({ command, mode }) => {
     let findPort = await portfinder.getPortPromise({ port: 8000, stopPort: 9000 });
 
     // 每个项目依赖包进行分割
-    let splitDependencies = {};
-    let includeDeps = [];
-    for (let prop in pkg.dependencies) {
-        if (pkg.dependencies.hasOwnProperty(prop)) {
-            splitDependencies[prop] = [prop];
-            includeDeps.push(prop);
-        }
-    }
+    // let splitDependencies = {};
+    // let includeDeps = [];
+    // for (let prop in pkg.dependencies) {
+    //     if (pkg.dependencies.hasOwnProperty(prop)) {
+    //         splitDependencies[prop] = [prop];
+    //         includeDeps.push(prop);
+    //     }
+    // }
 
     // vue 插件
     let viteVueConfig = {
@@ -126,16 +126,16 @@ export default defineConfig(async ({ command, mode }) => {
     };
 
     // 代码分割
-    let chunkSplitConfig = {
-        strategy: 'default',
-        // customChunk: (args) => {
-        //     if (args.file.endsWith('.png')) {
-        //         return 'png';
-        //     }
-        //     return null;
-        // },
-        customSplitting: Object.assign(splitDependencies, yiteConfig?.chunkSplit || {})
-    };
+    // let chunkSplitConfig = {
+    // strategy: 'default',
+    // customChunk: (args) => {
+    //     if (args.file.endsWith('.png')) {
+    //         return 'png';
+    //     }
+    //     return null;
+    // },
+    // customSplitting: Object.assign(splitDependencies, yiteConfig?.chunkSplit || {})
+    // };
 
     // zip 压缩
     // let zipPlugin = {
@@ -206,7 +206,7 @@ export default defineConfig(async ({ command, mode }) => {
 
     allPlugins.push(Components(componentsConfig));
     allPlugins.push(AutoImport(autoImportConfig));
-    allPlugins.push(ChunkSplit(chunkSplitConfig));
+    // allPlugins.push(ChunkSplit(chunkSplitConfig));
     // 默认不使用二维码，多个网卡情况下会很乱
     // allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
