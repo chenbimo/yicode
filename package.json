@@ -30,7 +30,7 @@
         "@commitlint/cli": "^17.7.2",
         "@yicode-helper/commitlint": "workspace:^",
         "@yicode-tool/monolage": "workspace:*",
-        "lerna": "^7.3.0",
+        "lerna": "^7.3.1",
         "lint-staged": "^14.0.1",
         "prettier": "^3.0.3",
         "rollup": "^4.0.2",
