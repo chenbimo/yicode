@@ -24,11 +24,11 @@
         "readme.md"
     ],
     "dependencies": {
-        "@arco-design/web-vue": "^2.52.0",
+        "@arco-design/web-vue": "^2.52.1",
         "@yicode/yidash": "workspace:^",
         "axios": "^1.5.1",
         "lodash-es": "^4.17.21",
-        "pinia": "^2.1.6",
+        "pinia": "^2.1.7",
         "sass": "^1.69.3",
         "store2": "^2.14.2",
         "vue": "^3.3.4",
@@ -37,7 +37,7 @@
     },
     "devDependencies": {
         "@yicode/yite-cli": "workspace:^",
-        "lint-staged": "^14.0.1",
+        "lint-staged": "^15.0.1",
         "prettier": "^3.0.3",
         "simple-git-hooks": "^2.9.0"
     },
