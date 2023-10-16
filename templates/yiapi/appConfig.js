@@ -1,6 +1,7 @@
 import { tableConfig } from './config/table.js';
 import { customConfig } from './config/custom.js';
 import { cronConfig } from './config/cron.js';
+import { menuConfig } from './config/menu.js';
 
 // 默认配置
 let appConfig = {
@@ -52,7 +53,8 @@ let appConfig = {
         username: process.env.YIAPI_REDIS_USER,
         password: process.env.YIAPI_REDIS_PASS,
         db: Number(process.env.YIAPI_REDIS_DB),
-        keyPrefix: process.env.YIAPI_REDIS_PREFIX
+        keyPrefix: process.env.YIAPI_REDIS_PREFIX,
+        ex: process.env.YIAPI_REDIS_EX
     },
     // jwt配置
     jwt: {
@@ -82,6 +84,8 @@ let appConfig = {
     cron: cronConfig,
     // 扩展表
     table: tableConfig,
+    // 菜单配置
+    menu: menuConfig,
     // 自定义字段
     custom: customConfig
 };
