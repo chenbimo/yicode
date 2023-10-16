@@ -1,0 +1,41 @@
+{
+    "name": "邮件日志",
+    "fields": {
+        "login_email": {
+            "type": "string",
+            "comment": "登录邮箱",
+            "length": 50,
+            "default": ""
+        },
+        "from_name": {
+            "type": "string",
+            "comment": "发送者昵称",
+            "length": 50,
+            "default": ""
+        },
+        "from_email": {
+            "type": "string",
+            "comment": "发送者邮箱",
+            "length": 50,
+            "default": ""
+        },
+        "to_email": {
+            "type": "string",
+            "comment": "接收者邮箱",
+            "length": 5000,
+            "default": ""
+        },
+        "email_type": {
+            "type": "string",
+            "comment": "邮件类型",
+            "length": 20,
+            "default": "common"
+        },
+        "text_content": {
+            "type": "string",
+            "comment": "发送内容",
+            "length": 10000,
+            "default": ""
+        }
+    }
+}

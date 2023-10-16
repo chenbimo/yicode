@@ -1,0 +1,29 @@
+{
+    "name": "系统字典分类表",
+    "fields": {
+        "code": {
+            "type": "string",
+            "comment": "字典分类编码",
+            "length": 50,
+            "default": "",
+            "index": true
+        },
+        "name": {
+            "type": "string",
+            "comment": "字典分类名称",
+            "length": 100,
+            "default": ""
+        },
+        "sort": {
+            "type": "bigInteger",
+            "comment": "字典分类排序",
+            "default": 0
+        },
+        "describe": {
+            "type": "string",
+            "comment": "描述",
+            "length": 500,
+            "default": ""
+        }
+    }
+}
