@@ -43,7 +43,7 @@
         "bull": "^4.11.4",
         "colorette": "^2.0.20",
         "copy-anything": "^3.0.5",
-        "croner": "^7.0.2",
+        "croner": "^7.0.3",
         "date-fns": "^2.30.0",
         "fast-glob": "^3.3.1",
         "fastify": "^4.24.2",

@@ -151,7 +151,6 @@
         "merge-anything": "^5.1.7",
         "pacote": "^17.0.4",
         "portfinder": "^1.0.32",
-        "rollup-plugin-visualizer": "^5.9.2",
         "tiny-cookie": "^2.4.1",
         "unocss": "^0.56.5",
         "unplugin-auto-import": "^0.16.6",

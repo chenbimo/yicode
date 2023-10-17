@@ -4,7 +4,7 @@ import viteVue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
-import { visualizer as Visualizer } from 'rollup-plugin-visualizer';
+// import { visualizer as Visualizer } from 'rollup-plugin-visualizer';
 
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import fs from 'fs-extra';
@@ -146,11 +146,11 @@ export default defineConfig(async ({ command, mode }) => {
     // };
 
     // 可视化报告
-    let visualizerConfig = {
-        open: false,
-        brotliSize: true,
-        filename: '.cache/buildReport.html'
-    };
+    // let visualizerConfig = {
+    //     open: false,
+    //     brotliSize: true,
+    //     filename: '.cache/buildReport.html'
+    // };
 
     // 打包入口配置
     let yiteHtmlConfig = {};
@@ -210,7 +210,7 @@ export default defineConfig(async ({ command, mode }) => {
     // 默认不使用二维码，多个网卡情况下会很乱
     // allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
-    allPlugins.push(Visualizer(visualizerConfig));
+    // allPlugins.push(Visualizer(visualizerConfig));
     allPlugins.push(viteVue(viteVueConfig));
 
     let viteConfig = mergeAndConcat(
