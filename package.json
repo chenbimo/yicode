@@ -43,7 +43,7 @@
     },
     "lint-staged": {
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write",
-        "!(*-lock.yaml)": "prettier --write"
+        "!(*-lock.*)": "prettier --write"
     },
     "commitlint": {
         "extends": [
