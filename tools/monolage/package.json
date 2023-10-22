@@ -1,6 +1,6 @@
 {
     "name": "@yicode/monolage",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "monorepo 多仓库 package.json 字段检测与补全工具",
     "type": "module",
     "scripts": {
