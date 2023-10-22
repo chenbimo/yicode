@@ -1,7 +1,7 @@
 {
-    "name": "@yicode-helper/commitlint",
+    "name": "@yicode/commitlint",
     "version": "1.0.1",
-    "description": "git提交信息校验",
+    "description": "git 提交信息校验",
     "type": "commonjs",
     "main": "index.js",
     "private": false,

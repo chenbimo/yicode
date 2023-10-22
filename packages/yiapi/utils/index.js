@@ -9,7 +9,6 @@ import md5 from 'blueimp-md5';
 import got from 'got';
 import { customAlphabet } from 'nanoid';
 import { copy as copyAny } from 'copy-anything';
-import { luhn } from '@yicode-helper/luhn';
 import logSymbols from 'log-symbols';
 import * as color from 'colorette';
 import {
@@ -80,11 +79,28 @@ export function fnCloneAny(data) {
     return result;
 }
 
+// 信用卡验证算法
+export const fnLuhn = (str) => {
+    const ord = 48;
+    const textEncoder = new TextEncoder();
+    const bytes = textEncoder.encode(String(str));
+    let ptr = bytes.length - 1;
+    let sum = 0;
+    let mul = 2;
+    while (ptr >= 0) {
+        let val = bytes[ptr--] - ord;
+        val *= mul;
+        sum += ((val % 10) + val / 10) | 0;
+        mul = 1 + (mul % 2);
+    }
+    return (10 - (sum % 10)) % 10;
+};
+
 // 创建顺序自增唯一ID
 export function fnIncrUID() {
     let timestamp = Math.floor(Date.now() / 1000);
     let random = crypto.randomInt(10000, 99999);
-    let check = luhn(`${timestamp}${random}`);
+    let check = fnLuhn(`${timestamp}${random}`);
     return `${timestamp}${random}${check}`;
 }
 

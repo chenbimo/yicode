@@ -32,18 +32,6 @@
 -   降低项目管理难度
 -   减少项目维护麻烦
 
-## 开源项目类型
-
--   packages (独立的功能 `8个`)
--   templates (生态项目模板 `6个`)
--   projects (完整的项目 `1个`)
--   helpers (辅助帮助插件 `8个`)
--   vscodes (vscode 插件项目 `2个`)
--   desktops (桌面类项目 `1个`)
--   tools (工具类项目 `3个`)
--   others (其他类项目 `2个`)
--   browsers (浏览器类项目 `1个`)
-
 ## 谁开发的？
 
 [随易科技官网 https://yicode.tech](https://yicode.tech)
@@ -57,27 +45,20 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 主要开源项目
 
 -   **@yicode/yite-cli**（基于 `vite` 进行深度封装的 `vue3` 项目开发脚手架）
--   **@yicode/yiapi**（基于 `fastify` 进行深度封装的 `nodejs` 项目接口开发框架-内部使用，不对外）
+-   **@yicode/yiapi**（基于 `fastify` 进行深度封装的 `nodejs` 项目接口开发框架 - 内部使用，不对外）
+-   **@yicode/yidash**（类 `lodash` 的业务方法库）
+-   **@yicode/yiscss** （`scss` 中的 `lodash`）
 -   **@yicode/dlnpm**（`yicode` 软件生态下载工具）
 -   **@yicode/commander**（`commander v10` 汉化，更符合国人使用）
--   **@yicode/yidash**（类 `lodash` 的业务方法库）
-
-辅助开源项目
-
--   **@yicode-helper/yidocs-auto**（`vitepress` 侧边栏和导航栏自动生成工具，避免手动配置）
--   **@yicode-helper/yite-html**（给基于 `vite` 项目开发提供不同环境下的入口文件）
--   **@yicode-helper/yite-qrcode**（开发时显示手机调试二维码，避免手动输入地址）
--   **@yicode-helper/yite-router**（简单、粗暴、方便的路由自动化方案）
--   **@yicode-helper/yite-i18n**（轻量级国际化语言数据生成插件）
--   **@yicode-helper/yite-chunk**（代码自动分割方案）
+-   **@yicode/yidocs-auto**（`vitepress` 侧边栏和导航栏自动生成工具，避免手动配置）
 
 模板开源项目
 
--   **@yicode-template/base-vue3**（基本且完整的 `vue3` 项目开发模板）
--   **@yicode-template/yidocs**（具备自动化侧边栏和导航栏的 `vitepress` 文档项目模板）
--   **@yicode-template/uni-vue3**（具备最新的依赖和项目组织的`uniapp vue3`项目模板）
--   **@yicode-template/admin-vue3**（`arco-design + vue3` 研发的后台管理模板）
--   **@yicode-template/yiapi-free**（`yiapi` 接口开发项目模板）
+-   **@yicode/base-template**（基本且完整的 `vue3` 项目开发模板）
+-   **@yicode/yidocs-template**（具备自动化侧边栏和导航栏的 `vitepress` 文档项目模板）
+-   **@yicode/uniapp-template**（具备最新的依赖和项目组织的`uniapp vue3`项目模板）
+-   **@yicode/admin-template**（`arco-design + vue3` 研发的后台管理模板）
+-   **@yicode/yiapi-template**（`yiapi` 接口开发项目模板）
 
 ## 代码贡献
 

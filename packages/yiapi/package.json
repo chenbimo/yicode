@@ -35,8 +35,6 @@
         "@fastify/static": "^6.11.2",
         "@fastify/swagger": "^8.12.0",
         "@fastify/swagger-ui": "^1.10.1",
-        "@yicode-helper/luhn": "workspace:^",
-        "@yicode-helper/yiapi-env": "workspace:^",
         "ajv": "^8.12.0",
         "ajv-i18n": "^4.2.0",
         "blueimp-md5": "^2.19.0",

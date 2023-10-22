@@ -1,3 +1,3 @@
-# @yicode-helper/commitlint
+# @yicode/commitlint-helper
 
-yicode生态专用git提交信息格式验证工具
+yicode 生态专用 git 提交信息格式验证工具
