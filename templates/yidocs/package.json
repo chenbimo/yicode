@@ -4,6 +4,9 @@
     "description": "yidocs 项目模板",
     "main": "index.js",
     "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "type": "module",
     "scripts": {
         "dev": "vitepress dev",
@@ -13,6 +16,7 @@
     "author": "陈随易 <bimostyle@qq.com>",
     "license": "ISC",
     "dependencies": {
-        "@yicode/yidocs-auto": "workspace:*"
-    }
+        "@yicode/yidocs-auto": "1.3.23"
+    },
+    "gitHead": "918faeaa60a57127bf4e85d3c72497f92b1936eb"
 }
