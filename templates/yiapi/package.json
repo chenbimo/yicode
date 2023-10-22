@@ -26,9 +26,9 @@
         "url": "https://github.com/yicode-team/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "workspace:*",
+        "@yicode/yiapi": "3.6.0",
         "cross-env": "^7.0.3",
         "lodash-es": "^4.17.21"
     },
-    "gitHead": "42d2fb47ac7454ab3af9cc241778421104b6ad8f"
+    "gitHead": "435fb5641aec7b86473f527f2b64fc99930e81d9"
 }

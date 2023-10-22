@@ -1,9 +1,9 @@
 {
     "name": "@yicode/yidocs-template",
     "version": "1.0.8",
-    "description": "yidocs",
+    "description": "yidocs 项目模板",
     "main": "index.js",
-    "private": true,
+    "private": false,
     "type": "module",
     "scripts": {
         "dev": "vitepress dev",
