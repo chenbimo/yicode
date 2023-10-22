@@ -17,8 +17,8 @@ importers:
                 specifier: workspace:*
                 version: link:tools/monolage
             lerna:
-                specifier: ^7.4.1
-                version: 7.4.1
+                specifier: ^7.4.0
+                version: 7.4.0
             lint-staged:
                 specifier: ^15.0.2
                 version: 15.0.2
@@ -2608,20 +2608,20 @@ packages:
         resolution: { integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw== }
         dev: false
 
-    /@lerna/child-process@7.4.1:
-        resolution: { integrity: sha512-Bx1cRCZcVcWoz+atDQc4CSVzGuEgGJPOpIAXjQbBEA2cX5nqIBWdbye8eHu31En/F03aH9BhpNEJghs6wy4iTg== }
+    /@lerna/child-process@7.4.0:
+        resolution: { integrity: sha512-KhocFx7HI04N2tUdKv/kJDy627m9TzIDrtudRTMTFVS8vKzGtxpfjgWZAnJ20hwQqe/MvvfrOhHsvDBrcBEW/g== }
         engines: { node: '>=16.0.0' }
         dependencies:
-            chalk: 4.1.0
-            execa: 5.0.0
+            chalk: 4.1.2
+            execa: 5.1.1
             strong-log-transformer: 2.1.0
         dev: true
 
-    /@lerna/create@7.4.1(typescript@5.2.2):
-        resolution: { integrity: sha512-zPO9GyWceRimtMD+j+aQ8xJgNPYn/Q/SzHf4wYN+4Rj5nrFKMyX+Et7FbWgUNpj0dRgyCCKBDYmTB7xQVVq4gQ== }
+    /@lerna/create@7.4.0(typescript@5.2.2):
+        resolution: { integrity: sha512-VmuJCS/cC2itJjpMNNBWBl1YRfYNBjo6BR4+KVdDYPO2/WT+CWqv5gWGrm0bU5/djwGJ2BN96STzHnWegACK0A== }
         engines: { node: '>=16.0.0' }
         dependencies:
-            '@lerna/child-process': 7.4.1
+            '@lerna/child-process': 7.4.0
             '@npmcli/run-script': 6.0.2
             '@nx/devkit': 16.10.0(nx@16.10.0)
             '@octokit/plugin-enterprise-rest': 6.0.1
@@ -2980,7 +2980,6 @@ packages:
         engines: { node: '>= 10' }
         cpu: [arm64]
         os: [linux]
-        libc: [glibc]
         requiresBuild: true
         dev: true
         optional: true
@@ -2990,7 +2989,6 @@ packages:
         engines: { node: '>= 10' }
         cpu: [arm64]
         os: [linux]
-        libc: [musl]
         requiresBuild: true
         dev: true
         optional: true
@@ -3000,7 +2998,6 @@ packages:
         engines: { node: '>= 10' }
         cpu: [x64]
         os: [linux]
-        libc: [glibc]
         requiresBuild: true
         dev: true
         optional: true
@@ -3010,7 +3007,6 @@ packages:
         engines: { node: '>= 10' }
         cpu: [x64]
         os: [linux]
-        libc: [musl]
         requiresBuild: true
         dev: true
         optional: true
@@ -3127,7 +3123,7 @@ packages:
             '@octokit/request-error': 3.0.3
             '@octokit/types': 9.3.2
             is-plain-object: 5.0.0
-            node-fetch: 2.6.7
+            node-fetch: 2.7.0
             universal-user-agent: 6.0.0
         transitivePeerDependencies:
             - encoding
@@ -5370,9 +5366,9 @@ packages:
         engines: { node: '>=10' }
         dependencies:
             cross-spawn: 7.0.3
-            get-stream: 6.0.0
+            get-stream: 6.0.1
             human-signals: 2.1.0
-            is-stream: 2.0.0
+            is-stream: 2.0.1
             merge-stream: 2.0.0
             npm-run-path: 4.0.1
             onetime: 5.1.2
@@ -5889,7 +5885,7 @@ packages:
             fs.realpath: 1.0.0
             inflight: 1.0.6
             inherits: 2.0.4
-            minimatch: 3.0.5
+            minimatch: 3.1.2
             once: 1.4.0
             path-is-absolute: 1.0.1
         dev: true
@@ -6594,7 +6590,7 @@ packages:
         hasBin: true
         dependencies:
             async: 3.2.4
-            chalk: 4.1.0
+            chalk: 4.1.2
             filelist: 1.0.4
             minimatch: 3.1.2
         dev: true
@@ -6603,7 +6599,7 @@ packages:
         resolution: { integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw== }
         engines: { node: ^14.15.0 || ^16.10.0 || >=18.0.0 }
         dependencies:
-            chalk: 4.1.0
+            chalk: 4.1.2
             diff-sequences: 29.6.3
             jest-get-type: 29.6.3
             pretty-format: 29.7.0
@@ -6797,13 +6793,13 @@ packages:
         resolution: { integrity: sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A== }
         dev: false
 
-    /lerna@7.4.1:
-        resolution: { integrity: sha512-c6sOO0dlJU689vStIsko+zjRdn2fJOWH8aNjePLNv2AubAdABKqfrDCpE2H/Q7+O80Duo68ZQtWYkUUk7hRWDw== }
+    /lerna@7.4.0:
+        resolution: { integrity: sha512-Dp5js6R7mygy3Ncxc/1HxDd5EgiE7mFqZbCAYKm6FzeOn/GLcqyOPJHLsck6PlSu/uvqUh1lZO4wGaJJQAcW2Q== }
         engines: { node: '>=16.0.0' }
         hasBin: true
         dependencies:
-            '@lerna/child-process': 7.4.1
-            '@lerna/create': 7.4.1(typescript@5.2.2)
+            '@lerna/child-process': 7.4.0
+            '@lerna/create': 7.4.0(typescript@5.2.2)
             '@npmcli/run-script': 6.0.2
             '@nx/devkit': 16.10.0(nx@16.10.0)
             '@octokit/plugin-enterprise-rest': 6.0.1
@@ -7548,7 +7544,7 @@ packages:
             array-differ: 3.0.0
             array-union: 2.1.0
             arrify: 2.0.1
-            minimatch: 3.0.5
+            minimatch: 3.1.2
         dev: true
 
     /mute-stream@0.0.8:
@@ -7649,7 +7645,6 @@ packages:
                 optional: true
         dependencies:
             whatwg-url: 5.0.0
-        dev: false
 
     /node-gyp-build-optional-packages@5.0.7:
         resolution: { integrity: sha512-YlCCc6Wffkx0kHkmam79GKvDQ6x+QZkMjFGrIMxgFNILFvGSbCp2fCBC55pGTT9gVaz8Na5CLmxt/urtzRv36w== }
@@ -7925,7 +7920,7 @@ packages:
             '@yarnpkg/parsers': 3.0.0-rc.46
             '@zkochan/js-yaml': 0.0.6
             axios: 1.5.1
-            chalk: 4.1.0
+            chalk: 4.1.2
             cli-cursor: 3.1.0
             cli-spinners: 2.6.1
             cliui: 8.0.1
@@ -8198,7 +8193,7 @@ packages:
             read-package-json-fast: 3.0.2
             sigstore: 1.9.0
             ssri: 10.0.5
-            tar: 6.1.11
+            tar: 6.2.0
         transitivePeerDependencies:
             - bluebird
             - supports-color
