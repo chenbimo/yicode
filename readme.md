@@ -49,7 +49,6 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 -   **@yicode/yidash**（类 `lodash` 的业务方法库）
 -   **@yicode/yiscss** （`scss` 中的 `lodash`）
 -   **@yicode/dlnpm**（`yicode` 软件生态下载工具）
--   **@yicode/commander**（`commander v10` 汉化，更符合国人使用）
 -   **@yicode/yidocs-auto**（`vitepress` 侧边栏和导航栏自动生成工具，避免手动配置）
 
 模板开源项目
