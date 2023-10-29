@@ -33,7 +33,7 @@
         "lerna": "^7.4.1",
         "lint-staged": "^15.0.2",
         "prettier": "^3.0.3",
-        "rollup": "^4.1.4",
+        "rollup": "^4.1.5",
         "simple-git-hooks": "^2.9.0",
         "vite": "^4.5.0"
     },
