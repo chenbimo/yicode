@@ -39,7 +39,7 @@
         "@iconify-json/academicons": "^1.1.11",
         "@iconify-json/akar-icons": "^1.1.20",
         "@iconify-json/ant-design": "^1.1.10",
-        "@iconify-json/arcticons": "^1.1.79",
+        "@iconify-json/arcticons": "^1.1.80",
         "@iconify-json/basil": "^1.1.2",
         "@iconify-json/bi": "^1.1.20",
         "@iconify-json/brandico": "^1.1.5",
@@ -90,12 +90,12 @@
         "@iconify-json/icon-park": "^1.1.12",
         "@iconify-json/icon-park-outline": "^1.1.12",
         "@iconify-json/icon-park-solid": "^1.1.10",
-        "@iconify-json/iconoir": "^1.1.32",
+        "@iconify-json/iconoir": "^1.1.33",
         "@iconify-json/ion": "^1.1.12",
         "@iconify-json/jam": "^1.1.5",
         "@iconify-json/line-md": "^1.1.33",
         "@iconify-json/logos": "^1.1.37",
-        "@iconify-json/lucide": "^1.1.137",
+        "@iconify-json/lucide": "^1.1.138",
         "@iconify-json/majesticons": "^1.1.8",
         "@iconify-json/maki": "^1.1.20",
         "@iconify-json/map": "^1.1.5",
@@ -159,7 +159,7 @@
         "vite": "^4.5.0",
         "vite-plugin-md": "^0.21.5",
         "vite-plugin-vue-devtools": "1.0.0-rc.5",
-        "vue-i18n": "^9.6.1"
+        "vue-i18n": "^9.6.2"
     },
     "gitHead": "918faeaa60a57127bf4e85d3c72497f92b1936eb"
 }
