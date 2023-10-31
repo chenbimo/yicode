@@ -65,5 +65,5 @@
         "winston": "^3.11.0",
         "winston-daily-rotate-file": "^4.7.1"
     },
-    "gitHead": "918faeaa60a57127bf4e85d3c72497f92b1936eb"
+    "gitHead": "a1570a925a56bf11a584a53f769fc637f3cc604d"
 }
