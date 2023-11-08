@@ -27,7 +27,7 @@
     },
     "homepage": "https://yicode.tech",
     "dependencies": {
-        "fast-glob": "^3.3.1",
+        "fast-glob": "^3.3.2",
         "lodash-es": "^4.17.21"
     },
     "gitHead": "918faeaa60a57127bf4e85d3c72497f92b1936eb"
