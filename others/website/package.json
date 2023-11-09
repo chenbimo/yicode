@@ -4,6 +4,9 @@
     "description": "随易科技官网",
     "main": "index.js",
     "private": true,
+    "publishConfig": {
+        "access": "restricted"
+    },
     "type": "module",
     "scripts": {
         "dev": "vitepress dev",
