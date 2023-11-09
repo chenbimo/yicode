@@ -4,6 +4,7 @@
     "description": "随易科技官网",
     "main": "index.js",
     "private": true,
+    "access": "restricted",
     "publishConfig": {
         "access": "restricted"
     },
