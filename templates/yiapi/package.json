@@ -12,7 +12,8 @@
         "preinstall": "npx only-allow pnpm",
         "dev": "nodemon --config=nodemon.json",
         "build": "pm2 start pm2.config.cjs",
-        "sync:db": "cross-env NODE_ENV=production node syncDatabase.js"
+        "sync:db_dev": "cross-env NODE_ENV=development node syncDatabase.js",
+        "sync:db_build": "cross-env NODE_ENV=production node syncDatabase.js"
     },
     "keywords": [
         "api",
