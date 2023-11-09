@@ -1,5 +1,3 @@
-import { keyBy } from 'lodash-es';
-
 /**
  * 一维数组生成无限级树结构
  * @param {Array} arrs - 传入的一维数组
@@ -11,7 +9,10 @@ import { keyBy } from 'lodash-es';
  */
 export function tree_array2Tree(arrs, id = 'id', pid = 'pid', children = 'children', forceChildren = true) {
     // id 对象，用于通过映射 ID 取得对应的对象数据
-    let idObject = keyBy(arrs, id);
+    let idObject = {};
+    arrs.forEach((item) => {
+        idObject[item[id]] = item;
+    });
 
     // 无限级树结构
     let treeData = [];
