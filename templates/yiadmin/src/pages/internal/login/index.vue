@@ -52,6 +52,9 @@
 </template>
 
 <script setup>
+// 外部集
+import { md5 } from 'js-md5';
+
 // 选项集
 defineOptions({
     name: 'login'
@@ -98,7 +101,7 @@ let $Method = {
                 url: '/admin/login',
                 data: {
                     account: $Data.formData.account,
-                    password: yidash_crypto_md5($Data.formData.password)
+                    password: md5($Data.formData.password)
                 }
             });
 

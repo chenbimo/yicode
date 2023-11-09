@@ -41,6 +41,7 @@ export const yiteConfig = {
                 //
                 'lodash-es',
                 'vue-i18n',
+                'js-md5',
                 'axios',
                 '@yicode/yidash',
                 'date-fns',
