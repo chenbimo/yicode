@@ -3,3 +3,4 @@ packages:
     - 'templates/*'
     - 'helpers/*'
     - 'tools/*'
+    - 'others/*'

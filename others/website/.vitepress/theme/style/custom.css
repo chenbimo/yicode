@@ -1,0 +1,30 @@
+:root {
+    /* 图标背景 */
+    --vp-home-hero-image-background-image: linear-gradient(135deg, #f6ceec 10%, #bdc1e7 100%);
+    --vp-home-hero-image-filter: blur(150px);
+    /* --vp-home-hero-name-color: #004eff;
+    --vp-button-brand-bg: #004eff;
+    --vp-button-brand-hover-bg: #004eff; */
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
+.vp-doc table tr th:first-child {
+    min-width: 120px !important;
+}
+.vp-doc table tr th:last-child {
+    width: 100% !important;
+}
+.content-container img {
+    border: 2px solid #ddd;
+    border-radius: 2px;
+}
+@media (min-width: 960px) {
+    .VPHome .VPHero .text {
+        line-height: 64px;
+        font-size: 42px !important;
+    }
+}

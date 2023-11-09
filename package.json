@@ -48,5 +48,8 @@
         "extends": [
             "@yicode/commitlint"
         ]
+    },
+    "dependencies": {
+        "vitepress": "1.0.0-rc.25"
     }
 }
