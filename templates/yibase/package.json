@@ -28,7 +28,7 @@
     "dependencies": {
         "@arco-design/web-vue": "^2.53.1",
         "@yicode/yidash": "workspace:*",
-        "axios": "^1.6.0",
+        "axios": "^1.6.1",
         "date-fns": "^2.30.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.7",
