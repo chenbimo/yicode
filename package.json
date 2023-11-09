@@ -42,8 +42,7 @@
         "pre-commit": "pnpm lint-staged"
     },
     "lint-staged": {
-        "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write",
-        "!(*-lock.*)": "prettier --write"
+        "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
     },
     "commitlint": {
         "extends": [
