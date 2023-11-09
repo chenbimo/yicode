@@ -1,6 +1,12 @@
 {
     "name": "@yicode/yiuni-template",
     "version": "0.0.1",
+    "private": false,
+    "publishConfig": {
+        "access": "public"
+    },
+    "author": "陈随易 <bimostyle@qq.com>",
+    "license": "ISC",
     "scripts": {
         "dev": "uni",
         "build": "uni build",
@@ -48,5 +54,6 @@
     },
     "lint-staged": {
         "*.{js,css,scss,less,ts,jsx,vue,html,json,md,yaml}": "prettier --write"
-    }
+    },
+    "gitHead": "8779c7f9e42ae2f89a43260be17552830962422b"
 }
