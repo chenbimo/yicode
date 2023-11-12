@@ -27,13 +27,13 @@
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
-        "@commitlint/cli": "^18.2.0",
+        "@commitlint/cli": "^18.4.1",
         "@yicode/commitlint": "workspace:*",
         "@yicode/monolage": "workspace:*",
         "lerna": "^7.4.2",
-        "lint-staged": "^15.0.2",
+        "lint-staged": "^15.1.0",
         "prettier": "^3.0.3",
-        "rollup": "^4.3.0",
+        "rollup": "^4.4.0",
         "simple-git-hooks": "^2.9.0",
         "vite": "^4.5.0"
     },
