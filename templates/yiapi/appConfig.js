@@ -38,6 +38,8 @@ let appConfig = {
     whiteApis: [],
     // 黑名单菜单
     blackMenus: [],
+    // 数据库表主键方案
+    tablePrimaryKey: 'default',
     // 数据库配置
     database: {
         db: process.env.YIAPI_DB_NAME,

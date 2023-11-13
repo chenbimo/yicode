@@ -54,6 +54,9 @@ let appConfig = mergeAndConcat(
         whiteApis: [],
         // 黑名单菜单
         blackMenus: [],
+        // TODO: 考虑增加 uuid 类型以及不同的 uuid 格式
+        // 数据库表主键方案 default（mysql自带）time（时序ID ）
+        tablePrimaryKey: 'default',
         // 数据库配置
         database: {
             db: null,

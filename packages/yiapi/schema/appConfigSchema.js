@@ -76,6 +76,12 @@ export let appConfigSchema = {
             },
             uniqueItems: true
         },
+        // 数据库表主键方案
+        tablePrimaryKey: {
+            title: '数据库表主键方案',
+            type: 'string',
+            enum: ['default', 'time']
+        },
         // 数据库配置
         database: {
             title: '数据库配合',
