@@ -28,8 +28,8 @@ importers:
         specifier: ^15.1.0
         version: 15.1.0
       prettier:
-        specifier: ^3.0.3
-        version: 3.0.3
+        specifier: ^3.1.0
+        version: 3.1.0
       rollup:
         specifier: ^4.4.0
         version: 4.4.0
@@ -105,8 +105,8 @@ importers:
         specifier: ^3.0.5
         version: 3.0.5
       croner:
-        specifier: ^7.0.4
-        version: 7.0.4
+        specifier: ^7.0.5
+        version: 7.0.5
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -198,8 +198,8 @@ importers:
         specifier: ^1.1.10
         version: 1.1.10
       '@iconify-json/arcticons':
-        specifier: ^1.1.81
-        version: 1.1.81
+        specifier: ^1.1.82
+        version: 1.1.82
       '@iconify-json/basil':
         specifier: ^1.1.2
         version: 1.1.2
@@ -414,8 +414,8 @@ importers:
         specifier: ^1.1.39
         version: 1.1.39
       '@iconify-json/pajamas':
-        specifier: ^1.1.35
-        version: 1.1.35
+        specifier: ^1.1.36
+        version: 1.1.36
       '@iconify-json/pepicons-pop':
         specifier: ^1.1.8
         version: 1.1.8
@@ -438,8 +438,8 @@ importers:
         specifier: ^1.1.12
         version: 1.1.12
       '@iconify-json/simple-icons':
-        specifier: ^1.1.77
-        version: 1.1.77
+        specifier: ^1.1.78
+        version: 1.1.78
       '@iconify-json/skill-icons':
         specifier: ^1.1.3
         version: 1.1.3
@@ -543,8 +543,8 @@ importers:
         specifier: ^0.16.7
         version: 0.16.7(rollup@4.4.0)
       unplugin-icons:
-        specifier: ^0.17.3
-        version: 0.17.3
+        specifier: ^0.17.4
+        version: 0.17.4
       unplugin-vue-components:
         specifier: ^0.25.2
         version: 0.25.2(rollup@4.4.0)(vue@3.3.8)
@@ -683,8 +683,8 @@ importers:
         specifier: ^0.3.23
         version: 0.3.23(rollup@4.4.0)(vue@3.3.8)
       '@vueuse/core':
-        specifier: ^10.6.0
-        version: 10.6.0(vue@3.3.8)
+        specifier: ^10.6.1
+        version: 10.6.1(vue@3.3.8)
       date-fns:
         specifier: ^2.30.0
         version: 2.30.0
@@ -729,8 +729,8 @@ importers:
         specifier: ^15.1.0
         version: 15.1.0
       prettier:
-        specifier: ^3.0.3
-        version: 3.0.3
+        specifier: ^3.1.0
+        version: 3.1.0
       sass:
         specifier: ^1.69.5
         version: 1.69.5
@@ -3192,8 +3192,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
-  /@iconify-json/arcticons@1.1.81:
-    resolution: {integrity: sha512-uSymQySbqGYpGGBJnzic3R4K9qerTVhAI7Ei8bg2kwzzWIImwueMC1ufPAaOl7gxTVWG/j79oyE7Rn5ltYneEA==}
+  /@iconify-json/arcticons@1.1.82:
+    resolution: {integrity: sha512-wDISY5pJ8fE+G6lydUANruRKV6YRFAT48I1F81vYeg73e3ByrAwM46hS4k44mvdCKkoHYe4yacREgHnWzvUSnw==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
@@ -3624,8 +3624,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
-  /@iconify-json/pajamas@1.1.35:
-    resolution: {integrity: sha512-ES45F9U2HM7I+EMuOWZ+dY0bx8T8RVXmf/XDuRDs5gsTnB8kVNKTjgnRHcuR1x/w1RQ9gnRb/THXMQsR4B7VsQ==}
+  /@iconify-json/pajamas@1.1.36:
+    resolution: {integrity: sha512-PWh3XcnKJkqWDZMkQP8kcRQRO/0+MP2PKQc5LiicHmnGFcD8kgVHc27vphalfS23rI8Ui7wvaZYGcAxLLsKZtA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
@@ -3672,8 +3672,8 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
-  /@iconify-json/simple-icons@1.1.77:
-    resolution: {integrity: sha512-awFflxKI8LGt3WvgPqmxX+DHX2UH0JG9Ehyv0zgsFOa93qdibtYAbVhVH/S+UWTzqFBV5NmTpTWdJ/v2kRLJIw==}
+  /@iconify-json/simple-icons@1.1.78:
+    resolution: {integrity: sha512-0EIy9T1YXyZyYj10rSqgcqswtfs30Rc6lTGW0xnLKn2O8rLR9gStvxzNfodLSRzb1zXDvx+vDuFJVKPXI7ty4g==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
@@ -5277,20 +5277,20 @@ packages:
   /@vue/shared@3.3.8:
     resolution: {integrity: sha512-8PGwybFwM4x8pcfgqEQFy70NaQxASvOC5DJwLQfpArw1UDfUXrJkdxD3BhVTMS+0Lef/TU7YO0Jvr0jJY8T+mw==}
 
-  /@vueuse/core@10.6.0(vue@3.3.8):
-    resolution: {integrity: sha512-+Yee+g9+9BEbvkyGdn4Bf4yZx9EfocAytpV2ZlrlP7xcz+qznLmZIDqDroTvc5vtMkWZicisgEv8dt3+jL+HQg==}
+  /@vueuse/core@10.6.1(vue@3.3.8):
+    resolution: {integrity: sha512-Pc26IJbqgC9VG1u6VY/xrXXfxD33hnvxBnKrLlA2LJlyHII+BSrRoTPJgGYq7qZOu61itITFUnm6QbacwZ4H8Q==}
     dependencies:
       '@types/web-bluetooth': 0.0.20
-      '@vueuse/metadata': 10.6.0
-      '@vueuse/shared': 10.6.0(vue@3.3.8)
+      '@vueuse/metadata': 10.6.1
+      '@vueuse/shared': 10.6.1(vue@3.3.8)
       vue-demi: 0.14.6(vue@3.3.8)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
     dev: false
 
-  /@vueuse/integrations@10.6.0(focus-trap@7.5.4)(vue@3.3.8):
-    resolution: {integrity: sha512-4RsM5+HF2IUOCFngdyQyvhDEFjus2gzOnPR2FbX4l+pQ4KPMMqzic1AFIq4bMYaVp32p/HF+pidTXwLJIZSQtA==}
+  /@vueuse/integrations@10.6.1(focus-trap@7.5.4)(vue@3.3.8):
+    resolution: {integrity: sha512-mPDupuofMJ4DPmtX/FfP1MajmWRzYDv8WSaTCo8LQ5kFznjWgmUQ16ApjYqgMquqffNY6+IRMdMgosLDRZOSZA==}
     peerDependencies:
       async-validator: '*'
       axios: '*'
@@ -5330,8 +5330,8 @@ packages:
       universal-cookie:
         optional: true
     dependencies:
-      '@vueuse/core': 10.6.0(vue@3.3.8)
-      '@vueuse/shared': 10.6.0(vue@3.3.8)
+      '@vueuse/core': 10.6.1(vue@3.3.8)
+      '@vueuse/shared': 10.6.1(vue@3.3.8)
       focus-trap: 7.5.4
       vue-demi: 0.14.6(vue@3.3.8)
     transitivePeerDependencies:
@@ -5339,12 +5339,12 @@ packages:
       - vue
     dev: false
 
-  /@vueuse/metadata@10.6.0:
-    resolution: {integrity: sha512-mzKHkHoiK6xVz01VzQjM2l6ofUanEaofgEGPgDHcAzlvOTccPRTIdEuzneOUTYxgfm1vkDikS6rtrEw/NYlaTQ==}
+  /@vueuse/metadata@10.6.1:
+    resolution: {integrity: sha512-qhdwPI65Bgcj23e5lpGfQsxcy0bMjCAsUGoXkJ7DsoeDUdasbZ2DBa4dinFCOER3lF4gwUv+UD2AlA11zdzMFw==}
     dev: false
 
-  /@vueuse/shared@10.6.0(vue@3.3.8):
-    resolution: {integrity: sha512-0t4MVE18sO+/4Gh0jfeOXBTjKeV4606N9kIrDOLPjFl8Rwnlodn+QC5A4LfJuysK7aOsTMjF3KnzNeueaI0xlQ==}
+  /@vueuse/shared@10.6.1(vue@3.3.8):
+    resolution: {integrity: sha512-TECVDTIedFlL0NUfHWncf3zF9Gc4VfdxfQc8JFwoVZQmxpONhLxFrlm0eHQeidHj4rdTPL3KXJa0TZCk1wnc5Q==}
     dependencies:
       vue-demi: 0.14.6(vue@3.3.8)
     transitivePeerDependencies:
@@ -6652,11 +6652,11 @@ packages:
     resolution: {integrity: sha512-p0SaNjrHOnQeR8/VnfGbmg9te2kfyYSQ7Sc/j/6DtPL3JQvKxmjO9TSjNFpujqV3vEYYBvNNvXSxzyksBWAx1Q==}
     engines: {node: '>=12.0.0'}
     dependencies:
-      luxon: 3.4.3
+      luxon: 3.4.4
     dev: false
 
-  /croner@7.0.4:
-    resolution: {integrity: sha512-P8Zd88km8oQ0xH8Es0u75GtOnFyCNopuAhlFv5kAnbcTuXd0xNvRTgnxnJEs63FicCOsHTL7rpu4BHzY3cMq4w==}
+  /croner@7.0.5:
+    resolution: {integrity: sha512-15HLCD7iXnMe5km54yc4LN5BH+Cg9uCQvbkJ0acHxFffE29w3Uvgb9s/l310UCVUgMwGSBNw9BAHsEb5uMgj1g==}
     engines: {node: '>=6.0'}
     dev: false
 
@@ -9085,8 +9085,8 @@ packages:
       '@dcloudio/types': 2.6.12
     dev: false
 
-  /luxon@3.4.3:
-    resolution: {integrity: sha512-tFWBiv3h7z+T/tDaoxA8rqTxy1CHV6gHS//QdaH4pulbq/JuBSGgQspQQqcgnwdAx6pNI7cmvz5Sv/addzHmUg==}
+  /luxon@3.4.4:
+    resolution: {integrity: sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==}
     engines: {node: '>=12'}
     dev: false
 
@@ -10616,8 +10616,8 @@ packages:
     resolution: {integrity: sha512-ZSsUr6EFlwWH0btdXMj6+X+hJAZ1v+aUzKlfwBGokKB1ZO6Shz+D16LxQhM8f+E/UgkKbVe2tsWXtGTUMCkGpQ==}
     dev: false
 
-  /prettier@3.0.3:
-    resolution: {integrity: sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==}
+  /prettier@3.1.0:
+    resolution: {integrity: sha512-TQLvXjq5IAibjh8EpBIkNKxO749UEWABoiIZehEPiY4GNpVdhaFKqSTu+QrlU6D2dPAfubRmtJTi4K4YkQ5eXw==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
@@ -12182,8 +12182,8 @@ packages:
       - rollup
     dev: false
 
-  /unplugin-icons@0.17.3:
-    resolution: {integrity: sha512-uvopA4I6QYWYpwAyRvG/4NNvR1Cd4GnF/mtOkybgP2YPkHjRX02l/ALm20VUla31Jt9eZHxHyODtNf/Upx5uaw==}
+  /unplugin-icons@0.17.4:
+    resolution: {integrity: sha512-PHLxjBx3ZV8RUBvfMafFl8uWH88jHeZgOijcRpkwgne7y2Ovx7WI0Ltzzw3fjZQ7dGaDhB8udyKVdm9N2S6BIw==}
     peerDependencies:
       '@svgr/core': '>=7.0.0'
       '@svgx/core': ^1.0.1
@@ -12544,8 +12544,8 @@ packages:
       '@types/markdown-it': 13.0.6
       '@vitejs/plugin-vue': 4.3.1(vite@4.5.0)(vue@3.3.8)
       '@vue/devtools-api': 6.5.1
-      '@vueuse/core': 10.6.0(vue@3.3.8)
-      '@vueuse/integrations': 10.6.0(focus-trap@7.5.4)(vue@3.3.8)
+      '@vueuse/core': 10.6.1(vue@3.3.8)
+      '@vueuse/integrations': 10.6.1(focus-trap@7.5.4)(vue@3.3.8)
       focus-trap: 7.5.4
       mark.js: 8.11.1
       minisearch: 6.2.0
