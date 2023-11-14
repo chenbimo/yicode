@@ -49,24 +49,19 @@ export function fnKebabCase(value, delimiter = '/') {
 
 // 端口是否打开
 export const fnIsPortOpen = (port) => {
-    console.log('🚀 ~ file: index.js:73 ~ fnIsPortOpen ~ port:', port);
-
     return new Promise((resolve, reject) => {
         const server = net_createServer();
 
         server.on('error', (err) => {
-            console.log('🚀 ~ file: index.js:62 ~ server.once ~ err:', err);
-
             if (err.code === 'EADDRINUSE') {
-                resolve(false); // 端口被占用
+                resolve(false);
             } else {
-                reject(err); // 发生其他错误
+                reject(err);
             }
         });
         server.on('listening', (data) => {
-            console.log('🚀 ~ file: index.js:65 ~ server.once ~ data:', data);
             server.close(() => {
-                resolve(true); // 端口可用
+                resolve(true);
             });
         });
 
