@@ -59,6 +59,7 @@ defineOptions({
 
 // 全局集
 let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+let $Router = useRouter();
 let $Route = useRoute();
 
 // 数据集
@@ -77,7 +78,8 @@ let $Data = $ref({
 // 方法集
 let $Method = {
     async initData() {
-        $Method.apiGetAdminMenus();
+        await $Method.apiTokenCheck();
+        await $Method.apiGetAdminMenus();
     },
     async onCollapse() {
         $Data.collapsed = !$Data.collapsed;
@@ -93,6 +95,21 @@ let $Method = {
         $Data.selectedItemId = id;
         $Data.selectedItem = $Data.menuObject[id];
         $Router.push($Data.selectedItem.value);
+    },
+    // 令牌检测
+    async apiTokenCheck() {
+        try {
+            let res = await $Http({
+                url: '/tool/tokenCheck',
+                data: {}
+            });
+            if (res.data.state === 'no') {
+                $Router.push('/internal/login');
+            }
+            console.log('🚀 ~ file: index.vue:105 ~ apiTokenCheck ~ res:', res);
+        } catch (err) {
+            console.log('🚀 ~ file: index.vue:102 ~ apiTokenCheck ~ err:', err);
+        }
     },
     // 获取管理员菜单
     async apiGetAdminMenus() {
