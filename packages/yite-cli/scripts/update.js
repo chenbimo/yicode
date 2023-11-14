@@ -9,7 +9,7 @@ import { cacheDir, srcDir } from '../config.js';
 async function mainUpdate(options) {
     try {
         let updateDir = path.resolve(cacheDir, 'npm-package');
-        const metaData = await got.get(`https://registry.npmmirror.com/@yicode-template/yiadmin/latest`).json();
+        const metaData = await got.get(`https://registry.npmmirror.com/@yicode/yiadmin-template/latest`).json();
         let downMeta = await pacote.extract(metaData.dist.tarball, updateDir, {});
         fs.copySync(path.resolve(updateDir, 'src', 'pages', 'internal'), path.resolve(srcDir, 'pages', 'internal'));
         fs.copySync(path.resolve(updateDir, 'src', 'config', 'internal.js'), path.resolve(srcDir, 'config', 'internal.js'));
