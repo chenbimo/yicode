@@ -23,7 +23,7 @@ import {
     merge as _merge
 } from 'lodash-es';
 
-import { fnImport, fnRequire } from '../utils/index.js';
+import { fnImport, fnRequire, fnIsPortOpen } from '../utils/index.js';
 import { appConfig } from '../config/appConfig.js';
 import { sysConfig } from '../config/sysConfig.js';
 import { fieldType } from '../config/fieldType.js';
@@ -216,6 +216,12 @@ async function fnGetTableData(allTableName) {
 
 // 同步数据库
 async function syncDatabase() {
+    // let isPortOpen = await fnIsPortOpen(3000);
+    // console.log('🚀 ~ file: syncDatabase.js:220 ~ syncDatabase ~ isPortOpen:', isPortOpen);
+    // if (!isPortOpen) {
+    //     console.log(`${logSymbols.warning} 请停止应用后再同步！！！`);
+    //     process.exit(1);
+    // }
     // 定义数据库链接
     let mysql = await new Knex({
         client: 'mysql2',

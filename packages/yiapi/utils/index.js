@@ -3,6 +3,7 @@ import crypto from 'node:crypto';
 import path from 'node:path';
 import url from 'node:url';
 import { createRequire } from 'node:module';
+import { createServer as net_createServer, Server as net_Server } from 'node:net';
 // 外部模块
 import fg from 'fast-glob';
 import md5 from 'blueimp-md5';
@@ -45,6 +46,33 @@ export function fnKebabCase(value, delimiter = '/') {
         .join(delimiter);
     return data;
 }
+
+// 端口是否打开
+export const fnIsPortOpen = (port) => {
+    console.log('🚀 ~ file: index.js:73 ~ fnIsPortOpen ~ port:', port);
+
+    return new Promise((resolve, reject) => {
+        const server = net_createServer();
+
+        server.on('error', (err) => {
+            console.log('🚀 ~ file: index.js:62 ~ server.once ~ err:', err);
+
+            if (err.code === 'EADDRINUSE') {
+                resolve(false); // 端口被占用
+            } else {
+                reject(err); // 发生其他错误
+            }
+        });
+        server.on('listening', (data) => {
+            console.log('🚀 ~ file: index.js:65 ~ server.once ~ data:', data);
+            server.close(() => {
+                resolve(true); // 端口可用
+            });
+        });
+
+        server.listen(port);
+    });
+};
 
 // 转换成小驼峰
 export function fnCamelCase(value, delimiter = '/') {
