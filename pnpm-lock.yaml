@@ -609,9 +609,6 @@ importers:
       '@yicode/yiapi':
         specifier: workspace:*
         version: link:../../packages/yiapi
-      cross-env:
-        specifier: ^7.0.3
-        version: 7.0.3
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -6658,14 +6655,6 @@ packages:
   /croner@7.0.5:
     resolution: {integrity: sha512-15HLCD7iXnMe5km54yc4LN5BH+Cg9uCQvbkJ0acHxFffE29w3Uvgb9s/l310UCVUgMwGSBNw9BAHsEb5uMgj1g==}
     engines: {node: '>=6.0'}
-    dev: false
-
-  /cross-env@7.0.3:
-    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
-    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
-    hasBin: true
-    dependencies:
-      cross-spawn: 7.0.3
     dev: false
 
   /cross-spawn@7.0.3:
