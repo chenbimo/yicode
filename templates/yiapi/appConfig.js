@@ -9,11 +9,11 @@ let appConfig = {
     appName: '易接口',
     appNameEn: 'yiapi',
     // 加密盐，请重新设置为一个随机值
-    salt: 'c0b256b1-a8ba-5924-87f2-55ac00e98063',
+    salt: 'yiapi-123456.',
     // 监听端口
     port: 3000,
-    // 默认开发管理员密码
-    devPassword: '123456',
+    // 超级管理员密码
+    devPassword: 'dev123456',
     // 是否验证参数
     paramsCheck: false,
     // 日志字段过滤，不打印

@@ -4,6 +4,7 @@ import Fastify from 'fastify';
 import autoLoad from '@fastify/autoload';
 import fp from 'fastify-plugin';
 import localize from 'ajv-i18n';
+import logSymbols from 'log-symbols';
 import { forOwn as _forOwn } from 'lodash-es';
 import fg from 'fast-glob';
 import fastifyStatic from '@fastify/static';
@@ -26,6 +27,18 @@ import { tableField } from './config/tableField.js';
 
 // 脚本
 import { syncDatabase } from './scripts/syncDatabase.js';
+
+// 启动前验证
+if (appConfig.devPassword === 'dev123456') {
+    console.log(`${logSymbols.warning} 请修改超级管理员密码！！！（位置：appConfig.devPassword）`);
+    process.exit(1);
+}
+
+// 启动前验证
+if (appConfig.salt === 'yiapi-123456.') {
+    console.log(`${logSymbols.warning} 请修改默认加密盐值！！！（位置：appConfig.salt）`);
+    process.exit(1);
+}
 
 // 确保关键目录存在
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));

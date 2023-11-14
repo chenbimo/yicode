@@ -30,7 +30,7 @@ let appConfig = mergeAndConcat(
         salt: 'yiapi-123456.',
         // 监听端口
         port: 3000,
-        // 默认开发管理员密码
+        // 超级管理员密码
         devPassword: 'dev123456',
         // 日志字段过滤，不打印
         logFilter: ['password', 'file'],
