@@ -5,10 +5,7 @@
         </a-config-provider>
     </div>
 </template>
-<script setup>
-// 引入后进行初始化
-let { $GlobalData } = useGlobal();
-</script>
+<script setup></script>
 
 <style lang="scss">
 @import '@/styles/global.scss';
