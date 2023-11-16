@@ -273,8 +273,12 @@ async function syncDatabase() {
                 table.charset('utf8mb4');
                 table.collate('utf8mb4_general_ci');
                 // 默认每个表的 ID 为自增流水号
-                table.increments('id');
-                table.bigInteger('id').primary().notNullable().unsigned().comment('主键 ID');
+                if (appConfig.tablePrimaryKey === 'default') {
+                    table.increments('id');
+                }
+                if (appConfig.tablePrimaryKey === 'time') {
+                    table.bigInteger('id').primary().notNullable().unsigned().comment('主键 ID');
+                }
                 // 设置状态
                 table.tinyint('state').index().notNullable().defaultTo(0).comment('状态 (0:正常，1:禁用，2:其他)');
                 // 设置时间
