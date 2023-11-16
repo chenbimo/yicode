@@ -6,7 +6,7 @@
         "preinstall": "npx only-allow pnpm",
         "dev": "yite --command=dev --env-file=development",
         "build": "yite --command=build",
-        "yite:update": "yite --command=update --project-type=yiadmin"
+        "update": "yite --command=update --project-type=yiadmin"
     },
     "type": "module",
     "private": false,
