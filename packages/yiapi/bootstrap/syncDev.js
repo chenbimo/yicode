@@ -92,7 +92,9 @@ async function plugin(fastify, opts) {
         _forOwn(roleConfig, (item, key) => {
             if (roleCodes.includes(key) === false && key !== 'dev') {
                 // 角色不存在，则添加
-                item.id = fnIncrUID();
+                if (appConfig.tablePrimaryKey === 'time') {
+                    item.id = fnIncrUID();
+                }
                 item.code = key;
                 item.api_ids = '';
                 item.menu_ids = '';
@@ -118,7 +120,7 @@ async function plugin(fastify, opts) {
             await roleModel.clone().insert(insertRoleData);
         }
 
-        // 如果待更新接口目录大于0，则更新
+        // 如果待更新接口目录大于 0，则更新
         if (_isEmpty(updateRoleData) === false) {
             let updateBatchData = updateRoleData.map((item) => {
                 return roleModel
@@ -135,13 +137,15 @@ async function plugin(fastify, opts) {
          */
         if (!devRoleData?.id) {
             let insertData = {
-                id: fnIncrUID(),
                 code: 'dev',
                 name: appConfig.devName || '开发管理员',
                 describe: '技术性相关的管理和维护',
                 menu_ids: menuIds.join(','),
                 api_ids: apiIds.join(',')
             };
+            if (appConfig.tablePrimaryKey === 'time') {
+                insertData.id = fnIncrUID();
+            }
             await roleModel.clone().insert(fnDbInsertData(insertData));
         } else {
             let updateData = {
@@ -154,12 +158,14 @@ async function plugin(fastify, opts) {
         // 如果没有开发管理员，则创建之
         if (!devAdminData?.id) {
             let insertData = {
-                id: fnIncrUID(),
                 username: 'dev',
                 nickname: '开发管理员',
                 role_codes: 'dev',
                 password: fnMD5(fnPureMD5(appConfig.devPassword))
             };
+            if (appConfig.tablePrimaryKey === 'time') {
+                insertData.id = fnIncrUID();
+            }
             await adminModel.clone().insert(fnDbInsertData(insertData));
         } else {
             let updateData = {

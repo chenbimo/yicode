@@ -145,8 +145,7 @@ async function syncMenuDir(fastify) {
             // 映射的菜单数据
             let mapMenu = menuDirByValue[item.value];
             if (!mapMenu) {
-                insertMenuDir.push({
-                    id: fnIncrUID(),
+                let insertData = {
                     name: item.name,
                     value: item.value,
                     pid: 0,
@@ -155,7 +154,11 @@ async function syncMenuDir(fastify) {
                     is_system: item.is_system || 0,
                     created_at: fnTimestamp(),
                     updated_at: fnTimestamp()
-                });
+                };
+                if (appConfig.tablePrimaryKey === 'time') {
+                    insertData.id = fnIncrUID();
+                }
+                insertMenuDir.push(insertData);
             } else {
                 updateMenuDir.push({
                     id: mapMenu.id,
@@ -178,7 +181,7 @@ async function syncMenuDir(fastify) {
             await menuModel.clone().insert(insertMenuDir);
         }
 
-        // 如果待更新接口目录大于0，则更新
+        // 如果待更新接口目录大于 0，则更新
         if (_isEmpty(updateMenuDir) === false) {
             let updateBatch = updateMenuDir.map((item) => {
                 return menuModel
@@ -228,8 +231,7 @@ async function syncMenuFile(fastify) {
                 let parentMenuData = menuDirByValue[menu.value];
                 if (!mapMenu) {
                     if (parentMenuData) {
-                        insertMenuFile.push({
-                            id: fnIncrUID(),
+                        let insertMenuData = {
                             name: item.name,
                             value: item.value,
                             pid: parentMenuData.id,
@@ -238,7 +240,11 @@ async function syncMenuFile(fastify) {
                             is_system: item.is_system || 0,
                             created_at: fnTimestamp(),
                             updated_at: fnTimestamp()
-                        });
+                        };
+                        if (appConfig.tablePrimaryKey === 'time') {
+                            insertMenuData.id = fnIncrUID();
+                        }
+                        insertMenuFile.push(insertMenuData);
                     }
                 } else {
                     updateMenuFile.push({
@@ -262,7 +268,7 @@ async function syncMenuFile(fastify) {
             await menuModel.clone().insert(insertMenuFile);
         }
 
-        // 如果待更新接口目录大于0，则更新
+        // 如果待更新接口目录大于 0，则更新
         if (_isEmpty(updateMenuFile) === false) {
             let updateBatchData = updateMenuFile.map((item) => {
                 return menuModel

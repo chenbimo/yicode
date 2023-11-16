@@ -108,7 +108,9 @@ async function syncApiDir(fastify) {
                 updateApiDirData.push(apiMeta);
             } else {
                 // 如果数据库中没有此目录，则添加目录
-                apiMeta.id = fnIncrUID();
+                if (appConfig.tablePrimaryKey === 'time') {
+                    apiMeta.id = fnIncrUID();
+                }
                 apiMeta.created_at = fnTimestamp();
                 insertApiDirData.push(apiMeta);
             }
@@ -207,7 +209,6 @@ async function syncApiFile(fastify) {
                 // 防止2个同名接口重复添加
                 autoApiObject[apiFileName] = true;
                 let apiParams = {
-                    id: fnIncrUID(),
                     pid: 0,
                     name: apiSchema?.summary || '',
                     value: apiFileName,
@@ -220,6 +221,9 @@ async function syncApiFile(fastify) {
                     created_at: fnTimestamp(),
                     updated_at: fnTimestamp()
                 };
+                if (appConfig.tablePrimaryKey === 'time') {
+                    apiParams.id = fnIncrUID();
+                }
                 if (_isEmpty(parentApiData) === false) {
                     apiParams.pid = parentApiData.id;
                     apiParams.pids = `0,${parentApiData.id}`;
