@@ -280,7 +280,7 @@ async function syncDatabase() {
                     table.bigInteger('id').primary().notNullable().unsigned().comment('主键 ID');
                 }
                 // 设置状态
-                table.tinyint('state').index().notNullable().defaultTo(0).comment('状态 (0:正常，1:禁用，2:其他)');
+                table.tinyint('state').index().notNullable().defaultTo(0).comment('状态 (0:正常，1:禁用，2:删除)');
                 // 设置时间
                 table.bigInteger('created_at').index().notNullable().unsigned().defaultTo(0).comment('创建时间');
                 table.bigInteger('updated_at').index().notNullable().unsigned().defaultTo(0).comment('更新时间');
