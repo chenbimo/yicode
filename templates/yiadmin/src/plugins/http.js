@@ -18,8 +18,8 @@ $Http.interceptors.request.use(
         }
         return config;
     },
-    function (error) {
-        return Promise.reject(error);
+    function (err) {
+        return Promise.reject(err);
     }
 );
 
@@ -34,8 +34,8 @@ $Http.interceptors.response.use(
         }
         return Promise.reject(res.data);
     },
-    function (error) {
-        return Promise.reject(res.data);
+    function (err) {
+        return Promise.reject(err);
     }
 );
 export { $Http };
