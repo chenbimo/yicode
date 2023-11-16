@@ -133,7 +133,7 @@ async function fnGetTableData(allTableName) {
                 }
                 // 规范字段名称
                 if (nameLimit.test(fieldName) === false) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段名称必须以 ${color.yellowBright('小写字母开头 + [小写字母|下划线|数字]')}，请检查`);
+                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段名称必须以 ${color.yellowBright('小写字母开头 + [小写字母 | 下划线 | 数字]')}，请检查`);
                     isCheckPass = false;
                 }
                 // 必须有字段类型
@@ -272,10 +272,11 @@ async function syncDatabase() {
                 // 设置数据表的字符集和编码
                 table.charset('utf8mb4');
                 table.collate('utf8mb4_general_ci');
-                // 默认每个表的ID为自增流水号
-                table.bigInteger('id').primary().notNullable().unsigned().comment('主键ID');
+                // 默认每个表的 ID 为自增流水号
+                table.increments('id');
+                table.bigInteger('id').primary().notNullable().unsigned().comment('主键 ID');
                 // 设置状态
-                table.tinyint('state').index().notNullable().defaultTo(0).comment('状态(0:正常,1:禁用,2:其他)');
+                table.tinyint('state').index().notNullable().defaultTo(0).comment('状态 (0:正常，1:禁用，2:其他)');
                 // 设置时间
                 table.bigInteger('created_at').index().notNullable().unsigned().defaultTo(0).comment('创建时间');
                 table.bigInteger('updated_at').index().notNullable().unsigned().defaultTo(0).comment('更新时间');
@@ -288,10 +289,10 @@ async function syncDatabase() {
                     let fieldItem = {};
                     // 产生实例
                     if (fieldData[fieldInfo.args?.[0]] !== undefined && fieldData[fieldInfo.args?.[1]] !== undefined) {
-                        // 如果有2个参数
+                        // 如果有 2 个参数
                         fieldItem = table[fieldData.type](fieldName, fieldData[fieldInfo.args[0]], fieldData[fieldInfo.args[1]]);
                     } else if (fieldData[fieldInfo.args?.[0]] !== undefined) {
-                        // 如果有1个参数
+                        // 如果有 1 个参数
                         fieldItem = table[fieldData.type](fieldName, fieldData[fieldInfo.args[0]]);
                     } else {
                         // 如果没有参数
