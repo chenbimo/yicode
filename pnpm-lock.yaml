@@ -519,7 +519,7 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0(rollup@4.5.1)(vue@3.3.8)
       '@yicode/yidash':
-        specifier: workspace:*
+        specifier: 3.6.2
         version: link:../yidash
       colorette:
         specifier: ^2.0.20
@@ -585,7 +585,7 @@ importers:
         specifier: ^2.53.2
         version: 2.53.2(vue@3.3.8)
       '@yicode/yidash':
-        specifier: workspace:*
+        specifier: 3.6.2
         version: link:../../packages/yidash
       axios:
         specifier: ^1.6.2
@@ -619,13 +619,13 @@ importers:
         version: 4.2.5(vue@3.3.8)
     devDependencies:
       '@yicode/yite-cli':
-        specifier: workspace:*
+        specifier: ^1.35.13
         version: link:../../packages/yite-cli
 
   templates/yiapi:
     dependencies:
       '@yicode/yiapi':
-        specifier: workspace:*
+        specifier: ^3.7.5
         version: link:../../packages/yiapi
       lodash-es:
         specifier: ^4.17.21
@@ -637,7 +637,7 @@ importers:
         specifier: ^2.53.2
         version: 2.53.2(vue@3.3.8)
       '@yicode/yidash':
-        specifier: workspace:*
+        specifier: 3.6.2
         version: link:../../packages/yidash
       axios:
         specifier: ^1.6.2
@@ -668,7 +668,7 @@ importers:
         version: 4.2.5(vue@3.3.8)
     devDependencies:
       '@yicode/yite-cli':
-        specifier: workspace:*
+        specifier: ^1.35.13
         version: link:../../packages/yite-cli
 
   templates/yidocs:
