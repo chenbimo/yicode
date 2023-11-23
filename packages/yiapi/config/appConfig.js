@@ -36,7 +36,7 @@ let appConfig = mergeAndConcat(
         logFilter: ['password', 'file'],
         // 是否进行参数验证
         paramsCheck: false,
-        // 是否显示swagger文档
+        // 是否显示 swagger 文档
         isSwagger: false,
         // 任何情况下可以访问的路由
         freeApis: [
@@ -55,7 +55,7 @@ let appConfig = mergeAndConcat(
         // 黑名单菜单
         blackMenus: [],
         // TODO: 考虑增加 uuid 类型以及不同的 uuid 格式
-        // 数据库表主键方案 default（mysql自带）time（时序ID ）
+        // 数据库表主键方案 default（mysql 自带）time（时序 ID）
         tablePrimaryKey: 'default',
         // 数据库配置
         database: {
@@ -66,7 +66,7 @@ let appConfig = mergeAndConcat(
             dialect: 'mysql',
             port: 3306
         },
-        // redis配置
+        // redis 配置
         redis: {
             host: '127.0.0.1',
             port: 6379,
@@ -75,7 +75,7 @@ let appConfig = mergeAndConcat(
             db: 0,
             keyPrefix: 'yiapi:'
         },
-        // jwt配置
+        // jwt 配置
         jwt: {
             secret: 'yiapi',
             expiresIn: '7d'

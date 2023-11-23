@@ -58,9 +58,9 @@ let appConfig = {
         keyPrefix: process.env.YIAPI_REDIS_PREFIX,
         ex: process.env.YIAPI_REDIS_EX
     },
-    // jwt配置
+    // jwt 配置
     jwt: {
-        // jwt密钥，第一次使用，请修改此密钥值！！！
+        // jwt 密钥，第一次使用，请修改此密钥值！！！
         secret: process.env.YIAPI_JWT_SECRET,
         expiresIn: process.env.YIAPI_JWT_EXPIRES_IN
     },
@@ -70,7 +70,7 @@ let appConfig = {
         port: 465,
         pool: true,
         secure: true,
-        // qq邮箱
+        // qq 邮箱
         user: 'demo@qq.com',
         pass: '',
         from_name: '易接口',

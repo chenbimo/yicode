@@ -15,14 +15,15 @@ import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
-import VueDevTools from 'vite-plugin-vue-devtools';
+// import VueDevTools from 'vite-plugin-vue-devtools';
 import { defineConfig as defineUnocssConfig } from 'unocss';
-import Markdown from 'vite-plugin-md';
+// import Markdown from 'vite-plugin-md';
+import { yidashLibNames } from '@yicode/yidash/yidashLibNames.js';
+
+// 内部文件
 import { yiteHtml as YiteHtml } from './plugins/html.js';
 import { yiteRouter as YiteRouter } from './plugins/router.js';
 import { yiteI18n as YiteI18n } from './plugins/i18n.js';
-import { yidashLibNames } from '@yicode/yidash/yidashLibNames.js';
-
 import { cliDir, appDir, srcDir, yicodeDir, cacheDir } from './config.js';
 import { fnFileProtocolPath, fnOmit, fnImport } from './utils.js';
 import { unocssConfig } from './unocss.js';
@@ -193,15 +194,15 @@ export default defineConfig(async ({ command, mode }) => {
     // 插件列表
     let allPlugins = [];
     allPlugins.push(YiteHtml(yiteHtmlConfig));
-    allPlugins.push(Markdown());
+    // allPlugins.push(Markdown());
     allPlugins.push(YiteRouter(yiteRouterConfig));
     allPlugins.push(YiteI18n(yiteI18nConfig));
     allPlugins.push(ReactivityTransform());
     allPlugins.push(Unocss(defineUnocssConfig(unocssConfig)));
     allPlugins.push(Icons(iconsConfig));
-    if (yiteConfig?.devtool === true) {
-        allPlugins.push(VueDevTools(vueDevtoolConfig));
-    }
+    // if (yiteConfig?.devtool === true) {
+    //     allPlugins.push(VueDevTools(vueDevtoolConfig));
+    // }
 
     allPlugins.push(Components(componentsConfig));
     allPlugins.push(AutoImport(autoImportConfig));

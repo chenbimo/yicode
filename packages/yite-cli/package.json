@@ -163,8 +163,6 @@
         "unplugin-icons": "^0.17.4",
         "unplugin-vue-components": "^0.25.2",
         "vite": "^5.0.2",
-        "vite-plugin-md": "^0.21.5",
-        "vite-plugin-vue-devtools": "1.0.0-rc.5",
         "vue-i18n": "^9.7.1"
     },
     "gitHead": "5d216095b7aaeed26f283617194053a34bedf205"
