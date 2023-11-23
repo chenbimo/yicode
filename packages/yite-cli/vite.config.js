@@ -49,7 +49,8 @@ export default defineConfig(async ({ command, mode }) => {
 
     // vue 插件
     let viteVueConfig = {
-        include: [/\.vue$/, /\.md$/]
+        include: [/\.vue$/, /\.md$/],
+        ...(yiteConfig?.pluginsConfig?.vue || {})
     };
 
     // 自动导入插件
