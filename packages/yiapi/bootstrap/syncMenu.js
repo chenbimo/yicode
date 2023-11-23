@@ -91,11 +91,6 @@ let menuConfig = _merge(appConfig.menu, {
                 name: '项目配置',
                 is_system: 1,
                 sort: 1
-            },
-            '/internal/table-config': {
-                name: '数据库表',
-                is_system: 1,
-                sort: 2
             }
         }
     },
