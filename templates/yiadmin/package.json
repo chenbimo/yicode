@@ -28,7 +28,7 @@
     "homepage": "https://yicode.tech",
     "dependencies": {
         "@arco-design/web-vue": "^2.53.2",
-        "@yicode/yidash": "workspace:*",
+        "@yicode/yidash": "3.6.2",
         "axios": "^1.6.2",
         "date-fns": "^2.30.0",
         "js-md5": "^0.8.3",
@@ -41,7 +41,7 @@
         "vue-router": "^4.2.5"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "workspace:*"
+        "@yicode/yite-cli": "1.35.12"
     },
-    "gitHead": "a1570a925a56bf11a584a53f769fc637f3cc604d"
+    "gitHead": "5d216095b7aaeed26f283617194053a34bedf205"
 }
