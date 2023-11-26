@@ -1,5 +1,5 @@
 export const yiteConfig = {
-    // eslint参数
+    // eslint 参数
     eslint: {},
     viteZip: {},
     chunkSplit: {},
@@ -9,6 +9,17 @@ export const yiteConfig = {
             {
                 name: 'ArcoResolver',
                 options: {}
+            }
+        ],
+        imports: [
+            {
+                '@arco-design/web-vue': [
+                    //
+                    'Message',
+                    'Modal',
+                    'Notification',
+                    'Drawer'
+                ]
             }
         ]
     },
@@ -23,10 +34,15 @@ export const yiteConfig = {
             }
         ]
     },
-    // webpack配置
+    // webpack 配置
     viteConfig: {
         optimizeDeps: {
-            include: ['lodash-es', 'vue-i18n', 'axios']
+            include: [
+                //
+                'lodash-es',
+                'vue-i18n',
+                'axios'
+            ]
         }
     }
 };
