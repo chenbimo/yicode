@@ -16,6 +16,7 @@ import {
     //
     kebabCase as _kebabCase,
     camelCase as _camelCase,
+    lowerCase as _lowerCase,
     forOwn as _forOwn,
     omit as _omit,
     isEmpty as _isEmpty,
@@ -119,7 +120,7 @@ export const fnLuhn = (str) => {
     return (10 - (sum % 10)) % 10;
 };
 
-// 创建顺序自增唯一ID
+// 创建顺序自增唯一 ID
 export function fnIncrUID() {
     let timestamp = Math.floor(Date.now() / 1000);
     let random = crypto.randomInt(10000, 99999);
@@ -450,6 +451,52 @@ export async function fnImport(path, name, defaultValue, options = {}) {
     }
 }
 
+// 设置路由函数
+export const fnRoute = async (metaUrl, fastify, options) => {
+    let apiInfo = await fnApiInfo(metaUrl);
+    let method = _lowerCase(options.method || 'post');
+    if (!options.apiName) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 apiName 属性，请检查`);
+        process.exit(1);
+        return;
+    }
+    if (!options.schemaRequest) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 schemaRequest 属性，请检查`);
+        process.exit(1);
+        return;
+    }
+    if (!options.apiHandler) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 apiHandler 属性，请检查`);
+        process.exit(1);
+        return;
+    }
+    if (!['get', 'post'].includes(method)) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口方法只能为 get 或 post 之一，请检查`);
+        process.exit(1);
+        return;
+    }
+
+    options.schemaRequest.title = options.apiName;
+
+    let routeParams = {
+        method: method,
+        url: options.url || `/${apiInfo.pureFileName}`,
+        schema: {
+            summary: options.apiName,
+            tags: [apiInfo.parentDirName],
+            response: options.schemaResponse || {}
+        },
+        handler: options.apiHandler
+    };
+
+    if (routeParams.method === 'get') {
+        routeParams.schema.query = options.schemaRequest;
+    } else {
+        routeParams.schema.body = options.schemaRequest;
+    }
+    fastify.route(routeParams);
+};
+
 // 获取 file 协议的路径
 export function fnFileProtocolPath(_path) {
     if (_startsWith(_path, 'file:')) {
@@ -460,7 +507,7 @@ export function fnFileProtocolPath(_path) {
 }
 
 /**
- * require函数
+ * require 函数
  * @param {String} filePath 文件路径，以根目录为基准
  * @param {any} defaultValue 任何默认值
  * @param {String} fromType 从哪里加载，值为 core 或 user
@@ -487,9 +534,9 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
         'state'
     ];
     let tableJson = fnRequire(filePath, {}, fromType);
-    // 如果没有fields子弹
+    // 如果没有 fields 子弹
     if (!tableJson?.fields) {
-        console.log(`${logSymbols.warning} ${color.blueBright(filePath)} 没有fields属性，请检查`);
+        console.log(`${logSymbols.warning} ${color.blueBright(filePath)} 没有 fields 属性，请检查`);
         process.exit();
     }
     let extraFields = {};
@@ -502,7 +549,7 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
     return allKeys;
 }
 
-// rsa-sha256加密
+// rsa-sha256 加密
 export function fnRsaSha256(data, privateKey) {
     let sign = crypto.createSign('RSA-SHA256');
     sign.update(data);
