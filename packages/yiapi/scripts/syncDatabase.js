@@ -83,17 +83,27 @@ async function fnGetTableData(allTableName) {
             absolute: true,
             cwd: sysConfig.appDir
         });
-        let tableFileAll = [...tableFilesSys, ...tableFilesUser];
+        let tableFileAll = [
+            ...tableFilesSys.map((file) => {
+                return {
+                    prefix: 'sys_',
+                    path: file
+                };
+            }),
+            ...tableFilesUser.map((file) => {
+                return {
+                    prefix: '',
+                    path: file
+                };
+            })
+        ];
         let allTableData = [];
 
         for (let i = 0; i < tableFileAll.length; i++) {
-            let filePath = tableFileAll[i];
+            let fileItem = tableFileAll[i];
+            let prefix = fileItem.prefix;
+            let filePath = fileItem.path;
             let fileUrl = url.pathToFileURL(filePath);
-            let prefix = '';
-
-            if (filePath.indexOf('yiapi/tables') !== -1) {
-                prefix = 'sys_';
-            }
 
             let tableName = prefix + _replace(_snakeCase(path.basename(filePath, '.json')), /_(\d+)/gi, '$1');
             // 获取表数据
