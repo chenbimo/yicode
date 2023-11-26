@@ -259,17 +259,6 @@
                     </div>
                     <div class="line">
                         <div class="line-inner">
-                            <div class="thumbnail">monolage</div>
-                            <div class="describe">monorepo 单体仓库子项目 package.json 配置统一设置工具</div>
-                            <div class="status">
-                                <img class="img" alt="npm" src="https://img.shields.io/npm/v/@yicode-tool/monolage?label=版本" />
-                                <div class="w-10px"></div>
-                                <img class="img" alt="npm" src="https://img.shields.io/npm/dm/@yicode-tool/monolage?label=下载" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="line">
-                        <div class="line-inner">
                             <div class="thumbnail">dlnpm</div>
                             <div class="describe">下载 npm 包工具</div>
                             <div class="status">
