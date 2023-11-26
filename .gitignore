@@ -21,6 +21,7 @@ out
 CHANGELOG.md
 note.md
 .changeset
+others/softs
 
 # Editor directories and files
 .vscode/*
