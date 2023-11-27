@@ -36,7 +36,6 @@ import { appConfig } from '../config/appConfig.js';
 import { sysConfig } from '../config/sysConfig.js';
 import { schemaType } from '../config/schemaType.js';
 import { schemaField } from '../config/schemaField.js';
-import { metaConfig } from '../config/metaConfig.js';
 
 // 自定义初始化字符
 let nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
@@ -524,8 +523,7 @@ export const fnMeta = (metaUrl, data) => {
                 id: fnSchema(schemaField.id, '唯一 ID'),
                 page: fnSchema(schemaField.page, '第几页'),
                 limit: fnSchema(schemaField.limit, '每页多少条'),
-                state: fnSchema(schemaField.state, '是否启用'),
-                ...metaConfig
+                state: fnSchema(schemaField.state, '是否启用')
             },
             data.schema
         )
