@@ -27,7 +27,7 @@ export default async (fastify) => {
         apiHandler: async (req, res) => {
             try {
                 let adminModel = fastify.mysql.table('sys_admin');
-                let adminData = await adminModel.clone().where('username', req.body.username).first('id');
+                let adminData = await adminModel.clone().where('username', req.body.username).selectOne('id');
                 if (adminData?.id) {
                     return {
                         ...codeConfig.FAIL,
