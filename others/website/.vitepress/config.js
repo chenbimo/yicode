@@ -42,7 +42,7 @@ export default defineConfig({
                 },
                 link: 'https://gitee.com/yicode-team/yicode'
             },
-            { icon: 'github', link: 'https://github.com/chenbimo' }
+            { icon: 'github', link: 'https://github.com/chenbimo/yicode' }
         ],
         footer: {
             message: '<span style="display:flex;justify-content:center;align-items:center;"><a href="https://beian.miit.gov.cn/" target="_blank">湘 ICP 备 2023002701 号 -1</a><img  src="/national_emblem.png" style="display:inline-block;padding:0 4px" /><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43052402000213" target="_blank"> 湘公网安备 43052402000213 号</a></span>',
