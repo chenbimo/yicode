@@ -3,7 +3,6 @@ import { fnRoute, fnCamelCase } from '../../utils/index.js';
 // 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-// 接口信息
 
 // 处理函数
 export default async (fastify) => {
