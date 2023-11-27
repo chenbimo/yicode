@@ -26,7 +26,7 @@ export default async (fastify) => {
                 let adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where({ id: req.body.id })
-                    .modify(function (queryBuilder) {});
+                    .modify(function (qb) {});
 
                 let adminData = await adminModel.clone().first('id');
                 if (!adminData?.id) {
