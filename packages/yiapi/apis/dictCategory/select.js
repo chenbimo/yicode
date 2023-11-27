@@ -1,61 +1,55 @@
 // 工具函数
-import { fnApiInfo, fnPageOffset, fnSelectFields } from '../../utils/index.js';
+import { fnRoute, fnSelectFields } from '../../utils/index.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-// 接口信息
-let apiInfo = await fnApiInfo(import.meta.url);
-// 选择字段
-let selectKeys = fnSelectFields('./tables/dictCategory.json');
-// 传参验证
-export let apiSchema = {
-    summary: `查询${metaConfig.name}`,
-    tags: [apiInfo.parentDirName],
-    body: {
-        title: `查询${metaConfig.name}接口`,
-        type: 'object',
-        properties: {
-            page: metaConfig.schema.page,
-            limit: metaConfig.schema.limit,
-            state: metaConfig.schema.state
-        },
-        required: []
-    }
-};
+
 // 处理函数
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '查询字典目录列表',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {
+                page: metaConfig.schema.page,
+                limit: metaConfig.schema.limit,
+                state: metaConfig.schema.state
+            },
+            required: []
+        },
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
-                let dictCategoryModel = fastify.mysql //
+                const dictCategoryModel = fastify.mysql //
                     .table('sys_dict_category')
-                    .modify(function (queryBuilder) {
+                    .modify(function (qb) {
                         if (req.body.keyword !== undefined) {
-                            queryBuilder.where('name', 'like', `%${req.body.keyword}%`);
+                            qb.where('name', 'like', `%${req.body.keyword}%`);
                         }
                         if (req.body.state !== undefined) {
-                            queryBuilder.where('state', req.body.state);
+                            qb.where('state', req.body.state);
                         }
                     });
 
                 // 记录总数
-                let { total } = await dictCategoryModel.clone().count('id', { as: 'total' }).first();
+                const { totalCount } = await dictCategoryModel.clone().selectCount();
 
                 // 记录列表
-                let rows = await dictCategoryModel
+                const rows = await dictCategoryModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .offset(fnPageOffset(req.body.page, req.body.limit))
-                    .limit(req.body.limit)
-                    .select(selectKeys);
+                    .selectData(req.body.page, req.body.limit, fnSelectFields('./tables/dictCategory.json'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
                     data: {
-                        total: total,
+                        total: totalCount,
                         rows: rows,
                         page: req.body.page,
                         limit: req.body.limit
@@ -67,4 +61,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};
