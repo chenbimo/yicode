@@ -1,39 +1,35 @@
 // 工具函数
-import { fnApiInfo, fnSelectFields } from '../../utils/index.js';
+import { fnRoute, fnSelectFields } from '../../utils/index.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-// 接口信息
-let apiInfo = await fnApiInfo(import.meta.url);
-// 选择字段
-let selectKeys = fnSelectFields('./tables/role.json');
-// 传参验证
-export let apiSchema = {
-    summary: `查询所有${metaConfig.name}`,
-    tags: [apiInfo.parentDirName],
-    body: {
-        title: `查询所有${metaConfig.name}接口`,
-        type: 'object',
-        properties: {}
-    }
-};
+
 // 处理函数
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '查询所有角色',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {}
+        },
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
-                let roleModel = fastify.mysql //
+                const roleModel = fastify.mysql //
                     .table('sys_role')
-                    .modify(function (queryBuilder) {
+                    .modify(function (qb) {
                         // 如果不是开发管理员查询，则排除掉开发角色
                         if (req.session.role_codes !== 'dev') {
-                            queryBuilder.where('code', '<>', 'dev');
+                            qb.where('code', '<>', 'dev');
                         }
                     });
 
-                let rows = await roleModel.clone().select(selectKeys);
+                const rows = await roleModel.clone().selectAll(fnSelectFields('./tables/role.json'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
@@ -47,4 +43,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};
