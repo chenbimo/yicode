@@ -1,43 +1,39 @@
 // 工具函数
-import { fnApiInfo, fnSelectFields } from '../../utils/index.js';
+import { fnRoute, fnSelectFields } from '../../utils/index.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-// 接口信息
-let apiInfo = await fnApiInfo(import.meta.url);
-// 选择字段
-let selectKeys = fnSelectFields('./tables/dict.json');
-// 传参校验
-export let apiSchema = {
-    summary: `查询所有${metaConfig.name}`,
-    tags: [apiInfo.parentDirName],
-    body: {
-        title: `查询所有${metaConfig.name}接口`,
-        type: 'object',
-        properties: {
-            category_code: metaConfig.schema.category_code,
-            state: metaConfig.schema.state
-        }
-    }
-};
+
 // 处理函数
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '查询所有字典',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {
+                category_code: metaConfig.schema.category_code,
+                state: metaConfig.schema.state
+            }
+        },
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
-                let dictModel = fastify.mysql
+                const dictModel = fastify.mysql
                     .table('sys_dict')
                     .where('category_code', req.body.category_code)
-                    .modify(function (queryBuilder) {
+                    .modify(function (qb) {
                         if (req.body.state !== undefined) {
-                            queryBuilder.where('state', req.body.state);
+                            qb.where('state', req.body.state);
                         }
                     });
-                let resultData = await dictModel.clone().select(selectKeys);
+                const rowsTemp = await dictModel.clone().selectAll(fnSelectFields('./tables/dict.json'));
 
-                let rows = resultData.map((item) => {
+                const rows = rowsTemp?.map((item) => {
                     if (item.symbol === 'number') {
                         item.value = Number(item.value);
                     }
@@ -55,4 +51,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};
