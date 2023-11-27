@@ -1,5 +1,5 @@
 export const yiteConfig = {
-    // eslint参数
+    // eslint 参数
     eslint: {},
     viteZip: {},
     chunkSplit: {},
@@ -34,7 +34,7 @@ export const yiteConfig = {
             }
         ]
     },
-    // webpack配置
+    // webpack 配置
     viteConfig: {
         optimizeDeps: {
             include: [
@@ -45,7 +45,9 @@ export const yiteConfig = {
                 'axios',
                 '@yicode/yidash',
                 'date-fns',
-                'date-fns/locale'
+                'date-fns/locale',
+                'tiny-cookie',
+                'store2'
             ]
         }
     }
