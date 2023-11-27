@@ -1,54 +1,49 @@
 // 工具函数
-import { fnApiInfo, fnPageOffset, fnSelectFields } from '../../utils/index.js';
+import { fnRoute, fnSelectFields } from '../../utils/index.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-// 接口信息
-let apiInfo = await fnApiInfo(import.meta.url);
-// 选择字段
-let selectKeys = fnSelectFields('./tables/role.json');
-// 传参验证
-export let apiSchema = {
-    summary: `查询${metaConfig.name}`,
-    tags: [apiInfo.parentDirName],
-    body: {
-        title: `查询${metaConfig.name}接口`,
-        type: 'object',
-        properties: {
-            page: metaConfig.schema.page,
-            limit: metaConfig.schema.limit,
-            keyword: metaConfig.schema.keyword
-        }
-    }
-};
+
 // 处理函数
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '查询字典目录列表',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {
+                page: metaConfig.schema.page,
+                limit: metaConfig.schema.limit,
+                keyword: metaConfig.schema.keyword
+            },
+            required: []
+        },
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
-                let roleModel = fastify.mysql //
+                const roleModel = fastify.mysql //
                     .table('sys_role')
-                    .modify(function (queryBuilder) {
+                    .modify(function (qb) {
                         if (req.session !== 'dev') {
-                            queryBuilder.where('code', '<>', 'dev');
+                            qb.where('code', '<>', 'dev');
                         }
                     });
 
-                let { total } = await roleModel.clone().count('id', { as: 'total' }).first();
-                let rows = await roleModel
-                    .clone()
+                const { totalCount } = await roleModel.clone().selectCount();
+                const rows = await roleModel
                     //
+                    .clone()
                     .orderBy('created_at', 'desc')
-                    .offset(fnPageOffset(req.body.page, req.body.limit))
-                    .limit(req.body.limit)
-                    .select(selectKeys);
+                    .selectData(req.body.page, req.body.limit, fnSelectFields('./tables/role.json'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
                     data: {
-                        total: total,
+                        total: totalCount,
                         rows: rows,
                         page: req.body.page,
                         limit: req.body.limit
@@ -60,4 +55,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};
