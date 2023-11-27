@@ -1,12 +1,7 @@
-import { fnSchema } from '../../utils/index.js';
+import { fnSchema, fnMeta } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
 
-export let metaConfig = {
+export let metaConfig = fnMeta(import.meta.url, {
     name: '用户',
-    schema: {
-        id: fnSchema(schemaField.id, '唯一ID'),
-        page: fnSchema(schemaField.page, '第几页'),
-        limit: fnSchema(schemaField.limit, '每页多少条'),
-        state: fnSchema(schemaField.state, '是否启用')
-    }
-};
+    schema: {}
+});
