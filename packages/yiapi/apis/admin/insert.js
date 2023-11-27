@@ -35,14 +35,12 @@ export default async (fastify) => {
                     };
                 }
 
-                const insertData = {
+                const result = await adminModel.clone().insertData({
                     username: req.body.username,
                     password: fnMD5(fnPureMD5(req.body.password)),
                     nickname: req.body.nickname,
                     role_codes: req.body.role_codes
-                };
-
-                const result = await adminModel.clone().insertData(insertData);
+                });
                 return {
                     ...codeConfig.INSERT_SUCCESS,
                     data: result

@@ -31,13 +31,11 @@ export default async (fastify) => {
                     .where({ id: req.body.id })
                     .modify(function (qb) {});
 
-                const updateData = {
+                await adminModel.clone().updateData({
                     password: fnMD5(req.body.password),
                     nickname: req.body.nickname,
                     role_codes: req.body.role_codes
-                };
-
-                await adminModel.clone().updateData(updateData);
+                });
 
                 return codeConfig.UPDATE_SUCCESS;
             } catch (err) {

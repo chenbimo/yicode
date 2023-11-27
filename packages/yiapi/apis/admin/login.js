@@ -51,16 +51,14 @@ export default async (fastify) => {
                         msg: '密码错误'
                     };
                 }
-                // 登录日志数据
-                const loginLogData = {
+                // 记录登录日志
+                await loginLogModel.clone().insertData({
                     username: adminData.username,
                     nickname: adminData.nickname,
                     role_codes: adminData.role_codes,
                     ip: req.ip || '',
                     ua: req.headers['user-agent'] || ''
-                };
-
-                await loginLogModel.clone().insertData(loginLogData);
+                });
 
                 // 成功返回
                 return {
