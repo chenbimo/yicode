@@ -187,8 +187,8 @@ function initServer() {
                 fastify.log.error(err);
                 process.exit(1);
             }
-            await fastify.cacheMenuData();
-            await fastify.cacheApiData();
+            // await fastify.cacheMenuData();
+            // await fastify.cacheApiData();
             fastify.log.warn(`${appConfig.appName} 接口服务已启动： ${address}`);
             console.log(`${appConfig.appName} 接口服务已启动： ${address}`);
         });

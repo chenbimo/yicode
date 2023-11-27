@@ -294,7 +294,7 @@ async function plugin(fastify) {
         await syncApiDir(fastify);
         await syncApiFile(fastify);
         // 将接口缓存到 redis 中
-        await fastify.cacheTreeData();
+        await fastify.cacheApiData();
     } catch (err) {
         fastify.log.error(err);
     }

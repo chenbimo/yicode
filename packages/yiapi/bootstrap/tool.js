@@ -93,17 +93,22 @@ async function plugin(fastify, opts) {
     });
 
     // 设置权限数据
-    fastify.decorate('cacheTreeData', async () => {
+    fastify.decorate('cacheMenuData', async () => {
         // 菜单列表
         let dataMenu = await fastify.mysql.table('sys_menu').select();
-        let dataApi = await fastify.mysql.table('sys_api').select();
-
-        // 白名单接口
-        let dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
 
         // 菜单树数据
         await fastify.redisSet(cacheData.menu, []);
         await fastify.redisSet(cacheData.menu, dataMenu);
+    });
+
+    // 设置权限数据
+    fastify.decorate('cacheApiData', async () => {
+        // 菜单列表
+        let dataApi = await fastify.mysql.table('sys_api').select();
+
+        // 白名单接口
+        let dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
 
         // 接口树数据
         await fastify.redisSet(cacheData.api, []);
