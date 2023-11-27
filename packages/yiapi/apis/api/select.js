@@ -23,13 +23,13 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                let apiModel = fastify.mysql //
+                const apiModel = fastify.mysql //
                     .table('sys_api')
                     .modify(function (qb) {});
 
-                let { totalCount } = await apiModel.clone().selectCount();
+                const { totalCount } = await apiModel.clone().selectCount();
 
-                let rows = await apiModel
+                const rows = await apiModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')

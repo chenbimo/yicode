@@ -23,17 +23,17 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                let adminModel = fastify.mysql //
+                const adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where({ id: req.body.id })
                     .modify(function (qb) {});
 
-                let adminData = await adminModel.clone().first('id');
+                const adminData = await adminModel.clone().first('id');
                 if (!adminData?.id) {
                     return codeConfig.NO_DATA;
                 }
 
-                let result = await adminModel.deleteData();
+                const result = await adminModel.deleteData();
 
                 return {
                     ...codeConfig.DELETE_SUCCESS,

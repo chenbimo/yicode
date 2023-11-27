@@ -23,7 +23,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                let adminModel = fastify.mysql //
+                const adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where('username', '<>', 'dev')
                     .modify((qb) => {
@@ -32,8 +32,8 @@ export default async (fastify) => {
                         }
                     });
 
-                let { totalCount } = await adminModel.clone().selectCount();
-                let rows = await adminModel
+                const { totalCount } = await adminModel.clone().selectCount();
+                const rows = await adminModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')

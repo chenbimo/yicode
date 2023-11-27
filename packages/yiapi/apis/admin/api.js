@@ -20,7 +20,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                let result = await fastify.getUserApis(req.session);
+                const result = await fastify.getUserApis(req.session);
                 return {
                     ...codeConfig.SELECT_SUCCESS,
                     data: {

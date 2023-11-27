@@ -26,12 +26,12 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                let adminModel = fastify.mysql //
+                const adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where({ id: req.body.id })
                     .modify(function (qb) {});
 
-                let updateData = {
+                const updateData = {
                     password: fnMD5(req.body.password),
                     nickname: req.body.nickname,
                     role_codes: req.body.role_codes

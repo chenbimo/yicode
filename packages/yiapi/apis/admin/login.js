@@ -26,12 +26,12 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                let adminModel = fastify.mysql.table('sys_admin');
-                let loginLogModel = fastify.mysql.table('sys_login_log');
+                const adminModel = fastify.mysql.table('sys_admin');
+                const loginLogModel = fastify.mysql.table('sys_login_log');
 
                 // 查询管理员是否存在
                 // TODO: 增加邮箱注册和邮箱登录
-                let adminData = await adminModel //
+                const adminData = await adminModel //
                     .clone()
                     .orWhere({ username: req.body.account })
                     .selectOne('id', 'password', 'username', 'nickname', 'role_codes');
@@ -52,7 +52,7 @@ export default async (fastify) => {
                     };
                 }
                 // 登录日志数据
-                let loginLogData = {
+                const loginLogData = {
                     username: adminData.username,
                     nickname: adminData.nickname,
                     role_codes: adminData.role_codes,

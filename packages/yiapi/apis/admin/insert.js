@@ -26,8 +26,8 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                let adminModel = fastify.mysql.table('sys_admin');
-                let adminData = await adminModel.clone().where('username', req.body.username).selectOne('id');
+                const adminModel = fastify.mysql.table('sys_admin');
+                const adminData = await adminModel.clone().where('username', req.body.username).selectOne('id');
                 if (adminData?.id) {
                     return {
                         ...codeConfig.FAIL,
@@ -35,14 +35,14 @@ export default async (fastify) => {
                     };
                 }
 
-                let insertData = {
+                const insertData = {
                     username: req.body.username,
                     password: fnMD5(fnPureMD5(req.body.password)),
                     nickname: req.body.nickname,
                     role_codes: req.body.role_codes
                 };
 
-                let result = await adminModel.clone().insertData(insertData);
+                const result = await adminModel.clone().insertData(insertData);
                 return {
                     ...codeConfig.INSERT_SUCCESS,
                     data: result
