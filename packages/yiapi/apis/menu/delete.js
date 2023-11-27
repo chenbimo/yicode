@@ -51,7 +51,7 @@ export default async (fastify) => {
                 }
 
                 const result = await menuModel.clone().where({ id: req.body.id }).deleteData();
-                await fastify.cacheTreeData();
+                await fastify.cacheMenuData();
                 return {
                     ...codeConfig.DELETE_SUCCESS,
                     data: result

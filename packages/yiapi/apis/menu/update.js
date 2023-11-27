@@ -67,7 +67,7 @@ export default async (fastify) => {
                         state: req.body.state
                     });
 
-                await fastify.cacheTreeData();
+                await fastify.cacheMenuData();
                 return codeConfig.UPDATE_SUCCESS;
             } catch (err) {
                 fastify.log.error(err);
