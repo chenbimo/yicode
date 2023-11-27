@@ -1,33 +1,30 @@
 // 工具函数
-import { fnTimestamp, fnDbInsertData, fnApiInfo, fnMD5, fnPureMD5 } from '../../utils/index.js';
+import { fnRoute, fnMD5, fnPureMD5 } from '../../utils/index.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { schemaField } from '../../config/schemaField.js';
 import { metaConfig } from './_meta.js';
-// 接口信息
-let apiInfo = await fnApiInfo(import.meta.url);
-// 传参校验
-export let apiSchema = {
-    tags: [apiInfo.parentDirName],
-    summary: `添加${metaConfig.name}`,
-    body: {
-        title: `添加${metaConfig.name}接口`,
-        type: 'object',
-        properties: {
-            username: metaConfig.schema.username,
-            password: metaConfig.schema.password,
-            nickname: metaConfig.schema.nickname,
-            role_codes: metaConfig.schema.role_codes
-        },
-        required: ['username', 'password', 'nickname', 'role_codes']
-    }
-};
+
 // 处理函数
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '添加管理员',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {
+                username: metaConfig.schema.username,
+                password: metaConfig.schema.password,
+                nickname: metaConfig.schema.nickname,
+                role_codes: metaConfig.schema.role_codes
+            },
+            required: ['username', 'password', 'nickname', 'role_codes']
+        },
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
                 let adminModel = fastify.mysql.table('sys_admin');
                 let adminData = await adminModel.clone().where('username', req.body.username).first('id');
@@ -45,7 +42,7 @@ export default async function (fastify, opts) {
                     role_codes: req.body.role_codes
                 };
 
-                let result = await adminModel.clone().insert(fnDbInsertData(insertData));
+                let result = await adminModel.clone().insertData(insertData);
                 return {
                     ...codeConfig.INSERT_SUCCESS,
                     data: result
@@ -56,4 +53,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};
