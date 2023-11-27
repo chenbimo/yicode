@@ -3,8 +3,6 @@ import { fnRoute, fnSelectFields } from '../../utils/index.js';
 // 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-// 查询字段
-let selectKeys = fnSelectFields('./tables/admin.json', 'core', ['password']);
 
 // 处理函数
 export default async (fastify) => {
@@ -39,7 +37,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(page, limit, selectKeys);
+                    .selectData(page, limit, fnSelectFields('./tables/admin.json', 'core', ['password']));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
