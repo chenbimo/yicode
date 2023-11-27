@@ -556,6 +556,11 @@ export function fnRequire(filePath, defaultValue, fromType = 'core') {
 
 // 获取查询字段
 export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) {
+    // 如果没有 fields 字段
+    if (['core', 'app'].includes(fromType) === false) {
+        console.log(`${logSymbols.warning} ${color.blueBright(filePath)} fromType 属性必须为 core,app 二者之一，请检查`);
+        process.exit(1);
+    }
     // 内置的字段
     let innerFields = [
         //
@@ -565,10 +570,11 @@ export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) 
         'state'
     ];
     let tableJson = fnRequire(filePath, {}, fromType);
+
     // 如果没有 fields 子弹
     if (!tableJson?.fields) {
         console.log(`${logSymbols.warning} ${color.blueBright(filePath)} 没有 fields 属性，请检查`);
-        process.exit();
+        process.exit(1);
     }
     let extraFields = {};
     if (fromType === 'core') {
