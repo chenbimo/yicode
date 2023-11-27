@@ -4,7 +4,7 @@ import { schemaField } from '../../config/schemaField.js';
 export let metaConfig = {
     name: '管理员',
     schema: {
-        id: fnSchema(schemaField.id, '唯一ID'),
+        id: fnSchema(schemaField.id, '唯一 ID'),
         account: fnSchema(schemaField.account, '账号'),
         username: fnSchema(schemaField.username, '用户名'),
         password: fnSchema(schemaField.password, '密码'),
