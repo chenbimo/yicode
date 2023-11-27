@@ -28,12 +28,15 @@ import {
     random as _random,
     isString as _isString,
     cloneDeep as _cloneDeep,
-    uniq as _uniq
+    uniq as _uniq,
+    isPlainObject as _isPlainObject
 } from 'lodash-es';
 // 配置文件
 import { appConfig } from '../config/appConfig.js';
 import { sysConfig } from '../config/sysConfig.js';
 import { schemaType } from '../config/schemaType.js';
+import { schemaField } from '../config/schemaField.js';
+import { metaConfig } from '../config/metaConfig.js';
 
 // 自定义初始化字符
 let nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
@@ -168,7 +171,7 @@ export async function fnAllApiMeta() {
 }
 
 // 获取文件名（不包括扩展名）
-export async function fnApiInfo(metaUrl) {
+export function fnApiInfo(metaUrl) {
     let _filename = fnFilename(metaUrl);
     let _dirname = fnDirname(metaUrl);
 
@@ -178,11 +181,9 @@ export async function fnApiInfo(metaUrl) {
 
     let metaFile = path.dirname(metaUrl) + '/_meta.js';
 
-    let { metaConfig } = await fnImport(metaFile, {});
-
     let apiHash = {
         pureFileName: pureFileName,
-        parentDirName: metaConfig?.dir ? metaConfig?.dir : parentDirName,
+        parentDirName: parentDirName,
         apiPath: [parentDirName, pureFileName].join('/')
     };
 
@@ -448,8 +449,8 @@ export async function fnImport(path, name, defaultValue, options = {}) {
 }
 
 // 设置路由函数
-export const fnRoute = async (metaUrl, fastify, options) => {
-    let apiInfo = await fnApiInfo(metaUrl);
+export const fnRoute = (metaUrl, fastify, options) => {
+    let apiInfo = fnApiInfo(metaUrl);
     let method = _lowerCase(options.method || 'post');
     if (!options.apiName) {
         console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 apiName 属性，请检查`);
@@ -476,7 +477,7 @@ export const fnRoute = async (metaUrl, fastify, options) => {
 
     let routeParams = {
         method: method,
-        url: options.url || `/${apiInfo.pureFileName}`,
+        url: `/${apiInfo.pureFileName}`,
         schema: {
             summary: options.apiName,
             tags: [apiInfo.parentDirName],
@@ -491,6 +492,44 @@ export const fnRoute = async (metaUrl, fastify, options) => {
         routeParams.schema.body = options.schemaRequest;
     }
     fastify.route(routeParams);
+};
+
+// 接口元数据函数
+export const fnMeta = (metaUrl, data) => {
+    let apiInfo = fnApiInfo(metaUrl);
+    if (!data.name) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据没有 name 属性，请检查`);
+        process.exit(1);
+        return;
+    }
+    if (_isString(data.name) === false) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据的 name 属性必须为字符串，请检查`);
+        process.exit(1);
+        return;
+    }
+    if (!data.schema) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据没有 schema 属性，请检查`);
+        process.exit(1);
+        return;
+    }
+    if (_isPlainObject(data.schema) === false) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据的 schema 属性必须为对象类型，请检查`);
+        process.exit(1);
+        return;
+    }
+    return {
+        name: data.name,
+        schema: _merge(
+            {
+                id: fnSchema(schemaField.id, '唯一 ID'),
+                page: fnSchema(schemaField.page, '第几页'),
+                limit: fnSchema(schemaField.limit, '每页多少条'),
+                state: fnSchema(schemaField.state, '是否启用'),
+                ...metaConfig
+            },
+            data.schema
+        )
+    };
 };
 
 // 获取 file 协议的路径
