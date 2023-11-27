@@ -1,7 +1,7 @@
-import { fnSchema } from '../../utils/index.js';
+import { fnSchema, fnMeta } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
 
-export let metaConfig = {
+export let metaConfig = fnMeta(import.meta.url, {
     name: '工具',
     schema: {
         to_email: fnSchema(schemaField.email, '邮箱地址'),
@@ -16,4 +16,4 @@ export let metaConfig = {
         },
         content: fnSchema(schemaField.string1to1000, '邮件内容')
     }
-};
+});
