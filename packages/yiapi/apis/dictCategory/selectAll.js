@@ -1,5 +1,5 @@
 // 工具函数
-import { fnRoute, fnSelectFields } from '../../utils/index.js';
+import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
@@ -30,7 +30,7 @@ export default async (fastify) => {
                         }
                     });
 
-                const rows = await dictCategoryModel.clone().selectAll(fnSelectFields('./tables/dictCategory.json'));
+                const rows = await dictCategoryModel.clone().selectAll(fnField('./tables/dictCategory.json'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

@@ -1,55 +1,45 @@
 import * as yiapi from '@yicode/yiapi';
 import { metaConfig } from './_meta.js';
 
-let apiInfo = await yiapi.utils.fnApiInfo(import.meta.url);
-
-export let apiSchema = {
-    summary: `查询资讯列表`,
-    tags: [apiInfo.parentDirName],
-    description: `${apiInfo.apiPath}`,
-    body: {
-        type: 'object',
-        title: '查询资讯列表接口',
-        properties: {
-            category_id: metaConfig.schema.category_id,
-            page: metaConfig.schema.page,
-            limit: metaConfig.schema.limit,
-            keyword: metaConfig.schema.keyword
+// 处理函数
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    yiapi.fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '查询资讯列表',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {
+                page: metaConfig.schema.page,
+                limit: metaConfig.schema.limit
+            },
+            required: []
         },
-        required: ['category_id']
-    }
-};
-
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
-                // 查询用户是否存在
-                let newsModel = fastify.mysql.table('news').modify(function (db) {
-                    if (req.body.category_id > 0) {
-                        db.where('category_id', req.body.category_id);
-                    }
-                });
+                const newsModel = fastify.mysql //
+                    .table('news')
+                    .modify(function (qb) {});
 
                 // 记录总数
-                let { total } = await newsModel
+                const { totalCount } = await newsModel
                     .clone() //
-                    .count('id', { as: 'total' })
-                    .first('id');
+                    .selectCount();
 
                 // 记录列表
-                let rows = await newsModel
+                const rows = await newsModel
                     .clone() //
                     .orderBy('created_at', 'desc')
-                    .offset(yiapi.utils.fnPageOffset(req.body.page, req.body.limit))
-                    .limit(req.body.limit)
-                    .select();
+                    .selectData(req.body.page, req.body.limit);
 
                 return {
                     ...yiapi.codeConfig.SELECT_SUCCESS,
                     data: {
-                        total: total,
+                        total: totalCount,
                         rows: rows,
                         page: req.body.page,
                         limit: req.body.limit
@@ -61,4 +51,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};

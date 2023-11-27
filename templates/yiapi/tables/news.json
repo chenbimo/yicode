@@ -1,0 +1,23 @@
+{
+    "name": "文章资讯表",
+    "fields": {
+        "title": {
+            "type": "string",
+            "comment": "资讯标题",
+            "length": 30,
+            "default": ""
+        },
+        "thumbnail": {
+            "type": "string",
+            "comment": "缩略图",
+            "length": 300,
+            "default": ""
+        },
+        "content": {
+            "type": "string",
+            "comment": "资讯内容",
+            "length": 5000,
+            "default": ""
+        }
+    }
+}

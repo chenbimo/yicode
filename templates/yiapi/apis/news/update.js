@@ -1,59 +1,47 @@
 import * as yiapi from '@yicode/yiapi';
 import { metaConfig } from './_meta.js';
 
-let apiInfo = await yiapi.utils.fnApiInfo(import.meta.url);
-
-export let apiSchema = {
-    summary: `更新资讯`,
-    tags: [apiInfo.parentDirName],
-    description: `${apiInfo.apiPath}`,
-    body: {
-        type: 'object',
-        title: '更新资讯接口',
-        properties: {
-            id: metaConfig.schema.id,
-            category_id: metaConfig.schema.category_id,
-            title: metaConfig.schema.title,
-            describe: metaConfig.schema.describe,
-            thumbnail: metaConfig.schema.thumbnail,
-            content: metaConfig.schema.content
+// 处理函数
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    yiapi.fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '更新资讯',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {
+                id: metaConfig.schema.id,
+                title: metaConfig.schema.title,
+                thumbnail: metaConfig.schema.thumbnail,
+                content: metaConfig.schema.content
+            },
+            required: ['id']
         },
-        required: [
-            //
-            'id'
-        ]
-    }
-};
-
-export default async function (fastify) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
-            let trx = await fastify.mysql.transaction();
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
-                let newsModel = trx.table('news').where('id', req.body.id);
+                const newsModel = fastify.mysql.table('news');
 
-                let updateData = {
-                    category_id: req.body.category_id,
-                    title: req.body.title,
-                    describe: req.body.describe,
-                    thumbnail: req.body.thumbnail,
-                    content: req.body.content
-                };
+                const result = await newsModel //
+                    .clone()
+                    .where('id', req.body.id)
+                    .updateData({
+                        title: req.body.title,
+                        thumbnail: req.body.thumbnail,
+                        content: req.body.content
+                    });
 
-                let result = await newsModel.clone().update(yiapi.utils.fnDbUpdateData(updateData));
-
-                await trx.commit();
                 return {
                     ...yiapi.codeConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                await trx.rollback();
-                // 成功返回
                 return yiapi.codeConfig.INSERT_FAIL;
             }
         }
     });
-}
+};

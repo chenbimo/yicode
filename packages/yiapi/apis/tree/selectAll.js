@@ -1,5 +1,5 @@
 // 工具函数
-import { fnRoute, fnSelectFields } from '../../utils/index.js';
+import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
@@ -28,7 +28,7 @@ export default async (fastify) => {
                     .where('category', req.body.category)
                     .modify(function (qb) {});
 
-                const rows = await roleModel.clone().selectAll(fnSelectFields('./tables/tree.json'));
+                const rows = await roleModel.clone().selectAll(fnField('./tables/tree.json'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

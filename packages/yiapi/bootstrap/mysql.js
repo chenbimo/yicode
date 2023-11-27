@@ -2,7 +2,7 @@ import fp from 'fastify-plugin';
 import Knex from 'knex';
 
 import { appConfig } from '../config/appConfig.js';
-import { fnDbInsertData, fnDbUpdateData, fnPageOffset } from '../utils/index.js';
+import { fnDbInsertData, fnDbUpdateData } from '../utils/index.js';
 
 async function plugin(fastify, options) {
     try {
@@ -20,7 +20,9 @@ async function plugin(fastify, options) {
         });
         // 查询数据
         Knex.QueryBuilder.extend('selectData', function (page, limit, ...args) {
-            return this.offset(fnPageOffset(page, limit)).limit(limit).select(args);
+            return this.offset((page - 1) * limit)
+                .limit(limit)
+                .select(args);
         });
         // 查询一条
         Knex.QueryBuilder.extend('selectOne', function (...args) {

@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import fs from 'fs-extra';
 import Fastify from 'fastify';
 import autoLoad from '@fastify/autoload';
@@ -10,9 +10,8 @@ import fg from 'fast-glob';
 import fastifyStatic from '@fastify/static';
 import gracefulShutdown from 'http-graceful-shutdown';
 
-// 工具函数
+// 环境变量，必须在配置信息之前执行
 import './env.js';
-import * as utils from './utils/index.js';
 
 // 配置信息
 import { appConfig } from './config/appConfig.js';
@@ -27,6 +26,17 @@ import { tableField } from './config/tableField.js';
 
 // 脚本
 import { syncDatabase } from './scripts/syncDatabase.js';
+// 工具函数
+import {
+    //
+    fnSchema,
+    fnUUID,
+    fnSaltMd5,
+    fnPureMD5,
+    fnRoute,
+    fnMeta,
+    fnField
+} from './utils/index.js';
 
 // 启动前验证
 if (appConfig.devPassword === 'dev123456') {
@@ -53,7 +63,7 @@ fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
 let fastify = Fastify({
     logger: logConfig,
     pluginTimeout: 0,
-    genReqId: () => utils.fnUUID(),
+    genReqId: () => fnUUID(),
     ajv: {
         customOptions: {
             allErrors: true,
@@ -214,7 +224,6 @@ export {
     // 内部工具
     fastify,
     initServer,
-    utils,
     fp,
     // 配置
     appConfig,
@@ -226,5 +235,13 @@ export {
     sysConfig,
     tableField,
     // 脚本
-    syncDatabase
+    syncDatabase,
+    // 工具函数
+    fnUUID,
+    fnSaltMd5,
+    fnPureMD5,
+    fnSchema,
+    fnRoute,
+    fnMeta,
+    fnField
 };

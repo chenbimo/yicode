@@ -1,5 +1,5 @@
 // 工具函数
-import { fnRoute, fnSelectFields } from '../../utils/index.js';
+import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
@@ -36,7 +36,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, fnSelectFields('./tables/tree.json'));
+                    .selectData(req.body.page, req.body.limit, fnField('./tables/tree.json'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

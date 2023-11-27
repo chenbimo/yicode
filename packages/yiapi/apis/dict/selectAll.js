@@ -1,5 +1,5 @@
 // 工具函数
-import { fnRoute, fnSelectFields } from '../../utils/index.js';
+import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
@@ -31,7 +31,7 @@ export default async (fastify) => {
                             qb.where('state', req.body.state);
                         }
                     });
-                const rowsTemp = await dictModel.clone().selectAll(fnSelectFields('./tables/dict.json'));
+                const rowsTemp = await dictModel.clone().selectAll(fnField('./tables/dict.json'));
 
                 const rows = rowsTemp?.map((item) => {
                     if (item.symbol === 'number') {

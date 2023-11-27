@@ -269,19 +269,14 @@ export function fnUUID(size = 26) {
     return nanoid(size);
 }
 
-// 加密 md5 值
-export function fnMD5(value) {
+// 加盐的 md5 值
+export function fnSaltMd5(value) {
     return md5(value, appConfig.salt);
 }
 
 // 单纯的 md5 值
 export function fnPureMD5(value) {
     return md5(value);
-}
-
-// 获得分页的偏移值
-export function fnPageOffset(page, limit) {
-    return (page - 1) * limit;
 }
 
 // 获取毫秒级时间戳
@@ -555,7 +550,7 @@ export function fnRequire(filePath, defaultValue, fromType = 'core') {
 }
 
 // 获取查询字段
-export function fnSelectFields(filePath, fromType = 'core', excludeFields = []) {
+export function fnField(filePath, fromType = 'core', excludeFields = []) {
     // 如果没有 fields 字段
     if (['core', 'app'].includes(fromType) === false) {
         console.log(`${logSymbols.warning} ${color.blueBright(filePath)} fromType 属性必须为 core,app 二者之一，请检查`);
