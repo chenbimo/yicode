@@ -1,33 +1,30 @@
 // 外部模块
 import { omit as _omit } from 'lodash-es';
 // 工具函数
-import { fnApiInfo, fnDbInsertData, fnPureMD5, fnMD5 } from '../../utils/index.js';
+import { fnRoute, fnPureMD5, fnMD5 } from '../../utils/index.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
-import { cacheData } from '../../config/cacheData.js';
 import { metaConfig } from './_meta.js';
-// 接口信息
-let apiInfo = await fnApiInfo(import.meta.url);
-// 传参校验
-export let apiSchema = {
-    tags: [apiInfo.parentDirName],
-    summary: `${metaConfig.name}登录`,
-    body: {
-        title: `${metaConfig.name}登录接口`,
-        type: 'object',
-        properties: {
-            account: metaConfig.schema.account,
-            password: metaConfig.schema.password
-        },
-        required: ['account', 'password']
-    }
-};
+
 // 处理函数
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '管理员登录',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {
+                account: metaConfig.schema.account,
+                password: metaConfig.schema.password
+            },
+            required: ['account', 'password']
+        },
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
                 let adminModel = fastify.mysql.table('sys_admin');
                 let loginLogModel = fastify.mysql.table('sys_login_log');
@@ -37,7 +34,7 @@ export default async function (fastify, opts) {
                 let adminData = await adminModel //
                     .clone()
                     .orWhere({ username: req.body.account })
-                    .first('id', 'password', 'username', 'nickname', 'role_codes');
+                    .selectOne('id', 'password', 'username', 'nickname', 'role_codes');
 
                 // 判断用户存在
                 if (!adminData?.id) {
@@ -63,7 +60,7 @@ export default async function (fastify, opts) {
                     ua: req.headers['user-agent'] || ''
                 };
 
-                await loginLogModel.clone().insert(fnDbInsertData(loginLogData));
+                await loginLogModel.clone().insertData(loginLogData);
 
                 // 成功返回
                 return {
@@ -86,4 +83,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};
