@@ -227,14 +227,10 @@ export function fnDbInsertData(obj) {
             newObj[key] = value;
         }
     });
-    // if (obj.created_at === null || obj.created_at === undefined) {
     newObj.created_at = fnTimestamp();
-    // }
-    // if (obj.updated_at === null || obj.updated_at === undefined) {
     newObj.updated_at = fnTimestamp();
-    // }
-    // if (obj.id === null || obj.id === undefined) {
     if (appConfig.tablePrimaryKey !== 'default') {
+        // 当主键为 time 模式时，更改 id 字段的值
         if (appConfig.tablePrimaryKey === 'time') {
             newObj.id = fnIncrUID();
         }
