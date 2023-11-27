@@ -247,9 +247,7 @@ export function fnDbUpdateData(obj) {
             newObj[key] = value;
         }
     });
-    if (obj.updated_at === null || obj.updated_at === undefined) {
-        newObj.updated_at = fnTimestamp();
-    }
+    newObj.updated_at = fnTimestamp();
     return newObj;
 }
 
