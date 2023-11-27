@@ -9,7 +9,7 @@ export default async (fastify) => {
     // 当前文件的路径，fastify 实例
     fnRoute(import.meta.url, fastify, {
         // 接口名称
-        apiName: '查询所有角色',
+        apiName: '查询所有树',
         // 请求参数约束
         schemaRequest: {
             type: 'object',

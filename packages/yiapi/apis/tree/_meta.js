@@ -2,7 +2,7 @@ import { fnSchema, fnMeta } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
 
 export let metaConfig = fnMeta(import.meta.url, {
-    name: '目录',
+    name: '树',
     schema: {
         pid: fnSchema(schemaField.pid, '父级目录 ID'),
         category: fnSchema(schemaField.category, '目录分类'),
