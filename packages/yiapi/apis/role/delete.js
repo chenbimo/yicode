@@ -1,36 +1,35 @@
 // 工具函数
-import { fnApiInfo } from '../../utils/index.js';
+import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 // 接口信息
-let apiInfo = await fnApiInfo(import.meta.url);
-// 传参验证
-export let apiSchema = {
-    tags: [apiInfo.parentDirName],
-    summary: `删除${metaConfig.name}`,
-    body: {
-        title: `删除${metaConfig.name}接口`,
-        type: 'object',
-        properties: {
-            id: metaConfig.schema.id
-        },
-        required: ['id']
-    }
-};
+
 // 处理函数
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '删除菜单',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {
+                id: metaConfig.schema.id
+            },
+            required: ['id']
+        },
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
-                let roleModel = fastify.mysql //
+                const roleModel = fastify.mysql //
                     .table('sys_role')
                     .where('id', req.body.id)
-                    .modify(function (queryBuilder) {});
+                    .modify(function (qb) {});
 
-                let roleData = await roleModel.clone().first('id', 'is_system');
+                const roleData = await roleModel.clone().selectOne('id', 'is_system');
                 if (!roleData?.id) {
                     return codeConfig.NO_DATA;
                 }
@@ -42,7 +41,7 @@ export default async function (fastify, opts) {
                     };
                 }
 
-                let result = await roleModel.clone().delete();
+                const result = await roleModel.clone().deleteData();
 
                 // 生成新的权限
                 await fastify.cacheRoleData();
@@ -56,4 +55,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};
