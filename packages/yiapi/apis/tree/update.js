@@ -1,45 +1,46 @@
 // 工具函数
-import { fnTimestamp, fnDbUpdateData, fnApiInfo } from '../../utils/index.js';
+import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
-// 接口信息
-let apiInfo = await fnApiInfo(import.meta.url);
-// 传参验证
-export let apiSchema = {
-    summary: `更新${metaConfig.name}`,
-    tags: [apiInfo.parentDirName],
-    body: {
-        title: `更新${metaConfig.name}接口`,
-        type: 'object',
-        properties: {
-            id: metaConfig.schema.id,
-            pid: metaConfig.schema.pid,
-            category: metaConfig.schema.category,
-            name: metaConfig.schema.name,
-            value: metaConfig.schema.value,
-            icon: metaConfig.schema.icon,
-            sort: metaConfig.schema.sort,
-            describe: metaConfig.schema.describe,
-            is_bool: metaConfig.schema.is_bool,
-            is_open: metaConfig.schema.is_open
-        },
-        required: ['id']
-    }
-};
+
 // 处理函数
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '更新树',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {
+                id: metaConfig.schema.id,
+                pid: metaConfig.schema.pid,
+                category: metaConfig.schema.category,
+                name: metaConfig.schema.name,
+                value: metaConfig.schema.value,
+                icon: metaConfig.schema.icon,
+                sort: metaConfig.schema.sort,
+                describe: metaConfig.schema.describe,
+                is_bool: metaConfig.schema.is_bool,
+                is_open: metaConfig.schema.is_open
+            },
+            required: ['id']
+        },
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             // TODO: 此处需要使用事务
             try {
-                let treeModel = fastify.mysql.table('sys_tree');
-                let parentData = null;
-                // 如果传了pid值
+                const treeModel = fastify.mysql.table('sys_tree');
+                const parentData = null;
+                // 如果传了 pid 值
                 if (req.body.pid) {
-                    parentData = await treeModel.clone().where('id', req.body.pid).first('id', 'pids');
+                    parentData = await treeModel //
+                        .clone()
+                        .where('id', req.body.pid)
+                        .first('id', 'pids');
                     if (!parentData?.id) {
                         return {
                             ...codeConfig.FAIL,
@@ -48,7 +49,10 @@ export default async function (fastify, opts) {
                     }
                 }
 
-                let selfData = await treeModel.clone().where('id', req.body.id).first('id');
+                const selfData = await treeModel //
+                    .clone()
+                    .where('id', req.body.id)
+                    .first('id');
                 if (!selfData?.id) {
                     return {
                         ...codeConfig.FAIL,
@@ -73,23 +77,24 @@ export default async function (fastify, opts) {
                 if (parentData !== null) {
                     updateData.pids = [parentData.pids, parentData.id].join(',');
                 }
-                let result = await treeModel
+                const result = await treeModel
                     //
                     .clone()
                     .where({ id: req.body.id })
-                    .update(fnDbUpdateData(updateData));
+                    .updateData(updateData);
 
                 // 如果更新成功，则更新所有子级
                 if (result) {
-                    let childrenPids = [updateData.pids || selfData.pid, selfData.id];
-                    let updateData2 = {
-                        pids: childrenPids.join(','),
-                        level: childrenPids.length
-                    };
-                    await treeModel.clone().where({ pid: selfData.id }).update(fnDbUpdateData(updateData2));
+                    const childrenPids = [updateData.pids || selfData.pid, selfData.id];
+                    await treeModel
+                        .clone()
+                        .where({ pid: selfData.id })
+                        .updateData({
+                            pids: childrenPids.join(','),
+                            level: childrenPids.length
+                        });
                 }
 
-                await fastify.cacheTreeData();
                 return {
                     ...codeConfig.UPDATE_SUCCESS,
                     data: result
@@ -100,4 +105,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};
