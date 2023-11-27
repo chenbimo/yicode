@@ -1,35 +1,32 @@
 // 工具函数
-import { fnApiInfo } from '../../utils/index.js';
+import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { cacheData } from '../../config/cacheData.js';
 import { metaConfig } from './_meta.js';
-// 接口信息
-let apiInfo = await fnApiInfo(import.meta.url);
-// 传参校验
-export let apiSchema = {
-    summary: `查询所有${metaConfig.name}`,
-    tags: [apiInfo.parentDirName],
-    body: {
-        title: `查询所有${metaConfig.name}接口`,
-        type: 'object',
-        properties: {},
-        required: []
-    }
-};
+
 // 处理函数
-export default async function (fastify, opts) {
-    fastify.post(`/${apiInfo.pureFileName}`, {
-        schema: apiSchema,
-        handler: async function (req, res) {
+export default async (fastify) => {
+    // 当前文件的路径，fastify 实例
+    fnRoute(import.meta.url, fastify, {
+        // 接口名称
+        apiName: '查询所有接口',
+        // 请求参数约束
+        schemaRequest: {
+            type: 'object',
+            properties: {}
+        },
+        // 返回数据约束
+        schemaResponse: {},
+        // 执行函数
+        apiHandler: async (req, res) => {
             try {
-                let apiData = await fastify.redisGet(cacheData.api);
+                let result = await fastify.redisGet(cacheData.api);
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
                     data: {
-                        rows: apiData
+                        rows: result
                     }
                 };
             } catch (err) {
@@ -38,4 +35,4 @@ export default async function (fastify, opts) {
             }
         }
     });
-}
+};
