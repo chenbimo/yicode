@@ -27,7 +27,12 @@ export let appConfigSchema = {
             default: false
         },
         isSwagger: {
-            title: '是否开启swagger文档',
+            title: '是否开启接口文档',
+            type: 'boolean',
+            default: false
+        },
+        isWxPay: {
+            title: '是否开启支付功能',
             type: 'boolean',
             default: false
         },
@@ -117,7 +122,7 @@ export let appConfigSchema = {
                 'port'
             ]
         },
-        // redis配置
+        // redis 配置
         redis: {
             title: '缓存配置',
             type: 'object',
@@ -156,9 +161,9 @@ export let appConfigSchema = {
                 'port'
             ]
         },
-        // jwt配置
+        // jwt 配置
         jwt: {
-            title: 'jwt配置',
+            title: 'jwt 配置',
             type: 'object',
             properties: {
                 secret: {
@@ -194,7 +199,7 @@ export let appConfigSchema = {
                     type: 'boolean'
                 },
                 secure: {
-                    title: '是否开启https',
+                    title: '是否开启 https',
                     type: 'boolean'
                 },
                 user: {

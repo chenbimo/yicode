@@ -36,8 +36,10 @@ let appConfig = mergeAndConcat(
         logFilter: ['password', 'file'],
         // 是否进行参数验证
         paramsCheck: false,
-        // 是否显示 swagger 文档
+        // 是否显示接口文档
         isSwagger: false,
+        // 是否开启微信支付
+        isWxPay: false,
         // 任何情况下可以访问的路由
         freeApis: [
             //
