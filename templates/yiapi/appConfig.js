@@ -63,7 +63,7 @@ let appConfig = {
     // jwt 配置
     jwt: {
         // jwt 密钥，第一次使用，请修改此密钥值！！！
-        secret: test,
+        secret: 'yiapi',
         expiresIn: '7d'
     },
     // 邮件配置
