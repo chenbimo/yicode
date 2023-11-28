@@ -7,21 +7,20 @@ import { keyBy as _keyBy } from 'lodash-es';
 import { appConfig } from '../config/appConfig.js';
 import { cacheData } from '../config/cacheData.js';
 
-async function plugin(fastify, opts) {
-    fastify.decorate('redisSet', async (key, value, second = 0) => {
+async function plugin(fastify) {
+    const redisSet = async (key, value, second = 0) => {
         if (second > 0) {
             await fastify.redis.set(key, JSON.stringify(value), 'EX', second);
         } else {
             await fastify.redis.set(key, JSON.stringify(value));
         }
-    });
-    fastify.decorate('redisGet', async (key, unpack = false) => {
+    };
+    const redisGet = async (key, unpack = false) => {
         let result = await fastify.redis.get(key);
         return JSON.parse(result);
-    });
+    };
 
-    // 获取当前登录用户可操作的接口列表
-    fastify.decorate('getUserApis', async (session) => {
+    const getUserApis = async (session) => {
         if (!session) return [];
         // 提取当前用户的角色码组
         let userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
@@ -53,10 +52,9 @@ async function plugin(fastify, opts) {
                 return item;
             });
         return result;
-    });
+    };
 
-    // 获取用户的菜单
-    fastify.decorate('getUserMenus', async (session) => {
+    const getUserMenus = async (session) => {
         try {
             if (session === null || session === undefined) return [];
             // 所有角色数组
@@ -90,20 +88,18 @@ async function plugin(fastify, opts) {
         } catch (err) {
             fastify.log.error(err);
         }
-    });
+    };
 
-    // 设置权限数据
-    fastify.decorate('cacheMenuData', async () => {
+    const cacheMenuData = async () => {
         // 菜单列表
         let dataMenu = await fastify.mysql.table('sys_menu').select();
 
         // 菜单树数据
         await fastify.redisSet(cacheData.menu, []);
         await fastify.redisSet(cacheData.menu, dataMenu);
-    });
+    };
 
-    // 设置权限数据
-    fastify.decorate('cacheApiData', async () => {
+    const cacheApiData = async () => {
         // 菜单列表
         let dataApi = await fastify.mysql.table('sys_api').select();
 
@@ -124,15 +120,75 @@ async function plugin(fastify, opts) {
         // 白名单接口数据
         await fastify.redisSet(cacheData.apiWhiteLists, []);
         await fastify.redisSet(cacheData.apiWhiteLists, dataApiWhiteLists);
-    });
+    };
 
-    // 设置角色数据
-    fastify.decorate('cacheRoleData', async () => {
+    const cacheRoleData = async () => {
         // 角色类别
         let dataRole = await fastify.mysql.table('sys_role').select();
 
         await fastify.redisSet(cacheData.role, []);
         await fastify.redisSet(cacheData.role, dataRole);
-    });
+    };
+
+    const getWeixinAccessToken = async () => {
+        try {
+            let res = await got('https://api.weixin.qq.com/cgi-bin/token', {
+                method: 'GET',
+                searchParams: {
+                    grant_type: 'client_credential',
+                    appid: appConfig.custom.weixin.appId,
+                    secret: appConfig.custom.weixin.appSecret
+                }
+            }).json();
+
+            if (res.access_token) {
+                fastify.redisSet(`cacheData:weixinAccessToken`, res.access_token, 6000);
+            }
+            return res.access_token;
+        } catch (err) {
+            fastify.log.error(err);
+            return false;
+        }
+    };
+
+    const getWeixinJsapiTicket = async (access_token) => {
+        try {
+            let access_token = await fastify.redisGet('cacheData:weixinAccessToken');
+            if (!access_token) {
+                access_token = await fastify.getWeixinAccessToken();
+            }
+            let res = await got('https://api.weixin.qq.com/cgi-bin/ticket/getticket', {
+                method: 'GET',
+                searchParams: {
+                    type: 'jsapi',
+                    access_token: access_token
+                }
+            }).json();
+            if (res.ticket) {
+                fastify.redisSet(`cacheData:weixinJsapiTicket`, res.ticket, 6000);
+            }
+            return res.ticket;
+        } catch (err) {
+            fastify.log.error(err);
+        }
+    };
+
+    // 设置和获取缓存数据
+    fastify.decorate('redisSet', redisSet);
+    fastify.decorate('redisGet', redisGet);
+    // 获取当前登录用户可操作的接口列表
+    fastify.decorate('getUserApis', getUserApis);
+    // 获取用户的菜单
+    fastify.decorate('getUserMenus', getUserMenus);
+    // 设置权限数据
+    fastify.decorate('cacheMenuData', cacheMenuData);
+    // 设置权限数据
+    fastify.decorate('cacheApiData', cacheApiData);
+    // 设置角色数据
+    fastify.decorate('cacheRoleData', cacheRoleData);
+    // 获取微信 access_token
+    fastify.decorate('getWeixinAccessToken', getWeixinAccessToken);
+    // 获取微信 jsapi_ticket
+    fastify.decorate('getWeixinJsapiTicket', getWeixinJsapiTicket);
 }
 export default fp(plugin, { name: 'tool', dependencies: ['mysql', 'redis'] });
