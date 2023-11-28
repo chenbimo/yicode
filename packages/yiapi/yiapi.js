@@ -1,5 +1,4 @@
 import path from 'node:path';
-import fs from 'fs-extra';
 import Fastify from 'fastify';
 import autoLoad from '@fastify/autoload';
 import fp from 'fastify-plugin';
@@ -32,19 +31,10 @@ import {
     fnPureMD5,
     fnRoute,
     fnMeta,
-    fnField,
-    initServerCheck
+    fnField
 } from './utils/index.js';
 
-initServerCheck();
-
-// 确保关键目录存在
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'tables'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'plugins'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
-fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
+import './preboot/init.js';
 
 // 初始化项目实例
 let fastify = Fastify({

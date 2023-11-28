@@ -5,6 +5,7 @@ import url from 'node:url';
 import { createRequire } from 'node:module';
 import { createServer as net_createServer, Server as net_Server } from 'node:net';
 // 外部模块
+
 import fg from 'fast-glob';
 import md5 from 'blueimp-md5';
 import got from 'got';
@@ -659,25 +660,4 @@ export const fnHashSign = (algorithm, content) => {
     let hash = crypto.createHash(algorithm);
     hash.update(content);
     return hash.digest('hex');
-};
-
-// 服务启动验证
-export const initServerCheck = () => {
-    // 启动前验证
-    if (appConfig.devPassword === 'dev123456') {
-        console.log(`${logSymbols.warning} 请修改超级管理员密码！！！（位置：appConfig.devPassword）`);
-        process.exit(1);
-    }
-
-    // 启动前验证
-    if (appConfig.salt === 'yiapi-123456.') {
-        console.log(`${logSymbols.warning} 请修改默认加密盐值！！！（位置：appConfig.salt）`);
-        process.exit(1);
-    }
-
-    // jwt密钥验证
-    if (appConfig.jwt.secret === 'yiapi') {
-        console.log(`${logSymbols.warning} 请修改jwt默认密钥！！！（位置：appConfig.jwt.secret`);
-        process.exit(1);
-    }
 };
