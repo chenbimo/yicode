@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import logSymbols from 'log-symbols';
 
 import { appConfig } from '../config/appConfig.js';
-import { sysConfig } from './config/sysConfig.js';
+import { sysConfig } from '../config/sysConfig.js';
 
 // 启动前验证
 if (appConfig.devPassword === 'dev123456') {
