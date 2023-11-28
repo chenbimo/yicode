@@ -641,3 +641,22 @@ export function fnSchema(hash, name, type, min, max, enumValue, defaultValue, pa
         throw new Error(err);
     }
 }
+
+// 获取参数按小写排序拼接
+export const fnParamsRaw = (args) => {
+    let keys = Object.keys(args).sort();
+    let newArgs = keys
+        .map((key) => {
+            return `${key.toLowerCase()}=${args[key]}`;
+        })
+        .join('&');
+
+    return newArgs;
+};
+
+// 创建哈希算法
+export const fnHashSign = (algorithm, content) => {
+    let hash = crypto.createHash(algorithm);
+    hash.update(content);
+    return hash.digest('hex');
+};
