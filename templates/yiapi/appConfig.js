@@ -35,14 +35,7 @@ let appConfig = {
         '/api/tool/sendMail'
     ],
     // 黑名单接口，不可访问的接口
-    blackApis: [
-        //
-        '/api/user/emailVerifyLogin',
-        '/api/user/emailPassLogin',
-        '/api/user/emailRegister',
-        '/api/user/emailVerifyBind',
-        '/api/user/emailVerifyLogin'
-    ],
+    blackApis: [],
     // 白名单接口，登录后访问无限制
     whiteApis: [],
     // 黑名单菜单
