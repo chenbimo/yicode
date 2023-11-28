@@ -32,20 +32,11 @@ import {
     fnPureMD5,
     fnRoute,
     fnMeta,
-    fnField
+    fnField,
+    initServerCheck
 } from './utils/index.js';
 
-// 启动前验证
-if (appConfig.devPassword === 'dev123456') {
-    console.log(`${logSymbols.warning} 请修改超级管理员密码！！！（位置：appConfig.devPassword）`);
-    process.exit(1);
-}
-
-// 启动前验证
-if (appConfig.salt === 'yiapi-123456.') {
-    console.log(`${logSymbols.warning} 请修改默认加密盐值！！！（位置：appConfig.salt）`);
-    process.exit(1);
-}
+initServerCheck();
 
 // 确保关键目录存在
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
