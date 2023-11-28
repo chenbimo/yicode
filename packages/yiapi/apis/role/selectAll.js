@@ -29,7 +29,7 @@ export default async (fastify) => {
                         }
                     });
 
-                const rows = await roleModel.clone().selectAll(fnField('./tables/role.json'));
+                const rows = await roleModel.clone().selectAll(fnField('role', 'core'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

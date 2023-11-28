@@ -31,7 +31,7 @@ export default async (fastify) => {
                             qb.where('state', req.body.state);
                         }
                     });
-                const rowsTemp = await dictModel.clone().selectAll(fnField('./tables/dict.json'));
+                const rowsTemp = await dictModel.clone().selectAll(fnField('dict', 'core'));
 
                 const rows = rowsTemp?.map((item) => {
                     if (item.symbol === 'number') {

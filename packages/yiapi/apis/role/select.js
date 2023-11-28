@@ -38,7 +38,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, fnField('./tables/role.json'));
+                    .selectData(req.body.page, req.body.limit, fnField('role', 'core'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

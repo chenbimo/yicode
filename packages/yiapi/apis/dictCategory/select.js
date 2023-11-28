@@ -44,7 +44,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, fnField('./tables/dictCategory.json'));
+                    .selectData(req.body.page, req.body.limit, fnField('dictCategory', 'core'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

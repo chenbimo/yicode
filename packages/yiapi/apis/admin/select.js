@@ -37,7 +37,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(page, limit, fnField('./tables/admin.json', 'core', ['password']));
+                    .selectData(page, limit, fnField('admin', 'core', ['password']));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

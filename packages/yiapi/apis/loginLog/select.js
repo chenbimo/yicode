@@ -40,7 +40,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .select(req.body.page, req.body.limit, fnField('./tables/loginLog.json'));
+                    .select(req.body.page, req.body.limit, fnField('loginLog', 'core'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
