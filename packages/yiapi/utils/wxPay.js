@@ -11,7 +11,7 @@ const wxPayConfig = {
     privateKey: appConfig.custom.weixin.privateKey,
     serialNo: appConfig.custom.weixin.serialNo,
     apiv3PrivateKey: appConfig.custom.weixin.apiv3PrivateKey,
-    notifyUrl: process.env.YIAPI_WEPAY_NOTIFY_URL,
+    notifyUrl: appConfig.custom.weixin.notifyUrl,
     certificates: [],
     certExpiresTime: ''
 };

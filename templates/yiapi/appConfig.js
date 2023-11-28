@@ -44,27 +44,27 @@ let appConfig = {
     tablePrimaryKey: 'default',
     // 数据库配置
     database: {
-        db: process.env.YIAPI_DB_NAME,
-        username: process.env.YIAPI_DB_USER,
-        password: process.env.YIAPI_DB_PASS,
-        host: process.env.YIAPI_DB_HOST,
-        port: Number(process.env.YIAPI_DB_PORT)
+        host: process.env.NODE_ENV === 'production' ? '127.0.0.1' : '127.0.0.1',
+        port: process.env.NODE_ENV === 'production' ? 3306 : 3306,
+        db: process.env.NODE_ENV === 'production' ? 'test' : 'test',
+        username: process.env.NODE_ENV === 'production' ? 'root' : 'root',
+        password: process.env.NODE_ENV === 'production' ? 'root' : 'root'
     },
     // 缓存配置
     redis: {
-        host: process.env.YIAPI_REDIS_HOST,
-        port: Number(process.env.YIAPI_REDIS_PORT),
-        username: process.env.YIAPI_REDIS_USER,
-        password: process.env.YIAPI_REDIS_PASS,
-        db: Number(process.env.YIAPI_REDIS_DB),
-        keyPrefix: process.env.YIAPI_REDIS_PREFIX,
-        ex: process.env.YIAPI_REDIS_EX
+        host: process.env.NODE_ENV === 'production' ? '127.0.0.1' : '127.0.0.1',
+        port: process.env.NODE_ENV === 'production' ? 6379 : 6379,
+        username: process.env.NODE_ENV === 'production' ? '' : '',
+        password: process.env.NODE_ENV === 'production' ? 'test' : '',
+        db: process.env.NODE_ENV === 'production' ? 0 : 0,
+        keyPrefix: process.env.NODE_ENV === 'production' ? 'test:' : 'test:',
+        ex: process.env.NODE_ENV === 'production' ? 86400 : 86400
     },
     // jwt 配置
     jwt: {
         // jwt 密钥，第一次使用，请修改此密钥值！！！
-        secret: process.env.YIAPI_JWT_SECRET,
-        expiresIn: process.env.YIAPI_JWT_EXPIRES_IN
+        secret: test,
+        expiresIn: '7d'
     },
     // 邮件配置
     mail: {
@@ -80,7 +80,7 @@ let appConfig = {
     },
     // 上传目录
     upload: {
-        dir: process.env.YIAPI_UPLOAD_DIR
+        dir: process.env.NODE_ENV === 'production' ? './public/static' : './public/static'
     },
     // 请求速率
     rate: {},

@@ -3,7 +3,8 @@ let customConfig = {
     weixin: {
         appId: '',
         mchId: '',
-        appSecret: ''
+        appSecret: '',
+        notifyUrl: ''
     },
     tencentCloud: {
         secretId: '',

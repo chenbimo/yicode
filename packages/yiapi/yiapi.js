@@ -10,9 +10,6 @@ import fg from 'fast-glob';
 import fastifyStatic from '@fastify/static';
 import gracefulShutdown from 'http-graceful-shutdown';
 
-// 环境变量，必须在配置信息之前执行
-import './env.js';
-
 // 配置信息
 import { appConfig } from './config/appConfig.js';
 import { codeConfig } from './config/codeConfig.js';
