@@ -610,7 +610,7 @@ importers:
   templates/yiapi:
     dependencies:
       '@yicode/yiapi':
-        specifier: workspace:^
+        specifier: ^3.10.2
         version: link:../../packages/yiapi
       lodash-es:
         specifier: ^4.17.21
