@@ -270,7 +270,7 @@ export function fnUUID(size = 26) {
 }
 
 // 加盐的 md5 值
-export function fnSaltMd5(value) {
+export function fnSaltMD5(value) {
     return md5(value, appConfig.salt);
 }
 

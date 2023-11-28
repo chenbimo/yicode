@@ -15,7 +15,7 @@ import {
     fnTimestamp,
     fnDbInsertData,
     fnDbUpdateData,
-    fnSaltMd5,
+    fnSaltMD5,
     fnPureMD5,
     fnIncrUID
 } from '../utils/index.js';
@@ -161,7 +161,7 @@ async function plugin(fastify, opts) {
                 username: 'dev',
                 nickname: '开发管理员',
                 role_codes: 'dev',
-                password: fnSaltMd5(fnPureMD5(appConfig.devPassword))
+                password: fnSaltMD5(fnPureMD5(appConfig.devPassword))
             };
             if (appConfig.tablePrimaryKey === 'time') {
                 insertData.id = fnIncrUID();
@@ -175,7 +175,7 @@ async function plugin(fastify, opts) {
             await roleModel.clone().where('code', 'dev').update(fnDbUpdateData(updateData));
             let updateData2 = {
                 nickname: '开发管理员',
-                password: fnSaltMd5(fnPureMD5(appConfig.devPassword))
+                password: fnSaltMD5(fnPureMD5(appConfig.devPassword))
             };
             await adminModel.clone().where('username', 'dev').update(fnDbUpdateData(updateData2));
         }

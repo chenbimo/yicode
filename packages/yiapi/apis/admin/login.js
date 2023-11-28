@@ -1,7 +1,7 @@
 // 外部模块
 import { omit as _omit } from 'lodash-es';
 // 工具函数
-import { fnRoute, fnPureMD5, fnSaltMd5 } from '../../utils/index.js';
+import { fnRoute, fnPureMD5, fnSaltMD5 } from '../../utils/index.js';
 // 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
@@ -45,7 +45,7 @@ export default async (fastify) => {
                 }
 
                 // 判断密码
-                if (fnSaltMd5(req.body.password) !== adminData.password) {
+                if (fnSaltMD5(req.body.password) !== adminData.password) {
                     return {
                         ...codeConfig.FAIL,
                         msg: '密码错误'

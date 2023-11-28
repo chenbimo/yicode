@@ -1,5 +1,5 @@
 // 工具函数
-import { fnRoute, fnSaltMd5 } from '../../utils/index.js';
+import { fnRoute, fnSaltMD5 } from '../../utils/index.js';
 // 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
@@ -32,7 +32,7 @@ export default async (fastify) => {
                     .modify(function (qb) {});
 
                 await adminModel.clone().updateData({
-                    password: fnSaltMd5(req.body.password),
+                    password: fnSaltMD5(req.body.password),
                     nickname: req.body.nickname,
                     role_codes: req.body.role_codes
                 });

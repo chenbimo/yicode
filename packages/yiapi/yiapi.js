@@ -31,7 +31,7 @@ import {
     //
     fnSchema,
     fnUUID,
-    fnSaltMd5,
+    fnSaltMD5,
     fnPureMD5,
     fnRoute,
     fnMeta,
@@ -238,7 +238,7 @@ export {
     syncDatabase,
     // 工具函数
     fnUUID,
-    fnSaltMd5,
+    fnSaltMD5,
     fnPureMD5,
     fnSchema,
     fnRoute,
