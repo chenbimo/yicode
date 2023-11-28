@@ -51,7 +51,6 @@ if (appConfig.salt === 'yiapi-123456.') {
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'tables'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'plugins'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'env'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
 fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
