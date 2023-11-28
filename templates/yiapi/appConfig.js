@@ -18,8 +18,10 @@ let appConfig = {
     paramsCheck: false,
     // 日志字段过滤，不打印
     logFilter: ['password', 'file'],
-    // 是否开启 swagger 文档
+    // 是否开启接口文档
     isSwagger: false,
+    // 是否开启支付功能
+    isWxPay: false,
     // 任何情况下可以访问的路由
     freeApis: [
         //
@@ -33,7 +35,14 @@ let appConfig = {
         '/api/tool/sendMail'
     ],
     // 黑名单接口，不可访问的接口
-    blackApis: [],
+    blackApis: [
+        //
+        '/api/user/emailVerifyLogin',
+        '/api/user/emailPassLogin',
+        '/api/user/emailRegister',
+        '/api/user/emailVerifyBind',
+        '/api/user/emailVerifyLogin'
+    ],
     // 白名单接口，登录后访问无限制
     whiteApis: [],
     // 黑名单菜单
