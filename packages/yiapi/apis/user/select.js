@@ -25,7 +25,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const userModel = fastify.mysql //
+                const sysUserModel = fastify.mysql //
                     .table('sys_user')
                     .modify(function (qb) {
                         if (req.body.state !== undefined) {
@@ -33,8 +33,8 @@ export default async (fastify) => {
                         }
                     });
 
-                const { totalCount } = await userModel.clone().selectCount();
-                const rows = await userModel
+                const { totalCount } = await sysUserModel.clone().selectCount();
+                const rows = await sysUserModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
