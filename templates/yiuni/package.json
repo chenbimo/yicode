@@ -3,7 +3,8 @@
     "version": "0.0.8",
     "private": false,
     "publishConfig": {
-        "access": "public"
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
     },
     "author": "陈随易 <bimostyle@qq.com>",
     "license": "ISC",
@@ -47,7 +48,7 @@
         "lint-staged": "^15.1.0",
         "prettier": "^3.1.0",
         "sass": "^1.69.5",
-        "vite": "^5.0.2"
+        "vite": "^5.0.3"
     },
     "simple-git-hooks": {
         "pre-commit": "pnpm lint-staged"

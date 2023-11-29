@@ -14,7 +14,8 @@
     "type": "module",
     "private": false,
     "publishConfig": {
-        "access": "public"
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
     },
     "scripts": {
         "preinstall": "npx only-allow pnpm"
@@ -162,7 +163,7 @@
         "unplugin-auto-import": "^0.17.1",
         "unplugin-icons": "^0.17.4",
         "unplugin-vue-components": "^0.25.2",
-        "vite": "^5.0.2",
+        "vite": "^5.0.3",
         "vue-i18n": "^9.8.0"
     },
     "gitHead": "5d216095b7aaeed26f283617194053a34bedf205"
