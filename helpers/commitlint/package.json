@@ -1,6 +1,6 @@
 {
     "name": "@yicode/commitlint",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "git 提交信息校验",
     "type": "commonjs",
     "main": "index.js",
