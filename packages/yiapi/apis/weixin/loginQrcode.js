@@ -62,7 +62,7 @@ export default async (fastify) => {
 
                 // 如果认证过期，则重新生成
                 if (result.errcode === 40001) {
-                    const result = await fastify.helper.getWeixinAccessToken();
+                    const result = await fastify.getWeixinAccessToken();
                     // 如果报错
                     if (result.errcode) {
                         return {
