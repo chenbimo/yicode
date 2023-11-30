@@ -25,7 +25,7 @@ export default async (fastify) => {
                 const result = await sysUserModel
                     .clone() //
                     .where('id', req.session.id)
-                    .selectOne(...fnField('user.json', 'core', ['password']));
+                    .selectOne(...fnField('user', 'core', ['password']));
 
                 if (!result?.id) {
                     return {
