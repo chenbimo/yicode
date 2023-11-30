@@ -20,7 +20,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const weixinAccessToken = await fastify.redisGet('cacheData:weixinAccessToken');
+                let weixinAccessToken = await fastify.redisGet('cacheData:weixinAccessToken');
                 if (!weixinAccessToken) {
                     const result = await got('https://api.weixin.qq.com/cgi-bin/token', {
                         method: 'GET',
