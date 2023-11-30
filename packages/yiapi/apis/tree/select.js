@@ -36,7 +36,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, fnField('tree', 'core'));
+                    .selectData(req.body.page, req.body.limit, ...fnField('tree', 'core'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

@@ -46,7 +46,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, fnField('dict', 'core'));
+                    .selectData(req.body.page, req.body.limit, ...fnField('dict', 'core'));
 
                 // 处理数字符号强制转换为数字值
                 let rows = rowsTemp?.map((item) => {

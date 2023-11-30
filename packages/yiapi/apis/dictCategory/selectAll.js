@@ -30,7 +30,7 @@ export default async (fastify) => {
                         }
                     });
 
-                const rows = await dictCategoryModel.clone().selectAll(fnField('dictCategory', 'core'));
+                const rows = await dictCategoryModel.clone().selectAll(...fnField('dictCategory', 'core'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,

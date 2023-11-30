@@ -30,7 +30,7 @@ export default async (fastify) => {
                     // 查询用户是否存在
                     const userData = await userModel //
                         .clone()
-                        .selectOne(fnField('user', 'core', ['password']));
+                        .selectOne(...fnField('user', 'core', ['password']));
                     if (userData?.id) {
                         return {
                             ...codeConfig.SUCCESS,

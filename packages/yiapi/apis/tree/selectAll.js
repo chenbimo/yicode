@@ -28,7 +28,7 @@ export default async (fastify) => {
                     .where('category', req.body.category)
                     .modify(function (qb) {});
 
-                const rows = await roleModel.clone().selectAll(fnField('tree', 'core'));
+                const rows = await roleModel.clone().selectAll(...fnField('tree', 'core'));
 
                 return {
                     ...codeConfig.SELECT_SUCCESS,
