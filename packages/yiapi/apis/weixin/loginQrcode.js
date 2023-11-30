@@ -1,6 +1,6 @@
 import got from 'got';
 // 工具函数
-import { fnRoute, fnField, fnSchema } from '../../utils/index.js';
+import { fnRoute, fnField, fnSchema, fnUUID } from '../../utils/index.js';
 // 配置文件
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
