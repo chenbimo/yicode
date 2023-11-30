@@ -152,7 +152,7 @@
         "copy-anything": "^3.0.5",
         "fast-glob": "^3.3.2",
         "fs-extra": "^11.2.0",
-        "got": "^13.0.0",
+        "got": "^14.0.0",
         "lodash-es": "^4.17.21",
         "log-symbols": "^6.0.0",
         "merge-anything": "^5.1.7",
@@ -161,9 +161,9 @@
         "tiny-cookie": "^2.5.1",
         "unocss": "^0.57.7",
         "unplugin-auto-import": "^0.17.1",
-        "unplugin-icons": "^0.17.4",
+        "unplugin-icons": "^0.18.0",
         "unplugin-vue-components": "^0.25.2",
-        "vite": "^5.0.3",
+        "vite": "^5.0.4",
         "vue-i18n": "^9.8.0"
     },
     "gitHead": "5d216095b7aaeed26f283617194053a34bedf205"

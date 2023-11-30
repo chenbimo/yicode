@@ -48,7 +48,7 @@
         "lint-staged": "^15.1.0",
         "prettier": "^3.1.0",
         "sass": "^1.69.5",
-        "vite": "^5.0.3"
+        "vite": "^5.0.4"
     },
     "simple-git-hooks": {
         "pre-commit": "pnpm lint-staged"
