@@ -6,11 +6,13 @@ import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 
+export const apiName = '创建微信支付订单';
+
 export default async (fastify) => {
     // 当前文件的路径，fastify 实例
     fnRoute(import.meta.url, fastify, {
         // 接口名称
-        apiName: '创建微信支付订单',
+        apiName: apiName,
         // 请求参数约束
         schemaRequest: {
             type: 'object',

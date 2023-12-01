@@ -202,7 +202,7 @@ async function syncApiFile(fastify) {
             // 获得父级数据
             let parentApiData = apiDirByValue[path.dirname(apiFileName)] || {};
 
-            let { apiSchema } = await fnImport(file, {});
+            let { apiName } = await fnImport(file, {});
 
             if (apiFileValue.includes(apiFileName) === false && !autoApiObject[apiFileName]) {
                 // 如果当前接口在数据库中不存在，且没有添加过，则添加接口
@@ -210,7 +210,7 @@ async function syncApiFile(fastify) {
                 autoApiObject[apiFileName] = true;
                 let apiParams = {
                     pid: 0,
-                    name: apiSchema?.summary || '',
+                    name: apiName || '',
                     value: apiFileName,
                     sort: 0,
                     is_open: 0,
@@ -245,7 +245,7 @@ async function syncApiFile(fastify) {
                                 pid: parentApiData.id,
                                 pids: `0,${parentApiData.id}`,
                                 level: 2,
-                                name: apiSchema?.summary || '',
+                                name: apiName || '',
                                 updated_at: fnTimestamp()
                             };
                             updateApiData.push(params);
@@ -255,7 +255,7 @@ async function syncApiFile(fastify) {
                                 pid: 0,
                                 pids: `0`,
                                 level: 1,
-                                name: apiSchema?.summary || '',
+                                name: apiName || '',
                                 updated_at: fnTimestamp()
                             };
                             updateApiData.push(params);
