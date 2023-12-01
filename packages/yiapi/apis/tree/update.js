@@ -40,7 +40,7 @@ export default async (fastify) => {
                     parentData = await treeModel //
                         .clone()
                         .where('id', req.body.pid)
-                        .first('id', 'pids');
+                        .selectOne('id', 'pids');
                     if (!parentData?.id) {
                         return {
                             ...codeConfig.FAIL,
@@ -52,7 +52,7 @@ export default async (fastify) => {
                 const selfData = await treeModel //
                     .clone()
                     .where('id', req.body.id)
-                    .first('id');
+                    .selectOne('id');
                 if (!selfData?.id) {
                     return {
                         ...codeConfig.FAIL,

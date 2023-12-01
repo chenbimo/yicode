@@ -59,10 +59,10 @@ async function plugin(fastify, opts) {
         let roleData = await roleModel.clone().select();
 
         // 查询开发管理员
-        let devAdminData = await adminModel.clone().where('username', 'dev').first('id');
+        let devAdminData = await adminModel.clone().where('username', 'dev').selectOne('id');
 
         // 查询开发角色
-        let devRoleData = await roleModel.clone().where('code', 'dev').first('id');
+        let devRoleData = await roleModel.clone().where('code', 'dev').selectOne('id');
 
         // 请求菜单数据，用于给开发管理员绑定菜单
         let menuData = await menuModel.clone().select();

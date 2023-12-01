@@ -32,7 +32,7 @@ export default async (fastify) => {
                 const dictCategoryData = await dictCategoryModel
                     .clone()
                     .where({ code: fnCamelCase(req.body.code) })
-                    .first('id');
+                    .selectOne('id');
 
                 if (dictCategory?.id) {
                     return {
