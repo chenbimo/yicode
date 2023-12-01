@@ -2,6 +2,7 @@ import got from 'got';
 // 工具函数
 import { fnRoute, fnParamsRaw, fnHashSign, fnUUID } from '../../utils/index.js';
 // 配置文件
+import { appConfig } from '../../config/appConfig.js';
 import { codeConfig } from '../../config/codeConfig.js';
 import { metaConfig } from './_meta.js';
 
