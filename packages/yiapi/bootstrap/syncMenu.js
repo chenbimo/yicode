@@ -309,7 +309,7 @@ async function plugin(fastify) {
 
         await syncMenuDir(fastify);
         await syncMenuFile(fastify);
-        await fastify.cacheApiData();
+        await fastify.cacheMenuData();
     } catch (err) {
         fastify.log.error(err);
     }
