@@ -41,7 +41,7 @@ async function syncApiDir(fastify) {
         });
 
         // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
-        let apis = await apiModel.clone().select();
+        let apis = await apiModel.clone().selectAll();
 
         // 所有接口目录数据
         let apisDir = apis.filter((item) => item.is_bool === 0);
@@ -118,12 +118,12 @@ async function syncApiDir(fastify) {
 
         // 如果待删除接口目录大于0，则删除
         if (_isEmpty(deleteApiDirData) === false) {
-            await apiModel.clone().whereIn('id', deleteApiDirData).delete();
+            await apiModel.clone().whereIn('id', deleteApiDirData).deleteData();
         }
 
         // 如果待增加接口目录大于0，则增加
         if (_isEmpty(insertApiDirData) === false) {
-            await apiModel.clone().insert(insertApiDirData);
+            await apiModel.clone().insertData(insertApiDirData);
         }
 
         // 如果待更新接口目录大于0，则更新
@@ -132,7 +132,7 @@ async function syncApiDir(fastify) {
                 return apiModel
                     .clone()
                     .where('id', item.id)
-                    .update(_omit(item, ['id', 'created_at']));
+                    .updateData(_omit(item, ['id', 'created_at']));
             });
             await Promise.all(updateBatchData);
         }
@@ -157,7 +157,7 @@ async function syncApiFile(fastify) {
         });
 
         // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
-        let apis = await apiModel.clone().select();
+        let apis = await apiModel.clone().selectAll();
 
         // 所有接口目录数据
         let apisDir = apis.filter((item) => item.is_bool === 0);
@@ -267,12 +267,12 @@ async function syncApiFile(fastify) {
 
         // 如果待删除接口大于0，则删除
         if (_isEmpty(deleteApiData) === false) {
-            await apiModel.clone().whereIn('id', deleteApiData).delete();
+            await apiModel.clone().whereIn('id', deleteApiData).deleteData();
         }
 
         // 如果待增加接口大于0，则增加
         if (_isEmpty(insertApiData) === false) {
-            await apiModel.clone().insert(insertApiData);
+            await apiModel.clone().insertData(insertApiData);
         }
 
         // 如果待更新接口大于0，则更新

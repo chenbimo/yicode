@@ -40,7 +40,7 @@ export default async (fastify) => {
                 const result = await treeModel //
                     .clone()
                     .where({ id: req.body.id })
-                    .delete();
+                    .deleteData();
 
                 return {
                     ...codeConfig.DELETE_SUCCESS,

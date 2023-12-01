@@ -92,7 +92,7 @@ async function plugin(fastify) {
 
     const cacheMenuData = async () => {
         // 菜单列表
-        let dataMenu = await fastify.mysql.table('sys_menu').select();
+        let dataMenu = await fastify.mysql.table('sys_menu').selectAll();
 
         // 菜单树数据
         await fastify.redisSet(cacheData.menu, []);
@@ -101,7 +101,7 @@ async function plugin(fastify) {
 
     const cacheApiData = async () => {
         // 菜单列表
-        let dataApi = await fastify.mysql.table('sys_api').select();
+        let dataApi = await fastify.mysql.table('sys_api').selectAll();
 
         // 白名单接口
         let dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
@@ -124,7 +124,7 @@ async function plugin(fastify) {
 
     const cacheRoleData = async () => {
         // 角色类别
-        let dataRole = await fastify.mysql.table('sys_role').select();
+        let dataRole = await fastify.mysql.table('sys_role').selectAll();
 
         await fastify.redisSet(cacheData.role, []);
         await fastify.redisSet(cacheData.role, dataRole);

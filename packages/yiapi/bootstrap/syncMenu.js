@@ -119,7 +119,7 @@ async function syncMenuDir(fastify) {
         let menuModel = fastify.mysql.table('sys_menu');
 
         // 第一次请求菜单数据，用于创建一级菜单
-        let menuDir = await menuModel.clone().where({ pid: 0 }).select();
+        let menuDir = await menuModel.clone().where({ pid: 0 }).selectAll();
         let menuDirByValue = _keyBy(menuDir, 'value');
 
         let deleteMenuDirValue = [];
@@ -146,9 +146,7 @@ async function syncMenuDir(fastify) {
                     pid: 0,
                     sort: item.sort || index,
                     is_open: 0,
-                    is_system: item.is_system || 0,
-                    created_at: fnTimestamp(),
-                    updated_at: fnTimestamp()
+                    is_system: item.is_system || 0
                 };
                 if (appConfig.tablePrimaryKey === 'time') {
                     insertData.id = fnIncrUID();
@@ -160,20 +158,19 @@ async function syncMenuDir(fastify) {
                     name: item.name,
                     value: item.value,
                     sort: item.sort || index,
-                    is_system: item.is_system || 0,
-                    updated_at: fnTimestamp()
+                    is_system: item.is_system || 0
                 });
             }
         });
 
         // 删除菜单目录
         if (_isEmpty(deleteMenuDir) === false) {
-            await menuModel.clone().whereIn('id', _uniq(deleteMenuDir)).delete();
+            await menuModel.clone().whereIn('id', _uniq(deleteMenuDir)).deleteData();
         }
 
         // 添加菜单目录
         if (_isEmpty(insertMenuDir) === false) {
-            await menuModel.clone().insert(insertMenuDir);
+            await menuModel.clone().insertData(insertMenuDir);
         }
 
         // 如果待更新接口目录大于 0，则更新
@@ -182,7 +179,7 @@ async function syncMenuDir(fastify) {
                 return menuModel
                     .clone()
                     .where('id', item.id)
-                    .update(_omit(item, ['id']));
+                    .updateData(_omit(item, ['id']));
             });
             await Promise.all(updateBatch);
         }
@@ -199,11 +196,11 @@ async function syncMenuFile(fastify) {
         // 准备好表
         let menuModel = fastify.mysql.table('sys_menu');
 
-        let menuDir = await menuModel.clone().where({ pid: 0 }).select();
+        let menuDir = await menuModel.clone().where({ pid: 0 }).selectAll();
         let menuDirByValue = _keyBy(menuDir, 'value');
 
         // 第二次请求菜单数据，用于创建二级菜单
-        let menuData = await menuModel.clone().andWhere('pid', '<>', 0).select();
+        let menuData = await menuModel.clone().andWhere('pid', '<>', 0).selectAll();
         let menuByValue = _keyBy(menuData, 'value');
 
         let deleteMenuFileValue = [];
@@ -232,9 +229,7 @@ async function syncMenuFile(fastify) {
                             pid: parentMenuData.id,
                             sort: item.sort || index2,
                             is_open: 0,
-                            is_system: item.is_system || 0,
-                            created_at: fnTimestamp(),
-                            updated_at: fnTimestamp()
+                            is_system: item.is_system || 0
                         };
                         if (appConfig.tablePrimaryKey === 'time') {
                             insertMenuData.id = fnIncrUID();
@@ -256,11 +251,11 @@ async function syncMenuFile(fastify) {
         });
 
         if (_isEmpty(deleteMenuFile) === false) {
-            await menuModel.clone().whereIn('id', _uniq(deleteMenuFile)).delete();
+            await menuModel.clone().whereIn('id', _uniq(deleteMenuFile)).deleteData();
         }
 
         if (_isEmpty(insertMenuFile) === false) {
-            await menuModel.clone().insert(insertMenuFile);
+            await menuModel.clone().insertData(insertMenuFile);
         }
 
         // 如果待更新接口目录大于 0，则更新
@@ -269,7 +264,7 @@ async function syncMenuFile(fastify) {
                 return menuModel
                     .clone()
                     .where('id', item.id)
-                    .update(_omit(item, ['id']));
+                    .updateData(_omit(item, ['id']));
             });
             await Promise.all(updateBatchData);
         }

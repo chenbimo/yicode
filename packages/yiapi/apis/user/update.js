@@ -33,7 +33,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .where({ id: req.session.id })
-                    .update({
+                    .updateData({
                         avatar: req.body.avatar,
                         nickname: req.body.nickname,
                         bio: req.body.bio,

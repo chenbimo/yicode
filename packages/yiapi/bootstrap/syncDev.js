@@ -56,7 +56,7 @@ async function plugin(fastify, opts) {
         let roleModel = fastify.mysql.table('sys_role');
 
         // 查询所有角色
-        let roleData = await roleModel.clone().select();
+        let roleData = await roleModel.clone().selectAll();
 
         // 查询开发管理员
         let devAdminData = await adminModel.clone().where('username', 'dev').selectOne('id');
@@ -65,12 +65,12 @@ async function plugin(fastify, opts) {
         let devRoleData = await roleModel.clone().where('code', 'dev').selectOne('id');
 
         // 请求菜单数据，用于给开发管理员绑定菜单
-        let menuData = await menuModel.clone().select();
+        let menuData = await menuModel.clone().selectAll();
         let menuIds = menuData.map((item) => item.id);
         let menuObject = _keyBy(menuData, 'value');
 
         // 请求接口数据，用于给开发管理员绑定接口
-        let apiData = await apiModel.clone().select();
+        let apiData = await apiModel.clone().selectAll();
         let apiIds = apiData.map((item) => item.id);
         let apiObject = _keyBy(apiData, 'value');
 
@@ -113,11 +113,11 @@ async function plugin(fastify, opts) {
         });
 
         if (_isEmpty(deleteRoleData) === false) {
-            await roleModel.clone().whereIn('id', deleteRoleData).delete();
+            await roleModel.clone().whereIn('id', deleteRoleData).deleteData();
         }
 
         if (insertRoleData.length > 0) {
-            await roleModel.clone().insert(insertRoleData);
+            await roleModel.clone().insertData(insertRoleData);
         }
 
         // 如果待更新接口目录大于 0，则更新
@@ -126,7 +126,7 @@ async function plugin(fastify, opts) {
                 return roleModel
                     .clone()
                     .where('code', item.code)
-                    .update(_omit(item, ['code']));
+                    .updateData(_omit(item, ['code']));
             });
             await Promise.all(updateBatchData);
         }
@@ -146,13 +146,13 @@ async function plugin(fastify, opts) {
             if (appConfig.tablePrimaryKey === 'time') {
                 insertData.id = fnIncrUID();
             }
-            await roleModel.clone().insert(fnDbInsertData(insertData));
+            await roleModel.clone().insertData(insertData);
         } else {
             let updateData = {
                 menu_ids: menuIds.join(','),
                 api_ids: apiIds.join(',')
             };
-            await roleModel.clone().where('code', 'dev').update(fnDbUpdateData(updateData));
+            await roleModel.clone().where('code', 'dev').updateData(updateData);
         }
 
         // 如果没有开发管理员，则创建之
@@ -166,18 +166,18 @@ async function plugin(fastify, opts) {
             if (appConfig.tablePrimaryKey === 'time') {
                 insertData.id = fnIncrUID();
             }
-            await adminModel.clone().insert(fnDbInsertData(insertData));
+            await adminModel.clone().insertData(insertData);
         } else {
             let updateData = {
                 menu_ids: menuIds.join(','),
                 api_ids: apiIds.join(',')
             };
-            await roleModel.clone().where('code', 'dev').update(fnDbUpdateData(updateData));
+            await roleModel.clone().where('code', 'dev').updateData(updateData);
             let updateData2 = {
                 nickname: '开发管理员',
                 password: fnSaltMD5(fnPureMD5(appConfig.devPassword))
             };
-            await adminModel.clone().where('username', 'dev').update(fnDbUpdateData(updateData2));
+            await adminModel.clone().where('username', 'dev').updateData(updateData2);
         }
         await fastify.cacheRoleData();
     } catch (err) {

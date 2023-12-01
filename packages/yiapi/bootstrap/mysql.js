@@ -55,11 +55,6 @@ async function plugin(fastify, options) {
             }
         });
 
-        // mysql.insertData = function (data) {
-        //     this.insert(fnDbInsertData(data));
-        //     return this;
-        // };
-
         fastify.decorate('mysql', mysql).addHook('onClose', (instance, done) => {
             if (instance.knex === handler) {
                 instance.knex.destroy();
