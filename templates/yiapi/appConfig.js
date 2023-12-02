@@ -9,11 +9,11 @@ let appConfig = {
     appName: '易接口',
     appNameEn: 'yiapi',
     // 加密盐，请重新设置为一个随机值
-    salt: 'yiapi-123456.0',
+    salt: 'yiapi-123456.',
     // 监听端口
     port: 3000,
     // 超级管理员密码
-    devPassword: 'dev1234560',
+    devPassword: 'dev123456',
     // 是否验证参数
     paramsCheck: false,
     // 日志字段过滤，不打印
@@ -46,7 +46,7 @@ let appConfig = {
     database: {
         host: process.env.NODE_ENV === 'production' ? '127.0.0.1' : '127.0.0.1',
         port: process.env.NODE_ENV === 'production' ? 3306 : 3306,
-        db: process.env.NODE_ENV === 'production' ? 'test2' : 'test2',
+        db: process.env.NODE_ENV === 'production' ? 'test' : 'test',
         username: process.env.NODE_ENV === 'production' ? 'root' : 'root',
         password: process.env.NODE_ENV === 'production' ? 'root' : 'root'
     },
@@ -63,7 +63,7 @@ let appConfig = {
     // jwt 配置
     jwt: {
         // jwt 密钥，第一次使用，请修改此密钥值！！！
-        secret: 'yiapi0',
+        secret: 'yiapi',
         expiresIn: '7d'
     },
     // 邮件配置
