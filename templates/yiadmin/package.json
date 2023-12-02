@@ -42,7 +42,7 @@
         "vue-router": "^4.2.5"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "workspace:^"
+        "@yicode/yite-cli": "workspace:*"
     },
     "gitHead": "5d216095b7aaeed26f283617194053a34bedf205"
 }

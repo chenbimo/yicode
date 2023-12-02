@@ -8,7 +8,14 @@ async function plugin(fastify, options) {
     try {
         // 添加数据
         Knex.QueryBuilder.extend('insertData', function (data) {
-            return this.insert(fnDbInsertData(data));
+            if (Array.isArray(data)) {
+                const data2 = data.map((item) => {
+                    return fnDbInsertData(item);
+                });
+                return this.insert(data2);
+            } else {
+                return this.insert(fnDbInsertData(data));
+            }
         });
         // 更新数据
         Knex.QueryBuilder.extend('updateData', function (data) {
