@@ -1,16 +1,17 @@
 import { defineConfig } from 'vitepress';
+import { withMermaid } from 'vitepress-plugin-mermaid';
 
 import { docsAuto } from '@yicode/yidocs-auto';
 
 let { sideBar, navBar } = docsAuto();
 
-export default defineConfig({
+export default withMermaid({
     base: '/',
     title: '随易科技',
     description: '何以解忧，唯有代码。',
     lastUpdated: true,
     markdown: {
-        theme: 'material-theme-palenight',
+        theme: 'one-dark-pro',
         lineNumbers: true
     },
     outDir: './dist',
@@ -69,5 +70,13 @@ export default defineConfig({
             // }
         ],
         sidebar: sideBar
+    },
+    mermaid: {
+        //mermaidConfig !theme here works for ligth mode since dark theme is forced in dark mode
+    },
+    vite: {
+        optimizeDeps: {
+            include: ['mermaid']
+        }
     }
 });

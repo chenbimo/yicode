@@ -17,6 +17,8 @@
     "author": "陈随易 <bimostyle@qq.com>",
     "license": "ISC",
     "dependencies": {
-        "@yicode/yidocs-auto": "workspace:*"
+        "@yicode/yidocs-auto": "workspace:*",
+        "mermaid": "^10.6.1",
+        "vitepress-plugin-mermaid": "^2.0.16"
     }
 }
