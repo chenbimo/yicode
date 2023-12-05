@@ -126,9 +126,8 @@ export const fnLuhn = (str) => {
 // 创建顺序自增唯一 ID
 export function fnIncrUID() {
     let timestamp = Math.floor(Date.now() / 1000);
-    let random = crypto.randomInt(10000, 99999);
-    let check = fnLuhn(`${timestamp}${random}`);
-    return `${timestamp}${random}${check}`;
+    let random = crypto.randomInt(100000, 999999);
+    return `${timestamp}${random}`;
 }
 
 // 获取接口目录名称
