@@ -121,7 +121,7 @@ async function plugin(fastify, opts) {
             if (!hasApi) {
                 res.send({
                     ...codeConfig.FAIL,
-                    msg: `您没有 [ ${req?.routeSchema?.summary || pureUrl} ] 接口的操作权限`
+                    msg: `您没有 [ ${req?.routeOptions?.schema?.summary || pureUrl} ] 接口的操作权限`
                 });
                 return;
             }
