@@ -71,6 +71,7 @@ export default async (fastify) => {
                         id: adminData.id,
                         username: adminData.username,
                         nickname: adminData.nickname,
+                        role_type: 'admin',
                         role_codes: adminData.role_codes
                     })
                 };

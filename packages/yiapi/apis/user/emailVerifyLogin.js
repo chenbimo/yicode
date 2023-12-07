@@ -74,6 +74,7 @@ export default async (fastify) => {
                     token: await fastify.jwt.sign({
                         id: userData.id,
                         nickname: userData.nickname,
+                        role_type: 'user',
                         role_codes: userData.role_codes
                     })
                 };
