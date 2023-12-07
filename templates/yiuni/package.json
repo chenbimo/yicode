@@ -29,14 +29,14 @@
         "@dcloudio/uni-h5": "3.0.0-3090520231028001",
         "@dcloudio/uni-ui": "^1.4.28",
         "@vue-macros/reactivity-transform": "^0.4.0",
-        "@vueuse/core": "^10.6.1",
+        "@vueuse/core": "^10.7.0",
         "date-fns": "^2.30.0",
         "js-md5": "^0.8.3",
         "lodash-es": "^4.17.21",
         "luch-request": "^3.1.1",
         "mp-html": "^2.4.2",
         "pinia": "2.0.33",
-        "vue": "^3.3.9",
+        "vue": "^3.3.10",
         "vue-i18n": "^9.8.0"
     },
     "devDependencies": {
@@ -44,11 +44,11 @@
         "@dcloudio/uni-cli-shared": "3.0.0-3090520231028001",
         "@dcloudio/uni-stacktracey": "3.0.0-3090520231028001",
         "@dcloudio/vite-plugin-uni": "3.0.0-3090520231028001",
-        "@vue/runtime-core": "^3.3.9",
-        "lint-staged": "^15.1.0",
+        "@vue/runtime-core": "^3.3.10",
+        "lint-staged": "^15.2.0",
         "prettier": "^3.1.0",
         "sass": "^1.69.5",
-        "vite": "^5.0.4"
+        "vite": "^5.0.6"
     },
     "simple-git-hooks": {
         "pre-commit": "pnpm lint-staged"

@@ -38,6 +38,8 @@ async function plugin(fastify, opts) {
 
     fastify.addHook('preHandler', async (req, res) => {
         try {
+            console.log('🚀 ~ file: auth.js:42 ~ fastify.addHook ~ req?.routeOptions:', req?.routeOptions);
+            console.log('🚀 ~ file: auth.js:42 ~ fastify.addHook ~ req?.routeOptions:', req?.routeOptions?.schema);
             let pureUrl = fnRouterPath(req.url);
             // 如果是收藏图标，则直接通过
             if (pureUrl === 'favicon.ico') return;
