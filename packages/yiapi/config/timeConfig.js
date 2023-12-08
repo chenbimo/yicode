@@ -1,5 +1,7 @@
 export const timeConfig = {
     second: {
+        // 永久
+        forever: 0,
         // 年
         year: 31536000,
         // 季
