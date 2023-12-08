@@ -19,6 +19,7 @@ import { schemaField } from './config/schemaField.js';
 import { schemaType } from './config/schemaType.js';
 import { sysConfig } from './config/sysConfig.js';
 import { tableField } from './config/tableField.js';
+import { timeConfig } from './config/timeConfig.js';
 
 // 脚本
 import { syncDatabase } from './scripts/syncDatabase.js';
@@ -211,6 +212,7 @@ export {
     schemaType,
     sysConfig,
     tableField,
+    timeConfig,
     // 脚本
     syncDatabase,
     // 工具函数
