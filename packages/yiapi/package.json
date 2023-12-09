@@ -9,6 +9,9 @@
         "access": "public",
         "registry": "https://registry.npmjs.org"
     },
+    "exports": {
+        ".": "yiapi.js"
+    },
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "install2": "pnpm install --ignore-workspace",
