@@ -171,7 +171,7 @@ fastify.register(autoLoad, {
 function initServer() {
     return new Promise(async (resolve, reject) => {
         // 启动服务！
-        fastify.listen({ port: appConfig.port, host: '::' }, async function (err, address) {
+        fastify.listen({ port: appConfig.port, host: appConfig.host }, async function (err, address) {
             if (err) {
                 fastify.log.error(err);
                 process.exit(1);

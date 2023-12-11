@@ -18,6 +18,8 @@ const appConfig = mergeAndConcat(
         salt: 'yiapi-123456.',
         // 监听端口
         port: 3000,
+        // 监听主机
+        host: '127.0.0.1',
         // 超级管理员密码
         devPassword: 'dev123456',
         // 日志字段过滤，不打印

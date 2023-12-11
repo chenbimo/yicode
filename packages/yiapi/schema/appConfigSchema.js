@@ -17,6 +17,10 @@ export let appConfigSchema = {
             title: '监听端口',
             type: 'number'
         },
+        host: {
+            title: '监听主机',
+            type: 'string'
+        },
         devPassword: {
             title: '开发者密码',
             type: 'string'
