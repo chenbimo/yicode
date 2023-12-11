@@ -36,7 +36,11 @@ export default async (fastify) => {
 
                 // 如果传了 pid 值，则判断父级是否存在
                 if (req.body.pid) {
-                    let parentData = await menuModel.clone().where('id', req.body.pid).selectOne('id');
+                    const parentData = await menuModel //
+                        .clone()
+                        .where('id', req.body.pid)
+                        .selectOne('id');
+
                     if (!parentData?.id) {
                         return {
                             ...httpConfig.FAIL,

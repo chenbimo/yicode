@@ -1,7 +1,7 @@
 import { fnSchema, fnMeta } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
 
-export let metaConfig = fnMeta(import.meta.url, {
+export const metaConfig = fnMeta(import.meta.url, {
     _name: '菜单',
     pid: fnSchema(schemaField.pid, '父级目录 ID'),
     name: fnSchema(null, '目录名称', 'string', 1, 30),

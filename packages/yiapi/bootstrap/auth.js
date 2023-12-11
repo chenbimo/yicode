@@ -37,19 +37,19 @@ async function plugin(fastify, opts) {
 
     fastify.addHook('preHandler', async (req, res) => {
         try {
-            let pureUrl = fnRouterPath(req.url);
+            const pureUrl = fnRouterPath(req.url);
             // 如果是收藏图标，则直接通过
             if (pureUrl === 'favicon.ico') return;
 
             /* --------------------------------- 接口禁用检测 --------------------------------- */
-            let isMatchBlackApi = micromatch.isMatch(pureUrl, appConfig.blackApis);
+            const isMatchBlackApi = micromatch.isMatch(pureUrl, appConfig.blackApis);
             if (isMatchBlackApi === true) {
                 res.send(httpConfig.API_DISABLED);
                 return;
             }
 
             /* --------------------------------- 自由接口判断 --------------------------------- */
-            let isMatchFreeApi = micromatch.isMatch(pureUrl, appConfig.freeApis);
+            const isMatchFreeApi = micromatch.isMatch(pureUrl, appConfig.freeApis);
             // 如果是自由通行的接口，则直接返回
             if (isMatchFreeApi === true) return;
 
@@ -65,7 +65,7 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 接口存在性判断 -------------------------------- */
-            let allApiNames = await fastify.redisGet('cacheData:apiNames');
+            const allApiNames = await fastify.redisGet('cacheData:apiNames');
 
             if (allApiNames.includes(pureUrl) === false) {
                 res.send(httpConfig.NO_API);
@@ -103,19 +103,19 @@ async function plugin(fastify, opts) {
 
             /* ---------------------------------- 白名单判断 --------------------------------- */
             // 从缓存获取白名单接口
-            let dataApiWhiteLists = await fastify.redisGet('cacheData:apiWhiteLists');
-            let whiteApis = dataApiWhiteLists?.map((item) => item.value);
-            let allWhiteApis = _uniq(_concat(appConfig.whiteApis, whiteApis || []));
+            const dataApiWhiteLists = await fastify.redisGet('cacheData:apiWhiteLists');
+            const whiteApis = dataApiWhiteLists?.map((item) => item.value);
+            const allWhiteApis = _uniq(_concat(appConfig.whiteApis, whiteApis || []));
 
             // 是否匹配白名单
-            let isMatchWhiteApi = micromatch.isMatch(pureUrl, allWhiteApis);
+            const isMatchWhiteApi = micromatch.isMatch(pureUrl, allWhiteApis);
 
             if (isMatchBlackApi === true) return;
 
             /* ---------------------------------- 角色接口权限判断 --------------------------------- */
             // 如果接口不在白名单中，则判断用户是否有接口访问权限
-            let userApis = await fastify.getUserApis(req.session);
-            let hasApi = _find(userApis, { value: pureUrl.replace('/api/', '/') });
+            const userApis = await fastify.getUserApis(req.session);
+            const hasApi = _find(userApis, { value: pureUrl.replace('/api/', '/') });
 
             if (!hasApi) {
                 res.send({

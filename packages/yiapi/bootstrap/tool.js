@@ -15,18 +15,18 @@ async function plugin(fastify) {
         }
     };
     const redisGet = async (key, unpack = false) => {
-        let result = await fastify.redis.get(key);
+        const result = await fastify.redis.get(key);
         return JSON.parse(result);
     };
 
     const getUserApis = async (session) => {
         if (!session) return [];
         // 提取当前用户的角色码组
-        let userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
+        const userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
 
         // 提取所有角色拥有的接口
         let apiIds = [];
-        let dataRoleCodes = await redisGet('cacheData:role');
+        const dataRoleCodes = await redisGet('cacheData:role');
         dataRoleCodes.forEach((item) => {
             if (userRoleCodes.includes(item.code)) {
                 apiIds = item.api_ids
@@ -38,12 +38,12 @@ async function plugin(fastify) {
         });
 
         // 将接口进行唯一性处理
-        let uniqApiIds = [...new Set(apiIds)];
+        const uniqApiIds = [...new Set(apiIds)];
 
-        let dataApi = await redisGet('cacheData:api');
+        const dataApi = await redisGet('cacheData:api');
 
         // 最终的用户接口列表
-        let result = dataApi
+        const result = dataApi
             .filter((item) => {
                 return uniqApiIds.includes(item.id);
             })
@@ -57,12 +57,12 @@ async function plugin(fastify) {
         try {
             if (session === null || session === undefined) return [];
             // 所有角色数组
-            let userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
+            const userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
 
             // 所有菜单 ID
             let menuIds = [];
 
-            let dataRoleCodes = await redisGet('cacheData:role');
+            const dataRoleCodes = await redisGet('cacheData:role');
             dataRoleCodes.forEach((item) => {
                 if (userRoleCodes.includes(item.code)) {
                     menuIds = item.menu_ids
@@ -73,10 +73,10 @@ async function plugin(fastify) {
                 }
             });
 
-            let userMenu = [...new Set(menuIds)];
-            let dataMenu = await redisGet('cacheData:menu');
+            const userMenu = [...new Set(menuIds)];
+            const dataMenu = await redisGet('cacheData:menu');
 
-            let result = dataMenu.filter((item) => {
+            const result = dataMenu.filter((item) => {
                 if (item.state === 0 && userMenu.includes(item.id)) {
                     return true;
                 } else {
@@ -91,7 +91,7 @@ async function plugin(fastify) {
 
     const cacheMenuData = async () => {
         // 菜单列表
-        let dataMenu = await fastify.mysql.table('sys_menu').selectAll();
+        const dataMenu = await fastify.mysql.table('sys_menu').selectAll();
 
         // 菜单树数据
         await redisSet('cacheData:menu', []);
@@ -100,10 +100,10 @@ async function plugin(fastify) {
 
     const cacheApiData = async () => {
         // 菜单列表
-        let dataApi = await fastify.mysql.table('sys_api').selectAll();
+        const dataApi = await fastify.mysql.table('sys_api').selectAll();
 
         // 白名单接口
-        let dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
+        const dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
 
         // 接口树数据
         await redisSet('cacheData:api', []);
@@ -123,7 +123,7 @@ async function plugin(fastify) {
 
     const cacheRoleData = async () => {
         // 角色类别
-        let dataRole = await fastify.mysql.table('sys_role').selectAll();
+        const dataRole = await fastify.mysql.table('sys_role').selectAll();
 
         await redisSet('cacheData:role', []);
         await redisSet('cacheData:role', dataRole);
@@ -159,11 +159,11 @@ async function plugin(fastify) {
 
     const getWeixinJsapiTicket = async (access_token) => {
         try {
-            let access_token = await redisGet('cacheData:weixinAccessToken');
+            const access_token = await redisGet('cacheData:weixinAccessToken');
             if (!access_token) {
                 access_token = await getWeixinAccessToken();
             }
-            let res = await got('https://api.weixin.qq.com/cgi-bin/ticket/getticket', {
+            const res = await got('https://api.weixin.qq.com/cgi-bin/ticket/getticket', {
                 method: 'GET',
                 searchParams: {
                     type: 'jsapi',

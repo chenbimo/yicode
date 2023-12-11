@@ -62,7 +62,7 @@ export default async (fastify) => {
                     };
                 }
 
-                let updateData = {
+                const updateData = {
                     pid: req.body.pid,
                     category: req.body.category,
                     name: req.body.name,

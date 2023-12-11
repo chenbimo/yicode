@@ -5,7 +5,6 @@ import fp from 'fastify-plugin';
 import localize from 'ajv-i18n';
 import logSymbols from 'log-symbols';
 import { forOwn as _forOwn } from 'lodash-es';
-import fg from 'fast-glob';
 import fastifyStatic from '@fastify/static';
 import gracefulShutdown from 'http-graceful-shutdown';
 
@@ -19,9 +18,9 @@ import { sysConfig } from './config/sysConfig.js';
 import { timeConfig } from './config/timeConfig.js';
 
 // 预配置
-import { logger } from './preConfig/logger.js';
+import { logger } from './init/logger.js';
 
-import './init.js';
+import './check.js';
 
 // 初始化项目实例
 const fastify = Fastify({

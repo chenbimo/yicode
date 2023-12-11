@@ -23,7 +23,7 @@ import {
 import { appConfig } from '../config/appConfig.js';
 
 // 内置角色配置
-let roleConfig = {
+const roleConfig = {
     visitor: {
         name: '游客',
         describe: '具备有限的权限和有限的查看内容',
@@ -50,29 +50,29 @@ async function plugin(fastify, opts) {
     // 同步接口
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table('sys_menu');
-        let apiModel = fastify.mysql.table('sys_api');
-        let adminModel = fastify.mysql.table('sys_admin');
-        let roleModel = fastify.mysql.table('sys_role');
+        const menuModel = fastify.mysql.table('sys_menu');
+        const apiModel = fastify.mysql.table('sys_api');
+        const adminModel = fastify.mysql.table('sys_admin');
+        const roleModel = fastify.mysql.table('sys_role');
 
         // 查询所有角色
-        let roleData = await roleModel.clone().selectAll();
+        const roleData = await roleModel.clone().selectAll();
 
         // 查询开发管理员
-        let devAdminData = await adminModel.clone().where('username', 'dev').selectOne('id');
+        const devAdminData = await adminModel.clone().where('username', 'dev').selectOne('id');
 
         // 查询开发角色
-        let devRoleData = await roleModel.clone().where('code', 'dev').selectOne('id');
+        const devRoleData = await roleModel.clone().where('code', 'dev').selectOne('id');
 
         // 请求菜单数据，用于给开发管理员绑定菜单
-        let menuData = await menuModel.clone().selectAll();
-        let menuIds = menuData.map((item) => item.id);
-        let menuObject = _keyBy(menuData, 'value');
+        const menuData = await menuModel.clone().selectAll();
+        const menuIds = menuData.map((item) => item.id);
+        const menuObject = _keyBy(menuData, 'value');
 
         // 请求接口数据，用于给开发管理员绑定接口
-        let apiData = await apiModel.clone().selectAll();
-        let apiIds = apiData.map((item) => item.id);
-        let apiObject = _keyBy(apiData, 'value');
+        const apiData = await apiModel.clone().selectAll();
+        const apiIds = apiData.map((item) => item.id);
+        const apiObject = _keyBy(apiData, 'value');
 
         // 处理角色数据，如果有同名的角色则删除
         let insertRoleData = [];
@@ -122,7 +122,7 @@ async function plugin(fastify, opts) {
 
         // 如果待更新接口目录大于 0，则更新
         if (_isEmpty(updateRoleData) === false) {
-            let updateBatchData = updateRoleData.map((item) => {
+            const updateBatchData = updateRoleData.map((item) => {
                 return roleModel
                     .clone()
                     .where('code', item.code)
@@ -148,7 +148,7 @@ async function plugin(fastify, opts) {
             }
             await roleModel.clone().insertData(insertData);
         } else {
-            let updateData = {
+            const updateData = {
                 menu_ids: menuIds.join(','),
                 api_ids: apiIds.join(',')
             };
@@ -168,16 +168,20 @@ async function plugin(fastify, opts) {
             }
             await adminModel.clone().insertData(insertData);
         } else {
-            let updateData = {
-                menu_ids: menuIds.join(','),
-                api_ids: apiIds.join(',')
-            };
-            await roleModel.clone().where('code', 'dev').updateData(updateData);
-            let updateData2 = {
-                nickname: '开发管理员',
-                password: fnSaltMD5(fnPureMD5(appConfig.devPassword))
-            };
-            await adminModel.clone().where('username', 'dev').updateData(updateData2);
+            await roleModel
+                .clone()
+                .where('code', 'dev')
+                .updateData({
+                    menu_ids: menuIds.join(','),
+                    api_ids: apiIds.join(',')
+                });
+            await adminModel
+                .clone()
+                .where('username', 'dev')
+                .updateData({
+                    nickname: '开发管理员',
+                    password: fnSaltMD5(fnPureMD5(appConfig.devPassword))
+                });
         }
         await fastify.cacheRoleData();
     } catch (err) {

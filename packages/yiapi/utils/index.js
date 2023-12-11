@@ -46,7 +46,7 @@ const schemaType = ['string', 'integer', 'number', 'array'];
 // 转换成中划线
 export function fnKebabCase(value, delimiter = '/') {
     if (value === undefined || value === null || value === '') return value;
-    let data = value
+    const data = value
         .split(delimiter)
         .map((v) => _kebabCase(v))
         .join(delimiter);
@@ -78,7 +78,7 @@ export const fnIsPortOpen = (port) => {
 // 转换成小驼峰
 export function fnCamelCase(value, delimiter = '/') {
     if (value === undefined || value === null || value === '') return value;
-    let data = value
+    const data = value
         .split(delimiter)
         .map((v) => _camelCase(v))
         .join(delimiter);
@@ -87,7 +87,7 @@ export function fnCamelCase(value, delimiter = '/') {
 
 // 自定义对象数组合并策略
 export function fnMergeArray(target, source) {
-    let result = _mergeWith(
+    const result = _mergeWith(
         //
         target,
         source,
@@ -104,7 +104,7 @@ export function fnMergeArray(target, source) {
 
 // 克隆数据
 export function fnCloneAny(data) {
-    let result = copyAny(data);
+    const result = copyAny(data);
     return result;
 }
 
@@ -127,15 +127,15 @@ export const fnLuhn = (str) => {
 
 // 创建顺序自增唯一 ID
 export function fnIncrUID() {
-    let timestamp = Math.floor(Date.now() / 1000);
-    let random = crypto.randomInt(100000, 999999);
+    const timestamp = Math.floor(Date.now() / 1000);
+    const random = crypto.randomInt(100000, 999999);
     return `${timestamp}${random}`;
 }
 
 // 获取接口目录名称
 export function getApiDirName(file) {
     // 如果不是插件接口
-    let apiDirName = file //
+    const apiDirName = file //
         .replace(/\\+/gi, '/')
         .replace('/_meta.js', '')
         .replace(/.+\/apis/, '');
@@ -144,7 +144,7 @@ export function getApiDirName(file) {
 
 // 获取接口文件名称
 export function getApiFileName(file) {
-    let apiFileName = file //
+    const apiFileName = file //
         .replace(/\\+/, '/')
         .replace('.js', '')
         .replace(/.+\/apis/, '');
@@ -153,36 +153,36 @@ export function getApiFileName(file) {
 
 // 获取所有接口文件
 export function fnAllApiFiles() {
-    let coreApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
-    let appApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
+    const coreApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
+    const appApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
 
-    let allApiFiles = _concat(coreApiFiles, appApiFiles);
+    const allApiFiles = _concat(coreApiFiles, appApiFiles);
 
     return allApiFiles;
 }
 
 // 获取所有接口文件
 export async function fnAllApiMeta() {
-    let coreApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
-    let appApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
+    const coreApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
+    const appApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
 
-    let allApiMetaFiles = _concat(coreApiMetaFiles, appApiMetaFiles);
+    const allApiMetaFiles = _concat(coreApiMetaFiles, appApiMetaFiles);
 
     return allApiMetaFiles;
 }
 
 // 获取文件名（不包括扩展名）
 export function fnApiInfo(metaUrl) {
-    let _filename = fnFilename(metaUrl);
-    let _dirname = fnDirname(metaUrl);
+    const _filename = fnFilename(metaUrl);
+    const _dirname = fnDirname(metaUrl);
 
-    let pureFileName = path.basename(_filename, '.js');
+    const pureFileName = path.basename(_filename, '.js');
 
-    let parentDirName = _dirname.replace(/\\+/gi, '/').replace(/.+\/apis/, '');
+    const parentDirName = _dirname.replace(/\\+/gi, '/').replace(/.+\/apis/, '');
 
-    let metaFile = path.dirname(metaUrl) + '/_meta.js';
+    const metaFile = path.dirname(metaUrl) + '/_meta.js';
 
-    let apiHash = {
+    const apiHash = {
         pureFileName: pureFileName,
         parentDirName: parentDirName,
         apiPath: [parentDirName, pureFileName].join('/')
@@ -193,7 +193,7 @@ export function fnApiInfo(metaUrl) {
 
 // 获取请求的接口路径
 export function fnApiPath(metaUrl) {
-    let apiPath = '/' + path.relative(path.resolve('./apis'), url.fileURLToPath(metaUrl)).replace('.js', '').replace(/\\+/, '/');
+    const apiPath = '/' + path.relative(path.resolve('./apis'), url.fileURLToPath(metaUrl)).replace('.js', '').replace(/\\+/, '/');
     return apiPath;
 }
 
@@ -210,7 +210,7 @@ export function fnClearEmptyData(obj, expludeFields = ['id']) {
 
 // 减少日志过长的内容
 export function fnClearLogData(obj, expludeFields = []) {
-    let objNew = _cloneDeep(_omit(obj, expludeFields));
+    const objNew = _cloneDeep(_omit(obj, expludeFields));
     // fnObjTraverse(objNew, {
     //     processValue: (key, value, level, path, isObjectRoot, isArrayElement, cbSetValue) => {
     //         if (_isString(value)) {
@@ -242,7 +242,7 @@ export function fnDbInsertData(obj) {
 
 // 数据库更新数据
 export function fnDbUpdateData(obj) {
-    let excludeFields = ['id', 'created_at'];
+    const excludeFields = ['id', 'created_at'];
     let newObj = {};
     _forOwn(obj, (value, key) => {
         if (value !== null && value !== undefined && !excludeFields.includes(key)) {
@@ -292,8 +292,8 @@ export function fnRandom6Number() {
 }
 
 export function fnRelativePath(from, to) {
-    let _relative = path.relative(from, to);
-    let _covertPath = _relative.replace(/\\+/g, '/');
+    const _relative = path.relative(from, to);
+    const _covertPath = _relative.replace(/\\+/g, '/');
 
     // 如果第一个不是（.），则自动拼接点
     if (_covertPath.indexOf('.') !== 0) {
@@ -307,7 +307,7 @@ export function fnFilename(metaUrl) {
 }
 
 export function fnDirname(metaUrl) {
-    let filename = url.fileURLToPath(metaUrl);
+    const filename = url.fileURLToPath(metaUrl);
     return path.dirname(filename);
 }
 
@@ -317,8 +317,8 @@ export function fnDirname(metaUrl) {
  * @returns {String} 返回路径字段
  */
 export function fnRouterPath(url) {
-    let urls = new URL(url, 'http://127.0.0.1');
-    let apiPath = urls.pathname;
+    const urls = new URL(url, 'http://127.0.0.1');
+    const apiPath = urls.pathname;
     return apiPath;
 }
 
@@ -331,76 +331,20 @@ export function fnApiParamsSign(params) {
         }
     });
 
-    let fieldsSort = fieldsArray.sort().join('&');
+    const fieldsSort = fieldsArray.sort().join('&');
 
-    let fieldsMd5 = md5(fieldsSort);
+    const fieldsMd5 = md5(fieldsSort);
     return { sign: fieldsMd5, sort: fieldsSort };
 }
-
-// 深度遍历对象节点
-// export let fnObjTraverse = (obj, callbacks = null, flattenArray = false, level = 0, path = []) => {
-//     let processValue = null;
-//     if (callbacks && callbacks.processValue) {
-//         processValue = callbacks.processValue;
-//     }
-//     if (callbacks && callbacks.enterLevel) {
-//         callbacks.enterLevel(level, path);
-//     }
-//     Object.entries(obj).forEach(([key, val]) => {
-//         if (val !== null && typeof val == 'object' && (!Array.isArray(val) || !flattenArray)) {
-//             if (Array.isArray(val)) {
-//                 for (let i = 0; i < val.length; i++) {
-//                     let elem = val[i];
-//                     let itemKey = '_' + i;
-//                     let currentPath = Array.from(path);
-//                     currentPath.push(key);
-//                     if (elem !== null && typeof elem == 'object') {
-//                         if (processValue) {
-//                             processValue(itemKey, elem, level, currentPath, true, true, (newElem) => {
-//                                 obj[key][i] = newElem;
-//                             });
-//                         }
-//                         currentPath.push(itemKey);
-//                         fnObjTraverse(elem, callbacks, flattenArray, level + 1, currentPath);
-//                     } else {
-//                         if (processValue) {
-//                             processValue(itemKey, elem, level, currentPath, false, true, (newElem) => {
-//                                 obj[key][i] = newElem;
-//                             });
-//                         }
-//                     }
-//                 }
-//             } else {
-//                 if (processValue) {
-//                     processValue(key, val, level, path, true, false, (newVal) => {
-//                         obj[key] = newVal;
-//                     });
-//                 }
-//                 let currentPath = Array.from(path);
-//                 currentPath.push(key);
-//                 fnObjTraverse(val, callbacks, flattenArray, level + 1, currentPath);
-//             }
-//         } else {
-//             if (processValue) {
-//                 processValue(key, val, level, path, false, false, (newVal) => {
-//                     obj[key] = newVal;
-//                 });
-//             }
-//         }
-//     });
-//     if (callbacks && callbacks.exitLevel) {
-//         callbacks.exitLevel(level, path);
-//     }
-// };
 
 /**
  * 检查传参有效性
  */
 export function fnApiParamsCheck(req) {
     return new Promise((resolve, reject) => {
-        let fields = req.body;
+        const fields = req.body;
 
-        let fieldsParams = _omit(fields, ['sign']);
+        const fieldsParams = _omit(fields, ['sign']);
 
         if (_isEmpty(fieldsParams)) {
             return resolve({ code: 0, msg: '接口未带参数' });
@@ -410,12 +354,12 @@ export function fnApiParamsCheck(req) {
             return reject({ code: 1, msg: '接口请求时间无效' });
         }
 
-        let diffTime = Date.now() - Number(fieldsParams.t);
+        const diffTime = Date.now() - Number(fieldsParams.t);
         if (diffTime > 3 * 60 * 1000) {
             return reject({ code: 1, msg: '接口请求时间已过期' });
         }
 
-        let paramsValid = fnApiParamsSign(fieldsParams);
+        const paramsValid = fnApiParamsSign(fieldsParams);
 
         if (paramsValid.sign !== fields.sign) {
             return reject({ code: 1, msg: '接口请求参数校验失败', other: paramsValid });
@@ -433,7 +377,7 @@ export function fnApiParamsCheck(req) {
  */
 export async function fnImport(path, name, defaultValue, options = {}) {
     try {
-        let data = await import(fnFileProtocolPath(path), options);
+        const data = await import(fnFileProtocolPath(path), options);
         return fnCloneAny(data);
     } catch (err) {
         console.log('🚀 ~ file: index.js:451 ~ fnImport ~ err:', err);
@@ -445,8 +389,8 @@ export async function fnImport(path, name, defaultValue, options = {}) {
 
 // 设置路由函数
 export const fnRoute = (metaUrl, fastify, options) => {
-    let apiInfo = fnApiInfo(metaUrl);
-    let method = _lowerCase(options.method || 'post');
+    const apiInfo = fnApiInfo(metaUrl);
+    const method = _lowerCase(options.method || 'post');
     if (!options.apiName) {
         console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 apiName 属性，请检查`);
         process.exit(1);
@@ -545,9 +489,9 @@ export function fnField(tableName, fromType, excludeFields = []) {
 
 // rsa-sha256 加密
 export function fnRsaSha256(data, privateKey) {
-    let sign = crypto.createSign('RSA-SHA256');
+    const sign = crypto.createSign('RSA-SHA256');
     sign.update(data);
-    let signature = sign.sign(privateKey, 'base64');
+    const signature = sign.sign(privateKey, 'base64');
     return signature;
 }
 
@@ -680,8 +624,8 @@ export const fnSchema = (field, title, type, min, max, defaultValue, enumValue, 
 
 // 获取参数按小写排序拼接
 export const fnParamsRaw = (args) => {
-    let keys = Object.keys(args).sort();
-    let newArgs = keys
+    const keys = Object.keys(args).sort();
+    const newArgs = keys
         .map((key) => {
             return `${key.toLowerCase()}=${args[key]}`;
         })
@@ -692,7 +636,7 @@ export const fnParamsRaw = (args) => {
 
 // 创建哈希算法
 export const fnHashSign = (algorithm, content) => {
-    let hash = crypto.createHash(algorithm);
+    const hash = crypto.createHash(algorithm);
     hash.update(content);
     return hash.digest('hex');
 };

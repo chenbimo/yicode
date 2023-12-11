@@ -44,7 +44,7 @@ async function plugin(fastify, options) {
             return this.count('id', { as: 'totalCount' }).first();
         });
         // 定义数据库链接
-        let mysql = await new Knex({
+        const mysql = await new Knex({
             client: 'mysql2',
             connection: {
                 host: appConfig.database.host,

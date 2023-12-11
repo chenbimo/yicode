@@ -41,17 +41,17 @@ export default async (fastify) => {
                     });
 
                 // 记录总数
-                let { totalCount } = await dictModel.clone().selectCount();
+                const { totalCount } = await dictModel.clone().selectCount();
 
                 // 记录列表
-                let rowsTemp = await dictModel
+                const rowsTemp = await dictModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
                     .selectData(req.body.page, req.body.limit, ...fnField('dict', 'core'));
 
                 // 处理数字符号强制转换为数字值
-                let rows = rowsTemp?.map((item) => {
+                const rows = rowsTemp?.map((item) => {
                     if (item.symbol === 'number') {
                         item.value = Number(item.value);
                     }

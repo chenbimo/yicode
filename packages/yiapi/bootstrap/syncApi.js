@@ -2,7 +2,6 @@
 import url from 'node:url';
 import path from 'node:path';
 // 外部模块
-import fg from 'fast-glob';
 import fp from 'fastify-plugin';
 import {
     //

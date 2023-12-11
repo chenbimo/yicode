@@ -1,7 +1,7 @@
 import { fnSchema, fnMeta } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
 
-export let metaConfig = fnMeta(import.meta.url, {
+export const metaConfig = fnMeta(import.meta.url, {
     _name: '用户',
     password: fnSchema(schemaField.password, '密码'),
     email: fnSchema(null, '邮箱', 'string', 5, 50),

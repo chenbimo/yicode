@@ -2,7 +2,7 @@ import { fnSchema, fnMeta } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
 import { schemaRegexp } from '../../config/schemaRegexp.js';
 
-export let metaConfig = fnMeta(import.meta.url, {
+export const metaConfig = fnMeta(import.meta.url, {
     _name: '树',
     pid: fnSchema(schemaField.pid, '父级目录 ID'),
     category: fnSchema(null, '目录分类', 'string', 1, 20, '', null, schemaRegexp.aA0_),

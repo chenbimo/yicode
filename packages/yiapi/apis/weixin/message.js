@@ -58,7 +58,7 @@ export default async (fastify) => {
 
                 // 扫描公众号二维码登录
                 if (xmlData.EventKey.indexOf('scan_qrcode_login') !== -1) {
-                    let [
+                    const [
                         //
                         scene_value,
                         qrcode_uuid

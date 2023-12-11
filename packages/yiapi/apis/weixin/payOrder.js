@@ -52,7 +52,7 @@ export default async (fastify) => {
                     pay_duration: payProduct?.duration || 0
                 };
                 fastify.log.warn({ what: '创建支付二维码', ...params });
-                let res = await fastify.wxpay.request('native', {
+                const res = await fastify.wxpay.request('native', {
                     description: payProduct?.describe || '无描述',
                     out_trade_no: orderNo,
                     amount: {

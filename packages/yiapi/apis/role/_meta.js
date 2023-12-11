@@ -2,7 +2,7 @@ import { fnSchema, fnMeta } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
 import { schemaRegexp } from '../../config/schemaRegexp.js';
 
-export let metaConfig = fnMeta(import.meta.url, {
+export const metaConfig = fnMeta(import.meta.url, {
     _name: '角色',
     code: fnSchema(null, '角色代号', 'string', 1, 20, '', null, schemaRegexp.aA0_),
     name: fnSchema(null, '角色名称', 'string', 0, 30),

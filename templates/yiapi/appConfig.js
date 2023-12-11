@@ -8,7 +8,7 @@ import { productConfig } from './config/product.js';
 import { weixinConfig } from './config/weixin.js';
 
 // 默认配置
-let appConfig = {
+const appConfig = {
     // 应用名称
     appName: '易接口',
     appNameEn: 'yiapi',

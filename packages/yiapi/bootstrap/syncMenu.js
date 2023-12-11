@@ -22,7 +22,7 @@ let menuDirNew = [];
 let menuFileNew = [];
 
 // 菜单配置
-let menuConfig = _merge(appConfig.menu, {
+const menuConfig = _merge(appConfig.menu, {
     '/internal/home': {
         name: '首页数据',
         sort: 0,
@@ -116,11 +116,11 @@ let menuConfig = _merge(appConfig.menu, {
 async function syncMenuDir(fastify) {
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table('sys_menu');
+        const menuModel = fastify.mysql.table('sys_menu');
 
         // 第一次请求菜单数据，用于创建一级菜单
-        let menuDir = await menuModel.clone().where({ pid: 0 }).selectAll();
-        let menuDirByValue = _keyBy(menuDir, 'value');
+        const menuDir = await menuModel.clone().where({ pid: 0 }).selectAll();
+        const menuDirByValue = _keyBy(menuDir, 'value');
 
         let deleteMenuDirValue = [];
         let insertMenuDir = [];
@@ -138,7 +138,7 @@ async function syncMenuDir(fastify) {
 
         _forEach(menuConfigNew, (item, index) => {
             // 映射的菜单数据
-            let mapMenu = menuDirByValue[item.value];
+            const mapMenu = menuDirByValue[item.value];
             if (!mapMenu) {
                 let insertData = {
                     name: item.name,
@@ -175,7 +175,7 @@ async function syncMenuDir(fastify) {
 
         // 如果待更新接口目录大于 0，则更新
         if (_isEmpty(updateMenuDir) === false) {
-            let updateBatch = updateMenuDir.map((item) => {
+            const updateBatch = updateMenuDir.map((item) => {
                 return menuModel
                     .clone()
                     .where('id', item.id)
@@ -194,14 +194,14 @@ async function syncMenuDir(fastify) {
 async function syncMenuFile(fastify) {
     try {
         // 准备好表
-        let menuModel = fastify.mysql.table('sys_menu');
+        const menuModel = fastify.mysql.table('sys_menu');
 
-        let menuDir = await menuModel.clone().where({ pid: 0 }).selectAll();
-        let menuDirByValue = _keyBy(menuDir, 'value');
+        const menuDir = await menuModel.clone().where({ pid: 0 }).selectAll();
+        const menuDirByValue = _keyBy(menuDir, 'value');
 
         // 第二次请求菜单数据，用于创建二级菜单
-        let menuData = await menuModel.clone().andWhere('pid', '<>', 0).selectAll();
-        let menuByValue = _keyBy(menuData, 'value');
+        const menuData = await menuModel.clone().andWhere('pid', '<>', 0).selectAll();
+        const menuByValue = _keyBy(menuData, 'value');
 
         let deleteMenuFileValue = [];
         let insertMenuFile = [];
@@ -219,8 +219,8 @@ async function syncMenuFile(fastify) {
 
         _forEach(menuConfigNew, (menu, index1) => {
             _forEach(menu.children, (item, index2) => {
-                let mapMenu = menuByValue[item.value];
-                let parentMenuData = menuDirByValue[menu.value];
+                const mapMenu = menuByValue[item.value];
+                const parentMenuData = menuDirByValue[menu.value];
                 if (!mapMenu) {
                     if (parentMenuData) {
                         let insertMenuData = {
@@ -260,7 +260,7 @@ async function syncMenuFile(fastify) {
 
         // 如果待更新接口目录大于 0，则更新
         if (_isEmpty(updateMenuFile) === false) {
-            let updateBatchData = updateMenuFile.map((item) => {
+            const updateBatchData = updateMenuFile.map((item) => {
                 return menuModel
                     .clone()
                     .where('id', item.id)
@@ -282,7 +282,7 @@ async function convertMenuStruct() {
             item.value = fnKebabCase(key);
             menuDirNew.push(item.value);
             if (_isObject(item['children'])) {
-                let childrenData = _cloneDeep(item['children']);
+                const childrenData = _cloneDeep(item['children']);
                 item['children'] = [];
                 _forOwn(childrenData, (item2, key2) => {
                     if (appConfig.blackMenus.includes(key) !== true) {

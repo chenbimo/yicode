@@ -18,7 +18,7 @@ const wxPayConfig = {
 
 // 获取请求路径
 const wxPayHttpUrl = (type, params) => {
-    let urls = {
+    const urls = {
         jsapi: {
             url: `/v3/pay/transactions/jsapi`,
             method: 'POST'
