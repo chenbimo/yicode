@@ -3,7 +3,7 @@ import { omit as _omit } from 'lodash-es';
 // 工具函数
 import { fnRoute, fnPureMD5, fnSaltMD5 } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '管理员登录';
@@ -41,7 +41,7 @@ export default async (fastify) => {
                 // 判断用户存在
                 if (!adminData?.id) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '用户不存在'
                     };
                 }
@@ -49,7 +49,7 @@ export default async (fastify) => {
                 // 判断密码
                 if (fnSaltMD5(req.body.password) !== adminData.password) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '密码错误'
                     };
                 }
@@ -64,7 +64,7 @@ export default async (fastify) => {
 
                 // 成功返回
                 return {
-                    ...codeConfig.SUCCESS,
+                    ...httpConfig.SUCCESS,
                     msg: '登录成功',
                     data: _omit(adminData, ['password']),
                     token: await fastify.jwt.sign({
@@ -78,7 +78,7 @@ export default async (fastify) => {
             } catch (err) {
                 fastify.log.error(err);
                 return {
-                    ...codeConfig.FAIL,
+                    ...httpConfig.FAIL,
                     msg: '登录失败'
                 };
             }

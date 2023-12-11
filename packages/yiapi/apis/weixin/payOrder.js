@@ -3,7 +3,7 @@ import got from 'got';
 import { fnRoute, fnField, fnSchema, fnIncrUID } from '../../utils/index.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '创建微信支付订单';
@@ -30,13 +30,13 @@ export default async (fastify) => {
                 const payProduct = appConfig.custom.productInfo[req.body.pay_product];
                 if (!payProduct?.code) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '支付产品错误'
                     };
                 }
                 if (!payProduct?.money) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '支付金额错误'
                     };
                 }
@@ -62,7 +62,7 @@ export default async (fastify) => {
                 });
                 if (res.code_url) {
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         data: {
                             pay_url: res.code_url,
                             order_no: orderNo,
@@ -73,11 +73,11 @@ export default async (fastify) => {
                     };
                 } else {
                     fastify.log.error(res);
-                    return codeConfig.FAIL;
+                    return httpConfig.FAIL;
                 }
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

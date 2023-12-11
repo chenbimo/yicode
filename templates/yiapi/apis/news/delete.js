@@ -28,12 +28,12 @@ export default async (fastify) => {
                 const result = await newsModel.clone().where('id', req.body.id).deleteData();
 
                 return {
-                    ...yiapi.codeConfig.INSERT_SUCCESS,
+                    ...yiapi.httpConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return yiapi.codeConfig.SELECT_FAIL;
+                return yiapi.httpConfig.SELECT_FAIL;
             }
         }
     });

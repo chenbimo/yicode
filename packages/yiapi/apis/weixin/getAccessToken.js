@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '获取访问令牌';
@@ -24,7 +24,7 @@ export default async (fastify) => {
                 const cacheWeixinAccessToken = await fastify.redisGet('cacheData:weixinAccessToken');
                 if (cacheWeixinAccessToken) {
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         data: {
                             accessToken: cacheWeixinAccessToken,
                             from: 'cache'
@@ -35,14 +35,14 @@ export default async (fastify) => {
 
                 if (access_token) {
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         data: access_token
                     };
                 }
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

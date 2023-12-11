@@ -3,7 +3,7 @@ import got from 'got';
 import { fnRoute, fnField, fnSchema } from '../../utils/index.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '通过 code 换取 session';
@@ -42,12 +42,12 @@ export default async (fastify) => {
                     }
                 });
                 return {
-                    ...codeConfig.SUCCESS,
+                    ...httpConfig.SUCCESS,
                     data: result.data
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

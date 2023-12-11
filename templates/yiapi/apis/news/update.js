@@ -36,12 +36,12 @@ export default async (fastify) => {
                     });
 
                 return {
-                    ...yiapi.codeConfig.INSERT_SUCCESS,
+                    ...yiapi.httpConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return yiapi.codeConfig.INSERT_FAIL;
+                return yiapi.httpConfig.INSERT_FAIL;
             }
         }
     });

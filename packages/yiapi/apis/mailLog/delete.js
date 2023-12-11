@@ -1,6 +1,6 @@
 import { fnRoute } from '../../utils/index.js';
 
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '删除邮件日志';
@@ -29,12 +29,12 @@ export default async (fastify) => {
                 const result = await mailLogModel.clone().where({ id: req.body.id }).deleteData();
 
                 return {
-                    ...codeConfig.DELETE_SUCCESS,
+                    ...httpConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.DELETE_FAIL;
+                return httpConfig.DELETE_FAIL;
             }
         }
     });

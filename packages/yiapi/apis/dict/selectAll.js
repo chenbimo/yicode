@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '查询所有字典';
@@ -42,14 +42,14 @@ export default async (fastify) => {
                     return item;
                 });
                 return {
-                    ...codeConfig.SELECT_SUCCESS,
+                    ...httpConfig.SELECT_SUCCESS,
                     data: {
                         rows: rows
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.SELECT_FAIL;
+                return httpConfig.SELECT_FAIL;
             }
         }
     });

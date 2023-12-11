@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '删除角色';
@@ -32,12 +32,12 @@ export default async (fastify) => {
 
                 const roleData = await roleModel.clone().selectOne('id', 'is_system');
                 if (!roleData?.id) {
-                    return codeConfig.NO_DATA;
+                    return httpConfig.NO_DATA;
                 }
 
                 if (roleData.is_system === 1) {
                     return {
-                        ...codeConfig.DELETE_FAIL,
+                        ...httpConfig.DELETE_FAIL,
                         msg: '默认角色，无法删除'
                     };
                 }
@@ -48,11 +48,11 @@ export default async (fastify) => {
                 await fastify.cacheRoleData();
 
                 return {
-                    ...codeConfig.DELETE_SUCCESS,
+                    ...httpConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
-                return codeConfig.DELETE_FAIL;
+                return httpConfig.DELETE_FAIL;
             }
         }
     });

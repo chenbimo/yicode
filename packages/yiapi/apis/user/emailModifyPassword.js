@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '邮箱修改密码';
@@ -34,7 +34,7 @@ export default async (fastify) => {
 
                 if (!userData?.email) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '请先绑定邮箱'
                     };
                 }
@@ -43,14 +43,14 @@ export default async (fastify) => {
                 const cacheVerifyCode = await fastify.redisGet(`setupPasswordVerifyCode:${req.body.email}`);
                 if (!cacheVerifyCode) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '未发送验证码或验证码已过期，请重新发送'
                     };
                 }
 
                 if (String(cacheVerifyCode) !== String(req.body.verify_code)) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '验证码错误'
                     };
                 }
@@ -63,13 +63,13 @@ export default async (fastify) => {
                     });
 
                 return {
-                    ...codeConfig.SUCCESS,
+                    ...httpConfig.SUCCESS,
                     msg: '修改密码成功',
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.INSERT_FAIL;
+                return httpConfig.INSERT_FAIL;
             }
         }
     });

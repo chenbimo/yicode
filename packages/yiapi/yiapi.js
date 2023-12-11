@@ -11,15 +11,17 @@ import gracefulShutdown from 'http-graceful-shutdown';
 
 // 配置信息
 import { appConfig } from './config/appConfig.js';
-import { codeConfig } from './config/codeConfig.js';
+import { httpConfig } from './config/httpConfig.js';
 import { crosConfig } from './config/crosConfig.js';
 import { fieldType } from './config/fieldType.js';
-import { logConfig } from './config/logConfig.js';
 import { schemaField } from './config/schemaField.js';
 import { schemaType } from './config/schemaType.js';
 import { sysConfig } from './config/sysConfig.js';
 import { tableField } from './config/tableField.js';
 import { timeConfig } from './config/timeConfig.js';
+
+// 预配置
+import { logger } from './preboot/logger.js';
 
 // 脚本
 import { syncDatabase } from './scripts/syncDatabase.js';
@@ -39,7 +41,7 @@ import './preboot/init.js';
 
 // 初始化项目实例
 let fastify = Fastify({
-    logger: logConfig,
+    logger: logger,
     pluginTimeout: 0,
     genReqId: () => fnUUID(),
     ajv: {
@@ -205,7 +207,7 @@ export {
     fp,
     // 配置
     appConfig,
-    codeConfig,
+    httpConfig,
     crosConfig,
     fieldType,
     schemaField,

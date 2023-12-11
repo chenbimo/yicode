@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '删除字典目录';
@@ -34,25 +34,25 @@ export default async (fastify) => {
                 const dictCategoryData = await dictCategoryModel.clone().selectOne('id');
 
                 if (!dictCategoryData?.id) {
-                    return codeConfig.NO_DATA;
+                    return httpConfig.NO_DATA;
                 }
 
                 const childrenDict = await dictModel.clone().where({ category_id: req.body.id }).selectOne('id');
                 if (childrenDict?.id) {
                     return {
-                        ...codeConfig.DELETE_FAIL,
+                        ...httpConfig.DELETE_FAIL,
                         msg: '此分类下有字典，无法删除'
                     };
                 }
 
                 const result = await dictCategoryModel.clone().deleteData();
                 return {
-                    ...codeConfig.DELETE_SUCCESS,
+                    ...httpConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.DELETE_FAIL;
+                return httpConfig.DELETE_FAIL;
             }
         }
     });

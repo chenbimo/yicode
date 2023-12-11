@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '删除菜单';
@@ -31,14 +31,14 @@ export default async (fastify) => {
 
                 if (!menuData?.id) {
                     return {
-                        ...codeConfig.DELETE_FAIL,
+                        ...httpConfig.DELETE_FAIL,
                         msg: '菜单不存在'
                     };
                 }
 
                 if (menuData.is_system === 1) {
                     return {
-                        ...codeConfig.DELETE_FAIL,
+                        ...httpConfig.DELETE_FAIL,
                         msg: '默认菜单，无法删除'
                     };
                 }
@@ -47,7 +47,7 @@ export default async (fastify) => {
 
                 if (childData?.id) {
                     return {
-                        ...codeConfig.DELETE_FAIL,
+                        ...httpConfig.DELETE_FAIL,
                         msg: '存在子菜单，无法删除'
                     };
                 }
@@ -55,12 +55,12 @@ export default async (fastify) => {
                 const result = await menuModel.clone().where({ id: req.body.id }).deleteData();
                 await fastify.cacheMenuData();
                 return {
-                    ...codeConfig.DELETE_SUCCESS,
+                    ...httpConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.DELETE_FAIL;
+                return httpConfig.DELETE_FAIL;
             }
         }
     });

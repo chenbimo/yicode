@@ -3,7 +3,7 @@ import got from 'got';
 import { fnRoute, fnParamsRaw, fnHashSign, fnUUID } from '../../utils/index.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '获取 jsapiPay 配置';
@@ -54,7 +54,7 @@ export default async (fastify) => {
                 const signature = fnHashSign('sha1', fnParamsRaw(params));
                 // 返回数据
                 return {
-                    ...codeConfig.SUCCESS,
+                    ...httpConfig.SUCCESS,
                     data: {
                         appId: appConfig.custom.weixin.appId,
                         signature: signature,
@@ -65,7 +65,7 @@ export default async (fastify) => {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

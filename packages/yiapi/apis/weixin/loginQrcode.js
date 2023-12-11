@@ -3,7 +3,7 @@ import got from 'got';
 import { fnRoute, fnField, fnSchema, fnUUID } from '../../utils/index.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '微信登录二维码';
@@ -37,7 +37,7 @@ export default async (fastify) => {
                     // 如果报错
                     if (result.errcode) {
                         return {
-                            ...codeConfig.FAIL,
+                            ...httpConfig.FAIL,
                             msg: result.errmsg
                         };
                     }
@@ -69,7 +69,7 @@ export default async (fastify) => {
                     // 如果报错
                     if (result.errcode) {
                         return {
-                            ...codeConfig.FAIL,
+                            ...httpConfig.FAIL,
                             msg: result.errmsg
                         };
                     }
@@ -77,7 +77,7 @@ export default async (fastify) => {
                     fastify.redisSet(`cacheData:weixinAccessToken`, weixinAccessToken, 6000);
                 }
                 return {
-                    ...codeConfig.SUCCESS,
+                    ...httpConfig.SUCCESS,
                     data: {
                         url: result.url,
                         scan_qrcode_uuid: scan_qrcode_uuid
@@ -85,7 +85,7 @@ export default async (fastify) => {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

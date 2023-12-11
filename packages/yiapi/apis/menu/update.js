@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '更新菜单';
@@ -40,7 +40,7 @@ export default async (fastify) => {
                     let parentData = await menuModel.clone().where('id', req.body.pid).selectOne('id');
                     if (!parentData?.id) {
                         return {
-                            ...codeConfig.FAIL,
+                            ...httpConfig.FAIL,
                             msg: '父级菜单不存在'
                         };
                     }
@@ -49,7 +49,7 @@ export default async (fastify) => {
                 const selfData = await menuModel.clone().where('id', req.body.id).selectOne('id');
                 if (!selfData?.id) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '菜单不存在'
                     };
                 }
@@ -70,10 +70,10 @@ export default async (fastify) => {
                     });
 
                 await fastify.cacheMenuData();
-                return codeConfig.UPDATE_SUCCESS;
+                return httpConfig.UPDATE_SUCCESS;
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.UPDATE_FAIL;
+                return httpConfig.UPDATE_FAIL;
             }
         }
     });

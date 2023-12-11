@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '查询菜单';
@@ -39,7 +39,7 @@ export default async (fastify) => {
                     .selectData(req.body.page, req.body.limit, ...fnField('menu', 'core'));
 
                 return {
-                    ...codeConfig.SELECT_SUCCESS,
+                    ...httpConfig.SELECT_SUCCESS,
                     data: {
                         total: totalCount,
                         rows: rows,
@@ -49,7 +49,7 @@ export default async (fastify) => {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.SELECT_FAIL;
+                return httpConfig.SELECT_FAIL;
             }
         }
     });

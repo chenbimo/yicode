@@ -9,7 +9,7 @@ import { fnRoute, fnUUID } from '../../utils/index.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '文件上传到本地';
@@ -72,13 +72,13 @@ export default async (fastify) => {
                 await writeFileSync(`${localDir}/${name}`, buffer);
 
                 return {
-                    ...codeConfig.SUCCESS,
+                    ...httpConfig.SUCCESS,
                     name: name,
                     url: path
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

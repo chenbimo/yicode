@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '删除树';
@@ -34,7 +34,7 @@ export default async (fastify) => {
 
                 if (treeData?.id) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '该树存在下级树，无法删除'
                     };
                 }
@@ -45,12 +45,12 @@ export default async (fastify) => {
                     .deleteData();
 
                 return {
-                    ...codeConfig.DELETE_SUCCESS,
+                    ...httpConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.DELETE_FAIL;
+                return httpConfig.DELETE_FAIL;
             }
         }
     });

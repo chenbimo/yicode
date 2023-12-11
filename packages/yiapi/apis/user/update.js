@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '更新用户信息';
@@ -43,12 +43,12 @@ export default async (fastify) => {
                     });
 
                 return {
-                    ...codeConfig.UPDATE_SUCCESS,
+                    ...httpConfig.UPDATE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.UPDATE_FAIL;
+                return httpConfig.UPDATE_FAIL;
             }
         }
     });

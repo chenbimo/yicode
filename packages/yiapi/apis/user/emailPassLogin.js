@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '邮箱密码登录';
@@ -33,7 +33,7 @@ export default async (fastify) => {
 
                 if (!userData?.id) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '用户不存在'
                     };
                 }
@@ -41,20 +41,20 @@ export default async (fastify) => {
                 // 如果没有设置密码，则提示设置密码后登录
                 if (!userData?.password) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '请扫码登录后，在个人中心绑定邮箱并设置密码后再使用此方式登录'
                     };
                 }
 
                 if (userData.password !== fnSaltMD5(req.body.password)) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '密码错误'
                     };
                 }
 
                 return {
-                    ...codeConfig.SUCCESS,
+                    ...httpConfig.SUCCESS,
                     msg: '密码登录成功',
                     data: userData,
                     token: await fastify.jwt.sign({
@@ -66,7 +66,7 @@ export default async (fastify) => {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.INSERT_FAIL;
+                return httpConfig.INSERT_FAIL;
             }
         }
     });

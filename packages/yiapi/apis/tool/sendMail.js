@@ -2,7 +2,7 @@
 import { fnRoute, fnRandom6Number } from '../../utils/index.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '发送邮件';
@@ -60,7 +60,7 @@ export default async (fastify) => {
                         text_content: req.body.content
                     });
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         msg: '邮件已发送',
                         from: 'new'
                     };
@@ -72,7 +72,7 @@ export default async (fastify) => {
                     const existsVerifyCode = await fastify.redisGet(`${req.body.verify_name}:${req.body.to_email}`);
                     if (existsVerifyCode) {
                         return {
-                            ...codeConfig.SUCCESS,
+                            ...httpConfig.SUCCESS,
                             msg: '邮箱验证码已发送（5 分钟有效）',
                             from: 'cache'
                         };
@@ -95,14 +95,14 @@ export default async (fastify) => {
                         text_content: '******'
                     });
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         msg: '邮箱验证码已发送（5 分钟有效）',
                         from: 'new'
                     };
                 }
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

@@ -38,7 +38,7 @@ export default async (fastify) => {
                     .selectData(req.body.page, req.body.limit);
 
                 return {
-                    ...yiapi.codeConfig.SELECT_SUCCESS,
+                    ...yiapi.httpConfig.SELECT_SUCCESS,
                     data: {
                         total: totalCount,
                         rows: rows,
@@ -48,7 +48,7 @@ export default async (fastify) => {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return yiapi.codeConfig.SELECT_FAIL;
+                return yiapi.httpConfig.SELECT_FAIL;
             }
         }
     });

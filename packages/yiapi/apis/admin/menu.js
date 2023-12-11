@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '查询管理员菜单权限';
@@ -24,14 +24,14 @@ export default async (fastify) => {
             try {
                 const result = await fastify.getUserMenus(req.session);
                 return {
-                    ...codeConfig.SELECT_SUCCESS,
+                    ...httpConfig.SELECT_SUCCESS,
                     data: {
                         rows: result
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.SELECT_FAIL;
+                return httpConfig.SELECT_FAIL;
             }
         }
     });

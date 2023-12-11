@@ -1,6 +1,6 @@
 import { fnRoute, fnCamelCase } from '../../utils/index.js';
 
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '添加字典';
@@ -44,7 +44,7 @@ export default async (fastify) => {
                 if (req.body.symbol === 'number') {
                     if (Number.isNaN(Number(req.body.value)) === true) {
                         return {
-                            ...codeConfig.UPDATE_FAIL,
+                            ...httpConfig.UPDATE_FAIL,
                             msg: '字典值不是一个数字类型'
                         };
                     }
@@ -65,12 +65,12 @@ export default async (fastify) => {
                 });
 
                 return {
-                    ...codeConfig.INSERT_SUCCESS,
+                    ...httpConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.INSERT_FAIL;
+                return httpConfig.INSERT_FAIL;
             }
         }
     });

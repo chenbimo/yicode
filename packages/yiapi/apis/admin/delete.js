@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '删除管理员';
@@ -32,18 +32,18 @@ export default async (fastify) => {
 
                 const adminData = await adminModel.clone().selectOne('id');
                 if (!adminData?.id) {
-                    return codeConfig.NO_DATA;
+                    return httpConfig.NO_DATA;
                 }
 
                 const result = await adminModel.deleteData();
 
                 return {
-                    ...codeConfig.DELETE_SUCCESS,
+                    ...httpConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.DELETE_FAIL;
+                return httpConfig.DELETE_FAIL;
             }
         }
     });

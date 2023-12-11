@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnCamelCase } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '更新字典';
@@ -37,7 +37,7 @@ export default async (fastify) => {
                 if (req.body.type === 'number') {
                     if (Number.isNaN(Number(req.body.value)) === true) {
                         return {
-                            ...codeConfig.UPDATE_FAIL,
+                            ...httpConfig.UPDATE_FAIL,
                             msg: '字典值不是一个数字类型'
                         };
                     }
@@ -59,10 +59,10 @@ export default async (fastify) => {
                         state: req.body.state
                     });
 
-                return codeConfig.UPDATE_SUCCESS;
+                return httpConfig.UPDATE_SUCCESS;
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.UPDATE_FAIL;
+                return httpConfig.UPDATE_FAIL;
             }
         }
     });

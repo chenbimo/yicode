@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '邮箱验证码登录';
@@ -35,7 +35,7 @@ export default async (fastify) => {
                 // 若用户存在则提示该用户已存在
                 if (!userData?.id) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '用户不存在'
                     };
                 }
@@ -43,7 +43,7 @@ export default async (fastify) => {
                 // 若用户存在则提示该用户已存在
                 if (!userData?.email) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '请扫码登录后，在个人中心绑定邮箱后再使用此方式登录'
                     };
                 }
@@ -53,14 +53,14 @@ export default async (fastify) => {
 
                 if (!cacheVerifyCode) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '未发送验证码或验证码已过期，请重新发送'
                     };
                 }
 
                 if (String(cacheVerifyCode) !== req.body.verify_code) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '验证码错误'
                     };
                 }
@@ -68,7 +68,7 @@ export default async (fastify) => {
                 await fastify.redis.del(`loginVerifyCode:${req.body.email}`);
 
                 return {
-                    ...codeConfig.SUCCESS,
+                    ...httpConfig.SUCCESS,
                     msg: '邮箱登录成功',
                     data: userData,
                     token: await fastify.jwt.sign({
@@ -80,7 +80,7 @@ export default async (fastify) => {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.INSERT_FAIL;
+                return httpConfig.INSERT_FAIL;
             }
         }
     });

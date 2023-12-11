@@ -29,12 +29,12 @@ export default async (fastify) => {
                     .selectOne();
 
                 return {
-                    ...yiapi.codeConfig.SELECT_SUCCESS,
+                    ...yiapi.httpConfig.SELECT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return yiapi.codeConfig.SELECT_FAIL;
+                return yiapi.httpConfig.SELECT_FAIL;
             }
         }
     });

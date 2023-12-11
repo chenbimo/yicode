@@ -490,6 +490,124 @@ export let appConfigSchema = {
                 additionalProperties: true
             }
         },
+        // 微信配置
+        weixin: {
+            title: '微信配置',
+            type: 'object',
+            properties: {
+                merchant: {
+                    title: '商户配置',
+                    type: 'array',
+                    items: {
+                        title: '单个公众号配置',
+                        type: 'object',
+                        properties: {
+                            // 代号
+                            code: {
+                                title: '代号',
+                                name: 'string'
+                            },
+                            // 名称
+                            name: {
+                                title: '名称',
+                                type: 'string'
+                            },
+                            mchId: {
+                                title: '商户号',
+                                type: 'string'
+                            },
+                            serialNo: {
+                                title: '支付序列号',
+                                type: 'string'
+                            },
+                            apiv3PrivateKey: {
+                                title: '支付秘钥',
+                                type: 'string'
+                            },
+                            privateKey: {
+                                title: '商户私钥',
+                                type: 'string'
+                            }
+                        },
+                        required: ['code', 'name']
+                    }
+                },
+                merchant: {
+                    title: '公众号配置',
+                    type: 'array',
+                    items: {
+                        title: '单个公众号配置',
+                        type: 'object',
+                        properties: {
+                            // 代号
+                            code: {
+                                title: '代号',
+                                name: 'string'
+                            },
+                            // 名称
+                            name: {
+                                title: '名称',
+                                type: 'string'
+                            },
+                            // appId
+                            appId: {
+                                title: 'appId',
+                                type: 'string'
+                            },
+                            // appSecret
+                            appSecret: {
+                                title: 'appSecret',
+                                type: 'string'
+                            }
+                        },
+                        required: ['code', 'name']
+                    }
+                }
+            }
+        },
+        // 产品配置
+        product: {
+            title: '产品配置',
+            type: 'object',
+            properties: {
+                '*': {
+                    title: '产品参数',
+                    type: 'array',
+                    items: {
+                        title: '单个产品配置',
+                        type: 'object',
+                        properties: {
+                            // 代号
+                            code: {
+                                title: '产品代号',
+                                type: 'string'
+                            },
+                            // 名称
+                            name: {
+                                title: '产品名称',
+                                type: 'string'
+                            },
+                            // 时长 0=永久 非0=秒
+                            duration: {
+                                title: '产品时间',
+                                type: 'integer'
+                            },
+                            // 价格 分
+                            money: {
+                                title: '产品价格',
+                                type: 'integer'
+                            },
+                            // 描述
+                            describe: {
+                                title: '产品描述',
+                                type: 'string'
+                            }
+                        },
+                        required: ['code', 'name']
+                    }
+                }
+            }
+        },
         // 自定义扩展配置
         custom: {
             title: '自定义配置',
@@ -528,6 +646,8 @@ export let appConfigSchema = {
         'cron',
         'table',
         'menu',
+        'weixin',
+        'product',
         'custom'
     ],
     additionalProperties: false

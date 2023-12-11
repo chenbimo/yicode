@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '令牌检测';
@@ -26,14 +26,14 @@ export default async (fastify) => {
                 try {
                     const jwtData = await req.jwtVerify();
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         data: {
                             state: 'yes'
                         }
                     };
                 } catch (err) {
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         data: {
                             state: 'no'
                         }
@@ -41,7 +41,7 @@ export default async (fastify) => {
                 }
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

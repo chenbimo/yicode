@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnSaltMD5, fnPureMD5 } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '添加管理员';
@@ -32,7 +32,7 @@ export default async (fastify) => {
                 const adminData = await adminModel.clone().where('username', req.body.username).selectOne('id');
                 if (adminData?.id) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '管理员账号或昵称已存在'
                     };
                 }
@@ -44,12 +44,12 @@ export default async (fastify) => {
                     role_codes: req.body.role_codes
                 });
                 return {
-                    ...codeConfig.INSERT_SUCCESS,
+                    ...httpConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.INSERT_FAIL;
+                return httpConfig.INSERT_FAIL;
             }
         }
     });

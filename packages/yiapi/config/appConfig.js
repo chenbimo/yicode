@@ -100,7 +100,18 @@ let appConfig = mergeAndConcat(
         // 扩展表字段
         table: {},
         // 自定义配置
-        custom: {}
+        custom: {},
+        // 微信配置
+        weixin: {
+            // 商户配置
+            merchant: [],
+            // 账号
+            account: []
+        },
+        // 产品配置
+        product: {},
+        // 自定义字段
+        custom: customConfig
     },
     importConfig
 );

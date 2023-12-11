@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '删除字典';
@@ -31,24 +31,24 @@ export default async (fastify) => {
 
                 const dictData = await dictModel.clone().selectOne('id', 'is_system');
                 if (!dictData?.id) {
-                    return codeConfig.NO_DATA;
+                    return httpConfig.NO_DATA;
                 }
 
                 if (dictData?.is_system === 1) {
                     return {
-                        ...codeConfig.DELETE_FAIL,
+                        ...httpConfig.DELETE_FAIL,
                         msg: '默认字典，无法删除'
                     };
                 }
 
                 const result = await dictModel.clone().deleteData();
                 return {
-                    ...codeConfig.DELETE_SUCCESS,
+                    ...httpConfig.DELETE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.DELETE_FAIL;
+                return httpConfig.DELETE_FAIL;
             }
         }
     });

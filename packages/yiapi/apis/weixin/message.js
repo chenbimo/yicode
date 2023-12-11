@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnUUID } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '微信消息通知';
@@ -31,7 +31,7 @@ export default async (fastify) => {
                 }
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });
@@ -91,7 +91,7 @@ export default async (fastify) => {
                 return 'SUCCESS';
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

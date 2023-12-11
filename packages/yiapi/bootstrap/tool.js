@@ -132,19 +132,26 @@ async function plugin(fastify) {
 
     const getWeixinAccessToken = async () => {
         try {
-            let res = await got('https://api.weixin.qq.com/cgi-bin/token', {
-                method: 'GET',
-                searchParams: {
-                    grant_type: 'client_credential',
-                    appid: appConfig.custom.weixin.appId,
-                    secret: appConfig.custom.weixin.appSecret
-                }
-            }).json();
+            const cacheWeixinAccessToken = await redisGet('cacheData:weixinAccessToken');
+            if (cacheWeixinAccessToken) {
+                return cacheWeixinAccessToken;
+            } else {
+                const res = await got('https://api.weixin.qq.com/cgi-bin/token', {
+                    method: 'GET',
+                    searchParams: {
+                        grant_type: 'client_credential',
+                        appid: appConfig.custom.weixin.appId,
+                        secret: appConfig.custom.weixin.appSecret
+                    }
+                }).json();
 
-            if (res.access_token) {
-                redisSet(`cacheData:weixinAccessToken`, res.access_token, 6000);
+                if (res.access_token) {
+                    await redisSet(`cacheData:weixinAccessToken`, res.access_token, 6000);
+                    return res.access_token;
+                } else {
+                    return '';
+                }
             }
-            return res.access_token;
         } catch (err) {
             fastify.log.error(err);
             return false;

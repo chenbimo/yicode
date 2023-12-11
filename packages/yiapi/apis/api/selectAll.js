@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { cacheData } from '../../config/cacheData.js';
 import { metaConfig } from './_meta.js';
 
@@ -26,14 +26,14 @@ export default async (fastify) => {
                 const result = await fastify.redisGet(cacheData.api);
 
                 return {
-                    ...codeConfig.SELECT_SUCCESS,
+                    ...httpConfig.SELECT_SUCCESS,
                     data: {
                         rows: result
                     }
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.SELECT_FAIL;
+                return httpConfig.SELECT_FAIL;
             }
         }
     });

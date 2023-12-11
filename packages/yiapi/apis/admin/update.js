@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnSaltMD5 } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '更新管理员';
@@ -39,10 +39,10 @@ export default async (fastify) => {
                     role_codes: req.body.role_codes
                 });
 
-                return codeConfig.UPDATE_SUCCESS;
+                return httpConfig.UPDATE_SUCCESS;
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.UPDATE_FAIL;
+                return httpConfig.UPDATE_FAIL;
             }
         }
     });

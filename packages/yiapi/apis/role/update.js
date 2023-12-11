@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件夹
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '更新角色';
@@ -43,7 +43,7 @@ export default async (fastify) => {
                 // 编码存在且 id 不等于当前角色
                 if (roleData?.id !== req.body.id) {
                     return {
-                        ...codeConfig.INSERT_FAIL,
+                        ...httpConfig.INSERT_FAIL,
                         msg: '角色名称或编码已存在'
                     };
                 }
@@ -62,12 +62,12 @@ export default async (fastify) => {
                 await fastify.cacheRoleData();
 
                 return {
-                    ...codeConfig.UPDATE_SUCCESS,
+                    ...httpConfig.UPDATE_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.UPDATE_FAIL;
+                return httpConfig.UPDATE_FAIL;
             }
         }
     });

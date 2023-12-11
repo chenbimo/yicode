@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField, fnSchema } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '支付结果检测';
@@ -29,7 +29,7 @@ export default async (fastify) => {
                 if (payOrderNo) {
                     await fastify.redis.del(redisKey);
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         msg: '付款成功！',
                         data: {
                             result: 'yes'
@@ -37,7 +37,7 @@ export default async (fastify) => {
                     };
                 } else {
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         msg: '付款中...',
                         data: {
                             result: 'no'
@@ -46,7 +46,7 @@ export default async (fastify) => {
                 }
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

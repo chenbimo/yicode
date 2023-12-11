@@ -3,7 +3,7 @@ import { toDate, addDays, getTime } from 'date-fns';
 // 工具函数
 import { fnRoute, fnField, fnSchema, fnIncrUID } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '微信支付回调';

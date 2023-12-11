@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '查询用户详情';
@@ -31,18 +31,18 @@ export default async (fastify) => {
 
                 if (!result?.id) {
                     return {
-                        ...codeConfig.SELECT_FAIL,
+                        ...httpConfig.SELECT_FAIL,
                         msg: '没有查到用户信息'
                     };
                 }
 
                 return {
-                    ...codeConfig.SELECT_SUCCESS,
+                    ...httpConfig.SELECT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.SELECT_FAIL;
+                return httpConfig.SELECT_FAIL;
             }
         }
     });

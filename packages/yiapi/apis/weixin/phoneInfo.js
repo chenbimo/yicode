@@ -2,7 +2,7 @@ import got from 'got';
 // 工具函数
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '获取手机号信息';
@@ -44,16 +44,16 @@ export default async (fastify) => {
                 });
                 if (result.data.errmsg === 'ok') {
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         data: result.data.phone_info
                     };
                 } else {
                     fastify.log.error(result.data);
-                    return codeConfig.FAIL;
+                    return httpConfig.FAIL;
                 }
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

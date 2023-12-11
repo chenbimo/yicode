@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnCamelCase } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '更新字典目录';
@@ -38,7 +38,7 @@ export default async (fastify) => {
 
                 if (dictCategory?.id) {
                     return {
-                        ...codeConfig.INSERT_FAIL,
+                        ...httpConfig.INSERT_FAIL,
                         msg: '当前编号已存在'
                     };
                 }
@@ -53,10 +53,10 @@ export default async (fastify) => {
                         state: req.body.state
                     });
 
-                return codeConfig.UPDATE_SUCCESS;
+                return httpConfig.UPDATE_SUCCESS;
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.UPDATE_FAIL;
+                return httpConfig.UPDATE_FAIL;
             }
         }
     });

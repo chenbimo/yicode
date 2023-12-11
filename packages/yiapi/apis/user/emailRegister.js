@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField, fnSaltMD5, fnPureMD5 } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '邮箱密码注册';
@@ -35,7 +35,7 @@ export default async (fastify) => {
                 // 若用户存在则提示该用户已存在
                 if (userData?.id) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '用户已存在'
                     };
                 }
@@ -44,14 +44,14 @@ export default async (fastify) => {
                 const cacheVerifyCode = await fastify.redisGet(`registerVerifyCode:${req.body.email}`);
                 if (!cacheVerifyCode) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '未发送验证码或验证码已过期，请重新发送'
                     };
                 }
 
                 if (cacheVerifyCode !== req.body.verify_code) {
                     return {
-                        ...codeConfig.FAIL,
+                        ...httpConfig.FAIL,
                         msg: '验证码错误'
                     };
                 }
@@ -66,13 +66,13 @@ export default async (fastify) => {
                     });
 
                 return {
-                    ...codeConfig.SUCCESS,
+                    ...httpConfig.SUCCESS,
                     msg: '邮箱注册成功',
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.INSERT_FAIL;
+                return httpConfig.INSERT_FAIL;
             }
         }
     });

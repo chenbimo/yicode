@@ -1,5 +1,5 @@
 // http状态码
-export let codeConfig = {
+export const httpConfig = {
     SUCCESS: { symbol: 'SUCCESS', code: 0, msg: '操作成功' },
     INSERT_SUCCESS: { symbol: 'INSERT_SUCCESS', code: 0, msg: '添加成功' },
     SELECT_SUCCESS: { symbol: 'SELECT_SUCCESS', code: 0, msg: '查询成功' },

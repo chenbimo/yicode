@@ -1,7 +1,7 @@
 // 工具函数
 import { fnRoute, fnField, fnSchema } from '../../utils/index.js';
 // 配置文件
-import { codeConfig } from '../../config/codeConfig.js';
+import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '微信登录检测';
@@ -35,7 +35,7 @@ export default async (fastify) => {
                         .selectOne(...fnField('user', 'core', ['password']));
                     if (userData?.id) {
                         return {
-                            ...codeConfig.SUCCESS,
+                            ...httpConfig.SUCCESS,
                             data: userData,
                             token: await fastify.jwt.sign({
                                 id: userData.id,
@@ -46,7 +46,7 @@ export default async (fastify) => {
                         };
                     } else {
                         return {
-                            ...codeConfig.SUCCESS,
+                            ...httpConfig.SUCCESS,
                             msg: '暂无数据',
                             detail: '暂无数据 2',
                             data: {}
@@ -54,7 +54,7 @@ export default async (fastify) => {
                     }
                 } else {
                     return {
-                        ...codeConfig.SUCCESS,
+                        ...httpConfig.SUCCESS,
                         msg: '暂无数据',
                         detail: '暂无数据 1',
                         data: {}
@@ -62,7 +62,7 @@ export default async (fastify) => {
                 }
             } catch (err) {
                 fastify.log.error(err);
-                return codeConfig.FAIL;
+                return httpConfig.FAIL;
             }
         }
     });
