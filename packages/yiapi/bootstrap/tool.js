@@ -5,7 +5,6 @@ import got from 'got';
 import { keyBy as _keyBy } from 'lodash-es';
 // 配置文件
 import { appConfig } from '../config/appConfig.js';
-import { cacheData } from '../config/cacheData.js';
 
 async function plugin(fastify) {
     const redisSet = async (key, value, second = 0) => {
@@ -27,7 +26,7 @@ async function plugin(fastify) {
 
         // 提取所有角色拥有的接口
         let apiIds = [];
-        let dataRoleCodes = await redisGet(cacheData.role);
+        let dataRoleCodes = await redisGet('cacheData:role');
         dataRoleCodes.forEach((item) => {
             if (userRoleCodes.includes(item.code)) {
                 apiIds = item.api_ids
@@ -41,7 +40,7 @@ async function plugin(fastify) {
         // 将接口进行唯一性处理
         let uniqApiIds = [...new Set(apiIds)];
 
-        let dataApi = await redisGet(cacheData.api);
+        let dataApi = await redisGet('cacheData:api');
 
         // 最终的用户接口列表
         let result = dataApi
@@ -63,7 +62,7 @@ async function plugin(fastify) {
             // 所有菜单 ID
             let menuIds = [];
 
-            let dataRoleCodes = await redisGet(cacheData.role);
+            let dataRoleCodes = await redisGet('cacheData:role');
             dataRoleCodes.forEach((item) => {
                 if (userRoleCodes.includes(item.code)) {
                     menuIds = item.menu_ids
@@ -75,7 +74,7 @@ async function plugin(fastify) {
             });
 
             let userMenu = [...new Set(menuIds)];
-            let dataMenu = await redisGet(cacheData.menu);
+            let dataMenu = await redisGet('cacheData:menu');
 
             let result = dataMenu.filter((item) => {
                 if (item.state === 0 && userMenu.includes(item.id)) {
@@ -95,8 +94,8 @@ async function plugin(fastify) {
         let dataMenu = await fastify.mysql.table('sys_menu').selectAll();
 
         // 菜单树数据
-        await redisSet(cacheData.menu, []);
-        await redisSet(cacheData.menu, dataMenu);
+        await redisSet('cacheData:menu', []);
+        await redisSet('cacheData:menu', dataMenu);
     };
 
     const cacheApiData = async () => {
@@ -107,27 +106,27 @@ async function plugin(fastify) {
         let dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
 
         // 接口树数据
-        await redisSet(cacheData.api, []);
-        await redisSet(cacheData.api, dataApi);
+        await redisSet('cacheData:api', []);
+        await redisSet('cacheData:api', dataApi);
 
         // 接口名称缓存
-        await redisSet(cacheData.apiNames, []);
+        await redisSet('cacheData:apiNames', []);
         await redisSet(
-            cacheData.apiNames,
+            'cacheData:apiNames',
             dataApi.filter((item) => item.is_bool === 1).map((item) => `/api${item.value}`)
         );
 
         // 白名单接口数据
-        await redisSet(cacheData.apiWhiteLists, []);
-        await redisSet(cacheData.apiWhiteLists, dataApiWhiteLists);
+        await redisSet('cacheData:apiWhiteLists', []);
+        await redisSet('cacheData:apiWhiteLists', dataApiWhiteLists);
     };
 
     const cacheRoleData = async () => {
         // 角色类别
         let dataRole = await fastify.mysql.table('sys_role').selectAll();
 
-        await redisSet(cacheData.role, []);
-        await redisSet(cacheData.role, dataRole);
+        await redisSet('cacheData:role', []);
+        await redisSet('cacheData:role', dataRole);
     };
 
     const getWeixinAccessToken = async () => {

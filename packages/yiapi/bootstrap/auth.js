@@ -16,7 +16,6 @@ import {
 // 配置文件
 import { appConfig } from '../config/appConfig.js';
 import { httpConfig } from '../config/httpConfig.js';
-import { cacheData } from '../config/cacheData.js';
 import { sysConfig } from '../config/sysConfig.js';
 import { fnRouterPath, fnApiParamsCheck, fnClearLogData } from '../utils/index.js';
 // 插件定义
@@ -66,7 +65,7 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 接口存在性判断 -------------------------------- */
-            let allApiNames = await fastify.redisGet(cacheData.apiNames);
+            let allApiNames = await fastify.redisGet('cacheData:apiNames');
 
             if (allApiNames.includes(pureUrl) === false) {
                 res.send(httpConfig.NO_API);
@@ -104,7 +103,7 @@ async function plugin(fastify, opts) {
 
             /* ---------------------------------- 白名单判断 --------------------------------- */
             // 从缓存获取白名单接口
-            let dataApiWhiteLists = await fastify.redisGet(cacheData.apiWhiteLists);
+            let dataApiWhiteLists = await fastify.redisGet('cacheData:apiWhiteLists');
             let whiteApis = dataApiWhiteLists?.map((item) => item.value);
             let allWhiteApis = _uniq(_concat(appConfig.whiteApis, whiteApis || []));
 

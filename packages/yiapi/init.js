@@ -3,13 +3,19 @@ import fs from 'fs-extra';
 import logSymbols from 'log-symbols';
 import Ajv from 'ajv';
 import localize from 'ajv-i18n';
+import { isEmpty } from 'lodash-es';
 
 // 协议文件
-import { appConfigSchema } from '../schema/appConfigSchema.js';
+import { appConfigSchema } from './schema/appConfigSchema.js';
 
 // 配置文件
 import { appConfig, appConfigOrigin } from '../config/appConfig.js';
-import { sysConfig } from '../config/sysConfig.js';
+import { sysConfig } from './config/sysConfig.js';
+
+if (isEmpty(appConfigOrigin) === true) {
+    console.log(`${logSymbols.warning} appConfig.js 文件配置为空`);
+    process.exit(1);
+}
 
 const ajv = new Ajv({ strict: false, messages: false });
 

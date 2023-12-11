@@ -592,18 +592,14 @@ export const fnMeta = (metaUrl, data) => {
         }
     });
 
-    return {
-        name: data.name,
-        schema: _merge(
-            {
-                id: fnSchema(schemaField.id, '唯一 ID'),
-                page: fnSchema(schemaField.page, '第几页'),
-                limit: fnSchema(schemaField.limit, '每页多少条'),
-                state: fnSchema(schemaField.stateEnum, '是否启用')
-            },
-            data.schema
-        )
-    };
+    const mergeData = _merge(data, {
+        id: fnSchema(schemaField.id, '主键ID'),
+        page: fnSchema(schemaField.page, '第几页'),
+        limit: fnSchema(schemaField.limit, '每页多少条'),
+        state: fnSchema(schemaField.stateEnum, '是否启用')
+    });
+
+    return mergeData;
 };
 
 /**

@@ -36,7 +36,7 @@ import {
     fnField
 } from './utils/index.js';
 
-import './preboot/init.js';
+import './init.js';
 
 // 初始化项目实例
 let fastify = Fastify({
@@ -171,7 +171,7 @@ fastify.register(autoLoad, {
 function initServer() {
     return new Promise(async (resolve, reject) => {
         // 启动服务！
-        fastify.listen({ port: appConfig.port, host: '127.0.0.1' }, async function (err, address) {
+        fastify.listen({ port: appConfig.port, host: '::' }, async function (err, address) {
             if (err) {
                 fastify.log.error(err);
                 process.exit(1);

@@ -2,7 +2,6 @@
 import { fnRoute } from '../../utils/index.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
-import { cacheData } from '../../config/cacheData.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '查询所有菜单';
@@ -23,7 +22,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const result = await fastify.redisGet(cacheData.menu);
+                const result = await fastify.redisGet('cacheData:menu');
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,
