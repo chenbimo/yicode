@@ -2,18 +2,24 @@ import { tableConfig } from './config/table.js';
 import { customConfig } from './config/custom.js';
 import { cronConfig } from './config/cron.js';
 import { menuConfig } from './config/menu.js';
+import { mysqlConfig } from './config/mysql.js';
+import { redisConfig } from './config/redis.js';
+import { productConfig } from './config/product.js';
+import { weixinConfig } from './config/weixin.js';
 
 // 默认配置
 let appConfig = {
     // 应用名称
     appName: '易接口',
-    appNameEn: 'yiapi0',
+    appNameEn: 'yiapi',
     // 加密盐，请重新设置为一个随机值
-    salt: 'yiapi-123456.0',
+    salt: 'yiapi-123456.',
     // 监听端口
     port: 3000,
+    // 监听主机
+    host: '::',
     // 超级管理员密码
-    devPassword: 'dev1234560',
+    devPassword: 'dev123456',
     // 是否验证参数
     paramsCheck: false,
     // 日志字段过滤，不打印
@@ -44,26 +50,26 @@ let appConfig = {
     tablePrimaryKey: 'default',
     // 数据库配置
     database: {
-        host: process.env.NODE_ENV === 'production' ? '127.0.0.1' : '127.0.0.1',
-        port: process.env.NODE_ENV === 'production' ? 3306 : 3306,
-        db: process.env.NODE_ENV === 'production' ? 'test' : 'test',
-        username: process.env.NODE_ENV === 'production' ? 'root' : 'root',
-        password: process.env.NODE_ENV === 'production' ? 'root' : 'root'
+        host: mysqlConfig.host,
+        port: mysqlConfig.port,
+        db: mysqlConfig.db,
+        username: mysqlConfig.username,
+        password: mysqlConfig.password
     },
     // 缓存配置
     redis: {
-        host: process.env.NODE_ENV === 'production' ? '127.0.0.1' : '127.0.0.1',
-        port: process.env.NODE_ENV === 'production' ? 6379 : 6379,
-        username: process.env.NODE_ENV === 'production' ? '' : '',
-        password: process.env.NODE_ENV === 'production' ? 'test' : '',
-        db: process.env.NODE_ENV === 'production' ? 0 : 0,
-        keyPrefix: process.env.NODE_ENV === 'production' ? 'test:' : 'test:',
-        ex: process.env.NODE_ENV === 'production' ? 86400 : 86400
+        host: redisConfig.host,
+        port: redisConfig.port,
+        username: redisConfig.username,
+        password: redisConfig.password,
+        db: redisConfig.db,
+        keyPrefix: redisConfig.keyPrefix,
+        ex: redisConfig.ex
     },
     // jwt 配置
     jwt: {
         // jwt 密钥，第一次使用，请修改此密钥值！！！
-        secret: 'yiapi0',
+        secret: 'yiapi',
         expiresIn: '7d'
     },
     // 邮件配置
@@ -90,6 +96,10 @@ let appConfig = {
     table: tableConfig,
     // 菜单配置
     menu: menuConfig,
+    // 产品配置
+    product: productConfig,
+    // 微信配置
+    weixin: weixinConfig,
     // 自定义字段
     custom: customConfig
 };

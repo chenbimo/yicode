@@ -1,11 +1,5 @@
 // 自定义配置
-let customConfig = {
-    weixin: {
-        appId: '',
-        mchId: '',
-        appSecret: '',
-        notifyUrl: ''
-    },
+const customConfig = {
     tencentCloud: {
         secretId: '',
         secretKey: '',

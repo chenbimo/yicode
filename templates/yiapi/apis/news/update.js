@@ -1,11 +1,12 @@
-import * as yiapi from '@yicode/yiapi';
+import { fnRoute, fnField } from '@yicode/yiapi/fn.js';
+import { httpConfig } from '@yicode/yiapi/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '更新资讯';
 
 export default async (fastify) => {
     // 当前文件的路径，fastify 实例
-    yiapi.fnRoute(import.meta.url, fastify, {
+    fnRoute(import.meta.url, fastify, {
         // 接口名称
         apiName: apiName,
         // 请求参数约束
@@ -36,12 +37,12 @@ export default async (fastify) => {
                     });
 
                 return {
-                    ...yiapi.httpConfig.INSERT_SUCCESS,
+                    ...httpConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return yiapi.httpConfig.INSERT_FAIL;
+                return httpConfig.INSERT_FAIL;
             }
         }
     });

@@ -1,5 +1,5 @@
 // 定时器设置
-let cronConfig = [
+const cronConfig = [
     // {
     //     timer: '*/5 * * * * *',
     //     name: '测试定时器',

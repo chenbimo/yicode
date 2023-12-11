@@ -1,2 +1,2 @@
-import { initServer } from '@yicode/yiapi';
+import { initServer } from '@yicode/yiapi/yiapi.js';
 initServer();

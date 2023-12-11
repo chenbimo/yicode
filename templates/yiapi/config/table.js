@@ -1,5 +1,5 @@
 // 系统表字段扩展
-let tableConfig = {
+const tableConfig = {
     sys_user: {
         test_field: {
             type: 'string',

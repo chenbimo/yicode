@@ -1,4 +1,4 @@
 // 系统表字段扩展
-let menuConfig = {};
+const menuConfig = {};
 
 export { menuConfig };
