@@ -7,7 +7,7 @@ import { sysConfig } from './sysConfig.js';
 
 fs.ensureDir(resolve(sysConfig.appDir, 'logs'));
 
-let fileConfig = {
+const fileConfig = {
     dirname: resolve(sysConfig.appDir, 'logs'),
     filename: '%DATE%.log',
     datePattern: 'YYYY-MM-DD',
@@ -15,9 +15,9 @@ let fileConfig = {
     maxSize: '50m'
 };
 
-let fileTransport = new winston.transports.DailyRotateFile(fileConfig);
+const fileTransport = new winston.transports.DailyRotateFile(fileConfig);
 
-let configParams = {
+const configParams = {
     levels: {
         fatal: 0,
         error: 1,
@@ -39,6 +39,6 @@ if (process.env.NODE_ENV === 'production') {
     configParams.transports = [new winston.transports.Console()];
 }
 
-let logConfig = winston.createLogger(configParams);
+const logConfig = winston.createLogger(configParams);
 
 export { logConfig };

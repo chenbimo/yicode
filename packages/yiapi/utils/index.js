@@ -29,17 +29,31 @@ import {
     random as _random,
     isString as _isString,
     cloneDeep as _cloneDeep,
+    isInteger as _isInteger,
+    isNumber as _isNumber,
     uniq as _uniq,
     isPlainObject as _isPlainObject
 } from 'lodash-es';
 // 配置文件
 import { appConfig } from '../config/appConfig.js';
 import { sysConfig } from '../config/sysConfig.js';
-import { schemaType } from '../config/schemaType.js';
 import { schemaField } from '../config/schemaField.js';
 
 // 自定义初始化字符
-let nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
+const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
+
+// 参数类型
+const schemaType = [
+    //
+    'json',
+    'string',
+    'number',
+    'integer',
+    'object',
+    'array',
+    'boolean'
+    // 'null'
+];
 
 // 转换成中划线
 export function fnKebabCase(value, delimiter = '/') {
@@ -447,22 +461,18 @@ export const fnRoute = (metaUrl, fastify, options) => {
     if (!options.apiName) {
         console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 apiName 属性，请检查`);
         process.exit(1);
-        return;
     }
     if (!options.schemaRequest) {
         console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 schemaRequest 属性，请检查`);
         process.exit(1);
-        return;
     }
     if (!options.apiHandler) {
         console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 apiHandler 属性，请检查`);
         process.exit(1);
-        return;
     }
     if (!['get', 'post'].includes(method)) {
         console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口方法只能为 get 或 post 之一，请检查`);
         process.exit(1);
-        return;
     }
 
     options.schemaRequest.title = options.apiName;
@@ -484,43 +494,6 @@ export const fnRoute = (metaUrl, fastify, options) => {
         routeParams.schema.body = options.schemaRequest;
     }
     fastify.route(routeParams);
-};
-
-// 接口元数据函数
-export const fnMeta = (metaUrl, data) => {
-    let apiInfo = fnApiInfo(metaUrl);
-    if (!data.name) {
-        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据没有 name 属性，请检查`);
-        process.exit(1);
-        return;
-    }
-    if (_isString(data.name) === false) {
-        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据的 name 属性必须为字符串，请检查`);
-        process.exit(1);
-        return;
-    }
-    if (!data.schema) {
-        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据没有 schema 属性，请检查`);
-        process.exit(1);
-        return;
-    }
-    if (_isPlainObject(data.schema) === false) {
-        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据的 schema 属性必须为对象类型，请检查`);
-        process.exit(1);
-        return;
-    }
-    return {
-        name: data.name,
-        schema: _merge(
-            {
-                id: fnSchema(schemaField.id, '唯一 ID'),
-                page: fnSchema(schemaField.page, '第几页'),
-                limit: fnSchema(schemaField.limit, '每页多少条'),
-                state: fnSchema(schemaField.state, '是否启用')
-            },
-            data.schema
-        )
-    };
 };
 
 // 获取 file 协议的路径
@@ -589,58 +562,135 @@ export function fnRsaSha256(data, privateKey) {
     return signature;
 }
 
+// 接口元数据函数
+export const fnMeta = (metaUrl, data) => {
+    const apiInfo = fnApiInfo(metaUrl);
+    if (_isPlainObject(data) === false) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据必须为对象类型，请检查`);
+        process.exit(1);
+    }
+    if (!data._name) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据没有 _name 属性，请检查`);
+        process.exit(1);
+    }
+    if (_isString(data._name) === false) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 元数据的 _name 属性必须为字符串，请检查`);
+        process.exit(1);
+    }
+
+    _forOwn(_omit(data, ['_name']), (item, key) => {
+        // 判断是否有标题
+        if (!item.title) {
+            console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} ${key} 参数缺少 title 名称，请检查`);
+            process.exit(1);
+        }
+
+        // 判断参数类型
+        if (['string', 'integer', 'number', 'array'].includes(item.type) === false) {
+            console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} ${key} 参数只能为 ${['string', 'integer', 'number'].join(',')} 其中之一`);
+            process.exit(1);
+        }
+    });
+
+    return {
+        name: data.name,
+        schema: _merge(
+            {
+                id: fnSchema(schemaField.id, '唯一 ID'),
+                page: fnSchema(schemaField.page, '第几页'),
+                limit: fnSchema(schemaField.limit, '每页多少条'),
+                state: fnSchema(schemaField.stateEnum, '是否启用')
+            },
+            data.schema
+        )
+    };
+};
+
 /**
- * 协议生成函数
- * @param {String} field 字段
- * @param {String} name 名称
- * @param {String} type 类型
- * @param {Integer} min 最小值
- * @param {Integer} max 最大值
+ * 数字参数协议
+ * @param {String} field 预置字段
+ * @param {String} title 参数名称
+ * @param {String} type 参数类型
+ * @param {Number} min 最小值
+ * @param {Number} max 最大值
+ * @param {Number} defaultValue 默认值
  * @param {Array} enumValue 枚举值
- * @param {Any} defaultValue 默认值
- * @param {String} pattern 正则表达式
- * @returns Object Schema 对象
+ * @param {Number|Integer|String} extraValue 扩展值
+ * @param {Boolean} uniqueItems 数组类型时，值是否唯一
+ * @returns Object
  */
-export function fnSchema(hash, name, type, min, max, enumValue, defaultValue, pattern) {
+export const fnSchema = (field, title, type, min, max, defaultValue, enumValue, extraValue, uniqueItems) => {
     try {
         // 获取已经存在的公共配置参数
-        let fieldData = fnCloneAny(hash || {});
+        let fieldData = fnCloneAny(field || {});
 
         // 字段协议必须填写名称
-        fieldData.title = name;
-        if (!name) {
-            throw new Error(`缺少字段名称`);
-        }
-
-        // 字段必须有正确的类型
-        if (!fieldData.type) fieldData.type = type;
-        if (schemaType.includes(fieldData.type) === false) {
-            throw new Error(`字段 [${name}] 类型 ${fieldData.type} 错误，只能为 ${schemaType.join(',')} 其中之一`);
-        }
+        fieldData.title = title;
 
         // 如果有枚举参数，则忽略最大，最小参数
         if (_isArray(enumValue)) {
             fieldData.enum = enumValue;
         } else {
-            if (type === 'integer' || type === 'number') {
-                if (min !== undefined && min !== null) fieldData.minimum = min;
-                if (max !== undefined && max !== null) fieldData.maximum = max;
+            if (type === 'number') {
+                // 最大最小值覆盖
+                if (_isNumber(min)) fieldData.minimum = min;
+                if (_isNumber(max)) fieldData.maximum = max;
+
+                // 倍数值覆盖
+                if (_isNumber(multipleOf)) fieldData.multipleOf = extraValue;
+            }
+
+            if (type === 'integer') {
+                // 最大最小值覆盖
+                if (_isInteger(min)) fieldData.minimum = min;
+                if (_isInteger(max)) fieldData.maximum = max;
+                // 倍数值覆盖
+                if (_isNumber(extraValue)) fieldData.multipleOf = extraValue;
             }
 
             if (type === 'string') {
-                if (min !== undefined && min !== null) fieldData.minLength = min;
-                if (max !== undefined && max !== null) fieldData.maxLength = max;
-                if (pattern !== undefined && pattern !== null) fieldData.pattern = pattern;
+                // 最大最小值覆盖
+                if (_isInteger(min)) fieldData.minLength = min;
+                if (_isInteger(max)) fieldData.maxLength = max;
+                // 字符模式
+                if (_isString(extraValue)) fieldData.pattern = extraValue;
             }
 
-            if (defaultValue !== undefined && pattern !== null) fieldData.default = defaultValue;
+            if (type === 'array') {
+                // 最大最小值覆盖
+                if (_isInteger(min)) fieldData.minItems = min;
+                if (_isInteger(max)) fieldData.maxItems = max;
+                // 字符模式
+                if (_isString(extraValue)) {
+                    if (['number', 'integer', 'string'].includes(extraValue) === true) {
+                        fieldData.items = {
+                            type: extraValue
+                        };
+                    } else {
+                        fieldData.items = extraValue.split('|').map((value) => {
+                            if (['number', 'integer', 'string'].includes(value) === true) {
+                                return {
+                                    type: value
+                                };
+                            } else {
+                                return {
+                                    enum: value.split(',').filter((v) => v)
+                                };
+                            }
+                        });
+                    }
+                }
+            }
         }
+
+        // 默认值覆盖
+        if (_isNumber(defaultValue)) fieldData.default = defaultValue;
 
         return fieldData;
     } catch (err) {
         throw new Error(err);
     }
-}
+};
 
 // 获取参数按小写排序拼接
 export const fnParamsRaw = (args) => {

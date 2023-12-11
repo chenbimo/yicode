@@ -12,9 +12,9 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                title: metaConfig.schema.title,
-                thumbnail: metaConfig.schema.thumbnail,
-                content: metaConfig.schema.content
+                title: metaConfig.title,
+                thumbnail: metaConfig.thumbnail,
+                content: metaConfig.content
             },
             required: ['title']
         },

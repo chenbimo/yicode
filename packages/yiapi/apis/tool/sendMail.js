@@ -20,9 +20,9 @@ export default async (fastify) => {
                     title: '发送验证码邮件',
                     type: 'object',
                     properties: {
-                        to_email: metaConfig.schema.to_email,
-                        subject: metaConfig.schema.subject,
-                        verify_name: metaConfig.schema.verify_name
+                        to_email: metaConfig.to_email,
+                        subject: metaConfig.subject,
+                        verify_name: metaConfig.verify_name
                     },
                     required: ['to_email', 'subject', 'verify_name']
                 },
@@ -30,9 +30,9 @@ export default async (fastify) => {
                     title: '发送普通邮件',
                     type: 'object',
                     properties: {
-                        to_email: metaConfig.schema.to_email,
-                        subject: metaConfig.schema.subject,
-                        content: metaConfig.schema.content
+                        to_email: metaConfig.to_email,
+                        subject: metaConfig.subject,
+                        content: metaConfig.content
                     },
                     required: ['to_email', 'subject', 'content']
                 }

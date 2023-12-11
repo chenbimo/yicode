@@ -1,17 +1,17 @@
 // 字符串长度枚举
-let stringEnum = [
-    //
-    1, 2, 3, 4, 5, 6, 7, 8, 9,
-    //
-    10, 20, 30, 40, 50, 60, 70, 80, 90,
-    //
-    100, 200, 300, 400, 500, 600, 700, 800, 900,
-    //
-    1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
-    //
-    10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000
-];
-let schemaField = {
+// const stringEnum = [
+//     //
+//     1, 2, 3, 4, 5, 6, 7, 8, 9,
+//     //
+//     10, 20, 30, 40, 50, 60, 70, 80, 90,
+//     //
+//     100, 200, 300, 400, 500, 600, 700, 800, 900,
+//     //
+//     1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+//     //
+//     10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000
+// ];
+const schemaField = {
     // 主键 ID
     id: {
         title: '主键ID',
@@ -21,20 +21,6 @@ let schemaField = {
     // 主键 ID
     pid: {
         title: '父级ID',
-        type: 'integer',
-        minimum: 0,
-        maximum: 18446744073709551615
-    },
-    // 最小数字为 1
-    min1: {
-        title: '最小数字为1',
-        type: 'integer',
-        minimum: 1,
-        maximum: 18446744073709551615
-    },
-    // 最小数字为 0
-    min0: {
-        title: '最小数字为0',
         type: 'integer',
         minimum: 0
     },
@@ -60,81 +46,22 @@ let schemaField = {
         enum: [0, 1]
     },
     // 状态 (0 正常，1 禁用，2 删除)
-    state: {
+    stateEnum: {
         title: '状态',
         type: 'integer',
         enum: [0, 1, 2]
     },
-    // 搜索关键字
-    keyword: {
-        title: '关键字',
-        type: 'string',
-        minLength: 0,
-        maxLength: 100
+    // 最小数字为 1
+    min1: {
+        title: '最小数字为1',
+        type: 'integer',
+        minimum: 1
     },
-    // 小写字母+数字
-    a123: {
-        title: '小写字母+数字',
-        type: 'string',
-        minLength: 0,
-        maxLength: 50,
-        pattern: '^[a-z][a-z0-9]*$'
-    },
-    // 小写字母+数字+下划线
-    a123_: {
-        title: '小写字母+数字+下划线',
-        type: 'string',
-        minLength: 0,
-        maxLength: 50,
-        pattern: '^[a-z][a-z0-9_]*$'
-    },
-    // 小写字母+数字+下划线+短横线
-    a123_d: {
-        title: '小写字母+数字+下划线+短横线',
-        type: 'string',
-        minLength: 0,
-        maxLength: 50,
-        pattern: '^[a-z][a-z0-9_-]*$'
-    },
-    // 大写字母+数字+下划线+短横线
-    A123_d: {
-        title: '字母+数字+下划线+短横线',
-        type: 'string',
-        minLength: 0,
-        maxLength: 50,
-        pattern: '^[A-Z][A-Z0-9_-]*$'
-    },
-    // 字母+数字+下划线+短横线
-    Aa123_d: {
-        title: '字母+数字+下划线+短横线',
-        type: 'string',
-        minLength: 0,
-        maxLength: 50,
-        pattern: '^[a-zA-Z][a-zA-Z0-9_-]*$'
-    },
-    // 字母+数字+下划线+斜杠
-    Aa123_x: {
-        title: '字母+数字+下划线+斜杠',
-        type: 'string',
-        minLength: 0,
-        maxLength: 50,
-        pattern: '^/[a-zA-Z][a-zA-Z0-9-\\/]*$'
-    },
-    // 分类代号
-    category: {
-        title: '分类编码',
-        type: 'string',
-        minLength: 0,
-        maxLength: 30,
-        pattern: '^[a-zA-Z][a-zA-Z0-9_-]*$'
-    },
-    // 编码代号
-    code: {
-        title: '编码',
-        type: 'string',
-        minLength: 0,
-        maxLength: 20,
-        pattern: '^[a-zA-Z][a-zA-Z0-9_-]*$'
+    // 最小数字为 0
+    min0: {
+        title: '最小数字为0',
+        type: 'integer',
+        minimum: 0
     },
     // 路由
     route: {
@@ -143,27 +70,6 @@ let schemaField = {
         minLength: 0,
         maxLength: 200,
         pattern: '^/[a-zA-Z][a-zA-Z0-9-\\/]*$'
-    },
-    // 标题
-    title: {
-        title: '标题',
-        type: 'string',
-        minLength: 0,
-        maxLength: 100
-    },
-    // 描述
-    describe: {
-        title: '描述',
-        type: 'string',
-        minLength: 0,
-        maxLength: 500
-    },
-    // 正文
-    content: {
-        title: '正文',
-        type: 'string',
-        minLength: 0,
-        maxLength: 65535
     },
     // 图片
     image: {
@@ -181,7 +87,7 @@ let schemaField = {
     },
     // 账号
     account: {
-        title: '账号',
+        title: '账号(用户名/手机号/邮箱等)',
         type: 'string',
         minLength: 1,
         maxLength: 50
@@ -191,7 +97,7 @@ let schemaField = {
         title: '角色组',
         type: 'string',
         minLength: 1,
-        maxLength: 2000
+        maxLength: 500
     },
     // 用户名
     username: {
@@ -233,22 +139,11 @@ let schemaField = {
         maxLength: 30,
         pattern: '^[a-zA-Z][-_a-zA-Z0-9]{5,19}$'
     },
-    // 数据编码
-    table_code: {
-        title: '表名称',
-        type: 'string',
-        minLength: 1,
-        maxLength: 50,
-        // 小写开头 + [下划线|字母|数字]
-        pattern: '^[a-z][_a-z0-9]*$'
-    },
     // QQ号
     qq: {
         title: 'QQ',
-        type: 'string',
-        minLength: 5,
-        maxLength: 20,
-        pattern: '^[1-9][0-9]{4,11}$'
+        type: 'integer',
+        minimum: 10000
     },
     // 邮箱
     email: {
@@ -273,19 +168,5 @@ let schemaField = {
         maxLength: 50
     }
 };
-
-// 字符串内置字段
-stringEnum.forEach((num) => {
-    schemaField[`string0to${num}`] = {
-        type: 'string',
-        minLength: 0,
-        maxLength: num
-    };
-    schemaField[`string1to${num}`] = {
-        type: 'string',
-        minLength: 1,
-        maxLength: num
-    };
-});
 
 export { schemaField };

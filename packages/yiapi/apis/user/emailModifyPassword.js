@@ -15,9 +15,9 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                password: metaConfig.schema.password,
-                email: metaConfig.schema.email,
-                verify_code: metaConfig.schema.verify_code
+                password: metaConfig.password,
+                email: metaConfig.email,
+                verify_code: metaConfig.verify_code
             },
             required: ['password', 'email', 'verify_code']
         },

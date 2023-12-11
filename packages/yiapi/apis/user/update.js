@@ -15,10 +15,10 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                avatar: metaConfig.schema.avatar,
-                nickname: metaConfig.schema.nickname,
-                bio: metaConfig.schema.bio,
-                describe: metaConfig.schema.describe
+                avatar: metaConfig.avatar,
+                nickname: metaConfig.nickname,
+                bio: metaConfig.bio,
+                describe: metaConfig.describe
             },
             required: []
         },

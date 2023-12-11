@@ -16,7 +16,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                state: metaConfig.schema.state
+                state: metaConfig.state
             }
         },
         // 返回数据约束

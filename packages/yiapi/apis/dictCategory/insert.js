@@ -16,9 +16,9 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                code: metaConfig.schema.code,
-                name: metaConfig.schema.name,
-                describe: metaConfig.schema.describe
+                code: metaConfig.code,
+                name: metaConfig.name,
+                describe: metaConfig.describe
             },
             required: ['code', 'name']
         },

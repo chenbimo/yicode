@@ -16,7 +16,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                category: metaConfig.schema.category
+                category: metaConfig.category
             },
             required: ['category']
         },

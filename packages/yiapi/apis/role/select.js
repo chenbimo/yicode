@@ -16,9 +16,9 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                page: metaConfig.schema.page,
-                limit: metaConfig.schema.limit,
-                keyword: metaConfig.schema.keyword
+                page: metaConfig.page,
+                limit: metaConfig.limit,
+                keyword: metaConfig.keyword
             },
             required: []
         },

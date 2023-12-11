@@ -1,27 +1,15 @@
 import { resolve } from 'node:path';
 import { mergeAndConcat } from 'merge-anything';
-import Ajv from 'ajv';
-import localize from 'ajv-i18n';
-import logSymbols from 'log-symbols';
 
-import { fnImport } from '../utils/index.js';
+import { fnImport, fnCloneAny } from '../utils/index.js';
 import { sysConfig } from './sysConfig.js';
-import { schemaField } from './schemaField.js';
-import { appConfigSchema } from '../schema/appConfigSchema.js';
 
-let ajv = new Ajv({ strict: false, messages: false });
+const { appConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'appConfig.js'), 'appConfig', {});
 
-let validate = ajv.compile(appConfigSchema);
-let { appConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'appConfig.js'), 'appConfig', {});
+// 克隆一份用户自己的配置文件
+const appConfigOrigin = fnCloneAny(importConfig);
 
-let valid = validate(importConfig);
-if (!valid) {
-    localize.zh(validate.errors);
-    console.log(logSymbols.error, 'appConfig.js 文件 ' + ajv.errorsText(validate.errors, { separator: '\n' }));
-    process.exit();
-}
-
-let appConfig = mergeAndConcat(
+const appConfig = mergeAndConcat(
     {
         // 应用名称
         appName: '易接口',
@@ -111,9 +99,9 @@ let appConfig = mergeAndConcat(
         // 产品配置
         product: {},
         // 自定义字段
-        custom: customConfig
+        custom: {}
     },
     importConfig
 );
 
-export { appConfig };
+export { appConfig, appConfigOrigin };

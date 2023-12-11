@@ -12,12 +12,10 @@ import gracefulShutdown from 'http-graceful-shutdown';
 // 配置信息
 import { appConfig } from './config/appConfig.js';
 import { httpConfig } from './config/httpConfig.js';
-import { crosConfig } from './config/crosConfig.js';
 import { fieldType } from './config/fieldType.js';
 import { schemaField } from './config/schemaField.js';
-import { schemaType } from './config/schemaType.js';
+import { schemaRegexp } from './config/schemaRegexp.js';
 import { sysConfig } from './config/sysConfig.js';
-import { tableField } from './config/tableField.js';
 import { timeConfig } from './config/timeConfig.js';
 
 // 预配置
@@ -25,6 +23,7 @@ import { logger } from './preboot/logger.js';
 
 // 脚本
 import { syncDatabase } from './scripts/syncDatabase.js';
+
 // 工具函数
 import {
     //
@@ -208,12 +207,10 @@ export {
     // 配置
     appConfig,
     httpConfig,
-    crosConfig,
     fieldType,
     schemaField,
-    schemaType,
+    schemaRegexp,
     sysConfig,
-    tableField,
     timeConfig,
     // 脚本
     syncDatabase,

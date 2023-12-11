@@ -16,8 +16,8 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                category_code: metaConfig.schema.category_code,
-                state: metaConfig.schema.state
+                category_code: metaConfig.category_code,
+                state: metaConfig.state
             }
         },
         // 返回数据约束

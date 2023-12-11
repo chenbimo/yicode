@@ -4,27 +4,11 @@ import { schemaField } from '../../config/schemaField.js';
 export let metaConfig = fnMeta(import.meta.url, {
     name: '角色',
     schema: {
-        code: fnSchema(schemaField.code, '角色代号'),
-        name: fnSchema(null, '角色名称', 'string', 1, 20),
-        describe: fnSchema(schemaField.describe, '角色描述'),
+        code: fnSchema(null, '角色代号', 'string', 1, 20, '', null, schemaRegexp.aA0_),
+        name: fnSchema(null, '角色名称', 'string', 0, 30),
+        describe: fnSchema(null, '角色描述', 'string', 0, 100),
         keyword: fnSchema(schemaField.keyword, '关键字'),
-        menu_ids: {
-            title: '菜单 ID 组',
-            type: 'array',
-            minItems: 0,
-            maxItems: 10000,
-            items: {
-                type: 'number'
-            }
-        },
-        api_ids: {
-            title: '接口 ID 组',
-            type: 'array',
-            minItems: 0,
-            maxItems: 10000,
-            items: {
-                type: 'number'
-            }
-        }
+        menu_ids: fnSchema(null, '菜单ID组', 'array', 0, 10000, [], null, 'integer', true),
+        api_ids: fnSchema(null, '接口ID组', 'array', 0, 10000, [], null, 'integer', true)
     }
 });

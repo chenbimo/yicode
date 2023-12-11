@@ -16,12 +16,12 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                id: metaConfig.schema.id,
-                code: metaConfig.schema.code,
-                name: metaConfig.schema.name,
-                describe: metaConfig.schema.describe,
-                menu_ids: metaConfig.schema.menu_ids,
-                api_ids: metaConfig.schema.api_ids
+                id: metaConfig.id,
+                code: metaConfig.code,
+                name: metaConfig.name,
+                describe: metaConfig.describe,
+                menu_ids: metaConfig.menu_ids,
+                api_ids: metaConfig.api_ids
             },
             required: ['id']
         },

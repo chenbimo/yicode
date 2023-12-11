@@ -16,15 +16,15 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                pid: metaConfig.schema.pid,
-                category: metaConfig.schema.category,
-                name: metaConfig.schema.name,
-                value: metaConfig.schema.value,
-                icon: metaConfig.schema.icon,
-                sort: metaConfig.schema.sort,
-                describe: metaConfig.schema.describe,
-                is_bool: metaConfig.schema.is_bool,
-                is_open: metaConfig.schema.is_open
+                pid: metaConfig.pid,
+                category: metaConfig.category,
+                name: metaConfig.name,
+                value: metaConfig.value,
+                icon: metaConfig.icon,
+                sort: metaConfig.sort,
+                describe: metaConfig.describe,
+                is_bool: metaConfig.is_bool,
+                is_open: metaConfig.is_open
             },
             required: ['pid', 'category', 'name']
         },

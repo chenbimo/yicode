@@ -1,6 +1,5 @@
 // 字段类型
-export let fieldType = {
-    // 字符串
+export const fieldType = {
     string: {
         type: 'string',
         args: ['length']

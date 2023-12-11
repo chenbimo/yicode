@@ -46,7 +46,7 @@
         "@dcloudio/vite-plugin-uni": "3.0.0-3090520231028001",
         "@vue/runtime-core": "^3.3.11",
         "lint-staged": "^15.2.0",
-        "prettier": "^3.1.0",
+        "prettier": "^3.1.1",
         "sass": "^1.69.5",
         "vite": "^4.5.1"
     },

@@ -16,10 +16,10 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                username: metaConfig.schema.username,
-                password: metaConfig.schema.password,
-                nickname: metaConfig.schema.nickname,
-                role_codes: metaConfig.schema.role_codes
+                username: metaConfig.username,
+                password: metaConfig.password,
+                nickname: metaConfig.nickname,
+                role_codes: metaConfig.role_codes
             },
             required: ['username', 'password', 'nickname', 'role_codes']
         },

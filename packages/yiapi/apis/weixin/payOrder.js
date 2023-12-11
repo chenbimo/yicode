@@ -17,8 +17,8 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                buy_amount: metaConfig.schema.buy_amount,
-                pay_product: metaConfig.schema.pay_product
+                buy_amount: metaConfig.buy_amount,
+                pay_product: metaConfig.pay_product
             },
             required: ['pay_product']
         },

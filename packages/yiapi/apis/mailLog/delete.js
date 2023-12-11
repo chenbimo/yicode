@@ -15,7 +15,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                id: metaConfig.schema.id
+                id: metaConfig.id
             },
             required: ['id']
         },

@@ -1,5 +1,5 @@
 // 缓存映射
-export let cacheData = {
+export const cacheData = {
     role: 'cacheData:role',
     tree: 'cacheData:tree',
     apiNames: 'cacheData:apiNames',

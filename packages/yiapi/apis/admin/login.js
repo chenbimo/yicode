@@ -18,8 +18,8 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                account: metaConfig.schema.account,
-                password: metaConfig.schema.password
+                account: metaConfig.account,
+                password: metaConfig.password
             },
             required: ['account', 'password']
         },
