@@ -41,19 +41,7 @@ import { schemaField } from '../config/schemaField.js';
 
 // 自定义初始化字符
 const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 26);
-
-// 参数类型
-const schemaType = [
-    //
-    'json',
-    'string',
-    'number',
-    'integer',
-    'object',
-    'array',
-    'boolean'
-    // 'null'
-];
+const schemaType = ['string', 'integer', 'number', 'array'];
 
 // 转换成中划线
 export function fnKebabCase(value, delimiter = '/') {
@@ -587,8 +575,8 @@ export const fnMeta = (metaUrl, data) => {
         }
 
         // 判断参数类型
-        if (['string', 'integer', 'number', 'array'].includes(item.type) === false) {
-            console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} ${key} 参数只能为 ${['string', 'integer', 'number'].join(',')} 其中之一`);
+        if (schemaType.includes(item.type) === false) {
+            console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} ${key} 参数只能为 ${schemaType.join(',')} 其中之一`);
             process.exit(1);
         }
     });
@@ -622,7 +610,8 @@ export const fnSchema = (field, title, type, min, max, defaultValue, enumValue, 
         let fieldData = fnCloneAny(field || {});
 
         // 字段协议必须填写名称
-        fieldData.title = title;
+        if (!_isEmpty(title)) fieldData.title = title;
+        if (!_isEmpty(type)) fieldData.type = type;
 
         // 如果有枚举参数，则忽略最大，最小参数
         if (_isArray(enumValue)) {
