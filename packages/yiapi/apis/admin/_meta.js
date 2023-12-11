@@ -1,4 +1,4 @@
-import { fnMeta } from '../../utils/index.js';
+import { fnMeta, fnSchema } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
 
 export const metaConfig = fnMeta(import.meta.url, {

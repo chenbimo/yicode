@@ -9,7 +9,7 @@ import { isEmpty } from 'lodash-es';
 import { appConfigSchema } from './schema/appConfigSchema.js';
 
 // 配置文件
-import { appConfig, appConfigOrigin } from '../config/appConfig.js';
+import { appConfig, appConfigOrigin } from './config/appConfig.js';
 import { sysConfig } from './config/sysConfig.js';
 
 if (isEmpty(appConfigOrigin) === true) {

@@ -448,6 +448,7 @@ export async function fnImport(path, name, defaultValue, options = {}) {
         let data = await import(fnFileProtocolPath(path), options);
         return fnCloneAny(data);
     } catch (err) {
+        console.log('🚀 ~ file: index.js:451 ~ fnImport ~ err:', err);
         return fnCloneAny({
             [name]: defaultValue
         });

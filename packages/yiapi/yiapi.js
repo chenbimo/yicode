@@ -39,7 +39,7 @@ import {
 import './init.js';
 
 // 初始化项目实例
-let fastify = Fastify({
+const fastify = Fastify({
     logger: logger,
     pluginTimeout: 0,
     genReqId: () => fnUUID(),
@@ -55,7 +55,7 @@ let fastify = Fastify({
 fastify.setErrorHandler(function (err, req, res) {
     if (err.validation) {
         localize.zh(err.validation);
-        let msg = err.validation
+        const msg = err.validation
             .map((error) => {
                 return (error.parentSchema.title + ' ' + error.message).trim();
             })

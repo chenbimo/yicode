@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import winston from 'winston';
 import 'winston-daily-rotate-file';
 
-import { sysConfig } from './sysConfig.js';
+import { sysConfig } from '../config/sysConfig.js';
 
 fs.ensureDir(resolve(sysConfig.appDir, 'logs'));
 
@@ -39,6 +39,6 @@ if (process.env.NODE_ENV === 'production') {
     configParams.transports = [new winston.transports.Console()];
 }
 
-const logConfig = winston.createLogger(configParams);
+const logger = winston.createLogger(configParams);
 
-export { logConfig };
+export { logger };
