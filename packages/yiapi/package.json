@@ -10,9 +10,9 @@
         "registry": "https://registry.npmjs.org"
     },
     "exports": {
-        ".": "./yiapi.js",
-        "./config/*.js": "./*.js",
-        "./fn.js": "./fn.js"
+        "./yiapi.js": "./yiapi.js",
+        "./fn.js": "./fn.js",
+        "./*.js": "./config/*.js"
     },
     "scripts": {
         "preinstall": "npx only-allow pnpm",
