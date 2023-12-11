@@ -11,7 +11,8 @@
     },
     "exports": {
         ".": "./yiapi.js",
-        "./config/*.js": "./config/*.js"
+        "./config/*.js": "./*.js",
+        "./fn.js": "./fn.js"
     },
     "scripts": {
         "preinstall": "npx only-allow pnpm",

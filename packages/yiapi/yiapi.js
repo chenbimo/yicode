@@ -21,28 +21,12 @@ import { timeConfig } from './config/timeConfig.js';
 // 预配置
 import { logger } from './preConfig/logger.js';
 
-// 脚本
-import { syncDatabase } from './scripts/syncDatabase.js';
-
-// 工具函数
-import {
-    //
-    fnSchema,
-    fnUUID,
-    fnSaltMD5,
-    fnPureMD5,
-    fnRoute,
-    fnMeta,
-    fnField
-} from './utils/index.js';
-
 import './init.js';
 
 // 初始化项目实例
 const fastify = Fastify({
     logger: logger,
     pluginTimeout: 0,
-    genReqId: () => fnUUID(),
     ajv: {
         customOptions: {
             allErrors: true,
@@ -199,27 +183,4 @@ function initServer() {
     });
 }
 
-export {
-    // 内部工具
-    fastify,
-    initServer,
-    fp,
-    // 配置
-    appConfig,
-    httpConfig,
-    fieldType,
-    schemaField,
-    schemaRegexp,
-    sysConfig,
-    timeConfig,
-    // 脚本
-    syncDatabase,
-    // 工具函数
-    fnUUID,
-    fnSaltMD5,
-    fnPureMD5,
-    fnSchema,
-    fnRoute,
-    fnMeta,
-    fnField
-};
+export { fastify, fp, initServer };

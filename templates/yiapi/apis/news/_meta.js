@@ -1,7 +1,7 @@
 import * as yiapi from '@yicode/yiapi';
 
 export const metaConfig = yiapi.fnMeta(import.meta.url, {
-    name: '资讯新闻',
+    _name: '资讯新闻',
     schema: {
         keyword: yiapi.fnSchema(yiapi.schemaField.keyword, '搜索关键字'),
         category_id: yiapi.fnSchema(yiapi.schemaField.id, '资讯分类'),
