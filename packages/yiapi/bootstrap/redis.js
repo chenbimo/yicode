@@ -1,5 +1,5 @@
 import fp from 'fastify-plugin';
-import fastifyRedis from '../preboot/redis.js';
+import fastifyRedis from '../preConfig/redis.js';
 
 import { appConfig } from '../config/appConfig.js';
 

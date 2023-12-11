@@ -19,7 +19,7 @@ import { sysConfig } from './config/sysConfig.js';
 import { timeConfig } from './config/timeConfig.js';
 
 // 预配置
-import { logger } from './preboot/logger.js';
+import { logger } from './preConfig/logger.js';
 
 // 脚本
 import { syncDatabase } from './scripts/syncDatabase.js';

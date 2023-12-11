@@ -10,7 +10,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "exports": {
-        ".": "yiapi.js",
+        ".": "./yiapi.js",
         "./config/*.js": "./config/*.js"
     },
     "scripts": {
