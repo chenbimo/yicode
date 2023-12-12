@@ -1,6 +1,10 @@
+import { resolve } from 'node:path';
+import { isFunction } from 'lodash-es';
 // 工具函数
 import { fnRoute, fnUUID } from '../../utils/index.js';
 // 配置文件
+import { appConfig } from '../../config/appConfig.js';
+import { sysConfig } from '../../config/sysConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -9,6 +13,7 @@ export const apiName = '微信消息通知';
 export default async (fastify) => {
     // 当前文件的路径，fastify 实例
     fnRoute(import.meta.url, fastify, {
+        // 请求方法
         method: 'get',
         // 接口名称
         apiName: apiName,
@@ -55,13 +60,16 @@ export default async (fastify) => {
                 if (!xmlData?.EventKey) {
                     xmlData.EventKey = 'test';
                 }
+                const { callbackConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'callback.js'), 'callbackConfig', {});
 
                 // 扫描公众号二维码登录
                 if (xmlData.EventKey.indexOf('scan_qrcode_login') !== -1) {
                     const [
                         //
                         scene_value,
-                        qrcode_uuid
+                        qrcode_uuid,
+                        agent_id,
+                        from_product
                     ] = xmlData.EventKey?.split('#') || [];
 
                     const userModel = fastify.mysql.table('sys_user');
@@ -75,7 +83,7 @@ export default async (fastify) => {
                     // 如果用户已存在，则返回
                     if (userData?.id) {
                         // 若用户不存在则创建该用户
-                        await fastify.redisSet(`scanQrcodeLogin:${qrcode_uuid}`, xmlData.FromUserName, 60);
+                        await fastify.redisSet(`scanQrcodeLogin:${qrcode_uuid}`, xmlData.FromUserName, 120);
                     } else {
                         // 若用户不存在则创建该用户
                         await userModel //
@@ -83,9 +91,19 @@ export default async (fastify) => {
                             .insertData({
                                 openid: xmlData.FromUserName,
                                 nickname: '用户' + fnUUID(10),
-                                role_codes: 'user'
+                                role_codes: 'user',
+                                agent_id: agent_id || 0,
+                                from_product: from_product || 'no'
                             });
-                        await fastify.redisSet(`scanQrcodeLogin:${qrcode_uuid}`, xmlData.FromUserName, 60);
+                        await fastify.redisSet(`scanQrcodeLogin:${qrcode_uuid}`, xmlData.FromUserName, 120);
+                    }
+                    if (isFunction(callbackConfig.weixinMessage)) {
+                        callbackConfig.weixinMessage(fastify, {
+                            scene_value: scene_value,
+                            qrcode_uuid: qrcode_uuid,
+                            agent_id: agent_id,
+                            from_product: from_product
+                        });
                     }
                 }
                 return 'SUCCESS';
