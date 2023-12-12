@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import logSymbols from 'log-symbols';
 import Ajv from 'ajv';
 import localize from 'ajv-i18n';
-import { isEmpty } from 'lodash-es';
+import { isEmpty, isPlainObject, isFunction } from 'lodash-es';
 
 // 协议文件
 import { appConfigSchema } from './schema/appConfigSchema.js';
@@ -11,6 +11,32 @@ import { appConfigSchema } from './schema/appConfigSchema.js';
 // 配置文件
 import { appConfig, appConfigOrigin } from './config/appConfig.js';
 import { sysConfig } from './config/sysConfig.js';
+import { fnImport } from './utils/index.js';
+
+// 确保关键目录存在
+fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
+fs.ensureDirSync(path.resolve(sysConfig.appDir, 'plugins'));
+fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
+fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
+fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
+fs.ensureFileSync(path.resolve(sysConfig.appDir, 'config', 'callback.js'));
+
+const { callbackConfig } = await fnImport(path.resolve(sysConfig.appDir, 'config', 'callback.js'), 'callbackConfig', {});
+
+if (isPlainObject(callbackConfig) === false) {
+    console.log(`${logSymbols.warning} callback.js 文件必须为一个对象`);
+    process.exit(1);
+}
+
+if (isFunction(callbackConfig.weixinMessage) === false) {
+    console.log(`${logSymbols.warning} callback.js 文件中的 weixinMessage 必须为一个函数`);
+    process.exit(1);
+}
+
+if (isFunction(callbackConfig.weixinPayNotify) === false) {
+    console.log(`${logSymbols.warning} callback.js 文件中的 weixinPayNotify 必须为一个函数`);
+    process.exit(1);
+}
 
 if (isEmpty(appConfigOrigin) === true) {
     console.log(`${logSymbols.warning} appConfig.js 文件配置为空`);
@@ -45,10 +71,3 @@ if (appConfig.jwt.secret === 'yiapi') {
     console.log(`${logSymbols.warning} 请修改jwt默认密钥！！！（位置：appConfig.jwt.secret`);
     process.exit(1);
 }
-
-// 确保关键目录存在
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'plugins'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'logs'));
-fs.ensureDirSync(path.resolve(sysConfig.appDir, 'public'));
-fs.ensureFileSync(path.resolve(sysConfig.appDir, 'yiapi.js'));
