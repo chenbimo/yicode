@@ -500,71 +500,63 @@ export const appConfigSchema = {
             type: 'object',
             properties: {
                 merchant: {
-                    title: '商户配置',
-                    type: 'array',
-                    items: {
-                        title: '单个公众号配置',
-                        type: 'object',
-                        properties: {
-                            // 代号
-                            code: {
-                                title: '代号',
-                                name: 'string'
-                            },
-                            // 名称
-                            name: {
-                                title: '名称',
-                                type: 'string'
-                            },
-                            mchId: {
-                                title: '商户号',
-                                type: 'string'
-                            },
-                            serialNo: {
-                                title: '支付序列号',
-                                type: 'string'
-                            },
-                            apiv3PrivateKey: {
-                                title: '支付秘钥',
-                                type: 'string'
-                            },
-                            privateKey: {
-                                title: '商户私钥',
-                                type: 'string'
+                    title: '商户列表',
+                    type: 'object',
+                    patternProperties: {
+                        '^mchId_*': {
+                            title: '公众号配置',
+                            type: 'object',
+                            properties: {
+                                // 名称
+                                name: {
+                                    title: '名称',
+                                    type: 'string'
+                                },
+                                mchId: {
+                                    title: '商户号',
+                                    type: 'string'
+                                },
+                                serialNo: {
+                                    title: '支付序列号',
+                                    type: 'string'
+                                },
+                                apiv3PrivateKey: {
+                                    title: '支付秘钥',
+                                    type: 'string'
+                                },
+                                privateKey: {
+                                    title: '商户私钥',
+                                    type: 'string'
+                                }
                             }
-                        },
-                        required: ['code', 'name']
+                        }
                     }
                 },
-                merchant: {
-                    title: '公众号配置',
-                    type: 'array',
-                    items: {
-                        title: '单个公众号配置',
-                        type: 'object',
-                        properties: {
-                            // 代号
-                            code: {
-                                title: '代号',
-                                name: 'string'
-                            },
-                            // 名称
-                            name: {
-                                title: '名称',
-                                type: 'string'
-                            },
-                            // appId
-                            appId: {
-                                title: 'appId',
-                                type: 'string'
-                            },
-                            // appSecret
-                            appSecret: {
-                                title: 'appSecret',
-                                type: 'string'
+                gongZhong: {
+                    title: '公众号列表',
+                    type: 'object',
+                    patternProperties: {
+                        '^appId_*': {
+                            title: '公众号配置',
+                            type: 'object',
+                            properties: {
+                                // 名称
+                                name: {
+                                    title: '名称',
+                                    type: 'string'
+                                },
+                                // appId
+                                appId: {
+                                    title: 'appId',
+                                    type: 'string'
+                                },
+                                // appSecret
+                                appSecret: {
+                                    title: 'appSecret',
+                                    type: 'string'
+                                }
                             }
-                        },
-                        required: ['code', 'name']
+                        }
                     }
                 }
             }
