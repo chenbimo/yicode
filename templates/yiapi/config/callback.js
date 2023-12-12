@@ -3,6 +3,7 @@ export const callbackConfig = {
     weixinMessage(fastify, options) {
         console.log('🚀 ~ file: callback.js:2 ~ messageCallback ~ options:', options);
     },
+    // 微信支付回调
     weixinPayNotify(fastify, options) {
         console.log('🚀 ~ file: callback.js:7 ~ weixinPayNotify ~ options:', options);
     }
