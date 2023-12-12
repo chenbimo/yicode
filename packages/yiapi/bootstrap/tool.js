@@ -132,7 +132,10 @@ async function plugin(fastify) {
     // 获取微信访问令牌
     const getWeixinAccessToken = async (gong_zhong_hao) => {
         try {
-            if (!appConfig.weixin.gongZhong[gong_zhong_hao]) return '';
+            if (!appConfig.weixin.gongZhong[gong_zhong_hao]) {
+                fastify.log.error(`[ ${gong_zhong_hao} ] 公众号令牌未配置`);
+                return '';
+            }
             const cacheWeixinAccessToken = await redisGet(`cacheData:weixinAccessToken:${gong_zhong_hao}`);
             if (cacheWeixinAccessToken) {
                 return cacheWeixinAccessToken;
@@ -150,6 +153,7 @@ async function plugin(fastify) {
                     await redisSet(`cacheData:weixinAccessToken:${gong_zhong_hao}`, res.access_token, 6000);
                     return res.access_token;
                 } else {
+                    fastify.log.error(res);
                     return '';
                 }
             }
