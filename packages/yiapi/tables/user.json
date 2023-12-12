@@ -17,6 +17,7 @@
         "from_product": {
             "type": "string",
             "comment": "来自产品",
+            "length": 100,
             "default": ""
         },
         "username": {
