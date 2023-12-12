@@ -17,7 +17,7 @@ const appConfig = {
     // 监听端口
     port: 3000,
     // 监听主机
-    host: '::',
+    host: '127.0.0.1',
     // 超级管理员密码
     devPassword: 'dev123456',
     // 是否验证参数
