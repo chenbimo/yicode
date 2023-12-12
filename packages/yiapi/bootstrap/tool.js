@@ -129,9 +129,11 @@ async function plugin(fastify) {
         await redisSet('cacheData:role', dataRole);
     };
 
-    const getWeixinAccessToken = async () => {
+    // 获取微信访问令牌
+    const getWeixinAccessToken = async (gong_zhong_hao) => {
         try {
-            const cacheWeixinAccessToken = await redisGet('cacheData:weixinAccessToken');
+            if (!appConfig.weixin.gongZhong[gong_zhong_hao]) return '';
+            const cacheWeixinAccessToken = await redisGet(`cacheData:weixinAccessToken:${gong_zhong_hao}`);
             if (cacheWeixinAccessToken) {
                 return cacheWeixinAccessToken;
             } else {
@@ -139,13 +141,13 @@ async function plugin(fastify) {
                     method: 'GET',
                     searchParams: {
                         grant_type: 'client_credential',
-                        appid: appConfig.custom.weixin.appId,
-                        secret: appConfig.custom.weixin.appSecret
+                        appid: appConfig.weixin.gongZhong[gong_zhong_hao].appId,
+                        secret: appConfig.weixin.gongZhong[gong_zhong_hao].appSecret
                     }
                 }).json();
 
                 if (res.access_token) {
-                    await redisSet(`cacheData:weixinAccessToken`, res.access_token, 6000);
+                    await redisSet(`cacheData:weixinAccessToken:${gong_zhong_hao}`, res.access_token, 6000);
                     return res.access_token;
                 } else {
                     return '';
@@ -157,17 +159,15 @@ async function plugin(fastify) {
         }
     };
 
-    const getWeixinJsapiTicket = async (access_token) => {
+    // 获取微信票据
+    const getWeixinJsapiTicket = async (gong_zhong_hao) => {
         try {
-            const access_token = await redisGet('cacheData:weixinAccessToken');
-            if (!access_token) {
-                access_token = await getWeixinAccessToken();
-            }
+            const cacheWeixinAccessToken = await getWeixinAccessToken(gong_zhong_hao);
             const res = await got('https://api.weixin.qq.com/cgi-bin/ticket/getticket', {
                 method: 'GET',
                 searchParams: {
                     type: 'jsapi',
-                    access_token: access_token
+                    access_token: cacheWeixinAccessToken
                 }
             }).json();
             if (res.ticket) {

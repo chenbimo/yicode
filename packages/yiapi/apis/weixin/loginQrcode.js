@@ -16,36 +16,35 @@ export default async (fastify) => {
         // 请求参数约束
         schemaRequest: {
             type: 'object',
-            properties: {}
+            properties: {
+                gong_zhong_hao: metaConfig.gong_zhong_hao,
+                agent_id: metaConfig.agent_id,
+                from_product: metaConfig.from_product
+            },
+            required: ['gong_zhong_hao']
         },
         // 返回数据约束
         schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                let weixinAccessToken = await fastify.redisGet('cacheData:weixinAccessToken');
+                if (!appConfig.weixin.gongZhong[req.body.gong_zhong_hao]) {
+                    return {
+                        ...httpConfig.FAIL,
+                        msg: '公众号appId未配置'
+                    };
+                }
+                const weixinAccessToken = await fastify.getWeixinAccessToken(req.body.gong_zhong_hao);
                 if (!weixinAccessToken) {
-                    const result = await got('https://api.weixin.qq.com/cgi-bin/token', {
-                        method: 'GET',
-                        searchParams: {
-                            grant_type: 'client_credential',
-                            appid: appConfig.custom.weixin.appId,
-                            secret: appConfig.custom.weixin.appSecret
-                        }
-                    }).json();
-
-                    // 如果报错
-                    if (result.errcode) {
-                        return {
-                            ...httpConfig.FAIL,
-                            msg: result.errmsg
-                        };
-                    }
-                    weixinAccessToken = result.access_token;
-                    fastify.redisSet(`cacheData:weixinAccessToken`, weixinAccessToken, 6000);
+                    return {
+                        ...httpConfig.FAIL,
+                        msg: '获取访问令牌失败'
+                    };
                 }
 
                 const scan_qrcode_uuid = fnUUID();
+                const agent_id = req.body.agent_id;
+                const from_product = req.body.from_product;
 
                 const result = await got('https://api.weixin.qq.com/cgi-bin/qrcode/create', {
                     method: 'post',
@@ -57,25 +56,20 @@ export default async (fastify) => {
                         action_name: 'QR_STR_SCENE',
                         action_info: {
                             scene: {
-                                scene_str: `scan_qrcode_login#${scan_qrcode_uuid}`
+                                scene_str: `scan_qrcode_login#${scan_qrcode_uuid}#${agent_id}#${from_product}`
                             }
                         }
                     }
                 }).json();
 
-                // 如果认证过期，则重新生成
-                if (result.errcode === 40001) {
-                    const result = await fastify.getWeixinAccessToken();
-                    // 如果报错
-                    if (result.errcode) {
-                        return {
-                            ...httpConfig.FAIL,
-                            msg: result.errmsg
-                        };
-                    }
-                    weixinAccessToken = result.access_token;
-                    fastify.redisSet(`cacheData:weixinAccessToken`, weixinAccessToken, 6000);
+                // 如果报错
+                if (result.errcode) {
+                    return {
+                        ...httpConfig.FAIL,
+                        msg: result?.errmsg || ''
+                    };
                 }
+
                 return {
                     ...httpConfig.SUCCESS,
                     data: {
