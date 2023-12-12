@@ -41,7 +41,7 @@ export default async (fastify) => {
                     });
                     return '';
                 }
-
+                const { callbackConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'callback.js'), 'callbackConfig', {});
                 // 解析数据
                 const reply = JSON.parse(fastify.wxpay.decodeCertificate(req.body.resource));
                 const attach = JSON.parse(reply.attach);
@@ -80,6 +80,10 @@ export default async (fastify) => {
                 const redisKey = `cacheData:payOrder_${attach.user_id}_${reply.out_trade_no}`;
                 await fastify.redisSet(redisKey, 'yes', 6000);
                 await payOrderModel.clone().insertData(insertData);
+
+                if (isFunction(callbackConfig.weixinMessage)) {
+                    callbackConfig.weixinPayNotify(fastify, insertData);
+                }
 
                 return '';
             } catch (err) {
