@@ -1,6 +1,24 @@
 {
     "name": "系统用户表",
     "fields": {
+        "openid": {
+            "type": "string",
+            "comment": "微信 openid",
+            "length": 100,
+            "default": "",
+            "index": true
+        },
+        "agent_id": {
+            "type": "bigInteger",
+            "comment": "上级ID",
+            "default": 0,
+            "index": true
+        },
+        "from_product": {
+            "type": "string",
+            "comment": "来自产品",
+            "default": ""
+        },
         "username": {
             "type": "string",
             "comment": "用户名",
