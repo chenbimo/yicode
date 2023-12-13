@@ -84,9 +84,19 @@ export default async (fastify) => {
                     if (userData?.id) {
                         // 若用户不存在则创建该用户
                         await fastify.redisSet(`scanQrcodeLogin:${qrcode_uuid}`, xmlData.FromUserName, 120);
+                        if (isFunction(callbackConfig.weixinMessage)) {
+                            callbackConfig.weixinMessage(fastify, {
+                                new_user: 0,
+                                user_id: userData?.id,
+                                scene_value: scene_value,
+                                qrcode_uuid: qrcode_uuid,
+                                agent_id: agent_id,
+                                from_product: from_product
+                            });
+                        }
                     } else {
                         // 若用户不存在则创建该用户
-                        await userModel //
+                        const result = await userModel //
                             .clone()
                             .insertData({
                                 openid: xmlData.FromUserName,
@@ -96,15 +106,16 @@ export default async (fastify) => {
                                 from_product: from_product || 'no'
                             });
                         await fastify.redisSet(`scanQrcodeLogin:${qrcode_uuid}`, xmlData.FromUserName, 120);
-                    }
-                    if (isFunction(callbackConfig.weixinMessage)) {
-                        callbackConfig.weixinMessage(fastify, {
-                            user_id: userData?.id || 0,
-                            scene_value: scene_value,
-                            qrcode_uuid: qrcode_uuid,
-                            agent_id: agent_id,
-                            from_product: from_product
-                        });
+                        if (isFunction(callbackConfig.weixinMessage)) {
+                            callbackConfig.weixinMessage(fastify, {
+                                new_user: 1,
+                                user_id: result?.[0] || 0,
+                                scene_value: scene_value,
+                                qrcode_uuid: qrcode_uuid,
+                                agent_id: agent_id,
+                                from_product: from_product
+                            });
+                        }
                     }
                 }
                 return 'SUCCESS';
