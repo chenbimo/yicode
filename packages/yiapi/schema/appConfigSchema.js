@@ -475,7 +475,8 @@ export const appConfigSchema = {
                                 '*': {
                                     name: {
                                         title: '菜单名称',
-                                        type: 'string'
+                                        type: 'string',
+                                        minLength: 1
                                     },
                                     sort: {
                                         title: '菜单排序',
@@ -510,25 +511,31 @@ export const appConfigSchema = {
                                 // 名称
                                 name: {
                                     title: '名称',
-                                    type: 'string'
+                                    type: 'string',
+                                    minLength: 1
                                 },
                                 mchId: {
                                     title: '商户号',
-                                    type: 'string'
+                                    type: 'string',
+                                    minLength: 1
                                 },
                                 serialNo: {
                                     title: '支付序列号',
-                                    type: 'string'
+                                    type: 'string',
+                                    minLength: 1
                                 },
                                 apiv3PrivateKey: {
                                     title: '支付秘钥',
-                                    type: 'string'
+                                    type: 'string',
+                                    minLength: 1
                                 },
                                 privateKey: {
                                     title: '商户私钥',
-                                    type: 'string'
+                                    type: 'string',
+                                    minLength: 1
                                 }
-                            }
+                            },
+                            required: ['name', 'mchId', 'serialNo', 'apiv3PrivateKey', 'privateKey']
                         }
                     }
                 },
@@ -543,19 +550,23 @@ export const appConfigSchema = {
                                 // 名称
                                 name: {
                                     title: '名称',
-                                    type: 'string'
+                                    type: 'string',
+                                    minLength: 1
                                 },
                                 // appId
                                 appId: {
                                     title: 'appId',
-                                    type: 'string'
+                                    type: 'string',
+                                    minLength: 1
                                 },
                                 // appSecret
                                 appSecret: {
                                     title: 'appSecret',
-                                    type: 'string'
+                                    type: 'string',
+                                    minLength: 1
                                 }
-                            }
+                            },
+                            required: ['name', 'appId', 'appSecret']
                         }
                     }
                 }
@@ -567,39 +578,39 @@ export const appConfigSchema = {
             type: 'object',
             properties: {
                 '*': {
-                    title: '产品参数',
-                    type: 'array',
-                    items: {
-                        title: '单个产品配置',
-                        type: 'object',
-                        properties: {
-                            // 代号
-                            code: {
-                                title: '产品代号',
-                                type: 'string'
+                    title: '购买时长类型',
+                    type: 'object',
+                    properties: {
+                        '*': {
+                            title: '单个产品配置',
+                            type: 'object',
+                            properties: {
+                                // 名称
+                                name: {
+                                    title: '产品名称',
+                                    type: 'string',
+                                    minLength: 1
+                                },
+                                // 时长 0=永久 非0=秒
+                                duration: {
+                                    title: '产品时间',
+                                    type: 'integer',
+                                    minimum: 0
+                                },
+                                // 价格 分
+                                money: {
+                                    title: '产品价格',
+                                    type: 'integer',
+                                    minimum: 1
+                                },
+                                // 描述
+                                describe: {
+                                    title: '产品描述',
+                                    type: 'string'
+                                }
                             },
-                            // 名称
-                            name: {
-                                title: '产品名称',
-                                type: 'string'
-                            },
-                            // 时长 0=永久 非0=秒
-                            duration: {
-                                title: '产品时间',
-                                type: 'integer'
-                            },
-                            // 价格 分
-                            money: {
-                                title: '产品价格',
-                                type: 'integer'
-                            },
-                            // 描述
-                            describe: {
-                                title: '产品描述',
-                                type: 'string'
-                            }
-                        },
-                        required: ['code', 'name']
+                            required: ['name', 'duration', 'money', 'describe']
+                        }
                     }
                 }
             }
