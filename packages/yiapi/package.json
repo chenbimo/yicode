@@ -2,7 +2,6 @@
     "name": "@yicode/yiapi",
     "version": "3.13.1",
     "description": "yiapi(易接口)，5 分钟上手 Node.js 接口开发",
-    "main": "yiapi.js",
     "type": "module",
     "private": false,
     "publishConfig": {
@@ -50,7 +49,7 @@
         "croner": "^8.0.0",
         "date-fns": "^2.30.0",
         "fast-glob": "^3.3.2",
-        "fastify": "^4.24.3",
+        "fastify": "^4.25.0",
         "fastify-plugin": "^4.5.1",
         "fastify-xml-body-parser": "^2.2.0",
         "fs-extra": "^11.2.0",
