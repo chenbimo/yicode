@@ -139,14 +139,14 @@ export const wxPayUpdateCertificates = async (forceUpdate = false) => {
  * @param associated_data 附加数据
  */
 export const wxPayDecodeCertificate = (options) => {
-    let { associated_data, ciphertext, nonce } = options;
-    let ciphertextBuffer = Buffer.from(ciphertext, 'base64');
-    let authTag = ciphertextBuffer.slice(ciphertextBuffer.length - 16);
-    let data = ciphertextBuffer.slice(0, ciphertextBuffer.length - 16);
-    let decipherIv = crypto.createDecipheriv('aes-256-gcm', wxPayConfig.apiv3PrivateKey, nonce);
+    const { associated_data, ciphertext, nonce } = options;
+    const ciphertextBuffer = Buffer.from(ciphertext, 'base64');
+    const authTag = ciphertextBuffer.slice(ciphertextBuffer.length - 16);
+    const data = ciphertextBuffer.slice(0, ciphertextBuffer.length - 16);
+    const decipherIv = crypto.createDecipheriv('aes-256-gcm', wxPayConfig.apiv3PrivateKey, nonce);
     decipherIv.setAuthTag(authTag);
     decipherIv.setAAD(Buffer.from(associated_data));
-    let decryptBuf = decipherIv.update(data);
+    const decryptBuf = decipherIv.update(data);
     decipherIv.final();
     return decryptBuf.toString('utf8');
 };

@@ -447,8 +447,8 @@ export function fnFileProtocolPath(_path) {
  */
 export function fnRequire(filePath, defaultValue, fromType = 'core') {
     try {
-        let require = createRequire(fnFileProtocolPath(path.resolve(fromType === 'core' ? sysConfig.yiapiDir : sysConfig.appDir, 'yiapi.js')));
-        let result = require(filePath);
+        const require = createRequire(fnFileProtocolPath(path.resolve(fromType === 'core' ? sysConfig.yiapiDir : sysConfig.appDir, 'yiapi.js')));
+        const result = require(filePath);
         return result;
     } catch (err) {
         return defaultValue;

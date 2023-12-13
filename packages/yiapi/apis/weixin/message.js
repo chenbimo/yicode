@@ -99,6 +99,7 @@ export default async (fastify) => {
                     }
                     if (isFunction(callbackConfig.weixinMessage)) {
                         callbackConfig.weixinMessage(fastify, {
+                            user_id: userData?.id || 0,
                             scene_value: scene_value,
                             qrcode_uuid: qrcode_uuid,
                             agent_id: agent_id,
