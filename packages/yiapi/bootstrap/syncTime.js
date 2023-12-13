@@ -9,7 +9,7 @@ async function plugin(fastify, opts) {
     const timestamp = res?.data?.t;
     if (timestamp) {
         const diffSeconds = Math.abs(differenceInSeconds(new Date(), toDate(timestamp * 1)));
-        if (diffSeconds > 60) {
+        if (diffSeconds > 180) {
             fastify.log.error('与北京时间相差大于1分钟');
             process.exit();
         }
