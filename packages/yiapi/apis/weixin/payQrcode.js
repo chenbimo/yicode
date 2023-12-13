@@ -18,45 +18,47 @@ export default async (fastify) => {
             type: 'object',
             properties: {
                 buy_amount: metaConfig.buy_amount,
-                pay_product: metaConfig.pay_product
+                buy_product: metaConfig.buy_product,
+                buy_duration: metaConfig.buy_duration,
+                buy_note: metaConfig.buy_note
             },
-            required: ['pay_product']
+            required: ['buy_amount', 'buy_product', 'buy_duration']
         },
         // 返回数据约束
         schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const payProduct = appConfig.custom.productInfo[req.body.pay_product];
-                if (!payProduct?.code) {
+                const productInfo = appConfig.product?.[req.body.buy_product]?.[req.body.buy_duration];
+                if (!productInfo?.name) {
                     return {
                         ...httpConfig.FAIL,
-                        msg: '支付产品错误'
+                        msg: '支付产品信息有误'
                     };
                 }
-                if (!payProduct?.money) {
+                if (!productInfo?.money) {
                     return {
                         ...httpConfig.FAIL,
-                        msg: '支付金额错误'
+                        msg: '产品支付金额错误'
                     };
                 }
-                const pay_note = '常规支付';
                 // 产品订单号
                 const orderNo = fnIncrUID();
                 const params = {
-                    amount: 1,
-                    user_id: req.session.id,
                     order_no: orderNo,
-                    pay_product: payProduct?.code || 0,
-                    pay_note: pay_note,
-                    pay_duration: payProduct?.duration || 0
+                    user_id: req.session.id,
+                    buy_amount: req.body.buy_amount,
+                    buy_product: productInfo?.buy_product || '',
+                    buy_note: req.body.buy_note || '常规支付',
+                    buy_duration: productInfo?.buy_product,
+                    buy_second: productInfo.duration
                 };
                 fastify.log.warn({ what: '创建支付二维码', ...params });
                 const res = await fastify.wxpay.request('native', {
-                    description: payProduct?.describe || '无描述',
+                    description: productInfo?.describe || '无描述',
                     out_trade_no: orderNo,
                     amount: {
-                        total: payProduct.money
+                        total: (productInfo.money * req.body.buy_amount).toFixed(0)
                     },
                     attach: JSON.stringify(params)
                 });
@@ -66,9 +68,9 @@ export default async (fastify) => {
                         data: {
                             pay_url: res.code_url,
                             order_no: orderNo,
-                            pay_product: payProduct?.code || 0,
-                            pay_note: pay_note,
-                            pay_duration: payProduct?.duration || 0
+                            buy_product: productInfo?.code || 0,
+                            buy_note: pay_note,
+                            buy_duration: productInfo?.duration || 0
                         }
                     };
                 } else {
