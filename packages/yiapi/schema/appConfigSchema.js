@@ -528,12 +528,12 @@ export const appConfigSchema = {
                 // 公众号配置
                 // appId
                 appId: {
-                    title: 'appId',
+                    title: '公众号appId',
                     type: 'string'
                 },
                 // appSecret
                 appSecret: {
-                    title: 'appSecret',
+                    title: '公众号密钥',
                     type: 'string'
                 },
                 // 支付回调地址
@@ -548,42 +548,38 @@ export const appConfigSchema = {
         // 产品配置
         product: {
             title: '产品配置',
-            type: 'object',
-            properties: {
-                '*': {
-                    title: '购买时长类型',
-                    type: 'object',
-                    properties: {
-                        '*': {
-                            title: '单个产品配置',
-                            type: 'object',
-                            properties: {
-                                // 名称
-                                name: {
-                                    title: '产品名称',
-                                    type: 'string'
-                                },
-                                // 时长 0=永久 非0=秒
-                                duration: {
-                                    title: '产品时间',
-                                    type: 'integer'
-                                },
-                                // 价格 分
-                                money: {
-                                    title: '产品价格',
-                                    type: 'integer'
-                                },
-                                // 描述
-                                describe: {
-                                    title: '产品描述',
-                                    type: 'string'
-                                }
-                            },
-                            additionalProperties: false,
-                            required: ['name', 'duration', 'money', 'describe']
-                        }
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    // 产品名称
+                    name: {
+                        title: '产品名称',
+                        type: 'string',
+                        minLength: 1,
+                        maxLength: 20
+                    },
+                    // 产品代号
+                    code: {
+                        title: '产品名代号',
+                        type: 'integer',
+                        minimum: 1
+                    },
+                    // 时长 0=永久 非0=秒
+                    duration: {
+                        title: '产品时间（秒）',
+                        type: 'integer',
+                        minimum: 0
+                    },
+                    // 价格 分
+                    money: {
+                        title: '产品价格（分）',
+                        type: 'integer',
+                        minimum: 1
                     }
-                }
+                },
+                additionalProperties: false,
+                required: ['name', 'code', 'duration', 'money']
             }
         }
     },

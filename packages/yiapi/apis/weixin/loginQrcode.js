@@ -18,7 +18,7 @@ export default async (fastify) => {
             type: 'object',
             properties: {
                 agent_id: metaConfig.agent_id,
-                from_product: metaConfig.from_product
+                product_code: metaConfig.product_code
             },
             required: []
         },
@@ -36,8 +36,6 @@ export default async (fastify) => {
                 }
 
                 const scan_qrcode_uuid = fnUUID();
-                const agent_id = req.body.agent_id;
-                const from_product = req.body.from_product;
 
                 const result = await got('https://api.weixin.qq.com/cgi-bin/qrcode/create', {
                     method: 'post',
@@ -49,7 +47,7 @@ export default async (fastify) => {
                         action_name: 'QR_STR_SCENE',
                         action_info: {
                             scene: {
-                                scene_str: `scan_qrcode_login#${scan_qrcode_uuid}#${agent_id}#${from_product}`
+                                scene_str: `scan_qrcode_login#${scan_qrcode_uuid}#${req.body.product_code}#${req.body.agent_id}`
                             }
                         }
                     }

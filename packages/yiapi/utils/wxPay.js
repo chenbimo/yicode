@@ -53,12 +53,12 @@ export const wxPayUpdateCertificates = async (forceUpdate = false) => {
             return;
         }
     }
-    const res = await request('getCertificates', {});
+    const res = await wxPayRequest('getCertificates', {});
 
-    const certificates = res.data
+    wxPayConfig.certificates = res.data
         .map((item) => {
             const { associated_data, ciphertext, nonce } = item.encrypt_certificate;
-            const decrypt_certificate = wxDecodeCertificate({
+            const decrypt_certificate = wxPayDecodeCertificate({
                 nonce,
                 associated_data,
                 ciphertext
@@ -109,7 +109,7 @@ export const wxPayDecodeCertificate = (options) => {
 };
 
 // 签名验证
-export const wxPayVerifySign = async (headers, body) => {
+export const wxPayVerifySign = (headers, body) => {
     const {
         //
         'wechatpay-timestamp': timestamp,
@@ -141,7 +141,7 @@ export const wxPayVerifySign = async (headers, body) => {
 export const wxPayRequest = async (type, params) => {
     try {
         // 请求路径和方法
-        const { url, method } = wxVerifySign(type);
+        const { url, method } = wxPayVerifySign(type);
         // 时间戳
         const timestamp = Math.floor(Date.now() / 1000);
         // 随机字符
@@ -174,7 +174,6 @@ export const wxPayRequest = async (type, params) => {
         } else {
             reqParams.searchParams = params;
         }
-        console.log('🚀 ~ file: wxPay.js:183 ~ WxPay ~ request ~ reqParams:', reqParams);
 
         const res = await got('https://api.mch.weixin.qq.com' + url, reqParams).json();
 

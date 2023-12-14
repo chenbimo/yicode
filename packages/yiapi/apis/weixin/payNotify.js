@@ -1,10 +1,13 @@
 import { resolve } from 'path';
 import { toDate, addDays, getTime } from 'date-fns';
+import { find } from 'lodash-es';
 
 // 工具函数
 import { fnRoute, fnIncrUID, fnImport } from '../../utils/index.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
+import { sysConfig } from '../../config/sysConfig.js';
+import { appConfig } from '../../config/appConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
@@ -65,7 +68,7 @@ export default async (fastify) => {
                 }
 
                 // 产品信息
-                const productInfo = appConfig.product?.[attach.buy_product]?.[attach.buy_duration];
+                const productInfo = find(appConfig.product, { code: attach.product_code });
 
                 // 添加订单数据
                 const insertData = {
@@ -74,11 +77,10 @@ export default async (fastify) => {
                     user_openid: reply.payer.openid,
                     order_no: reply.out_trade_no,
                     transaction_id: reply.transaction_id,
-                    buy_product: attach.buy_product,
+                    product_code: attach.product_code,
                     pay_total: reply.amount.total,
                     buy_amount: attach.buy_amount,
-                    buy_duration: attach.buy_duration,
-                    buy_second: productInfo.duration || 0,
+                    buy_duration: productInfo.duration || 0,
                     origin_price: productInfo.money || 0,
                     buy_note: attach.buy_note
                 };

@@ -19,6 +19,12 @@
             "index": true,
             "unique": true
         },
+        "product_code": {
+            "type": "integer",
+            "comment": "产品代号",
+            "default": 0,
+            "index": true
+        },
         "transaction_id": {
             "type": "string",
             "comment": "业务 ID",
@@ -40,11 +46,6 @@
             "comment": "购买数量",
             "default": 0
         },
-        "buy_product": {
-            "type": "string",
-            "comment": "产品名称",
-            "default": ""
-        },
         "buy_zhe": {
             "type": "integer",
             "comment": "购买折扣（百分比：100为单位）",
@@ -57,11 +58,6 @@
         },
         "buy_duration": {
             "type": "string",
-            "comment": "购买时长 (时长代号）",
-            "default": 0
-        },
-        "buy_second": {
-            "type": "integer",
             "comment": "购买时长 (秒）",
             "default": 0
         },

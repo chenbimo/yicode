@@ -1,4 +1,5 @@
 import got from 'got';
+import { find } from 'lodash-es';
 // 工具函数
 import { fnRoute, fnField, fnSchema, fnIncrUID } from '../../utils/index.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
@@ -18,19 +19,18 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
+                product_code: metaConfig.product_code,
                 buy_amount: metaConfig.buy_amount,
-                buy_product: metaConfig.buy_product,
-                buy_duration: metaConfig.buy_duration,
                 buy_note: metaConfig.buy_note
             },
-            required: ['buy_amount', 'buy_product', 'buy_duration']
+            required: ['buy_amount', 'product_code']
         },
         // 返回数据约束
         schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const productInfo = appConfig.product?.[req.body.buy_product]?.[req.body.buy_duration];
+                const productInfo = find(appConfig.product, { code: req.body.product_code });
                 if (!productInfo?.name) {
                     return {
                         ...httpConfig.FAIL,
@@ -48,8 +48,7 @@ export default async (fastify) => {
                 const params = {
                     order_no: orderNo,
                     user_id: req.session.id,
-                    buy_product: productInfo?.buy_product || '',
-                    buy_duration: req.body.buy_duration,
+                    product_code: req.body.product_code,
                     buy_amount: req.body.buy_amount,
                     buy_note: req.body.buy_note || '常规支付'
                 };
@@ -66,9 +65,8 @@ export default async (fastify) => {
                     };
                 }
 
-                await wxPayinit();
                 const res = await wxPayRequest('native', {
-                    description: productInfo?.describe || '无描述',
+                    description: productInfo?.name || '无',
                     out_trade_no: orderNo,
                     amount: {
                         total: Number((productInfo.money * req.body.buy_amount).toFixed(0))
@@ -80,11 +78,7 @@ export default async (fastify) => {
                         ...httpConfig.SUCCESS,
                         data: {
                             pay_url: res.code_url,
-                            order_no: orderNo,
-                            buy_product: params.buy_product,
-                            buy_duration: params.buy_duration,
-                            buy_amount: params.buy_amount,
-                            buy_note: params.buy_note
+                            order_no: orderNo
                         }
                     };
                 } else {

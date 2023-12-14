@@ -69,7 +69,7 @@ export default async (fastify) => {
                         scene_value,
                         qrcode_uuid,
                         agent_id,
-                        from_product
+                        product_code
                     ] = xmlData.EventKey?.split('#') || [];
 
                     const userModel = fastify.mysql.table('sys_user');
@@ -91,7 +91,7 @@ export default async (fastify) => {
                                 scene_value: scene_value,
                                 qrcode_uuid: qrcode_uuid,
                                 agent_id: agent_id,
-                                from_product: from_product
+                                product_code: product_code
                             });
                         }
                     } else {
@@ -103,7 +103,7 @@ export default async (fastify) => {
                                 nickname: '用户' + fnUUID(10),
                                 role_codes: 'user',
                                 agent_id: agent_id || 0,
-                                from_product: from_product || 'no'
+                                from_product: product_code || 0
                             });
                         await fastify.redisSet(`scanQrcodeLogin:${qrcode_uuid}`, xmlData.FromUserName, 120);
                         if (isFunction(callbackConfig.weixinMessage)) {
@@ -113,7 +113,7 @@ export default async (fastify) => {
                                 scene_value: scene_value,
                                 qrcode_uuid: qrcode_uuid,
                                 agent_id: agent_id,
-                                from_product: from_product
+                                product_code: product_code
                             });
                         }
                     }
