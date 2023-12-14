@@ -132,7 +132,7 @@ async function plugin(fastify) {
     // 获取微信访问令牌
     const getWeixinAccessToken = async (gong_zhong_hao) => {
         try {
-            if (!appConfig.weixin.gongZhong[gong_zhong_hao]) {
+            if (!appConfig.weixinGongZhong[gong_zhong_hao]) {
                 fastify.log.error(`[ ${gong_zhong_hao} ] 公众号令牌未配置`);
                 return '';
             }
@@ -144,8 +144,8 @@ async function plugin(fastify) {
                     method: 'GET',
                     searchParams: {
                         grant_type: 'client_credential',
-                        appid: appConfig.weixin.gongZhong[gong_zhong_hao].appId,
-                        secret: appConfig.weixin.gongZhong[gong_zhong_hao].appSecret
+                        appid: appConfig.weixinGongZhong[gong_zhong_hao].appId,
+                        secret: appConfig.weixinGongZhong[gong_zhong_hao].appSecret
                     }
                 }).json();
 

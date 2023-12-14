@@ -27,7 +27,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                if (!appConfig.weixin.gongZhong[req.body.gong_zhong_hao]) {
+                if (!appConfig.weixinGongZhong[req.body.gong_zhong_hao]) {
                     return {
                         ...httpConfig.FAIL,
                         msg: '公众号appId未配置'
