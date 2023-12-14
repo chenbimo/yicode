@@ -1,0 +1,75 @@
+{
+    "name": "支付订单表",
+    "fields": {
+        "user_id": {
+            "type": "bigInteger",
+            "comment": "用户 ID",
+            "default": 0,
+            "index": true
+        },
+        "user_openid": {
+            "type": "string",
+            "comment": "支付者微信 openid",
+            "length": 50,
+            "default": ""
+        },
+        "order_no": {
+            "type": "bigInteger",
+            "comment": "订单号",
+            "index": true,
+            "unique": true
+        },
+        "transaction_id": {
+            "type": "string",
+            "comment": "业务 ID",
+            "length": 100,
+            "default": ""
+        },
+        "pay_total": {
+            "type": "integer",
+            "comment": "支付总金额 (分)",
+            "default": 0
+        },
+        "origin_price": {
+            "type": "integer",
+            "comment": "产品原价",
+            "default": 0
+        },
+        "buy_amount": {
+            "type": "integer",
+            "comment": "购买数量",
+            "default": 0
+        },
+        "buy_product": {
+            "type": "string",
+            "comment": "产品名称",
+            "default": ""
+        },
+        "buy_zhe": {
+            "type": "integer",
+            "comment": "购买折扣（百分比：100为单位）",
+            "default": 0
+        },
+        "buy_coupon": {
+            "type": "integer",
+            "comment": "购买优惠（减免金额：分）",
+            "default": 0
+        },
+        "buy_duration": {
+            "type": "string",
+            "comment": "购买时长 (时长代号）",
+            "default": 0
+        },
+        "buy_second": {
+            "type": "integer",
+            "comment": "购买时长 (秒）",
+            "default": 0
+        },
+        "buy_note": {
+            "type": "string",
+            "comment": "购买备注",
+            "length": 100,
+            "default": ""
+        }
+    }
+}

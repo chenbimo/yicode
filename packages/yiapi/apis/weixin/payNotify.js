@@ -64,14 +64,16 @@ export default async (fastify) => {
                 const insertData = {
                     id: fnIncrUID(),
                     user_id: attach.user_id,
-                    pay_product: attach.pay_product,
+                    user_openid: reply.payer.openid,
                     order_no: reply.out_trade_no,
                     transaction_id: reply.transaction_id,
+                    buy_product: attach.buy_product,
+                    origin_price: attach.origin_price,
                     pay_total: reply.amount.total,
-                    pay_amount: attach.amount,
-                    pay_note: attach.pay_note,
-                    pay_duration: attach.pay_duration,
-                    user_openid: reply.payer.openid
+                    buy_amount: attach.buy_amount,
+                    buy_duration: attach.buy_duration,
+                    buy_second: attach.buy_second,
+                    buy_note: attach.buy_note
                 };
                 fastify.log.warn({
                     what: '微信支付回调参数',

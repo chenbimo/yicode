@@ -47,13 +47,17 @@ export default async (fastify) => {
                 const params = {
                     order_no: orderNo,
                     user_id: req.session.id,
-                    buy_amount: req.body.buy_amount,
                     buy_product: productInfo?.buy_product || '',
-                    buy_note: req.body.buy_note || '常规支付',
-                    buy_duration: productInfo?.buy_product,
-                    buy_second: productInfo.duration
+                    buy_amount: req.body.buy_amount,
+                    origin_price: productInfo?.money || '',
+                    buy_duration: req.body.buy_duration,
+                    buy_second: productInfo.duration,
+                    buy_note: req.body.buy_note || '常规支付'
                 };
-                fastify.log.warn({ what: '创建支付二维码', ...params });
+                fastify.log.warn({
+                    what: '创建支付二维码',
+                    ...params
+                });
                 const res = await fastify.wxpay.request('native', {
                     description: productInfo?.describe || '无描述',
                     out_trade_no: orderNo,
@@ -68,9 +72,12 @@ export default async (fastify) => {
                         data: {
                             pay_url: res.code_url,
                             order_no: orderNo,
-                            buy_product: productInfo?.code || 0,
-                            buy_note: pay_note,
-                            buy_duration: productInfo?.duration || 0
+                            buy_amount: params.buy_amount,
+                            buy_product: params.buy_product,
+                            buy_duration: params.buy_duration,
+                            buy_second: params.buy_second,
+                            buy_note: params.buy_note,
+                            origin_price: params.origin_price
                         }
                     };
                 } else {
