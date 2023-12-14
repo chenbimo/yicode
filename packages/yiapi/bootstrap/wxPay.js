@@ -8,7 +8,8 @@ import { fnUUID } from '../utils/index.js';
 
 async function plugin(fastify) {
     class WxPay {
-        constructor() {
+        constructor(app_id) {
+            this.appId = app_id;
             this.certificates = [];
             this.certExpiresTime = '';
             this.merchantConfig = appConfig.weixinMerchant || {};
@@ -155,7 +156,7 @@ async function plugin(fastify) {
                 // 请求体，如果没有参数，则请求体为空
                 let paramsStr = '';
                 if (Object.keys(params).length > 0) {
-                    params.appid = this.merchantConfig.appId;
+                    params.appid = this.appId;
                     params.mchid = this.merchantConfig.mchId;
                     params.notify_url = this.merchantConfig.notifyUrl;
                     paramsStr = JSON.stringify(params);
