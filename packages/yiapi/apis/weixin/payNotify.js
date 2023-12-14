@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { toDate, addDays, getTime } from 'date-fns';
-import { find } from 'lodash-es';
+import { find, isFunction } from 'lodash-es';
 
 // 工具函数
 import { fnRoute, fnIncrUID, fnImport } from '../../utils/index.js';
