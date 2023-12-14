@@ -5,12 +5,11 @@ import fp from 'fastify-plugin';
 
 import { appConfig } from '../config/appConfig.js';
 import { fnUUID } from '../utils/index.js';
-
+let certificates = [];
+let certExpiresTime = '';
 async function plugin(fastify) {
     class WxPay {
         constructor() {
-            this.certificates = [];
-            this.certExpiresTime = '';
             this.updateCertificates();
         }
 
@@ -48,12 +47,12 @@ async function plugin(fastify) {
         async updateCertificates(forceUpdate = false) {
             //如果证书过期时间存在，并且证书过期时间大于当前时间，则不更新证书
             if (forceUpdate === false) {
-                if (this.certExpiresTime && this.certExpiresTime > new Date()) {
+                if (certExpiresTime && certExpiresTime > new Date()) {
                     return;
                 }
             }
-            this.certificates = await this.getCertificates();
-            this.certExpiresTime = new Date(Date.now() + 12 * 60 * 60 * 1000);
+            certificates = await this.getCertificates();
+            certExpiresTime = new Date(Date.now() + 12 * 60 * 60 * 1000);
         }
 
         // 获取证书列表
@@ -128,7 +127,7 @@ async function plugin(fastify) {
                 bodyStr = Object.keys(body).length !== 0 ? JSON.stringify(body) : '';
             }
             const signStr = [timestamp, nonce, bodyStr].join('\n') + '\n';
-            const cert = this.certificates.find((item) => item.serial_no === serial);
+            const cert = certificates.find((item) => item.serial_no === serial);
             if (!cert) {
                 fastify.log.error('没有对应的签名');
                 return false;
