@@ -72,7 +72,6 @@ export default async (fastify) => {
 
                 // 添加订单数据
                 const insertData = {
-                    id: fnIncrUID(),
                     user_id: attach.user_id,
                     user_openid: reply.payer.openid,
                     order_no: reply.out_trade_no,
@@ -84,13 +83,19 @@ export default async (fastify) => {
                     origin_price: productInfo.money || 0,
                     buy_note: attach.buy_note
                 };
+                if (appConfig.tablePrimaryKey === 'time') {
+                    insertData.id = fnIncrUID();
+                }
                 fastify.log.warn({
                     what: '微信支付回调参数',
                     ...insertData
                 });
                 const redisKey = `cacheData:payOrder_${attach.user_id}_${reply.out_trade_no}`;
                 await fastify.redisSet(redisKey, 'yes', 6000);
-                await payOrderModel.clone().insertData(insertData);
+                let result = await payOrderModel.clone().insertData(insertData);
+                if (appConfig.tablePrimaryKey === 'default') {
+                    insertData.id = result?.[0] || 0;
+                }
 
                 if (isFunction(callbackConfig.weixinMessage)) {
                     callbackConfig.weixinPayNotify(fastify, insertData);
