@@ -3,27 +3,37 @@ export const appConfigSchema = {
     properties: {
         appName: {
             title: '应用名称',
-            type: 'string'
+            type: 'string',
+            minLength: 1,
+            maxLength: 50
         },
         appNameEn: {
             title: '应用英文名称',
-            type: 'string'
+            type: 'string',
+            minLength: 1,
+            maxLength: 50
         },
         salt: {
             title: '加密盐值',
-            type: 'string'
+            type: 'string',
+            minLength: 1,
+            maxLength: 300
         },
         port: {
             title: '监听端口',
-            type: 'number'
+            type: 'integer'
         },
         host: {
             title: '监听主机',
-            type: 'string'
+            type: 'string',
+            minLength: 1,
+            maxLength: 30
         },
         devPassword: {
             title: '开发者密码',
-            type: 'string'
+            type: 'string',
+            minLength: 6,
+            maxLength: 20
         },
         paramsCheck: {
             title: '接口参数验证',
@@ -117,6 +127,7 @@ export const appConfigSchema = {
                     type: 'number'
                 }
             },
+            additionalProperties: false,
             required: [
                 //
                 'db',
@@ -156,11 +167,13 @@ export const appConfigSchema = {
                     type: 'number'
                 }
             },
+            additionalProperties: false,
             required: [
                 //
                 'keyPrefix',
                 'username',
                 'password',
+                'db',
                 'host',
                 'port'
             ]
@@ -179,6 +192,7 @@ export const appConfigSchema = {
                     type: 'string'
                 }
             },
+            additionalProperties: false,
             required: [
                 //
                 'secret',
@@ -213,8 +227,17 @@ export const appConfigSchema = {
                 pass: {
                     title: '密码',
                     type: 'string'
+                },
+                from_user: {
+                    title: '发送者昵称',
+                    type: 'string'
+                },
+                from_email: {
+                    title: '发送者邮箱',
+                    type: 'string'
                 }
             },
+            additionalProperties: false,
             required: [
                 //
                 'host',
@@ -222,27 +245,10 @@ export const appConfigSchema = {
                 'pool',
                 'secure',
                 'user',
-                'pass'
-            ],
-            from: {
-                title: '发件人',
-                type: 'object',
-                properties: {
-                    name: {
-                        title: '发件人名称',
-                        type: 'string'
-                    },
-                    address: {
-                        title: '发件人地址',
-                        type: 'string'
-                    }
-                },
-                required: [
-                    //
-                    'name',
-                    'address'
-                ]
-            }
+                'pass',
+                'from_user',
+                'from_email'
+            ]
         },
         // 文件上传
         upload: {
@@ -253,6 +259,7 @@ export const appConfigSchema = {
                     type: 'string'
                 }
             },
+            additionalProperties: false,
             required: ['dir']
         },
         // 请求限速
@@ -284,7 +291,8 @@ export const appConfigSchema = {
                     type: 'array',
                     title: '白名单'
                 }
-            }
+            },
+            additionalProperties: false
         },
         // 定时器配置
         cron: {
@@ -313,10 +321,11 @@ export const appConfigSchema = {
                         title: '时区',
                         type: 'string'
                     },
-                    hander: {
+                    handler: {
                         title: '处理函数'
                     }
                 },
+                additionalProperties: false,
                 required: ['timer', 'handler', 'name', 'code']
             }
         },
@@ -328,7 +337,13 @@ export const appConfigSchema = {
                 sys_admin: {
                     title: '系统管理表',
                     type: 'object',
-                    additionalProperties: true
+                    properties: {
+                        '*': {
+                            title: '任意字段',
+                            type: 'object',
+                            properties: {}
+                        }
+                    }
                 },
                 sys_api: {
                     title: '系统接口表',
@@ -337,11 +352,9 @@ export const appConfigSchema = {
                         '*': {
                             title: '任意字段',
                             type: 'object',
-                            properties: {},
-                            additionalProperties: true
+                            properties: {}
                         }
-                    },
-                    additionalProperties: true
+                    }
                 },
                 sys_app_config: {
                     title: '系统配置表',
@@ -350,11 +363,9 @@ export const appConfigSchema = {
                         '*': {
                             title: '任意字段',
                             type: 'object',
-                            properties: {},
-                            additionalProperties: true
+                            properties: {}
                         }
-                    },
-                    additionalProperties: true
+                    }
                 },
                 sys_dict_category: {
                     title: '系统字典分类表',
@@ -363,11 +374,9 @@ export const appConfigSchema = {
                         '*': {
                             title: '任意字段',
                             type: 'object',
-                            properties: {},
-                            additionalProperties: true
+                            properties: {}
                         }
-                    },
-                    additionalProperties: true
+                    }
                 },
                 sys_dict: {
                     title: '系统字典表',
@@ -376,11 +385,9 @@ export const appConfigSchema = {
                         '*': {
                             title: '任意字段',
                             type: 'object',
-                            properties: {},
-                            additionalProperties: true
+                            properties: {}
                         }
-                    },
-                    additionalProperties: true
+                    }
                 },
                 sys_login_log: {
                     title: '系统登录日志表',
@@ -389,11 +396,9 @@ export const appConfigSchema = {
                         '*': {
                             title: '任意字段',
                             type: 'object',
-                            properties: {},
-                            additionalProperties: true
+                            properties: {}
                         }
-                    },
-                    additionalProperties: true
+                    }
                 },
                 sys_mail_log: {
                     title: '系统邮件日志表',
@@ -402,11 +407,9 @@ export const appConfigSchema = {
                         '*': {
                             title: '任意字段',
                             type: 'object',
-                            properties: {},
-                            additionalProperties: true
+                            properties: {}
                         }
-                    },
-                    additionalProperties: true
+                    }
                 },
                 sys_menu: {
                     title: '系统菜单表',
@@ -415,11 +418,9 @@ export const appConfigSchema = {
                         '*': {
                             title: '任意字段',
                             type: 'object',
-                            properties: {},
-                            additionalProperties: true
+                            properties: {}
                         }
-                    },
-                    additionalProperties: true
+                    }
                 },
                 sys_role: {
                     title: '系统角色表',
@@ -428,11 +429,9 @@ export const appConfigSchema = {
                         '*': {
                             title: '任意字段',
                             type: 'object',
-                            properties: {},
-                            additionalProperties: true
+                            properties: {}
                         }
-                    },
-                    additionalProperties: true
+                    }
                 },
                 sys_user: {
                     title: '系统用户表',
@@ -441,11 +440,9 @@ export const appConfigSchema = {
                         '*': {
                             title: '任意字段',
                             type: 'object',
-                            properties: {},
-                            additionalProperties: true
+                            properties: {}
                         }
-                    },
-                    additionalProperties: true
+                    }
                 }
             }
         },
@@ -462,6 +459,11 @@ export const appConfigSchema = {
                             title: '菜单名称',
                             type: 'string'
                         },
+                        is_system: {
+                            title: '是否系统菜单',
+                            type: 'integer',
+                            enum: [0, 1]
+                        },
                         sort: {
                             title: '菜单排序',
                             type: 'integer',
@@ -473,26 +475,33 @@ export const appConfigSchema = {
                             type: 'object',
                             properties: {
                                 '*': {
-                                    name: {
-                                        title: '菜单名称',
-                                        type: 'string',
-                                        minLength: 1
+                                    type: 'object',
+                                    properties: {
+                                        name: {
+                                            title: '菜单名称',
+                                            type: 'string'
+                                        },
+                                        sort: {
+                                            title: '菜单排序',
+                                            type: 'integer',
+                                            minimum: 1,
+                                            maximum: 999
+                                        },
+                                        is_system: {
+                                            title: '是否系统菜单',
+                                            type: 'integer',
+                                            enum: [0, 1]
+                                        }
                                     },
-                                    sort: {
-                                        title: '菜单排序',
-                                        type: 'integer',
-                                        minimum: 1,
-                                        maximum: 999
-                                    }
-                                },
-                                additionalProperties: true
-                            },
-                            required: ['name', 'sort']
+                                    additionalProperties: false,
+                                    required: ['name', 'sort', 'children']
+                                }
+                            }
                         }
                     },
-                    required: ['name', 'children', 'sort']
-                },
-                additionalProperties: true
+                    additionalProperties: false,
+                    required: ['name', 'sort', 'children']
+                }
             }
         },
         // 微信配置
@@ -511,30 +520,26 @@ export const appConfigSchema = {
                                 // 名称
                                 name: {
                                     title: '名称',
-                                    type: 'string',
-                                    minLength: 1
+                                    type: 'string'
                                 },
                                 mchId: {
                                     title: '商户号',
-                                    type: 'string',
-                                    minLength: 1
+                                    type: 'string'
                                 },
                                 serialNo: {
                                     title: '支付序列号',
-                                    type: 'string',
-                                    minLength: 1
+                                    type: 'string'
                                 },
                                 apiv3PrivateKey: {
                                     title: '支付秘钥',
-                                    type: 'string',
-                                    minLength: 1
+                                    type: 'string'
                                 },
                                 privateKey: {
                                     title: '商户私钥',
-                                    type: 'string',
-                                    minLength: 1
+                                    type: 'string'
                                 }
                             },
+                            additionalProperties: false,
                             required: ['name', 'mchId', 'serialNo', 'apiv3PrivateKey', 'privateKey']
                         }
                     }
@@ -550,22 +555,20 @@ export const appConfigSchema = {
                                 // 名称
                                 name: {
                                     title: '名称',
-                                    type: 'string',
-                                    minLength: 1
+                                    type: 'string'
                                 },
                                 // appId
                                 appId: {
                                     title: 'appId',
-                                    type: 'string',
-                                    minLength: 1
+                                    type: 'string'
                                 },
                                 // appSecret
                                 appSecret: {
                                     title: 'appSecret',
-                                    type: 'string',
-                                    minLength: 1
+                                    type: 'string'
                                 }
                             },
+                            additionalProperties: false,
                             required: ['name', 'appId', 'appSecret']
                         }
                     }
@@ -588,20 +591,17 @@ export const appConfigSchema = {
                                 // 名称
                                 name: {
                                     title: '产品名称',
-                                    type: 'string',
-                                    minLength: 1
+                                    type: 'string'
                                 },
                                 // 时长 0=永久 非0=秒
                                 duration: {
                                     title: '产品时间',
-                                    type: 'integer',
-                                    minimum: 0
+                                    type: 'integer'
                                 },
                                 // 价格 分
                                 money: {
                                     title: '产品价格',
-                                    type: 'integer',
-                                    minimum: 1
+                                    type: 'integer'
                                 },
                                 // 描述
                                 describe: {
@@ -609,6 +609,7 @@ export const appConfigSchema = {
                                     type: 'string'
                                 }
                             },
+                            additionalProperties: false,
                             required: ['name', 'duration', 'money', 'describe']
                         }
                     }

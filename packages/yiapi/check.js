@@ -1,8 +1,6 @@
 import path from 'node:path';
 import fs from 'fs-extra';
 import logSymbols from 'log-symbols';
-import Ajv from 'ajv';
-import localize from 'ajv-i18n';
 import { isEmpty, isPlainObject, isFunction } from 'lodash-es';
 
 // 协议文件
@@ -12,6 +10,7 @@ import { appConfigSchema } from './schema/appConfigSchema.js';
 import { appConfig, appConfigOrigin } from './config/appConfig.js';
 import { sysConfig } from './config/sysConfig.js';
 import { fnImport } from './utils/index.js';
+import { ajvValidate } from './utils/ajv.js';
 
 // 确保关键目录存在
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));
@@ -43,16 +42,7 @@ if (isEmpty(appConfigOrigin) === true) {
     process.exit(1);
 }
 
-const ajv = new Ajv({ strict: false, messages: false });
-
-const validateAppConfig = ajv.compile(appConfigSchema);
-
-const validResult = validateAppConfig(appConfigOrigin);
-if (!validResult) {
-    localize.zh(validResult.errors);
-    console.log(logSymbols.error, 'appConfig.js 文件 ' + ajv.errorsText(validResult.errors, { separator: '\n' }));
-    process.exit();
-}
+ajvValidate('appConfig.js', appConfigSchema, appConfigOrigin, true);
 
 // 启动前验证
 if (appConfig.devPassword === 'dev123456') {
