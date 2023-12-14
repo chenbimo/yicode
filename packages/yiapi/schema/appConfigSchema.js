@@ -504,74 +504,61 @@ export const appConfigSchema = {
                 }
             }
         },
-        // 微信配置
-        weixin: {
-            title: '微信配置',
+        weixinMerchant: {
+            title: '微信商户配置',
             type: 'object',
             properties: {
-                merchant: {
-                    title: '商户列表',
-                    type: 'object',
-                    patternProperties: {
-                        '^mchId_*': {
-                            title: '公众号配置',
-                            type: 'object',
-                            properties: {
-                                // 名称
-                                name: {
-                                    title: '名称',
-                                    type: 'string'
-                                },
-                                mchId: {
-                                    title: '商户号',
-                                    type: 'string'
-                                },
-                                serialNo: {
-                                    title: '支付序列号',
-                                    type: 'string'
-                                },
-                                apiv3PrivateKey: {
-                                    title: '支付秘钥',
-                                    type: 'string'
-                                },
-                                privateKey: {
-                                    title: '商户私钥',
-                                    type: 'string'
-                                }
-                            },
-                            additionalProperties: false,
-                            required: ['name', 'mchId', 'serialNo', 'apiv3PrivateKey', 'privateKey']
-                        }
-                    }
+                // 名称
+                name: {
+                    title: '名称',
+                    type: 'string'
                 },
-                gongZhong: {
-                    title: '公众号列表',
+                mchId: {
+                    title: '商户号',
+                    type: 'string'
+                },
+                serialNo: {
+                    title: '支付序列号',
+                    type: 'string'
+                },
+                apiv3PrivateKey: {
+                    title: '支付秘钥',
+                    type: 'string'
+                },
+                privateKey: {
+                    title: '商户私钥',
+                    type: 'string'
+                }
+            },
+            additionalProperties: false,
+            required: ['name', 'mchId', 'serialNo', 'apiv3PrivateKey', 'privateKey']
+        },
+        weixinGongZhong: {
+            title: '公众号列表',
+            type: 'object',
+            patternProperties: {
+                '^appId_*': {
+                    title: '公众号配置',
                     type: 'object',
-                    patternProperties: {
-                        '^appId_*': {
-                            title: '公众号配置',
-                            type: 'object',
-                            properties: {
-                                // 名称
-                                name: {
-                                    title: '名称',
-                                    type: 'string'
-                                },
-                                // appId
-                                appId: {
-                                    title: 'appId',
-                                    type: 'string'
-                                },
-                                // appSecret
-                                appSecret: {
-                                    title: 'appSecret',
-                                    type: 'string'
-                                }
-                            },
-                            additionalProperties: false,
-                            required: ['name', 'appId', 'appSecret']
+                    properties: {
+                        // 名称
+                        name: {
+                            title: '名称',
+                            type: 'string'
+                        },
+                        // appId
+                        appId: {
+                            title: 'appId',
+                            type: 'string'
+                        },
+                        // appSecret
+                        appSecret: {
+                            title: 'appSecret',
+                            type: 'string'
                         }
-                    }
+                    },
+                    additionalProperties: false,
+                    required: ['name', 'appId', 'appSecret']
                 }
             }
         },
@@ -640,7 +627,8 @@ export const appConfigSchema = {
         'cron',
         'table',
         'menu',
-        'weixin',
+        'weixinMerchant',
+        'weixinGongZhong',
         'product'
     ],
     additionalProperties: false

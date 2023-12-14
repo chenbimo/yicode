@@ -3,7 +3,7 @@ import { schemaField } from '../../config/schemaField.js';
 import { appConfig } from '../../config/appConfig.js';
 import { timeConfig } from '../../config/timeConfig.js';
 
-const gongZhongHao = ['no', ...Object.keys(appConfig.weixin.gongZhong)];
+const gongZhongHao = ['no', ...Object.keys(appConfig.weixinGongZhong)];
 const productNames = ['no', ...Object.keys(appConfig.product)];
 const durationTime = Object.keys(timeConfig.second);
 

@@ -10,7 +10,7 @@
         "user_openid": {
             "type": "string",
             "comment": "支付者微信 openid",
-            "length": 50,
+            "length": 100,
             "default": ""
         },
         "order_no": {

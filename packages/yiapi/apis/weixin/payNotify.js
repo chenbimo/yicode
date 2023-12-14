@@ -32,8 +32,10 @@ export default async (fastify) => {
                     return '';
                 }
 
+                const wxPay = new fastify.WxPay();
+
                 // 验签失败
-                const isVerifySignPass = fastify.wxpay.verifySign(req.headers, req.body);
+                const isVerifySignPass = wxPay.verifySign(req.headers, req.body);
                 if (isVerifySignPass === false) {
                     fastify.log.error({
                         what: '验签失败',
@@ -43,7 +45,7 @@ export default async (fastify) => {
                 }
                 const { callbackConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'callback.js'), 'callbackConfig', {});
                 // 解析数据
-                const reply = JSON.parse(fastify.wxpay.decodeCertificate(req.body.resource));
+                const reply = JSON.parse(wxPay.decodeCertificate(req.body.resource));
                 const attach = JSON.parse(reply.attach);
                 const payOrderModel = fastify.mysql.table('pay_order');
 

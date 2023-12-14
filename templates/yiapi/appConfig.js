@@ -4,7 +4,8 @@ import { menuConfig } from './config/menu.js';
 import { mysqlConfig } from './config/mysql.js';
 import { redisConfig } from './config/redis.js';
 import { productConfig } from './config/product.js';
-import { weixinConfig } from './config/weixin.js';
+import { weixinMerchantConfig } from './config/weixinMerchant.js';
+import { weixinGongZhongConfig } from './config/weixinGongZhong.js';
 
 // 默认配置
 const appConfig = {
@@ -12,13 +13,13 @@ const appConfig = {
     appName: '易接口',
     appNameEn: 'yiapi',
     // 加密盐，请重新设置为一个随机值
-    salt: 'yiapi-123456.',
+    salt: 'yiapi-123456.0',
     // 监听端口
     port: 3000,
     // 监听主机
     host: '127.0.0.1',
     // 超级管理员密码
-    devPassword: 'dev123456',
+    devPassword: 'dev1234560',
     // 是否验证参数
     paramsCheck: false,
     // 日志字段过滤，不打印
@@ -67,7 +68,7 @@ const appConfig = {
     // jwt 配置
     jwt: {
         // jwt 密钥，第一次使用，请修改此密钥值！！！
-        secret: 'yiapi',
+        secret: 'yiapi0',
         expiresIn: '7d'
     },
     // 邮件配置
@@ -96,8 +97,10 @@ const appConfig = {
     menu: menuConfig,
     // 产品配置
     product: productConfig,
-    // 微信配置
-    weixin: weixinConfig
+    // 微信商户配置
+    weixinMerchant: weixinMerchantConfig,
+    // 微信公众号配置
+    weixinGongZhong: weixinGongZhongConfig
 };
 
 export { appConfig };
