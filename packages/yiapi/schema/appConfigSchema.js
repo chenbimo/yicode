@@ -528,10 +528,14 @@ export const appConfigSchema = {
                 privateKey: {
                     title: '商户私钥',
                     type: 'string'
+                },
+                notifyUrl: {
+                    title: '支付通知地址',
+                    type: 'string'
                 }
             },
             additionalProperties: false,
-            required: ['name', 'mchId', 'serialNo', 'apiv3PrivateKey', 'privateKey']
+            required: ['name', 'mchId', 'serialNo', 'apiv3PrivateKey', 'privateKey', 'notifyUrl']
         },
         weixinGongZhong: {
             title: '公众号列表',

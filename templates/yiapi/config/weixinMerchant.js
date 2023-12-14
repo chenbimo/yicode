@@ -6,5 +6,6 @@ export const weixinMerchantConfig = {
     mchId: '123456',
     serialNo: '123456789123456789123456',
     apiv3PrivateKey: '123456789123456789123456',
-    privateKey: weixinPrivateKey
+    privateKey: weixinPrivateKey,
+    notifyUrl: ''
 };
