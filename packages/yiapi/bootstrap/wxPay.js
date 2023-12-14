@@ -42,7 +42,7 @@ async function plugin(fastify) {
          * @returns 返回签名字符串，base64
          */
         rsaSign(content) {
-            return crypto.createSign('RSA-SHA256').update(content).sign(this.merchantConfig.private_key, 'base64');
+            return crypto.createSign('RSA-SHA256').update(content).sign(this.merchantConfig.privateKey, 'base64');
         }
 
         // 更新证书
