@@ -130,13 +130,9 @@ async function plugin(fastify) {
     };
 
     // 获取微信访问令牌
-    const getWeixinAccessToken = async (app_id) => {
+    const getWeixinAccessToken = async () => {
         try {
-            if (!appConfig.weixinGongZhong[app_id]) {
-                fastify.log.error(`[ ${app_id} ] 公众号令牌未配置`);
-                return '';
-            }
-            const cacheWeixinAccessToken = await redisGet(`cacheData:weixinAccessToken:${app_id}`);
+            const cacheWeixinAccessToken = await redisGet(`cacheData:weixinAccessToken`);
             if (cacheWeixinAccessToken) {
                 return cacheWeixinAccessToken;
             } else {
@@ -144,13 +140,13 @@ async function plugin(fastify) {
                     method: 'GET',
                     searchParams: {
                         grant_type: 'client_credential',
-                        appid: appConfig.weixinGongZhong[app_id].appId,
-                        secret: appConfig.weixinGongZhong[app_id].appSecret
+                        appid: appConfig.weixin.appId,
+                        secret: appConfig.weixin.appSecret
                     }
                 }).json();
 
                 if (res.access_token) {
-                    await redisSet(`cacheData:weixinAccessToken:${app_id}`, res.access_token, 6000);
+                    await redisSet(`cacheData:weixinAccessToken`, res.access_token, 6000);
                     return res.access_token;
                 } else {
                     fastify.log.error(res);
@@ -164,9 +160,9 @@ async function plugin(fastify) {
     };
 
     // 获取微信票据
-    const getWeixinJsapiTicket = async (app_id) => {
+    const getWeixinJsapiTicket = async () => {
         try {
-            const cacheWeixinAccessToken = await getWeixinAccessToken(app_id);
+            const cacheWeixinAccessToken = await getWeixinAccessToken();
             const res = await got('https://api.weixin.qq.com/cgi-bin/ticket/getticket', {
                 method: 'GET',
                 searchParams: {

@@ -17,13 +17,12 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                app_id: metaConfig.app_id,
                 buy_amount: metaConfig.buy_amount,
                 buy_product: metaConfig.buy_product,
                 buy_duration: metaConfig.buy_duration,
                 buy_note: metaConfig.buy_note
             },
-            required: ['app_id', 'buy_amount', 'buy_product', 'buy_duration']
+            required: ['buy_amount', 'buy_product', 'buy_duration']
         },
         // 返回数据约束
         schemaResponse: {},
@@ -59,7 +58,7 @@ export default async (fastify) => {
                     what: '创建支付二维码',
                     ...params
                 });
-                const wxPay = new fastify.WxPay(req.body.app_id);
+                const wxPay = new fastify.WxPay();
                 const res = await wxPay.request('native', {
                     description: productInfo?.describe || '无描述',
                     out_trade_no: orderNo,

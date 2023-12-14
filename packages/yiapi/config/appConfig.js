@@ -89,10 +89,8 @@ const appConfig = mergeAndConcat(
         cron: [],
         // 扩展表字段
         table: {},
-        // 微信商户配置
-        weixinMerchant: {},
-        // 微信公众号配置
-        weixinGongZhong: {},
+        // 微信配置
+        weixin: {},
         // 产品配置
         product: {}
     },

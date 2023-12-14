@@ -4,8 +4,7 @@ import { menuConfig } from './config/menu.js';
 import { mysqlConfig } from './config/mysql.js';
 import { redisConfig } from './config/redis.js';
 import { productConfig } from './config/product.js';
-import { weixinMerchantConfig } from './config/weixinMerchant.js';
-import { weixinGongZhongConfig } from './config/weixinGongZhong.js';
+import { weixinConfig } from './config/weixin.js';
 
 // 默认配置
 const appConfig = {
@@ -97,10 +96,8 @@ const appConfig = {
     menu: menuConfig,
     // 产品配置
     product: productConfig,
-    // 微信商户配置
-    weixinMerchant: weixinMerchantConfig,
-    // 微信公众号配置
-    weixinGongZhong: weixinGongZhongConfig
+    // 微信配置
+    weixin: weixinConfig
 };
 
 export { appConfig };

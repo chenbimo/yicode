@@ -8,11 +8,9 @@ import { fnUUID } from '../utils/index.js';
 
 async function plugin(fastify) {
     class WxPay {
-        constructor(app_id) {
-            this.appId = app_id;
+        constructor() {
             this.certificates = [];
             this.certExpiresTime = '';
-            this.merchantConfig = appConfig.weixinMerchant || {};
             this.updateCertificates();
         }
 
@@ -43,7 +41,7 @@ async function plugin(fastify) {
          * @returns 返回签名字符串，base64
          */
         rsaSign(content) {
-            return crypto.createSign('RSA-SHA256').update(content).sign(this.merchantConfig.privateKey, 'base64');
+            return crypto.createSign('RSA-SHA256').update(content).sign(appConfig.weixin.privateKey, 'base64');
         }
 
         // 更新证书
@@ -108,7 +106,7 @@ async function plugin(fastify) {
             const ciphertextBuffer = Buffer.from(ciphertext, 'base64');
             const authTag = ciphertextBuffer.slice(ciphertextBuffer.length - 16);
             const data = ciphertextBuffer.slice(0, ciphertextBuffer.length - 16);
-            const decipherIv = crypto.createDecipheriv('aes-256-gcm', this.merchantConfig.apiv3PrivateKey, nonce);
+            const decipherIv = crypto.createDecipheriv('aes-256-gcm', appConfig.weixin.apiv3PrivateKey, nonce);
             decipherIv.setAuthTag(authTag);
             decipherIv.setAAD(Buffer.from(associated_data));
             const decryptBuf = decipherIv.update(data);
@@ -130,7 +128,7 @@ async function plugin(fastify) {
                 bodyStr = Object.keys(body).length !== 0 ? JSON.stringify(body) : '';
             }
             const signStr = [timestamp, nonce, bodyStr].join('\n') + '\n';
-            const cert = this.merchantConfig.certificates.find((item) => item.serial_no === serial);
+            const cert = this.certificates.find((item) => item.serial_no === serial);
             if (!cert) {
                 fastify.log.error('没有对应的签名');
                 return false;
@@ -156,9 +154,9 @@ async function plugin(fastify) {
                 // 请求体，如果没有参数，则请求体为空
                 let paramsStr = '';
                 if (Object.keys(params).length > 0) {
-                    params.appid = this.appId;
-                    params.mchid = this.merchantConfig.mchId;
-                    params.notify_url = this.merchantConfig.notifyUrl;
+                    params.appid = appConfig.weixin.appId;
+                    params.mchid = appConfig.weixin.mchId;
+                    params.notify_url = appConfig.weixin.notifyUrl;
                     paramsStr = JSON.stringify(params);
                 }
 
@@ -166,7 +164,7 @@ async function plugin(fastify) {
                 const signature = this.rsaSign(`${method}\n${url}\n${timestamp}\n${onece_str}\n${paramsStr}\n`);
 
                 // 认证
-                const Authorization = `WECHATPAY2-SHA256-RSA2048 mchid="${this.merchantConfig.mchId}",nonce_str="${onece_str}",timestamp="${timestamp}",signature="${signature}",serial_no="${this.merchantConfig.serialNo}"`;
+                const Authorization = `WECHATPAY2-SHA256-RSA2048 mchid="${appConfig.weixin.mchId}",nonce_str="${onece_str}",timestamp="${timestamp}",signature="${signature}",serial_no="${appConfig.weixin.serialNo}"`;
                 // 发起请求
                 let reqParams = {
                     method: method,
@@ -181,6 +179,8 @@ async function plugin(fastify) {
                 } else {
                     reqParams.searchParams = params;
                 }
+                console.log('🚀 ~ file: wxPay.js:183 ~ WxPay ~ request ~ reqParams:', reqParams);
+
                 const res = await got('https://api.mch.weixin.qq.com' + url, reqParams).json();
 
                 // 返回结果

@@ -17,24 +17,17 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                url: metaConfig.page_url,
-                app_id: metaConfig.app_id
+                url: metaConfig.page_url
             },
-            required: ['url', 'app_id']
+            required: ['url']
         },
         // 返回数据约束
         schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                if (!appConfig.weixinGongZhong[req.body.app_id]) {
-                    return {
-                        ...httpConfig.FAIL,
-                        msg: '公众号appId未配置'
-                    };
-                }
                 // 票据
-                const jsapi_ticket = await fastify.getWeixinJsapiTicket(req.body.app_id);
+                const jsapi_ticket = await fastify.getWeixinJsapiTicket();
                 // 随机值
                 const nonceStr = fnUUID();
                 // 时间戳
