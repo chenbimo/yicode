@@ -18,23 +18,23 @@ export default async (fastify) => {
             type: 'object',
             properties: {
                 url: metaConfig.page_url,
-                gong_zhong_hao: metaConfig.gong_zhong_hao
+                app_id: metaConfig.app_id
             },
-            required: ['url', 'gong_zhong_hao']
+            required: ['url', 'app_id']
         },
         // 返回数据约束
         schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                if (!appConfig.weixinGongZhong[req.body.gong_zhong_hao]) {
+                if (!appConfig.weixinGongZhong[req.body.app_id]) {
                     return {
                         ...httpConfig.FAIL,
                         msg: '公众号appId未配置'
                     };
                 }
                 // 票据
-                const jsapi_ticket = await fastify.getWeixinJsapiTicket(req.body.gong_zhong_hao);
+                const jsapi_ticket = await fastify.getWeixinJsapiTicket(req.body.app_id);
                 // 随机值
                 const nonceStr = fnUUID();
                 // 时间戳

@@ -17,24 +17,24 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                gong_zhong_hao: metaConfig.gong_zhong_hao,
+                app_id: metaConfig.app_id,
                 agent_id: metaConfig.agent_id,
                 from_product: metaConfig.from_product
             },
-            required: ['gong_zhong_hao']
+            required: ['app_id']
         },
         // 返回数据约束
         schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                if (!appConfig.weixinGongZhong[req.body.gong_zhong_hao]) {
+                if (!appConfig.weixinGongZhong[req.body.app_id]) {
                     return {
                         ...httpConfig.FAIL,
                         msg: '公众号appId未配置'
                     };
                 }
-                const weixinAccessToken = await fastify.getWeixinAccessToken(req.body.gong_zhong_hao);
+                const weixinAccessToken = await fastify.getWeixinAccessToken(req.body.app_id);
                 if (!weixinAccessToken) {
                     return {
                         ...httpConfig.FAIL,

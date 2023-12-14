@@ -540,8 +540,8 @@ export const appConfigSchema = {
         weixinGongZhong: {
             title: '公众号列表',
             type: 'object',
-            patternProperties: {
-                '^appId_*': {
+            properties: {
+                '*': {
                     title: '公众号配置',
                     type: 'object',
                     properties: {
