@@ -614,20 +614,6 @@ export const appConfigSchema = {
                     }
                 }
             }
-        },
-        // 自定义扩展配置
-        custom: {
-            title: '自定义配置',
-            type: 'object',
-            properties: {
-                '*': {
-                    title: '任意字段',
-                    type: 'object',
-                    properties: {},
-                    additionalProperties: true
-                }
-            },
-            additionalProperties: true
         }
     },
     required: [
@@ -654,8 +640,7 @@ export const appConfigSchema = {
         'table',
         'menu',
         'weixin',
-        'product',
-        'custom'
+        'product'
     ],
     additionalProperties: false
 };
