@@ -57,7 +57,7 @@
             "default": 0
         },
         "buy_duration": {
-            "type": "string",
+            "type": "integer",
             "comment": "购买时长 (秒）",
             "default": 0
         },
