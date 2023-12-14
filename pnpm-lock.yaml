@@ -616,7 +616,7 @@ importers:
   templates/yiapi:
     dependencies:
       '@yicode/yiapi':
-        specifier: ^3.14.0
+        specifier: ^3.15.0
         version: link:../../packages/yiapi
       lodash-es:
         specifier: ^4.17.21
