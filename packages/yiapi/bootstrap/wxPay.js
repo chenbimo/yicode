@@ -147,7 +147,7 @@ async function plugin(fastify) {
         async request(type, params) {
             try {
                 // 请求路径和方法
-                const { url, method } = httpUrl(type);
+                const { url, method } = this.httpUrl(type);
                 // 时间戳
                 const timestamp = Math.floor(Date.now() / 1000);
                 // 随机字符
