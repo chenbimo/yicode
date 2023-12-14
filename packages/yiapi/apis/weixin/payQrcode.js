@@ -48,24 +48,30 @@ export default async (fastify) => {
                     order_no: orderNo,
                     user_id: req.session.id,
                     buy_product: productInfo?.buy_product || '',
-                    buy_amount: req.body.buy_amount,
-                    origin_price: productInfo?.money || '',
                     buy_duration: req.body.buy_duration,
-                    buy_second: productInfo.duration,
+                    buy_amount: req.body.buy_amount,
                     buy_note: req.body.buy_note || '常规支付'
                 };
                 fastify.log.warn({
                     what: '创建支付二维码',
                     ...params
                 });
+
+                const attachStringify = JSON.stringify(params);
+                if (attachStringify.length > 128) {
+                    return {
+                        ...httpConfig.FAIL,
+                        msg: '微信支付 attach 参数长度不能大于 128 个字符'
+                    };
+                }
                 const wxPay = new fastify.WxPay();
                 const res = await wxPay.request('native', {
                     description: productInfo?.describe || '无描述',
                     out_trade_no: orderNo,
                     amount: {
-                        total: (productInfo.money * req.body.buy_amount).toFixed(0)
+                        total: Number((productInfo.money * req.body.buy_amount).toFixed(0))
                     },
-                    attach: JSON.stringify(params)
+                    attach: attachStringify
                 });
                 if (res.code_url) {
                     return {
@@ -73,12 +79,10 @@ export default async (fastify) => {
                         data: {
                             pay_url: res.code_url,
                             order_no: orderNo,
-                            buy_amount: params.buy_amount,
                             buy_product: params.buy_product,
                             buy_duration: params.buy_duration,
-                            buy_second: params.buy_second,
-                            buy_note: params.buy_note,
-                            origin_price: params.origin_price
+                            buy_amount: params.buy_amount,
+                            buy_note: params.buy_note
                         }
                     };
                 } else {

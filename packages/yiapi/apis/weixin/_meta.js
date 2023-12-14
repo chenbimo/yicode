@@ -18,5 +18,5 @@ export const metaConfig = fnMeta(import.meta.url, {
     buy_duration: fnSchema(null, '时长代号', 'string', 1, 100),
     buy_amount: fnSchema(schemaField.min1, '购买数量'),
     buy_product: fnSchema(null, '支付产品', 'string', null, null, productNames),
-    buy_note: fnSchema(null, '购买备注', 'string', 0, 100, '')
+    buy_note: fnSchema(null, '购买备注', 'string', 0, 20, '')
 });

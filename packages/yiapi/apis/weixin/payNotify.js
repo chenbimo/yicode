@@ -1,7 +1,8 @@
+import { resolve } from 'path';
 import { toDate, addDays, getTime } from 'date-fns';
 
 // 工具函数
-import { fnRoute, fnField, fnSchema, fnIncrUID } from '../../utils/index.js';
+import { fnRoute, fnIncrUID, fnImport } from '../../utils/index.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
@@ -62,6 +63,9 @@ export default async (fastify) => {
                     return '';
                 }
 
+                // 产品信息
+                const productInfo = appConfig.product?.[attach.buy_product]?.[attach.buy_duration];
+
                 // 添加订单数据
                 const insertData = {
                     id: fnIncrUID(),
@@ -70,11 +74,11 @@ export default async (fastify) => {
                     order_no: reply.out_trade_no,
                     transaction_id: reply.transaction_id,
                     buy_product: attach.buy_product,
-                    origin_price: attach.origin_price,
                     pay_total: reply.amount.total,
                     buy_amount: attach.buy_amount,
                     buy_duration: attach.buy_duration,
-                    buy_second: attach.buy_second,
+                    buy_second: productInfo.duration || 0,
+                    origin_price: productInfo.money || 0,
                     buy_note: attach.buy_note
                 };
                 fastify.log.warn({
