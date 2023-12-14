@@ -3,6 +3,7 @@ import { toDate, addDays, getTime } from 'date-fns';
 
 // 工具函数
 import { fnRoute, fnIncrUID, fnImport } from '../../utils/index.js';
+import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
@@ -33,10 +34,10 @@ export default async (fastify) => {
                     return '';
                 }
 
-                const wxPay = new fastify.WxPay();
+                await wxPayinit();
 
                 // 验签失败
-                const isVerifySignPass = wxPay.verifySign(req.headers, req.body);
+                const isVerifySignPass = wxPayVerifySign(req.headers, req.body);
                 if (isVerifySignPass === false) {
                     fastify.log.error({
                         what: '验签失败',
@@ -46,7 +47,7 @@ export default async (fastify) => {
                 }
                 const { callbackConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'callback.js'), 'callbackConfig', {});
                 // 解析数据
-                const reply = JSON.parse(wxPay.decodeCertificate(req.body.resource));
+                const reply = JSON.parse(wxPayDecodeCertificate(req.body.resource));
                 const attach = JSON.parse(reply.attach);
                 const payOrderModel = fastify.mysql.table('pay_order');
 

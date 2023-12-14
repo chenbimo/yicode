@@ -1,6 +1,7 @@
 import got from 'got';
 // 工具函数
 import { fnRoute, fnField, fnSchema, fnIncrUID } from '../../utils/index.js';
+import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
@@ -64,8 +65,9 @@ export default async (fastify) => {
                         msg: '微信支付 attach 参数长度不能大于 128 个字符'
                     };
                 }
-                const wxPay = new fastify.WxPay();
-                const res = await wxPay.request('native', {
+
+                await wxPayinit();
+                const res = await wxPayRequest('native', {
                     description: productInfo?.describe || '无描述',
                     out_trade_no: orderNo,
                     amount: {
