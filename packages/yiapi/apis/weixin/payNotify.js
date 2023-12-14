@@ -52,7 +52,7 @@ export default async (fastify) => {
                 // 解析数据
                 const reply = JSON.parse(wxPayDecodeCertificate(req.body.resource));
                 const attach = JSON.parse(reply.attach);
-                const payOrderModel = fastify.mysql.table('pay_order');
+                const payOrderModel = fastify.mysql.table('sys_pay_order');
 
                 // 判断订单是否存在
                 const payOrderData = await payOrderModel //
