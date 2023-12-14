@@ -1,5 +1,4 @@
 import { tableConfig } from './config/table.js';
-import { customConfig } from './config/custom.js';
 import { cronConfig } from './config/cron.js';
 import { menuConfig } from './config/menu.js';
 import { mysqlConfig } from './config/mysql.js';
@@ -63,8 +62,7 @@ const appConfig = {
         username: redisConfig.username,
         password: redisConfig.password,
         db: redisConfig.db,
-        keyPrefix: redisConfig.keyPrefix,
-        ex: redisConfig.ex
+        keyPrefix: redisConfig.keyPrefix
     },
     // jwt 配置
     jwt: {
@@ -81,7 +79,7 @@ const appConfig = {
         // qq 邮箱
         user: 'demo@qq.com',
         pass: '',
-        from_name: '易接口',
+        from_user: '易接口',
         from_email: 'demo@qq.com'
     },
     // 上传目录
@@ -99,9 +97,7 @@ const appConfig = {
     // 产品配置
     product: productConfig,
     // 微信配置
-    weixin: weixinConfig,
-    // 自定义字段
-    custom: customConfig
+    weixin: weixinConfig
 };
 
 export { appConfig };

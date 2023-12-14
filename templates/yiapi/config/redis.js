@@ -6,8 +6,7 @@ export const redisConfig = {
         username: '',
         password: '',
         db: 0,
-        keyPrefix: 'test:',
-        ex: 86400
+        keyPrefix: 'test:'
     },
     // 开发环境配置
     production: {
@@ -16,7 +15,6 @@ export const redisConfig = {
         username: '',
         password: '123456789123456789',
         db: 0,
-        keyPrefix: 'test:',
-        ex: 86400
+        keyPrefix: 'test:'
     }
 }[process.env.NODE_ENV];
