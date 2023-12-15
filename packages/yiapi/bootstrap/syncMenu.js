@@ -13,7 +13,7 @@ import {
     merge as _merge
 } from 'lodash-es';
 // 工具函数
-import { fnTimestamp, fnKebabCase, fnIncrUID } from '../utils/index.js';
+import { fnKebabCase, fnIncrUID } from '../utils/index.js';
 // 配置文件
 import { appConfig } from '../config/appConfig.js';
 
@@ -243,8 +243,7 @@ async function syncMenuFile(fastify) {
                         value: item.value,
                         pid: parentMenuData.id,
                         sort: item.sort || index2,
-                        is_system: item.is_system || 0,
-                        updated_at: fnTimestamp()
+                        is_system: item.is_system || 0
                     });
                 }
             });

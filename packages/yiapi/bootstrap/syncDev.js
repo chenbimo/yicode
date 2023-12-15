@@ -12,7 +12,6 @@ import {
 // 工具函数
 import {
     //
-    fnTimestamp,
     fnDbInsertData,
     fnDbUpdateData,
     fnSaltMD5,
@@ -98,16 +97,13 @@ async function plugin(fastify, opts) {
                 item.code = key;
                 item.api_ids = '';
                 item.menu_ids = '';
-                item.created_at = fnTimestamp();
-                item.updated_at = fnTimestamp();
                 insertRoleData.push(item);
             } else {
                 updateRoleData.push({
                     code: key,
                     name: item.name,
                     describe: item.describe,
-                    is_system: item.is_system || 0,
-                    updated_at: fnTimestamp()
+                    is_system: item.is_system || 0
                 });
             }
         });

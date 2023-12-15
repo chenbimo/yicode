@@ -14,7 +14,6 @@ import {
 import {
     //
     getApiDirName,
-    fnTimestamp,
     getApiFileName,
     fnAllApiMeta,
     fnAllApiFiles,
@@ -102,14 +101,12 @@ async function syncApiDir(fastify) {
             if (apiDirByValue[apiDirName]) {
                 // 如果数据库中已有此目录，则更新目录
                 apiMeta.id = apiDirByValue[apiDirName].id;
-                apiMeta.updated_at = fnTimestamp();
                 updateApiDirData.push(apiMeta);
             } else {
                 // 如果数据库中没有此目录，则添加目录
                 if (appConfig.tablePrimaryKey === 'time') {
                     apiMeta.id = fnIncrUID();
                 }
-                apiMeta.created_at = fnTimestamp();
                 insertApiDirData.push(apiMeta);
             }
         }
@@ -215,9 +212,7 @@ async function syncApiFile(fastify) {
                     describe: '',
                     pids: '0',
                     level: 1,
-                    is_bool: 1,
-                    created_at: fnTimestamp(),
-                    updated_at: fnTimestamp()
+                    is_bool: 1
                 };
                 if (appConfig.tablePrimaryKey === 'time') {
                     apiParams.id = fnIncrUID();
