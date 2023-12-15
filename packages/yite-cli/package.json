@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yite-cli",
-    "version": "1.37.0",
+    "version": "1.37.1",
     "description": "专注于vite + vue3 的项目开发脚手架",
     "main": "./index.js",
     "exports": {
