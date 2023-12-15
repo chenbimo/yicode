@@ -5,7 +5,7 @@
 </template>
 <script setup>
 // 引入后进行初始化
-let { $GlobalData } = useGlobal();
+const { $GlobalData } = useGlobal();
 
 onMounted(() => {
     window.onresize = onResizeWindow;

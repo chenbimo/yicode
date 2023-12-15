@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Message } from '@arco-design/web-vue';
 
-let $Http = axios.create({
+const $Http = axios.create({
     method: 'POST',
     baseURL: import.meta.env.VITE_HOST,
     timeout: 1000 * 60,
@@ -13,7 +13,7 @@ let $Http = axios.create({
 // 添加请求拦截器
 $Http.interceptors.request.use(
     function (config) {
-        let token = yite.getCookie('token');
+        const token = yite.getCookie('token');
         if (token) {
             config.headers.authorization = 'Bearer ' + token;
         }

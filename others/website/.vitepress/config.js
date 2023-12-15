@@ -26,7 +26,15 @@ export default withMermaid({
                 rel: 'shortcut icon',
                 href: '/favicon.ico'
             }
-        ]
+        ],
+        [
+            'script',
+            {
+                id: 'LA_COLLECT',
+                src: '//sdk.51.la/js-sdk-pro.min.js'
+            }
+        ],
+        ['script', {}, `LA.init({ id: 'KHjnFvbXIAiDwH6M', ck: 'KHjnFvbXIAiDwH6M', autoTrack: true, hashMode: true });`]
     ],
 
     themeConfig: {
