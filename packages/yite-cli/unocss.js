@@ -2,7 +2,7 @@ import path from 'node:path';
 import { fnFileProtocolPath, fnOmit, fnImport } from './utils.js';
 import { cliDir, appDir, srcDir, cacheDir } from './config.js';
 
-// unocss相关配置
+// unocss相关配置2
 import { presetAttributify, presetUno, presetIcons } from 'unocss';
 import transformerVariantGroup from '@unocss/transformer-variant-group';
 import transformerCompileClass from '@unocss/transformer-compile-class';
