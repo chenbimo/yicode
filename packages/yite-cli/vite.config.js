@@ -24,16 +24,15 @@ import { yidashLibNames } from '@yicode/yidash/yidashLibNames.js';
 import { yiteHtml as YiteHtml } from './plugins/html.js';
 import { yiteRouter as YiteRouter } from './plugins/router.js';
 import { yiteI18n as YiteI18n } from './plugins/i18n.js';
-import { cliDir, appDir, srcDir, yicodeDir, cacheDir } from './config.js';
+import { cliDir, appDir, srcDir, cacheDir } from './config.js';
 import { fnFileProtocolPath, fnOmit, fnImport } from './utils.js';
 import { unocssConfig } from './unocss.js';
 
 export default defineConfig(async ({ command, mode }) => {
     // 没有则生成目录
     fs.ensureDirSync(cacheDir);
-    fs.ensureDirSync(yicodeDir);
 
-    const { yiteConfig } = await fnImport(fnFileProtocolPath(path.resolve(yicodeDir, 'yite.config.js')), 'yiteConfig', {});
+    const { yiteConfig } = await fnImport(fnFileProtocolPath(path.resolve(srcDir, 'yite.config.js')), 'yiteConfig', {});
     let pkg = fs.readJsonSync(path.resolve(appDir, 'package.json'), { throws: false }) || {};
 
     let findPort = await portfinder.getPortPromise({ port: 8000, stopPort: 9000 });
