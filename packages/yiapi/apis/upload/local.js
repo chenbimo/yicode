@@ -47,7 +47,7 @@ export default async (fastify) => {
                     }
                 }
             },
-            required: ['file']
+            required: ['file', 'dir']
         },
         // 返回数据约束
         schemaResponse: {},
@@ -63,7 +63,7 @@ export default async (fastify) => {
                 const year = format(new Date(), 'yyyy');
                 const month = format(new Date(), 'MM');
 
-                const dir = req.body.dir.value ? `${req.body.dir.value}/${year}-${month}` : `${year}-${month}`;
+                const dir = `${req.body.dir.value}/${year}-${month}`;
                 const name = `${fnUUID()}${extname}`;
                 const path = `${dir}/${name}`;
 
