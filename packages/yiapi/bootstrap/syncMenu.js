@@ -35,9 +35,21 @@ const menuConfig = _merge(appConfig.menu, {
             }
         }
     },
+    '/internal/banner': {
+        name: '轮播图',
+        sort: 1000,
+        is_system: 1,
+        children: {
+            '/': {
+                name: '轮播列表',
+                is_system: 1,
+                sort: 1
+            }
+        }
+    },
     '/internal/people': {
         name: '人员数据',
-        sort: 1000,
+        sort: 1001,
         is_system: 1,
         children: {
             '/internal/user': {
@@ -54,7 +66,7 @@ const menuConfig = _merge(appConfig.menu, {
     },
     '/internal/permission': {
         name: '权限数据',
-        sort: 1001,
+        sort: 1002,
         children: {
             '/internal/menu': {
                 name: '菜单列表',
@@ -85,7 +97,7 @@ const menuConfig = _merge(appConfig.menu, {
     },
     '/internal/setup': {
         name: '配置数据',
-        sort: 1002,
+        sort: 1003,
         children: {
             '/internal/app-config': {
                 name: '项目配置',
@@ -96,7 +108,7 @@ const menuConfig = _merge(appConfig.menu, {
     },
     '/internal/log': {
         name: '日志数据',
-        sort: 1002,
+        sort: 1004,
         children: {
             '/internal/login-log': {
                 name: '登录日志',
