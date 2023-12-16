@@ -1,5 +1,5 @@
 // 内部模块
-import { resolve } from 'node:path';
+import { resolve, extname as path_extname } from 'node:path';
 import { writeFileSync } from 'node:fs';
 // 外部模块
 import { ensureDirSync, ensureFileSync } from 'fs-extra';
@@ -56,7 +56,7 @@ export default async (fastify) => {
             try {
                 const data = req.body.file;
 
-                const extname = data.mimetype.split('/')[1];
+                const extname = path_extname(data.filename);
 
                 const buffer = await data.toBuffer();
 
@@ -64,7 +64,7 @@ export default async (fastify) => {
                 const month = format(new Date(), 'MM');
 
                 const dir = req.body.dir.value ? `${req.body.dir.value}/${year}-${month}` : `${year}-${month}`;
-                const name = `${fnUUID()}.${extname}`;
+                const name = `${fnUUID()}${extname}`;
                 const path = `${dir}/${name}`;
 
                 const localDir = resolve(sysConfig.appDir, appConfig.upload.dir || 'public', dir);
