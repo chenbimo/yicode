@@ -2,7 +2,7 @@
     <div class="page-banner page-full">
         <div class="page-action">
             <div class="left">
-                <a-button type="primary">添加</a-button>
+                <a-button type="primary" @click="$Method.onDataAction('insertData')">添加</a-button>
             </div>
             <div class="right">
                 <a-input placeholder="请输入搜索关键字" allow-clear></a-input>
@@ -41,6 +41,9 @@
                 <a-pagination v-model:current="$Data.pagination.page" :total="$Data.pagination.total" :default-page-size="$GlobalData.pageLimit" show-total show-jumper @change="$Method.apiSelectData()" />
             </div>
         </div>
+
+        <!-- 编辑数据抽屉 -->
+        <editDataDrawer v-if="$Data.isShow.editDataDrawer" v-model="$Data.isShow.editDataDrawer" :pageConfig="$Data.pageConfig" :actionType="$Data.actionType" :rowData="$Data.rowData" @success="$Method.fnFreshData"></editDataDrawer>
     </div>
 </template>
 
@@ -58,6 +61,11 @@ let $Router = useRouter();
 
 // 数据集
 let $Data = $ref({
+    // 显示和隐藏
+    isShow: {
+        editDataDrawer: false,
+        deleteDataDialog: false
+    },
     pagination: {
         page: 1,
         total: 0
@@ -69,6 +77,35 @@ let $Data = $ref({
 let $Method = {
     async initData() {
         await $Method.apiSelectData();
+    },
+    // 触发数据事件
+    onDataAction(actionType, rowData) {
+        $Data.actionType = actionType;
+        $Data.rowData = rowData;
+
+        // 编辑数据
+        if ($Data.actionType === 'insertData' || $Data.actionType === 'updateData') {
+            $Data.isShow.editDataDrawer = true;
+            return;
+        }
+
+        // 删除数据
+        if ($Data.actionType === 'deleteData') {
+            Modal.confirm({
+                title: '提示',
+                content: '请确认是否删除？',
+                modalClass: 'delete-modal-class',
+                alignCenter: true,
+                onOk() {
+                    $Method.apiDeleteData();
+                }
+            });
+            return;
+        }
+    },
+    // 刷新数据
+    async fnFreshData() {
+        $Method.apiSelectData();
     },
     // 查询用户数据
     async apiSelectData() {
