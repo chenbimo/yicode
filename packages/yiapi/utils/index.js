@@ -153,8 +153,8 @@ export function getApiFileName(file) {
 
 // 获取所有接口文件
 export function fnAllApiFiles() {
-    const coreApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
-    const appApiFiles = fg.sync(['./apis/**/*', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
+    const coreApiFiles = fg.sync(['./apis/**/*', '!**/_*/**', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
+    const appApiFiles = fg.sync(['./apis/**/*', '!**/_*/**', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
 
     const allApiFiles = _concat(coreApiFiles, appApiFiles);
 
@@ -163,8 +163,13 @@ export function fnAllApiFiles() {
 
 // 获取所有接口文件
 export async function fnAllApiMeta() {
-    const coreApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
-    const appApiMetaFiles = fg.sync('./apis/**/_meta.js', { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
+    const coreApiMetaFiles = fg.sync(['./apis/**/_meta.js', '!**/_*/**'], {
+        onlyFiles: true,
+        dot: false,
+        absolute: true,
+        cwd: sysConfig.yiapiDir
+    });
+    const appApiMetaFiles = fg.sync(['./apis/**/_meta.js', '!**/_*/**'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
 
     const allApiMetaFiles = _concat(coreApiMetaFiles, appApiMetaFiles);
 
