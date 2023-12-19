@@ -31,7 +31,7 @@
         "lerna": "^8.0.1",
         "lint-staged": "^15.2.0",
         "prettier": "^3.1.1",
-        "rollup": "^4.9.0",
+        "rollup": "^4.9.1",
         "simple-git-hooks": "^2.9.0"
     },
     "simple-git-hooks": {
@@ -47,6 +47,6 @@
         ]
     },
     "dependencies": {
-        "vitepress": "1.0.0-rc.31"
+        "vitepress": "1.0.0-rc.32"
     }
 }
