@@ -30,5 +30,8 @@
         "@yicode/yiapi": "workspace:^",
         "lodash-es": "^4.17.21"
     },
-    "gitHead": "d0cce96e6fb116e5cb59c5c7351ff9f5a8f50bfb"
+    "gitHead": "d0cce96e6fb116e5cb59c5c7351ff9f5a8f50bfb",
+    "devDependencies": {
+        "nodemon": "^3.0.2"
+    }
 }
