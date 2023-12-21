@@ -23,8 +23,9 @@ export default async (fastify) => {
         schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
+            const trx = await fastify.mysql.transaction();
             try {
-                const newsModel = fastify.mysql.table('news');
+                const newsModel = trx('news');
 
                 const result = await newsModel //
                     .clone()
@@ -34,11 +35,14 @@ export default async (fastify) => {
                         content: req.body.content
                     });
 
+                throw new Error('123');
+                await trx.commit();
                 return {
                     ...httpConfig.INSERT_SUCCESS,
                     data: result
                 };
             } catch (err) {
+                await trx.rollback();
                 fastify.log.error(err);
                 return httpConfig.INSERT_FAIL;
             }
