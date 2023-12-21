@@ -38,7 +38,11 @@ const appConfig = mergeAndConcat(
             '/docs/**',
             '/public/**',
             '/api/admin/login',
-            '/api/tool/tokenCheck'
+            '/api/weixin/loginCheck',
+            '/api/weixin/getConfg',
+            '/api/weixin/loginQrcode',
+            '/api/weixin/message',
+            '/api/weixin/payNotify'
         ],
         // 黑名单接口，不可访问的接口
         blackApis: [],
