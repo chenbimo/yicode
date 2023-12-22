@@ -25,6 +25,12 @@
             "default": 0,
             "index": true
         },
+        "pay_code": {
+            "type": "integer",
+            "comment": "支付代号",
+            "default": 0,
+            "index": true
+        },
         "transaction_id": {
             "type": "string",
             "comment": "业务 ID",

@@ -36,7 +36,7 @@ export default async (fastify) => {
                     });
                     return '';
                 }
-
+                // 支付初始化，必须放在验签前面
                 await wxPayinit();
 
                 // 验签失败
@@ -68,7 +68,7 @@ export default async (fastify) => {
                 }
 
                 // 产品信息
-                const productInfo = find(appConfig.product, { code: attach.product_code });
+                const productInfo = find(appConfig.payment, { code: attach.pay_code });
 
                 // 添加订单数据
                 const insertData = {
@@ -76,7 +76,7 @@ export default async (fastify) => {
                     user_openid: reply.payer.openid,
                     order_no: reply.out_trade_no,
                     transaction_id: reply.transaction_id,
-                    product_code: attach.product_code,
+                    pay_code: attach.pay_code,
                     pay_total: reply.amount.total,
                     buy_amount: attach.buy_amount,
                     buy_duration: productInfo.duration || 0,

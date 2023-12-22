@@ -9,7 +9,7 @@ import { appConfigSchema } from './schema/appConfigSchema.js';
 // 配置文件
 import { appConfig, appConfigOrigin } from './config/appConfig.js';
 import { sysConfig } from './config/sysConfig.js';
-import { fnImport } from './utils/index.js';
+import { fnImport, fnIsUnique } from './utils/index.js';
 import { ajvValidate } from './utils/ajv.js';
 
 // 确保关键目录存在
@@ -44,8 +44,18 @@ if (isEmpty(appConfigOrigin) === true) {
 
 ajvValidate('appConfig.js', appConfigSchema, appConfigOrigin, true);
 
-// 启动前验证
+if (fnIsUnique(Object.values(appConfigOrigin.product)) === false) {
+    console.log(`${logSymbols.warning} 产品代号必须唯一`);
+    process.exit(1);
+}
+
+if (fnIsUnique(appConfigOrigin.payment.map((item) => item.code)) === false) {
+    console.log(`${logSymbols.warning} 支付代号必须唯一`);
+    process.exit(1);
+}
+
 if (appConfig.devPassword === 'dev123456') {
+    // 启动前验证
     console.log(`${logSymbols.warning} 请修改超级管理员密码！！！（位置：appConfig.devPassword）`);
     process.exit(1);
 }

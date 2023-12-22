@@ -3,7 +3,8 @@ import { schemaField } from '../../config/schemaField.js';
 import { appConfig } from '../../config/appConfig.js';
 import { timeConfig } from '../../config/timeConfig.js';
 
-const productCodes = appConfig.product.map((item) => item.code);
+const paymentCodes = appConfig.payment.map((item) => item.code);
+const productCodes = [0, ...Object.values(appConfig.product)];
 
 export const metaConfig = fnMeta(import.meta.url, {
     _name: '用户',
@@ -16,6 +17,7 @@ export const metaConfig = fnMeta(import.meta.url, {
     // 购买相关
     buy_duration: fnSchema(null, '时长代号', 'string', 1, 100),
     buy_amount: fnSchema(schemaField.min1, '购买数量'),
-    product_code: fnSchema(null, '支付产品', 'integer', null, null, productCodes),
+    product_code: fnSchema(null, '支付产品', 'integer', null, null, [0, ...productCodes]),
+    pay_code: fnSchema(null, '支付代号', 'integer', null, null, [0, ...paymentCodes]),
     buy_note: fnSchema(null, '购买备注', 'string', 0, 20, '')
 });

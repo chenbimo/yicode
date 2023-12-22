@@ -19,18 +19,18 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                product_code: metaConfig.product_code,
+                pay_code: metaConfig.pay_code,
                 buy_amount: metaConfig.buy_amount,
                 buy_note: metaConfig.buy_note
             },
-            required: ['buy_amount', 'product_code']
+            required: ['buy_amount', 'pay_code']
         },
         // 返回数据约束
         schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const productInfo = find(appConfig.product, { code: req.body.product_code });
+                const productInfo = find(appConfig.payment, { code: req.body.pay_code });
                 if (!productInfo?.name) {
                     return {
                         ...httpConfig.FAIL,
@@ -48,7 +48,7 @@ export default async (fastify) => {
                 const params = {
                     order_no: orderNo,
                     user_id: req.session.id,
-                    product_code: req.body.product_code,
+                    pay_code: req.body.pay_code,
                     buy_amount: req.body.buy_amount,
                     buy_note: req.body.buy_note || '常规支付'
                 };

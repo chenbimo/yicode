@@ -624,7 +624,8 @@ export const appConfigSchema = {
         'table',
         'menu',
         'weixin',
-        'product'
+        'product',
+        'payment'
     ],
     additionalProperties: false
 };

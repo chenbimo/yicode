@@ -98,7 +98,7 @@ const appConfig = mergeAndConcat(
         // 产品配置
         product: {},
         // 支付配置
-        payment: {}
+        payment: []
     },
     importConfig
 );

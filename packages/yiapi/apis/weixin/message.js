@@ -90,8 +90,8 @@ export default async (fastify) => {
                                 user_id: userData?.id,
                                 scene_value: scene_value,
                                 qrcode_uuid: qrcode_uuid,
-                                agent_id: agent_id,
-                                product_code: product_code
+                                agent_id: agent_id || 0,
+                                product_code: product_code || 0
                             });
                         }
                     } else {
@@ -112,8 +112,8 @@ export default async (fastify) => {
                                 user_id: result?.[0] || 0,
                                 scene_value: scene_value,
                                 qrcode_uuid: qrcode_uuid,
-                                agent_id: agent_id,
-                                product_code: product_code
+                                agent_id: agent_id || 0,
+                                product_code: product_code || 0
                             });
                         }
                     }

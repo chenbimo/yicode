@@ -53,6 +53,11 @@ export function fnKebabCase(value, delimiter = '/') {
     return data;
 }
 
+// 是否有重复值
+export const fnIsUnique = (array) => {
+    return new Set(array).size === array.length;
+};
+
 // 端口是否打开
 export const fnIsPortOpen = (port) => {
     return new Promise((resolve, reject) => {

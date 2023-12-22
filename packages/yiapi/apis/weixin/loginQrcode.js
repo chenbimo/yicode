@@ -20,7 +20,7 @@ export default async (fastify) => {
                 agent_id: metaConfig.agent_id,
                 product_code: metaConfig.product_code
             },
-            required: []
+            required: ['agent_id', 'product_code']
         },
         // 返回数据约束
         schemaResponse: {},
