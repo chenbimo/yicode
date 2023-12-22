@@ -98,7 +98,7 @@ export default async (fastify) => {
                     insertData.id = result?.[0] || 0;
                 }
 
-                if (isFunction(callbackConfig.weixinMessage)) {
+                if (isFunction(callbackConfig.weixinPayNotify)) {
                     callbackConfig.weixinPayNotify(fastify, insertData);
                 }
 
