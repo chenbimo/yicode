@@ -37,6 +37,7 @@ const appConfig = mergeAndConcat(
             '/favicon.*',
             '/docs/**',
             '/public/**',
+            '/api/tool/tokenCheck',
             '/api/admin/login',
             '/api/weixin/loginCheck',
             '/api/weixin/getConfg',
