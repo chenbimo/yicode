@@ -32,7 +32,7 @@ export default defineConfig(async ({ command, mode }) => {
     // 没有则生成目录
     fs.ensureDirSync(cacheDir);
 
-    const { yiteConfig } = await fnImport(fnFileProtocolPath(path.resolve(srcDir, 'yite.config.js')), 'yiteConfig', {});
+    const { yiteConfig } = await fnImport(fnFileProtocolPath(path.resolve(appDir, 'yite.config.js')), 'yiteConfig', {});
     let pkg = fs.readJsonSync(path.resolve(appDir, 'package.json'), { throws: false }) || {};
 
     let findPort = await portfinder.getPortPromise({ port: 8000, stopPort: 9000 });
