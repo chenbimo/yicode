@@ -4,6 +4,7 @@ import { menuConfig } from './config/menu.js';
 import { mysqlConfig } from './config/mysql.js';
 import { redisConfig } from './config/redis.js';
 import { productConfig } from './config/product.js';
+import { paymentConfig } from './config/payment.js';
 import { weixinConfig } from './config/weixin.js';
 
 // 默认配置
@@ -97,6 +98,8 @@ const appConfig = {
     menu: menuConfig,
     // 产品配置
     product: productConfig,
+    // 支付配置
+    payment: paymentConfig,
     // 微信配置
     weixin: weixinConfig
 };
