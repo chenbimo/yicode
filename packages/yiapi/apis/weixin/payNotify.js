@@ -69,6 +69,7 @@ export default async (fastify) => {
 
                 // 产品信息
                 const paymentInfo = find(appConfig.payment, { code: attach.pay_code });
+                fastify.log.warn({ msg: '产品信息', ...paymentInfo });
 
                 // 添加订单数据
                 const insertData = {
@@ -79,7 +80,7 @@ export default async (fastify) => {
                     pay_code: attach.pay_code,
                     pay_total: reply.amount.total,
                     buy_amount: attach.buy_amount,
-                    product_code: paymentInfo.product_code || 0,
+                    product_code: paymentInfo.product || 0,
                     buy_duration: paymentInfo.duration || 0,
                     origin_price: paymentInfo.money || 0,
                     buy_note: attach.buy_note
