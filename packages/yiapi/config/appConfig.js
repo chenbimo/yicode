@@ -96,7 +96,9 @@ const appConfig = mergeAndConcat(
         // 微信配置
         weixin: {},
         // 产品配置
-        product: {}
+        product: {},
+        // 支付配置
+        payment: {}
     },
     importConfig
 );

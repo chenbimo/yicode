@@ -548,6 +548,17 @@ export const appConfigSchema = {
         // 产品配置
         product: {
             title: '产品配置',
+            type: 'object',
+            properties: {
+                '*': {
+                    type: 'integer',
+                    minimum: 1
+                }
+            }
+        },
+        // 支付配置
+        payment: {
+            title: '支付配置',
             type: 'array',
             items: {
                 type: 'object',
@@ -560,26 +571,32 @@ export const appConfigSchema = {
                         maxLength: 20
                     },
                     // 产品代号
+                    product: {
+                        title: '产品代号',
+                        type: 'integer',
+                        minimum: 1
+                    },
+                    // 支付代号
                     code: {
-                        title: '产品名代号',
+                        title: '支付代号',
                         type: 'integer',
                         minimum: 1
                     },
                     // 时长 0=永久 非0=秒
                     duration: {
-                        title: '产品时间（秒）',
+                        title: '购买时间（秒）',
                         type: 'integer',
                         minimum: 0
                     },
                     // 价格 分
                     money: {
-                        title: '产品价格（分）',
+                        title: '购买价格（分）',
                         type: 'integer',
                         minimum: 1
                     }
                 },
                 additionalProperties: false,
-                required: ['name', 'code', 'duration', 'money']
+                required: ['name', 'product', 'code', 'duration', 'money']
             }
         }
     },
