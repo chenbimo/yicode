@@ -31,7 +31,7 @@
         "@arco-design/web-vue": "^2.53.3",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.2",
-        "date-fns": "^3.0.5",
+        "date-fns": "^3.0.6",
         "js-md5": "^0.8.3",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.7",
