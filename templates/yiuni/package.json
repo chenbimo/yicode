@@ -36,7 +36,7 @@
         "luch-request": "^3.1.1",
         "mp-html": "^2.4.2",
         "pinia": "2.0.33",
-        "vue": "^3.4.1",
+        "vue": "^3.4.3",
         "vue-i18n": "^9.8.0"
     },
     "devDependencies": {
@@ -44,7 +44,7 @@
         "@dcloudio/uni-cli-shared": "3.0.0-3090520231028001",
         "@dcloudio/uni-stacktracey": "3.0.0-3090520231028001",
         "@dcloudio/vite-plugin-uni": "3.0.0-3090520231028001",
-        "@vue/runtime-core": "^3.4.1",
+        "@vue/runtime-core": "^3.4.3",
         "lint-staged": "^15.2.0",
         "prettier": "^3.1.1",
         "sass": "^1.69.6",

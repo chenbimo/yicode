@@ -65,7 +65,7 @@
         "micromatch": "^4.0.5",
         "mysql2": "^3.6.5",
         "nanoid": "^5.0.4",
-        "nodemailer": "^6.9.7",
+        "nodemailer": "^6.9.8",
         "ora": "^8.0.1",
         "winston": "^3.11.0",
         "winston-daily-rotate-file": "^4.7.1"
