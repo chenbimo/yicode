@@ -26,12 +26,12 @@
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
-        "@commitlint/cli": "^18.4.3",
+        "@commitlint/cli": "^18.4.4",
         "@yicode/commitlint": "workspace:*",
-        "lerna": "^8.0.1",
+        "lerna": "^8.0.2",
         "lint-staged": "^15.2.0",
         "prettier": "^3.1.1",
-        "rollup": "^4.9.2",
+        "rollup": "^4.9.3",
         "simple-git-hooks": "^2.9.0"
     },
     "simple-git-hooks": {
@@ -47,6 +47,6 @@
         ]
     },
     "dependencies": {
-        "vitepress": "1.0.0-rc.34"
+        "vitepress": "1.0.0-rc.35"
     }
 }
