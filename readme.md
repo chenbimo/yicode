@@ -55,7 +55,6 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 
 -   **@yicode/base-template**（基本且完整的 `vue3` 项目开发模板）
 -   **@yicode/yidocs-template**（具备自动化侧边栏和导航栏的 `vitepress` 文档项目模板）
--   **@yicode/uniapp-template**（具备最新的依赖和项目组织的`uniapp vue3`项目模板）
 -   **@yicode/admin-template**（`arco-design + vue3` 研发的后台管理模板）
 -   **@yicode/yiapi-template**（自用，`yiapi` 接口开发项目模板）
 
