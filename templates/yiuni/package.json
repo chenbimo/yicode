@@ -28,7 +28,7 @@
         "@dcloudio/uni-components": "3.0.0-3090520231028001",
         "@dcloudio/uni-h5": "3.0.0-3090520231028001",
         "@dcloudio/uni-ui": "^1.4.28",
-        "@vue-macros/reactivity-transform": "^0.4.1",
+        "@vue-macros/reactivity-transform": "^0.4.2",
         "@vueuse/core": "^10.7.1",
         "date-fns": "^3.1.0",
         "js-md5": "^0.8.3",
@@ -37,10 +37,10 @@
         "mp-html": "^2.4.2",
         "pinia": "2.0.33",
         "vue": "^3.4.5",
-        "vue-i18n": "^9.8.0"
+        "vue-i18n": "^9.9.0"
     },
     "devDependencies": {
-        "@dcloudio/types": "^3.4.5",
+        "@dcloudio/types": "^3.4.6",
         "@dcloudio/uni-cli-shared": "3.0.0-3090520231028001",
         "@dcloudio/uni-stacktracey": "3.0.0-3090520231028001",
         "@dcloudio/vite-plugin-uni": "3.0.0-3090520231028001",

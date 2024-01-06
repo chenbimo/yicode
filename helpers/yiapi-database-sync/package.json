@@ -1,0 +1,40 @@
+{
+    "name": "@yicode/yiapi-database-sync",
+    "version": "1.0.2",
+    "description": "yiapi（易接口） - 数据库表同步工具",
+    "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    },
+    "exports": {
+        ".": "./index.js"
+    },
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "keywords": [
+        "fastify",
+        "nodejs",
+        "api",
+        "yiapi"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "dependencies": {
+        "colorette": "^2.0.20",
+        "fast-glob": "^3.3.2",
+        "got": "^14.0.0",
+        "inquirer": "^9.2.12",
+        "knex": "^3.1.0",
+        "knex-schema-inspector": "^3.1.0",
+        "lodash-es": "^4.17.21",
+        "log-symbols": "^6.0.0"
+    },
+    "gitHead": "d0cce96e6fb116e5cb59c5c7351ff9f5a8f50bfb"
+}
