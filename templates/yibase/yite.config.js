@@ -1,8 +1,6 @@
+import { vitePluginForArco } from '@arco-plugins/vite-vue';
 export const yiteConfig = {
-    // eslint 参数
-    eslint: {},
-    viteZip: {},
-    chunkSplit: {},
+    devtool: true,
     // 自动导入解析
     autoImport: {
         resolvers: [
@@ -41,8 +39,14 @@ export const yiteConfig = {
                 //
                 'lodash-es',
                 'vue-i18n',
-                'axios'
+                'axios',
+                '@arco-design/web-vue'
             ]
-        }
+        },
+        plugins: [
+            vitePluginForArco({
+                style: 'css'
+            })
+        ]
     }
 };

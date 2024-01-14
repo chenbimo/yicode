@@ -1,13 +1,15 @@
 import path from 'node:path';
-import { defineConfig } from 'vite';
+import { defineConfig as defineViteConfig } from 'vite';
 import viteVue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
-// import { visualizer as Visualizer } from 'rollup-plugin-visualizer';
+// import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import logSymbols from 'log-symbols';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
-import fs from 'fs-extra';
+import { ensureDirSync, readJsonSync } from 'fs-extra/esm';
 import portfinder from 'portfinder';
 
 import { mergeAndConcat } from 'merge-anything';
@@ -15,28 +17,31 @@ import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
-// import VueDevTools from 'vite-plugin-vue-devtools';
+import VueDevTools from 'vite-plugin-vue-devtools';
 import { defineConfig as defineUnocssConfig } from 'unocss';
 // import Markdown from 'vite-plugin-md';
-// 2
 import { yidashLibNames } from '@yicode/yidash/yidashLibNames.js';
 
 // 内部文件
-import { yiteHtml as YiteHtml } from './plugins/html.js';
-import { yiteRouter as YiteRouter } from './plugins/router.js';
-import { yiteI18n as YiteI18n } from './plugins/i18n.js';
+import { yiteRouter } from './plugins/router.js';
+import { yiteI18n } from './plugins/i18n.js';
 import { cliDir, appDir, srcDir, cacheDir } from './config.js';
 import { fnFileProtocolPath, fnOmit, fnImport } from './utils.js';
 import { unocssConfig } from './unocss.js';
 
-export default defineConfig(async ({ command, mode }) => {
+export default defineViteConfig(async ({ command, mode }) => {
     // 没有则生成目录
-    fs.ensureDirSync(cacheDir);
+    ensureDirSync(cacheDir);
 
     const { yiteConfig } = await fnImport(fnFileProtocolPath(path.resolve(appDir, 'yite.config.js')), 'yiteConfig', {});
-    let pkg = fs.readJsonSync(path.resolve(appDir, 'package.json'), { throws: false }) || {};
+    if (!yiteConfig.viteConfig) {
+        console.log(`${logSymbols.error} 请确认是否存在 yite.config.js 文件`);
+        process.exit();
+    }
 
-    let findPort = await portfinder.getPortPromise({ port: 8000, stopPort: 9000 });
+    const pkg = readJsonSync(path.resolve(appDir, 'package.json'), { throws: false }) || {};
+
+    const findPort = await portfinder.getPortPromise({ port: 8000, stopPort: 9000 });
 
     // 每个项目依赖包进行分割
     // let splitDependencies = {};
@@ -48,16 +53,16 @@ export default defineConfig(async ({ command, mode }) => {
     //     }
     // }
 
-    // vue 插件
-    let viteVueConfig = {
-        include: [/\.vue$/, /\.md$/],
-        ...(yiteConfig?.pluginsConfig?.vue || {})
-    };
-
     // 自动导入插件
-    let autoImportConfig = mergeAndConcat(
+    const autoImportConfig = mergeAndConcat(
         {
-            include: [/\.[tj]sx?$/, /\.vue$/, /\.vue\?vue/, /\.md$/],
+            include: [
+                //
+                /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+                /\.vue$/,
+                /\.vue\?vue/, // .vue
+                /\.md$/ // .md
+            ],
             imports: [
                 'vue',
                 {
@@ -114,16 +119,25 @@ export default defineConfig(async ({ command, mode }) => {
     );
 
     // 自动导入组件
-    let componentsConfig = {
-        dirs: [
-            //
-            path.resolve(srcDir, 'components')
-        ],
-        dts: '.cache/components.d.ts',
-        version: 3,
-        directoryAsNamespace: false,
-        resolvers: [IconsResolver()]
-    };
+    const componentsConfig = mergeAndConcat(
+        {
+            dirs: [
+                //
+                path.resolve(srcDir, 'components')
+            ],
+            dts: '.cache/components.d.ts',
+            version: 3,
+            directoryAsNamespace: true,
+            resolvers: [IconsResolver()]
+        },
+        fnOmit(yiteConfig?.autoComponent || {}, ['resolvers']),
+        {
+            resolvers:
+                yiteConfig?.autoComponent?.resolvers?.map((item) => {
+                    return ComponentResolvers[item.name](item.options);
+                }) || []
+        }
+    );
 
     // 代码分割
     // let chunkSplitConfig = {
@@ -137,72 +151,28 @@ export default defineConfig(async ({ command, mode }) => {
     // customSplitting: Object.assign(splitDependencies, yiteConfig?.chunkSplit || {})
     // };
 
-    // zip 压缩
-    // let zipPlugin = {
-    //     folderPath: path.resolve(appDir, 'dist'),
-    //     outPath: cacheDir,
-    //     zipName: yiteConfig?.viteZip?.zipName || 'dist.zip',
-    //     enabled: mode === 'production' ? true : false
-    // };
-
-    // 可视化报告
-    // let visualizerConfig = {
-    //     open: false,
-    //     brotliSize: true,
-    //     filename: '.cache/buildReport.html'
-    // };
-
-    // 打包入口配置
-    let yiteHtmlConfig = {};
-
-    // 正式环境下，才启用自动解析，避免页面重载
-    if (mode === 'production') {
-        // 自动导入方法，不需要按需，只要组件按需
-        // autoImportConfig = mergeAndConcat(
-        //     //
-        //     autoImportConfig,
-        //     fnOmit(yiteConfig?.autoImport || {}, ['resolvers']),
-        //     {
-        //         resolvers: yiteConfig?.autoImport?.resolvers?.map((item) => ComponentResolvers[item.name](item.options)) || []
-        //     }
-        // );
-
-        // 自动导入组件
-        componentsConfig = mergeAndConcat(
-            //
-            componentsConfig,
-            fnOmit(yiteConfig?.autoComponent || {}, ['resolvers']),
-            {
-                resolvers:
-                    yiteConfig?.autoComponent?.resolvers?.map((item) => {
-                        return ComponentResolvers[item.name](item.options);
-                    }) || []
-            }
-        );
-    }
-
-    let iconsConfig = {
-        autoInstall: false
-    };
-
-    // vue devtool
-    let vueDevtoolConfig = {};
-
-    let yiteRouterConfig = {};
-    let yiteI18nConfig = {};
-
     // 插件列表
     let allPlugins = [];
-    allPlugins.push(YiteHtml(yiteHtmlConfig));
-    // allPlugins.push(Markdown());
-    allPlugins.push(YiteRouter(yiteRouterConfig));
-    allPlugins.push(YiteI18n(yiteI18nConfig));
+
+    // allPlugins.push(Markdown()) ;
+    allPlugins.push(yiteRouter({}));
+    allPlugins.push(yiteI18n({}));
     allPlugins.push(ReactivityTransform());
     allPlugins.push(Unocss(defineUnocssConfig(unocssConfig)));
-    allPlugins.push(Icons(iconsConfig));
-    // if (yiteConfig?.devtool === true) {
-    //     allPlugins.push(VueDevTools(vueDevtoolConfig));
-    // }
+    allPlugins.push(
+        Icons({
+            autoInstall: true
+        })
+    );
+    // allPlugins.push(
+    //     nodePolyfills({
+    //         include: [],
+    //         exclude: [],
+    //         globals: {},
+    //         overrides: {},
+    //         protocolImports: true
+    //     })
+    // );
 
     allPlugins.push(Components(componentsConfig));
     allPlugins.push(AutoImport(autoImportConfig));
@@ -210,10 +180,24 @@ export default defineConfig(async ({ command, mode }) => {
     // 默认不使用二维码，多个网卡情况下会很乱
     // allPlugins.push(YiteQrcode());
     // allPlugins.push(ZipFile(zipPlugin));
-    // allPlugins.push(Visualizer(visualizerConfig));
-    allPlugins.push(viteVue(viteVueConfig));
+    allPlugins.push(
+        visualizer({
+            filename: '.cache/stats.html',
+            title: pkg?.name || '编译可视化'
+        })
+    );
+    allPlugins.push(
+        viteVue({
+            include: [/\.vue$/, /\.md$/],
+            ...(yiteConfig?.pluginsConfig?.vue || {})
+        })
+    );
 
-    let viteConfig = mergeAndConcat(
+    if (yiteConfig?.devtool === true) {
+        allPlugins.push(VueDevTools({}));
+    }
+
+    const viteConfig = mergeAndConcat(
         {
             plugins: allPlugins,
             css: {

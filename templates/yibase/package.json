@@ -28,6 +28,7 @@
     "homepage": "https://yicode.tech",
     "dependencies": {
         "@arco-design/web-vue": "^2.54.2",
+        "@arco-plugins/vite-vue": "^1.4.5",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.5",
         "date-fns": "^3.2.0",
