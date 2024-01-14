@@ -4,7 +4,6 @@ import viteVue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
-// import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import logSymbols from 'log-symbols';
 import { visualizer } from 'rollup-plugin-visualizer';
 
@@ -164,15 +163,6 @@ export default defineViteConfig(async ({ command, mode }) => {
             autoInstall: true
         })
     );
-    // allPlugins.push(
-    //     nodePolyfills({
-    //         include: [],
-    //         exclude: [],
-    //         globals: {},
-    //         overrides: {},
-    //         protocolImports: true
-    //     })
-    // );
 
     allPlugins.push(Components(componentsConfig));
     allPlugins.push(AutoImport(autoImportConfig));
