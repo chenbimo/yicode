@@ -189,7 +189,12 @@ export default defineViteConfig(async ({ command, mode }) => {
     }
 
     if (mode === 'production' && yiteConfig?.imagemin === true) {
-        allPlugins.push(imagemin({}));
+        allPlugins.push(
+            imagemin({
+                mode: 'sharp',
+                beforeBundle: true
+            })
+        );
     }
 
     const viteConfig = mergeAndConcat(
