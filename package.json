@@ -27,7 +27,7 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
         "@commitlint/cli": "^18.4.4",
-        "@yicode/commitlint": "workspace:*",
+        "@yicode/commit-lint": "workspace:*",
         "lerna": "^8.0.2",
         "lint-staged": "^15.2.0",
         "prettier": "^3.2.2",
@@ -43,7 +43,7 @@
     },
     "commitlint": {
         "extends": [
-            "@yicode/commitlint"
+            "@yicode/commit-lint"
         ]
     }
 }

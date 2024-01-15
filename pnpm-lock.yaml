@@ -11,9 +11,9 @@ importers:
       '@commitlint/cli':
         specifier: ^18.4.4
         version: 18.4.4(@types/node@20.11.0)(typescript@5.3.3)
-      '@yicode/commitlint':
+      '@yicode/commit-lint':
         specifier: workspace:*
-        version: link:helpers/commitlint
+        version: link:helpers/commitLint
       lerna:
         specifier: ^8.0.2
         version: 8.0.2
@@ -30,9 +30,9 @@ importers:
         specifier: ^2.9.0
         version: 2.9.0
 
-  helpers/commitlint: {}
+  helpers/commitLint: {}
 
-  helpers/taobaoNpmrc:
+  helpers/taobaoNpmrcBinary:
     dependencies:
       colorette:
         specifier: ^2.0.20
@@ -47,7 +47,7 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
 
-  helpers/yiapi-database-sync:
+  helpers/yiapiDatabaseSync:
     dependencies:
       colorette:
         specifier: ^2.0.20
@@ -74,7 +74,7 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
 
-  helpers/yidocs-auto:
+  helpers/yidocsAuto:
     dependencies:
       fast-glob:
         specifier: ^3.3.2
@@ -387,7 +387,7 @@ importers:
     dependencies:
       '@yicode/yidocs-auto':
         specifier: workspace:*
-        version: link:../../helpers/yidocs-auto
+        version: link:../../helpers/yidocsAuto
       vitepress:
         specifier: 1.0.0-rc.36
         version: 1.0.0-rc.36(@algolia/client-search@4.22.1)(@types/node@20.11.0)(search-insights@2.13.0)(typescript@5.3.3)
@@ -5347,7 +5347,7 @@ packages:
     resolution: {integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       diff-sequences: 29.6.3
       jest-get-type: 29.6.3
       pretty-format: 29.7.0
@@ -6605,7 +6605,7 @@ packages:
       '@yarnpkg/parsers': 3.0.0-rc.46
       '@zkochan/js-yaml': 0.0.6
       axios: 1.6.5
-      chalk: 4.1.0
+      chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-spinners: 2.6.1
       cliui: 8.0.1
