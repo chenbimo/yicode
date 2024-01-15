@@ -192,7 +192,7 @@ export default defineViteConfig(async ({ command, mode }) => {
         allPlugins.push(
             imagemin({
                 mode: 'sharp',
-                beforeBundle: true
+                beforeBundle: false
             })
         );
     }
