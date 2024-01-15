@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yidocs-template",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "description": "yidocs 项目模板",
     "main": "index.js",
     "private": false,
@@ -17,7 +17,7 @@
     "author": "陈随易 <bimostyle@qq.com>",
     "license": "ISC",
     "dependencies": {
-        "@yicode/yidocs-auto": "1.3.28",
+        "@yicode/yidocs-auto": "^1.3.29",
         "vitepress": "1.0.0-rc.36"
     },
     "gitHead": "7a3a87362d798e9cfddcd485781c209ac5a1cc46"
