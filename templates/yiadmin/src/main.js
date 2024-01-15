@@ -9,4 +9,4 @@ app.use($Router);
 app.use($Pinia);
 app.use($I18n);
 
-export { app };
+app.mount('#app');

@@ -1,8 +1,7 @@
+import { vitePluginForArco } from '@arco-plugins/vite-vue';
 export const yiteConfig = {
-    // eslint 参数
-    eslint: {},
-    viteZip: {},
-    chunkSplit: {},
+    devtool: true,
+    imagemin: false,
     // 自动导入解析
     autoImport: {
         resolvers: [
@@ -36,6 +35,11 @@ export const yiteConfig = {
     },
     // webpack 配置
     viteConfig: {
+        plugins: [
+            vitePluginForArco({
+                style: 'css'
+            })
+        ],
         optimizeDeps: {
             include: [
                 //
@@ -47,7 +51,8 @@ export const yiteConfig = {
                 'date-fns',
                 'date-fns/locale',
                 'tiny-cookie',
-                'store2'
+                'store2',
+                '@arco-design/web-vue'
             ]
         }
     }

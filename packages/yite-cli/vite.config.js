@@ -6,6 +6,7 @@ import Components from 'unplugin-vue-components/vite';
 import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
 import logSymbols from 'log-symbols';
 import { visualizer } from 'rollup-plugin-visualizer';
+import imagemin from 'unplugin-imagemin/vite';
 
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import { ensureDirSync, readJsonSync } from 'fs-extra/esm';
@@ -185,6 +186,10 @@ export default defineViteConfig(async ({ command, mode }) => {
 
     if (yiteConfig?.devtool === true) {
         allPlugins.push(VueDevTools({}));
+    }
+
+    if (mode === 'production' && yiteConfig?.imagemin === true) {
+        allPlugins.push(imagemin({}));
     }
 
     const viteConfig = mergeAndConcat(
