@@ -1,0 +1,39 @@
+{
+    "name": "@yicode/tbn",
+    "version": "1.0.0",
+    "description": "淘宝NPM配置二进制下载地址",
+    "type": "module",
+    "bin": {
+        "tbn": "index.js"
+    },
+    "private": false,
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    },
+    "exports": {
+        ".": "./index.js"
+    },
+    "scripts": {
+        "preinstall": "npx only-allow pnpm"
+    },
+    "keywords": [
+        "fastify",
+        "nodejs",
+        "api",
+        "yiapi"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "homepage": "https://yicode.tech",
+    "dependencies": {
+        "colorette": "^2.0.20",
+        "fs-extra": "^11.2.0",
+        "ini": "^4.1.1",
+        "log-symbols": "^6.0.0"
+    },
+    "gitHead": "d0cce96e6fb116e5cb59c5c7351ff9f5a8f50bfb"
+}
