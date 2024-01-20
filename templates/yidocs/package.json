@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yidocs-template",
-    "version": "1.0.17",
+    "version": "1.0.18",
     "description": "yidocs 项目模板",
     "main": "index.js",
     "private": false,
