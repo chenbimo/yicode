@@ -27,21 +27,21 @@
     },
     "homepage": "https://yicode.tech",
     "dependencies": {
-        "@arco-design/web-vue": "^2.54.2",
+        "@arco-design/web-vue": "^2.54.3",
         "@arco-plugins/vite-vue": "^1.4.5",
-        "@yicode/yidash": "3.6.8",
+        "@yicode/yidash": "workspace:*",
         "axios": "^1.6.5",
         "date-fns": "^3.2.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.7",
-        "sass": "^1.69.7",
+        "sass": "^1.70.0",
         "store2": "^2.14.2",
-        "vue": "^3.4.13",
+        "vue": "^3.4.15",
         "vue-i18n": "^9.9.0",
         "vue-router": "^4.2.5"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "^2.1.2"
+        "@yicode/yite-cli": "workspace:^"
     },
     "gitHead": "7a3a87362d798e9cfddcd485781c209ac5a1cc46"
 }
