@@ -15,7 +15,7 @@
     "main": "index.js",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "r": "bumpp -r --commit='发布版本: 发布版本' --no-verify --no-tag"
+        "r": "lerna publish"
     },
     "keywords": [
         "yicode",
@@ -48,8 +48,5 @@
         "extends": [
             "@yicode/commit-lint"
         ]
-    },
-    "dependencies": {
-        "bumpp": "^9.3.0"
     }
 }
