@@ -17,9 +17,13 @@ const taobaoMirror = 'https://npmmirror.com/mirrors/';
 
 // 包映射
 const packageMap = {
-    SHARP_BINARY_HOST: `${taobaoMirror}sharp`,
-    SHARP_LIBVIPS_BINARY_HOST: `${taobaoMirror}sharp-libvips`,
-    CHROMEDRIVER_CDNURL: `${taobaoMirror}chromedriver`
+    SHARP_BINARY_HOST: `${taobaoMirror}sharp/`,
+    SHARP_LIBVIPS_BINARY_HOST: `${taobaoMirror}sharp-libvips/`,
+    CHROMEDRIVER_CDNURL: `${taobaoMirror}chromedriver/`,
+    ELECTRON_MIRROR: `${taobaoMirror}electron/`,
+    ELECTRON_CUSTOM_DIR: `{{ version }}`,
+    ELECTRON_SKIP_BINARY_DOWNLOAD: 1,
+    SASS_BINARY_SITE: `${taobaoMirror}node-sass`
 };
 
 // 获取当前npmrc配置
