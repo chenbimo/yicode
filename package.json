@@ -12,7 +12,7 @@
     "main": "index.js",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "r": "bumpp -r"
+        "r": "bumpp"
     },
     "keywords": [
         "yicode",
