@@ -1,6 +1,6 @@
 {
     "name": "@yicode/tbn",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "淘宝NPM配置二进制下载地址",
     "type": "module",
     "bin": {
