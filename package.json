@@ -3,6 +3,9 @@
     "version": "0.0.0",
     "private": true,
     "type": "module",
+    "publishConfig": {
+        "access": "restricted"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/chenbimo/yicode.git"
@@ -12,7 +15,7 @@
     "main": "index.js",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "r": "bumpp"
+        "r": "bumpp -r --commit='发布版本: 发布版本' --no-verify --no-tag"
     },
     "keywords": [
         "yicode",
