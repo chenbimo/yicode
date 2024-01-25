@@ -18,7 +18,7 @@
     "license": "ISC",
     "dependencies": {
         "@yicode/yidocs-auto": "workspace:*",
-        "vitepress": "1.0.0-rc.39"
+        "vitepress": "1.0.0-rc.40"
     },
     "gitHead": "7a3a87362d798e9cfddcd485781c209ac5a1cc46"
 }
