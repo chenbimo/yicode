@@ -208,6 +208,9 @@ importers:
 
   packages/yite-cli:
     dependencies:
+      '@iconify/json':
+        specifier: ^2.2.175
+        version: 2.2.175
       '@unocss/transformer-compile-class':
         specifier: ^0.58.4
         version: 0.58.4
@@ -1545,6 +1548,13 @@ packages:
     resolution: {integrity: sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==}
     engines: {node: '>=6.9.0'}
     dev: true
+
+  /@iconify/json@2.2.175:
+    resolution: {integrity: sha512-/Ds/BSUv4++rTf0+KoGXHKSapCRXBqqSVG3h2Sci3jEgWxLpgfCZ4bOjOWGa5i+tURgde6VYOaTaX8u0xDnoAw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+      pathe: 1.1.2
+    dev: false
 
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
