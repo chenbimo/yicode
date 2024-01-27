@@ -37,6 +37,7 @@
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
     "dependencies": {
+        "@iconify-json/tabler": "^1.1.104",
         "@iconify/json": "^2.2.175",
         "@unocss/transformer-compile-class": "^0.58.4",
         "@unocss/transformer-directives": "^0.58.4",

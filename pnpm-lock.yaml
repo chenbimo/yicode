@@ -208,6 +208,9 @@ importers:
 
   packages/yite-cli:
     dependencies:
+      '@iconify-json/tabler':
+        specifier: ^1.1.104
+        version: 1.1.104
       '@iconify/json':
         specifier: ^2.2.175
         version: 2.2.175
@@ -1548,6 +1551,12 @@ packages:
     resolution: {integrity: sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==}
     engines: {node: '>=6.9.0'}
     dev: true
+
+  /@iconify-json/tabler@1.1.104:
+    resolution: {integrity: sha512-wULNz6HmRZSOUansZl57uI9PkE98QlkplIpalBEez56RtJ2Ygi30JqFNG+eSBRA8dYcYJG9TPNg6fcOV3TZYpA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
 
   /@iconify/json@2.2.175:
     resolution: {integrity: sha512-/Ds/BSUv4++rTf0+KoGXHKSapCRXBqqSVG3h2Sci3jEgWxLpgfCZ4bOjOWGa5i+tURgde6VYOaTaX8u0xDnoAw==}
