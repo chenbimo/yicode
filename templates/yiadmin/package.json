@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiadmin-template",
-    "version": "1.1.8",
+    "version": "1.1.9",
     "description": "前后分离的 vue3 + vite + yite-cli 后台管理模板",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
