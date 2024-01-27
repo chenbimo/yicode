@@ -161,7 +161,7 @@ export default defineViteConfig(async ({ command, mode }) => {
     allPlugins.push(Unocss(defineUnocssConfig(unocssConfig)));
     allPlugins.push(
         Icons({
-            autoInstall: false
+            compiler: 'vue3'
         })
     );
 
