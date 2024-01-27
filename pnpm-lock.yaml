@@ -208,12 +208,6 @@ importers:
 
   packages/yite-cli:
     dependencies:
-      '@iconify-json/tabler':
-        specifier: ^1.1.104
-        version: 1.1.104
-      '@iconify/json':
-        specifier: ^2.2.175
-        version: 2.2.175
       '@unocss/transformer-compile-class':
         specifier: ^0.58.4
         version: 0.58.4
@@ -298,6 +292,9 @@ importers:
       '@arco-design/web-vue':
         specifier: ^2.54.3
         version: 2.54.3(vue@3.4.15)
+      '@iconify/json':
+        specifier: ^2.2.175
+        version: 2.2.175
       '@yicode/yidash':
         specifier: workspace:*
         version: link:../../packages/yidash
@@ -357,6 +354,9 @@ importers:
       '@arco-plugins/vite-vue':
         specifier: ^1.4.5
         version: 1.4.5
+      '@iconify/json':
+        specifier: ^2.2.175
+        version: 2.2.175
       '@yicode/yidash':
         specifier: workspace:*
         version: link:../../packages/yidash
@@ -1551,12 +1551,6 @@ packages:
     resolution: {integrity: sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==}
     engines: {node: '>=6.9.0'}
     dev: true
-
-  /@iconify-json/tabler@1.1.104:
-    resolution: {integrity: sha512-wULNz6HmRZSOUansZl57uI9PkE98QlkplIpalBEez56RtJ2Ygi30JqFNG+eSBRA8dYcYJG9TPNg6fcOV3TZYpA==}
-    dependencies:
-      '@iconify/types': 2.0.0
-    dev: false
 
   /@iconify/json@2.2.175:
     resolution: {integrity: sha512-/Ds/BSUv4++rTf0+KoGXHKSapCRXBqqSVG3h2Sci3jEgWxLpgfCZ4bOjOWGa5i+tURgde6VYOaTaX8u0xDnoAw==}
@@ -8762,6 +8756,7 @@ packages:
 
   /tslib@2.6.2:
     resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+    requiresBuild: true
 
   /tuf-js@1.1.7:
     resolution: {integrity: sha512-i3P9Kgw3ytjELUfpuKVDNBJvk4u5bXL6gskv572mcevPbSKCV3zt3djhmlEQ65yERjIbOSncy7U4cQJaB1CBCg==}
