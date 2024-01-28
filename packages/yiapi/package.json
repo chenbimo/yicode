@@ -32,7 +32,7 @@
     "homepage": "https://yicode.tech",
     "dependencies": {
         "@fastify/autoload": "^5.8.0",
-        "@fastify/cors": "^8.5.0",
+        "@fastify/cors": "^9.0.0",
         "@fastify/jwt": "^8.0.0",
         "@fastify/multipart": "^8.1.0",
         "@fastify/rate-limit": "^9.1.0",
@@ -55,7 +55,7 @@
         "fs-extra": "^11.2.0",
         "got": "^14.0.0",
         "http-graceful-shutdown": "^3.1.13",
-        "inquirer": "^9.2.12",
+        "inquirer": "^9.2.13",
         "ioredis": "^5.3.2",
         "knex": "^3.1.0",
         "knex-schema-inspector": "^3.1.0",
