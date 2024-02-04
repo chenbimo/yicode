@@ -28,8 +28,8 @@
     },
     "homepage": "https://yicode.tech",
     "dependencies": {
-        "@arco-design/web-vue": "^2.54.3",
-        "@iconify/json": "^2.2.177",
+        "@arco-design/web-vue": "^2.54.4",
+        "@iconify/json": "^2.2.179",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.7",
         "date-fns": "^3.3.1",
