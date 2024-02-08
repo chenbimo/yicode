@@ -29,7 +29,7 @@
     "homepage": "https://yicode.tech",
     "dependencies": {
         "@arco-design/web-vue": "^2.54.4",
-        "@iconify/json": "^2.2.179",
+        "@iconify/json": "^2.2.181",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.7",
         "date-fns": "^3.3.1",
@@ -38,7 +38,7 @@
         "pinia": "^2.1.7",
         "sass": "^1.70.0",
         "store2": "^2.14.2",
-        "vue": "^3.4.15",
+        "vue": "^3.4.16",
         "vue-i18n": "^9.9.1",
         "vue-router": "^4.2.5"
     },
