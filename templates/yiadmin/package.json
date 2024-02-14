@@ -29,7 +29,7 @@
     "homepage": "https://yicode.tech",
     "dependencies": {
         "@arco-design/web-vue": "^2.54.4",
-        "@iconify/json": "^2.2.182",
+        "@iconify/json": "^2.2.183",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.7",
         "date-fns": "^3.3.1",

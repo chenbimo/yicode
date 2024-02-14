@@ -39,7 +39,7 @@
         "@fastify/routes": "^5.1.0",
         "@fastify/static": "^7.0.1",
         "@fastify/swagger": "^8.14.0",
-        "@fastify/swagger-ui": "^2.1.0",
+        "@fastify/swagger-ui": "^3.0.0",
         "ajv": "^8.12.0",
         "ajv-i18n": "^4.2.0",
         "blueimp-md5": "^2.19.0",
@@ -68,7 +68,7 @@
         "nodemailer": "^6.9.9",
         "ora": "^8.0.1",
         "winston": "^3.11.0",
-        "winston-daily-rotate-file": "^4.7.1"
+        "winston-daily-rotate-file": "^5.0.0"
     },
     "gitHead": "d0cce96e6fb116e5cb59c5c7351ff9f5a8f50bfb"
 }
