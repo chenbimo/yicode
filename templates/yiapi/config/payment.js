@@ -1,4 +1,4 @@
-import { timeConfig } from '@yicode/yiapi/timeConfig.js';
+import { timeConfig } from '@yicode/yiapi/config/timeConfig.js';
 import { productConfig } from './product.js';
 export const paymentConfig = [
     {

@@ -1,5 +1,5 @@
 import { fnSchema, fnMeta } from '@yicode/yiapi/fn.js';
-import { schemaField } from '@yicode/yiapi/schemaField.js';
+import { schemaField } from '@yicode/yiapi/config/schemaField.js';
 
 export const metaConfig = fnMeta(import.meta.url, {
     _name: '资讯新闻',

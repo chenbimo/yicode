@@ -1,5 +1,5 @@
 import { fnRoute, fnField } from '@yicode/yiapi/fn.js';
-import { httpConfig } from '@yicode/yiapi/httpConfig.js';
+import { httpConfig } from '@yicode/yiapi/config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
 export const apiName = '删除资讯';
