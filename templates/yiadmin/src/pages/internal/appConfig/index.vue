@@ -70,12 +70,12 @@ defineOptions({
 });
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 工具集
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     // 页面配置
     pageConfig: {
         name: '项目配置'
@@ -93,7 +93,7 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {},
     // 触发数据事件
     onDataAction(actionType, rowData) {
@@ -119,7 +119,7 @@ let $Method = {
     // 查询用户数据
     async apiSelectData() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/tableConfig/select',
                 data: {
                     page: $Data.pagination.page,

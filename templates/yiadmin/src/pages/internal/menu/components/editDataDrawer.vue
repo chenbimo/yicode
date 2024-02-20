@@ -25,10 +25,10 @@
 // 内部集
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 属性集
-let $Prop = defineProps({
+const $Prop = defineProps({
     pageConfig: {
         type: Object
     },
@@ -46,10 +46,10 @@ let $Prop = defineProps({
 });
 
 // 事件集
-let $Emit = defineEmits(['update:modelValue', 'success']);
+const $Emit = defineEmits(['update:modelValue', 'success']);
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     // 显示和隐藏
     isShow: {
         editDataDrawer: false
@@ -64,7 +64,7 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {
         $Data.isShow.editDataDrawer = $Prop.modelValue;
         $Data.formData = _.merge($Data.formData, $Prop.rowData);
@@ -80,12 +80,12 @@ let $Method = {
     // 编辑
     async apiEditData() {
         try {
-            let url = {
+            const url = {
                 insertData: '/menu/insert',
                 updateData: '/menu/update'
             }[$Prop.actionType];
 
-            let res = await $Http({
+            const res = await $Http({
                 url: url,
                 data: $Data.formData
             });

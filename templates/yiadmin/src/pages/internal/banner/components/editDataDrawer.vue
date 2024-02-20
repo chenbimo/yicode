@@ -91,7 +91,7 @@ const $Method = {
     async onUploadFile(event) {
         try {
             const fileObject = event.target.files[0];
-            let formData = new FormData();
+            const formData = new FormData();
             formData.append('file', fileObject);
             formData.append('dir', 'version');
             const res = await $Http({

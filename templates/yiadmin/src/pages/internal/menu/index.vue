@@ -60,12 +60,12 @@ defineOptions({
 });
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 工具集
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     // 页面配置
     pageConfig: {
         name: '目录'
@@ -86,7 +86,7 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {
         await $Method.apiSelectData();
     },
@@ -140,7 +140,7 @@ let $Method = {
     // 查询用户数据
     async apiSelectData() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/menu/selectAll',
                 data: {
                     page: $Data.pagination.page,
@@ -157,7 +157,7 @@ let $Method = {
     // 删除菜单
     async apiDeleteData() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/menu/delete',
                 data: {
                     id: $Data.rowData.id

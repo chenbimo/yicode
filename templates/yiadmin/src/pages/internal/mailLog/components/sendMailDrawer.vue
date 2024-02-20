@@ -32,20 +32,20 @@
 // 内部集
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 属性集
-let $Prop = defineProps({
+const $Prop = defineProps({
     modelValue: {
         type: Boolean
     }
 });
 
 // 事件集
-let $Emit = defineEmits(['update:modelValue', 'success']);
+const $Emit = defineEmits(['update:modelValue', 'success']);
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     // 显示和隐藏
     isShow: {
         sendMailDrawer: false
@@ -61,7 +61,7 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {
         $Data.isShow.sendMailDrawer = $Prop.modelValue;
     },
@@ -75,7 +75,7 @@ let $Method = {
     // 编辑
     async apiEditData() {
         try {
-            let formData = {
+            const formData = {
                 email_type: $Data.formData.email_type,
                 to_email: $Data.formData.to_email,
                 subject: $Data.formData.subject
@@ -86,7 +86,7 @@ let $Method = {
             if ($Data.formData.email_type === 'verify') {
                 formData.verify_name = $Data.formData.verify_name;
             }
-            let res = await $Http({
+            const res = await $Http({
                 url: '/tool/sendMail',
                 data: formData
             });

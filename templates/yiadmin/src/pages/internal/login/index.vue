@@ -32,7 +32,7 @@
                                 <a-button type="parmary" link>忘记密码</a-button>
                             </div>
                             <div class="right">
-                                <a-button type="primary" size="small" :loading="$Is.logining === true" :disabled="$Is.logining === true" @click="$Method.apiAdminLogin">登录</a-button>
+                                <a-button type="primary" size="small" :loading="$Data.isShow.logining === true" :disabled="$Data.isShow.logining === true" @click="$Method.apiAdminLogin">登录</a-button>
                             </div>
                         </div>
                     </div>
@@ -63,19 +63,17 @@ defineOptions({
 // 外部集
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 实例集
 const $Router = useRouter();
 const $Route = useRoute();
 
-// 状态集
-let $Is = $ref({
-    logining: false
-});
-
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
+    isShow: {
+        logining: false
+    },
     reqParams: {
         keywords: ''
     },
@@ -90,14 +88,14 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     // 初始化数据
     async initData() {},
     // 管理员登录
     async apiAdminLogin() {
         try {
-            $Is.logining = true;
-            let res = await $Http({
+            $Data.isShow.logining = true;
+            const res = await $Http({
                 url: '/admin/login',
                 data: {
                     account: $Data.formData.account,
@@ -122,7 +120,7 @@ let $Method = {
                 content: err.msg || err
             });
         } finally {
-            $Is.logining = false;
+            $Data.isShow.logining = false;
         }
     }
 };

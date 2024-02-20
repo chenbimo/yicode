@@ -58,12 +58,12 @@ defineOptions({
 });
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
-let $Router = useRouter();
-let $Route = useRoute();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const $Router = useRouter();
+const $Route = useRoute();
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     isShow: {
         sideMenu: false
     },
@@ -76,7 +76,7 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {
         await $Method.apiTokenCheck();
         await $Method.apiGetAdminMenus();
@@ -99,7 +99,7 @@ let $Method = {
     // 令牌检测
     async apiTokenCheck() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/tool/tokenCheck',
                 data: {}
             });
@@ -114,7 +114,7 @@ let $Method = {
     // 获取管理员菜单
     async apiGetAdminMenus() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/admin/menu',
                 data: {}
             });

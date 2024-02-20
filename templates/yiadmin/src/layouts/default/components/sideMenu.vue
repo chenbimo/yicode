@@ -11,10 +11,10 @@
 </template>
 <script setup>
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 属性集
-let $Prop = defineProps({
+const $Prop = defineProps({
     openMenuId: {
         type: Number
     },
@@ -30,14 +30,14 @@ let $Prop = defineProps({
 });
 
 // 数据集
-let $Data = $ref({});
+const $Data = $ref({});
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {},
     // 点击菜单项
     onMenuItemClick(id) {
-        let selectedItem = $Prop.menuObject[id];
+        const selectedItem = $Prop.menuObject[id];
         $Router.push(selectedItem.value);
     }
 };

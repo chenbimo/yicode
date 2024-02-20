@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let $Http = axios.create({
+const $Http = axios.create({
     method: 'POST',
     baseURL: import.meta.env.VITE_HOST,
     timeout: 1000 * 60,
@@ -12,7 +12,7 @@ let $Http = axios.create({
 // 添加请求拦截器
 $Http.interceptors.request.use(
     function (config) {
-        let token = $Storage.local.get('token');
+        const token = $Storage.local.get('token');
         if (token) {
             config.headers.authorization = 'Bearer ' + token;
         }

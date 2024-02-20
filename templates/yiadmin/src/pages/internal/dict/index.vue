@@ -60,12 +60,12 @@ defineOptions({
 });
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 工具集
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     // 页面配置
     pageConfig: {
         name: '字典'
@@ -89,7 +89,7 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {
         await $Method.apiSelectCategory();
         if ($Data.formData.category_code) {
@@ -124,7 +124,7 @@ let $Method = {
     // 查询字典分类
     async apiSelectCategory() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/dictCategory/selectAll',
                 data: {}
             });
@@ -142,7 +142,7 @@ let $Method = {
     // 查询用户数据
     async apiSelectData() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/dict/select',
                 data: {
                     page: $Data.pagination.page,

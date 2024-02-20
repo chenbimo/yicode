@@ -9,19 +9,19 @@ defineOptions({
 });
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 工具集
-let $Router = useRouter();
+const $Router = useRouter();
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     // 显示和隐藏
     isShow: {}
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     initData() {}
 };
 

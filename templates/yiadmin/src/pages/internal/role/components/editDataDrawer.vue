@@ -41,10 +41,10 @@
 // 内部集
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 属性集
-let $Prop = defineProps({
+const $Prop = defineProps({
     pageConfig: {
         type: Object
     },
@@ -62,10 +62,10 @@ let $Prop = defineProps({
 });
 
 // 事件集
-let $Emit = defineEmits(['update:modelValue', 'success']);
+const $Emit = defineEmits(['update:modelValue', 'success']);
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     // 显示和隐藏
     isShow: {
         editDataDrawer: false
@@ -99,7 +99,7 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {
         $Data.isShow.editDataDrawer = $Prop.modelValue;
         $Data.formData = Object.assign($Data.formData, $Prop.rowData, {
@@ -125,11 +125,11 @@ let $Method = {
     // 查询所有菜单数据
     async apiSelectAllMenuData() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/menu/selectAll',
                 data: {}
             });
-            let data = res.data.rows.map((item) => {
+            const data = res.data.rows.map((item) => {
                 if ($Data.formData.menu_ids.includes(item.id)) {
                     item.checked = true;
                 } else {
@@ -148,11 +148,11 @@ let $Method = {
     // 查询所有接口数据
     async apiSelectAllApiData() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/api/selectAll',
                 data: {}
             });
-            let data = res.data.rows.map((item) => {
+            const data = res.data.rows.map((item) => {
                 if ($Data.formData.api_ids.includes(item.id)) {
                     item.checked = true;
                 } else {
@@ -171,15 +171,15 @@ let $Method = {
     // 绑定角色权限
     async apiRoleBindPermission() {
         try {
-            let url = {
+            const url = {
                 insertData: '/role/insert',
                 updateData: '/role/update'
             }[$Prop.actionType];
 
-            let menuIds = _.concat($Data.menuCheckedKeys, $Data.menuHalfCheckedKeys);
-            let apiIds = _.concat($Data.apiCheckedKeys, $Data.apiHalfCheckedKeys);
+            const menuIds = _.concat($Data.menuCheckedKeys, $Data.menuHalfCheckedKeys);
+            const apiIds = _.concat($Data.apiCheckedKeys, $Data.apiHalfCheckedKeys);
 
-            let res = await $Http({
+            const res = await $Http({
                 url: url,
                 data: {
                     ...$Data.formData,

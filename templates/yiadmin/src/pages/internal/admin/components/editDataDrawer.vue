@@ -30,10 +30,10 @@
 // 内部集
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 属性集
-let $Prop = defineProps({
+const $Prop = defineProps({
     pageConfig: {
         type: Object
     },
@@ -58,10 +58,10 @@ let $Prop = defineProps({
 });
 
 // 事件集
-let $Emit = defineEmits(['update:modelValue', 'success', 'changeCategory']);
+const $Emit = defineEmits(['update:modelValue', 'success', 'changeCategory']);
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     // 显示和隐藏
     isShow: {
         editDataDrawer: false
@@ -77,7 +77,7 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {
         await $Method.apiSelectAllRole();
         $Data.isShow.editDataDrawer = $Prop.modelValue;
@@ -93,7 +93,7 @@ let $Method = {
     // 查询字典分类
     async apiSelectAllRole() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/role/selectAll',
                 data: {}
             });
@@ -106,12 +106,12 @@ let $Method = {
     // 编辑
     async apiEditData() {
         try {
-            let url = {
+            const url = {
                 insertData: '/admin/insert',
                 updateData: '/admin/update'
             }[$Prop.actionType];
 
-            let res = await $Http({
+            const res = await $Http({
                 url: url,
                 data: $Data.formData
             });

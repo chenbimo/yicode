@@ -49,13 +49,13 @@ defineOptions({
 });
 
 // 全局集
-let { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
+const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
 
 // 工具集
-let $Router = useRouter();
+const $Router = useRouter();
 
 // 数据集
-let $Data = $ref({
+const $Data = $ref({
     pagination: {
         page: 1,
         total: 0
@@ -64,14 +64,14 @@ let $Data = $ref({
 });
 
 // 方法集
-let $Method = {
+const $Method = {
     async initData() {
         await $Method.apiSelectData();
     },
     // 查询用户数据
     async apiSelectData() {
         try {
-            let res = await $Http({
+            const res = await $Http({
                 url: '/user/select',
                 data: {
                     page: $Data.pagination.page,
