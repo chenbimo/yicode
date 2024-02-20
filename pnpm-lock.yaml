@@ -32,6 +32,24 @@ importers:
 
   helpers/commitLint: {}
 
+  helpers/syncUserDatabase:
+    dependencies:
+      colorette:
+        specifier: ^2.0.20
+        version: 2.0.20
+      fast-glob:
+        specifier: ^3.3.2
+        version: 3.3.2
+      knex:
+        specifier: ^3.1.0
+        version: 3.1.0(mysql2@3.9.1)
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      log-symbols:
+        specifier: ^6.0.0
+        version: 6.0.0
+
   helpers/taobaoNpmrcBinary:
     dependencies:
       colorette:
@@ -43,33 +61,6 @@ importers:
       ini:
         specifier: ^4.1.1
         version: 4.1.1
-      log-symbols:
-        specifier: ^6.0.0
-        version: 6.0.0
-
-  helpers/yiapiDatabaseSync:
-    dependencies:
-      colorette:
-        specifier: ^2.0.20
-        version: 2.0.20
-      fast-glob:
-        specifier: ^3.3.2
-        version: 3.3.2
-      got:
-        specifier: ^14.2.0
-        version: 14.2.0
-      inquirer:
-        specifier: ^9.2.15
-        version: 9.2.15
-      knex:
-        specifier: ^3.1.0
-        version: 3.1.0(mysql2@3.9.1)
-      knex-schema-inspector:
-        specifier: ^3.1.0
-        version: 3.1.0
-      lodash-es:
-        specifier: ^4.17.21
-        version: 4.17.21
       log-symbols:
         specifier: ^6.0.0
         version: 6.0.0
@@ -5951,13 +5942,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /knex-schema-inspector@3.1.0:
-    resolution: {integrity: sha512-qEwBs7bDSufTq5bOiT783KS3g340WjidmTKA0Iu3Fxw50Iot1sIeAaQ5mjdKjRhdVwbSy2t/RdRxJqLnh2KWhw==}
-    dependencies:
-      lodash.flatten: 4.4.0
-      lodash.isnil: 4.0.0
-    dev: false
-
   /knex@3.1.0(mysql2@3.9.1):
     resolution: {integrity: sha512-GLoII6hR0c4ti243gMs5/1Rb3B+AjwMOfjYm97pu0FOQa7JH56hgBxYf5WK2525ceSbBY1cjeZ9yk99GPMB6Kw==}
     engines: {node: '>=16'}
@@ -6250,10 +6234,6 @@ packages:
     resolution: {integrity: sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==}
     dev: false
 
-  /lodash.flatten@4.4.0:
-    resolution: {integrity: sha512-C5N2Z3DgnnKr0LOpv/hKCgKdb7ZZwafIrsesve6lmzvZIRZRGaZ/l6Q8+2W7NaT+ZwO3fFlSCzCzrDCFdJfZ4g==}
-    dev: false
-
   /lodash.isarguments@3.1.0:
     resolution: {integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg==}
     dev: false
@@ -6265,10 +6245,6 @@ packages:
   /lodash.ismatch@4.4.0:
     resolution: {integrity: sha512-fPMfXjGQEV9Xsq/8MTSgUf255gawYRbjwMyDbcvDhXgV7enSZA0hynz6vMPnpAb5iONEzBHBPsT+0zes5Z301g==}
     dev: true
-
-  /lodash.isnil@4.0.0:
-    resolution: {integrity: sha512-up2Mzq3545mwVnMhTDMdfoG1OurpA/s5t88JmQX809eH3C8491iu2sfKhTfhQtKY78oPNhiaHJUpT/dUDAAtng==}
-    dev: false
 
   /lodash.isplainobject@4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}

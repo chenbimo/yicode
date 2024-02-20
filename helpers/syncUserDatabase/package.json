@@ -1,7 +1,7 @@
 {
-    "name": "@yicode/yiapi-database-sync",
+    "name": "@yicode/sync-user-database",
     "version": "1.0.10",
-    "description": "yiapi（易接口） - 数据库表同步工具",
+    "description": "yiapi（易接口） - 用户数据库表同步工具",
     "type": "module",
     "private": false,
     "publishConfig": {
@@ -29,10 +29,7 @@
     "dependencies": {
         "colorette": "^2.0.20",
         "fast-glob": "^3.3.2",
-        "got": "^14.2.0",
-        "inquirer": "^9.2.15",
         "knex": "^3.1.0",
-        "knex-schema-inspector": "^3.1.0",
         "lodash-es": "^4.17.21",
         "log-symbols": "^6.0.0"
     },

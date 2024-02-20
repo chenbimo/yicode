@@ -4,7 +4,6 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import Knex from 'knex';
 import fg from 'fast-glob';
-import { SchemaInspector } from 'knex-schema-inspector';
 import logSymbols from 'log-symbols';
 import * as color from 'colorette';
 
@@ -21,7 +20,8 @@ import {
     isString as _isString,
     isArray as _isArray,
     merge as _merge,
-    startsWith as _startsWith
+    startsWith as _startsWith,
+    isEmpty as _isEmpty
 } from 'lodash-es';
 
 let sysConfig = {};
@@ -32,6 +32,8 @@ let fieldType = {};
 let isCheckPass = true;
 // 判断自定义字段是否生效
 let isCustomTablePass = false;
+// 名称限制
+const nameLimit = /^[a-z][a-z_0-9]*$/;
 
 // 不能设置的字段
 const denyFields = [
@@ -39,8 +41,7 @@ const denyFields = [
     'id',
     'created_at',
     'updated_at',
-    'deleted_at',
-    'state'
+    'deleted_at'
 ];
 
 // 文本类型可用的值，
@@ -75,28 +76,14 @@ async function fnGetTableData(allTableName) {
             onlyFiles: true,
             dot: false,
             absolute: true,
-            cwd: sysConfig.yiapiDir
-        });
-        const tableFilesUser = fg.sync(['./tables/*.json', '!**/_*.json'], {
-            onlyFiles: true,
-            dot: false,
-            absolute: true,
             cwd: sysConfig.appDir
         });
-        const tableFileAll = [
-            ...tableFilesSys.map((file) => {
-                return {
-                    prefix: 'sys_',
-                    path: file
-                };
-            }),
-            ...tableFilesUser.map((file) => {
-                return {
-                    prefix: '',
-                    path: file
-                };
-            })
-        ];
+        const tableFileAll = tableFilesSys.map((file) => {
+            return {
+                prefix: '',
+                path: file
+            };
+        });
         const allTableData = [];
 
         for (let i = 0; i < tableFileAll.length; i++) {
@@ -107,7 +94,8 @@ async function fnGetTableData(allTableName) {
 
             const tableName = prefix + _replace(_snakeCase(path.basename(filePath, '.json')), /_(\d+)/gi, '$1');
             // 获取表数据
-            let tableDataItem = await fnRequire(filePath, {}, prefix ? 'core' : 'user');
+            // let { default: tableDataItem } = await fnImport(fileUrl, 'default', { default: {} }, { assert: { type: 'json' } });
+            const tableDataItem = await fnRequire(filePath, {}, 'user');
             // 设置表名称、描述
             tableDataItem.tableName = tableName;
             tableDataItem.tableComment = tableDataItem.name;
@@ -120,14 +108,6 @@ async function fnGetTableData(allTableName) {
             }
             // 使用自带的字段覆盖扩展的字段
             tableDataItem.fields = _merge(appConfig.table[tableName] || {}, tableDataItem.fields);
-            // 校验系统用户表必须有test_field字段，用来避免数据库数据被破坏
-            if (tableName === 'sys_user') {
-                if (appConfig.table[tableName]?.test_field?.type) {
-                    isCustomTablePass = true;
-                } else {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表必须存在 test_field 字段，用于检测自定义字段是否生效，避免同步时删除已有字段`);
-                }
-            }
             // 如果存在表，则创建新表
             if (allTableName.includes(tableDataItem.tableName)) {
                 tableDataItem.tableNewName = tableDataItem.tableName + '_new';
@@ -141,7 +121,7 @@ async function fnGetTableData(allTableName) {
                     isCheckPass = false;
                 }
                 // 规范字段名称
-                if (/^[a-z][a-z_0-9]*$/.test(fieldName) === false) {
+                if (nameLimit.test(fieldName) === false) {
                     console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段名称必须以 ${color.yellowBright('小写字母开头 + [小写字母 | 下划线 | 数字]')}，请检查`);
                     isCheckPass = false;
                 }
@@ -218,19 +198,25 @@ async function fnGetTableData(allTableName) {
         }
         return allTableData;
     } catch (err) {
-        console.log('🚀 ~ file: syncDatabase.js:279 ~ fnCheckTableField ~ err:', err);
+        console.log('🚀 ~ fnGetTableData ~ err:', err);
         isCheckPass = false;
     }
 }
 
 // 同步数据库
-async function syncDatabase(_sysConfig, _appConfig, _fieldType) {
+async function syncUserDatabase() {
     console.log(`${logSymbols.warning} ${color.red('本项目为作者自用，请勿使用！！！')}`);
     console.log(`${logSymbols.warning} ${color.red('本项目为作者自用，请勿使用！！！')}`);
     console.log(`${logSymbols.warning} ${color.red('本项目为作者自用，请勿使用！！！')}`);
     sysConfig = _sysConfig;
     appConfig = _appConfig;
     fieldType = _fieldType;
+    // let isPortOpen = await fnIsPortOpen(3000);
+    // console.log('🚀 ~ file: syncCoreDatabase.js:220 ~ syncCoreDatabase ~ isPortOpen:', isPortOpen);
+    // if (!isPortOpen) {
+    //     console.log(`${logSymbols.warning} 请停止应用后再同步！！！`);
+    //     process.exit(1);
+    // }
     // 定义数据库链接
     const mysql = await new Knex({
         client: 'mysql2',
@@ -249,12 +235,19 @@ async function syncDatabase(_sysConfig, _appConfig, _fieldType) {
             max: 10
         }
     });
-    const inspector = SchemaInspector(mysql);
-    // 获取所有的表
-    const allTableName = await inspector.tables();
+
     const trx = await mysql.transaction();
 
     try {
+        const tableRecords = await trx
+            .table('INFORMATION_SCHEMA.TABLES')
+            .where({
+                TABLE_TYPE: 'BASE TABLE',
+                TABLE_SCHEMA: mysql.client.database()
+            })
+            .select('TABLE_NAME');
+        // 获取所有的表
+        const allTableName = tableRecords.map((item) => item.TABLE_NAME);
         // 重置校验默认值
         isCheckPass = true;
         isCustomTablePass = false;
@@ -272,8 +265,16 @@ async function syncDatabase(_sysConfig, _appConfig, _fieldType) {
         // 合并表参数
         for (let i = 0; i < allTableData.length; i++) {
             const tableDataItem = allTableData[i];
-            // 删除新表
-            // await trx.schema.dropTableIfExists(tableDataItem.tableNewName);
+
+            // 判断新表是否存在，存在则删除，否则会报错
+            if (tableDataItem.tableNewName) {
+                // 删除新表;
+                await trx.schema.dropTableIfExists(tableDataItem.tableNewName);
+            }
+
+            // 拼接表名
+            const tableName = (tableDataItem.name + '表').replace('表表', '表');
+
             // 删除旧表
             // await trx.schema.dropTableIfExists(tableDataItem.tableOldName);
             // 如果不存在表，则直接创建
@@ -288,11 +289,12 @@ async function syncDatabase(_sysConfig, _appConfig, _fieldType) {
                 if (appConfig.tablePrimaryKey === 'time') {
                     table.bigInteger('id').primary().notNullable().unsigned().comment('主键 ID');
                 }
-                // 设置状态
-                table.tinyint('state').index().notNullable().defaultTo(0).comment('状态 (0:正常，1:禁用，2:删除)');
+                // 设置状态（交给用户选择）
+                // table.tinyint('state').index().notNullable().defaultTo(0).comment('状态 (0:正常，1:禁用，2:删除)');
                 // 设置时间
                 table.bigInteger('created_at').index().notNullable().unsigned().defaultTo(0).comment('创建时间');
                 table.bigInteger('updated_at').index().notNullable().unsigned().defaultTo(0).comment('更新时间');
+                table.bigInteger('deleted_at').index().notNullable().unsigned().defaultTo(0).comment('删除时间');
 
                 // 处理每个字段
                 _forOwn(tableDataItem.fields, (fieldData, fieldName) => {
@@ -336,35 +338,50 @@ async function syncDatabase(_sysConfig, _appConfig, _fieldType) {
 
             // 如果创建的是新表，则把旧表的数据转移进来
             if (tableDataItem.tableNewName) {
-                // 获取当前的新字段
-                const validFields = _uniq(_concat(_keys(tableDataItem.fields), ['id', 'created_at', 'updated_at']));
                 // 获取所有旧字段
-                const allOldFields = await inspector.columns(tableDataItem.tableName);
+                const allOldFieldsInfo = await mysql.table(tableDataItem.tableName).columnInfo();
+                const allOldFields = _keys(allOldFieldsInfo);
+                // 获取当前的新字段
+                const validFields = _uniq(_concat(_keys(tableDataItem.fields), ['id', 'created_at', 'updated_at', 'deleted_at']));
+                // 判断字段是否有调整，如果没有调整则不用进行数据转移
+                let isFieldChange = false;
+                // 判断字段是否有改动
+                validFields.forEach((field) => {
+                    if (allOldFields.includes(field) === false) {
+                        isFieldChange = true;
+                    }
+                });
                 // 提取所有旧字段跟新字段匹配的字段
-                const allOldNames = allOldFields
-                    .filter((item) => {
-                        return validFields.includes(item.column);
-                    })
-                    .map((item) => item.column);
-                const validFieldsRow = allOldNames.map((field) => '`' + field + '`').join(',');
-                // 移动数据
-                const moveData = await trx.raw(`INSERT INTO ${tableDataItem.tableNewName} (${validFieldsRow}) SELECT ${validFieldsRow} FROM ${tableDataItem.tableName}`);
-                // 删除旧表，重命名新表
-                await trx.schema.dropTableIfExists(tableDataItem.tableName);
-                await trx.schema.renameTable(tableDataItem.tableNewName, tableDataItem.tableName);
+                const allOldNames = allOldFields.filter((field) => {
+                    return validFields.includes(field);
+                });
+
+                if (isFieldChange === true) {
+                    const validFieldsRow = allOldNames.map((field) => '`' + field + '`').join(',');
+                    // 移动数据
+                    const moveData = await trx.raw(`INSERT INTO ${tableDataItem.tableNewName} (${validFieldsRow}) SELECT ${validFieldsRow} FROM ${tableDataItem.tableName}`);
+                    // 删除旧表，重命名新表
+                    await trx.schema.dropTableIfExists(tableDataItem.tableName);
+                    await trx.schema.renameTable(tableDataItem.tableNewName, tableDataItem.tableName);
+                    console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableName)}(${color.blueBright(tableName)}) ${color.yellowBright('数据已同步')}`);
+                } else {
+                    console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableName)}(${color.blueBright(tableName)}) ${color.cyanBright('字段无改动')}`);
+                }
+            } else {
+                console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableName)}(${color.blueBright(tableName)}) ${color.redBright('空表已创建')}`);
             }
         }
         await trx.commit();
         await trx.destroy();
-        console.log(`${logSymbols.success} 同步完成`);
+        console.log(`${logSymbols.success} 系统表全部操作完毕`);
         process.exit();
     } catch (err) {
-        console.log('🚀 ~ file: syncDatabase.js:274 ~ syncDatabase ~ err:', err);
+        console.log('🚀 ~ syncCoreDatabase ~ err:', err);
         await trx.rollback();
         await trx.destroy();
-        console.log(`${logSymbols.success} 同步失败`);
+        console.log(`${logSymbols.success} 系统表同步失败`);
         process.exit();
     }
 }
 
-export { syncDatabase };
+export { syncUserDatabase };

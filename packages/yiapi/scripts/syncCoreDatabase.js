@@ -20,7 +20,6 @@ import {
     isString as _isString,
     isArray as _isArray,
     merge as _merge,
-    difference as _difference,
     isEmpty as _isEmpty
 } from 'lodash-es';
 
