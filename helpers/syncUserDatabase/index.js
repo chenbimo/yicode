@@ -30,8 +30,6 @@ let fieldType = {};
 
 // 是否全部检测通过，未通过则不进行表创建
 let isCheckPass = true;
-// 判断自定义字段是否生效
-let isCustomTablePass = false;
 // 名称限制
 const nameLimit = /^[a-z][a-z_0-9]*$/;
 
@@ -204,10 +202,11 @@ async function fnGetTableData(allTableName) {
 }
 
 // 同步数据库
-async function syncUserDatabase() {
+async function syncUserDatabase(_sysConfig, _appConfig, _fieldType) {
     console.log(`${logSymbols.warning} ${color.red('本项目为作者自用，请勿使用！！！')}`);
     console.log(`${logSymbols.warning} ${color.red('本项目为作者自用，请勿使用！！！')}`);
     console.log(`${logSymbols.warning} ${color.red('本项目为作者自用，请勿使用！！！')}`);
+    console.log('             ');
     sysConfig = _sysConfig;
     appConfig = _appConfig;
     fieldType = _fieldType;
@@ -250,13 +249,12 @@ async function syncUserDatabase() {
         const allTableName = tableRecords.map((item) => item.TABLE_NAME);
         // 重置校验默认值
         isCheckPass = true;
-        isCustomTablePass = false;
 
         // 检测校验表字段是否都正确
         const allTableData = await fnGetTableData(allTableName);
 
         // 如果检测没有通过，则不进行表相关操作
-        if (isCheckPass === false || isCustomTablePass === false) {
+        if (isCheckPass === false) {
             console.log(`${logSymbols.warning} ${color.red('请先处理完毕所有的错误提示内容')}`);
             process.exit();
             return;
