@@ -66,24 +66,24 @@ async function main() {
                 default: '@yicode/yibase',
                 choices: [
                     {
-                        name: 'yiapi Node.js接口开发模板',
-                        value: '@yicode/yiapi'
+                        name: 'yiapi 接口开发模板',
+                        value: '@yicode/yiapi-template'
                     },
                     {
-                        name: 'yite + vue3 基础项目开发模板',
-                        value: '@yicode/yibase'
+                        name: 'yibase 基础项目开发模板',
+                        value: '@yicode/yibase-template'
                     },
                     {
-                        name: 'yite + vue3 后台项目开发模板',
-                        value: '@yicode/yiadmin'
+                        name: 'yiadmin 后台项目开发模板',
+                        value: '@yicode/yiadmin-template'
                     },
                     {
-                        name: 'uniapp + vue3 基础项目开发模板',
-                        value: '@yicode/yiuni'
+                        name: 'yiuni 小程序项目开发模板',
+                        value: '@yicode/yiuni-template'
                     },
                     {
                         name: 'yidocs 易文档基础模板',
-                        value: '@yicode/yidocs'
+                        value: '@yicode/yidocs-template'
                     }
                 ]
             });
