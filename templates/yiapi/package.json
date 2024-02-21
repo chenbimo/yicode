@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiapi-template",
-    "version": "3.17.1",
+    "version": "3.17.2",
     "description": "易接口模板",
     "main": "yiapi.js",
     "type": "module",
