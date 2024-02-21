@@ -51,6 +51,7 @@ export const yiteConfig = {
                 'date-fns',
                 'date-fns/locale',
                 'tiny-cookie',
+                '@arco-design/web-vue/es/icon',
                 'store2',
                 '@arco-design/web-vue'
             ]

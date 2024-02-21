@@ -5,7 +5,7 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "dev": "yite --command=dev --env-file=development",
-        "build": "yite --command=build",
+        "build": "yite --command=build --env-file=production",
         "update": "yite --command=update --project-type=yiadmin"
     },
     "type": "module",
@@ -29,6 +29,7 @@
     "homepage": "https://yicode.tech",
     "dependencies": {
         "@arco-design/web-vue": "^2.54.4",
+        "@arco-plugins/vite-vue": "^1.4.5",
         "@iconify/json": "^2.2.184",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.7",
