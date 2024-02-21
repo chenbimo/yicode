@@ -28,6 +28,12 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
+                if (req.body.role_codes === 'dev') {
+                    return {
+                        ...httpConfig.FAIL,
+                        msg: '不能增加开发管理员角色'
+                    };
+                }
                 const adminModel = fastify.mysql.table('sys_admin');
                 const adminData = await adminModel.clone().where('username', req.body.username).selectOne('id');
                 if (adminData?.id) {

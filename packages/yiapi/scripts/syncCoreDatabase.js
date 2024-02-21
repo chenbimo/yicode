@@ -92,7 +92,6 @@ async function fnGetTableData(allTableName) {
 
             const tableName = prefix + _replace(_snakeCase(path.basename(filePath, '.json')), /_(\d+)/gi, '$1');
             // 获取表数据
-            // let { default: tableDataItem } = await fnImport(fileUrl, 'default', { default: {} }, { assert: { type: 'json' } });
             const tableDataItem = await fnRequire(filePath, {}, 'core');
             // 设置表名称、描述
             tableDataItem.tableName = tableName;
