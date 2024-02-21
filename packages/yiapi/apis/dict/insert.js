@@ -22,8 +22,7 @@ export default async (fastify) => {
                 value: metaConfig.value,
                 symbol: metaConfig.symbol,
                 thumbnail: metaConfig.thumbnail,
-                describe: metaConfig.describe,
-                state: metaConfig.state
+                describe: metaConfig.describe
             },
             required: [
                 //
@@ -60,8 +59,7 @@ export default async (fastify) => {
                     value: req.body.value,
                     symbol: req.body.symbol,
                     thumbnail: req.body.thumbnail,
-                    describe: req.body.describe,
-                    state: req.body.state
+                    describe: req.body.describe
                 });
 
                 return {

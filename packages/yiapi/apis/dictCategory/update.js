@@ -19,8 +19,7 @@ export default async (fastify) => {
                 id: metaConfig.id,
                 code: metaConfig.code,
                 name: metaConfig.name,
-                describe: metaConfig.describe,
-                state: metaConfig.state
+                describe: metaConfig.describe
             },
             required: ['id', 'code']
         },
@@ -49,8 +48,7 @@ export default async (fastify) => {
                     .updateData({
                         code: fnCamelCase(req.body.code),
                         name: req.body.name,
-                        describe: req.body.describe,
-                        state: req.body.state
+                        describe: req.body.describe
                     });
 
                 return httpConfig.UPDATE_SUCCESS;

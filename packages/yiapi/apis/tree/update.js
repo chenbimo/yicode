@@ -72,7 +72,6 @@ export default async (fastify) => {
                     is_open: req.body.is_open,
                     is_bool: req.body.is_bool,
                     describe: req.body.describe,
-                    state: req.body.state,
                     pids: req.body.pids
                 };
 

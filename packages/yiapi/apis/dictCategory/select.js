@@ -17,8 +17,7 @@ export default async (fastify) => {
             type: 'object',
             properties: {
                 page: metaConfig.page,
-                limit: metaConfig.limit,
-                state: metaConfig.state
+                limit: metaConfig.limit
             },
             required: []
         },
@@ -32,9 +31,6 @@ export default async (fastify) => {
                     .modify(function (qb) {
                         if (req.body.keyword !== undefined) {
                             qb.where('name', 'like', `%${req.body.keyword}%`);
-                        }
-                        if (req.body.state !== undefined) {
-                            qb.where('state', req.body.state);
                         }
                     });
 

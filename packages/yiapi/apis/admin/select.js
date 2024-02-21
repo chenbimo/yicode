@@ -28,11 +28,7 @@ export default async (fastify) => {
                 const adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where('username', '<>', 'dev')
-                    .modify((qb) => {
-                        if (req.body.state !== undefined) {
-                            qb.where('state', req.body.state);
-                        }
-                    });
+                    .modify((qb) => {});
 
                 const { totalCount } = await adminModel.clone().selectCount();
                 const rows = await adminModel

@@ -18,7 +18,6 @@ export default async (fastify) => {
             properties: {
                 page: metaConfig.page,
                 limit: metaConfig.limit,
-                state: metaConfig.state,
                 category_code: metaConfig.category_code
             },
             required: ['category_code']
@@ -34,9 +33,6 @@ export default async (fastify) => {
                     .modify(function (qb) {
                         if (req.body.keyword !== undefined) {
                             qb.where('name', 'like', `%${req.body.keyword}%`);
-                        }
-                        if (req.body.state !== undefined) {
-                            qb.where('state', req.body.state);
                         }
                     });
 

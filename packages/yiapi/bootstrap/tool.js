@@ -77,12 +77,13 @@ async function plugin(fastify) {
             const dataMenu = await redisGet('cacheData:menu');
 
             const result = dataMenu.filter((item) => {
-                if (item.state === 0 && userMenu.includes(item.id)) {
+                if (userMenu.includes(item.id)) {
                     return true;
                 } else {
                     return false;
                 }
             });
+            console.log('🚀 ~ result ~ result:', result);
             return result;
         } catch (err) {
             fastify.log.error(err);

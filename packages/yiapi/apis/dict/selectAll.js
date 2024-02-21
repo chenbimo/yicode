@@ -16,8 +16,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                category_code: metaConfig.category_code,
-                state: metaConfig.state
+                category_code: metaConfig.category_code
             }
         },
         // 返回数据约束
@@ -28,11 +27,7 @@ export default async (fastify) => {
                 const dictModel = fastify.mysql
                     .table('sys_dict')
                     .where('category_code', req.body.category_code)
-                    .modify(function (qb) {
-                        if (req.body.state !== undefined) {
-                            qb.where('state', req.body.state);
-                        }
-                    });
+                    .modify(function (qb) {});
                 const rowsTemp = await dictModel.clone().selectAll(...fnField('dict', 'core'));
 
                 const rows = rowsTemp?.map((item) => {

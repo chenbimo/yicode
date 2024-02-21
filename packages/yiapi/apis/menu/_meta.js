@@ -8,7 +8,6 @@ export const metaConfig = fnMeta(import.meta.url, {
     value: fnSchema(schemaField.route, '菜单路由'),
     icon: fnSchema(schemaField.image, '目录图标'),
     sort: fnSchema(schemaField.min0, '目录排序'),
-    state: fnSchema(schemaField.stateEnum, '目录状态'),
     describe: fnSchema(null, '目录描述', 'string', 0, 100),
     is_open: fnSchema(schemaField.boolEnum, '是否公开')
 });

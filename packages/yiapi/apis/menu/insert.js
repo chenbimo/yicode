@@ -21,7 +21,6 @@ export default async (fastify) => {
                 value: metaConfig.value,
                 icon: metaConfig.icon,
                 sort: metaConfig.sort,
-                state: metaConfig.state,
                 describe: metaConfig.describe,
                 is_open: metaConfig.is_open
             },
@@ -56,8 +55,7 @@ export default async (fastify) => {
                     icon: req.body.icon,
                     sort: req.body.sort,
                     is_open: req.body.is_open,
-                    describe: req.body.describe,
-                    state: req.body.state
+                    describe: req.body.describe
                 });
 
                 await fastify.cacheMenuData();

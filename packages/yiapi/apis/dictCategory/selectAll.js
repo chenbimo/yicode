@@ -15,9 +15,7 @@ export default async (fastify) => {
         // 请求参数约束
         schemaRequest: {
             type: 'object',
-            properties: {
-                state: metaConfig.state
-            }
+            properties: {}
         },
         // 返回数据约束
         schemaResponse: {},
@@ -26,11 +24,7 @@ export default async (fastify) => {
             try {
                 const dictCategoryModel = fastify.mysql //
                     .table('sys_dict_category')
-                    .modify(function (qb) {
-                        if (req.body.state !== undefined) {
-                            qb.where('state', req.body.state);
-                        }
-                    });
+                    .modify(function (qb) {});
 
                 const rows = await dictCategoryModel.clone().selectAll(...fnField('dictCategory', 'core'));
 

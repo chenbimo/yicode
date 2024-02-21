@@ -28,11 +28,7 @@ export default async (fastify) => {
             try {
                 const sysUserModel = fastify.mysql //
                     .table('sys_user')
-                    .modify(function (qb) {
-                        if (req.body.state !== undefined) {
-                            qb.where('state', req.body.state);
-                        }
-                    });
+                    .modify(function (qb) {});
 
                 const { totalCount } = await sysUserModel.clone().selectCount();
                 const rows = await sysUserModel

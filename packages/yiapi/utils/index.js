@@ -387,10 +387,11 @@ export function fnApiParamsCheck(req) {
  */
 export async function fnImport(path, name, defaultValue, options = {}) {
     try {
+        let dd = fnFileProtocolPath(path);
         const data = await import(fnFileProtocolPath(path), options);
         return fnCloneAny(data);
     } catch (err) {
-        console.log('🚀 ~ file: index.js:451 ~ fnImport ~ err:', err);
+        console.log('🚀 ~ fnImport ~ err:', err);
         return fnCloneAny({
             [name]: defaultValue
         });
@@ -479,7 +480,7 @@ export function fnField(tableName, fromType, excludeFields = []) {
         'id',
         'created_at',
         'updated_at',
-        'state'
+        'deleted_at'
     ];
     const tableJson = fnRequire(filePath, {}, fromType);
 
@@ -538,8 +539,7 @@ export const fnMeta = (metaUrl, data) => {
     const mergeData = _merge(data, {
         id: fnSchema(schemaField.id, '主键ID'),
         page: fnSchema(schemaField.page, '第几页'),
-        limit: fnSchema(schemaField.limit, '每页多少条'),
-        state: fnSchema(schemaField.stateEnum, '是否启用')
+        limit: fnSchema(schemaField.limit, '每页多少条')
     });
 
     return mergeData;
