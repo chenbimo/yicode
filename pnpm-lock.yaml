@@ -280,6 +280,9 @@ importers:
       '@arco-design/web-vue':
         specifier: ^2.54.4
         version: 2.54.4(vue@3.4.19)
+      '@arco-plugins/vite-vue':
+        specifier: ^1.4.5
+        version: 1.4.5
       '@iconify/json':
         specifier: ^2.2.184
         version: 2.2.184

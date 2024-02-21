@@ -97,7 +97,7 @@ const $Method = {
                 url: '/role/selectAll',
                 data: {}
             });
-            $Data.roleAll = res.data.rows;
+            $Data.roleAll = res.data.rows.filter((item) => item.code !== 'dev');
         } catch (err) {
             console.log('🚀 ~ file: index.vue:86 ~ apiSelectData ~ err:', err);
             Message.error(err.msg || err);
