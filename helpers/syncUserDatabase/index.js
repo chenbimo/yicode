@@ -370,13 +370,13 @@ async function syncUserDatabase(_sysConfig, _appConfig, _fieldType) {
         }
         await trx.commit();
         await trx.destroy();
-        console.log(`${logSymbols.success} 系统表全部操作完毕`);
+        console.log(`${logSymbols.success} 用户表全部操作完毕`);
         process.exit();
     } catch (err) {
         console.log('🚀 ~ syncCoreDatabase ~ err:', err);
         await trx.rollback();
         await trx.destroy();
-        console.log(`${logSymbols.success} 系统表同步失败`);
+        console.log(`${logSymbols.success} 用户表同步失败`);
         process.exit();
     }
 }
