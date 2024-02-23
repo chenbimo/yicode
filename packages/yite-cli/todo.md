@@ -1,2 +1,3 @@
 -   引入vite-plugin-node-polyfills
 -   处理开启压缩图片后，public的图片会消失的问题。
+-   2
