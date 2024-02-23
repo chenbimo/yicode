@@ -34,6 +34,6 @@
     },
     "gitHead": "d0cce96e6fb116e5cb59c5c7351ff9f5a8f50bfb",
     "devDependencies": {
-        "nodemon": "^3.0.3"
+        "nodemon": "^3.1.0"
     }
 }
