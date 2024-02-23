@@ -321,7 +321,7 @@ importers:
         version: 4.2.5(vue@3.4.19)
     devDependencies:
       '@yicode/yite-cli':
-        specifier: ^2.2.11
+        specifier: ^2.2.12
         version: link:../../packages/yite-cli
 
   templates/yiapi:
@@ -380,7 +380,7 @@ importers:
         version: 4.2.5(vue@3.4.19)
     devDependencies:
       '@yicode/yite-cli':
-        specifier: ^2.2.11
+        specifier: ^2.2.12
         version: link:../../packages/yite-cli
 
   templates/yidocs:

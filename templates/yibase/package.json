@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yibase-template",
-    "version": "1.1.22",
+    "version": "1.1.23",
     "description": "vue3 + vite + yite-cli 基础开发模板",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
@@ -42,7 +42,7 @@
         "vue-router": "^4.2.5"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "^2.2.11"
+        "@yicode/yite-cli": "^2.2.12"
     },
     "gitHead": "d805f3c219cc05fdcfa872be19a47c1d8f8a1ae8"
 }
