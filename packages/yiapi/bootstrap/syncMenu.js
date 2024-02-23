@@ -36,7 +36,7 @@ const menuConfig = _merge(appConfig.menu, {
         }
     },
     '/internal/banner': {
-        name: '轮播图',
+        name: '轮播管理',
         sort: 1000,
         is_system: 1,
         children: {
