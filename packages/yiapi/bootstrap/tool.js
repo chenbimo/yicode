@@ -83,7 +83,6 @@ async function plugin(fastify) {
                     return false;
                 }
             });
-            console.log('🚀 ~ result ~ result:', result);
             return result;
         } catch (err) {
             fastify.log.error(err);
