@@ -6,7 +6,7 @@
         </template>
         <div class="bodyer">
             <a-form :model="$Data.formData" layout="vertical">
-                <a-form-item field="name" label="所属目录">
+                <a-form-item field="category" label="所属目录">
                     <a-select v-model="$Data.formData.pid">
                         <a-option v-for="item in $Data.menuCategory" :key="item.id" :value="item.id" :label="item.name"></a-option>
                     </a-select>
