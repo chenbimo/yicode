@@ -4,7 +4,7 @@
     "description": "vue3 + vite + yite-cli 基础开发模板",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "dev": "yite --command=dev --env-file=development",
+        "dev": "yite --command=dev --envfile=development",
         "build": "yite --command=build"
     },
     "type": "module",

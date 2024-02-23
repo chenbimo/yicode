@@ -3,7 +3,7 @@ import { createServer } from 'vite';
 import path from 'path';
 import { cliDir } from '../config.js';
 
-async function mainDev() {
+async function mainDev(options) {
     const server = await createServer({
         // 任何合法的用户配置选项，加上 `mode` 和 `configFile`
         configFile: path.resolve(cliDir, 'vite.config.js')
