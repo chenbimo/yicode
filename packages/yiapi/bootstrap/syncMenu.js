@@ -25,7 +25,7 @@ let menuFileNew = [];
 const menuConfig = _merge(appConfig.menu, {
     '/internal/home': {
         name: '首页数据',
-        sort: 0,
+        sort: 1,
         is_system: 1,
         children: {
             '/': {
