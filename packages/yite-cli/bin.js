@@ -10,7 +10,6 @@ import { fnFileProtocolPath, fnGetEnvNames, sysConfig } from './utils.js';
 
 // 命令行参数2
 const options = minimist(process.argv.slice(2));
-console.log('🚀 ~ options:', options);
 const docSite = `${colors.green('[ 使用文档请访问网址 ]')} ${colors.white('https://yicode.tech')}`;
 
 if (['dev', 'build', 'update'].includes(options['command']) === false) {
@@ -21,7 +20,7 @@ if (['dev', 'build', 'update'].includes(options['command']) === false) {
 
 if (['dev', 'build'].includes(options['command']) === true) {
     if (options['envfile']) {
-        let envFiles = fnGetEnvNames();
+        const envFiles = fnGetEnvNames();
         if (envFiles.includes(options['envfile']) === false) {
             console.log(`${colors.red('[ 环境名错误 ]')} 只能为 ${envFiles.join(',')} 之一，如：--envfile=development`);
             console.log(docSite);
@@ -33,7 +32,7 @@ if (['dev', 'build'].includes(options['command']) === true) {
 }
 
 if (['update'].includes(options['command']) === true) {
-    let projectTypes = ['yiadmin'];
+    const projectTypes = ['yiadmin'];
     if (['yiadmin'].includes(options['project-type']) === false) {
         console.log(`${colors.red('[ 项目类型错误 ]')} 只能为 ${projectTypes.join(',')} 之一，如：--project-type=yiadmin`);
         console.log(docSite);
@@ -42,20 +41,20 @@ if (['update'].includes(options['command']) === true) {
 }
 
 if (options['command'] === 'dev') {
-    let execFile = fnFileProtocolPath(path.resolve(cliDir, 'scripts', 'dev.js'));
-    let { mainDev } = await import(execFile);
+    const execFile = fnFileProtocolPath(path.resolve(cliDir, 'scripts', 'dev.js'));
+    const { mainDev } = await import(execFile);
 
     mainDev(options);
 }
 
 if (options['command'] === 'build') {
-    let execFile = fnFileProtocolPath(path.resolve(cliDir, 'scripts', 'build.js'));
-    let { mainBuild } = await import(execFile);
+    const execFile = fnFileProtocolPath(path.resolve(cliDir, 'scripts', 'build.js'));
+    const { mainBuild } = await import(execFile);
     mainBuild(options);
 }
 
 if (options['command'] === 'update') {
-    let execFile = fnFileProtocolPath(path.resolve(cliDir, 'scripts', 'update.js'));
-    let { mainUpdate } = await import(execFile);
+    const execFile = fnFileProtocolPath(path.resolve(cliDir, 'scripts', 'update.js'));
+    const { mainUpdate } = await import(execFile);
     mainUpdate(options);
 }
