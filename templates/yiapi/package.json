@@ -29,10 +29,10 @@
         "url": "https://github.com/yicode-team/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "workspace:*",
+        "@yicode/yiapi": "3.17.4",
         "lodash-es": "^4.17.21"
     },
-    "gitHead": "d0cce96e6fb116e5cb59c5c7351ff9f5a8f50bfb",
+    "gitHead": "eb5a32d4ce9f7c26caf02dac95da2799a772e144",
     "devDependencies": {
         "nodemon": "^3.1.0"
     }

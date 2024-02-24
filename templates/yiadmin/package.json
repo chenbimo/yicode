@@ -31,7 +31,7 @@
         "@arco-design/web-vue": "^2.54.5",
         "@arco-plugins/vite-vue": "^1.4.5",
         "@iconify/json": "^2.2.186",
-        "@yicode/yidash": "workspace:*",
+        "@yicode/yidash": "3.6.10",
         "axios": "^1.6.7",
         "date-fns": "^3.3.1",
         "js-md5": "^0.8.3",
@@ -44,7 +44,7 @@
         "vue-router": "^4.3.0"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "workspace:^"
+        "@yicode/yite-cli": "^2.2.14"
     },
-    "gitHead": "eb1ce3b2c151555796374eaeef01070663f854d3"
+    "gitHead": "eb5a32d4ce9f7c26caf02dac95da2799a772e144"
 }
