@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiapi-template",
-    "version": "3.17.5",
+    "version": "3.17.6",
     "description": "易接口模板",
     "main": "yiapi.js",
     "type": "module",
@@ -29,7 +29,7 @@
         "url": "https://github.com/yicode-team/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "3.17.4",
+        "@yicode/yiapi": "^3.17.5",
         "lodash-es": "^4.17.21"
     },
     "gitHead": "eb5a32d4ce9f7c26caf02dac95da2799a772e144",

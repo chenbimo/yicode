@@ -287,7 +287,7 @@ importers:
         specifier: ^2.2.186
         version: 2.2.186
       '@yicode/yidash':
-        specifier: workspace:*
+        specifier: 3.6.10
         version: link:../../packages/yidash
       axios:
         specifier: ^1.6.7
@@ -321,13 +321,13 @@ importers:
         version: 4.3.0(vue@3.4.19)
     devDependencies:
       '@yicode/yite-cli':
-        specifier: workspace:^
+        specifier: ^2.2.14
         version: link:../../packages/yite-cli
 
   templates/yiapi:
     dependencies:
       '@yicode/yiapi':
-        specifier: workspace:*
+        specifier: ^3.17.5
         version: link:../../packages/yiapi
       lodash-es:
         specifier: ^4.17.21
