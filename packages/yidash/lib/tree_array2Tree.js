@@ -9,17 +9,17 @@
  */
 export function tree_array2Tree(arrs, id = 'id', pid = 'pid', children = 'children', forceChildren = true) {
     // id 对象，用于通过映射 ID 取得对应的对象数据
-    let idObject = {};
+    const idObject = {};
     arrs.forEach((item) => {
         idObject[item[id]] = item;
     });
 
     // 无限级树结构
-    let treeData = [];
+    const treeData = [];
 
     arrs.forEach((item) => {
         // 父级对象数据
-        let pData = idObject[item[pid]];
+        const pData = idObject[item[pid]];
 
         if (pData) {
             if (!pData[children]) {
