@@ -1,4 +1,3 @@
-import { vitePluginForArco } from '@arco-plugins/vite-vue';
 export const yiteConfig = {
     devtool: true,
     imagemin: false,
@@ -43,11 +42,6 @@ export const yiteConfig = {
                 'axios',
                 '@arco-design/web-vue'
             ]
-        },
-        plugins: [
-            vitePluginForArco({
-                style: 'css'
-            })
-        ]
+        }
     }
 };

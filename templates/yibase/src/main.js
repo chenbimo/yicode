@@ -1,4 +1,5 @@
 import App from '@/App.vue';
+import '@arco-design/web-vue/dist/arco.css';
 import 'virtual:uno.css';
 
 const app = createApp(App);

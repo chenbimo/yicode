@@ -1,4 +1,3 @@
-import { vitePluginForArco } from '@arco-plugins/vite-vue';
 export const yiteConfig = {
     devtool: true,
     imagemin: false,
@@ -35,11 +34,7 @@ export const yiteConfig = {
     },
     // webpack 配置
     viteConfig: {
-        plugins: [
-            vitePluginForArco({
-                style: 'css'
-            })
-        ],
+        plugins: [],
         optimizeDeps: {
             include: [
                 //
