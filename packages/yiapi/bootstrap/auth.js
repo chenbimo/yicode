@@ -48,6 +48,14 @@ async function plugin(fastify, opts) {
                 return;
             }
 
+            /* --------------------------------- 解析用户登录参数 --------------------------------- */
+            const isAuthFail = false;
+            try {
+                await req.jwtVerify();
+            } catch (err) {
+                isAuthFail = true;
+            }
+
             /* --------------------------------- 自由接口判断 --------------------------------- */
             const isMatchFreeApi = micromatch.isMatch(pureUrl, appConfig.freeApis);
             // 如果是自由通行的接口，则直接返回
@@ -73,9 +81,7 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 接口登录检测 --------------------------------- */
-            try {
-                await req.jwtVerify();
-            } catch (err) {
+            if (isAuthFail === true) {
                 res.send({
                     ...httpConfig.NOT_LOGIN,
                     detail: 'token 验证失败'
