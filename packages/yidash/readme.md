@@ -2,7 +2,7 @@
 
 > 实用方法库
 
-![logo](https://static.chensuiyi.com/images/yidash-logo.png)
+![logo](https://static.yicode.tech/images/yidash-logo.png)
 
 ## 安装
 

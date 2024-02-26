@@ -109,13 +109,7 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 
 ## 赞助作者
 
-支付宝赞赏码
-
-![支付宝](https://static.chensuiyi.com/alipay-qrcode.png)
-
-微信赞赏码
-
-![微信收款码](https://static.chensuiyi.com/wepay-qrcode.png)
+![赞赏](https://static.yicode.tech/images/zan-shang.jpg)
 
 ## 版权说明
 
