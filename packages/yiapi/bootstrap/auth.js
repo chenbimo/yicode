@@ -49,7 +49,7 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 解析用户登录参数 --------------------------------- */
-            const isAuthFail = false;
+            let isAuthFail = false;
             try {
                 await req.jwtVerify();
             } catch (err) {
