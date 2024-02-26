@@ -30,7 +30,7 @@ export default async (fastify) => {
                 const roleModel = fastify.mysql //
                     .table('sys_role')
                     .modify(function (qb) {
-                        if (req.session !== 'dev') {
+                        if (req.session.role_codes !== 'dev') {
                             qb.where('code', '<>', 'dev');
                         }
                     });
