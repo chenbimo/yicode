@@ -16,8 +16,8 @@
                     <a-table-column title="名称" data-index="name" :width="200"></a-table-column>
                     <a-table-column title="编码" data-index="code" :width="150"></a-table-column>
                     <a-table-column title="描述" data-index="describe" :width="300" ellipsis tooltip></a-table-column>
-                    <a-table-column title="菜单" data-index="menu_ids" :width="500"></a-table-column>
-                    <a-table-column title="接口" data-index="api_ids" :width="500"></a-table-column>
+                    <a-table-column title="菜单" data-index="menu_ids" :width="500" ellipsis tooltip></a-table-column>
+                    <a-table-column title="接口" data-index="api_ids" :width="500" ellipsis tooltip></a-table-column>
                     <a-table-column title="创建时间" data-index="created_at2" :width="150"></a-table-column>
                     <a-table-column title="更新时间" data-index="updated_at2" :width="150"></a-table-column>
                     <a-table-column title="操作" fixed="right" :width="100" align="right">
