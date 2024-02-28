@@ -13,8 +13,8 @@
         <div class="page-table">
             <a-table :data="$Data.tableData" :scroll="$GlobalData.tableScroll" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
                 <template #columns>
-                    <a-table-column title="名称" data-index="name" :width="200"></a-table-column>
-                    <a-table-column title="编码" data-index="code" :width="150"></a-table-column>
+                    <a-table-column title="名称" data-index="name" :width="200" ellipsis tooltip></a-table-column>
+                    <a-table-column title="编码" data-index="code" :width="150" ellipsis tooltip></a-table-column>
                     <a-table-column title="描述" data-index="describe" :width="300" ellipsis tooltip></a-table-column>
                     <a-table-column title="菜单" data-index="menu_ids" :width="500" ellipsis tooltip></a-table-column>
                     <a-table-column title="接口" data-index="api_ids" :width="500" ellipsis tooltip></a-table-column>

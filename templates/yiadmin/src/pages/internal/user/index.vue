@@ -11,14 +11,16 @@
         <div class="page-table">
             <a-table :data="$Data.tableData" :scroll="$GlobalData.tableScroll" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id">
                 <template #columns>
-                    <a-table-column title="昵称" data-index="nickname"></a-table-column>
-                    <a-table-column title="用户名" data-index="username"></a-table-column>
-                    <a-table-column title="角色" data-index="role_codes"></a-table-column>
-                    <a-table-column title="手机" data-index="phone"></a-table-column>
-                    <a-table-column title="微信" data-index="wexin"></a-table-column>
-                    <a-table-column title="QQ" data-index="qq"></a-table-column>
-                    <a-table-column title="邮箱" data-index="email"></a-table-column>
-                    <a-table-column title="签名" data-index="bio"></a-table-column>
+                    <a-table-column title="昵称" data-index="nickname" :width="200" ellipsis tooltip></a-table-column>
+                    <a-table-column title="用户名" data-index="username" :width="150" ellipsis tooltip></a-table-column>
+                    <a-table-column title="角色" data-index="role_codes" :width="100" ellipsis tooltip></a-table-column>
+                    <a-table-column title="手机" data-index="phone" :width="150" ellipsis tooltip></a-table-column>
+                    <a-table-column title="微信" data-index="wexin" :width="200" ellipsis tooltip></a-table-column>
+                    <a-table-column title="QQ" data-index="qq" :width="200" ellipsis tooltip></a-table-column>
+                    <a-table-column title="邮箱" data-index="email" :width="200" ellipsis tooltip></a-table-column>
+                    <a-table-column title="签名" data-index="bio" :width="300" ellipsis tooltip></a-table-column>
+                    <a-table-column title="创建时间" data-index="created_at2" :width="150"></a-table-column>
+                    <a-table-column title="更新时间" data-index="updated_at2" :width="150"></a-table-column>
                     <a-table-column title="操作" fixed="right" :width="100" align="right">
                         <template #cell="{ record }">
                             <a-dropdown position="br" @select="$Method.onExecAction($event, record)">
@@ -78,7 +80,7 @@ const $Method = {
                     limit: $GlobalData.pageLimit
                 }
             });
-            $Data.tableData = res.data.rows;
+            $Data.tableData = datetime_relativeTime(res.data.rows);
             $Data.pagination.total = res.data.total;
         } catch (err) {
         } finally {
