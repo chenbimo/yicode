@@ -10,7 +10,8 @@ export const $InternalConfig = {
     // 表格滚动
     tableScroll: {
         x: '100%',
-        y: '100%'
+        y: '100%',
+        maxHeight: '100%'
     },
     // 抽屉默认宽度
     drawerWidth: 400,
