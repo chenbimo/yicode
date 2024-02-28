@@ -66,6 +66,12 @@ a {
     background-size: cover;
 }
 
+.bodyer-modal {
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 .page-full {
     position: absolute;
     top: 15px;
@@ -80,6 +86,10 @@ a {
         height: 34px;
         display: flex;
         justify-content: space-between;
+        .left {
+            display: flex;
+            align-items: center;
+        }
         .right {
             display: flex;
             align-items: center;
