@@ -3,15 +3,16 @@ import { zhCN } from 'date-fns/locale';
 // 转换相对时间
 const _convertTime = (obj) => {
     try {
-        let item = {};
+        const item = {};
         for (let key in obj) {
             if (obj.hasOwnProperty(key)) {
-                let value = obj[key];
+                const value = obj[key];
                 if (key.endsWith('_at')) {
                     let key1 = key.replace('_at', '_at1');
                     let key2 = key.replace('_at', '_at2');
                     let dt = new Date(value);
                     if (value !== 0) {
+                        item[key] = value;
                         item[key1] = format(dt, 'yyyy-MM-dd HH:mm:ss');
                         item[key2] = formatDistanceToNow(dt, { locale: zhCN, addSuffix: true });
                     } else {
