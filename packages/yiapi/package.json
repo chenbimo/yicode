@@ -66,9 +66,9 @@
         "log-symbols": "^6.0.0",
         "merge-anything": "^5.1.7",
         "micromatch": "^4.0.5",
-        "mysql2": "^3.9.1",
+        "mysql2": "^3.9.2",
         "nanoid": "^5.0.6",
-        "nodemailer": "^6.9.10",
+        "nodemailer": "^6.9.11",
         "ora": "^8.0.1",
         "winston": "^3.11.0",
         "winston-daily-rotate-file": "^5.0.0"
