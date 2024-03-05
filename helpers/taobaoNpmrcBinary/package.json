@@ -32,7 +32,7 @@
     "dependencies": {
         "colorette": "^2.0.20",
         "fs-extra": "^11.2.0",
-        "ini": "^4.1.1",
+        "ini": "^4.1.2",
         "log-symbols": "^6.0.0"
     },
     "gitHead": "7a3a87362d798e9cfddcd485781c209ac5a1cc46"
