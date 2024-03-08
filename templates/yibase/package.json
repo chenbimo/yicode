@@ -3,7 +3,6 @@
     "version": "1.1.30",
     "description": "vue3 + vite + yite-cli 基础开发模板",
     "scripts": {
-        "preinstall": "npx only-allow pnpm",
         "dev": "yite --command=dev --envfile=development",
         "build": "yite --command=build"
     },

@@ -15,7 +15,6 @@
         "./scripts/*.js": "./scripts/*.js"
     },
     "scripts": {
-        "preinstall": "npx only-allow pnpm",
         "install2": "pnpm install --ignore-workspace",
         "outdated2": "pnpm outdated --ignore-workspace",
         "update2": "pnpm update --ignore-workspace"

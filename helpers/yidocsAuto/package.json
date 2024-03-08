@@ -2,9 +2,7 @@
     "name": "@yicode/yidocs-auto",
     "version": "1.3.29",
     "description": "vitepress 导航和侧边栏自动生成工具",
-    "scripts": {
-        "preinstall": "npx only-allow pnpm"
-    },
+    "scripts": {},
     "type": "module",
     "private": false,
     "publishConfig": {

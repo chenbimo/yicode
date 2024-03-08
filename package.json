@@ -14,7 +14,6 @@
     "homepage": "https://yicode.tech",
     "main": "index.js",
     "scripts": {
-        "preinstall": "npx only-allow pnpm",
         "r": "lerna publish"
     },
     "keywords": [

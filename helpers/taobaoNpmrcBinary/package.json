@@ -14,9 +14,7 @@
     "exports": {
         ".": "./index.js"
     },
-    "scripts": {
-        "preinstall": "npx only-allow pnpm"
-    },
+    "scripts": {},
     "keywords": [
         "fastify",
         "nodejs",

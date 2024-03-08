@@ -17,9 +17,7 @@
         "access": "public",
         "registry": "https://registry.npmjs.org"
     },
-    "scripts": {
-        "preinstall": "npx only-allow pnpm"
-    },
+    "scripts": {},
     "repository": {
         "type": "git",
         "url": "https://github.com/chenbimo/yicode.git"
