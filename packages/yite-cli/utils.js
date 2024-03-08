@@ -100,3 +100,13 @@ export function fnOmit(obj, exclude = []) {
     }
     return obj2;
 }
+
+export function fnRequire(filePath, defaultValue) {
+    try {
+        const require = createRequire(fnFileProtocolPath(path.resolve(process.cwd())));
+        const result = require(filePath);
+        return result;
+    } catch (err) {
+        return defaultValue;
+    }
+}

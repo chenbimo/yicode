@@ -4,9 +4,7 @@
     "description": "专注于vite + vue3 的项目开发脚手架",
     "main": "./index.js",
     "exports": {
-        ".": {
-            "import": "./index.js"
-        }
+        ".": "./index.js"
     },
     "bin": {
         "yite": "bin.js"

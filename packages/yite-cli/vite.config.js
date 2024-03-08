@@ -152,7 +152,7 @@ export default defineViteConfig(async ({ command, mode }) => {
     // };
 
     // 插件列表
-    let allPlugins = [];
+    const allPlugins = [];
 
     // allPlugins.push(Markdown()) ;
     allPlugins.push(yiteRouter({}));
