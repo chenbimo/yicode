@@ -45,7 +45,7 @@
         "copy-anything": "^3.0.5",
         "fast-glob": "^3.3.2",
         "fs-extra": "^11.2.0",
-        "got": "^14.2.0",
+        "got": "^14.2.1",
         "lodash-es": "^4.17.21",
         "log-symbols": "^6.0.0",
         "merge-anything": "^5.1.7",
