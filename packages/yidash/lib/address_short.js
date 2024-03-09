@@ -2,8 +2,9 @@
  * 地址转换为短地址形式
  */
 export function address_short(address) {
-    let addressSplit = address.split('');
-    let result = [
+    if (!address) return '';
+    const addressSplit = address.split('');
+    const result = [
         //
         addressSplit.slice(0, 4).join(''),
         '...',
