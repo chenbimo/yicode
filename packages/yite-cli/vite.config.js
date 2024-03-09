@@ -7,6 +7,7 @@ import * as ComponentResolvers from 'unplugin-vue-components/resolvers';
 import logSymbols from 'log-symbols';
 import { visualizer } from 'rollup-plugin-visualizer';
 import imagemin from 'unplugin-imagemin/vite';
+import viteLegacy from '@vitejs/plugin-legacy';
 
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
 import { ensureDirSync, readJsonSync } from 'fs-extra/esm';
@@ -155,6 +156,7 @@ export default defineViteConfig(async ({ command, mode }) => {
     const allPlugins = [];
 
     // allPlugins.push(Markdown()) ;
+    allPlugins.push(viteLegacy({}));
     allPlugins.push(yiteRouter({}));
     allPlugins.push(yiteI18n({}));
     allPlugins.push(ReactivityTransform());

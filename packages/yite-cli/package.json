@@ -36,6 +36,7 @@
         "@unocss/transformer-compile-class": "^0.58.5",
         "@unocss/transformer-directives": "^0.58.5",
         "@unocss/transformer-variant-group": "^0.58.5",
+        "@vitejs/plugin-legacy": "^5.3.2",
         "@vitejs/plugin-vue": "^5.0.4",
         "@vue-macros/reactivity-transform": "^0.4.3",
         "@yicode/yidash": "workspace:*",
