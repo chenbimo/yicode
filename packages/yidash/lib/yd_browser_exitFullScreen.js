@@ -1,7 +1,7 @@
 /**
  * 退出全屏
  */
-export function browser_exitFullScreen() {
+export function yd_browser_exitFullScreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.msExitFullscreen) {

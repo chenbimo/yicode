@@ -7,7 +7,7 @@
  * @returns {Array} 返回一个无限级数组结构
  * @summary 应用场景：用于生成无限级菜单结构
  */
-export function tree_array2Tree(arrs, id = 'id', pid = 'pid', children = 'children', forceChildren = true) {
+export function yd_tree_array2Tree(arrs, id = 'id', pid = 'pid', children = 'children', forceChildren = true) {
     // id 对象，用于通过映射 ID 取得对应的对象数据
     const idObject = {};
     arrs.forEach((item) => {

@@ -3,7 +3,7 @@
  * @param {string} address 地址字符串
  * @returns {array} 省市区
  */
-export function address_areaMatch(address) {
+export function yd_address_areaMatch(address) {
     let regex = /^(北京市|天津市|重庆市|上海市|香港特别行政区|澳门特别行政区)/;
     let province = [];
     let addressBean = {

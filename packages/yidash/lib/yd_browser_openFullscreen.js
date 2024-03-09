@@ -2,7 +2,7 @@
  * 开启网页全屏
  * @param {String} element 元素
  */
-export function browser_openFullscreen(element) {
+export function yd_browser_openFullscreen(element) {
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.mozRequestFullScreen) {

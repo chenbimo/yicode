@@ -1,7 +1,7 @@
 /**
  * 地址转换为短地址形式
  */
-export function address_short(address) {
+export function yd_address_short(address) {
     if (!address) return '';
     const addressSplit = address.split('');
     const result = [

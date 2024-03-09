@@ -1,5 +1,5 @@
 // 数结构递归函数
-export function tree_traverse(tree, mapFunction) {
+export function yd_tree_traverse(tree, mapFunction) {
     function preorder(node, index, parent) {
         const newNode = Object.assign({}, mapFunction(node, index, parent));
 

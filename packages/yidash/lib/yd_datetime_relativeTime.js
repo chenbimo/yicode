@@ -31,7 +31,7 @@ const _convertTime = (obj) => {
 };
 
 // 转换相对时间
-export function datetime_relativeTime(data) {
+export function yd_datetime_relativeTime(data) {
     // 如果是数组
     if (Array.isArray(data)) {
         return data.map((item) => {

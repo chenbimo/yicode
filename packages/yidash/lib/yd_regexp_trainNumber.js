@@ -4,6 +4,6 @@
  * @returns {RegExp}
  * @summary /^[GCDZTSPKXLY1-9]\d{1,4}$/
  */
-export function regexp_trainNumber() {
+export function yd_regexp_trainNumber() {
     return /^[GCDZTSPKXLY1-9]\d{1,4}$/;
 }
