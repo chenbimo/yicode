@@ -28,10 +28,10 @@
     "dependencies": {
         "@arco-design/web-vue": "^2.54.6",
         "@arco-plugins/vite-vue": "^1.4.5",
-        "@iconify/json": "^2.2.190",
+        "@iconify/json": "^2.2.191",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.7",
-        "date-fns": "^3.3.1",
+        "date-fns": "^3.4.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.7",
         "sass": "^1.71.1",
