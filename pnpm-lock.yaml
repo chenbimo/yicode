@@ -212,8 +212,8 @@ importers:
         specifier: ^0.4.3
         version: 0.4.3(rollup@4.12.1)(vue@3.4.21)
       '@yicode/yidash':
-        specifier: 3.6.10
-        version: 3.6.10
+        specifier: workspace:*
+        version: link:../yidash
       colorette:
         specifier: ^2.0.20
         version: 2.0.20
@@ -2960,13 +2960,6 @@ packages:
       js-yaml: 3.14.1
       tslib: 2.6.2
     dev: true
-
-  /@yicode/yidash@3.6.10:
-    resolution: {integrity: sha512-z/i2hLUNDjXZryEikn4zQv2K/TuzmZwwIpUiSP1jrZT2BxND6SrYqK1waKgbmxjpxbKmUeLJdsATFmZ/n5dNGw==}
-    requiresBuild: true
-    dependencies:
-      date-fns: 3.4.0
-    dev: false
 
   /@zkochan/js-yaml@0.0.6:
     resolution: {integrity: sha512-nzvgl3VfhcELQ8LyVrYOru+UtAy1nrygk2+AGbTm8a5YcO6o8lSjAT+pfg3vJWxIoZKOUhrK6UU7xW/+00kQrg==}
