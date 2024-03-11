@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-        <a-config-provider size="small">
+        <a-config-provider size="small" class="">
             <router-view></router-view>
         </a-config-provider>
     </div>
