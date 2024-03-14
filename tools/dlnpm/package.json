@@ -16,7 +16,7 @@
     "files": [],
     "dependencies": {
         "got": "^14.2.1",
-        "inquirer": "^9.2.15",
+        "inquirer": "^9.2.16",
         "log-symbols": "^6.0.0",
         "pacote": "^17.0.6"
     },
