@@ -1,6 +1,6 @@
 export const $InternalConfig = {
     // 用户令牌
-    token: yite.getCookie('token') || '',
+    token: $Storage.local.get('token') || '',
     // 用户数据
     userData: $Storage.local.get('userData') || {},
     // 表格边框
