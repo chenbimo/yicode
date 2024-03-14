@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "yite --command=dev --envfile=development",
         "build": "yite --command=build --envfile=production",
-        "update": "yite --command=update --project-type=yiadmin"
+        "update:template": "yite --command=update --project-type=yiadmin"
     },
     "type": "module",
     "private": false,
