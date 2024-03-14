@@ -119,7 +119,7 @@ const $Method = {
                 data: {}
             });
             $Data.menuObject = _.keyBy(_.cloneDeep(res.data.rows), 'id');
-            $Data.menuTree = tree_array2Tree(_.sortBy(res.data.rows, 'sort'));
+            $Data.menuTree = yd_tree_array2Tree(_.sortBy(res.data.rows, 'sort'));
             $Data.menuTree.forEach((menu, index) => {
                 menu.children?.forEach((item, index2) => {
                     if (item.value === $Route.path) {

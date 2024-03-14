@@ -147,7 +147,7 @@ const $Method = {
                     limit: $GlobalData.pageLimit
                 }
             });
-            $Data.tableData = tree_array2Tree(_.sortBy(datetime_relativeTime(res.data.rows), 'sort'));
+            $Data.tableData = yd_tree_array2Tree(_.sortBy(yd_datetime_relativeTime(res.data.rows), 'sort'));
         } catch (err) {
             Message.error({
                 content: err.msg || err

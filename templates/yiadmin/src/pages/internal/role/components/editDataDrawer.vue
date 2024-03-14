@@ -138,7 +138,7 @@ const $Method = {
                 return item;
             });
             $Data.allMenuTableData = data;
-            $Data.allMenuTreeData = tree_array2Tree(_.cloneDeep(data));
+            $Data.allMenuTreeData = yd_tree_array2Tree(_.cloneDeep(data));
             $Data.allMenuDataObject = _.keyBy(data, 'id');
         } catch (err) {
             console.log('🚀 ~ file: index.vue:201 ~ apiSelectAllMenuData ~ err', err);
@@ -161,7 +161,7 @@ const $Method = {
                 return item;
             });
             $Data.allApiTableData = data;
-            $Data.allApiTreeData = tree_array2Tree(_.cloneDeep(data));
+            $Data.allApiTreeData = yd_tree_array2Tree(_.cloneDeep(data));
             $Data.allApiDataObject = _.keyBy(data, 'id');
         } catch (err) {
             console.log('🚀 ~ file: index.vue:227 ~ apiSelectAllApiData ~ err', err);
