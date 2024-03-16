@@ -13,7 +13,7 @@ const $Http = axios.create({
 // 添加请求拦截器
 $Http.interceptors.request.use(
     function (config) {
-        const token = yite.getCookie('token');
+        const token = $Storage.local.get('token');
         if (token) {
             config.headers.authorization = 'Bearer ' + token;
         }
