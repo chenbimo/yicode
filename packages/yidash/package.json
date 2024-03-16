@@ -27,7 +27,7 @@
     },
     "homepage": "https://yicode.tech",
     "dependencies": {
-        "date-fns": "^3.4.0"
+        "date-fns": "^3.5.0"
     },
     "gitHead": "d84ced515d8efa643181941e47bef9e4738c1fc3"
 }
