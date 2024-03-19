@@ -33,7 +33,7 @@
         "inquirer": "^9.2.16",
         "lodash-es": "^4.17.21",
         "ora": "^8.0.1",
-        "simple-git": "^3.22.0"
+        "simple-git": "^3.23.0"
     },
     "gitHead": "5d216095b7aaeed26f283617194053a34bedf205"
 }

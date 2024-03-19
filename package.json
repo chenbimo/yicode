@@ -28,7 +28,7 @@
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
-        "@commitlint/cli": "^19.2.0",
+        "@commitlint/cli": "^19.2.1",
         "@yicode/commit-lint": "workspace:*",
         "lerna": "^8.1.2",
         "lint-staged": "^15.2.2",
