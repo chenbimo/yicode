@@ -17,8 +17,8 @@
     "author": "陈随易 <bimostyle@qq.com>",
     "license": "ISC",
     "dependencies": {
-        "@yicode/yidocs-auto": "workspace:*",
+        "@yicode/yidocs-auto": "1.3.30",
         "vitepress": "1.0.0-rc.45"
     },
-    "gitHead": "7a3a87362d798e9cfddcd485781c209ac5a1cc46"
+    "gitHead": "38556b8639649e72ca9ab2cbebc6a5e0ac32f569"
 }
