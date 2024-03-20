@@ -212,7 +212,7 @@ importers:
         specifier: ^0.4.3
         version: 0.4.3(rollup@4.13.0)(vue@3.4.21)
       '@yicode/yidash':
-        specifier: 3.7.3
+        specifier: workspace:*
         version: link:../yidash
       colorette:
         specifier: ^2.0.20
@@ -284,7 +284,7 @@ importers:
         specifier: ^2.2.194
         version: 2.2.194
       '@yicode/yidash':
-        specifier: 3.7.3
+        specifier: workspace:*
         version: link:../../packages/yidash
       axios:
         specifier: ^1.6.8
@@ -321,13 +321,13 @@ importers:
         version: 4.3.0(vue@3.4.21)
     devDependencies:
       '@yicode/yite-cli':
-        specifier: ^2.4.11
+        specifier: workspace:*
         version: link:../../packages/yite-cli
 
   templates/yiapi:
     dependencies:
       '@yicode/yiapi':
-        specifier: ^3.17.22
+        specifier: workspace:*
         version: link:../../packages/yiapi
       lodash-es:
         specifier: ^4.17.21
@@ -349,7 +349,7 @@ importers:
         specifier: ^2.2.194
         version: 2.2.194
       '@yicode/yidash':
-        specifier: 3.7.3
+        specifier: workspace:*
         version: link:../../packages/yidash
       axios:
         specifier: ^1.6.8
@@ -383,13 +383,13 @@ importers:
         version: 4.3.0(vue@3.4.21)
     devDependencies:
       '@yicode/yite-cli':
-        specifier: ^2.4.11
+        specifier: workspace:*
         version: link:../../packages/yite-cli
 
   templates/yidocs:
     dependencies:
       '@yicode/yidocs-auto':
-        specifier: 1.3.30
+        specifier: workspace:*
         version: link:../../helpers/yidocsAuto
       vitepress:
         specifier: 1.0.0-rc.45
