@@ -321,13 +321,13 @@ importers:
         version: 4.3.0(vue@3.4.21)
     devDependencies:
       '@yicode/yite-cli':
-        specifier: ^2.4.10
+        specifier: ^2.4.11
         version: link:../../packages/yite-cli
 
   templates/yiapi:
     dependencies:
       '@yicode/yiapi':
-        specifier: ^3.17.21
+        specifier: ^3.17.22
         version: link:../../packages/yiapi
       lodash-es:
         specifier: ^4.17.21
@@ -383,7 +383,7 @@ importers:
         version: 4.3.0(vue@3.4.21)
     devDependencies:
       '@yicode/yite-cli':
-        specifier: ^2.4.10
+        specifier: ^2.4.11
         version: link:../../packages/yite-cli
 
   templates/yidocs:
