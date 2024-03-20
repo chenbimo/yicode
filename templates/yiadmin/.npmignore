@@ -1,6 +1,3 @@
 dist
 .cache
 CHANGELOG.md
-!.gitignore
-!.npmignore
-!.npmrc
