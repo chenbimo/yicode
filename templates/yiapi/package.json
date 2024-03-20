@@ -31,7 +31,7 @@
         "@yicode/yiapi": "^3.17.21",
         "lodash-es": "^4.17.21"
     },
-    "gitHead": "4a0662c696c4f58409c75a90deff3081b1c0f5f7",
+    "gitHead": "cce8e5e04c1f222c645c9fe7ec5166fecab8ef62",
     "devDependencies": {
         "nodemon": "^3.1.0"
     }
