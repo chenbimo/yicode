@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yibase-template",
-    "version": "1.2.8",
+    "version": "1.2.9",
     "description": "vue3 + vite + yite-cli 基础开发模板",
     "scripts": {
         "dev": "yite --command=dev --envfile=development",
