@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiadmin-template",
-    "version": "1.2.11",
+    "version": "1.2.12",
     "description": "前后分离的 vue3 + vite + yite-cli 后台管理模板",
     "scripts": {
         "dev": "yite --command=dev --envfile=development",
@@ -44,7 +44,7 @@
         "vue-router": "^4.3.0"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "^2.4.6"
+        "@yicode/yite-cli": "^2.4.7"
     },
     "gitHead": "09596f96a661b15c789ad83df2a7e63099b80e6c"
 }
