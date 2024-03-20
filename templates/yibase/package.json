@@ -28,7 +28,7 @@
     "dependencies": {
         "@arco-design/web-vue": "^2.55.0",
         "@arco-plugins/vite-vue": "^1.4.5",
-        "@iconify/json": "^2.2.193",
+        "@iconify/json": "^2.2.194",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.8",
         "date-fns": "^3.6.0",
