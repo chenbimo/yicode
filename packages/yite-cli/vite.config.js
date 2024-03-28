@@ -24,13 +24,14 @@ import { yidashLibNames } from '@yicode/yidash/yidashLibNames.js';
 // 内部文件
 import { yiteRouter } from './plugins/router.js';
 import { yiteI18n } from './plugins/i18n.js';
-import { cliDir, appDir, srcDir, cacheDir } from './config.js';
-import { fnFileProtocolPath, fnOmit, fnImport } from './utils.js';
+import { fnFileProtocolPath, fnOmit, fnImport, fnAppDir } from './utils.js';
 import { unocssConfig } from './unocss.js';
+
+const appDir = fnAppDir(process.env.YITE_CLI_WORK_DIR);
 
 export default defineViteConfig(async ({ command, mode }) => {
     // 没有则生成目录
-    ensureDirSync(cacheDir);
+    ensureDirSync(appDir, '.cache');
 
     const { yiteConfig } = await fnImport(fnFileProtocolPath(path.resolve(appDir, 'yite.config.js')), 'yiteConfig', {});
     if (!yiteConfig.viteConfig) {
@@ -100,11 +101,11 @@ export default defineViteConfig(async ({ command, mode }) => {
             ],
             dirs: [
                 //
-                path.resolve(srcDir, 'plugins'),
-                path.resolve(srcDir, 'hooks'),
-                path.resolve(srcDir, 'utils'),
-                path.resolve(srcDir, 'stores'),
-                path.resolve(srcDir, 'config')
+                path.resolve(appDir, 'src', 'plugins'),
+                path.resolve(appDir, 'src', 'hooks'),
+                path.resolve(appDir, 'src', 'utils'),
+                path.resolve(appDir, 'src', 'stores'),
+                path.resolve(appDir, 'src', 'config')
             ],
             defaultExportByFilename: true,
             vueTemplate: true,
@@ -122,7 +123,7 @@ export default defineViteConfig(async ({ command, mode }) => {
         {
             dirs: [
                 //
-                path.resolve(srcDir, 'components')
+                path.resolve(appDir, 'src', 'components')
             ],
             dts: '.cache/components.d.ts',
             version: 3,
@@ -201,7 +202,7 @@ export default defineViteConfig(async ({ command, mode }) => {
                 alias: [
                     {
                         find: '@',
-                        replacement: path.resolve(srcDir)
+                        replacement: path.resolve(appDir, 'src')
                     },
                     {
                         find: 'vue-i18n',
@@ -214,7 +215,7 @@ export default defineViteConfig(async ({ command, mode }) => {
             },
             root: appDir,
             base: './',
-            envDir: path.resolve(srcDir, 'env'),
+            envDir: path.resolve(appDir, 'src', 'env'),
             logLevel: 'info',
             build: {
                 reportCompressedSize: false,

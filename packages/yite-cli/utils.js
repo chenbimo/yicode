@@ -12,12 +12,6 @@ import { cwd } from 'node:process';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(dirname(__filename));
 
-export const sysConfig = {
-    appDir: cwd(),
-    yiapiDir: __dirname
-    // 内置表字段定义
-};
-
 export function fnFilename(metaUrl) {
     return url.fileURLToPath(metaUrl);
 }
@@ -29,6 +23,14 @@ export function fnPureFilename(metaUrl) {
 export function fnDirname(metaUrl) {
     const filename = url.fileURLToPath(metaUrl);
     return path.dirname(filename);
+}
+
+export function fnCliDir(metaUrl) {
+    return path.join(fnDirname(import.meta.url));
+}
+
+export function fnAppDir(workdir) {
+    return workdir ? path.resolve(process.cwd(), workdir) : process.cwd();
 }
 
 // 获取file协议的路径
@@ -73,12 +75,12 @@ export async function fnImport(path, name, defaultValue) {
  * 获取所有环境变量.env文件的文件名组成的数组
  * @returns array 环境变量数组
  */
-export function fnGetEnvNames(promptParams) {
+export function fnGetEnvNames(promptParams, appDir) {
     let envFiles = fg
         .sync('.env.*', {
             dot: true,
             absolute: false,
-            cwd: path.resolve(sysConfig.appDir, 'src/env'),
+            cwd: path.resolve(appDir, 'src/env'),
             onlyFiles: true,
             ignore: ['.env.*.local']
         })

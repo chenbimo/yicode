@@ -1,10 +1,10 @@
 import { build } from 'vite';
 import path from 'path';
-import { cliDir } from '../config.js';
+import { fnCliDir } from '../utils.js';
 
 async function mainBuild(options) {
     await build({
-        configFile: path.resolve(cliDir, 'vite.config.js')
+        configFile: path.resolve(fnCliDir(), 'vite.config.js')
     });
 }
 

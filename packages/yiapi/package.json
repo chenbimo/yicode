@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiapi",
-    "version": "3.17.24",
+    "version": "3.18.0",
     "description": "yiapi(易接口)，5 分钟上手 Node.js 接口开发",
     "type": "module",
     "private": false,
@@ -14,11 +14,7 @@
         "./config/*.js": "./config/*.js",
         "./scripts/*.js": "./scripts/*.js"
     },
-    "scripts": {
-        "install2": "pnpm install --ignore-workspace",
-        "outdated2": "pnpm outdated --ignore-workspace",
-        "update2": "pnpm update --ignore-workspace"
-    },
+    "scripts": {},
     "keywords": [
         "fastify",
         "nodejs",
@@ -30,14 +26,14 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "repository": {
         "type": "git",
-        "url": "https://github.com/yicode-team/yicode.git"
+        "url": "https://github.com/chenbimo/yiapi"
     },
     "homepage": "https://yicode.tech",
     "dependencies": {
         "@fastify/autoload": "^5.8.0",
         "@fastify/cors": "^9.0.1",
         "@fastify/jwt": "^8.0.0",
-        "@fastify/multipart": "^8.1.0",
+        "@fastify/multipart": "^8.2.0",
         "@fastify/rate-limit": "^9.1.0",
         "@fastify/routes": "^5.1.0",
         "@fastify/static": "^7.0.1",
@@ -65,12 +61,11 @@
         "log-symbols": "^6.0.0",
         "merge-anything": "^5.1.7",
         "micromatch": "^4.0.5",
-        "mysql2": "^3.9.2",
+        "mysql2": "^3.9.3",
         "nanoid": "^5.0.6",
         "nodemailer": "^6.9.13",
         "ora": "^8.0.1",
-        "winston": "^3.12.0",
+        "winston": "^3.13.0",
         "winston-daily-rotate-file": "^5.0.0"
-    },
-    "gitHead": "252b1e644b09c8c710300c388544e1dc15ba2cd0"
+    }
 }

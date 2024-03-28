@@ -1,0 +1,33 @@
+{
+    "name": "@yicode/yidocs-auto",
+    "version": "1.5.1",
+    "description": "vitepress 导航和侧边栏自动生成工具",
+    "type": "module",
+    "private": false,
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    },
+    "exports": {
+        ".": "./index.js"
+    },
+    "sideEffects": true,
+    "scripts": {},
+    "keywords": [
+        "lodash",
+        "utils",
+        "helper",
+        "help"
+    ],
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yidocs-auto"
+    },
+    "homepage": "https://yicode.tech",
+    "dependencies": {
+        "fast-glob": "^3.3.2",
+        "lodash-es": "^4.17.21"
+    },
+    "devDependencies": {}
+}
