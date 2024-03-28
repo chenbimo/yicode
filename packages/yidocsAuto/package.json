@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yidocs-auto",
-    "version": "1.5.1",
+    "version": "1.5.2",
     "description": "vitepress 导航和侧边栏自动生成工具",
     "type": "module",
     "private": false,
@@ -28,6 +28,5 @@
     "dependencies": {
         "fast-glob": "^3.3.2",
         "lodash-es": "^4.17.21"
-    },
-    "devDependencies": {}
+    }
 }
