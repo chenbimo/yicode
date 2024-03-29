@@ -32,8 +32,8 @@ const appDir = fnAppDir(process.env.YITE_CLI_WORK_DIR);
 export default defineViteConfig(async ({ command, mode }) => {
     // 没有则生成目录
     ensureDirSync(appDir, '.cache');
-
-    const { yiteConfig } = await fnImport(fnFileProtocolPath(path.resolve(appDir, 'yite.config.js')), 'yiteConfig', {});
+    const yiteConfigPath = fnFileProtocolPath(path.resolve(appDir, 'yite.config.js'));
+    const { yiteConfig } = await fnImport(yiteConfigPath, 'yiteConfig', {});
     if (!yiteConfig.viteConfig) {
         console.log(`${logSymbols.error} 请确认是否存在 yite.config.js 文件`);
         process.exit();
