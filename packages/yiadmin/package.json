@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiadmin",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "description": "前后分离的 vue3 + vite + yite-cli 后台管理模板",
     "sideEffects": true,
     "type": "module",
