@@ -62,7 +62,7 @@ console.log(validNumber('1.2.')); // 1.20
 
 ## 文档
 
-[yidash 在线文档地址](https://yidash.chensuiyi.com)
+[yidash 在线文档地址](https://yidash.chensuiyi.me)
 
 ## 待办
 
@@ -73,4 +73,4 @@ console.log(validNumber('1.2.')); // 1.20
 
 > [github https://github.com/chenbimo/yicode](https://github.com/chenbimo/yicode)
 
-> [gitee https://gitee.com/yicode-team/yicode](https://gitee.com/yicode-team/yicode)
+> [gitee https://gitee.com/chenbimo/yicode](https://gitee.com/chenbimo/yicode)

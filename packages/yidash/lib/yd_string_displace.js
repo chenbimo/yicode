@@ -1,6 +1,6 @@
 /**
  * @name 字符置换
- * @author 陈随易 <https://chensuiyi.com>
+ * @author 陈随易 <https://chensuiyi.me>
  * @param {String} strs 字符串
  * @param {Number} start 前面留多少个字符
  * @param {Number} end 后面留多少个字符

@@ -22,23 +22,23 @@
     "author": "chensuiyi <bimostyle@qq.com>",
     "repository": {
         "type": "git",
-        "url": "https://github.com/yicode-team/yicode.git"
+        "url": "https://github.com/chenbimo/yicode.git"
     },
     "homepage": "https://yicode.tech",
     "dependencies": {
         "@arco-design/web-vue": "^2.55.1",
         "@arco-plugins/vite-vue": "^1.4.5",
-        "@iconify/json": "^2.2.196",
+        "@iconify/json": "^2.2.197",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.8",
         "date-fns": "^3.6.0",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.7",
-        "sass": "^1.72.0",
+        "sass": "^1.74.1",
         "store2": "^2.14.3",
-        "unocss": "^0.58.8",
+        "unocss": "^0.58.9",
         "vue": "^3.4.21",
-        "vue-i18n": "^9.10.2",
+        "vue-i18n": "^9.11.0",
         "vue-router": "^4.3.0"
     }
 }

@@ -25,7 +25,7 @@
     "homepage": "https://yicode.tech",
     "repository": {
         "type": "git",
-        "url": "https://github.com/yicode-team/yicode.git"
+        "url": "https://github.com/chenbimo/yicode.git"
     },
     "dependencies": {
         "@yicode/yiapi": "workspace:*",
