@@ -26,6 +26,7 @@
     },
     "homepage": "https://yicode.tech",
     "dependencies": {
+        "colorette": "^2.0.20",
         "fast-glob": "^3.3.2",
         "lodash-es": "^4.17.21"
     }

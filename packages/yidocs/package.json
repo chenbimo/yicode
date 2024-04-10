@@ -1,0 +1,25 @@
+{
+    "name": "@yicode/yidocs",
+    "version": "3.2.2",
+    "description": "陈随易的网站",
+    "type": "module",
+    "main": "index.js",
+    "private": false,
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    },
+    "scripts": {
+        "dev": "vitepress dev",
+        "build": "vitepress build"
+    },
+    "keywords": [],
+    "author": "陈随易 <bimostyle@qq.com>",
+    "license": "ISC",
+    "dependencies": {
+        "@yicode/yidocs-auto": "workspace:^"
+    },
+    "devDependencies": {
+        "vitepress": "^1.1.0"
+    }
+}
