@@ -1,1 +1,141 @@
-# 陈随易的网站
+# yidocs (易文档)
+
+基于 `vitepress` 深度定制的文档项目模板。
+
+## 开源仓库
+
+[gitee 仓库](https://gitee.com/yicode-team/yicode)
+
+[github 仓库](https://github.com/chenbimo/yicode)
+
+笔者自 `2019` 年开源至今，坚持不懈，默默耕耘。
+
+如果笔者的开源项目能够给你带来帮助和便利，可以给笔者的仓库点个 `star`。
+
+如果您希望赞赏笔者，给笔者喝杯咖啡，可以访问以下地址进行适当支持。
+
+[👍 请作者喝杯咖啡](https://yicode.tech/4-关于/1-站长信息/1-关于站长.html)
+
+## 效果
+
+请直接访问 [`https://yicode.tech`](https://yicode.tech) 查看效果。
+
+![picture 1](https://static.yicode.tech/images/202306/20230605224024.png)
+
+## 下载
+
+下载 `yidocs` 的教程，请访问以下链接：
+
+[yidocs 下载方法](https://yicode.tech/4-关于/2-问题帮助/1-如何下载模板.html)
+
+## 为什么使用 `yidocs`？
+
+`yidocs` 开箱即用，并且无需手动配置 `侧边栏` 和 `导航栏`。
+
+如果我们使用 `vitepress`，需要的配置如下：
+
+```javascript
+export default {
+    themeConfig: {
+        sidebar: {
+            '/guide/': [
+                {
+                    text: 'Guide',
+                    items: [
+                        { text: 'Index', link: '/guide/' },
+                        { text: 'One', link: '/guide/one' },
+                        { text: 'Two', link: '/guide/two' }
+                    ]
+                }
+            ],
+
+            '/config/': [
+                {
+                    text: 'Config',
+                    items: [
+                        { text: 'Index', link: '/config/' },
+                        { text: 'Three', link: '/config/three' },
+                        { text: 'Four', link: '/config/four' }
+                    ]
+                }
+            ]
+        }
+    }
+};
+```
+
+使用 `yidocs`，配置如下即可：
+
+```javascript
+import { docsAuto } from '@yicode/yidocs-auto';
+let { sideBar, navBar } = docsAuto();
+export default {
+    themeConfig: {
+        sidebar: sideBar,
+        nav: navBar
+    }
+};
+```
+
+最苦、最累、最麻烦的问题，交给笔者。
+
+最好、最强、最方便的功能，留给你们。
+
+## 要求和理念
+
+当然，要想如此方便地使用 `yidocs`，一些必要的约定还是要遵守的。
+
+```bash
+├───📁 markdown/
+│   ├───📁 1-开源/
+│   │   ├───📁 1-yite-cli/
+│   │   │   ├───📁 1-基本简介/
+│   │   │   │   ├───📄 1-基本介绍.md
+│   │   │   │   ├───📄 2-快速体验.md
+│   │   │   │   ├───📄 3-项目结构.md
+│   │   │   │   └───📄 4-视频入门.md
+```
+
+1. 所有文件和目录，都要以 `数字-` 开头
+
+如上所示，任何目录和文章，均以 `数字` + `短横线` 开头，作用就是用于 `文章` 和 `目录` 的排序。
+
+如果没有人为的 `数字标识`，文档的目录和排序有可能是乱套的，所以此为 `yidocs` 的必要要求之一。
+
+2. `markdown` 文件使用 `分类-[项目]-目录-文件` 的方式来进行组织。
+
+什么意思呢？
+
+继续看如上项目结构：
+
+-   `分类` = `开源`
+-   `项目` = `yite-cli`
+-   `目录` = `基本简介`
+-   `文章` = `基本介绍.md`
+
+这样的结构是满足 `分类-项目-目录-文件` 要求的，是可以被正常展示的。
+
+同时，可以看到，`[项目]` 以中括号包裹，表示 `项目` 这个 `概念结构` 不是必须的。
+
+以下为没有 `项目` 的文件组织结构 `分类-目录-文件` 示例：
+
+```bash
+├───📁 markdown/
+│   ├───📁 1-关于/
+│   │   ├───📁 1-站长信息/
+│   │   │   └───📄 1-关于站长.md
+│   │   └───📁 2-问题帮助/
+│   │       └───📄 1-如何下载模板.md
+```
+
+-   `分类` = `关于`
+-   `目录` = `站长信息`
+-   `文章` = `关于站长.md`
+
+这就是 `yidocs` 的文件组织结构。
+
+不满足此规则的文件，在编译的控制台将会进行提示，且对应文件将不会在文档中显示。
+
+## 反馈
+
+有任何使用问题，请访问 [✋ 给作者反馈](https://yicode.tech/4-关于/1-站长信息/1-关于站长.html)联系笔者。
