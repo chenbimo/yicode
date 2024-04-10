@@ -11,7 +11,7 @@ async function mainUpdate(options) {
         const appDir = fnAppDir(options.workdir);
         const updateDir = path.resolve(appDir, '.cache', 'npm-package');
         const metaData = await got.get(`https://registry.npmmirror.com/@yicode/yiadmin/latest`).json();
-        // const downMeta = await pacote.extract(metaData.dist.tarball, updateDir, {});
+        const downMeta = await pacote.extract(metaData.dist.tarball, updateDir, {});
         fs.copySync(path.resolve(updateDir, 'src', 'pages', 'internal'), path.resolve(appDir, 'src', 'pages', 'internal'));
         fs.copySync(path.resolve(updateDir, 'src', 'config', 'internal.js'), path.resolve(appDir, 'src', 'config', 'internal.js'));
         fs.copySync(path.resolve(updateDir, 'src', 'utils', 'internal.js'), path.resolve(appDir, 'src', 'utils', 'internal.js'));
