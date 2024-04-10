@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yidocs",
-    "version": "3.2.2",
+    "version": "3.3.0",
     "description": "陈随易的网站",
     "type": "module",
     "main": "index.js",
