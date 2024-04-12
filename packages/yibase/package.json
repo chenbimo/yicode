@@ -28,7 +28,7 @@
     "dependencies": {
         "@arco-design/web-vue": "^2.55.1",
         "@arco-plugins/vite-vue": "^1.4.5",
-        "@iconify/json": "^2.2.198",
+        "@iconify/json": "^2.2.199",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.8",
         "date-fns": "^3.6.0",
@@ -36,9 +36,9 @@
         "pinia": "^2.1.7",
         "sass": "^1.74.1",
         "store2": "^2.14.3",
-        "unocss": "^0.59.0",
+        "unocss": "^0.59.1",
         "vue": "^3.4.21",
-        "vue-i18n": "^9.11.0",
+        "vue-i18n": "^9.11.1",
         "vue-router": "^4.3.0"
     }
 }
