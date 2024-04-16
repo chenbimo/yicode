@@ -29,18 +29,18 @@
     "dependencies": {
         "@arco-design/web-vue": "^2.55.1",
         "@arco-plugins/vite-vue": "^1.4.5",
-        "@iconify/json": "^2.2.199",
+        "@iconify/json": "^2.2.201",
         "@yicode/yidash": "workspace:*",
         "axios": "^1.6.8",
         "date-fns": "^3.6.0",
         "js-md5": "^0.8.3",
         "lodash-es": "^4.17.21",
         "pinia": "^2.1.7",
-        "sass": "^1.74.1",
+        "sass": "^1.75.0",
         "store2": "^2.14.3",
-        "unocss": "^0.59.1",
-        "vue": "^3.4.21",
-        "vue-i18n": "^9.11.1",
+        "unocss": "^0.59.3",
+        "vue": "^3.4.22",
+        "vue-i18n": "^9.12.1",
         "vue-router": "^4.3.0"
     },
     "devDependencies": {
