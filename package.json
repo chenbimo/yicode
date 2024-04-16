@@ -14,7 +14,8 @@
     "homepage": "https://yicode.tech",
     "main": "index.js",
     "scripts": {
-        "r": "lerna publish"
+        "r": "lerna publish",
+        "c": "pnpm dlx lerna clean"
     },
     "keywords": [
         "yicode",
