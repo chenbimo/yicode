@@ -1,10 +1,9 @@
 import { fnSchema, fnMeta } from '../../utils/index.js';
 import { schemaField } from '../../config/schemaField.js';
-import { schemaRegexp } from '../../config/schemaRegexp.js';
 
 export const metaConfig = fnMeta(import.meta.url, {
     _name: '角色',
-    code: fnSchema(null, '角色代号', 'string', 1, 20, '', null, schemaRegexp.aA0_),
+    code: fnSchema(null, '角色代号', 'string', 1, 20, '', null, '^[a-zA-Z][a-zA-Z0-9_-]*$'),
     name: fnSchema(null, '角色名称', 'string', 0, 30),
     describe: fnSchema(null, '角色描述', 'string', 0, 100),
     keyword: fnSchema(null, '关键字', 'string', 0, 100),
