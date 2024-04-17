@@ -16,9 +16,9 @@
     "files": [],
     "dependencies": {
         "got": "^14.2.1",
-        "inquirer": "^9.2.18",
+        "inquirer": "^9.2.19",
         "log-symbols": "^6.0.0",
-        "pacote": "^17.0.7"
+        "pacote": "^18.0.0"
     },
     "scripts": {},
     "engines": {},
