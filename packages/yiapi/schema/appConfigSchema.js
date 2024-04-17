@@ -228,7 +228,7 @@ export const appConfigSchema = {
                     title: '密码',
                     type: 'string'
                 },
-                from_user: {
+                from_name: {
                     title: '发送者昵称',
                     type: 'string'
                 },
@@ -246,7 +246,7 @@ export const appConfigSchema = {
                 'secure',
                 'user',
                 'pass',
-                'from_user',
+                'from_name',
                 'from_email'
             ]
         },
