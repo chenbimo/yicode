@@ -1,5 +1,5 @@
 // 工具函数
-import { fnRoute, fnField } from '../../utils/index.js';
+import { fnRoute, fnField, fnSaltMD5, fnPureMD5 } from '../../utils/index.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
@@ -59,7 +59,7 @@ export default async (fastify) => {
                     .clone()
                     .where({ id: req.session.id })
                     .updateData({
-                        password: fnSaltMD5(utils.fnPureMD5(req.body.password))
+                        password: fnSaltMD5(fnPureMD5(req.body.password))
                     });
 
                 return {
