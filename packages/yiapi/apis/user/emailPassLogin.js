@@ -1,3 +1,4 @@
+import { omit } from 'lodash-es';
 // 工具函数
 import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
@@ -29,7 +30,7 @@ export default async (fastify) => {
                 const userData = await userModel //
                     .clone()
                     .where({ email: req.body.email })
-                    .selectOne(...fnField('user', 'core', ['password']));
+                    .selectOne(...fnField('user', 'core'));
 
                 if (!userData?.id) {
                     return {
@@ -56,7 +57,7 @@ export default async (fastify) => {
                 return {
                     ...httpConfig.SUCCESS,
                     msg: '密码登录成功',
-                    data: userData,
+                    data: omit(userData, ['password']),
                     token: await fastify.jwt.sign({
                         id: userData.id,
                         nickname: userData.nickname,
