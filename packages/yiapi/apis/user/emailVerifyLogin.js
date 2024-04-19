@@ -70,7 +70,6 @@ export default async (fastify) => {
                 return {
                     ...httpConfig.SUCCESS,
                     msg: '邮箱登录成功',
-                    data: userData,
                     token: await fastify.jwt.sign({
                         id: userData.id,
                         nickname: userData.nickname,
@@ -80,7 +79,7 @@ export default async (fastify) => {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpConfig.INSERT_FAIL;
+                return httpConfig.FAIL;
             }
         }
     });

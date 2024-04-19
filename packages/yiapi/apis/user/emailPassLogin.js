@@ -1,6 +1,5 @@
-import { omit } from 'lodash-es';
 // 工具函数
-import { fnRoute, fnField } from '../../utils/index.js';
+import { fnRoute, fnField, fnSaltMD5 } from '../../utils/index.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
@@ -57,7 +56,6 @@ export default async (fastify) => {
                 return {
                     ...httpConfig.SUCCESS,
                     msg: '密码登录成功',
-                    data: omit(userData, ['password']),
                     token: await fastify.jwt.sign({
                         id: userData.id,
                         nickname: userData.nickname,
@@ -67,7 +65,7 @@ export default async (fastify) => {
                 };
             } catch (err) {
                 fastify.log.error(err);
-                return httpConfig.INSERT_FAIL;
+                return httpConfig.FAIL;
             }
         }
     });
