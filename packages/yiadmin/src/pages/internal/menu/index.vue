@@ -16,12 +16,12 @@
         <div class="page-table">
             <a-table :data="$Data.tableData" :scroll="$GlobalData.tableScroll" :pagination="false" :bordered="$GlobalData.tableBordered" row-key="id" hide-expand-button-on-empty>
                 <template #columns>
-                    <a-table-column title="名称" data-index="name" :width="250"></a-table-column>
-                    <a-table-column title="路由" data-index="value" :width="300"></a-table-column>
-                    <a-table-column title="描述" data-index="describe"></a-table-column>
-                    <a-table-column title="排序" data-index="sort" :width="80"></a-table-column>
-                    <a-table-column title="创建时间" data-index="created_at2" :width="150"></a-table-column>
-                    <a-table-column title="更新时间" data-index="updated_at2" :width="150"></a-table-column>
+                    <a-table-column title="名称" data-index="name" :width="250" ellipsis tooltip></a-table-column>
+                    <a-table-column title="路由" data-index="value" :width="300" ellipsis tooltip></a-table-column>
+                    <a-table-column title="描述" data-index="describe" ellipsis tooltip></a-table-column>
+                    <a-table-column title="排序" data-index="sort" :width="80" ellipsis tooltip></a-table-column>
+                    <a-table-column title="创建时间" data-index="created_at2" :width="150" ellipsis tooltip></a-table-column>
+                    <a-table-column title="更新时间" data-index="updated_at2" :width="150" ellipsis tooltip></a-table-column>
                     <a-table-column title="操作" fixed="right" :width="100" align="right">
                         <template #cell="{ record }">
                             <a-dropdown position="br" @select="$Method.onDataAction($event, record)">
