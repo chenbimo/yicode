@@ -27,7 +27,7 @@ export default async (fastify) => {
             try {
                 const apiModel = fastify.mysql //
                     .table('sys_api')
-                    .modify(function (qb) {});
+                    .modify(function (db) {});
 
                 const { totalCount } = await apiModel.clone().selectCount();
 

@@ -37,7 +37,7 @@ export default async (fastify) => {
                 const adminModel = fastify.mysql //
                     .table('sys_admin')
                     .where({ id: req.body.id })
-                    .modify(function (qb) {});
+                    .modify(function (db) {});
 
                 await adminModel.clone().updateData({
                     password: fnSaltMD5(req.body.password),

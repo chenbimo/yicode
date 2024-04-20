@@ -28,7 +28,7 @@ export default async (fastify) => {
                 const roleModel = fastify.mysql //
                     .table('sys_role')
                     .where('id', req.body.id)
-                    .modify(function (qb) {});
+                    .modify(function (db) {});
 
                 const roleData = await roleModel.clone().selectOne('id', 'is_system');
                 if (!roleData?.id) {

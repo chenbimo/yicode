@@ -28,7 +28,7 @@ export default async (fastify) => {
                 const roleModel = fastify.mysql //
                     .table('sys_tree')
                     .where('category', req.body.category)
-                    .modify(function (qb) {});
+                    .modify(function (db) {});
 
                 const rows = await roleModel.clone().selectAll(...fnField('tree', 'core'));
 

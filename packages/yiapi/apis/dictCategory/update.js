@@ -28,7 +28,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const dictCategoryModel = fastify.mysql.table('sys_dict_category').modify(function (qb) {});
+                const dictCategoryModel = fastify.mysql.table('sys_dict_category').modify(function (db) {});
 
                 const dictCategoryData = await dictCategoryModel
                     .clone()

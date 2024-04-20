@@ -33,7 +33,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const treeModel = fastify.mysql.table('sys_tree').modify(function (qb) {});
+                const treeModel = fastify.mysql.table('sys_tree').modify(function (db) {});
 
                 if (req.body.pid === 0) {
                     req.body.pids = '0';

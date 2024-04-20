@@ -24,10 +24,10 @@ export default async (fastify) => {
             try {
                 const roleModel = fastify.mysql //
                     .table('sys_role')
-                    .modify(function (qb) {
+                    .modify(function (db) {
                         // 如果不是开发管理员查询，则排除掉开发角色
                         if (req.session.role_codes !== 'dev') {
-                            qb.where('code', '<>', 'dev');
+                            db.where('code', '<>', 'dev');
                         }
                     });
 

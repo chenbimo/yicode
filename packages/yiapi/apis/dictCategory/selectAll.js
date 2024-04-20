@@ -24,7 +24,7 @@ export default async (fastify) => {
             try {
                 const dictCategoryModel = fastify.mysql //
                     .table('sys_dict_category')
-                    .modify(function (qb) {});
+                    .modify(function (db) {});
 
                 const rows = await dictCategoryModel.clone().selectAll(...fnField('dictCategory', 'core'));
 

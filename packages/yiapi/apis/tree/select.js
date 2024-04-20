@@ -30,7 +30,7 @@ export default async (fastify) => {
                 const treeModel = fastify.mysql //
                     .table('sys_tree')
                     .where('category', req.body.category)
-                    .modify(function (qb) {});
+                    .modify(function (db) {});
 
                 const { totalCount } = await treeModel.clone().selectCount();
 

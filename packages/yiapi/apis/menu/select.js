@@ -28,7 +28,7 @@ export default async (fastify) => {
             try {
                 const menuModel = fastify.mysql //
                     .table('sys_menu')
-                    .modify(function (qb) {});
+                    .modify(function (db) {});
 
                 const { totalCount } = await menuModel.clone().selectCount();
 

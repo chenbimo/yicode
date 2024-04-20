@@ -27,7 +27,7 @@ export default async (fastify) => {
                 const dictModel = fastify.mysql
                     .table('sys_dict')
                     .where('category_code', req.body.category_code)
-                    .modify(function (qb) {});
+                    .modify(function (db) {});
                 const rowsTemp = await dictModel.clone().selectAll(...fnField('dict', 'core'));
 
                 const rows = rowsTemp?.map((item) => {

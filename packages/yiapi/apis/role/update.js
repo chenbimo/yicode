@@ -32,7 +32,7 @@ export default async (fastify) => {
             try {
                 const roleModel = fastify.mysql //
                     .table('sys_role')
-                    .modify(function (qb) {});
+                    .modify(function (db) {});
 
                 const roleData = await roleModel //
                     .clone()

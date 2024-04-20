@@ -41,7 +41,7 @@ export default async (fastify) => {
                         };
                     }
                 }
-                const dictModel = fastify.mysql.table('sys_dict').modify(function (qb) {});
+                const dictModel = fastify.mysql.table('sys_dict').modify(function (db) {});
 
                 const result = await dictModel //
                     .clone()
