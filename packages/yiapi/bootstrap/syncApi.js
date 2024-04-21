@@ -284,7 +284,7 @@ async function plugin(fastify) {
     // 同步接口
     try {
         await syncApiDir(fastify);
-        await fnDelay(500);
+        await fnDelay(1000);
         await syncApiFile(fastify);
         // 将接口缓存到 redis 中
         await fastify.cacheApiData();

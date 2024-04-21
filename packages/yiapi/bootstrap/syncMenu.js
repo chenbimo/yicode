@@ -13,7 +13,7 @@ import {
     merge as _merge
 } from 'lodash-es';
 // 工具函数
-import { fnKebabCase, fnIncrUID } from '../utils/index.js';
+import { fnKebabCase, fnIncrUID, fnDelay } from '../utils/index.js';
 // 配置文件
 import { appConfig } from '../config/appConfig.js';
 
@@ -314,6 +314,7 @@ async function plugin(fastify) {
         menuConfigNew = await convertMenuStruct();
 
         await syncMenuDir(fastify);
+        await fnDelay(500);
         await syncMenuFile(fastify);
         await fastify.cacheMenuData();
     } catch (err) {
