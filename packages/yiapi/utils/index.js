@@ -53,6 +53,13 @@ export function fnKebabCase(value, delimiter = '/') {
     return data;
 }
 
+// 延迟函数
+export const fnDelay = (wait) => {
+    return new Promise((resolve) => {
+        setTimeout(resolve, wait);
+    });
+};
+
 // 是否有重复值
 export const fnIsUnique = (array) => {
     return new Set(array).size === array.length;
