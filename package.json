@@ -29,12 +29,12 @@
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
     "devDependencies": {
-        "@commitlint/cli": "^19.2.2",
+        "@commitlint/cli": "^19.3.0",
         "@yicode/commit-lint": "workspace:*",
         "lerna": "^8.1.2",
         "lint-staged": "^15.2.2",
         "prettier": "^3.2.5",
-        "rollup": "^4.16.0",
+        "rollup": "^4.16.4",
         "simple-git-hooks": "^2.11.1"
     },
     "simple-git-hooks": {
