@@ -36,7 +36,7 @@ export default async (fastify) => {
             // TODO: 此处需要使用事务
             try {
                 const treeModel = fastify.mysql.table('sys_tree');
-                const parentData = null;
+                let parentData = null;
                 // 如果传了 pid 值
                 if (req.body.pid) {
                     parentData = await treeModel //

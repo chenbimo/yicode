@@ -310,7 +310,7 @@ export function fnRandom6Number() {
 
 export function fnRelativePath(from, to) {
     const _relative = path.relative(from, to);
-    const _covertPath = _relative.replace(/\\+/g, '/');
+    let _covertPath = _relative.replace(/\\+/g, '/');
 
     // 如果第一个不是（.），则自动拼接点
     if (_covertPath.indexOf('.') !== 0) {
