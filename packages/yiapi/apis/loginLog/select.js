@@ -35,7 +35,7 @@ export default async (fastify) => {
                     });
 
                 // 记录总数
-                const { totalCount } = await loginLogModel.clone().selectAll();
+                const { totalCount } = await loginLogModel.clone().selectCount();
 
                 // 记录列表
                 const rows = await loginLogModel
