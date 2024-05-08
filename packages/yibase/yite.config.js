@@ -1,52 +1,23 @@
 import { vitePluginForArco } from '@arco-plugins/vite-vue';
 export const yiteConfig = {
-    devtool: true,
-    imagemin: false,
+    devtool: false,
     // 自动导入解析
     autoImport: {
-        resolvers: [
-            {
-                name: 'ArcoResolver',
-                options: {}
-            }
-        ],
-        imports: [
-            {
-                '@arco-design/web-vue': [
-                    //
-                    'Message',
-                    'Modal',
-                    'Notification',
-                    'Drawer'
-                ]
-            }
-        ]
+        resolvers: []
     },
     // 自动组件解析
     autoComponent: {
-        resolvers: [
-            {
-                name: 'ArcoResolver',
-                options: {
-                    sideEffect: true
-                }
-            }
-        ]
+        resolvers: []
     },
     // webpack 配置
     viteConfig: {
-        plugins: [
-            vitePluginForArco({
-                style: 'css'
-            })
-        ],
         optimizeDeps: {
             include: [
                 //
                 'lodash-es',
                 'vue-i18n',
                 'axios',
-                '@arco-design/web-vue'
+                'store2'
             ]
         }
     }

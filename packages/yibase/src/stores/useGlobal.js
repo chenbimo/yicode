@@ -4,9 +4,7 @@ export const useGlobal = Pinia.defineStore('global', () => {
         // 用户令牌
         token: $Storage.local.get('token') || '',
         // 用户数据
-        userData: $Storage.local.get('userData') || {},
-        clientWidth: '',
-        clientHeight: ''
+        userData: $Storage.local.get('userData') || {}
     });
 
     // 全局计算数据

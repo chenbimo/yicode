@@ -9,7 +9,6 @@
 
 <script setup>
 // 外部集
-import { Message } from '@arco-design/web-vue';
 
 // 全局集
 const { $GlobalData, $GlobalComputed, $GlobalMethod } = useGlobal();
