@@ -27,8 +27,8 @@
     "homepage": "https://chensuiyi.me",
     "dependencies": {
         "@iconify/json": "^2.2.207",
-        "@yicode/yidash": "workspace:*",
-        "@yicode/yite-cli": "workspace:*",
+        "@yicode/yidash": "workspace:^",
+        "@yicode/yite-cli": "workspace:^",
         "axios": "^1.6.8",
         "date-fns": "^3.6.0",
         "lodash-es": "^4.17.21",
