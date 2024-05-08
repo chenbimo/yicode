@@ -25,7 +25,7 @@
         "type": "git",
         "url": "https://github.com/chenbimo/yicode.git"
     },
-    "homepage": "https://yicode.tech",
+    "homepage": "https://chensuiyi.me",
     "dependencies": {
         "@arco-design/web-vue": "^2.55.1",
         "@arco-plugins/vite-vue": "^1.4.5",

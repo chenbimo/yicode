@@ -1,7 +1,6 @@
 # Logs
 logs
 *.log
-.npmrc
 npm-debug.log*
 esdata
 data

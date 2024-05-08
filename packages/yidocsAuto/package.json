@@ -24,7 +24,7 @@
         "type": "git",
         "url": "https://github.com/chenbimo/yidocs-auto"
     },
-    "homepage": "https://yicode.tech",
+    "homepage": "https://chensuiyi.me",
     "dependencies": {
         "colorette": "^2.0.20",
         "fast-glob": "^3.3.2",

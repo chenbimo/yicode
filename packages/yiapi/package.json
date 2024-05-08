@@ -28,7 +28,7 @@
         "type": "git",
         "url": "https://github.com/chenbimo/yiapi"
     },
-    "homepage": "https://yicode.tech",
+    "homepage": "https://chensuiyi.me",
     "dependencies": {
         "@fastify/autoload": "^5.8.2",
         "@fastify/cors": "^9.0.1",

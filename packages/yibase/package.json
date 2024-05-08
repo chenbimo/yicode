@@ -24,7 +24,7 @@
         "type": "git",
         "url": "https://github.com/chenbimo/yicode.git"
     },
-    "homepage": "https://yicode.tech",
+    "homepage": "https://chensuiyi.me",
     "dependencies": {
         "@iconify/json": "^2.2.207",
         "@yicode/yidash": "workspace:*",

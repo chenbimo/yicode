@@ -25,7 +25,7 @@
         "javascript",
         "脚手架"
     ],
-    "homepage": "https://yicode.tech",
+    "homepage": "https://chensuiyi.me",
     "author": "chensuiyi <bimostyle@qq.com>",
     "dependencies": {
         "cli-table3": "^0.6.4",
