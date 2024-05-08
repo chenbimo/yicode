@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiapi-sync-user-database",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "yiapi（易接口） - 用户数据库表同步工具",
     "type": "module",
     "private": false,
