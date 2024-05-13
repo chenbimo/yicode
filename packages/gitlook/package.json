@@ -28,7 +28,7 @@
     "homepage": "https://chensuiyi.me",
     "author": "chensuiyi <bimostyle@qq.com>",
     "dependencies": {
-        "cli-table3": "^0.6.4",
+        "cli-table3": "^0.6.5",
         "dayjs": "^1.11.11",
         "inquirer": "^9.2.20",
         "lodash-es": "^4.17.21",
