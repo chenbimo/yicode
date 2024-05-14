@@ -47,16 +47,13 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 -   **@yicode/yite-cli**（基于 `vite` 进行深度封装的 `vue3` 项目开发脚手架）
 -   **@yicode/yiapi**（自用，基于 `fastify` 进行深度封装的 `nodejs` 项目接口开发框架）
 -   **@yicode/yidash**（类 `lodash` 的业务方法库）
--   **@yicode/yiscss** （`scss` 中的 `lodash`）
+-   **@yicode/gitlook** （`git` 提交统计工具）
 -   **@yicode/dlnpm**（`yicode` 软件生态下载工具）
+-   **@yicode/yidocs**（`vitepress` 经过深度定制的文档模板）
 -   **@yicode/yidocs-auto**（`vitepress` 侧边栏和导航栏自动生成工具，避免手动配置）
-
-模板开源项目
-
--   **@yicode/base-template**（基本且完整的 `vue3` 项目开发模板）
--   **@yicode/yidocs-template**（具备自动化侧边栏和导航栏的 `vitepress` 文档项目模板）
--   **@yicode/admin-template**（`arco-design + vue3` 研发的后台管理模板）
--   **@yicode/yiapi-template**（自用，`yiapi` 接口开发项目模板）
+-   **@yicode/yibase**（基于`yite-cli` 的基础项目模板）
+-   **@yicode/yiadmin**（跟`yiapi` 配套的后台管理模板）
+-   **@yicode/yiserver**（`yiapi` 接口开发项目模板）
 
 ## 代码贡献
 
