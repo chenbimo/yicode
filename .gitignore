@@ -18,7 +18,6 @@ dist-ssr
 *.vsix
 out
 CHANGELOG.md
-note.md
 .changeset
 others/softs
 other.md

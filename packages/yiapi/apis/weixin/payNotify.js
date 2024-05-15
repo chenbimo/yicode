@@ -11,13 +11,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
-export const apiName = '微信支付回调';
-
 export default async (fastify) => {
     // 当前文件的路径，fastify 实例
-    fnRoute(import.meta.url, fastify, {
-        // 接口名称
-        apiName: apiName,
+    fnRoute(import.meta.url, fastify, metaConfig, {
         // 请求参数约束
         schemaRequest: {
             type: 'object',
@@ -69,7 +65,7 @@ export default async (fastify) => {
 
                 // 产品信息
                 const paymentInfo = find(appConfig.payment, { code: attach.pay_code });
-                fastify.log.warn({ msg: '产品信息', ...paymentInfo });
+                fastify.log.info({ msg: '产品信息', ...paymentInfo });
 
                 // 添加订单数据
                 const insertData = {
@@ -88,7 +84,7 @@ export default async (fastify) => {
                 if (appConfig.tablePrimaryKey === 'time') {
                     insertData.id = fnIncrUID();
                 }
-                fastify.log.warn({
+                fastify.log.info({
                     what: '微信支付回调参数',
                     ...insertData
                 });

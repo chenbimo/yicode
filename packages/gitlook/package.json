@@ -30,7 +30,7 @@
     "dependencies": {
         "cli-table3": "^0.6.5",
         "dayjs": "^1.11.11",
-        "inquirer": "^9.2.20",
+        "inquirer": "^9.2.21",
         "lodash-es": "^4.17.21",
         "ora": "^8.0.1",
         "simple-git": "^3.24.0"

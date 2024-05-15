@@ -9,7 +9,7 @@ import * as utils from '../utils/index.js';
 // 配置信息
 import { appConfig } from '../config/appConfig.js';
 
-async function plugin(fastify, opts) {
+function plugin(fastify, opts, next) {
     appConfig.cron.forEach((item) => {
         if (isFunction(item.handler) === false) {
             console.log(logSymbols.error, `${item.name} 定时器 handler 必须为一个函数`);
@@ -25,5 +25,6 @@ async function plugin(fastify, opts) {
         });
         fastify.decorate(item.code, job);
     });
+    next();
 }
 export default fp(plugin, { name: 'cron', dependencies: ['tool'] });

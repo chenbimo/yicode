@@ -406,13 +406,9 @@ export async function fnImport(path, name, defaultValue, options = {}) {
 }
 
 // 设置路由函数
-export const fnRoute = (metaUrl, fastify, options) => {
+export const fnRoute = (metaUrl, fastify, metaConfig, options) => {
     const apiInfo = fnApiInfo(metaUrl);
     const method = _lowerCase(options.method || 'post');
-    if (!options.apiName) {
-        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 apiName 属性，请检查`);
-        process.exit(1);
-    }
     if (!options.schemaRequest) {
         console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 schemaRequest 属性，请检查`);
         process.exit(1);
@@ -426,13 +422,13 @@ export const fnRoute = (metaUrl, fastify, options) => {
         process.exit(1);
     }
 
-    options.schemaRequest.title = options.apiName;
+    options.schemaRequest.title = metaConfig.apiNames[apiInfo.pureFileName];
 
     let routeParams = {
         method: method,
         url: `/${apiInfo.pureFileName}`,
         schema: {
-            summary: options.apiName,
+            summary: metaConfig.apiNames[apiInfo.pureFileName],
             tags: [apiInfo.parentDirName],
             response: options.schemaResponse || {}
         },

@@ -81,7 +81,7 @@ const appConfig = {
         // qq 邮箱
         user: 'demo@qq.com',
         pass: '',
-        from_user: '易接口',
+        from_name: '易接口',
         from_email: 'demo@qq.com'
     },
     // 上传目录

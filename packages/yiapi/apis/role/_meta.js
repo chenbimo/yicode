@@ -1,12 +1,10 @@
-import { fnSchema, fnMeta } from '../../utils/index.js';
-import { schemaField } from '../../config/schemaField.js';
-
-export const metaConfig = fnMeta(import.meta.url, {
-    _name: '角色',
-    code: fnSchema(null, '角色代号', 'string', 1, 20, '', null, '^[a-zA-Z][a-zA-Z0-9_-]*$'),
-    name: fnSchema(null, '角色名称', 'string', 0, 30),
-    describe: fnSchema(null, '角色描述', 'string', 0, 100),
-    keyword: fnSchema(null, '关键字', 'string', 0, 100),
-    menu_ids: fnSchema(null, '菜单ID组', 'array', 0, 10000, [], null, 'integer', true),
-    api_ids: fnSchema(null, '接口ID组', 'array', 0, 10000, [], null, 'integer', true)
-});
+export const metaConfig = {
+    dirName: '角色',
+    apiNames: {
+        insert: '添加角色',
+        delete: '删除角色',
+        update: '修改角色',
+        select: '分页查询角色',
+        selectAll: '查询所有角色'
+    }
+};

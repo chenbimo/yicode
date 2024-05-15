@@ -1,15 +1,10 @@
-import { fnSchema, fnMeta } from '../../utils/index.js';
-import { schemaField } from '../../config/schemaField.js';
-
-export const metaConfig = fnMeta(import.meta.url, {
-    _name: '树',
-    pid: fnSchema(schemaField.pid, '父级目录 ID'),
-    category: fnSchema(null, '目录分类', 'string', 1, 20, '', null, '^[a-zA-Z][a-zA-Z0-9_-]*$'),
-    name: fnSchema(null, '目录名称', 'string', 1, 30),
-    value: fnSchema(null, '目录值', 'string', 0, 300),
-    icon: fnSchema(schemaField.image, '目录图标'),
-    sort: fnSchema(schemaField.min0, '目录排序'),
-    describe: fnSchema(null, '目录描述', 'string', 0, 100),
-    is_bool: fnSchema(schemaField.boolEnum, '是否虚拟目录'),
-    is_open: fnSchema(schemaField.boolEnum, '是否公开')
-});
+export const metaConfig = {
+    dirName: '树结构',
+    apiNames: {
+        insert: '添加树结构',
+        delete: '删除树结构',
+        update: '修改树结构',
+        select: '分页查询树结构',
+        selectAll: '查询所有树结构'
+    }
+};

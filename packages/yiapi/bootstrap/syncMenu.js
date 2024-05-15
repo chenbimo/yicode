@@ -18,29 +18,29 @@ import { fnKebabCase, fnIncrUID, fnDelay } from '../utils/index.js';
 import { appConfig } from '../config/appConfig.js';
 
 let menuConfigNew = [];
-let menuDirNew = [];
-let menuFileNew = [];
+const menuDirNew = [];
+const menuFileNew = [];
 
 // 菜单配置
 const menuConfig = _merge(appConfig.menu, {
-    '/internal/home': {
+    '/internal/_home': {
         name: '首页数据',
         sort: 1,
         is_system: 1,
         children: {
-            '/': {
+            '/internal/home': {
                 name: '首页',
                 is_system: 1,
                 sort: 1
             }
         }
     },
-    '/internal/banner': {
+    '/internal/_banner': {
         name: '轮播管理',
         sort: 1000,
         is_system: 1,
         children: {
-            '/': {
+            '/internal/banner': {
                 name: '轮播列表',
                 is_system: 1,
                 sort: 1

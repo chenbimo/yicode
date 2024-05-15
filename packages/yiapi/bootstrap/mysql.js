@@ -71,6 +71,7 @@ async function plugin(fastify, options) {
         });
     } catch (err) {
         fastify.log.error(err);
+        process.exit(1);
     }
 }
 

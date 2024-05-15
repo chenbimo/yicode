@@ -185,4 +185,4 @@ async function plugin(fastify, opts) {
         process.exit();
     }
 }
-export default fp(plugin, { name: 'sync', dependencies: ['mysql', 'redis', 'tool', 'syncApi', 'syncMenu'] });
+export default fp(plugin, { name: 'syncDev', dependencies: ['mysql', 'redis', 'tool', 'syncApi', 'syncMenu'] });

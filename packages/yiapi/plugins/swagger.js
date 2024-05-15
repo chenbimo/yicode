@@ -30,4 +30,6 @@ async function main(fastify, opts) {
         staticCSP: true
     });
 }
-export default fp(main, { name: 'swagger' });
+export default fp(main, {
+    name: 'swagger'
+});

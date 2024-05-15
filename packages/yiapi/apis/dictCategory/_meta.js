@@ -1,9 +1,10 @@
-import { fnSchema, fnMeta } from '../../utils/index.js';
-import { schemaField } from '../../config/schemaField.js';
-
-export const metaConfig = fnMeta(import.meta.url, {
-    _name: '字典分类',
-    code: fnSchema(null, '字典编码', 'string', 1, 20, '', null, '^[a-zA-Z][a-zA-Z0-9_-]*$'),
-    name: fnSchema(null, '字典分类名称', 'string', 1, 20),
-    describe: fnSchema(null, '字典分类描述', 'string', 0, 100)
-});
+export const metaConfig = {
+    dirName: '字典分类',
+    apiNames: {
+        insert: '添加字典分类',
+        delete: '删除字典分类',
+        update: '修改字典分类',
+        select: '分页查询字典分类',
+        selectAll: '查询所有字典分类'
+    }
+};

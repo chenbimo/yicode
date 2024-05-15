@@ -8,15 +8,11 @@ import { sysConfig } from '../../config/sysConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
-export const apiName = '微信消息通知';
-
 export default async (fastify) => {
     // 当前文件的路径，fastify 实例
-    fnRoute(import.meta.url, fastify, {
+    fnRoute(import.meta.url, fastify, metaConfig, {
         // 请求方法
         method: 'get',
-        // 接口名称
-        apiName: apiName,
         // 请求参数约束
         schemaRequest: {
             type: 'object',
@@ -56,7 +52,7 @@ export default async (fastify) => {
         apiHandler: async (req, res) => {
             try {
                 const xmlData = req.body.xml || {};
-                fastify.log.warn(req.body);
+                fastify.log.info(req.body);
                 if (!xmlData?.EventKey) {
                     xmlData.EventKey = 'test';
                 }

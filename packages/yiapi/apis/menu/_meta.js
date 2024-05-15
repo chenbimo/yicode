@@ -1,13 +1,10 @@
-import { fnSchema, fnMeta } from '../../utils/index.js';
-import { schemaField } from '../../config/schemaField.js';
-
-export const metaConfig = fnMeta(import.meta.url, {
-    _name: '菜单',
-    pid: fnSchema(schemaField.pid, '父级目录 ID'),
-    name: fnSchema(null, '目录名称', 'string', 1, 30),
-    value: fnSchema(schemaField.route, '菜单路由'),
-    icon: fnSchema(schemaField.image, '目录图标'),
-    sort: fnSchema(schemaField.min0, '目录排序'),
-    describe: fnSchema(null, '目录描述', 'string', 0, 100),
-    is_open: fnSchema(schemaField.boolEnum, '是否公开')
-});
+export const metaConfig = {
+    dirName: '菜单',
+    apiNames: {
+        insert: '添加菜单',
+        delete: '删除菜单',
+        update: '修改菜单',
+        select: '分页查询菜单',
+        selectAll: '查询所有菜单'
+    }
+};

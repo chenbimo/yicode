@@ -26,7 +26,7 @@ const configParams = {
         trace: 4,
         debug: 5
     },
-    level: 'warn',
+    level: 'info',
     format: winston.format.combine(winston.format.timestamp(), winston.format.json()),
     transports: []
 };

@@ -53,20 +53,6 @@ const textType = [
     'longtext' // 4GB
 ];
 
-// 一个字段全部属性
-// let oneField = {
-//     type: 'integer',
-//     comment: '字段',
-//     length: 100,
-//     default: 0,
-//     index: true,
-//     unique: true,
-//     unsigned: true,
-//     precision: 5,
-//     scale: 5,
-//     capacity: 'mediumtext'
-// };
-
 // 检测校验表格数据
 async function fnGetTableData(allTableName) {
     try {
@@ -183,13 +169,13 @@ async function fnGetTableData(allTableName) {
                     }
                 }
                 // 必须有字段注释
-                if (fieldData.comment === undefined) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段定义缺少 ${color.yellowBright('comment')} 属性，请检查`);
+                if (fieldData.name === undefined) {
+                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段定义缺少 ${color.yellowBright('name')} 属性，请检查`);
                     isCheckPass = false;
                 }
                 // 字段注释必须为字符串
-                if (_isString(fieldData.comment) === false) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('comment')} 属性必须为字符串，请检查`);
+                if (_isString(fieldData.name) === false) {
+                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('name')} 属性必须为字符串，请检查`);
                     isCheckPass = false;
                 }
                 tableDataItem.fields[fieldName] = fieldData;
@@ -306,7 +292,7 @@ async function syncCoreDatabase() {
                         fieldItem = table[fieldData.type](fieldName);
                     }
                     // 设置不能为空、编码、注释
-                    fieldItem = fieldItem.notNullable().collate('utf8mb4_general_ci').comment(fieldData.comment);
+                    fieldItem = fieldItem.notNullable().collate('utf8mb4_general_ci').comment(fieldData.name);
                     // 设置默认值
                     if (fieldData.default !== undefined) {
                         fieldItem = fieldItem.defaultTo(fieldData.default);

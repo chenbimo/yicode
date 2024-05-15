@@ -6,4 +6,6 @@ import { appConfig } from '../config/appConfig.js';
 async function main(fastify, opts) {
     await fastify.register(fastifyRoutes);
 }
-export default fp(main, { name: 'routes' });
+export default fp(main, {
+    name: 'routes'
+});

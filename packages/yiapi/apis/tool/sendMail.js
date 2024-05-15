@@ -5,14 +5,10 @@ import { appConfig } from '../../config/appConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
-export const apiName = '发送邮件';
-
 // 处理函数
 export default async (fastify) => {
     // 当前文件的路径，fastify 实例
-    fnRoute(import.meta.url, fastify, {
-        // 接口名称
-        apiName: apiName,
+    fnRoute(import.meta.url, fastify, metaConfig, {
         // 请求参数约束
         schemaRequest: {
             oneOf: [

@@ -13,7 +13,7 @@ import { appConfig } from './config/appConfig.js';
 import { sysConfig } from './config/sysConfig.js';
 
 // 预配置
-import { logger } from './init/logger.js';
+import { logger } from './plugins/logger.js';
 
 import './check.js';
 
@@ -21,6 +21,7 @@ import './check.js';
 const fastify = Fastify({
     logger: logger,
     pluginTimeout: 0,
+    bodyLimit: 10485760, // 10M
     ajv: {
         customOptions: {
             allErrors: true,
@@ -48,9 +49,9 @@ fastify.setErrorHandler(function (err, req, res) {
     } else if (err.statusCode === 429) {
         err.message = '请求过快，请降低请求频率。';
     } else if (err.statusCode >= 400) {
-        fastify.log.warn(err);
+        fastify.log.info(err);
     } else {
-        fastify.log.warn(err);
+        fastify.log.info(err);
     }
 
     // 发送错误响应
@@ -156,7 +157,7 @@ function initServer() {
             }
             // await fastify.cacheMenuData();
             // await fastify.cacheApiData();
-            fastify.log.warn(`${appConfig.appName} 接口服务已启动： ${address}`);
+            fastify.log.info(`${appConfig.appName} 接口服务已启动： ${address}`);
             console.log(`${appConfig.appName} 接口服务已启动： ${address}`);
         });
 
@@ -171,7 +172,7 @@ function initServer() {
         // 监听服务停止
         gracefulShutdown(fastify.server, {
             finally: function () {
-                fastify.log.warn('服务已停止');
+                fastify.log.info('服务已停止');
             }
         });
     });

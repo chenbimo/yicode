@@ -8,13 +8,9 @@ import { appConfig } from '../../config/appConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 
-export const apiName = '创建微信支付订单';
-
 export default async (fastify) => {
     // 当前文件的路径，fastify 实例
-    fnRoute(import.meta.url, fastify, {
-        // 接口名称
-        apiName: apiName,
+    fnRoute(import.meta.url, fastify, metaConfig, {
         // 请求参数约束
         schemaRequest: {
             type: 'object',
@@ -52,7 +48,7 @@ export default async (fastify) => {
                     buy_amount: req.body.buy_amount,
                     buy_note: req.body.buy_note || '常规支付'
                 };
-                fastify.log.warn({
+                fastify.log.info({
                     what: '创建支付二维码',
                     ...params
                 });

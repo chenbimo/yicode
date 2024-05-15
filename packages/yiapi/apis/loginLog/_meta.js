@@ -1,6 +1,7 @@
-import { fnSchema, fnMeta } from '../../utils/index.js';
-import { schemaField } from '../../config/schemaField.js';
-
-export const metaConfig = fnMeta(import.meta.url, {
-    _name: '登录日志'
-});
+export const metaConfig = {
+    dirName: '登录日志',
+    apiNames: {
+        delete: '删除登录日志',
+        select: '查询登录日志'
+    }
+};
