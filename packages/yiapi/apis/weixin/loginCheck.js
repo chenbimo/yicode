@@ -1,5 +1,5 @@
 // 工具函数
-import { fnRoute, fnField, fnSchema } from '../../utils/index.js';
+import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
@@ -15,8 +15,6 @@ export default async (fastify) => {
             },
             required: ['scan_qrcode_uuid']
         },
-        // 返回数据约束
-        schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {

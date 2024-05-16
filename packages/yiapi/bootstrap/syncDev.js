@@ -12,8 +12,6 @@ import {
 // 工具函数
 import {
     //
-    fnDbInsertData,
-    fnDbUpdateData,
     fnSaltMD5,
     fnPureMD5,
     fnIncrUID

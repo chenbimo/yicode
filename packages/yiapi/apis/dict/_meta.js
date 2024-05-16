@@ -1,5 +1,5 @@
 export const metaConfig = {
-    name: '字典',
+    dirName: '字典',
     apiNames: {
         insert: '添加字典',
         delete: '删除字典',

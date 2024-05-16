@@ -15,8 +15,6 @@ export default async (fastify) => {
                 category_code: metaConfig.category_code
             }
         },
-        // 返回数据约束
-        schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {

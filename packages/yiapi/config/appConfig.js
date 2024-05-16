@@ -2,9 +2,9 @@ import { resolve } from 'node:path';
 import { mergeAndConcat } from 'merge-anything';
 
 import { fnImport, fnCloneAny } from '../utils/index.js';
-import { sysConfig } from './sysConfig.js';
+import { system } from '../system.js';
 
-const { appConfig: importConfig } = await fnImport(resolve(sysConfig.appDir, 'appConfig.js'), 'appConfig', {});
+const { appConfig: importConfig } = await fnImport(resolve(system.appDir, 'config', 'appConfig.js'), 'appConfig', {});
 
 // 克隆一份用户自己的配置文件
 const appConfigOrigin = fnCloneAny(importConfig);

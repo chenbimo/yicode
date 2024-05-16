@@ -19,8 +19,7 @@ export default async (fastify) => {
             },
             required: ['title']
         },
-        // 返回数据约束
-        schemaResponse: {},
+
         // 执行函数
         apiHandler: async (req, res) => {
             const trx = await fastify.mysql.transaction();

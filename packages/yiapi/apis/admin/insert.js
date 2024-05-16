@@ -1,8 +1,9 @@
 // 工具函数
-import { fnRoute, fnSaltMD5, fnPureMD5 } from '../../utils/index.js';
+import { fnRoute, fnSaltMD5, fnPureMD5, fnProp } from '../../utils/index.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
+import { tableData } from '../../tables/admin.js';
 
 // 处理函数
 export default async (fastify) => {
@@ -12,15 +13,13 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                username: metaConfig.username,
-                password: metaConfig.password,
-                nickname: metaConfig.nickname,
-                role_codes: metaConfig.role_codes
+                username: fnProp(tableData.username),
+                password: fnProp(tableData.password),
+                nickname: fnProp(tableData.nickname),
+                role_codes: fnProp(tableData.role_codes)
             },
             required: ['username', 'password', 'nickname', 'role_codes']
         },
-        // 返回数据约束
-        schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {

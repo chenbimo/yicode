@@ -1,6 +1,6 @@
 import got from 'got';
 // 工具函数
-import { fnRoute, fnField, fnSchema } from '../../utils/index.js';
+import { fnRoute, fnField } from '../../utils/index.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
@@ -22,8 +22,6 @@ export default async (fastify) => {
             },
             required: ['code']
         },
-        // 返回数据约束
-        schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {

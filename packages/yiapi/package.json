@@ -65,6 +65,7 @@
         "nanoid": "^5.0.7",
         "nodemailer": "^6.9.13",
         "ora": "^8.0.1",
+        "picomatch": "^4.0.2",
         "winston": "^3.13.0",
         "winston-daily-rotate-file": "^5.0.0"
     }

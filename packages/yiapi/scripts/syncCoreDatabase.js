@@ -33,8 +33,8 @@ let isCheckPass = true;
 // 判断自定义字段是否生效
 let isCustomTablePass = false;
 
-// 名称限制
-const nameLimit = /^[a-z][a-z_0-9]*$/;
+// 表字段名称限制
+const fieldNameLimit = /^[a-z][a-z_0-9]*$/;
 
 // 不能设置的字段
 const denyFields = [
@@ -107,7 +107,7 @@ async function fnGetTableData(allTableName) {
                     isCheckPass = false;
                 }
                 // 规范字段名称
-                if (nameLimit.test(fieldName) === false) {
+                if (fieldNameLimit.test(fieldName) === false) {
                     console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段名称必须以 ${color.yellowBright('小写字母开头 + [小写字母 | 下划线 | 数字]')}，请检查`);
                     isCheckPass = false;
                 }

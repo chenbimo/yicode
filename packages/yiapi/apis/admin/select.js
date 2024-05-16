@@ -1,8 +1,9 @@
 // 工具函数
-import { fnRoute, fnField } from '../../utils/index.js';
+import { fnRoute, fnField, fnProp } from '../../utils/index.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
+import { schemaField } from '../../config/schemaField.js';
 
 // 处理函数
 export default async (fastify) => {
@@ -12,12 +13,10 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                page: metaConfig.page,
-                limit: metaConfig.limit
+                page: fnProp(schemaField.page),
+                limit: fnProp(schemaField.limit)
             }
         },
-        // 返回数据约束
-        schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {

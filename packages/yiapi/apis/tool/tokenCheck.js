@@ -14,8 +14,6 @@ export default async (fastify) => {
             properties: {},
             required: []
         },
-        // 返回数据约束
-        schemaResponse: {},
         // 执行函数
         apiHandler: async (req, res) => {
             try {
