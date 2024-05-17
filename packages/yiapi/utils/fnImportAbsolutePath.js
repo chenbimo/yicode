@@ -1,6 +1,6 @@
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-export const fnImport = async (absolutePath, name, defaultValue) => {
+export const fnImportAbsolutePath = async (absolutePath, name, defaultValue) => {
     try {
         const data = await import(pathToFileURL(absolutePath));
         return data;

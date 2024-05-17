@@ -46,7 +46,7 @@ export default async (fastify) => {
                     buy_amount: req.body.buy_amount,
                     buy_note: req.body.buy_note || '常规支付'
                 };
-                fastify.log.info({
+                fastify.log.warn({
                     what: '创建支付二维码',
                     ...params
                 });

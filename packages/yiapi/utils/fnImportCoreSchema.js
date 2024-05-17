@@ -10,7 +10,7 @@ export const fnImportCoreSchema = async (name, defaultValue = {}) => {
     } catch (err) {
         console.log('🚀 ~ fnImport ~ err:', err);
         return {
-            [name]: defaultValue
+            [name + 'Schema']: defaultValue
         };
     }
 };

@@ -1,4 +1,4 @@
 export const jwtConfig = {
-    secret: 'yiapi0',
+    secret: 'demo',
     expiresIn: '7d'
 };

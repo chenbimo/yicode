@@ -9,7 +9,7 @@ export const appConfig = fnMerge(
         // 应用名称
         appName: '易接口',
         // 加密盐
-        salt: 'yiapi-123456.',
+        md5Salt: 'yiapi-123456.',
         // 监听端口
         port: 3000,
         // 监听主机

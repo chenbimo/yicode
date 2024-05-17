@@ -1,1 +1,4 @@
-export const appConfig = {};
+export const appConfig = {
+    devPassword: 'demodemo',
+    md5Salt: 'demo'
+};

@@ -95,7 +95,7 @@ async function plugin(fastify, opts) {
              * 才进行日志记录
              * 减少无意义的日志
              */
-            fastify.log.info({
+            fastify.log.warn({
                 apiPath: req?.url,
                 body: _omit(req?.body || {}, appConfig.reqParamsFilter),
                 session: req?.session,

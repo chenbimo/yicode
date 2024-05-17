@@ -29,3 +29,4 @@
 -   [ ] 提供数据库创建和对比，不提供同步功能。
 -   [ ] 限制Node.js版本只能为v20
 -   [ ] 判断process.env.NODE_ENV是否为production或development
+-   [ ] 判断系统接口和用户接口名称冲突问题

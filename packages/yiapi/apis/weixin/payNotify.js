@@ -63,7 +63,7 @@ export default async (fastify) => {
 
                 // 产品信息
                 const paymentInfo = find(appConfig.payment, { code: attach.pay_code });
-                fastify.log.info({ msg: '产品信息', ...paymentInfo });
+                fastify.log.warn({ msg: '产品信息', ...paymentInfo });
 
                 // 添加订单数据
                 const insertData = {
@@ -82,7 +82,7 @@ export default async (fastify) => {
                 if (appConfig.tablePrimaryKey === 'time') {
                     insertData.id = fnIncrUID();
                 }
-                fastify.log.info({
+                fastify.log.warn({
                     what: '微信支付回调参数',
                     ...insertData
                 });

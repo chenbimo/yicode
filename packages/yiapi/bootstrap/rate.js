@@ -21,7 +21,7 @@ async function plugin(fastify, options) {
                 return req.headers['x-real-ip'] || req.headers['x-client-ip'] || req.ip || req.headers['x-forwarded-for'];
             },
             onExceeded(req, key) {
-                fastify.log.info({
+                fastify.log.warn({
                     key: key,
                     message: '请求过快',
                     apiPath: req?.url,

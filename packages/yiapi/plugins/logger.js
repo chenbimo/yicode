@@ -1,14 +1,13 @@
-import fs from 'fs-extra';
+// 核心模块
 import { resolve } from 'node:path';
+// 外部模块
 import winston from 'winston';
 import 'winston-daily-rotate-file';
 
-import { sysConfig } from '../config/sysConfig.js';
-
-fs.ensureDir(resolve(sysConfig.appDir, 'logs'));
+import { system } from '../system.js';
 
 const fileConfig = {
-    dirname: resolve(sysConfig.appDir, 'logs'),
+    dirname: resolve(system.appDir, 'logs'),
     filename: '%DATE%.log',
     datePattern: 'YYYY-MM-DD',
     zippedArchive: false,
@@ -26,7 +25,7 @@ const configParams = {
         trace: 4,
         debug: 5
     },
-    level: 'info',
+    level: 'warn',
     format: winston.format.combine(winston.format.timestamp(), winston.format.json()),
     transports: []
 };

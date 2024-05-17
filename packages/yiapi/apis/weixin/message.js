@@ -49,7 +49,7 @@ export default async (fastify) => {
         apiHandler: async (req, res) => {
             try {
                 const xmlData = req.body.xml || {};
-                fastify.log.info(req.body);
+                fastify.log.warn(req.body);
                 if (!xmlData?.EventKey) {
                     xmlData.EventKey = 'test';
                 }

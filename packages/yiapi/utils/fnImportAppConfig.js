@@ -8,9 +8,9 @@ export const fnImportAppConfig = async (name, defaultValue = {}) => {
         const data = await import(pathToFileURL(absolutePath));
         return data;
     } catch (err) {
-        console.log('🚀 ~ fnImport ~ err:', err);
+        console.log('🚀 ~ fnImportAppConfig ~ err:', err);
         return {
-            [name]: defaultValue
+            [name + 'Config']: defaultValue
         };
     }
 };

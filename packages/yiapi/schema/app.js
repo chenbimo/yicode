@@ -8,8 +8,8 @@ export const appSchema = {
             minLength: 1,
             maxLength: 50
         },
-        salt: {
-            title: '加密盐值',
+        md5Salt: {
+            title: 'MD5加密盐值',
             type: 'string',
             minLength: 1,
             maxLength: 300
@@ -57,7 +57,7 @@ export const appSchema = {
     required: [
         //
         'appName',
-        'salt',
+        'md5Salt',
         'port',
         'host',
         'devPassword',
