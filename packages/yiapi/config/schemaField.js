@@ -1,4 +1,4 @@
-const schemaField = {
+export const schemaFieldConfig = {
     // 主键 ID
     id: {
         name: '主键ID',
@@ -51,5 +51,3 @@ const schemaField = {
         minimum: 0
     }
 };
-
-export { schemaField };

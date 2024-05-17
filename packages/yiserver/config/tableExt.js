@@ -1,5 +1,5 @@
 // 系统表字段扩展
-const tableConfig = {
+export const tableConfig = {
     sys_user: {
         test_field: {
             type: 'string',
@@ -9,5 +9,3 @@ const tableConfig = {
         }
     }
 };
-
-export { tableConfig };

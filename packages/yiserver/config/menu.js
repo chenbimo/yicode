@@ -1,5 +1,5 @@
 // 自定义菜单
-const menuConfig = {
+export const menuConfig = {
     // 自定义菜单演示
     // '/keyword': {
     //     name: '关键字',
@@ -12,5 +12,3 @@ const menuConfig = {
     //     }
     // }
 };
-
-export { menuConfig };

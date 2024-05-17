@@ -11,7 +11,7 @@ const ajv = new Ajv({
 });
 
 // ajv验证
-export const ajvValidate = async (file, schema, config, isBreak = false) => {
+export const fnAjvValidate = async (file, schema, config, isBreak = false) => {
     const validResult = ajv.validate(schema, config);
     if (!validResult) {
         localize.zh(ajv.errors);

@@ -7,10 +7,12 @@ import { isEmpty, isPlainObject, isFunction } from 'lodash-es';
 import { appConfigSchema } from './schema/appConfigSchema.js';
 
 // 配置文件
-import { appConfig, appConfigOrigin } from './config/appConfig.js';
+import { appConfig, appConfigOrigin } from './config/app.js';
 import { sysConfig } from './config/sysConfig.js';
 import { fnImport, fnIsUnique } from './utils/index.js';
-import { ajvValidate } from './utils/ajv.js';
+import { ajvValidate } from './utils/fnAjvValidate.js';
+
+// 增加判断，当前目录是否有 yiapi.js 文件，有则正在执行
 
 // 确保关键目录存在
 fs.ensureDirSync(path.resolve(sysConfig.appDir, 'apis'));

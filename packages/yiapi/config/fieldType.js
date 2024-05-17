@@ -1,5 +1,5 @@
 // 字段类型
-export const fieldType = {
+export const fieldTypeConfig = {
     // 字符串型
     string: {
         type: 'string',

@@ -1,5 +1,5 @@
 // 定时器设置
-const cronConfig = [
+export const cronConfig = [
     // {
     //     timer: '*/5 * * * * *',
     //     name: '测试定时器',
@@ -13,5 +13,3 @@ const cronConfig = [
     //     }
     // }
 ];
-
-export { cronConfig };

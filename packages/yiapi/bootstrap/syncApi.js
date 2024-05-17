@@ -13,10 +13,6 @@ import {
 // 工具函数
 import {
     //
-    getApiDirName,
-    getApiFileName,
-    fnAllApiMeta,
-    fnAllApiFiles,
     fnImport,
     fnCloneAny,
     fnIncrUID,
@@ -24,6 +20,50 @@ import {
 } from '../utils/index.js';
 // 配置文件
 import { appConfig } from '../config/appConfig.js';
+
+// 获取接口目录名称
+function getApiDirName(file) {
+    // 如果不是插件接口
+    const apiDirName = file //
+        .replace(/\\+/gi, '/')
+        .replace('/_meta.js', '')
+        .replace(/.+\/apis/, '');
+    return apiDirName;
+}
+
+// 获取接口文件名称
+function getApiFileName(file) {
+    const apiFileName = file //
+        .replace(/\\+/, '/')
+        .replace('.js', '')
+        .replace(/.+\/apis/, '');
+    return apiFileName;
+}
+
+// 获取所有接口文件
+async function fnAllApiMeta() {
+    const coreApiMetaFiles = fg.sync(['./apis/**/_meta.js', '!**/_*/**'], {
+        onlyFiles: true,
+        dot: false,
+        absolute: true,
+        cwd: sysConfig.yiapiDir
+    });
+    const appApiMetaFiles = fg.sync(['./apis/**/_meta.js', '!**/_*/**'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
+
+    const allApiMetaFiles = _concat(coreApiMetaFiles, appApiMetaFiles);
+
+    return allApiMetaFiles;
+}
+
+// 获取所有接口文件
+function fnAllApiFiles() {
+    const coreApiFiles = fg.sync(['./apis/**/*', '!**/_*/**', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
+    const appApiFiles = fg.sync(['./apis/**/*', '!**/_*/**', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
+
+    const allApiFiles = _concat(coreApiFiles, appApiFiles);
+
+    return allApiFiles;
+}
 
 // 同步接口目录
 async function syncApiDir(fastify) {

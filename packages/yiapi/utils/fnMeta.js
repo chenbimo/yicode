@@ -1,3 +1,5 @@
+const schemaType = ['string', 'integer', 'number', 'array'];
+
 // 接口元数据函数
 export const fnMeta = (metaUrl, data) => {
     const apiInfo = fnApiInfo(metaUrl);

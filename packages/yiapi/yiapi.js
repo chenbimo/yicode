@@ -4,7 +4,6 @@ import autoLoad from '@fastify/autoload';
 import fp from 'fastify-plugin';
 import localize from 'ajv-i18n';
 import logSymbols from 'log-symbols';
-import { forOwn as _forOwn } from 'lodash-es';
 import fastifyStatic from '@fastify/static';
 import gracefulShutdown from 'http-graceful-shutdown';
 
