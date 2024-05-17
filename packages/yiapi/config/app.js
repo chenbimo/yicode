@@ -1,10 +1,8 @@
-import { system } from '../system.js';
 import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
-import { fnMerge } from '../utils/fnMerger.js';
 
 const { appConfig: importConfig } = await fnImportAppConfig('app', {});
 
-export const appConfig = fnMerge(
+export const appConfig = Object.assign(
     {
         // 应用名称
         appName: '易接口',

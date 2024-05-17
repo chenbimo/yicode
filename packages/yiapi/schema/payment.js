@@ -38,6 +38,13 @@ export const paymentSchema = {
             }
         },
         additionalProperties: false,
-        required: ['name', 'product', 'code', 'duration', 'money']
+        required: [
+            //
+            'name',
+            'product',
+            'code',
+            'duration',
+            'money'
+        ]
     }
 };

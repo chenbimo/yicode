@@ -1,5 +1,9 @@
+import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
+
+const { httpConfig: importConfig } = await fnImportAppConfig('http', {});
+
 // http状态码
-export const httpConfig = {
+export const httpConfig = Object.assign(importConfig, {
     SUCCESS: { symbol: 'SUCCESS', code: 0, msg: '操作成功' },
     INSERT_SUCCESS: { symbol: 'INSERT_SUCCESS', code: 0, msg: '添加成功' },
     SELECT_SUCCESS: { symbol: 'SELECT_SUCCESS', code: 0, msg: '查询成功' },
@@ -19,4 +23,4 @@ export const httpConfig = {
     NO_API: { symbol: 'NO_API', code: 18, msg: '接口不存在' },
     NO_USER: { symbol: 'NO_USER', code: 19, msg: '用户不存在' },
     NO_DATA: { symbol: 'NO_DATA', code: 20, msg: '数据不存在' }
-};
+});

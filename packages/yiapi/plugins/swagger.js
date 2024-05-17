@@ -2,9 +2,9 @@ import fp from 'fastify-plugin';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 
-import { appConfig } from '../config/appConfig.js';
+import { appConfig } from '../config/app.js';
 
-async function main(fastify, opts) {
+async function plugin(fastify, opts) {
     await fastify.register(fastifySwagger, {
         mode: 'dynamic',
         swagger: {
@@ -30,6 +30,6 @@ async function main(fastify, opts) {
         staticCSP: true
     });
 }
-export default fp(main, {
+export default fp(plugin, {
     name: 'swagger'
 });

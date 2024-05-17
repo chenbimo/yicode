@@ -37,5 +37,14 @@ export const weixinSchema = {
         }
     },
     additionalProperties: false,
-    required: ['mchId', 'serialNo', 'apiv3PrivateKey', 'privateKey', 'appId', 'appSecret', 'notifyUrl']
+    required: [
+        //
+        'mchId',
+        'serialNo',
+        'apiv3PrivateKey',
+        'privateKey',
+        'appId',
+        'appSecret',
+        'notifyUrl'
+    ]
 };

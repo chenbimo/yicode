@@ -1,7 +1,5 @@
-import { system } from '../system.js';
 import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
-import { fnMerge } from '../utils/fnMerger.js';
 
 const { uploadConfig: importConfig } = await fnImportAppConfig('upload', {});
 
-export const uploadConfig = fnMerge({}, importConfig);
+export const uploadConfig = Object.assign({}, importConfig);

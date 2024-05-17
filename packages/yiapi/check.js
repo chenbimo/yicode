@@ -1,8 +1,8 @@
 // 内核模块
 import { resolve, basename } from 'node:path';
-import { readdirSync } from 'node:fs';
+import { readdirSync, existsSync } from 'node:fs';
 // 外部模块
-import fs from 'fs-extra';
+import { ensureDirSync } from 'fs-extra';
 import logSymbols from 'log-symbols';
 import Ajv from 'ajv';
 import localize from 'ajv-i18n';
@@ -23,7 +23,7 @@ import { fnImportCoreConfig } from './utils/fnImportCoreConfig.js';
 import { fnImportCoreSchema } from './utils/fnImportCoreSchema.js';
 
 // 判断运行目录下是否有 yiapi.js 文件
-if (fs.exists(resolve(system.appDir, 'yiapi.js')) === false) {
+if (existsSync(resolve(system.appDir, 'yiapi.js')) === false) {
     console.log(`${logSymbols.warning} 请在 yiapi 项目根目录下运行`);
     process.exit(1);
 }
@@ -35,17 +35,16 @@ if (['development', 'production'].includes(process.env.NODE_ENV) === false) {
 }
 
 // 确保关键目录存在
-fs.ensureDirSync(resolve(system.appDir, 'apis'));
-fs.ensureDirSync(resolve(system.appDir, 'config'));
-fs.ensureDirSync(resolve(system.appDir, 'plugins'));
-fs.ensureDirSync(resolve(system.appDir, 'logs'));
-fs.ensureDirSync(resolve(system.appDir, 'public'));
+ensureDirSync(resolve(system.appDir, 'apis'));
+ensureDirSync(resolve(system.appDir, 'config'));
+ensureDirSync(resolve(system.appDir, 'plugins'));
+ensureDirSync(resolve(system.appDir, 'logs'));
+ensureDirSync(resolve(system.appDir, 'public'));
 
 // 验证所有配置文件
 const ajv = new Ajv({
     strict: false,
-    allErrors: true,
-    verbose: true
+    allErrors: true
 });
 const files = readdirSync(resolve(system.yiapiDir, 'config'));
 for (let file of files) {

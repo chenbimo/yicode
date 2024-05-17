@@ -1,10 +1,8 @@
-import { system } from '../system.js';
 import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
-import { fnMerge } from '../utils/fnMerger.js';
 
 const { mailConfig: importConfig } = await fnImportAppConfig('mail', {});
 
-export const mailConfig = fnMerge(
+export const mailConfig = Object.assign(
     {
         host: 'demo.com',
         port: 465,

@@ -10,6 +10,22 @@ import localize from 'ajv-i18n';
 import logSymbols from 'log-symbols';
 import fastifyStatic from '@fastify/static';
 import gracefulShutdown from 'http-graceful-shutdown';
+// 启动插件
+import swaggerPlugin from './plugins/swagger.js';
+import jwtPlugin from './plugins/jwt.js';
+import xmlParsePlugin from './bootstrap/xmlParse.js';
+import redisPlugin from './bootstrap/redis.js';
+import mysqlPlugin from './bootstrap/mysql.js';
+import toolPlugin from './bootstrap/tool.js';
+import corsPlugin from './bootstrap/cors.js';
+import cronPlugin from './bootstrap/corn.js';
+import authPlugin from './bootstrap/auth.js';
+import mailPlugin from './bootstrap/mail.js';
+import ratePlugin from './bootstrap/rate.js';
+import syncApiPlugin from './bootstrap/syncApi.js';
+import syncMenuPlugin from './bootstrap/syncMenu.js';
+import syncDevPlugin from './bootstrap/syncDev.js';
+import uploadPlugin from './bootstrap/upload.js';
 
 // 配置信息
 import { appConfig } from './config/app.js';
@@ -91,32 +107,22 @@ fastify.get('/', function (req, res) {
     });
 });
 
-// 路由映射列表
-// fastify.register(autoLoad, {
-//     dir: join(system.yiapiDir, 'plugins'),
-//     matchFilter: (_path) => {
-//         return _path === '/routes.js';
-//     }
-// });
-
-// 接口文档生成
-if (appConfig.isSwagger === true) {
-    fastify.register(autoLoad, {
-        dir: join(system.yiapiDir, 'plugins'),
-        matchFilter: (_path) => {
-            return _path === '/swagger.js';
-        }
-    });
-}
-
 // 加载启动插件
-// fastify.register(autoLoad, {
-//     dir: join(system.yiapiDir, 'bootstrap'),
-//     matchFilter: (_path) => {
-//         return _path.endsWith('.js') === true;
-//     },
-//     ignorePattern: /^[_.]/
-// });
+appConfig.isSwagger === true && fastify.register(swaggerPlugin, {});
+fastify.register(jwtPlugin, {});
+fastify.register(xmlParsePlugin, {});
+fastify.register(redisPlugin, {});
+fastify.register(mysqlPlugin, {});
+fastify.register(toolPlugin, {});
+fastify.register(corsPlugin, {});
+fastify.register(cronPlugin, {});
+fastify.register(authPlugin, {});
+fastify.register(mailPlugin, {});
+fastify.register(ratePlugin, {});
+fastify.register(syncApiPlugin, {});
+fastify.register(syncMenuPlugin, {});
+fastify.register(syncDevPlugin, {});
+fastify.register(uploadPlugin, {});
 
 // 加载用户插件
 // fastify.register(autoLoad, {
@@ -180,5 +186,13 @@ function initServer() {
         });
     });
 }
-
-export { fastify, fp, initServer };
+const appDir = system.appDir;
+const yiapiDir = system.yiapiDir;
+export {
+    //
+    fastify,
+    fp,
+    initServer,
+    appDir,
+    yiapiDir
+};

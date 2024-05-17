@@ -1,10 +1,8 @@
-import { system } from '../system.js';
 import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
-import { fnMerge } from '../utils/fnMerger.js';
 
 const { mysqlConfig: importConfig } = await fnImportAppConfig('mysql', {});
 
-export const mysqlConfig = fnMerge(
+export const mysqlConfig = Object.assign(
     {
         host: '127.0.0.1',
         port: 3306,
