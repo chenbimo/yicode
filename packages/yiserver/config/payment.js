@@ -1,4 +1,4 @@
-import { timeConfig } from '@yicode/yiapi/config/time.js';
+import { secondTimeConfig } from '@yicode/yiapi/config/secondTime.js';
 import { productConfig } from './product.js';
 export const paymentConfig = [
     {
@@ -9,7 +9,7 @@ export const paymentConfig = [
         // 支付代号
         code: 1,
         // 时长 0=永久 非0=秒
-        duration: timeConfig.second.month,
+        duration: secondTimeConfig.month,
         // 价格 分
         money: 1500
     },
@@ -21,7 +21,7 @@ export const paymentConfig = [
         // 支付代号
         code: 2,
         // 时长 0=永久 非0=秒
-        duration: timeConfig.second.forever,
+        duration: secondTimeConfig.forever,
         // 价格 分
         money: 4500
     }

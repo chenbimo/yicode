@@ -8,12 +8,6 @@ export const appSchema = {
             minLength: 1,
             maxLength: 50
         },
-        appNameEn: {
-            title: '应用英文名称',
-            type: 'string',
-            minLength: 1,
-            maxLength: 50
-        },
         salt: {
             title: '加密盐值',
             type: 'string',
@@ -58,5 +52,18 @@ export const appSchema = {
             type: 'string',
             enum: ['default', 'time']
         }
-    }
+    },
+    additionalProperties: false,
+    required: [
+        //
+        'appName',
+        'salt',
+        'port',
+        'host',
+        'devPassword',
+        'paramsCheck',
+        'isSwagger',
+        'isWxPay',
+        'tablePrimaryKey'
+    ]
 };

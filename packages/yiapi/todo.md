@@ -28,3 +28,4 @@
 -   [ ] 数据库同步字段名称改变不要删除，把该字段改成其他名称。
 -   [ ] 提供数据库创建和对比，不提供同步功能。
 -   [ ] 限制Node.js版本只能为v20
+-   [ ] 判断process.env.NODE_ENV是否为production或development

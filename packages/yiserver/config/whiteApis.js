@@ -1,1 +1,1 @@
-export const whiteApisConfig = {};
+export const whiteApisConfig = [];

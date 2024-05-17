@@ -1,1 +1,1 @@
-export const freeApisConfig = {};
+export const freeApisConfig = [];

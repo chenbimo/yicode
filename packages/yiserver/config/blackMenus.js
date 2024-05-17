@@ -1,1 +1,1 @@
-export const blackMenusConfig = {};
+export const blackMenusConfig = [];

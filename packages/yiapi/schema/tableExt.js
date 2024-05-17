@@ -1,4 +1,4 @@
-export const sysTableExtSchema = {
+export const tableExtSchema = {
     // 扩展系统表字段
     title: '系统表扩展字段',
     type: 'object',

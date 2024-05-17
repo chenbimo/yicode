@@ -1,1 +1,1 @@
-export const logFilterConfig = {};
+export const logFilterConfig = [];

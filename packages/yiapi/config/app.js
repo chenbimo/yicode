@@ -2,13 +2,12 @@ import { system } from '../system.js';
 import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
 import { fnMerge } from '../utils/fnMerger.js';
 
-const { app: importConfig } = await fnImportAppConfig('app', {});
+const { appConfig: importConfig } = await fnImportAppConfig('app', {});
 
 export const appConfig = fnMerge(
     {
         // 应用名称
         appName: '易接口',
-        appNameEn: 'yiapi',
         // 加密盐
         salt: 'yiapi-123456.',
         // 监听端口

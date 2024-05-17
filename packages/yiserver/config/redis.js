@@ -17,4 +17,4 @@ export const redisConfig = {
         db: 0,
         keyPrefix: 'test:'
     }
-}[process.env.NODE_ENV];
+}[process.env.NODE_ENV || 'development'];

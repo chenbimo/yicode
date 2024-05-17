@@ -1,5 +1,5 @@
 // 系统表字段扩展
-export const tableConfig = {
+export const tableExtConfig = {
     sys_user: {
         test_field: {
             type: 'string',

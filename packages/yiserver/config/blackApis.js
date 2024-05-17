@@ -1,1 +1,1 @@
-export const blackApisConfig = {};
+export const blackApisConfig = [];
