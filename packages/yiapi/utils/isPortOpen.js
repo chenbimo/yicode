@@ -1,3 +1,4 @@
+import { createServer as net_createServer, Server as net_Server } from 'node:net';
 // 端口是否打开
 export const fnIsPortOpen = (port) => {
     return new Promise((resolve, reject) => {

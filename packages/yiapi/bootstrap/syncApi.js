@@ -6,7 +6,7 @@ import { readdirSync } from 'node:fs';
 import fp from 'fastify-plugin';
 import { isEmpty as _isEmpty } from 'lodash-es';
 // 工具函数
-import { fnImport } from '../utils/index.js';
+import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
 import { fnDelay } from '../utils/fnDelay.js';
 import { fnIncrUID } from '../utils/fnIncrUID.js';
 import { fnCloneAny } from '../utils/fnCloneAny.js';
@@ -84,7 +84,7 @@ async function syncApiDir(fastify) {
             const apiDirName = file.replace('/_meta.js', '').replace(/.+\/apis/, '');
 
             // 如果数据库中存在当前接口目录，则进行添加或更新
-            const { metaConfig } = await fnImport(url.pathToFileURL(file), {});
+            const { metaConfig } = await fnImportAbsolutePath(url.pathToFileURL(file), {});
 
             const apiMeta = {
                 name: metaConfig._name,
@@ -192,7 +192,7 @@ async function syncApiFile(fastify) {
             // 获得父级数据
             const apiDirData = apiDirByValue[dirname(apiFileName)] || {};
 
-            const { apiName } = await fnImport(file, {});
+            const { apiName } = await fnImportAbsolutePath(file, {});
 
             if (apiFileValue.includes(apiFileName) === false && !autoApiObject[apiFileName]) {
                 // 如果当前接口在数据库中不存在，且没有添加过，则添加接口

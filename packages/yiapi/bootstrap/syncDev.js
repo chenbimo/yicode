@@ -10,14 +10,11 @@ import {
     omit as _omit
 } from 'lodash-es';
 // 工具函数
-import {
-    //
-    fnSaltMD5,
-    fnPureMD5,
-    fnIncrUID
-} from '../utils/index.js';
+import { fnSaltMD5 } from '../utils/fnSaltMD5.js';
+import { fnPureMD5 } from '../utils/fnPureMD5.js';
+import { fnIncrUID } from '../utils/fnIncrUID.js';
 // 配置文件
-import { appConfig } from '../config/appConfig.js';
+import { appConfig } from '../config/app.js';
 
 // 内置角色配置
 const roleConfig = {

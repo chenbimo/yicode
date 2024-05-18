@@ -1,5 +1,5 @@
 import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
 
-const { paymentConfig: importConfig } = await fnImportAppConfig('payment', {});
+const { paymentConfig: importConfig } = await fnImportAppConfig('payment', []);
 
-export const paymentConfig = Object.assign({}, importConfig);
+export const paymentConfig = Object.assign([], importConfig);

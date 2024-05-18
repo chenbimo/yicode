@@ -2,7 +2,7 @@ export const menuSchema = {
     title: '菜单字段',
     type: 'object',
     patternProperties: {
-        '^/[a-z][a-z0-9_-/]*$': {
+        '^\\/[a-z][a-z0-9_\\/-]*$': {
             title: '主菜单',
             type: 'object',
             properties: {
@@ -19,7 +19,7 @@ export const menuSchema = {
                     title: '菜单排序',
                     type: 'integer',
                     minimum: 1,
-                    maximum: 999
+                    maximum: 9999
                 },
                 children: {
                     title: '子菜单',
@@ -36,7 +36,7 @@ export const menuSchema = {
                                     title: '菜单排序',
                                     type: 'integer',
                                     minimum: 1,
-                                    maximum: 999
+                                    maximum: 9999
                                 },
                                 is_system: {
                                     title: '是否系统菜单',

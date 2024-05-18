@@ -1,3 +1,6 @@
+import * as color from 'colorette';
+import logSymbols from 'log-symbols';
+
 const schemaType = ['string', 'integer', 'number', 'array'];
 
 // 接口元数据函数

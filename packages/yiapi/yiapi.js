@@ -12,13 +12,14 @@ import fastifyStatic from '@fastify/static';
 import gracefulShutdown from 'http-graceful-shutdown';
 // 启动插件
 import swaggerPlugin from './plugins/swagger.js';
+import { logger } from './plugins/logger.js';
 import jwtPlugin from './plugins/jwt.js';
 import xmlParsePlugin from './bootstrap/xmlParse.js';
 import redisPlugin from './bootstrap/redis.js';
 import mysqlPlugin from './bootstrap/mysql.js';
 import toolPlugin from './bootstrap/tool.js';
 import corsPlugin from './bootstrap/cors.js';
-import cronPlugin from './bootstrap/corn.js';
+import cronPlugin from './bootstrap/cron.js';
 import authPlugin from './bootstrap/auth.js';
 import mailPlugin from './bootstrap/mail.js';
 import ratePlugin from './bootstrap/rate.js';
@@ -31,8 +32,8 @@ import uploadPlugin from './bootstrap/upload.js';
 import { appConfig } from './config/app.js';
 import { system } from './system.js';
 
-// 预配置
-import { logger } from './plugins/logger.js';
+const appDir = system.appDir;
+const yiapiDir = system.yiapiDir;
 
 // 初始化项目实例
 const fastify = Fastify({
@@ -119,10 +120,10 @@ fastify.register(cronPlugin, {});
 fastify.register(authPlugin, {});
 fastify.register(mailPlugin, {});
 fastify.register(ratePlugin, {});
-fastify.register(syncApiPlugin, {});
-fastify.register(syncMenuPlugin, {});
-fastify.register(syncDevPlugin, {});
 fastify.register(uploadPlugin, {});
+// fastify.register(syncApiPlugin, {});
+// fastify.register(syncMenuPlugin, {});
+// fastify.register(syncDevPlugin, {});
 
 // 加载用户插件
 // fastify.register(autoLoad, {
@@ -186,8 +187,7 @@ function initServer() {
         });
     });
 }
-const appDir = system.appDir;
-const yiapiDir = system.yiapiDir;
+
 export {
     //
     fastify,

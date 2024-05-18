@@ -1,3 +1,5 @@
+import * as color from 'colorette';
+import logSymbols from 'log-symbols';
 // 设置路由函数
 export const fnRoute = (metaUrl, fastify, metaConfig, options) => {
     const apiInfo = fnApiInfo(metaUrl);

@@ -1,3 +1,5 @@
+import * as color from 'colorette';
+import logSymbols from 'log-symbols';
 // 获取查询字段
 export function fnField(tableName, fromType, excludeFields = []) {
     const filePath = `./tables/${tableName}.json`;

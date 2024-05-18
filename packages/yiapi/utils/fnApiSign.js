@@ -1,3 +1,4 @@
+import md5 from 'blueimp-md5';
 // 请求参数签名
 export function fnApiParamsSign(params) {
     let fieldsArray = [];

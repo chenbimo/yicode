@@ -1,3 +1,4 @@
+import { createRequire } from 'node:module';
 /**
  * require 函数
  * @param {String} filePath 文件路径，以根目录为基准

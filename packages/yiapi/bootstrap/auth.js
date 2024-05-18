@@ -19,8 +19,9 @@ import { freeApisConfig } from '../config/freeApis.js';
 import { whiteApisConfig } from '../config/whiteApis.js';
 import { httpConfig } from '../config/http.js';
 // 工具函数
-import { fnRouterPath, fnClearLogData } from '../utils/index.js';
 import { fnApiCheck } from '../utils/fnApiCheck.js';
+import { fnRouterPath } from '../utils/fnRouterPath.js';
+import { fnClearLogData } from '../utils/fnClearLogData.js';
 
 async function plugin(fastify, opts) {
     fastify.addHook('preHandler', async (req, res) => {
