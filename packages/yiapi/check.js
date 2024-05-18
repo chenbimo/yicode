@@ -18,7 +18,7 @@ import { productConfig } from './config/product.js';
 import { paymentConfig } from './config/payment.js';
 import { jwtConfig } from './config/jwt.js';
 // 工具函数
-import { fnIsUnique } from './utils/fnIsUnique.js';
+import { toUnique } from './utils/toUnique.js';
 import { fnImportCoreConfig } from './utils/fnImportCoreConfig.js';
 import { fnImportCoreSchema } from './utils/fnImportCoreSchema.js';
 
@@ -85,12 +85,12 @@ if (isFunction(callbackConfig.weixinPayNotify) === false) {
     process.exit(1);
 }
 
-if (fnIsUnique(Object.values(productConfig)) === false) {
+if (toUnique(Object.values(productConfig)) === false) {
     console.log(`${logSymbols.warning} 产品代号必须唯一`);
     process.exit(1);
 }
 
-if (fnIsUnique(paymentConfig.map((item) => item.code)) === false) {
+if (toUnique(paymentConfig.map((item) => item.code)) === false) {
     console.log(`${logSymbols.warning} 支付代号必须唯一`);
     process.exit(1);
 }

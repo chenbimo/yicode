@@ -1,68 +1,38 @@
 // 内部模块
 import url from 'node:url';
-import path from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { readdirSync } from 'node:fs';
 // 外部模块
 import fp from 'fastify-plugin';
-import {
-    //
-    concat as _concat,
-    keyBy as _keyBy,
-    isEmpty as _isEmpty,
-    omit as _omit
-} from 'lodash-es';
+import { isEmpty as _isEmpty } from 'lodash-es';
 // 工具函数
-import {
-    //
-    fnImport,
-    fnCloneAny,
-    fnIncrUID,
-    fnDelay
-} from '../utils/index.js';
+import { fnImport } from '../utils/index.js';
+import { fnDelay } from '../utils/fnDelay.js';
+import { fnIncrUID } from '../utils/fnIncrUID.js';
+import { fnCloneAny } from '../utils/fnCloneAny.js';
+// 工具函数
+import { toKeyBy } from '../utils/toKeyBy.js';
 // 配置文件
-import { appConfig } from '../config/appConfig.js';
-
-// 获取接口目录名称
-function getApiDirName(file) {
-    // 如果不是插件接口
-    const apiDirName = file //
-        .replace(/\\+/gi, '/')
-        .replace('/_meta.js', '')
-        .replace(/.+\/apis/, '');
-    return apiDirName;
-}
-
-// 获取接口文件名称
-function getApiFileName(file) {
-    const apiFileName = file //
-        .replace(/\\+/, '/')
-        .replace('.js', '')
-        .replace(/.+\/apis/, '');
-    return apiFileName;
-}
+import { system } from '../system.js';
+import { appConfig } from '../config/app.js';
 
 // 获取所有接口文件
-async function fnAllApiMeta() {
-    const coreApiMetaFiles = fg.sync(['./apis/**/_meta.js', '!**/_*/**'], {
-        onlyFiles: true,
-        dot: false,
-        absolute: true,
-        cwd: sysConfig.yiapiDir
-    });
-    const appApiMetaFiles = fg.sync(['./apis/**/_meta.js', '!**/_*/**'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
+async function fnAllApiFiles(type) {
+    const coreApiFiles = readdirSync(resolve(system.yiapiDir, 'apis'));
+    const appApiFiles = readdirSync(resolve(system.appDir, 'apis'));
 
-    const allApiMetaFiles = _concat(coreApiMetaFiles, appApiMetaFiles);
+    const allApiFiles = [...coreApiFiles, ...appApiFiles].map((file) => file.replace(/\\+/gi, '/'));
 
-    return allApiMetaFiles;
-}
+    if (type === 'meta') {
+        return allApiFiles.filter((file) => file.endWiths('/_meta.js'));
+    }
 
-// 获取所有接口文件
-function fnAllApiFiles() {
-    const coreApiFiles = fg.sync(['./apis/**/*', '!**/_*/**', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.yiapiDir });
-    const appApiFiles = fg.sync(['./apis/**/*', '!**/_*/**', '!**/_*.js'], { onlyFiles: true, dot: false, absolute: true, cwd: sysConfig.appDir });
-
-    const allApiFiles = _concat(coreApiFiles, appApiFiles);
-
-    return allApiFiles;
+    if (type === 'api') {
+        return allApiFiles.filter((file) => {
+            const fileName = basename(file);
+            return !basename(file).startWiths('_');
+        });
+    }
 }
 
 // 同步接口目录
@@ -72,11 +42,11 @@ async function syncApiDir(fastify) {
         const apiModel = fastify.mysql.table('sys_api');
 
         // 所有的接口元数据文件，用来生成目录
-        const allApiMeta = await fnAllApiMeta();
+        const allApiMeta = await fnAllApiFiles('meta');
 
         // 所有目录路径的数组
         const allApiMetaByValue = allApiMeta.map((file) => {
-            return getApiDirName(file);
+            return file.replace('/_meta.js', '').replace(/.+\/apis/, '');
         });
 
         // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
@@ -85,16 +55,16 @@ async function syncApiDir(fastify) {
         // 所有接口目录数据
         const apisDir = apis.filter((item) => item.is_bool === 0);
         const apiDirValue = apisDir.map((item) => item.value);
-        const apiDirByValue = _keyBy(apisDir, 'value');
+        const apiDirByValue = toKeyBy(apisDir, 'value');
 
         // 从数据库查出的，明确保留的接口
-        let keepApiDataObject = [];
+        const keepApiDataObject = [];
         // 将要删除的接口数据
-        let deleteApiDirData = [];
+        const deleteApiDirData = [];
         // 将要添加的接口数据
-        let insertApiDirData = [];
+        const insertApiDirData = [];
         // 将要修改的数据
-        let updateApiDirData = [];
+        const updateApiDirData = [];
 
         // 找出所有需要删除的接口目录
         apisDir.forEach((item) => {
@@ -111,33 +81,18 @@ async function syncApiDir(fastify) {
 
         for (let i = 0; i < allApiMeta.length; i++) {
             const file = allApiMeta[i];
-            const apiDirName = getApiDirName(file);
+            const apiDirName = file.replace('/_meta.js', '').replace(/.+\/apis/, '');
 
             // 如果数据库中存在当前接口目录，则进行添加或更新
             const { metaConfig } = await fnImport(url.pathToFileURL(file), {});
 
-            if (!metaConfig) {
-                fastify.log.error(`缺少接口元数据：${file}`);
-                process.exit(1);
-            }
-
-            if (_isEmpty(metaConfig) === true) {
-                fastify.log.error(`接口元数据不能为空：${file}`);
-                process.exit(1);
-            }
-
-            // 判断有无 name 字段
-            if (!metaConfig?._name) {
-                fastify.log.error(`接口元数据缺少 _name 字段：${file} `);
-                process.exit(1);
-            }
-
-            let apiMeta = {};
-            apiMeta.name = metaConfig._name;
-            apiMeta.value = apiDirName;
-            apiMeta.is_bool = 0;
-            apiMeta.pid = 0;
-            apiMeta.pids = '0';
+            const apiMeta = {
+                name: metaConfig._name,
+                value: apiDirName,
+                is_bool: 0,
+                pid: 0,
+                pids: '0'
+            };
 
             if (apiDirByValue[apiDirName]) {
                 // 如果数据库中已有此目录，则更新目录
@@ -153,22 +108,22 @@ async function syncApiDir(fastify) {
         }
 
         // 如果待删除接口目录大于0，则删除
-        if (_isEmpty(deleteApiDirData) === false) {
+        if (deleteApiDirData.length > 0) {
             await apiModel.clone().whereIn('id', deleteApiDirData).deleteData();
         }
 
         // 如果待增加接口目录大于0，则增加
-        if (_isEmpty(insertApiDirData) === false) {
+        if (insertApiDirData.length > 0) {
             await apiModel.clone().insertData(insertApiDirData);
         }
 
         // 如果待更新接口目录大于0，则更新
-        if (_isEmpty(updateApiDirData) === false) {
+        if (updateApiDirData.length > 0) {
             const updateBatchData = updateApiDirData.map((item) => {
                 return apiModel
                     .clone()
                     .where('id', item.id)
-                    .updateData(_omit(item, ['id', 'created_at']));
+                    .updateData(toOmit(item, ['id', 'created_at']));
             });
             await Promise.all(updateBatchData);
         }
@@ -185,11 +140,11 @@ async function syncApiFile(fastify) {
         const apiModel = fastify.mysql.table('sys_api');
 
         // 所有的接口文件，用来生成接口
-        const allApiFiles = await fnAllApiFiles();
+        const allApiFiles = await fnAllApiFiles('api');
 
         // 所有接口路径的数组
         const allApiFileByValue = allApiFiles.map((file) => {
-            return getApiFileName(file);
+            return file.replace('.js', '').replace(/.+\/apis/, '');
         });
 
         // 接口目录同步完毕后，重新查询一遍接口目录，拿到所有的接口目录
@@ -198,23 +153,23 @@ async function syncApiFile(fastify) {
         // 所有接口目录数据
         const apisDir = apis.filter((item) => item.is_bool === 0);
         const apiDirValue = apisDir.map((item) => item.value);
-        const apiDirByValue = _keyBy(apisDir, 'value');
+        const apiDirByValue = toKeyBy(apisDir, 'value');
 
         // 所有的接口数据
         const apisFile = apis.filter((item) => item.is_bool === 1);
         const apiFileValue = apisFile.map((item) => item.value);
-        const apiFileByValue = _keyBy(apisFile, 'value');
+        const apiFileByValue = toKeyBy(apisFile, 'value');
 
         // 从数据库查出的，明确保留的接口
-        let keepApiDataObject = [];
+        const keepApiDataObject = [];
         // 将要删除的接口数据
-        let deleteApiData = [];
+        const deleteApiData = [];
         // 将要添加的接口数据
-        let insertApiData = [];
+        const insertApiData = [];
         // 将要修改的数据
-        let updateApiData = [];
+        const updateApiData = [];
         // 自动生成的接口路径
-        let autoApiObject = {};
+        const autoApiObject = {};
 
         // 找出所有需要删除的接口文件
         apisFile.forEach((item) => {
@@ -233,10 +188,9 @@ async function syncApiFile(fastify) {
         // 使用 for 替代 forEach 遍历，不然代码不会同步执行
         for (let i = 0; i < allApiFiles.length; i++) {
             const file = allApiFiles[i];
-            const apiFileName = getApiFileName(file);
-
+            const apiFileName = file.replace('.js', '').replace(/.+\/apis/, '');
             // 获得父级数据
-            const parentApiData = apiDirByValue[path.dirname(apiFileName)] || {};
+            const apiDirData = apiDirByValue[dirname(apiFileName)] || {};
 
             const { apiName } = await fnImport(file, {});
 
@@ -258,9 +212,9 @@ async function syncApiFile(fastify) {
                 if (appConfig.tablePrimaryKey === 'time') {
                     apiParams.id = fnIncrUID();
                 }
-                if (_isEmpty(parentApiData) === false) {
-                    apiParams.pid = parentApiData.id;
-                    apiParams.pids = `0,${parentApiData.id}`;
+                if (_isEmpty(apiDirData) === false) {
+                    apiParams.pid = apiDirData.id;
+                    apiParams.pids = `0,${apiDirData.id}`;
                     apiParams.level = 2;
                 }
                 insertApiData.push(apiParams);
@@ -273,11 +227,11 @@ async function syncApiFile(fastify) {
                     const currentApi = apiFileByValue[apiFileName] || {};
                     if (_isEmpty(currentApi) === false) {
                         // 如果当前API不为空，且父级API不为空，且当前父级ID为0
-                        if (_isEmpty(parentApiData) === false) {
+                        if (_isEmpty(apiDirData) === false) {
                             const params = {
                                 id: currentApi.id,
-                                pid: parentApiData.id,
-                                pids: `0,${parentApiData.id}`,
+                                pid: apiDirData.id,
+                                pids: `0,${apiDirData.id}`,
                                 level: 2,
                                 name: apiName || ''
                             };
@@ -310,7 +264,7 @@ async function syncApiFile(fastify) {
         // 如果待更新接口大于0，则更新
         if (_isEmpty(updateApiData) === false) {
             const updateBatchData = updateApiData.map((item) => {
-                return apiModel.clone().where('id', item.id).updateData(_omit(item, 'id'));
+                return apiModel.clone().where('id', item.id).updateData(toOmit(item, 'id'));
             });
             await Promise.all(updateBatchData);
         }
@@ -324,12 +278,12 @@ async function plugin(fastify) {
     // 同步接口
     try {
         await syncApiDir(fastify);
-        await fnDelay(1000);
+        await fnDelay(500);
         await syncApiFile(fastify);
-        // 将接口缓存到 redis 中
+        await fnDelay(100);
         await fastify.cacheApiData();
     } catch (err) {
         fastify.log.error(err);
     }
 }
-export default fp(plugin, { name: 'syncApi', dependencies: ['mysql', 'redis', 'tool'] });
+export default fp(plugin, { name: 'syncApi', dependencies: ['redis', 'mysql', 'tool'] });

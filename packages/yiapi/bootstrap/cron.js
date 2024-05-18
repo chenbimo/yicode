@@ -1,19 +1,18 @@
 import { Cron } from 'croner';
 import fp from 'fastify-plugin';
-import { isFunction } from 'lodash-es';
 import logSymbols from 'log-symbols';
 
 // 工具函数
-import * as utils from '../utils/index.js';
 
 // 配置信息
-import { appConfig } from '../config/appConfig.js';
+import { cronConfig } from '../config/cron.js';
+import { isFunction } from '../utils/isFunction.js';
 
 function plugin(fastify, opts, next) {
-    appConfig.cron.forEach((item) => {
+    cronConfig.forEach((item) => {
         if (isFunction(item.handler) === false) {
             console.log(logSymbols.error, `${item.name} 定时器 handler 必须为一个函数`);
-            process.exit();
+            process.exit(1);
         }
         const options = {
             name: item.name,

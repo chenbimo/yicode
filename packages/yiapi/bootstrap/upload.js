@@ -1,8 +1,7 @@
 import fp from 'fastify-plugin';
 import fastifyMultipart from '@fastify/multipart';
-import { appConfig } from '../config/appConfig.js';
 
-async function plugin(fastify, options) {
+async function plugin(fastify) {
     await fastify.register(fastifyMultipart, {
         attachFieldsToBody: true,
         limits: {

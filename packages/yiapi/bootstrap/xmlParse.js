@@ -1,14 +1,12 @@
 import fp from 'fastify-plugin';
 import fxp from 'fast-xml-parser';
-import { appConfig } from '../config/appConfig.js';
+import { appConfig } from '../config/app.js';
 
-const defaults = {
-    contentType: ['text/xml', 'application/xml', 'application/rss+xml'],
-    validate: false
-};
-
-function plugin(fastify, options, next) {
-    const opts = Object.assign({}, defaults, options || {});
+async function plugin(fastify) {
+    const opts = {
+        contentType: ['text/xml', 'application/xml', 'application/rss+xml'],
+        validate: false
+    };
 
     function contentParser(req, payload, done) {
         const xmlParser = new fxp.XMLParser(opts);
@@ -52,8 +50,6 @@ function plugin(fastify, options, next) {
     }
 
     fastify.addContentTypeParser(opts.contentType, contentParser);
-
-    next();
 }
 
 export default fp(plugin, {

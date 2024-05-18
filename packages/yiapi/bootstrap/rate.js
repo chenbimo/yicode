@@ -1,20 +1,20 @@
 import fp from 'fastify-plugin';
 import rateLimit from '@fastify/rate-limit';
 
-import { appConfig } from '../config/appConfig.js';
+import { rateConfig } from '../config/rate.js';
 
 async function plugin(fastify, options) {
     try {
         await fastify.register(rateLimit, {
-            global: appConfig.rate.global || true,
-            max: appConfig.rate.max || 100,
+            global: rateConfig.global || true,
+            max: rateConfig.max || 100,
             ban: null,
-            timeWindow: appConfig.rate.timeWindow || 1000 * 10,
-            hook: appConfig.rate.hook || 'onRequest',
-            cache: appConfig.rate.cache || 10000,
-            allowList: appConfig.rate.allowList || ['127.0.0.1', 'localhost'],
+            timeWindow: rateConfig.timeWindow || 1000 * 10,
+            hook: rateConfig.hook || 'onRequest',
+            cache: rateConfig.cache || 10000,
+            allowList: rateConfig.allowList || ['127.0.0.1', 'localhost'],
             redis: null,
-            nameSpace: appConfig.rate.namespace || 'test_rate:',
+            nameSpace: rateConfig.namespace || 'test_rate:',
             continueExceeding: true,
             skipOnError: true,
             keyGenerator: function (req) {
@@ -35,4 +35,4 @@ async function plugin(fastify, options) {
     }
 }
 
-export default fp(plugin, { name: 'rate', dependencies: ['mysql', 'redis'] });
+export default fp(plugin, { name: 'rate', dependencies: ['redis'] });

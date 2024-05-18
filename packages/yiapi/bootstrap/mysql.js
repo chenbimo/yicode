@@ -1,8 +1,9 @@
 import fp from 'fastify-plugin';
 import Knex from 'knex';
 
-import { appConfig } from '../config/appConfig.js';
-import { fnDbInsertData, fnDbUpdateData } from '../utils/index.js';
+import { mysqlConfig } from '../config/mysql.js';
+import { fnDbInsert } from '../utils/fnDbInsert.js';
+import { fnDbUpdate } from '../utils/fnDbUpdate.js';
 
 async function plugin(fastify, options) {
     try {
@@ -10,16 +11,16 @@ async function plugin(fastify, options) {
         Knex.QueryBuilder.extend('insertData', function (data) {
             if (Array.isArray(data)) {
                 const data2 = data.map((item) => {
-                    return fnDbInsertData(item);
+                    return fnDbInsert(item);
                 });
                 return this.insert(data2);
             } else {
-                return this.insert(fnDbInsertData(data));
+                return this.insert(fnDbInsert(data));
             }
         });
         // 更新数据
         Knex.QueryBuilder.extend('updateData', function (data) {
-            return this.update(fnDbUpdateData(data));
+            return this.update(fnDbUpdate(data));
         });
         // 删除数据
         Knex.QueryBuilder.extend('deleteData', function (data) {
@@ -47,11 +48,11 @@ async function plugin(fastify, options) {
         const mysql = await new Knex({
             client: 'mysql2',
             connection: {
-                host: appConfig.database.host,
-                port: appConfig.database.port,
-                user: appConfig.database.username,
-                password: appConfig.database.password,
-                database: appConfig.database.db
+                host: mysqlConfig.host,
+                port: mysqlConfig.port,
+                user: mysqlConfig.username,
+                password: mysqlConfig.password,
+                database: mysqlConfig.db
             },
             acquireConnectionTimeout: 30000,
             asyncStackTraces: true,

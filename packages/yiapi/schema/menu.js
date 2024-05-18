@@ -1,9 +1,8 @@
 export const menuSchema = {
-    // 扩展菜单字段
-    title: '扩展菜单字段',
+    title: '菜单字段',
     type: 'object',
-    properties: {
-        '*': {
+    patternProperties: {
+        '^/[a-z][a-z0-9_-/]*$': {
             title: '主菜单',
             type: 'object',
             properties: {

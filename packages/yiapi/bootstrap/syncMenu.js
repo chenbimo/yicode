@@ -1,128 +1,16 @@
 // 外部插件
 import fp from 'fastify-plugin';
-import {
-    //
-    forEach as _forEach,
-    isEmpty as _isEmpty,
-    keyBy as _keyBy,
-    omit as _omit,
-    forOwn as _forOwn,
-    isObject as _isObject,
-    cloneDeep as _cloneDeep,
-    uniq as _uniq,
-    merge as _merge
-} from 'lodash-es';
 // 工具函数
-import { fnKebabCase, fnIncrUID, fnDelay } from '../utils/index.js';
+import { isObject } from '../utils/isObject.js';
+import { toKeyBy } from '../utils/toKeyBy.js';
+import { toUnique } from '../utils/toUnique.js';
+import { toOmit } from '../utils/toOmit.js';
+import { fnIncrUID } from '../utils/fnIncrUID.js';
+import { fnDelay } from '../utils/fnDelay.js';
 // 配置文件
-import { appConfig } from '../config/appConfig.js';
-
-let menuConfigNew = [];
-const menuDirNew = [];
-const menuFileNew = [];
-
-// 菜单配置
-const menuConfig = _merge(appConfig.menu, {
-    '/internal/_home': {
-        name: '首页数据',
-        sort: 1,
-        is_system: 1,
-        children: {
-            '/internal/home': {
-                name: '首页',
-                is_system: 1,
-                sort: 1
-            }
-        }
-    },
-    '/internal/_banner': {
-        name: '轮播管理',
-        sort: 1000,
-        is_system: 1,
-        children: {
-            '/internal/banner': {
-                name: '轮播列表',
-                is_system: 1,
-                sort: 1
-            }
-        }
-    },
-    '/internal/people': {
-        name: '人员数据',
-        sort: 1001,
-        is_system: 1,
-        children: {
-            '/internal/user': {
-                name: '用户',
-                is_system: 1,
-                sort: 1
-            },
-            '/internal/admin': {
-                name: '管理员',
-                is_system: 1,
-                sort: 2
-            }
-        }
-    },
-    '/internal/permission': {
-        name: '权限数据',
-        sort: 1002,
-        children: {
-            '/internal/menu': {
-                name: '菜单列表',
-                is_system: 1,
-                sort: 1
-            },
-            '/internal/api': {
-                name: '接口列表',
-                is_system: 1,
-                sort: 2
-            },
-            '/internal/dictCategory': {
-                name: '字典分类',
-                is_system: 1,
-                sort: 3
-            },
-            '/internal/dict': {
-                name: '字典管理',
-                is_system: 1,
-                sort: 4
-            },
-            '/internal/role': {
-                name: '角色管理',
-                is_system: 1,
-                sort: 5
-            }
-        }
-    },
-    '/internal/setup': {
-        name: '配置数据',
-        sort: 1003,
-        children: {
-            '/internal/app-config': {
-                name: '项目配置',
-                is_system: 1,
-                sort: 1
-            }
-        }
-    },
-    '/internal/log': {
-        name: '日志数据',
-        sort: 1004,
-        children: {
-            '/internal/login-log': {
-                name: '登录日志',
-                is_system: 1,
-                sort: 1
-            },
-            '/internal/mail-log': {
-                name: '邮件日志',
-                is_system: 1,
-                sort: 2
-            }
-        }
-    }
-});
+import { appConfig } from '../config/app.js';
+import { menuConfig } from '../config/menu.js';
+import { blackMenusConfig } from '../config/blackMenus.js';
 
 // 同步菜单目录
 async function syncMenuDir(fastify) {
@@ -131,67 +19,66 @@ async function syncMenuDir(fastify) {
         const menuModel = fastify.mysql.table('sys_menu');
 
         // 第一次请求菜单数据，用于创建一级菜单
-        const menuDir = await menuModel.clone().where({ pid: 0 }).selectAll();
-        const menuDirByValue = _keyBy(menuDir, 'value');
+        const menuDirDb = await menuModel.clone().where({ pid: 0 }).selectAll();
+        const menuDirDbByValue = toKeyBy(menuDirDb, 'value');
 
-        let deleteMenuDirValue = [];
-        let insertMenuDir = [];
-        let deleteMenuDir = [];
-        let updateMenuDir = [];
+        const insertMenuDb = [];
+        const deleteMenuDb = [];
+        const updateMenuDb = [];
+        let menuDbIndex = 1;
 
-        // 删除重复数据
-        menuDir.forEach((item) => {
-            if (deleteMenuDirValue.includes(item.value) === true) {
-                deleteMenuDir.push(item.id);
+        for (let keyDir in menuConfig) {
+            if (menuConfig.hasOwnProperty(keyDir) === false) continue;
+            const itemDir = menuConfig[keyDir];
+            const menuDirData = menuDirDbByValue[keyDir];
+            if (menuDirData?.id) {
+                updateMenuDb.push({
+                    id: menuDirData.id,
+                    name: itemDir.name,
+                    value: itemDir.value,
+                    sort: itemDir.sort || index,
+                    is_system: itemDir.is_system || 0
+                });
             } else {
-                deleteMenuDirValue.push(item.value);
-            }
-        });
-
-        _forEach(menuConfigNew, (item, index) => {
-            // 映射的菜单数据
-            const mapMenu = menuDirByValue[item.value];
-            if (!mapMenu) {
-                let insertData = {
-                    name: item.name,
-                    value: item.value,
+                const insertData = {
+                    name: itemDir.name,
+                    value: keyDir,
                     pid: 0,
-                    sort: item.sort || index,
+                    sort: itemDir.sort || menuDbIndex++,
                     is_open: 0,
-                    is_system: item.is_system || 0
+                    is_system: itemDir.is_system || 0
                 };
                 if (appConfig.tablePrimaryKey === 'time') {
                     insertData.id = fnIncrUID();
                 }
-                insertMenuDir.push(insertData);
-            } else {
-                updateMenuDir.push({
-                    id: mapMenu.id,
-                    name: item.name,
-                    value: item.value,
-                    sort: item.sort || index,
-                    is_system: item.is_system || 0
-                });
+                insertMenuDb.push(insertData);
+            }
+        }
+
+        // 获得删除数据
+        menuDirDb.forEach((item) => {
+            if (!menuConfig(item.value)) {
+                deleteMenuDb.push(item.id);
             }
         });
 
         // 删除菜单目录
-        if (_isEmpty(deleteMenuDir) === false) {
-            await menuModel.clone().whereIn('id', _uniq(deleteMenuDir)).deleteData();
+        if (deleteMenuDb.length > 0) {
+            await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
         }
 
         // 添加菜单目录
-        if (_isEmpty(insertMenuDir) === false) {
-            await menuModel.clone().insertData(insertMenuDir);
+        if (insertMenuDb.length > 0) {
+            await menuModel.clone().insertData(insertMenuDb);
         }
 
         // 如果待更新接口目录大于 0，则更新
-        if (_isEmpty(updateMenuDir) === false) {
-            const updateBatch = updateMenuDir.map((item) => {
+        if (updateMenuDb.length > 0) {
+            const updateBatch = updateMenuDb.map((item) => {
                 return menuModel
                     .clone()
                     .where('id', item.id)
-                    .updateData(_omit(item, ['id']));
+                    .updateData(toOmit(item, ['id']));
             });
             await Promise.all(updateBatch);
         }
@@ -208,74 +95,79 @@ async function syncMenuFile(fastify) {
         // 准备好表
         const menuModel = fastify.mysql.table('sys_menu');
 
-        const menuDir = await menuModel.clone().where({ pid: 0 }).selectAll();
-        const menuDirByValue = _keyBy(menuDir, 'value');
+        const menuDirDb = await menuModel.clone().where({ pid: 0 }).selectAll();
+        const menuDirDbByValue = toKeyBy(menuDirDb, 'value');
 
         // 第二次请求菜单数据，用于创建二级菜单
-        const menuData = await menuModel.clone().andWhere('pid', '<>', 0).selectAll();
-        const menuByValue = _keyBy(menuData, 'value');
+        const menuFileDb = await menuModel.clone().where('pid', '<>', 0).selectAll();
+        const menuFileDbByValue = toKeyBy(menuFileDb, 'value');
 
-        let deleteMenuFileValue = [];
-        let insertMenuFile = [];
-        let updateMenuFile = [];
-        let deleteMenuFile = [];
+        const insertMenuDb = [];
+        const updateMenuDb = [];
+        const deleteMenuDb = [];
+        const menuConfigByFileValue = {};
 
-        // 获得删除数据
-        menuData.forEach((item) => {
-            if (deleteMenuFileValue.includes(item.value)) {
-                deleteMenuFile.push(item.id);
-            } else {
-                deleteMenuFileValue.push(item.value);
-            }
-        });
-
-        _forEach(menuConfigNew, (menu, index1) => {
-            _forEach(menu.children, (item, index2) => {
-                const mapMenu = menuByValue[item.value];
-                const parentMenuData = menuDirByValue[menu.value];
-                if (!mapMenu) {
-                    if (parentMenuData) {
-                        let insertMenuData = {
-                            name: item.name,
-                            value: item.value,
-                            pid: parentMenuData.id,
-                            sort: item.sort || index2,
+        for (let keyDir in menuConfig) {
+            if (menuConfig.hasOwnProperty(keyDir) === false) continue;
+            const menuChildren = menuConfig[keyDir].children;
+            let menuDbIndex = 1;
+            for (let keyFile in menuChildren) {
+                if (menuChildren.hasOwnProperty(keyFile) === false) continue;
+                const itemDir = menuConfig[keyDir];
+                const itemFile = menuChildren[keyFile];
+                const menuFileData = menuFileDbByValue[keyFile];
+                const menuDirData = menuDirDbByValue[keyDir];
+                menuConfigByFileValue[keyFile] = menuChildren[keyFile];
+                if (menuFileData?.id) {
+                    updateMenuDb.push({
+                        id: menuFileData.id,
+                        name: itemFile.name,
+                        value: itemFile.value,
+                        pid: menuDirData.id,
+                        sort: itemFile.sort || menuDbIndex++,
+                        is_system: itemFile.is_system || 0
+                    });
+                } else {
+                    if (menuDir) {
+                        const insertMenuData = {
+                            name: itemFile.name,
+                            value: itemFile.value,
+                            pid: menuDirData.id,
+                            sort: itemFile.sort || menuDbIndex++,
                             is_open: 0,
-                            is_system: item.is_system || 0
+                            is_system: itemFile.is_system || 0
                         };
                         if (appConfig.tablePrimaryKey === 'time') {
                             insertMenuData.id = fnIncrUID();
                         }
-                        insertMenuFile.push(insertMenuData);
+                        insertMenuDb.push(insertMenuData);
                     }
-                } else {
-                    updateMenuFile.push({
-                        id: mapMenu.id,
-                        name: item.name,
-                        value: item.value,
-                        pid: parentMenuData.id,
-                        sort: item.sort || index2,
-                        is_system: item.is_system || 0
-                    });
                 }
-            });
-        });
-
-        if (_isEmpty(deleteMenuFile) === false) {
-            await menuModel.clone().whereIn('id', _uniq(deleteMenuFile)).deleteData();
+            }
         }
 
-        if (_isEmpty(insertMenuFile) === false) {
-            await menuModel.clone().insertData(insertMenuFile);
+        // 获得删除数据
+        menuFileDbByValue.forEach((item) => {
+            if (!menuConfigByFileValue[item.value]) {
+                deleteMenuDb.push(item.id);
+            }
+        });
+
+        if (deleteMenuDb.length > 0) {
+            await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
+        }
+
+        if (insertMenuDb.length > 0) {
+            await menuModel.clone().insertData(insertMenuDb);
         }
 
         // 如果待更新接口目录大于 0，则更新
-        if (_isEmpty(updateMenuFile) === false) {
-            const updateBatchData = updateMenuFile.map((item) => {
+        if (updateMenuDb.length > 0) {
+            const updateBatchData = updateMenuDb.map((item) => {
                 return menuModel
                     .clone()
                     .where('id', item.id)
-                    .updateData(_omit(item, ['id']));
+                    .updateData(toOmit(item, ['id']));
             });
             await Promise.all(updateBatchData);
         }
@@ -285,40 +177,17 @@ async function syncMenuFile(fastify) {
     }
 }
 
-// 转换菜单结构
-async function convertMenuStruct() {
-    let dataArray = [];
-    _forOwn(menuConfig, (item, key) => {
-        if (appConfig.blackMenus.includes(key) !== true) {
-            item.value = fnKebabCase(key);
-            menuDirNew.push(item.value);
-            if (_isObject(item['children'])) {
-                const childrenData = _cloneDeep(item['children']);
-                item['children'] = [];
-                _forOwn(childrenData, (item2, key2) => {
-                    if (appConfig.blackMenus.includes(key) !== true) {
-                        item2.value = fnKebabCase(key2);
-                        menuFileNew.push(item2.value);
-                        item['children'].push(item2);
-                    }
-                });
-            }
-            dataArray.push(item);
-        }
-    });
-    return dataArray;
-}
+// 转换
 
 async function plugin(fastify) {
     try {
-        menuConfigNew = await convertMenuStruct();
-
         await syncMenuDir(fastify);
         await fnDelay(500);
         await syncMenuFile(fastify);
+        await fnDelay(100);
         await fastify.cacheMenuData();
     } catch (err) {
         fastify.log.error(err);
     }
 }
-export default fp(plugin, { name: 'syncMenu', dependencies: ['mysql', 'redis', 'tool'] });
+export default fp(plugin, { name: 'syncMenu', dependencies: ['redis', 'mysql', 'tool'] });

@@ -1,12 +1,11 @@
 // 外部模块
 import fp from 'fastify-plugin';
-import fs from 'fs-extra';
 import got from 'got';
-import { keyBy as _keyBy } from 'lodash-es';
 // 配置文件
-import { appConfig } from '../config/appConfig.js';
+import { weixinConfig } from '../config/weixin.js';
 
 async function plugin(fastify) {
+    // 设置 redis
     const redisSet = async (key, value, second = 0) => {
         if (second > 0) {
             await fastify.redis.set(key, JSON.stringify(value), 'EX', second);
@@ -14,6 +13,8 @@ async function plugin(fastify) {
             await fastify.redis.set(key, JSON.stringify(value));
         }
     };
+
+    // 获取 redis
     const redisGet = async (key, unpack = false) => {
         const result = await fastify.redis.get(key);
         return JSON.parse(result);
@@ -55,7 +56,7 @@ async function plugin(fastify) {
 
     const getUserMenus = async (session) => {
         try {
-            if (session === null || session === undefined) return [];
+            if (!session) return [];
             // 所有角色数组
             const userRoleCodes = session.role_codes.split(',').filter((code) => code !== '');
 
@@ -140,8 +141,8 @@ async function plugin(fastify) {
                     method: 'GET',
                     searchParams: {
                         grant_type: 'client_credential',
-                        appid: appConfig.weixin.appId,
-                        secret: appConfig.weixin.appSecret
+                        appid: weixinConfig.appId,
+                        secret: weixinConfig.appSecret
                     }
                 }).json();
 
@@ -171,7 +172,7 @@ async function plugin(fastify) {
                 }
             }).json();
             if (res.ticket) {
-                redisSet(`cacheData:weixinJsapiTicket`, res.ticket, 6000);
+                await redisSet(`cacheData:weixinJsapiTicket`, res.ticket, 6000);
             }
             return res.ticket;
         } catch (err) {
@@ -197,4 +198,4 @@ async function plugin(fastify) {
     // 获取微信 jsapi_ticket
     fastify.decorate('getWeixinJsapiTicket', getWeixinJsapiTicket);
 }
-export default fp(plugin, { name: 'tool', dependencies: ['mysql', 'redis'] });
+export default fp(plugin, { name: 'tool', dependencies: ['redis', 'mysql'] });

@@ -1,10 +1,15 @@
+import { appConfig } from '../config/app.js';
+import { fnIncrUID } from '../utils/fnIncrUID.js';
+
 export function fnDbInsert(obj) {
-    let newObj = {};
-    _forOwn(obj, (value, key) => {
-        if (value !== null && value !== undefined) {
-            newObj[key] = value;
+    const newObj = {};
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (obj[key] !== null && obj[key] !== undefined) {
+                newObj[key] = obj[key];
+            }
         }
-    });
+    }
     newObj.created_at = Date.now();
     newObj.updated_at = Date.now();
     if (appConfig.tablePrimaryKey !== 'default') {

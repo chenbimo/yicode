@@ -1,11 +1,13 @@
-export function fnDbUpdateData(obj) {
+export function fnDbUpdate(obj) {
     const excludeFields = ['id', 'created_at'];
     let newObj = {};
-    _forOwn(obj, (value, key) => {
-        if (value !== null && value !== undefined && !excludeFields.includes(key)) {
-            newObj[key] = value;
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (obj[key] !== null && obj[key] !== undefined && !excludeFields.includes(key)) {
+                newObj[key] = obj[key];
+            }
         }
-    });
+    }
     newObj.updated_at = Date.now();
     return newObj;
 }

@@ -1,7 +1,7 @@
 import fp from 'fastify-plugin';
 import Redis from 'ioredis';
 
-import { appConfig } from '../config/appConfig.js';
+import { redisConfig } from '../config/redis.js';
 
 function close(fastify) {
     return fastify.redis.quit();
@@ -14,7 +14,7 @@ function plugin(fastify, opts, next) {
         return next(new Error('Redis 已注册'));
     } else {
         try {
-            client = new Redis(appConfig.redis);
+            client = new Redis(redisConfig);
         } catch (err) {
             return next(err);
         }
