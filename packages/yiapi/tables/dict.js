@@ -1,5 +1,5 @@
+export const tableName = '系统字典表';
 export const tableData = {
-    _name: '系统字典表',
     category_id: {
         name: '分类ID',
         fieldDefault: 0,

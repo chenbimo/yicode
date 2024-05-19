@@ -20,7 +20,7 @@ export default async (fastify) => {
                     .table('sys_role')
                     .modify(function (db) {
                         // 如果不是开发管理员查询，则排除掉开发角色
-                        if (req.session.role_codes !== 'dev') {
+                        if (req.session.role !== 'dev') {
                             db.where('code', '<>', 'dev');
                         }
                     });

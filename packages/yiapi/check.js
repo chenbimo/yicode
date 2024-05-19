@@ -6,7 +6,7 @@ import { ensureDirSync } from 'fs-extra';
 import logSymbols from 'log-symbols';
 import Ajv from 'ajv';
 import localize from 'ajv-i18n';
-import { isEmpty, isPlainObject, isFunction } from 'lodash-es';
+import { isEmpty, isFunction } from 'lodash-es';
 
 // 内部模块
 import { system } from './system.js';
@@ -17,8 +17,12 @@ import { callbackConfig } from './config/callback.js';
 import { productConfig } from './config/product.js';
 import { paymentConfig } from './config/payment.js';
 import { jwtConfig } from './config/jwt.js';
+// 协议配置
+import { tableSchema } from './schema/table.js';
 // 工具函数
 import { toUnique } from './utils/toUnique.js';
+import { isPlainObject } from './utils/isPlainObject.js';
+import { fnImportAbsolutePath } from './utils/fnImportAbsolutePath.js';
 import { fnImportCoreConfig } from './utils/fnImportCoreConfig.js';
 import { fnImportCoreSchema } from './utils/fnImportCoreSchema.js';
 
@@ -37,15 +41,18 @@ if (['development', 'production'].includes(process.env.NODE_ENV) === false) {
 // 确保关键目录存在
 ensureDirSync(resolve(system.appDir, 'apis'));
 ensureDirSync(resolve(system.appDir, 'config'));
+ensureDirSync(resolve(system.appDir, 'tables'));
 ensureDirSync(resolve(system.appDir, 'plugins'));
 ensureDirSync(resolve(system.appDir, 'logs'));
 ensureDirSync(resolve(system.appDir, 'public'));
 
-// 验证所有配置文件
 const ajv = new Ajv({
     strict: false,
-    allErrors: true
+    allErrors: true,
+    verbose: true
 });
+
+// 验证所有配置文件
 const files = readdirSync(resolve(system.yiapiDir, 'config'));
 for (let file of files) {
     const pureFileName = basename(file, '.js');
@@ -65,6 +72,31 @@ for (let file of files) {
     if (!validResult) {
         localize.zh(ajv.errors);
         console.log(logSymbols.error, '[ ' + file + ' ] ' + ajv.errorsText(ajv.errors, { separator: '\n' }));
+        process.exit(1);
+    }
+}
+
+// 验证所有表字段配置
+const sysDbFiles = readdirSync(resolve(system.yiapiDir, 'tables'));
+const appDbFiles = readdirSync(resolve(system.appDir, 'tables'));
+const allDbFiles = [
+    //
+    ...sysDbFiles.map((file) => resolve(system.yiapiDir, 'tables', file)),
+    ...appDbFiles.map((file) => resolve(system.appDir, 'tables', file))
+];
+const validateTable = ajv.compile(tableSchema);
+for (let file of allDbFiles) {
+    const pureFileName = basename(file, '.js');
+    const { tableData } = await fnImportAbsolutePath(file, 'tableData', {});
+    if (isPlainObject(tableData || {})) {
+        console.log(`${logSymbols.warning} ${file} 文件必须为一个对象`);
+        process.exit(1);
+    }
+
+    const validResult = validateTable(tableData);
+    if (!validResult) {
+        localize.zh(validateTable.errors);
+        console.log(logSymbols.error, '[ ' + file + ' ] \n' + ajv.errorsText(validateTable.errors, { separator: '\n' }));
         process.exit(1);
     }
 }

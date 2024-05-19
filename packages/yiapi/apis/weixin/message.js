@@ -94,7 +94,7 @@ export default async (fastify) => {
                             .insertData({
                                 openid: xmlData.FromUserName,
                                 nickname: '用户' + fnUUID(10),
-                                role_codes: 'user',
+                                role: 'user',
                                 agent_id: agent_id || 0,
                                 from_product: product_code || 0
                             });

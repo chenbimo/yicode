@@ -1,5 +1,5 @@
+export const tableName = '登录日志表';
 export const tableData = {
-    _name: '登录日志',
     username: {
         name: '用户名',
         fieldDefault: '',
@@ -14,7 +14,7 @@ export const tableData = {
         schemaType: 'string',
         maxLength: 50
     },
-    role_codes: {
+    role: {
         name: '角色',
         fieldDefault: '',
         fieldType: 'string',

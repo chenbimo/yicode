@@ -12,13 +12,9 @@ import picomatch from 'picomatch';
 import { system } from '../system.js';
 import { fnImport } from '../utils/fnImport.js';
 
-// console.log(import.meta.dirname);
-// console.log(dirname(import.meta.filename));
-
 // 检测表字段
 const checkTableFields = async () => {
     const files = readdirSync(resolve(system.appDir, 'tables'));
-    console.log('🚀 ~ files:', files);
     for (let file of files) {
         const { tableData } = await fnImport(resolve(system.appDir, 'tables', file), 'tableData', {});
         console.log('🚀 ~ checkTableFields ~ tableData:', tableData);

@@ -1,5 +1,5 @@
+export const tableName = '邮件日志表';
 export const tableData = {
-    _name: '邮件日志',
     login_email: {
         name: '登录邮箱',
         fieldDefault: '',

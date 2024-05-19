@@ -6,38 +6,46 @@ export const dbFieldConfig = {
         args: ['length']
     },
     // 文本型
-    smalltext: {
+    tinyText: {
         type: 'text',
         args: []
     },
-    mediumtext: {
+    smallText: {
         type: 'text',
         args: []
     },
-    longtext: {
+    mediumText: {
+        type: 'text',
+        args: []
+    },
+    text: {
+        type: 'text',
+        args: []
+    },
+    bigText: {
         type: 'text',
         args: []
     },
     // 整型
-    tinyint: {
+    tinyInt: {
         type: 'number',
         args: ['length']
     },
-    smallint: {
+    smallInt: {
         type: 'number',
         args: []
     },
-    mediumint: {
-        type: 'number',
-        args: []
-    },
-    bigint: {
+    mediumInt: {
         type: 'number',
         args: []
     },
     int: {
         type: 'number',
         args: ['length']
+    },
+    bigInt: {
+        type: 'number',
+        args: []
     },
     // 浮点型
     float: {

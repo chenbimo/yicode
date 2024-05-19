@@ -1,5 +1,5 @@
+export const tableName = '系统用户表';
 export const tableData = {
-    _name: '系统用户表',
     openid: {
         name: '微信 openid',
         fieldDefault: '',
@@ -44,8 +44,8 @@ export const tableData = {
         schemaType: 'string',
         maxLength: 50
     },
-    role_codes: {
-        name: '角色码组',
+    role: {
+        name: '角色',
         fieldDefault: '',
         fieldType: 'string',
         schemaType: 'string',

@@ -16,14 +16,14 @@ export default async (fastify) => {
                 username: fnProp(tableData.username),
                 password: fnProp(tableData.password),
                 nickname: fnProp(tableData.nickname),
-                role_codes: fnProp(tableData.role_codes)
+                role: fnProp(tableData.role)
             },
-            required: ['username', 'password', 'nickname', 'role_codes']
+            required: ['username', 'password', 'nickname', 'role']
         },
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                if (req.body.role_codes === 'dev') {
+                if (req.body.role === 'dev') {
                     return {
                         ...httpConfig.FAIL,
                         msg: '不能增加开发管理员角色'
@@ -42,7 +42,7 @@ export default async (fastify) => {
                     username: req.body.username,
                     password: fnSaltMD5(fnPureMD5(req.body.password)),
                     nickname: req.body.nickname,
-                    role_codes: req.body.role_codes
+                    role: req.body.role
                 });
                 return {
                     ...httpConfig.INSERT_SUCCESS,

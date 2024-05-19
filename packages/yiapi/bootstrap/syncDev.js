@@ -51,27 +51,24 @@ async function plugin(fastify, opts) {
 
         // 查询所有角色
         const roleData = await roleModel.clone().selectAll();
-
+        const roleDataByCode = roleData.map((item) => item.code);
         // 查询开发管理员
         const devAdminData = await adminModel.clone().where('username', 'dev').selectOne('id');
-
         // 查询开发角色
         const devRoleData = await roleModel.clone().where('code', 'dev').selectOne('id');
 
         // 请求菜单数据，用于给开发管理员绑定菜单
         const menuData = await menuModel.clone().selectAll();
         const menuIds = menuData.map((item) => item.id);
-        const menuObject = _keyBy(menuData, 'value');
 
         // 请求接口数据，用于给开发管理员绑定接口
         const apiData = await apiModel.clone().selectAll();
         const apiIds = apiData.map((item) => item.id);
-        const apiObject = _keyBy(apiData, 'value');
 
         // 处理角色数据，如果有同名的角色则删除
-        let insertRoleData = [];
-        let deleteRoleData = [];
-        let updateRoleData = [];
+        const insertRoleData = [];
+        const deleteRoleData = [];
+        const updateRoleData = [];
 
         let roleCodes = [];
         roleData.forEach((item) => {
@@ -83,15 +80,19 @@ async function plugin(fastify, opts) {
         });
 
         // 需要同步的角色，过滤掉数据库中已经存在的角色
-        _forOwn(roleConfig, (item, key) => {
-            if (roleCodes.includes(key) === false && key !== 'dev') {
+        for (let keyRole in roleConfig) {
+            if (roleConfig.hasOwnProperty(keyRole) === false) continue;
+            if (roleDataByCode.includes(keyRole) === false && keyRole !== 'dev') {
+                const itemRole = {
+                    code: keyRole,
+                    api_ids: '',
+                    menu_ids: ''
+                };
                 // 角色不存在，则添加
                 if (appConfig.tablePrimaryKey === 'time') {
                     item.id = fnIncrUID();
                 }
-                item.code = key;
-                item.api_ids = '';
-                item.menu_ids = '';
+
                 insertRoleData.push(item);
             } else {
                 updateRoleData.push({
@@ -101,9 +102,9 @@ async function plugin(fastify, opts) {
                     is_system: item.is_system || 0
                 });
             }
-        });
+        }
 
-        if (_isEmpty(deleteRoleData) === false) {
+        if (deleteRoleData.length > 0) {
             await roleModel.clone().whereIn('id', deleteRoleData).deleteData();
         }
 
@@ -112,12 +113,12 @@ async function plugin(fastify, opts) {
         }
 
         // 如果待更新接口目录大于 0，则更新
-        if (_isEmpty(updateRoleData) === false) {
+        if (updateRoleData.length > 0) {
             const updateBatchData = updateRoleData.map((item) => {
                 return roleModel
                     .clone()
                     .where('code', item.code)
-                    .updateData(_omit(item, ['code']));
+                    .updateData(toOmit(item, ['code']));
             });
             await Promise.all(updateBatchData);
         }
@@ -127,9 +128,9 @@ async function plugin(fastify, opts) {
          * 如果有开发角色，则更新之
          */
         if (!devRoleData?.id) {
-            let insertData = {
+            const insertData = {
                 code: 'dev',
-                name: appConfig.devName || '开发管理员',
+                name: '开发管理员角色',
                 describe: '技术性相关的管理和维护',
                 menu_ids: menuIds.join(','),
                 api_ids: apiIds.join(',')
@@ -148,10 +149,10 @@ async function plugin(fastify, opts) {
 
         // 如果没有开发管理员，则创建之
         if (!devAdminData?.id) {
-            let insertData = {
+            const insertData = {
                 username: 'dev',
                 nickname: '开发管理员',
-                role_codes: 'dev',
+                role: 'dev',
                 password: fnSaltMD5(fnPureMD5(appConfig.devPassword))
             };
             if (appConfig.tablePrimaryKey === 'time') {

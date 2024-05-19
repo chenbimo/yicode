@@ -3,8 +3,8 @@ import { appConfig } from '../config/appConfig.js';
 const paymentCodes = appConfig.payment.map((item) => item.code);
 const productCodes = [0, ...Object.values(appConfig.product)];
 
+export const tableName = '支付订单表';
 export const tableData = {
-    _name: '支付订单表',
     user_id: {
         name: '用户 ID',
         fieldDefault: 0,

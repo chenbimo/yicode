@@ -15,14 +15,14 @@ export default async (fastify) => {
                 id: metaConfig.id,
                 password: metaConfig.password,
                 nickname: metaConfig.nickname,
-                role_codes: metaConfig.role_codes
+                role: metaConfig.role
             },
             required: ['id']
         },
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                if (req.body.role_codes === 'dev') {
+                if (req.body.role === 'dev') {
                     return {
                         ...httpConfig.FAIL,
                         msg: '不能增加开发管理员角色'
@@ -36,7 +36,7 @@ export default async (fastify) => {
                 await adminModel.clone().updateData({
                     password: fnSaltMD5(req.body.password),
                     nickname: req.body.nickname,
-                    role_codes: req.body.role_codes
+                    role: req.body.role
                 });
 
                 return httpConfig.UPDATE_SUCCESS;

@@ -1,5 +1,5 @@
+export const tableName = '项目配置表';
 export const tableData = {
-    _name: '项目配置',
     site_name: {
         name: '站点名称',
         fieldDefault: '',

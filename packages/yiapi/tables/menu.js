@@ -1,5 +1,5 @@
+export const tableName = '系统菜单表';
 export const tableData = {
-    _name: '系统菜单表',
     pid: {
         name: '父级ID',
         fieldDefault: 0,

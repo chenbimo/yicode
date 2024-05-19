@@ -56,7 +56,7 @@ export default async (fastify) => {
                     .insertData({
                         password: fnSaltMD5(fnPureMD5(req.body.password)),
                         email: req.body.email,
-                        role_codes: 'user'
+                        role: 'user'
                     });
 
                 return {

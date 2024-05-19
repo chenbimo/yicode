@@ -228,17 +228,17 @@ async function syncApiFile(fastify) {
         }
 
         // 如果待删除接口大于0，则删除
-        if (_isEmpty(deleteApiData) === false) {
+        if (deleteApiData.length > 0) {
             await apiModel.clone().whereIn('id', deleteApiData).deleteData();
         }
 
         // 如果待增加接口大于0，则增加
-        if (_isEmpty(insertApiData) === false) {
+        if (insertApiData.length > 0) {
             await apiModel.clone().insertData(insertApiData);
         }
 
         // 如果待更新接口大于0，则更新
-        if (_isEmpty(updateApiData) === false) {
+        if (updateApiData.length > 0) {
             const updateBatchData = updateApiData.map((item) => {
                 return apiModel.clone().where('id', item.id).updateData(toOmit(item, 'id'));
             });

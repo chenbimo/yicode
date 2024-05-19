@@ -68,7 +68,7 @@ export default async (fastify) => {
                         id: userData.id,
                         nickname: userData.nickname,
                         role_type: 'user',
-                        role_codes: userData.role_codes
+                        role: userData.role
                     })
                 };
             } catch (err) {

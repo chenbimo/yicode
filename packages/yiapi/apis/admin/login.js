@@ -30,7 +30,7 @@ export default async (fastify) => {
                 const adminData = await adminModel //
                     .clone()
                     .orWhere({ username: req.body.account })
-                    .selectOne('id', 'password', 'username', 'nickname', 'role_codes');
+                    .selectOne('id', 'password', 'username', 'nickname', 'role');
 
                 // 判断用户存在
                 if (!adminData?.id) {
@@ -51,7 +51,7 @@ export default async (fastify) => {
                 await loginLogModel.clone().insertData({
                     username: adminData.username,
                     nickname: adminData.nickname,
-                    role_codes: adminData.role_codes,
+                    role: adminData.role,
                     ip: req.ip || '',
                     ua: req.headers['user-agent'] || ''
                 });
@@ -66,7 +66,7 @@ export default async (fastify) => {
                         username: adminData.username,
                         nickname: adminData.nickname,
                         role_type: 'admin',
-                        role_codes: adminData.role_codes
+                        role: adminData.role
                     })
                 };
             } catch (err) {

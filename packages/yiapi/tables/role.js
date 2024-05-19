@@ -1,5 +1,5 @@
+export const tableName = '系统角色表';
 export const tableData = {
-    _name: '系统角色表',
     code: {
         name: '角色编码',
         fieldDefault: '',
