@@ -6,7 +6,6 @@ import { ensureDirSync } from 'fs-extra';
 import logSymbols from 'log-symbols';
 import Ajv from 'ajv';
 import localize from 'ajv-i18n';
-import { isEmpty, isFunction } from 'lodash-es';
 
 // 内部模块
 import { system } from './system.js';
@@ -22,6 +21,8 @@ import { tableSchema } from './schema/table.js';
 // 工具函数
 import { toUnique } from './utils/toUnique.js';
 import { isPlainObject } from './utils/isPlainObject.js';
+import { isObject } from './utils/isObject.js';
+import { isFunction } from './utils/isFunction.js';
 import { fnImportAbsolutePath } from './utils/fnImportAbsolutePath.js';
 import { fnImportCoreConfig } from './utils/fnImportCoreConfig.js';
 import { fnImportCoreSchema } from './utils/fnImportCoreSchema.js';
@@ -102,19 +103,17 @@ for (let file of allDbFiles) {
 }
 
 // 检测回调配置都是函数
-if (isPlainObject(callbackConfig) === false) {
+if (isObject(callbackConfig) === false) {
     console.log(`${logSymbols.warning} callback.js 文件必须为一个对象`);
     process.exit(1);
 }
 
-if (isFunction(callbackConfig.weixinMessage) === false) {
-    console.log(`${logSymbols.warning} callback.js 文件中的 weixinMessage 必须为一个函数`);
-    process.exit(1);
-}
-
-if (isFunction(callbackConfig.weixinPayNotify) === false) {
-    console.log(`${logSymbols.warning} callback.js 文件中的 weixinPayNotify 必须为一个函数`);
-    process.exit(1);
+for (let callback in callbackConfig) {
+    if (callbackConfig.hasOwnProperty(callback) === false) continue;
+    if (isFunction(callbackConfig[callback]) === false) {
+        console.log(`${logSymbols.warning} callback.js 文件中的 ${callback} 必须为函数`);
+        process.exit(1);
+    }
 }
 
 if (toUnique(Object.values(productConfig)) === false) {

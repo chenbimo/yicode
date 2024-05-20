@@ -1,104 +1,158 @@
-import { appConfig } from '../config/appConfig.js';
+import { paymentConfig } from '../config/payment.js';
+import { productConfig } from '../config/product.js';
 
-const paymentCodes = appConfig.payment.map((item) => item.code);
-const productCodes = [0, ...Object.values(appConfig.product)];
+const paymentCodes = paymentConfig.map((item) => item.code);
+const productCodes = [0, ...Object.values(productConfig)];
 
 export const tableName = '支付订单表';
 export const tableData = {
     user_id: {
         name: '用户 ID',
-        fieldDefault: 0,
-        fieldType: 'bigint',
-        schemaType: 'integer',
-        minimum: 0,
-        index: true
+        field: {
+            type: 'bigInt',
+            default: 0,
+            isIndex: true
+        },
+        schema: {
+            type: 'integer',
+            min: 0
+        }
     },
     user_openid: {
         name: '支付者微信 openid',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 100
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 100
+        }
     },
     order_no: {
         name: '订单号',
-        fieldDefault: '',
-        fieldType: 'bigint',
-        schemaType: 'integer',
-        index: true,
-        unique: true
+        field: {
+            type: 'bigInt',
+            default: 0,
+            isIndex: true,
+            isUnique: true
+        },
+        schema: {
+            type: 'integer'
+        }
     },
     product_code: {
         name: '产品代号',
-        fieldDefault: 0,
-        fieldType: 'int',
-        minimum: 0,
-        index: true,
-        enum: productCodes
+        field: {
+            type: 'bigInt',
+            default: 0,
+            isIndex: 0
+        },
+        schema: {
+            type: 'integer',
+            min: 0,
+            enum: productCodes
+        }
     },
     pay_code: {
         name: '支付代号',
-        fieldDefault: 0,
-        fieldType: 'int',
-        schemaType: 'integer',
-        minimum: 0,
-        index: true,
-        enum: paymentCodes
+        field: {
+            type: 'bigInt',
+            default: 0,
+            isIndex: true
+        },
+        schema: {
+            type: 'integer',
+            min: 0,
+            enum: paymentCodes
+        }
     },
     transaction_id: {
         name: '业务 ID',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 100
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 200
+        }
     },
     pay_total: {
         name: '支付总金额 (分)',
-        fieldDefault: 0,
-        fieldType: 'int',
-        schemaType: 'integer',
-        minimum: 0
+        field: {
+            type: 'bigInt',
+            default: 0
+        },
+        schema: {
+            type: 'integer',
+            min: 0
+        }
     },
     origin_price: {
         name: '产品原价',
-        fieldDefault: 0,
-        fieldType: 'int',
-        schemaType: 'integer',
-        minimum: 0
+        field: {
+            type: 'bigInt',
+            default: 0
+        },
+        schema: {
+            type: 'integer',
+            min: 0
+        }
     },
     buy_amount: {
         name: '购买数量',
-        fieldDefault: 0,
-        fieldType: 'int',
-        schemaType: 'integer',
-        minimum: 0
+        field: {
+            type: 'bigInt',
+            default: 0
+        },
+        schema: {
+            type: 'integer',
+            min: 0
+        }
     },
     buy_zhe: {
         name: '购买折扣（百分比：100为单位）',
-        fieldDefault: 0,
-        fieldType: 'int',
-        schemaType: 'integer',
-        minimum: 0
+        field: {
+            type: 'bigInt',
+            default: 0
+        },
+        schema: {
+            type: 'integer',
+            min: 0
+        }
     },
     buy_coupon: {
         name: '购买优惠（减免金额：分）',
-        fieldDefault: 0,
-        fieldType: 'int',
-        schemaType: 'integer',
-        minimum: 0
+        field: {
+            type: 'bigInt',
+            default: 0
+        },
+        schema: {
+            type: 'integer',
+            min: 0
+        }
     },
     buy_duration: {
         name: '购买时长 (秒）',
-        fieldDefault: 0,
-        fieldType: 'int',
-        schemaType: 'integer',
-        minimum: 0
+        field: {
+            type: 'bigInt',
+            default: 0
+        },
+        schema: {
+            type: 'integer',
+            min: 0
+        }
     },
     buy_note: {
         name: '购买备注',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 100
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 100
+        }
     }
 };

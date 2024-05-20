@@ -9,7 +9,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "exports": {
-        "./yiapi.js": "./yiapi.js",
+        "./yiapi.js": "./yiapi2.js",
         "./fn.js": "./fn.js",
         "./config/*.js": "./config/*.js",
         "./scripts/*.js": "./scripts/*.js"

@@ -2,51 +2,79 @@ export const tableName = '邮件日志表';
 export const tableData = {
     login_email: {
         name: '登录邮箱',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 50
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 100
+        }
     },
     from_name: {
         name: '发送者昵称',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 50
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 100
+        }
     },
     from_email: {
         name: '发送者邮箱',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 50
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 100
+        }
     },
     to_email: {
         name: '接收者邮箱',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 5000
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 5000
+        }
     },
     email_type: {
         name: '邮件类型',
-        fieldDefault: 'common',
-        fieldType: 'string',
-        schemaType: 'string',
-        enum: ['common', 'verify']
+        field: {
+            type: 'string',
+            default: 'common'
+        },
+        schema: {
+            type: 'string',
+            enum: ['common', 'verify']
+        }
     },
     email_code: {
         name: '邮件识别码',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        enum: ['loginVerifyCode', 'bindMailVerifyCode', 'setupPasswordVerifyCode']
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            enum: ['loginVerifyCode', 'bindMailVerifyCode', 'setupPasswordVerifyCode']
+        }
     },
     text_content: {
         name: '发送内容',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 10000
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 10000
+        }
     }
 };

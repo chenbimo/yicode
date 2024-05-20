@@ -49,7 +49,7 @@ const denyFields = [
 const textType = [
     //
     'text', // 默认 16KB
-    'mediumtext', // 16MB
+    'mediumText', // 16MB
     'longtext' // 4GB
 ];
 

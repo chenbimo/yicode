@@ -2,116 +2,180 @@ export const tableName = '系统用户表';
 export const tableData = {
     openid: {
         name: '微信 openid',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 100,
-        index: true
+        field: {
+            type: 'string',
+            default: '',
+            isIndex: true
+        },
+        schema: {
+            type: 'string',
+            max: 100
+        }
     },
     agent_id: {
         name: '上级ID',
-        fieldDefault: 0,
-        fieldType: 'bigint',
-        schemaType: 'integer',
-        minimum: 0,
-        index: true
+        field: {
+            type: 'bigInt',
+            default: 0,
+            isIndex: true
+        },
+        schema: {
+            type: 'integer',
+            min: 0
+        }
     },
     from_product: {
         name: '来自产品',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 100
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 100
+        }
     },
     username: {
         name: '用户名',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 30
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 50
+        }
     },
     password: {
         name: '密码',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 300
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 500
+        }
     },
     nickname: {
         name: '昵称',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 50
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 100
+        }
     },
     role: {
         name: '角色',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 2000
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 100
+        }
     },
     phone: {
         name: '手机号',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 20
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 50
+        }
     },
     weixin: {
         name: '微信号',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 30
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 50
+        }
     },
     qq: {
         name: 'QQ号',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 30
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 30
+        }
     },
     email: {
         name: '邮箱',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 30
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 50
+        }
     },
     avatar: {
         name: '头像',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 300
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 500
+        }
     },
     bio: {
         name: '签名',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 100
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 500
+        }
     },
     describe: {
         name: '描述',
-        fieldDefault: '',
-        fieldType: 'string',
-        schemaType: 'string',
-        maxLength: 500
+        field: {
+            type: 'string',
+            default: ''
+        },
+        schema: {
+            type: 'string',
+            max: 500
+        }
     },
     is_recommend: {
         name: '是否推荐',
-        fieldDefault: 0,
-        fieldType: 'tinyint',
-        schemaType: 'integer',
-        enum: [0, 1]
+        field: {
+            type: 'tinyInt',
+            default: 0
+        },
+        schema: {
+            type: 'integer',
+            enum: [0, 1]
+        }
     },
     is_top: {
         name: '是否置顶',
-        fieldDefault: 0,
-        fieldType: 'tinyint',
-        schemaType: 'integer',
-        enum: [0, 1]
+        field: {
+            type: 'tinyInt',
+            default: 0
+        },
+        schema: {
+            type: 'integer',
+            enum: [0, 1]
+        }
     }
 };
