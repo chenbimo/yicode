@@ -2,8 +2,7 @@ export const tableSchema = {
     title: '数据库表',
     type: 'object',
     patternProperties: {
-        // '^[a-z][a-z0-9_]*$': {
-        '^[a-z]*': {
+        '^[a-z][a-z0-9_]*$': {
             title: '任意字段',
             type: 'object',
             properties: {

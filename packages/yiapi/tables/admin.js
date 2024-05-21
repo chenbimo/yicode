@@ -9,7 +9,7 @@ export const tableData = {
         schema: {
             type: 'string',
             min: 1,
-            max: 50,
+            max: '50',
             pattern: '^[a-z][a-z0-9_-]*$'
         }
     },

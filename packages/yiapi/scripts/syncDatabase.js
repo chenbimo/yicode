@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 import url from 'node:url';
-import path from 'node:path';
+import { basename, resolve } from 'node:path';
+import { readdirSync } from 'node:fs';
 import fs from 'fs-extra';
 import Knex from 'knex';
 import fg from 'fast-glob';
 import logSymbols from 'log-symbols';
 import * as color from 'colorette';
+import Ajv from 'ajv';
+import localize from 'ajv-i18n';
 
 import {
     //
@@ -24,8 +27,11 @@ import {
 } from 'lodash-es';
 
 import { fnImport, fnRequire, fnIsPortOpen } from '../utils/index.js';
-import { appConfig } from '../config/appConfig.js';
-import { sysConfig } from '../config/sysConfig.js';
+import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
+import { isPlainObject } from '../utils/isPlainObject.js';
+import { system } from '../system.js';
+import { appConfig } from '../config/app.js';
+import { mysqlConfig } from '../config/mysql.js';
 import { fieldType } from '../config/fieldType.js';
 
 // 是否全部检测通过，未通过则不进行表创建
@@ -53,6 +59,12 @@ const textType = [
     'longtext' // 4GB
 ];
 
+const ajv = new Ajv({
+    strict: false,
+    allErrors: true,
+    verbose: true
+});
+
 // 检测校验表格数据
 async function fnGetTableData(allTableName) {
     try {
@@ -60,7 +72,7 @@ async function fnGetTableData(allTableName) {
             onlyFiles: true,
             dot: false,
             absolute: true,
-            cwd: sysConfig.yiapiDir
+            cwd: system.yiapiDir
         });
         const tableFileAll = tableFilesSys.map((file) => {
             return {
@@ -76,7 +88,7 @@ async function fnGetTableData(allTableName) {
             const filePath = fileItem.path;
             const fileUrl = url.pathToFileURL(filePath);
 
-            const tableName = prefix + _replace(_snakeCase(path.basename(filePath, '.json')), /_(\d+)/gi, '$1');
+            const tableName = prefix + _replace(_snakeCase(basename(filePath, '.json')), /_(\d+)/gi, '$1');
             // 获取表数据
             const tableDataItem = await fnRequire(filePath, {}, 'core');
             // 设置表名称、描述
@@ -190,7 +202,7 @@ async function fnGetTableData(allTableName) {
 }
 
 // 同步数据库
-async function syncCoreDatabase() {
+async function syncDatabase() {
     // let isPortOpen = await fnIsPortOpen(3000);
     // console.log('🚀 ~ file: syncCoreDatabase.js:220 ~ syncCoreDatabase ~ isPortOpen:', isPortOpen);
     // if (!isPortOpen) {
@@ -201,11 +213,11 @@ async function syncCoreDatabase() {
     const mysql = await new Knex({
         client: 'mysql2',
         connection: {
-            host: appConfig.database.host,
-            port: appConfig.database.port,
-            user: appConfig.database.username,
-            password: appConfig.database.password,
-            database: appConfig.database.db
+            host: mysqlConfig.host,
+            port: mysqlConfig.port,
+            user: mysqlConfig.username,
+            password: mysqlConfig.password,
+            database: mysqlConfig.db
         },
         acquireConnectionTimeout: 30000,
         asyncStackTraces: true,
@@ -233,17 +245,58 @@ async function syncCoreDatabase() {
         isCustomTablePass = false;
 
         // 检测校验表字段是否都正确
-        const allTableData = await fnGetTableData(allTableName);
+        // const allTableData = await fnGetTableData(allTableName);
+        const allDbTable = [];
+        // 验证所有表字段配置
+        const sysDbFiles = readdirSync(resolve(system.yiapiDir, 'tables'));
+        const appDbFiles = readdirSync(resolve(system.appDir, 'tables'));
+        const allDbFiles = [
+            //
+            ...sysDbFiles.map((file) => resolve(system.yiapiDir, 'tables', file)),
+            ...appDbFiles.map((file) => resolve(system.appDir, 'tables', file))
+        ];
+        const validateTable = ajv.compile(tableSchema);
+        for (let file of allDbFiles) {
+            const pureFileName = basename(file, '.js');
+            if (pureFileName.test(/[a-z][a-zA-Z0-9_]/) === false) {
+                console.log(`${logSymbols.warning} ${file} 文件名只能为 大小写字母+数字+下划线`);
+                process.exit(1);
+            }
+            const { tableName } = await fnImportAbsolutePath(file, 'tableName', {});
+            const { tableData } = await fnImportAbsolutePath(file, 'tableData', {});
 
-        // 如果检测没有通过，则不进行表相关操作
-        if (isCheckPass === false || isCustomTablePass === false) {
-            console.log(`${logSymbols.warning} ${color.red('请先处理完毕所有的错误提示内容')}`);
-            process.exit();
-            return;
+            if (!tableName) {
+                console.log(`${logSymbols.warning} ${file} 文件的 tableName 必须有表名称`);
+                process.exit(1);
+            }
+
+            if (isObject(tableData) === false) {
+                console.log(`${logSymbols.warning} ${file} 文件的 tableData 必须为对象结构`);
+                process.exit(1);
+            }
+
+            if (isPlainObject(tableData || {}) === true) {
+                console.log(`${logSymbols.warning} ${file} 文件的 tableData 必须为非空对象`);
+                process.exit(1);
+            }
+
+            const validResult = validateTable(tableData);
+            if (!validResult) {
+                localize.zh(validateTable.errors);
+                console.log(logSymbols.error, '[ ' + file + ' ] \n' + ajv.errorsText(validateTable.errors, { separator: '\n' }));
+                process.exit(1);
+            }
+            allDbTable.push({
+                fileName: pureFileName,
+                tableName: tableName,
+                tableData: tableData
+            });
         }
 
         // 合并表参数
-        for (let i = 0; i < allTableData.length; i++) {
+        for (let keyTable in allDbTable) {
+            if (allDbTable.hasOwnProperty(keyTable) === false) continue;
+            const tableItem = allDbTable[keyTable];
             const tableDataItem = allTableData[i];
 
             // 判断新表是否存在，存在则删除，否则会报错
@@ -362,4 +415,4 @@ async function syncCoreDatabase() {
     }
 }
 
-export { syncCoreDatabase };
+export { syncDatabase };
