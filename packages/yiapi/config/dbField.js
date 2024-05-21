@@ -6,14 +6,6 @@ export const dbFieldConfig = {
         args: ['length']
     },
     // 文本型
-    tinyText: {
-        type: 'text',
-        args: []
-    },
-    smallText: {
-        type: 'text',
-        args: []
-    },
     mediumText: {
         type: 'text',
         args: []

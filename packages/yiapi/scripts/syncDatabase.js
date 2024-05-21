@@ -28,7 +28,9 @@ import {
 
 import { fnImport, fnRequire, fnIsPortOpen } from '../utils/index.js';
 import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
+import { isObject } from '../utils/isObject.js';
 import { isPlainObject } from '../utils/isPlainObject.js';
+import { toSnakeCase } from '../utils/toSnakeCase.js';
 import { system } from '../system.js';
 import { appConfig } from '../config/app.js';
 import { mysqlConfig } from '../config/mysql.js';
@@ -252,8 +254,18 @@ async function syncDatabase() {
         const appDbFiles = readdirSync(resolve(system.appDir, 'tables'));
         const allDbFiles = [
             //
-            ...sysDbFiles.map((file) => resolve(system.yiapiDir, 'tables', file)),
-            ...appDbFiles.map((file) => resolve(system.appDir, 'tables', file))
+            ...sysDbFiles.map((file) => {
+                return {
+                    prefix: 'sys_',
+                    path: resolve(system.yiapiDir, 'tables', file)
+                };
+            }),
+            ...appDbFiles.map((file) => {
+                return {
+                    prefix: '',
+                    path: resolve(system.appDir, 'tables', file)
+                };
+            })
         ];
         const validateTable = ajv.compile(tableSchema);
         for (let file of allDbFiles) {
@@ -262,11 +274,17 @@ async function syncDatabase() {
                 console.log(`${logSymbols.warning} ${file} 文件名只能为 大小写字母+数字+下划线`);
                 process.exit(1);
             }
-            const { tableName } = await fnImportAbsolutePath(file, 'tableName', {});
+            const tableFile = toSnakeCase(pureFileName.trim());
+            const { tableName } = await fnImportAbsolutePath(file, 'tableName', '');
             const { tableData } = await fnImportAbsolutePath(file, 'tableData', {});
 
             if (!tableName) {
                 console.log(`${logSymbols.warning} ${file} 文件的 tableName 必须有表名称`);
+                process.exit(1);
+            }
+
+            if (tableName.endsWith('_temp')) {
+                console.log(`${logSymbols.warning} ${file} 文件名不能以 _temp 结尾`);
                 process.exit(1);
             }
 
@@ -287,8 +305,8 @@ async function syncDatabase() {
                 process.exit(1);
             }
             allDbTable.push({
-                fileName: pureFileName,
-                tableName: tableName,
+                tableFile: tableFile,
+                tableName: tableName + '表'.replace('表表', '表'),
                 tableData: tableData
             });
         }
@@ -299,81 +317,104 @@ async function syncDatabase() {
             const tableItem = allDbTable[keyTable];
             const tableDataItem = allTableData[i];
 
-            // 判断新表是否存在，存在则删除，否则会报错
-            if (tableDataItem.tableNewName) {
-                // 删除新表;
-                await trx.schema.dropTableIfExists(tableDataItem.tableNewName);
+            if (allTableName.includes(tableItem.tableFile) === true) {
+                tableItem.tableFileTemp = tableItem.tableFile + '_temp';
             }
 
-            // 拼接表名
-            const tableName = (tableDataItem.name + '表').replace('表表', '表');
+            // 判断新表是否存在，存在则删除，否则会报错
+            if (allTableName.includes(tableItem.tableFileTemp) === true) {
+                // 删除新表;
+                await trx.schema.dropTableIfExists(tableItem.tableFileTemp);
+            }
 
             // 删除旧表
-            // await trx.schema.dropTableIfExists(tableDataItem.tableOldName);
+            // await trx.schema.dropTableIfExists(tableItem.tableOldName);
             // 如果不存在表，则直接创建
-            await trx.schema.createTable(tableDataItem.tableNewName || tableDataItem.tableName, (table) => {
+            await trx.schema.createTable(tableItem.tableFileTemp || tableItem.tableFile, (table) => {
                 // 设置数据表的字符集和编码
                 table.charset('utf8mb4');
                 table.collate('utf8mb4_general_ci');
+                // 设置表名称
+                table.comment(tableItem.tableName);
                 // 默认每个表的 ID 为自增流水号
                 if (appConfig.tablePrimaryKey === 'default') {
                     table.increments('id');
                 }
                 if (appConfig.tablePrimaryKey === 'time') {
-                    table.bigInteger('id').primary().notNullable().unsigned().comment('主键 ID');
+                    table.bigint('id').primary().notNullable().unsigned().comment('主键 ID');
                 }
                 // 设置时间
-                table.bigInteger('created_at').index().notNullable().unsigned().defaultTo(0).comment('创建时间');
-                table.bigInteger('updated_at').index().notNullable().unsigned().defaultTo(0).comment('更新时间');
-                table.bigInteger('deleted_at').index().notNullable().unsigned().defaultTo(0).comment('删除时间');
+                table.bigint('created_at').index().notNullable().unsigned().defaultTo(0).comment('创建时间');
+                table.bigint('updated_at').index().notNullable().unsigned().defaultTo(0).comment('更新时间');
+                table.bigint('deleted_at').index().notNullable().unsigned().defaultTo(0).comment('删除时间');
 
                 // 处理每个字段
-                _forOwn(tableDataItem.fields, (fieldData, fieldName) => {
-                    // 获取字段的类型信息
-                    const fieldInfo = fieldType[fieldData.type] || {};
-                    // 字段链式调用实例
-                    let fieldItem = {};
-                    // 产生实例
-                    if (fieldData[fieldInfo.args?.[0]] !== undefined && fieldData[fieldInfo.args?.[1]] !== undefined) {
-                        // 如果有 2 个参数
-                        fieldItem = table[fieldData.type](fieldName, fieldData[fieldInfo.args[0]], fieldData[fieldInfo.args[1]]);
-                    } else if (fieldData[fieldInfo.args?.[0]] !== undefined) {
-                        // 如果有 1 个参数
-                        fieldItem = table[fieldData.type](fieldName, fieldData[fieldInfo.args[0]]);
-                    } else {
-                        // 如果没有参数
-                        fieldItem = table[fieldData.type](fieldName);
-                    }
-                    // 设置不能为空、编码、注释
-                    fieldItem = fieldItem.notNullable().collate('utf8mb4_general_ci').comment(fieldData.name);
-                    // 设置默认值
-                    if (fieldData.default !== undefined) {
-                        fieldItem = fieldItem.defaultTo(fieldData.default);
-                    }
-                    // 数字类型，默认为有符号
-                    if (fieldData.type === 'number' || fieldData.type === 'float') {
-                        if (fieldData.unsigned !== false) {
-                            fieldItem = fieldItem.unsigned();
+                for (let keyField in tableData) {
+                    if (tableData.hasOwnProperty(keyField) === false) continue;
+                    const fieldData = tableData[keyField];
+                    let fieldHandler = null;
+                    // 字符串
+                    if (fieldData.field.type === 'string') {
+                        if (fieldData.field.length !== undefined) {
+                            fieldHandler = table['string'](keyField, fieldData.field.length);
+                        } else if (fieldData.schema.max !== undefined) {
+                            fieldHandler = table['string'](keyField, fieldData.schema.max);
+                        } else {
+                            fieldHandler = table['string'](keyField);
                         }
                     }
+                    // 文本
+                    if (['mediumText', 'text', 'bigText'].includes(fieldData.field.type) === true) {
+                        fieldHandler = table['text'](keyField, fieldData.field.type.toLowerCase());
+                    }
+                    // 数字
+                    if (['tinyInt', 'smallInt', 'int', 'mediumInt', 'bigInt'].includes(fieldData.field.type) === true) {
+                        if (fieldData.field.type === 'int') {
+                            fieldHandler = table['integer'](keyField);
+                        } else {
+                            fieldHandler = table[fieldData.field.type.toLowerCase()](keyField);
+                        }
+                        if (fieldData.field.isUnsigned !== false) {
+                            fieldHandler = fieldHandler.unsigned();
+                        }
+                    }
+                    // 小数
+                    if (['float', 'double'].includes(fieldData.field.type) === true) {
+                        fieldHandler = table[fieldData.field.type](keyField, fieldData.field.precision, fieldData.field.scale);
+                        if (fieldData.field.isUnsigned !== false) {
+                            fieldHandler = fieldHandler.unsigned();
+                        }
+                    }
+
+                    // 设置不能为空、编码、注释
+                    fieldHandler = fieldHandler.notNullable().collate('utf8mb4_general_ci').comment(fieldData.name);
+
+                    // 设置默认值
+                    if (fieldData.field.default !== undefined) {
+                        fieldHandler = fieldHandler.defaultTo(fieldData.default);
+                    }
                     // 设置索引
-                    if (fieldData.index === true) {
-                        fieldItem = fieldItem.index();
+                    if (fieldData.isIndex === true) {
+                        fieldHandler = fieldHandler.index();
                     }
                     // 设置唯一性
-                    if (fieldData.unique === true) {
-                        fieldItem = fieldItem.unique();
+                    if (fieldData.isUnique === true) {
+                        fieldHandler = fieldHandler.unique();
                     }
-                });
+                }
             });
 
             // 如果创建的是新表，则把旧表的数据转移进来
-            if (tableDataItem.tableNewName) {
+            if (tableItem.tableFileTemp) {
                 // 获取所有旧字段
-                const allOldFieldsInfo = await mysql.table(tableDataItem.tableName).columnInfo();
-                const allOldFields = _keys(allOldFieldsInfo);
+                const allOldFieldsInfo = await mysql.table(tableItem.tableFile).columnInfo();
+                const allOldFields = Object.keys(allOldFieldsInfo);
                 // 获取当前的新字段
-                const validFields = _uniq(_concat(_keys(tableDataItem.fields), ['id', 'created_at', 'updated_at', 'deleted_at']));
+                const validFields = [
+                    //
+                    ...Object.keys(tableItem.tableData),
+                    ...['id', 'created_at', 'updated_at', 'deleted_at']
+                ];
                 // 判断字段是否有调整，如果没有调整则不用进行数据转移
                 let isFieldChange = false;
                 // 判断字段是否有改动
@@ -390,16 +431,16 @@ async function syncDatabase() {
                 if (isFieldChange === true) {
                     const validFieldsRow = allOldNames.map((field) => '`' + field + '`').join(',');
                     // 移动数据
-                    const moveData = await trx.raw(`INSERT INTO ${tableDataItem.tableNewName} (${validFieldsRow}) SELECT ${validFieldsRow} FROM ${tableDataItem.tableName}`);
+                    const moveData = await trx.raw(`INSERT INTO ${tableDataItem.tableFileTemp} (${validFieldsRow}) SELECT ${validFieldsRow} FROM ${tableDataItem.tableFile}`);
                     // 删除旧表，重命名新表
-                    await trx.schema.dropTableIfExists(tableDataItem.tableName);
-                    await trx.schema.renameTable(tableDataItem.tableNewName, tableDataItem.tableName);
-                    console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableName)}(${color.blueBright(tableName)}) ${color.yellowBright('数据已同步')}`);
+                    await trx.schema.dropTableIfExists(tableDataItem.tableFile);
+                    await trx.schema.renameTable(tableDataItem.tableFileTemp, tableDataItem.tableFile);
+                    console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableFile)}(${color.blueBright(tableFile)}) ${color.yellowBright('数据已同步')}`);
                 } else {
-                    console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableName)}(${color.blueBright(tableName)}) ${color.cyanBright('字段无改动')}`);
+                    console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableFile)}(${color.blueBright(tableFile)}) ${color.cyanBright('字段无改动')}`);
                 }
             } else {
-                console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableName)}(${color.blueBright(tableName)}) ${color.redBright('空表已创建')}`);
+                console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableFile)}(${color.blueBright(tableFile)}) ${color.redBright('空表已创建')}`);
             }
         }
         await trx.commit();

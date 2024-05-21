@@ -50,7 +50,8 @@ export const tableSchema = {
                                     },
                                     length: {
                                         title: '内容长度',
-                                        type: 'string'
+                                        type: 'string',
+                                        maxLength: 60000
                                     },
                                     isIndex: {
                                         title: '是否索引',
