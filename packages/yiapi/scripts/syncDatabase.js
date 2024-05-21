@@ -53,155 +53,11 @@ const denyFields = [
     'deleted_at'
 ];
 
-// 文本类型可用的值，
-const textType = [
-    //
-    'text', // 默认 16KB
-    'mediumText', // 16MB
-    'longtext' // 4GB
-];
-
 const ajv = new Ajv({
     strict: false,
     allErrors: true,
     verbose: true
 });
-
-// 检测校验表格数据
-async function fnGetTableData(allTableName) {
-    try {
-        const tableFilesSys = fg.sync(['./tables/*.json', '!**/_*.json'], {
-            onlyFiles: true,
-            dot: false,
-            absolute: true,
-            cwd: system.yiapiDir
-        });
-        const tableFileAll = tableFilesSys.map((file) => {
-            return {
-                prefix: 'sys_',
-                path: file
-            };
-        });
-        const allTableData = [];
-
-        for (let i = 0; i < tableFileAll.length; i++) {
-            const fileItem = tableFileAll[i];
-            const prefix = fileItem.prefix;
-            const filePath = fileItem.path;
-            const fileUrl = url.pathToFileURL(filePath);
-
-            const tableName = prefix + _replace(_snakeCase(basename(filePath, '.json')), /_(\d+)/gi, '$1');
-            // 获取表数据
-            const tableDataItem = await fnRequire(filePath, {}, 'core');
-            // 设置表名称、描述
-            tableDataItem.tableName = tableName;
-            tableDataItem.tableComment = tableDataItem.name;
-            tableDataItem.tableNewName = null;
-            tableDataItem.tableOldName = tableDataItem.tableName + '_old';
-            // 使用自带的字段覆盖扩展的字段
-            tableDataItem.fields = _merge(appConfig.table[tableName] || {}, tableDataItem.fields);
-            // 校验系统用户表必须有test_field字段，用来避免数据库数据被破坏
-            if (tableName === 'sys_user') {
-                if (appConfig.table[tableName]?.test_field?.type) {
-                    isCustomTablePass = true;
-                } else {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表必须存在 test_field 字段，用于检测自定义字段是否生效，避免同步时删除已有字段`);
-                }
-            }
-            // 如果存在表，则创建新表
-            if (allTableName.includes(tableDataItem.tableName)) {
-                tableDataItem.tableNewName = tableDataItem.tableName + '_new';
-            }
-            // 遍历每个字段
-            // 补充该字段缺失的属性
-            _forOwn(tableDataItem.fields, (fieldData, fieldName) => {
-                // 如果不是默认内置的字段名称，则对其进行校验和补充
-                if (denyFields.includes(fieldName) === true) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段名称不能为 ${color.yellowBright(denyFields.join(','))} 其中之一`);
-                    isCheckPass = false;
-                }
-                // 规范字段名称
-                if (fieldNameLimit.test(fieldName) === false) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段名称必须以 ${color.yellowBright('小写字母开头 + [小写字母 | 下划线 | 数字]')}，请检查`);
-                    isCheckPass = false;
-                }
-                // 必须有字段类型
-                if (fieldData.type === undefined) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段定义缺少 ${color.yellowBright('type')} 属性，请检查`);
-                    isCheckPass = false;
-                }
-                // 不能为不存在的类型
-                if (fieldType[fieldData.type] === undefined) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright(fieldData.type)} 类型不存在`);
-                    isCheckPass = false;
-                }
-                // 索引只能为布尔值
-                if (fieldData.index !== undefined && [true, false].includes(fieldData.index) === false) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('index')} 属性只能为 true 或 false`);
-                    isCheckPass = false;
-                }
-                // 唯一只能为布尔值
-                if (fieldData.unique !== undefined && [true, false].includes(fieldData.unique) === false) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('unique')} 属性只能为 true 或 false`);
-                    isCheckPass = false;
-                }
-                // 无符号只能为布尔值
-                if (fieldData.unsigned !== undefined && [true, false].includes(fieldData.unsigned) === false) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('unsigned')} 属性只能为 true 或 false`);
-                    isCheckPass = false;
-                }
-                // length 属性必须为大于 0 的整数
-                if (fieldData.length !== undefined) {
-                    if (_isInteger(fieldData.length) === false || fieldData.length < 0) {
-                        console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('length')} 属性必须为大于或等于 0 的整数，请检查`);
-                        isCheckPass = false;
-                    }
-                }
-
-                // 字符串类型必须设置 length 长度
-                if (fieldData.type === 'string' && (_isInteger(fieldData.length) === false || fieldData.length < 0)) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段必须有 ${color.yellowBright('length')} 属性，且其值必须为大于或等于 0 的整数`);
-                    isCheckPass = false;
-                }
-                // 文本类型必须设置 capacity 容量字段
-                if (fieldData.type === 'text' && textType.includes(fieldData.capacity) === false) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段必须有 ${color.yellowBright('capacity')} 属性，且其值为 ${textType.join(',')} 之一`);
-                    isCheckPass = false;
-                }
-                // 浮点类型精度必须为大于等于 0 的整数
-                if (fieldData.type === 'float' && fieldData.precision !== undefined) {
-                    if (_isInteger(fieldData.precision) === false || fieldData.precision < 0) {
-                        console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('precision')} 属性必须为大于或等于 0 的整数`);
-                        isCheckPass = false;
-                    }
-                }
-                // 浮点类型小数位必须为大于等于 0 的整数
-                if (fieldData.type === 'float' && fieldData.scale !== undefined) {
-                    if (_isInteger(fieldData.scale) === false || fieldData.scale < 0) {
-                        console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('scale')} 属性必须为大于或等于 0 的整数`);
-                        isCheckPass = false;
-                    }
-                }
-                // 必须有字段注释
-                if (fieldData.name === undefined) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段定义缺少 ${color.yellowBright('name')} 属性，请检查`);
-                    isCheckPass = false;
-                }
-                // 字段注释必须为字符串
-                if (_isString(fieldData.name) === false) {
-                    console.log(`${logSymbols.warning} ${color.blueBright(tableDataItem.tableComment)}（${color.cyanBright(tableDataItem.tableName)}）表 ${color.greenBright(fieldName)} 字段的 ${color.yellowBright('name')} 属性必须为字符串，请检查`);
-                    isCheckPass = false;
-                }
-                tableDataItem.fields[fieldName] = fieldData;
-            });
-            allTableData.push(tableDataItem);
-        }
-        return allTableData;
-    } catch (err) {
-        console.log('🚀 ~ fnGetTableData ~ err:', err);
-        isCheckPass = false;
-    }
-}
 
 // 同步数据库
 async function syncDatabase() {
@@ -413,7 +269,7 @@ async function syncDatabase() {
                 const validFields = [
                     //
                     ...Object.keys(tableItem.tableData),
-                    ...['id', 'created_at', 'updated_at', 'deleted_at']
+                    ...denyFields
                 ];
                 // 判断字段是否有调整，如果没有调整则不用进行数据转移
                 let isFieldChange = false;
