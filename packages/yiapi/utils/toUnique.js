@@ -1,4 +1,3 @@
-// 是否有重复值
-export const toUnique = (array) => {
-    return new Set(array).size === array.length;
+export const toUnique = (arr) => {
+    return [...new Set(arr)];
 };

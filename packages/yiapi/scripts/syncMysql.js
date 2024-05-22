@@ -1,48 +1,25 @@
 #!/usr/bin/env node
+// 内部模块
 import url from 'node:url';
 import { basename, resolve } from 'node:path';
 import { readdirSync } from 'node:fs';
-import fs from 'fs-extra';
+// 外部模块
 import Knex from 'knex';
-import fg from 'fast-glob';
 import logSymbols from 'log-symbols';
 import * as color from 'colorette';
 import Ajv from 'ajv';
 import localize from 'ajv-i18n';
-
-import {
-    //
-    replace as _replace,
-    snakeCase as _snakeCase,
-    concat as _concat,
-    endsWith as _endsWith,
-    isInteger as _isInteger,
-    forOwn as _forOwn,
-    uniq as _uniq,
-    keys as _keys,
-    isString as _isString,
-    isArray as _isArray,
-    merge as _merge,
-    isEmpty as _isEmpty
-} from 'lodash-es';
-
-import { fnImport, fnRequire, fnIsPortOpen } from '../utils/index.js';
+// 配置文件
+import { system } from '../system.js';
+import { appConfig } from '../config/app.js';
+import { mysqlConfig } from '../config/mysql.js';
+import { tableSchema } from '../schema/table.js';
+// 工具函数
 import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
 import { isObject } from '../utils/isObject.js';
 import { isPlainObject } from '../utils/isPlainObject.js';
 import { toSnakeCase } from '../utils/toSnakeCase.js';
-import { system } from '../system.js';
-import { appConfig } from '../config/app.js';
-import { mysqlConfig } from '../config/mysql.js';
-import { fieldType } from '../config/fieldType.js';
-
-// 是否全部检测通过，未通过则不进行表创建
-let isCheckPass = true;
-// 判断自定义字段是否生效
-let isCustomTablePass = false;
-
-// 表字段名称限制
-const fieldNameLimit = /^[a-z][a-z_0-9]*$/;
+import { toUnique } from '../utils/toUnique.js';
 
 // 不能设置的字段
 const denyFields = [
@@ -60,7 +37,7 @@ const ajv = new Ajv({
 });
 
 // 同步数据库
-async function syncDatabase() {
+export const syncMysql = async () => {
     // let isPortOpen = await fnIsPortOpen(3000);
     // console.log('🚀 ~ file: syncCoreDatabase.js:220 ~ syncCoreDatabase ~ isPortOpen:', isPortOpen);
     // if (!isPortOpen) {
@@ -98,14 +75,9 @@ async function syncDatabase() {
             .select('TABLE_NAME');
         // 获取所有的表
         const allTableName = tableRecords.map((item) => item.TABLE_NAME);
-        // 重置校验默认值
-        isCheckPass = true;
-        isCustomTablePass = false;
-
-        // 检测校验表字段是否都正确
-        // const allTableData = await fnGetTableData(allTableName);
+        // 所有的表数据
         const allDbTable = [];
-        // 验证所有表字段配置
+        // 所有表文件
         const sysDbFiles = readdirSync(resolve(system.yiapiDir, 'tables'));
         const appDbFiles = readdirSync(resolve(system.appDir, 'tables'));
         const allDbFiles = [
@@ -113,56 +85,56 @@ async function syncDatabase() {
             ...sysDbFiles.map((file) => {
                 return {
                     prefix: 'sys_',
-                    path: resolve(system.yiapiDir, 'tables', file)
+                    file: resolve(system.yiapiDir, 'tables', file)
                 };
             }),
             ...appDbFiles.map((file) => {
                 return {
                     prefix: '',
-                    path: resolve(system.appDir, 'tables', file)
+                    file: resolve(system.appDir, 'tables', file)
                 };
             })
         ];
         const validateTable = ajv.compile(tableSchema);
-        for (let file of allDbFiles) {
-            const pureFileName = basename(file, '.js');
-            if (pureFileName.test(/[a-z][a-zA-Z0-9_]/) === false) {
+        for (let item of allDbFiles) {
+            const pureFileName = basename(item.file, '.js');
+            if (/[a-z][a-zA-Z0-9_]/.test(pureFileName) === false) {
                 console.log(`${logSymbols.warning} ${file} 文件名只能为 大小写字母+数字+下划线`);
                 process.exit(1);
             }
             const tableFile = toSnakeCase(pureFileName.trim());
-            const { tableName } = await fnImportAbsolutePath(file, 'tableName', '');
-            const { tableData } = await fnImportAbsolutePath(file, 'tableData', {});
+            const { tableName } = await fnImportAbsolutePath(item.file, 'tableName', '');
+            const { tableData } = await fnImportAbsolutePath(item.file, 'tableData', {});
 
             if (!tableName) {
-                console.log(`${logSymbols.warning} ${file} 文件的 tableName 必须有表名称`);
+                console.log(`${logSymbols.warning} ${item.file} 文件的 tableName 必须有表名称`);
                 process.exit(1);
             }
 
             if (tableName.endsWith('_temp')) {
-                console.log(`${logSymbols.warning} ${file} 文件名不能以 _temp 结尾`);
+                console.log(`${logSymbols.warning} ${item.file} 文件名不能以 _temp 结尾`);
                 process.exit(1);
             }
 
             if (isObject(tableData) === false) {
-                console.log(`${logSymbols.warning} ${file} 文件的 tableData 必须为对象结构`);
+                console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 必须为对象结构`);
                 process.exit(1);
             }
 
             if (isPlainObject(tableData || {}) === true) {
-                console.log(`${logSymbols.warning} ${file} 文件的 tableData 必须为非空对象`);
+                console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 必须为非空对象`);
                 process.exit(1);
             }
 
             const validResult = validateTable(tableData);
             if (!validResult) {
                 localize.zh(validateTable.errors);
-                console.log(logSymbols.error, '[ ' + file + ' ] \n' + ajv.errorsText(validateTable.errors, { separator: '\n' }));
+                console.log(logSymbols.error, '[ ' + item.file + ' ] \n' + ajv.errorsText(validateTable.errors, { separator: '\n' }));
                 process.exit(1);
             }
             allDbTable.push({
                 tableFile: tableFile,
-                tableName: tableName + '表'.replace('表表', '表'),
+                tableName: (tableName + '表').replace('表表', '表'),
                 tableData: tableData
             });
         }
@@ -171,7 +143,6 @@ async function syncDatabase() {
         for (let keyTable in allDbTable) {
             if (allDbTable.hasOwnProperty(keyTable) === false) continue;
             const tableItem = allDbTable[keyTable];
-            const tableDataItem = allTableData[i];
 
             if (allTableName.includes(tableItem.tableFile) === true) {
                 tableItem.tableFileTemp = tableItem.tableFile + '_temp';
@@ -205,9 +176,9 @@ async function syncDatabase() {
                 table.bigint('deleted_at').index().notNullable().unsigned().defaultTo(0).comment('删除时间');
 
                 // 处理每个字段
-                for (let keyField in tableData) {
-                    if (tableData.hasOwnProperty(keyField) === false) continue;
-                    const fieldData = tableData[keyField];
+                for (let keyField in tableItem.tableData) {
+                    if (tableItem.tableData.hasOwnProperty(keyField) === false) continue;
+                    const fieldData = tableItem.tableData[keyField];
                     let fieldHandler = null;
                     // 字符串
                     if (fieldData.field.type === 'string') {
@@ -266,7 +237,7 @@ async function syncDatabase() {
                 const allOldFieldsInfo = await mysql.table(tableItem.tableFile).columnInfo();
                 const allOldFields = Object.keys(allOldFieldsInfo);
                 // 获取当前的新字段
-                const validFields = [
+                const allNewFields = [
                     //
                     ...Object.keys(tableItem.tableData),
                     ...denyFields
@@ -274,42 +245,38 @@ async function syncDatabase() {
                 // 判断字段是否有调整，如果没有调整则不用进行数据转移
                 let isFieldChange = false;
                 // 判断字段是否有改动
-                validFields.forEach((field) => {
+                allNewFields.forEach((field) => {
                     if (allOldFields.includes(field) === false) {
                         isFieldChange = true;
                     }
                 });
-                // 提取所有旧字段跟新字段匹配的字段
-                const allOldNames = allOldFields.filter((field) => {
-                    return validFields.includes(field);
-                });
 
                 if (isFieldChange === true) {
-                    const validFieldsRow = allOldNames.map((field) => '`' + field + '`').join(',');
+                    // 提取所有旧字段跟新字段匹配的字段
+                    const uniqueNewFields = toUnique(...allOldFields, ...allNewFields);
+                    const validFieldsRaw = uniqueNewFields.map((field) => '`' + field + '`').join(',');
                     // 移动数据
-                    const moveData = await trx.raw(`INSERT INTO ${tableDataItem.tableFileTemp} (${validFieldsRow}) SELECT ${validFieldsRow} FROM ${tableDataItem.tableFile}`);
+                    const moveData = await trx.raw(`INSERT INTO ${tableItem.tableFileTemp} (${validFieldsRaw}) SELECT ${validFieldsRaw} FROM ${tableItem.tableFile}`);
                     // 删除旧表，重命名新表
-                    await trx.schema.dropTableIfExists(tableDataItem.tableFile);
-                    await trx.schema.renameTable(tableDataItem.tableFileTemp, tableDataItem.tableFile);
-                    console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableFile)}(${color.blueBright(tableFile)}) ${color.yellowBright('数据已同步')}`);
+                    await trx.schema.dropTableIfExists(tableItem.tableFile);
+                    await trx.schema.renameTable(tableItem.tableFileTemp, tableItem.tableFile);
+                    console.log(`${logSymbols.success} ${color.magentaBright(tableItem.tableFile)}(${color.blueBright(tableItem.tableName)}) ${color.yellowBright('数据已同步')}`);
                 } else {
-                    console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableFile)}(${color.blueBright(tableFile)}) ${color.cyanBright('字段无改动')}`);
+                    console.log(`${logSymbols.success} ${color.magentaBright(tableItem.tableFile)}(${color.blueBright(tableItem.tableName)}) ${color.blackBright('字段无改动')}`);
                 }
             } else {
-                console.log(`${logSymbols.success} ${color.greenBright(tableDataItem.tableFile)}(${color.blueBright(tableFile)}) ${color.redBright('空表已创建')}`);
+                console.log(`${logSymbols.success} ${color.magentaBright(tableItem.tableFile)}(${color.blueBright(tableItem.tableName)}) ${color.greenBright('空表已创建')}`);
             }
         }
         await trx.commit();
         await trx.destroy();
-        console.log(`${logSymbols.success} 系统表全部操作完毕`);
+        console.log(`${logSymbols.success} ${mysqlConfig.db} 数据库表同步成功`);
         process.exit();
     } catch (err) {
         console.log('🚀 ~ syncCoreDatabase ~ err:', err);
         await trx.rollback();
         await trx.destroy();
-        console.log(`${logSymbols.success} 系统表同步失败`);
+        console.log(`${logSymbols.error} ${mysqlConfig.db} 数据库表同步成功`);
         process.exit();
     }
-}
-
-export { syncDatabase };
+};
