@@ -37,8 +37,7 @@ export const tableData = {
     menu_ids: {
         name: '角色菜单',
         field: {
-            type: 'mediumText',
-            default: ''
+            type: 'mediumText'
         },
         schema: {
             type: 'array',
@@ -49,8 +48,7 @@ export const tableData = {
     api_ids: {
         name: '角色接口',
         field: {
-            type: 'mediumText',
-            default: ''
+            type: 'mediumText'
         },
         schema: {
             type: 'array',

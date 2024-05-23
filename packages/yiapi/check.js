@@ -77,31 +77,6 @@ for (let file of files) {
     }
 }
 
-// 验证所有表字段配置
-const sysDbFiles = readdirSync(resolve(system.yiapiDir, 'tables'));
-const appDbFiles = readdirSync(resolve(system.appDir, 'tables'));
-const allDbFiles = [
-    //
-    ...sysDbFiles.map((file) => resolve(system.yiapiDir, 'tables', file)),
-    ...appDbFiles.map((file) => resolve(system.appDir, 'tables', file))
-];
-const validateTable = ajv.compile(tableSchema);
-for (let file of allDbFiles) {
-    const pureFileName = basename(file, '.js');
-    const { tableData } = await fnImportAbsolutePath(file, 'tableData', {});
-    if (isPlainObject(tableData || {})) {
-        console.log(`${logSymbols.warning} ${file} 文件必须为一个对象`);
-        process.exit(1);
-    }
-
-    const validResult = validateTable(tableData);
-    if (!validResult) {
-        localize.zh(validateTable.errors);
-        console.log(logSymbols.error, '[ ' + file + ' ] \n' + ajv.errorsText(validateTable.errors, { separator: '\n' }));
-        process.exit(1);
-    }
-}
-
 // 检测回调配置都是函数
 if (isObject(callbackConfig) === false) {
     console.log(`${logSymbols.warning} callback.js 文件必须为一个对象`);

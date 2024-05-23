@@ -2,7 +2,7 @@ import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
 
 const { schemaFieldConfig: importConfig } = await fnImportAppConfig('schemaField', {});
 
-export const schemaFieldConfig = Object.assign(importConfig, {
+export const schemaHelperConfig = Object.assign(importConfig, {
     // 主键 ID
     id: {
         name: '主键ID',

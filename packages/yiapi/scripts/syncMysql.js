@@ -13,6 +13,8 @@ import localize from 'ajv-i18n';
 import { system } from '../system.js';
 import { appConfig } from '../config/app.js';
 import { mysqlConfig } from '../config/mysql.js';
+import { tableFieldConfig } from '../config/tableField.js';
+import { tableSchemaConfig } from '../config/tableSchema.js';
 import { tableSchema } from '../schema/table.js';
 // 工具函数
 import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
@@ -20,6 +22,12 @@ import { isObject } from '../utils/isObject.js';
 import { isPlainObject } from '../utils/isPlainObject.js';
 import { toSnakeCase } from '../utils/toSnakeCase.js';
 import { toUnique } from '../utils/toUnique.js';
+import { isArrayContain } from '../utils/isArrayContain.js';
+import { isArrayDiff } from '../utils/isArrayDiff.js';
+import { isString } from '../utils/isString.js';
+import { isInteger } from '../utils/isInteger.js';
+import { isNumber } from '../utils/isNumber.js';
+import { isArray } from '../utils/isArray.js';
 
 // 不能设置的字段
 const denyFields = [
@@ -95,7 +103,9 @@ export const syncMysql = async () => {
                 };
             })
         ];
+        ajv.validateSchema(tableSchema);
         const validateTable = ajv.compile(tableSchema);
+
         for (let item of allDbFiles) {
             const pureFileName = basename(item.file, '.js');
             if (/[a-z][a-zA-Z0-9_]/.test(pureFileName) === false) {
@@ -126,11 +136,78 @@ export const syncMysql = async () => {
                 process.exit(1);
             }
 
+            if (isArrayContain(Object.keys(tableData), denyFields) === true) {
+                console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 不能包含 ${denyFields} 字段`);
+                process.exit(1);
+            }
+
             const validResult = validateTable(tableData);
             if (!validResult) {
                 localize.zh(validateTable.errors);
                 console.log(logSymbols.error, '[ ' + item.file + ' ] \n' + ajv.errorsText(validateTable.errors, { separator: '\n' }));
                 process.exit(1);
+            }
+
+            // 验证字段
+            for (let keyField in tableData) {
+                if (tableData.hasOwnProperty(keyField) === false) continue;
+                const itemData = tableData[keyField];
+                const keysField = Object.keys(itemData.field);
+                const keysSchema = Object.keys(itemData.schema);
+                const tableField = tableFieldConfig[itemData.field.type];
+                const tableSchema = tableSchemaConfig[itemData.schema.type];
+                const tableFieldDiff = isArrayDiff(keysField, tableField);
+                if (['string'].includes(itemData.field.type)) {
+                    if (itemData.field.default !== undefined && isString(itemData.field.default) === false) {
+                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为字符串`);
+                        process.exit(1);
+                    }
+                }
+                if (['tinyInt', 'smallInt', 'mediumInt', 'int', 'bigInt'].includes(itemData.field.type)) {
+                    if (itemData.field.default !== undefined && isInteger(itemData.field.default) === false) {
+                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为整数`);
+                        process.exit(1);
+                    }
+                }
+                if (['float', 'double'].includes(itemData.field.type)) {
+                    if (itemData.field.default !== undefined && isNumber(itemData.field.default) === false) {
+                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为数字`);
+                        process.exit(1);
+                    }
+                }
+                if (itemData.schema.type === 'string') {
+                    if (itemData.schema.default !== undefined && isString(itemData.schema.default) === false) {
+                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为字符串`);
+                        process.exit(1);
+                    }
+                }
+                if (itemData.schema.type === 'integer') {
+                    if (itemData.schema.default !== undefined && isInteger(itemData.schema.default) === false) {
+                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为整数`);
+                        process.exit(1);
+                    }
+                }
+                if (itemData.schema.type === 'number') {
+                    if (itemData.schema.default !== undefined && isNumber(itemData.schema.default) === false) {
+                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为数字`);
+                        process.exit(1);
+                    }
+                }
+                if (itemData.schema.type === 'array') {
+                    if (itemData.schema.default !== undefined && isArray(itemData.schema.default) === false) {
+                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为数组`);
+                        process.exit(1);
+                    }
+                }
+                if (tableFieldDiff.length > 0) {
+                    console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field 属性不能为 ${tableFieldDiff}`);
+                    process.exit(1);
+                }
+                const tableSchemaDiff = isArrayDiff(keysField, tableField);
+                if (tableSchemaDiff.length > 0) {
+                    console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema 属性不能为 ${tableSchemaDiff} 中的值`);
+                    process.exit(1);
+                }
             }
             allDbTable.push({
                 tableFile: tableFile,
@@ -182,9 +259,9 @@ export const syncMysql = async () => {
                     let fieldHandler = null;
                     // 字符串
                     if (fieldData.field.type === 'string') {
-                        if (fieldData.field.length !== undefined) {
+                        if (fieldData.field?.length !== undefined) {
                             fieldHandler = table['string'](keyField, fieldData.field.length);
-                        } else if (fieldData.schema.max !== undefined) {
+                        } else if (fieldData.schema?.max !== undefined) {
                             fieldHandler = table['string'](keyField, fieldData.schema.max);
                         } else {
                             fieldHandler = table['string'](keyField);
@@ -207,7 +284,7 @@ export const syncMysql = async () => {
                     }
                     // 小数
                     if (['float', 'double'].includes(fieldData.field.type) === true) {
-                        fieldHandler = table[fieldData.field.type](keyField, fieldData.field.precision, fieldData.field.scale);
+                        fieldHandler = table[fieldData.field.type](keyField, fieldData.field.precision || 8, fieldData.field.scale || 2);
                         if (fieldData.field.isUnsigned !== false) {
                             fieldHandler = fieldHandler.unsigned();
                         }
@@ -273,10 +350,10 @@ export const syncMysql = async () => {
         console.log(`${logSymbols.success} ${mysqlConfig.db} 数据库表同步成功`);
         process.exit();
     } catch (err) {
-        console.log('🚀 ~ syncCoreDatabase ~ err:', err);
+        console.log('🚀 ~ syncMysql ~ err:', err);
         await trx.rollback();
         await trx.destroy();
-        console.log(`${logSymbols.error} ${mysqlConfig.db} 数据库表同步成功`);
+        console.log(`${logSymbols.error} ${mysqlConfig.db} 数据库表同步失败`);
         process.exit();
     }
 };

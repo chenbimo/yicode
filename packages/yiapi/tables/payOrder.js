@@ -46,7 +46,7 @@ export const tableData = {
         field: {
             type: 'bigInt',
             default: 0,
-            isIndex: 0
+            isIndex: true
         },
         schema: {
             type: 'integer',
