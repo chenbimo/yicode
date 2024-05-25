@@ -1,6 +1,6 @@
 // 内部模块
 import url from 'node:url';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { readdirSync } from 'node:fs';
 // 外部模块
 import fp from 'fastify-plugin';
@@ -24,13 +24,13 @@ async function fnAllApiFiles(type) {
     const allApiFiles = [...coreApiFiles, ...appApiFiles].map((file) => file.replace(/\\+/gi, '/'));
 
     if (type === 'meta') {
-        return allApiFiles.filter((file) => file.endWiths('/_meta.js'));
+        return allApiFiles.filter((file) => file.endsWith('/_meta.js'));
     }
 
     if (type === 'api') {
         return allApiFiles.filter((file) => {
             const fileName = basename(file);
-            return !basename(file).startWiths('_');
+            return !basename(file).startsWith('_');
         });
     }
 }

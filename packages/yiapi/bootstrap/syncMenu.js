@@ -57,7 +57,7 @@ async function syncMenuDir(fastify) {
 
         // 获得删除数据
         menuDirDb.forEach((item) => {
-            if (!menuConfig(item.value)) {
+            if (!menuConfig[item.value]) {
                 deleteMenuDb.push(item.id);
             }
         });
@@ -128,7 +128,7 @@ async function syncMenuFile(fastify) {
                         is_system: itemFile.is_system || 0
                     });
                 } else {
-                    if (menuDir) {
+                    if (menuDirData) {
                         const insertMenuData = {
                             name: itemFile.name,
                             value: itemFile.value,
@@ -147,11 +147,13 @@ async function syncMenuFile(fastify) {
         }
 
         // 获得删除数据
-        menuFileDbByValue.forEach((item) => {
+        for (let key in menuFileDbByValue) {
+            if (menuFileDbByValue.hasOwnProperty(key) === false) continue;
+            const item = menuFileDbByValue[key];
             if (!menuConfigByFileValue[item.value]) {
                 deleteMenuDb.push(item.id);
             }
-        });
+        }
 
         if (deleteMenuDb.length > 0) {
             await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();

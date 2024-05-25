@@ -28,6 +28,7 @@ import { isString } from '../utils/isString.js';
 import { isInteger } from '../utils/isInteger.js';
 import { isNumber } from '../utils/isNumber.js';
 import { isArray } from '../utils/isArray.js';
+import { fnIncrDate } from '../utils/fnIncrDate.js';
 
 // 不能设置的字段
 const denyFields = [
@@ -112,7 +113,11 @@ export const syncMysql = async () => {
                 console.log(`${logSymbols.warning} ${file} 文件名只能为 大小写字母+数字+下划线`);
                 process.exit(1);
             }
-            const tableFile = toSnakeCase(pureFileName.trim());
+            const tableFile = item.prefix + toSnakeCase(pureFileName.trim());
+            if (!item.prefix && tableFile.startsWith('sys_') === true) {
+                console.log(`${logSymbols.warning} ${file} 非系统表不能以 sys_ 开头`);
+                process.exit(1);
+            }
             const { tableName } = await fnImportAbsolutePath(item.file, 'tableName', '');
             const { tableData } = await fnImportAbsolutePath(item.file, 'tableData', {});
 
@@ -255,56 +260,56 @@ export const syncMysql = async () => {
                 // 处理每个字段
                 for (let keyField in tableItem.tableData) {
                     if (tableItem.tableData.hasOwnProperty(keyField) === false) continue;
-                    const fieldData = tableItem.tableData[keyField];
+                    const itemData = tableItem.tableData[keyField];
                     let fieldHandler = null;
                     // 字符串
-                    if (fieldData.field.type === 'string') {
-                        if (fieldData.field?.length !== undefined) {
-                            fieldHandler = table['string'](keyField, fieldData.field.length);
-                        } else if (fieldData.schema?.max !== undefined) {
-                            fieldHandler = table['string'](keyField, fieldData.schema.max);
+                    if (itemData.field.type === 'string') {
+                        if (itemData.field?.length !== undefined) {
+                            fieldHandler = table['string'](keyField, itemData.field.length);
+                        } else if (itemData.schema?.max !== undefined) {
+                            fieldHandler = table['string'](keyField, itemData.schema.max);
                         } else {
                             fieldHandler = table['string'](keyField);
                         }
                     }
                     // 文本
-                    if (['mediumText', 'text', 'bigText'].includes(fieldData.field.type) === true) {
-                        fieldHandler = table['text'](keyField, fieldData.field.type.toLowerCase());
+                    if (['mediumText', 'text', 'bigText'].includes(itemData.field.type) === true) {
+                        fieldHandler = table['text'](keyField, itemData.field.type.toLowerCase());
                     }
                     // 数字
-                    if (['tinyInt', 'smallInt', 'int', 'mediumInt', 'bigInt'].includes(fieldData.field.type) === true) {
-                        if (fieldData.field.type === 'int') {
+                    if (['tinyInt', 'smallInt', 'int', 'mediumInt', 'bigInt'].includes(itemData.field.type) === true) {
+                        if (itemData.field.type === 'int') {
                             fieldHandler = table['integer'](keyField);
                         } else {
-                            fieldHandler = table[fieldData.field.type.toLowerCase()](keyField);
+                            fieldHandler = table[itemData.field.type.toLowerCase()](keyField);
                         }
-                        if (fieldData.field.isUnsigned !== false) {
+                        if (itemData.field.isUnsigned !== false) {
                             fieldHandler = fieldHandler.unsigned();
                         }
                     }
                     // 小数
-                    if (['float', 'double'].includes(fieldData.field.type) === true) {
-                        fieldHandler = table[fieldData.field.type](keyField, fieldData.field.precision || 8, fieldData.field.scale || 2);
-                        if (fieldData.field.isUnsigned !== false) {
+                    if (['float', 'double'].includes(itemData.field.type) === true) {
+                        fieldHandler = table[itemData.field.type](keyField, itemData.field.precision || 8, itemData.field.scale || 2);
+                        if (itemData.field.isUnsigned !== false) {
                             fieldHandler = fieldHandler.unsigned();
                         }
                     }
 
-                    // 设置不能为空、编码、注释
-                    fieldHandler = fieldHandler.notNullable().collate('utf8mb4_general_ci').comment(fieldData.name);
-
                     // 设置默认值
-                    if (fieldData.field.default !== undefined) {
-                        fieldHandler = fieldHandler.defaultTo(fieldData.default);
+                    if (itemData.field.default !== undefined) {
+                        fieldHandler = fieldHandler.defaultTo(itemData.field.default);
                     }
                     // 设置索引
-                    if (fieldData.isIndex === true) {
+                    if (itemData.isIndex === true) {
                         fieldHandler = fieldHandler.index();
                     }
                     // 设置唯一性
-                    if (fieldData.isUnique === true) {
+                    if (itemData.isUnique === true) {
                         fieldHandler = fieldHandler.unique();
                     }
+
+                    // 设置不能为空、编码、注释
+                    fieldHandler = fieldHandler.notNullable().collate('utf8mb4_general_ci').comment(itemData.name);
                 }
             });
 
@@ -330,12 +335,19 @@ export const syncMysql = async () => {
 
                 if (isFieldChange === true) {
                     // 提取所有旧字段跟新字段匹配的字段
-                    const uniqueNewFields = toUnique(...allOldFields, ...allNewFields);
-                    const validFieldsRaw = uniqueNewFields.map((field) => '`' + field + '`').join(',');
+                    const validFieldsRaw = allOldFields
+                        .filter((field) => {
+                            return allNewFields.includes(field);
+                        })
+                        .map((field) => '`' + field + '`')
+                        .join(',');
+                    // const uniqueNewFields = toUnique([...allOldFields, ...allNewFields]);
+                    // const validFieldsRaw = uniqueNewFields.map((field) => '`' + field + '`').join(',');
                     // 移动数据
+                    // console.log('🚀 ~ syncMysql ~ validFieldsRaw:', validFieldsRaw);
                     const moveData = await trx.raw(`INSERT INTO ${tableItem.tableFileTemp} (${validFieldsRaw}) SELECT ${validFieldsRaw} FROM ${tableItem.tableFile}`);
                     // 删除旧表，重命名新表
-                    await trx.schema.dropTableIfExists(tableItem.tableFile);
+                    await trx.schema.renameTable(tableItem.tableFile, tableItem.tableFile + '_' + fnIncrDate());
                     await trx.schema.renameTable(tableItem.tableFileTemp, tableItem.tableFile);
                     console.log(`${logSymbols.success} ${color.magentaBright(tableItem.tableFile)}(${color.blueBright(tableItem.tableName)}) ${color.yellowBright('数据已同步')}`);
                 } else {

@@ -56,6 +56,7 @@ const ajv = new Ajv({
 // 验证所有配置文件
 const files = readdirSync(resolve(system.yiapiDir, 'config'));
 for (let file of files) {
+    const absolutePath = resolve(system.yiapiDir, 'config', file);
     const pureFileName = basename(file, '.js');
     const configFile = await fnImportCoreConfig(pureFileName, {});
     const configData = configFile[pureFileName + 'Config'];
@@ -72,7 +73,7 @@ for (let file of files) {
     const validResult = ajv.validate(schemaData, configData);
     if (!validResult) {
         localize.zh(ajv.errors);
-        console.log(logSymbols.error, '[ ' + file + ' ] ' + ajv.errorsText(ajv.errors, { separator: '\n' }));
+        console.log(logSymbols.error, '[ ' + absolutePath + ' ] \n' + ajv.errorsText(ajv.errors, { separator: '\n' }));
         process.exit(1);
     }
 }

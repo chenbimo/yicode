@@ -4,63 +4,53 @@ export const tableFieldSchema = {
     properties: {
         // 字符串型
         string: {
-            type: 'array',
-            enum: ['type', 'default', 'length', 'isIndex', 'isUnique'],
-            required: ['type', 'default', 'length', 'isIndex', 'isUnique']
+            title: '字符串',
+            type: 'array'
         },
         // 文本型
         mediumText: {
-            type: 'array',
-            enum: ['type'],
-            required: ['type']
+            title: '中长文本',
+            type: 'array'
         },
         text: {
-            type: 'array',
-            enum: ['type'],
-            required: ['type']
+            title: '普通文本',
+            type: 'array'
         },
         bigText: {
-            type: 'array',
-            enum: ['type'],
-            required: ['type']
+            title: '长文本',
+            type: 'array'
         },
         // 整型
         tinyInt: {
-            type: 'array',
-            enum: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned'],
-            required: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned']
+            title: '微整数',
+            type: 'array'
         },
         smallInt: {
-            type: 'array',
-            enum: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned'],
-            required: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned']
+            title: '小整数',
+            type: 'array'
         },
         mediumInt: {
-            type: 'array',
-            enum: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned'],
-            required: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned']
+            title: '中整数',
+            type: 'array'
         },
         int: {
-            type: 'array',
-            enum: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned'],
-            required: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned']
+            title: '普通整数',
+            type: 'array'
         },
         bigInt: {
-            type: 'array',
-            enum: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned'],
-            required: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned']
+            title: '大整数',
+            type: 'array'
         },
         // 浮点型
         float: {
-            type: 'array',
-            enum: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned', 'precision', 'scale'],
-            required: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned', 'precision', 'scale']
+            title: '浮点数',
+            type: 'array'
         },
         // 双精度型
         double: {
-            type: 'array',
-            enum: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned', 'precision', 'scale'],
-            required: ['type', 'default', 'isIndex', 'isUnique', 'isUnsigned', 'precision', 'scale']
+            title: '双精度',
+            type: 'array'
         }
-    }
+    },
+    additionalProperties: false
 };

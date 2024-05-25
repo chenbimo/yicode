@@ -4,27 +4,19 @@ export const tableSchemaSchema = {
     properties: {
         string: {
             title: '字符串',
-            type: 'array',
-            enum: ['type', 'default', 'min', 'max', 'enum', 'pattern'],
-            required: ['type', 'default', 'min', 'max', 'enum', 'pattern']
+            type: 'array'
         },
         integer: {
             title: '整数',
-            type: 'array',
-            enum: ['type', 'default', 'min', 'max', 'multipleOf'],
-            required: ['type', 'default', 'min', 'max', 'multipleOf']
+            type: 'array'
         },
         number: {
             title: '数字',
-            type: 'array',
-            enum: ['type', 'default', 'min', 'max', 'multipleOf'],
-            required: ['type', 'default', 'min', 'max', 'multipleOf']
+            type: 'array'
         },
         array: {
             title: '数组',
-            type: 'array',
-            enum: ['type', 'default', 'items', 'isUniqueItems', 'isAdditionalItems'],
-            required: ['type', 'default', 'items', 'isUniqueItems', 'isAdditionalItems']
+            type: 'array'
         }
     }
 };

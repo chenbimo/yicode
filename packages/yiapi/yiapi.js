@@ -121,8 +121,9 @@ fastify.register(authPlugin, {});
 fastify.register(mailPlugin, {});
 fastify.register(ratePlugin, {});
 fastify.register(uploadPlugin, {});
-// fastify.register(syncApiPlugin, {});
-// fastify.register(syncMenuPlugin, {});
+fastify.register(syncMenuPlugin, {});
+fastify.register(syncApiPlugin, {});
+
 // fastify.register(syncDevPlugin, {});
 
 // 加载用户插件
