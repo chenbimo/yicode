@@ -5,7 +5,7 @@ export const fnImportAbsolutePath = async (absolutePath, name, defaultValue) => 
         const data = await import(pathToFileURL(absolutePath));
         return data;
     } catch (err) {
-        console.log('🚀 ~ fnImport ~ err:', err);
+        console.trace('🚀 ~ fnImportAbsolutePath ~ err:', err);
         return {
             [name]: defaultValue
         };

@@ -1,10 +1,9 @@
 // 内部模块
 import url from 'node:url';
 import { basename, dirname, resolve } from 'node:path';
-import { readdirSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 // 外部模块
 import fp from 'fastify-plugin';
-import { isEmpty as _isEmpty } from 'lodash-es';
 // 工具函数
 import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
 import { fnDelay } from '../utils/fnDelay.js';
@@ -12,16 +11,23 @@ import { fnIncrUID } from '../utils/fnIncrUID.js';
 import { fnCloneAny } from '../utils/fnCloneAny.js';
 // 工具函数
 import { toKeyBy } from '../utils/toKeyBy.js';
+import { toOmit } from '../utils/toOmit.js';
 // 配置文件
 import { system } from '../system.js';
 import { appConfig } from '../config/app.js';
 
 // 获取所有接口文件
 async function fnAllApiFiles(type) {
-    const coreApiFiles = readdirSync(resolve(system.yiapiDir, 'apis'));
-    const appApiFiles = readdirSync(resolve(system.appDir, 'apis'));
+    const coreApiFiles = readdirSync(resolve(system.yiapiDir, 'apis'), { recursive: true });
+    const appApiFiles = readdirSync(resolve(system.appDir, 'apis'), { recursive: true });
 
-    const allApiFiles = [...coreApiFiles, ...appApiFiles].map((file) => file.replace(/\\+/gi, '/'));
+    const allApiFiles = [
+        //
+        ...coreApiFiles.map((file) => resolve(system.yiapiDir, 'apis', file)),
+        ...appApiFiles.map((file) => resolve(system.appDir, 'apis', file))
+    ] //
+        .filter((file) => file.endsWith('.js'))
+        .map((file) => file.replace(/\\+/gi, '/'));
 
     if (type === 'meta') {
         return allApiFiles.filter((file) => file.endsWith('/_meta.js'));
@@ -43,6 +49,7 @@ async function syncApiDir(fastify) {
 
         // 所有的接口元数据文件，用来生成目录
         const allApiMetaFiles = await fnAllApiFiles('meta');
+        console.log('🚀 ~ syncApiDir ~ allApiMetaFiles:', allApiMetaFiles);
 
         // 所有目录路径的数组
         const allApiMetaByValue = allApiMetaFiles.map((file) => {
@@ -129,6 +136,7 @@ async function syncApiFile(fastify) {
 
         // 所有的接口文件，用来生成接口
         const allApiFiles = await fnAllApiFiles('api');
+        console.log('🚀 ~ syncApiFile ~ allApiFiles:', allApiFiles);
 
         // 所有接口路径的数组
         const allApiFileByValue = allApiFiles.map((file) => {
@@ -202,9 +210,9 @@ async function syncApiFile(fastify) {
 
                 // 当前API数据
                 const currentApi = apiFileByValue[apiFileRoute] || {};
-                if (_isEmpty(currentApi) === false) {
+                if (currentApi.length > 0) {
                     // 如果当前API不为空，且父级API不为空，且当前父级ID为0
-                    if (_isEmpty(apiDirData) === false) {
+                    if (apiDirData?.id) {
                         const params = {
                             id: currentApi.id,
                             pid: apiDirData.id,
