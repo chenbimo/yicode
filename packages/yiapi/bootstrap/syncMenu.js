@@ -62,25 +62,27 @@ async function syncMenuDir(fastify) {
             }
         });
 
-        // 删除菜单目录
-        if (deleteMenuDb.length > 0) {
-            await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
-        }
+        if (process.env.NODE_APP_INSTANCE === undefined) {
+            // 删除菜单目录
+            if (deleteMenuDb.length > 0) {
+                await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
+            }
 
-        // 添加菜单目录
-        if (insertMenuDb.length > 0) {
-            await menuModel.clone().insertData(insertMenuDb);
-        }
+            // 添加菜单目录
+            if (insertMenuDb.length > 0) {
+                await menuModel.clone().insertData(insertMenuDb);
+            }
 
-        // 如果待更新接口目录大于 0，则更新
-        if (updateMenuDb.length > 0) {
-            const updateBatch = updateMenuDb.map((item) => {
-                return menuModel
-                    .clone()
-                    .where('id', item.id)
-                    .updateData(toOmit(item, ['id']));
-            });
-            await Promise.all(updateBatch);
+            // 如果待更新接口目录大于 0，则更新
+            if (updateMenuDb.length > 0) {
+                const updateBatch = updateMenuDb.map((item) => {
+                    return menuModel
+                        .clone()
+                        .where('id', item.id)
+                        .updateData(toOmit(item, ['id']));
+                });
+                await Promise.all(updateBatch);
+            }
         }
     } catch (err) {
         fastify.log.error(err);
@@ -155,23 +157,26 @@ async function syncMenuFile(fastify) {
             }
         }
 
-        if (deleteMenuDb.length > 0) {
-            await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
-        }
+        // 数据的同步只在主进程中操作
+        if (process.env.NODE_APP_INSTANCE === undefined) {
+            if (deleteMenuDb.length > 0) {
+                await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
+            }
 
-        if (insertMenuDb.length > 0) {
-            await menuModel.clone().insertData(insertMenuDb);
-        }
+            if (insertMenuDb.length > 0) {
+                await menuModel.clone().insertData(insertMenuDb);
+            }
 
-        // 如果待更新接口目录大于 0，则更新
-        if (updateMenuDb.length > 0) {
-            const updateBatchData = updateMenuDb.map((item) => {
-                return menuModel
-                    .clone()
-                    .where('id', item.id)
-                    .updateData(toOmit(item, ['id']));
-            });
-            await Promise.all(updateBatchData);
+            // 如果待更新接口目录大于 0，则更新
+            if (updateMenuDb.length > 0) {
+                const updateBatchData = updateMenuDb.map((item) => {
+                    return menuModel
+                        .clone()
+                        .where('id', item.id)
+                        .updateData(toOmit(item, ['id']));
+                });
+                await Promise.all(updateBatchData);
+            }
         }
     } catch (err) {
         fastify.log.error(err);
@@ -184,9 +189,7 @@ async function syncMenuFile(fastify) {
 async function plugin(fastify) {
     try {
         await syncMenuDir(fastify);
-        await fnDelay(500);
         await syncMenuFile(fastify);
-        await fnDelay(100);
         await fastify.cacheMenuData();
     } catch (err) {
         fastify.log.error(err);

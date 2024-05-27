@@ -32,6 +32,6 @@
         "lodash-es": "^4.17.21"
     },
     "devDependencies": {
-        "nodemon": "^3.1.0"
+        "nodemon": "^3.1.1"
     }
 }

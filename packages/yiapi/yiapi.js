@@ -109,7 +109,9 @@ fastify.get('/', function (req, res) {
 });
 
 // 加载启动插件
-appConfig.isSwagger === true && fastify.register(swaggerPlugin, {});
+if (appConfig.isSwagger === true) {
+    fastify.register(swaggerPlugin, {});
+}
 fastify.register(jwtPlugin, {});
 fastify.register(xmlParsePlugin, {});
 fastify.register(redisPlugin, {});
@@ -123,7 +125,6 @@ fastify.register(ratePlugin, {});
 fastify.register(uploadPlugin, {});
 fastify.register(syncMenuPlugin, {});
 fastify.register(syncApiPlugin, {});
-
 // fastify.register(syncDevPlugin, {});
 
 // 加载用户插件
