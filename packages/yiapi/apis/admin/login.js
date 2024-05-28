@@ -1,7 +1,7 @@
 // 外部模块
-import { omit as _omit } from 'lodash-es';
 // 工具函数
 import { fnRoute, fnPureMD5, fnSaltMD5 } from '../../utils/index.js';
+import { toOmit } from '../../utils/toOmit.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
@@ -60,7 +60,7 @@ export default async (fastify) => {
                 return {
                     ...httpConfig.SUCCESS,
                     msg: '登录成功',
-                    data: _omit(adminData, ['password']),
+                    data: toOmit(adminData, ['password']),
                     token: await fastify.jwt.sign({
                         id: adminData.id,
                         username: adminData.username,

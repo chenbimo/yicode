@@ -4,13 +4,6 @@ import { resolve } from 'node:path';
 // 外部模块
 import fp from 'fastify-plugin';
 import picomatch from 'picomatch';
-import {
-    //
-    uniq as _uniq,
-    concat as _concat,
-    find as _find,
-    omit as _omit
-} from 'lodash-es';
 // 配置文件
 import { system } from '../system.js';
 import { appConfig } from '../config/app.js';
@@ -22,16 +15,26 @@ import { httpConfig } from '../config/http.js';
 import { fnApiCheck } from '../utils/fnApiCheck.js';
 import { fnRouterPath } from '../utils/fnRouterPath.js';
 import { fnClearLogData } from '../utils/fnClearLogData.js';
+import { toUnique } from '../utils/toUnique.js';
+import { toOmit } from '../utils/toOmit.js';
+import { toFind } from '../utils/toFind.js';
 
 async function plugin(fastify, opts) {
     fastify.addHook('preHandler', async (req, res) => {
         try {
-            const pureUrl = fnRouterPath(req.url);
+            const routePath = fnRouterPath(req.url);
             // 如果是收藏图标，则直接通过
-            if (pureUrl === 'favicon.ico') return;
+            if (routePath === 'favicon.ico') return;
+            if (routePath === '/') {
+                res.send({
+                    code: 0,
+                    msg: `${appConfig.appName} 接口程序已启动`
+                });
+                return;
+            }
 
             /* --------------------------------- 接口禁用检测 --------------------------------- */
-            const isMatchBlackApi = picomatch.isMatch(pureUrl, blackApisConfig);
+            const isMatchBlackApi = picomatch.isMatch(routePath, blackApisConfig);
             if (isMatchBlackApi === true) {
                 res.send(httpConfig.API_DISABLED);
                 return;
@@ -46,13 +49,13 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 自由接口判断 --------------------------------- */
-            const isMatchFreeApi = picomatch.isMatch(pureUrl, freeApisConfig);
+            const isMatchFreeApi = picomatch.isMatch(routePath, freeApisConfig);
             // 如果是自由通行的接口，则直接返回
             if (isMatchFreeApi === true) return;
 
             /* --------------------------------- 请求资源判断 --------------------------------- */
-            if (pureUrl.indexOf('.') !== -1) {
-                if (existsSync(resolve(system.appDir, 'public', pureUrl)) === true) {
+            if (routePath.indexOf('.') !== -1) {
+                if (existsSync(resolve(system.appDir, 'public', routePath)) === true) {
                     return;
                 } else {
                     // 文件不存在
@@ -64,7 +67,7 @@ async function plugin(fastify, opts) {
             /* --------------------------------- 接口存在性判断 -------------------------------- */
             const allApiNames = await fastify.redisGet('cacheData:apiNames');
 
-            if (allApiNames.includes(pureUrl) === false) {
+            if (allApiNames.includes(routePath) === false) {
                 res.send(httpConfig.NO_API);
                 return;
             }
@@ -86,7 +89,7 @@ async function plugin(fastify, opts) {
              */
             fastify.log.warn({
                 apiPath: req?.url,
-                body: _omit(req?.body || {}, appConfig.reqParamsFilter),
+                body: toOmit(req?.body || {}, appConfig.reqParamsFilter),
                 session: req?.session,
                 reqId: req?.id
             });
@@ -100,22 +103,22 @@ async function plugin(fastify, opts) {
             // 从缓存获取白名单接口
             const dataApiWhiteLists = await fastify.redisGet('cacheData:apiWhiteLists');
             const whiteApis = dataApiWhiteLists?.map((item) => item.value);
-            const allWhiteApis = _uniq(_concat(whiteApisConfig, whiteApis || []));
+            const allWhiteApis = toUnique([...whiteApisConfig, ...(whiteApis || [])]);
 
             // 是否匹配白名单
-            const isMatchWhiteApi = picomatch.isMatch(pureUrl, allWhiteApis);
+            const isMatchWhiteApi = picomatch.isMatch(routePath, allWhiteApis);
 
             if (isMatchBlackApi === true) return;
 
             /* ---------------------------------- 角色接口权限判断 --------------------------------- */
             // 如果接口不在白名单中，则判断用户是否有接口访问权限
             const userApis = await fastify.getUserApis(req.session);
-            const hasApi = _find(userApis, { value: pureUrl.replace('/api/', '/') });
+            const hasApi = toFind(userApis, 'value', routePath.replace('/api/', '/'));
 
             if (!hasApi) {
                 res.send({
                     ...httpConfig.FAIL,
-                    msg: `您没有 [ ${req?.routeOptions?.schema?.summary || pureUrl} ] 接口的操作权限`
+                    msg: `您没有 [ ${req?.routeOptions?.schema?.summary || routePath} ] 接口的操作权限`
                 });
                 return;
             }

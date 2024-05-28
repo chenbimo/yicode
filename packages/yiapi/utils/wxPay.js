@@ -1,6 +1,5 @@
 import got from 'got';
 import crypto from 'crypto';
-import { isEmpty } from 'lodash-es';
 
 import { appConfig } from '../config/appConfig.js';
 import { fnUUID } from '../utils/index.js';

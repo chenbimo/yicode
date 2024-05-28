@@ -16,7 +16,7 @@ export const tableData = {
         name: '年龄',
         field: {
             type: 'tinyInt',
-            default: ''
+            default: 18
         },
         schema: {
             type: 'integer',

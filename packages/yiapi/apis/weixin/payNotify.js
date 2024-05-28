@@ -4,6 +4,7 @@ import { find, isFunction } from 'lodash-es';
 
 // 工具函数
 import { fnRoute, fnIncrUID, fnImport } from '../../utils/index.js';
+import { isFunction } from '../../utils/isFunction.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
 import { sysConfig } from '../../config/sysConfig.js';

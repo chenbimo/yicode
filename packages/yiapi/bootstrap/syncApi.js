@@ -195,8 +195,14 @@ async function syncApiFile(fastify) {
             const apiFileName = basename(item.file, '.js');
             const apiDirName = dirname(item.file);
             const apiFileRoute = item.filePathName;
-            console.log('🚀 ~ syncApiFile ~ apiFileRoute:', apiFileRoute);
             const apiDirRoute = dirname(apiFileRoute);
+
+            // 判断接口层次
+            const apiFileSplit = apiFileRoute.split('/').filter((name) => name);
+            if (apiFileSplit.length !== 2) {
+                fastify.log.warn(`${item.file} 接口只能为2层`);
+                process.exit();
+            }
 
             // 当前接口的目录数据
             const apiDirData = apiDirDbByValue[apiDirRoute] || {};
@@ -225,7 +231,6 @@ async function syncApiFile(fastify) {
                     is_open: 0,
                     describe: '',
                     pids: '0',
-                    level: 1,
                     is_bool: 1
                 };
                 if (appConfig.tablePrimaryKey === 'time') {
@@ -234,7 +239,6 @@ async function syncApiFile(fastify) {
                 if (apiDirData?.id) {
                     apiParams.pid = apiDirData.id;
                     apiParams.pids = `0,${apiDirData.id}`;
-                    apiParams.level = 2;
                 }
                 insertApiData.push(apiParams);
             } else {
@@ -243,7 +247,6 @@ async function syncApiFile(fastify) {
                     id: currentApi.id,
                     pid: apiDirData.id,
                     pids: `0,${apiDirData.id}`,
-                    level: 2,
                     name: metaConfig.apiNames[apiFileName] || '' || ''
                 };
                 updateApiData.push(apiParams);

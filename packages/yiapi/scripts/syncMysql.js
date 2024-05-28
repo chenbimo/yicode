@@ -23,7 +23,8 @@ import { isPlainObject } from '../utils/isPlainObject.js';
 import { toSnakeCase } from '../utils/toSnakeCase.js';
 import { toUnique } from '../utils/toUnique.js';
 import { isArrayContain } from '../utils/isArrayContain.js';
-import { isArrayDiff } from '../utils/isArrayDiff.js';
+import { getArrayDiffBoth } from '../utils/getArrayDiffBoth.js';
+import { getArrayDiffFirst } from '../utils/getArrayDiffFirst.js';
 import { isString } from '../utils/isString.js';
 import { isInteger } from '../utils/isInteger.js';
 import { isNumber } from '../utils/isNumber.js';
@@ -161,7 +162,7 @@ export const syncMysql = async () => {
                 const keysSchema = Object.keys(itemData.schema);
                 const tableField = tableFieldConfig[itemData.field.type];
                 const tableSchema = tableSchemaConfig[itemData.schema.type];
-                const tableFieldDiff = isArrayDiff(keysField, tableField);
+                const tableFieldDiff = getArrayDiffFirst(keysField, tableField);
                 if (['string'].includes(itemData.field.type)) {
                     if (itemData.field.default !== undefined && isString(itemData.field.default) === false) {
                         console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为字符串`);
@@ -208,7 +209,7 @@ export const syncMysql = async () => {
                     console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field 属性不能为 ${tableFieldDiff}`);
                     process.exit(1);
                 }
-                const tableSchemaDiff = isArrayDiff(keysField, tableField);
+                const tableSchemaDiff = getArrayDiffFirst(keysField, tableField);
                 if (tableSchemaDiff.length > 0) {
                     console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema 属性不能为 ${tableSchemaDiff} 中的值`);
                     process.exit(1);
@@ -325,15 +326,9 @@ export const syncMysql = async () => {
                     ...denyFields
                 ];
                 // 判断字段是否有调整，如果没有调整则不用进行数据转移
-                let isFieldChange = false;
-                // 判断字段是否有改动
-                allNewFields.forEach((field) => {
-                    if (allOldFields.includes(field) === false) {
-                        isFieldChange = true;
-                    }
-                });
+                const allFieldDiff = getArrayDiffBoth(allNewFields, allOldFields);
 
-                if (isFieldChange === true) {
+                if (allFieldDiff.length > 0) {
                     // 提取所有旧字段跟新字段匹配的字段
                     const validFieldsRaw = allOldFields
                         .filter((field) => {
@@ -341,10 +336,6 @@ export const syncMysql = async () => {
                         })
                         .map((field) => '`' + field + '`')
                         .join(',');
-                    // const uniqueNewFields = toUnique([...allOldFields, ...allNewFields]);
-                    // const validFieldsRaw = uniqueNewFields.map((field) => '`' + field + '`').join(',');
-                    // 移动数据
-                    // console.log('🚀 ~ syncMysql ~ validFieldsRaw:', validFieldsRaw);
                     const moveData = await trx.raw(`INSERT INTO ${tableItem.tableFileTemp} (${validFieldsRaw}) SELECT ${validFieldsRaw} FROM ${tableItem.tableFile}`);
                     // 删除旧表，重命名新表
                     await trx.schema.renameTable(tableItem.tableFile, tableItem.tableFile + '_' + fnIncrDate());

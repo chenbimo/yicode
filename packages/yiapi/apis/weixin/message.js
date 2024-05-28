@@ -1,7 +1,7 @@
 import { resolve } from 'node:path';
-import { isFunction } from 'lodash-es';
 // 工具函数
 import { fnRoute, fnImport, fnUUID } from '../../utils/index.js';
+import { isFunction } from '../../utils/isFunction.js';
 // 配置文件
 import { appConfig } from '../../config/appConfig.js';
 import { sysConfig } from '../../config/sysConfig.js';

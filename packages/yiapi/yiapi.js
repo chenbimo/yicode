@@ -100,14 +100,6 @@ fastify.register(fastifyStatic, {
     prefix: '/'
 });
 
-// 根请求
-fastify.get('/', function (req, res) {
-    res.send({
-        code: 0,
-        msg: `${appConfig.appName} 接口程序已启动`
-    });
-});
-
 // 加载启动插件
 if (appConfig.isSwagger === true) {
     fastify.register(swaggerPlugin, {});
@@ -125,7 +117,7 @@ fastify.register(ratePlugin, {});
 fastify.register(uploadPlugin, {});
 fastify.register(syncMenuPlugin, {});
 fastify.register(syncApiPlugin, {});
-// fastify.register(syncDevPlugin, {});
+fastify.register(syncDevPlugin, {});
 
 // 加载用户插件
 // fastify.register(autoLoad, {

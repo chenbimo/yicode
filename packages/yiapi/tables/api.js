@@ -23,17 +23,6 @@ export const tableData = {
             max: 1000
         }
     },
-    level: {
-        name: '目录层级',
-        field: {
-            type: 'tinyInt',
-            default: 1
-        },
-        schema: {
-            type: 'integer',
-            min: 1
-        }
-    },
     name: {
         name: '名称',
         field: {
