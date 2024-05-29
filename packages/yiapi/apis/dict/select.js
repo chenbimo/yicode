@@ -3,6 +3,7 @@ import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
 // 数据表格
 import { tableData } from '../../tables/dict.js';
 // 接口元数据
@@ -16,9 +17,9 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                page: metaConfig.page,
-                limit: metaConfig.limit,
-                category_code: metaConfig.category_code
+                page: fnSchema(schemaHelperConfig.page),
+                limit: fnSchema(schemaHelperConfig.limit),
+                category_code: fnSchema(tableData.category_code)
             },
             required: ['category_code']
         },

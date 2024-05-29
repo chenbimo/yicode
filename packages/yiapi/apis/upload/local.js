@@ -1,8 +1,8 @@
 // 内部模块
-import { resolve, extname as path_extname } from 'node:path';
+import { resolve, extname } from 'node:path';
 import { writeFileSync } from 'node:fs';
 // 外部模块
-import { ensureDirSync, ensureFileSync } from 'fs-extra';
+import { ensureDirSync } from 'fs-extra';
 import { format } from 'date-fns';
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
@@ -12,6 +12,7 @@ import { fnUUID } from '../../utils/fnUUID.js';
 import { system } from '../../system.js';
 import { appConfig } from '../../config/app.js';
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
 // 接口元数据
 import { metaConfig } from './_meta.js';
 
@@ -53,7 +54,7 @@ export default async (fastify) => {
             try {
                 const data = req.body.file;
 
-                const extname = path_extname(data.filename);
+                const extname = extname(data.filename);
 
                 const buffer = await data.toBuffer();
 

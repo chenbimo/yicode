@@ -4,6 +4,9 @@ import { fnSchema } from '../../utils/fnSchema.js';
 import { toCamelCase } from '../../utils/toCamelCase.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
+// 数据表格
+import { tableData } from '../../tables/dictCategory.js';
 // 接口元数据
 import { metaConfig } from './_meta.js';
 
@@ -15,10 +18,10 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                id: metaConfig.id,
-                code: metaConfig.code,
-                name: metaConfig.name,
-                describe: metaConfig.describe
+                id: fnSchema(schemaHelperConfig.page),
+                code: fnSchema(tableData.code),
+                name: fnSchema(tableData.name),
+                describe: fnSchema(tableData.describe)
             },
             required: ['id', 'code']
         },

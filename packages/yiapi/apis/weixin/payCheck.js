@@ -3,6 +3,8 @@ import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+// 数据库表
+import { tableData } from '../../tables/payOrder.js';
 // 接口元数据
 import { metaConfig } from './_meta.js';
 
@@ -13,7 +15,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                order_no: metaConfig.order_no
+                order_no: fnSchema(tableData.order_no)
             },
             required: ['order_no']
         },

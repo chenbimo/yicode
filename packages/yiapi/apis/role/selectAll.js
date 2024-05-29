@@ -3,6 +3,7 @@ import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
 // 数据表格
 import { tableData } from '../../tables/role.js';
 // 接口元数据

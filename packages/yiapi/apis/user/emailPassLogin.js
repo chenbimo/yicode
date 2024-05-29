@@ -4,6 +4,7 @@ import { fnSchema } from '../../utils/fnSchema.js';
 import { fnSaltMD5 } from '../../utils/fnSaltMD5.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
 // 数据表格
 import { tableData } from '../../tables/user.js';
 // 接口元数据
@@ -16,8 +17,8 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                email: metaConfig.email,
-                password: metaConfig.password
+                email: fnSchema(tableData.code),
+                password: fnSchema(tableData.code)
             },
             required: ['email', 'password']
         },

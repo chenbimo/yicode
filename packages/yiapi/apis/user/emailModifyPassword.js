@@ -5,6 +5,10 @@ import { fnSaltMD5 } from '../../utils/fnSaltMD5.js';
 import { fnPureMD5 } from '../../utils/fnPureMD5.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
+// 数据表格
+import { tableData } from '../../tables/user.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -14,9 +18,9 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                password: metaConfig.password,
-                email: metaConfig.email,
-                verify_code: metaConfig.verify_code
+                password: fnSchema(tableData.code),
+                email: fnSchema(tableData.code),
+                verify_code: fnSchema(tableData.code)
             },
             required: ['password', 'email', 'verify_code']
         },

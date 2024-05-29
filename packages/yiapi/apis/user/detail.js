@@ -4,6 +4,7 @@ import { fnSchema } from '../../utils/fnSchema.js';
 import { toOmit } from '../../utils/toOmit.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
 // 数据表格
 import { tableData } from '../../tables/user.js';
 // 接口元数据

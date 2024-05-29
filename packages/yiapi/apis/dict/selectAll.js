@@ -16,7 +16,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                category_code: metaConfig.category_code
+                category_code: fnSchema(tableData.category_code)
             }
         },
         // 执行函数

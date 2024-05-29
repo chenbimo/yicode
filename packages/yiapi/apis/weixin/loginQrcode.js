@@ -6,6 +6,8 @@ import { fnUUID } from '../../utils/fnUUID.js';
 // 配置文件
 import { appConfig } from '../../config/app.js';
 import { httpConfig } from '../../config/http.js';
+// 数据库表
+import { tableData } from '../../tables/payOrder.js';
 // 接口元数据
 import { metaConfig } from './_meta.js';
 
@@ -17,7 +19,7 @@ export default async (fastify) => {
             type: 'object',
             properties: {
                 agent_id: metaConfig.agent_id,
-                product_code: metaConfig.product_code
+                product_code: fnSchema(tableData.product_code)
             },
             required: ['agent_id', 'product_code']
         },

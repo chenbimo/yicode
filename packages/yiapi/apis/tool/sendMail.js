@@ -5,6 +5,7 @@ import { fnRandom6Number } from '../../utils/fnRandom6Number.js';
 // 配置文件
 import { appConfig } from '../../config/app.js';
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
 // 接口元数据
 import { metaConfig } from './_meta.js';
 

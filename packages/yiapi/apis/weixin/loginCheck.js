@@ -16,7 +16,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                scan_qrcode_uuid: metaConfig.scan_qrcode_uuid
+                scan_qrcode_uuid: fnSchema({ name: '扫码识别号', schema: { type: 'string', min: 5, max: 50 } })
             },
             required: ['scan_qrcode_uuid']
         },

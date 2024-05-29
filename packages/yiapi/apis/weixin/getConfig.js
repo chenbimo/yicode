@@ -18,7 +18,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                url: metaConfig.page_url
+                url: fnSchema({ name: '页面路径', schema: { type: 'string' } })
             },
             required: ['url']
         },

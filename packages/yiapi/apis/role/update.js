@@ -3,6 +3,9 @@ import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件夹
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
+// 数据表格
+import { tableData } from '../../tables/role.js';
 // 接口元数据
 import { metaConfig } from './_meta.js';
 
@@ -14,12 +17,12 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                id: metaConfig.id,
-                code: metaConfig.code,
-                name: metaConfig.name,
-                describe: metaConfig.describe,
-                menu_ids: metaConfig.menu_ids,
-                api_ids: metaConfig.api_ids
+                id: fnSchema(tableData.code),
+                code: fnSchema(tableData.code),
+                name: fnSchema(tableData.code),
+                describe: fnSchema(tableData.code),
+                menu_ids: fnSchema(tableData.code),
+                api_ids: fnSchema(tableData.code)
             },
             required: ['id']
         },

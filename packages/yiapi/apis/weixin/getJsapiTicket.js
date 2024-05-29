@@ -16,10 +16,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                url: {
-                    title: '页面 URL',
-                    type: 'string'
-                }
+                url: fnSchema({ name: '页面路径', schema: { type: 'string' } })
             },
             required: ['url']
         },

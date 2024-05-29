@@ -8,7 +8,9 @@ import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from
 // 配置文件
 import { appConfig } from '../../config/app.js';
 import { httpConfig } from '../../config/http.js';
-// // 接口元数据
+// 数据库表
+import { tableData } from '../../tables/payOrder.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -18,9 +20,9 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                pay_code: metaConfig.pay_code,
-                buy_amount: metaConfig.buy_amount,
-                buy_note: metaConfig.buy_note
+                pay_code: fnSchema(tableData.pay_code),
+                buy_amount: fnSchema(tableData.buy_amount),
+                buy_note: fnSchema(tableData.buy_note)
             },
             required: ['buy_amount', 'pay_code']
         },

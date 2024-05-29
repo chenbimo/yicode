@@ -3,6 +3,10 @@ import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
+// 数据表格
+import { tableData } from '../../tables/user.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -12,10 +16,10 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                avatar: metaConfig.avatar,
-                nickname: metaConfig.nickname,
-                bio: metaConfig.bio,
-                describe: metaConfig.describe
+                avatar: fnSchema(tableData.code),
+                nickname: fnSchema(tableData.code),
+                bio: fnSchema(tableData.code),
+                describe: fnSchema(tableData.code)
             },
             required: []
         },
