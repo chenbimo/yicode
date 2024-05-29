@@ -1,5 +1,5 @@
 import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
-import { fnMerge } from '../utils/fnMerger.js';
+import { fnMerge } from '../utils/fnMerge.js';
 
 const { logFilterConfig: importConfig } = await fnImportAppConfig('logFilter', []);
 

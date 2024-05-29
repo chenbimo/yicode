@@ -14,7 +14,6 @@ import { httpConfig } from '../config/http.js';
 // 工具函数
 import { fnApiCheck } from '../utils/fnApiCheck.js';
 import { fnRouterPath } from '../utils/fnRouterPath.js';
-import { fnClearLogData } from '../utils/fnClearLogData.js';
 import { toUnique } from '../utils/toUnique.js';
 import { toOmit } from '../utils/toOmit.js';
 import { toFind } from '../utils/toFind.js';
