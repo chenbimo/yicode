@@ -2,7 +2,7 @@
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnField } from '../../utils/fnField.js';
 // 配置文件
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {

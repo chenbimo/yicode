@@ -28,8 +28,7 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "workspace:^",
-        "lodash-es": "^4.17.21"
+        "@yicode/yiapi": "workspace:^"
     },
     "devDependencies": {
         "nodemon": "^3.1.1"

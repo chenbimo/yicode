@@ -1,13 +1,13 @@
 import got from 'got';
-import { find } from 'lodash-es';
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnField } from '../../utils/fnField.js';
 import { fnIncrUID } from '../../utils/fnIncrUID.js';
+import { toFind } from '../../utils/toFind.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
 import { appConfig } from '../../config/app.js';
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -26,7 +26,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const productInfo = find(appConfig.payment, { code: req.body.pay_code });
+                const productInfo = toFind(appConfig.payment, 'code', req.body.pay_code);
                 if (!productInfo?.name) {
                     return {
                         ...httpConfig.FAIL,

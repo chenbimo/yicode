@@ -1,8 +1,8 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
-import { fnCamelCase } from '../../utils/fnCamelCase.js';
+import { toCamelCase } from '../../utils/toCamelCase.js';
 // 配置文件
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 
 // 处理函数
@@ -27,7 +27,7 @@ export default async (fastify) => {
 
                 const dictCategoryData = await dictCategoryModel
                     .clone()
-                    .where({ code: fnCamelCase(req.body.code) })
+                    .where({ code: toCamelCase(req.body.code) })
                     .selectOne('id');
 
                 if (dictCategory?.id) {
@@ -41,7 +41,7 @@ export default async (fastify) => {
                     .clone()
                     .where({ id: req.body.id })
                     .updateData({
-                        code: fnCamelCase(req.body.code),
+                        code: toCamelCase(req.body.code),
                         name: req.body.name,
                         describe: req.body.describe
                     });

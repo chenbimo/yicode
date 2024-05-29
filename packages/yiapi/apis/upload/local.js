@@ -8,9 +8,9 @@ import { format } from 'date-fns';
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnUUID } from '../../utils/fnUUID.js';
 // 配置文件
+import { system } from '../../system.js';
 import { appConfig } from '../../config/app.js';
-import { sysConfig } from '../../config/sysConfig.js';
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 
 // 处理函数
@@ -62,7 +62,7 @@ export default async (fastify) => {
                 const name = `${fnUUID()}${extname}`;
                 const path = `${dir}/${name}`;
 
-                const localDir = resolve(sysConfig.appDir, appConfig.upload.dir || 'public', dir);
+                const localDir = resolve(system.appDir, appConfig.upload.dir || 'public', dir);
                 await ensureDirSync(localDir);
                 await writeFileSync(`${localDir}/${name}`, buffer);
 

@@ -1,13 +1,13 @@
 import { resolve } from 'node:path';
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
-import { fnImport } from '../../utils/fnImport.js';
+import { fnImportAbsolutePath } from '../../utils/fnImportAbsolutePath.js';
 import { fnUUID } from '../../utils/fnUUID.js';
 import { isFunction } from '../../utils/isFunction.js';
 // 配置文件
+import { system } from '../../system.js';
 import { appConfig } from '../../config/app.js';
-import { sysConfig } from '../../config/sysConfig.js';
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -55,7 +55,7 @@ export default async (fastify) => {
                 if (!xmlData?.EventKey) {
                     xmlData.EventKey = 'test';
                 }
-                const { callbackConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'callback.js'), 'callbackConfig', {});
+                const { callbackConfig } = await fnImportAbsolutePath(resolve(system.appDir, 'config', 'callback.js'), 'callbackConfig', {});
 
                 // 扫描公众号二维码登录
                 if (xmlData.EventKey.indexOf('scan_qrcode_login') !== -1) {

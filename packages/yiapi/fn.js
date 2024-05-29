@@ -6,7 +6,6 @@ export {
     fnSaltMD5,
     fnPureMD5,
     fnRoute,
-    fnMeta,
     fnField,
     fnRsaSha256
 } from './utils/index.js';

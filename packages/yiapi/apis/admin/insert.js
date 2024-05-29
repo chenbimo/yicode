@@ -4,7 +4,7 @@ import { fnSaltMD5 } from '../../utils/fnSaltMD5.js';
 import { fnPureMD5 } from '../../utils/fnPureMD5.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 import { tableData } from '../../tables/admin.js';
 

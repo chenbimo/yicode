@@ -5,7 +5,7 @@ import { fnField } from '../../utils/fnField.js';
 import { fnUUID } from '../../utils/fnUUID.js';
 // 配置文件
 import { appConfig } from '../../config/app.js';
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {

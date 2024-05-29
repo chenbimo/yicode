@@ -3,7 +3,7 @@ import { fnRoute } from '../../utils/fnRoute.js';
 import { fnRandom6Number } from '../../utils/fnRandom6Number.js';
 // 配置文件
 import { appConfig } from '../../config/app.js';
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 
 // 处理函数

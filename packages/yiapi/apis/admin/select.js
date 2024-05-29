@@ -3,9 +3,9 @@ import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 import { fnField } from '../../utils/fnField.js';
 // 配置文件
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
-import { schemaField } from '../../config/schemaField.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
 
 // 处理函数
 export default async (fastify) => {
@@ -15,8 +15,8 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                page: fnProp(schemaField.page),
-                limit: fnProp(schemaField.limit)
+                page: fnSchema(schemaHelperConfig.page),
+                limit: fnSchema(schemaHelperConfig.limit)
             }
         },
         // 执行函数

@@ -1,17 +1,17 @@
 import { resolve } from 'path';
 import { toDate, addDays, getTime } from 'date-fns';
-import { find, isFunction } from 'lodash-es';
 
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnIncrUID } from '../../utils/fnIncrUID.js';
-import { fnImport } from '../../utils/fnImport.js';
+import { fnImportAbsolutePath } from '../../utils/fnImportAbsolutePath.js';
 import { isFunction } from '../../utils/isFunction.js';
+import { toFind } from '../../utils/toFind.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
-import { sysConfig } from '../../config/sysConfig.js';
+import { system } from '../../system.js';
 import { appConfig } from '../../config/app.js';
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -45,7 +45,7 @@ export default async (fastify) => {
                     });
                     return '';
                 }
-                const { callbackConfig } = await fnImport(resolve(sysConfig.appDir, 'config', 'callback.js'), 'callbackConfig', {});
+                const { callbackConfig } = await fnImportAbsolutePath(resolve(system.appDir, 'config', 'callback.js'), 'callbackConfig', {});
                 // 解析数据
                 const reply = JSON.parse(wxPayDecodeCertificate(req.body.resource));
                 const attach = JSON.parse(reply.attach);
@@ -65,7 +65,7 @@ export default async (fastify) => {
                 }
 
                 // 产品信息
-                const paymentInfo = find(appConfig.payment, { code: attach.pay_code });
+                const paymentInfo = toFind(appConfig.payment, 'code', attach.pay_code);
                 fastify.log.warn({ msg: '产品信息', ...paymentInfo });
 
                 // 添加订单数据

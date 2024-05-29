@@ -23,7 +23,6 @@ import { toUnique } from './utils/toUnique.js';
 import { isPlainObject } from './utils/isPlainObject.js';
 import { isObject } from './utils/isObject.js';
 import { isFunction } from './utils/isFunction.js';
-import { fnImportAbsolutePath } from './utils/fnImportAbsolutePath.js';
 import { fnImportCoreConfig } from './utils/fnImportCoreConfig.js';
 import { fnImportCoreSchema } from './utils/fnImportCoreSchema.js';
 

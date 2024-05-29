@@ -1,8 +1,8 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
-import { fnCamelCase } from '../../utils/fnCamelCase.js';
+import { toCamelCase } from '../../utils/toCamelCase.js';
 // 配置文件
-import { httpConfig } from '../../config/httpConfig.js';
+import { httpConfig } from '../../config/http.js';
 import { metaConfig } from './_meta.js';
 
 // 处理函数
@@ -49,8 +49,8 @@ export default async (fastify) => {
 
                 const result = await dictModel.insertData({
                     category_id: req.body.category_id,
-                    category_code: fnCamelCase(req.body.category_code),
-                    code: fnCamelCase(req.body.code),
+                    category_code: toCamelCase(req.body.category_code),
+                    code: toCamelCase(req.body.code),
                     name: req.body.name,
                     value: req.body.value,
                     symbol: req.body.symbol,
