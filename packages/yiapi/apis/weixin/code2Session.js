@@ -15,12 +15,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                code: {
-                    type: 'string',
-                    minLength: 10,
-                    maxLength: 100,
-                    title: 'code'
-                }
+                code: fnSchema({ name: 'code串', schema: { type: 'string', min: 1 } })
             },
             required: ['code']
         },

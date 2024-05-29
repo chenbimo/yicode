@@ -18,9 +18,9 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                email: fnSchema(tableData.code),
-                password: fnSchema(tableData.code),
-                verify_code: fnSchema(tableData.code)
+                email: fnSchema(tableData.email),
+                password: fnSchema(tableData.password),
+                verify_code: fnSchema({ name: '验证码', schema: { type: 'string', min: 6, max: 6 } })
             },
             required: ['email', 'password', 'verify_code']
         },

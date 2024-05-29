@@ -50,6 +50,19 @@ export const schemaHelperConfig = Object.assign(importConfig, {
             max: 100
         }
     },
+    // 搜索关键字
+    keyword: {
+        name: '搜索关键字',
+        field: {
+            type: 'string'
+        },
+        schema: {
+            type: 'string',
+            default: '',
+            min: 0,
+            max: 100
+        }
+    },
     // 布尔值
     boolEnum: {
         name: '布尔值',

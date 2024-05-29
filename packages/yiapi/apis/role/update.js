@@ -17,12 +17,12 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                id: fnSchema(tableData.code),
+                id: fnSchema(schemaHelperConfig.id),
                 code: fnSchema(tableData.code),
-                name: fnSchema(tableData.code),
-                describe: fnSchema(tableData.code),
-                menu_ids: fnSchema(tableData.code),
-                api_ids: fnSchema(tableData.code)
+                name: fnSchema(tableData.name),
+                describe: fnSchema(tableData.describe),
+                menu_ids: fnSchema(tableData.menu_ids),
+                api_ids: fnSchema(tableData.api_ids)
             },
             required: ['id']
         },

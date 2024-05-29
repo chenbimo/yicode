@@ -17,7 +17,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                category: fnSchema(tableData.code)
+                category: fnSchema(tableData.category)
             },
             required: ['category']
         },

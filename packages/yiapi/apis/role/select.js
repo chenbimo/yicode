@@ -17,9 +17,9 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                page: fnSchema(tableData.code),
-                limit: fnSchema(tableData.code),
-                keyword: fnSchema(tableData.code)
+                page: fnSchema(schemaHelperConfig.page),
+                limit: fnSchema(schemaHelperConfig.limit),
+                keyword: fnSchema(schemaHelperConfig.keyword)
             },
             required: []
         },

@@ -16,10 +16,10 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                avatar: fnSchema(tableData.code),
-                nickname: fnSchema(tableData.code),
-                bio: fnSchema(tableData.code),
-                describe: fnSchema(tableData.code)
+                avatar: fnSchema(tableData.avatar),
+                nickname: fnSchema(tableData.nickname),
+                bio: fnSchema(tableData.bio),
+                describe: fnSchema(tableData.describe)
             },
             required: []
         },

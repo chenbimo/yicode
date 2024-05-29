@@ -1,5 +1,11 @@
-import { fnRoute } from '@yicode/yiapi/fn.js';
+// 工具函数
+import { fnRoute, fnSchema } from '@yicode/yiapi/fn.js';
+// 配置文件
 import { httpConfig } from '@yicode/yiapi/config/http.js';
+import { schemaHelperConfig } from '@yicode/yiapi/config/schemaHelper.js';
+// 数据库表
+import { tableData } from '../../tables/example.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -9,7 +15,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                id: metaConfig.id
+                id: fnSchema(schemaHelperConfig.id)
             },
             required: ['id']
         },

@@ -40,9 +40,9 @@ export const tableData = {
             type: 'mediumText'
         },
         schema: {
-            type: 'array',
-            items: 'integer',
-            default: []
+            type: 'string',
+            default: '',
+            max: 50000
         }
     },
     api_ids: {
@@ -51,9 +51,9 @@ export const tableData = {
             type: 'mediumText'
         },
         schema: {
-            type: 'array',
-            items: 'integer',
-            default: []
+            type: 'string',
+            default: '',
+            max: 50000
         }
     },
     sort: {

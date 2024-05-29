@@ -20,9 +20,9 @@ export default async (fastify) => {
                     title: '发送验证码邮件',
                     type: 'object',
                     properties: {
-                        to_email: metaConfig.to_email,
-                        subject: metaConfig.subject,
-                        verify_name: metaConfig.verify_name
+                        to_email: fnSchema({ name: '发送给谁', schema: { type: 'string', min: 5 } }),
+                        subject: fnSchema({ name: '邮件主题', schema: { type: 'string', min: 1 } }),
+                        verify_name: fnSchema({ name: '验证码名称', schema: { type: 'string', min: 2, max: 30, pattern: '^[a-z][a-zA-Z0-9]*' } })
                     },
                     required: ['to_email', 'subject', 'verify_name']
                 },
@@ -30,9 +30,9 @@ export default async (fastify) => {
                     title: '发送普通邮件',
                     type: 'object',
                     properties: {
-                        to_email: metaConfig.to_email,
-                        subject: metaConfig.subject,
-                        content: metaConfig.content
+                        to_email: fnSchema({ name: '发送给谁', schema: { type: 'string', min: 5 } }),
+                        subject: fnSchema({ name: '邮件主题', schema: { type: 'string', min: 1 } }),
+                        content: fnSchema({ name: '邮件内容', schema: { type: 'string', min: 1, max: 10000 } })
                     },
                     required: ['to_email', 'subject', 'content']
                 }

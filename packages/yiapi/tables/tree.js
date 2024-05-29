@@ -46,7 +46,7 @@ export const tableData = {
             pattern: '^[a-zA-Z][a-zA-Z0-9_-]*$'
         }
     },
-    icon: {
+    image: {
         name: '图标',
         field: {
             type: 'string',

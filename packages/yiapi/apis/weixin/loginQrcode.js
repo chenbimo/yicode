@@ -18,7 +18,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                agent_id: metaConfig.agent_id,
+                agent_id: fnSchema({ name: '代理ID', schema: { type: 'integer', min: 1 } }),
                 product_code: fnSchema(tableData.product_code)
             },
             required: ['agent_id', 'product_code']

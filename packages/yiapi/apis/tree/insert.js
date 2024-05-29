@@ -17,15 +17,15 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                pid: fnSchema(tableData.code),
-                category: fnSchema(tableData.code),
-                name: fnSchema(tableData.code),
-                value: fnSchema(tableData.code),
-                icon: fnSchema(tableData.code),
-                sort: fnSchema(tableData.code),
-                describe: fnSchema(tableData.code),
-                is_bool: fnSchema(tableData.code),
-                is_open: fnSchema(tableData.code)
+                pid: fnSchema(tableData.pid),
+                category: fnSchema(tableData.category),
+                name: fnSchema(tableData.name),
+                value: fnSchema(tableData.value),
+                image: fnSchema(tableData.image),
+                sort: fnSchema(tableData.sort),
+                describe: fnSchema(tableData.describe),
+                is_bool: fnSchema(tableData.is_bool),
+                is_open: fnSchema(tableData.is_open)
             },
             required: ['pid', 'category', 'name']
         },
@@ -60,7 +60,7 @@ export default async (fastify) => {
                         category: req.body.category,
                         name: req.body.name,
                         value: req.body.value,
-                        icon: req.body.icon,
+                        image: req.body.image,
                         sort: req.body.sort,
                         is_open: req.body.is_open,
                         is_bool: req.body.is_bool,

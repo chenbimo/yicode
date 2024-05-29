@@ -18,10 +18,10 @@ export default async (fastify) => {
             type: 'object',
             properties: {
                 code: fnSchema(tableData.code),
-                name: fnSchema(tableData.code),
-                describe: fnSchema(tableData.code),
-                menu_ids: fnSchema(tableData.code),
-                api_ids: fnSchema(tableData.code)
+                name: fnSchema(tableData.name),
+                describe: fnSchema(tableData.describe),
+                menu_ids: fnSchema(tableData.menu_ids),
+                api_ids: fnSchema(tableData.api_ids)
             },
             required: ['name', 'code']
         },

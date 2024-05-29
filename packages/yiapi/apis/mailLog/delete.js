@@ -17,7 +17,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                id: fnSchema(tableData.code)
+                id: fnSchema(schemaHelperConfig.id)
             },
             required: ['id']
         },

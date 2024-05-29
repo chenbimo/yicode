@@ -12,7 +12,7 @@ const fieldTypeEnum = [
     'float',
     'double'
 ];
-const schemaTypeEnum = ['string', 'integer', 'number', 'array'];
+const schemaTypeEnum = ['string', 'integer', 'number'];
 export const tableSchema = {
     title: '数据库表',
     type: 'object',
@@ -49,10 +49,7 @@ export const tableSchema = {
                         max: { title: '最大长度', type: 'integer' },
                         enum: { title: '枚举值', type: 'array' },
                         pattern: { title: '模式匹配', type: 'string' },
-                        multipleOf: { title: '倍数', type: 'integer', minimum: 1 },
-                        items: { title: '数组类型', type: 'string' },
-                        isUnique: { title: '是否唯一', type: 'boolean', default: false },
-                        isAdditional: { title: '是否扩展', type: 'boolean', default: false }
+                        multipleOf: { title: '倍数', type: 'integer', minimum: 1 }
                     },
                     additionalProperties: false,
                     required: ['type']
