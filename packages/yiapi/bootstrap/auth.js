@@ -31,7 +31,7 @@ async function plugin(fastify, opts) {
                 });
                 return;
             }
-            if (routePath.startsWith('/docs')) return;
+            if (routePath.startsWith('/swagger')) return;
 
             /* --------------------------------- 接口禁用检测 --------------------------------- */
             const isMatchBlackApi = picomatch.isMatch(routePath, blackApisConfig);

@@ -51,7 +51,7 @@ export const fnRoute = (metaUrl, fastify, metaConfig, options) => {
         url: `/${apiInfo.pureFileName}`,
         schema: {
             summary: metaConfig.apiNames[apiInfo.pureFileName],
-            tags: [apiInfo.parentDirName],
+            tags: [apiInfo.parentDirName + ' ' + metaConfig.dirName],
             response: options.schemaResponse || {}
         },
         handler: options.apiHandler

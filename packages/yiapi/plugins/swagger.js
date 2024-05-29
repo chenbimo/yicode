@@ -21,7 +21,7 @@ async function plugin(fastify, opts) {
     });
 
     await fastify.register(fastifySwaggerUi, {
-        routePrefix: '/docs',
+        routePrefix: '/swagger',
         initOAuth: {},
         uiConfig: {
             docExpansion: 'none',
