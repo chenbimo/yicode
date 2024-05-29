@@ -1,7 +1,6 @@
 import { vitePluginForArco } from '@arco-plugins/vite-vue';
 export const yiteConfig = {
-    devtool: true,
-    imagemin: false,
+    devtool: false,
     // 自动导入解析
     autoImport: {
         resolvers: [

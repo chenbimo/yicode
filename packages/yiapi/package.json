@@ -60,7 +60,7 @@
         "lodash-es": "^4.17.21",
         "log-symbols": "^6.0.0",
         "merge-anything": "^5.1.7",
-        "mysql2": "^3.9.8",
+        "mysql2": "^3.9.9",
         "nanoid": "^5.0.7",
         "nodemailer": "^6.9.13",
         "ora": "^8.0.1",
