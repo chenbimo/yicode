@@ -1,7 +1,10 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
+import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 // 处理函数
@@ -12,7 +15,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                id: metaConfig.id
+                id: fnSchema(schemaHelperConfig.id)
             },
             required: ['id']
         },

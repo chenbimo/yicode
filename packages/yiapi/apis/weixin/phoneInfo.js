@@ -1,8 +1,10 @@
 import got from 'got';
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
+import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {

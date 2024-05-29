@@ -1,8 +1,12 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
-import { fnField } from '../../utils/fnField.js';
+import { fnSchema } from '../../utils/fnSchema.js';
+import { toOmit } from '../../utils/toOmit.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+// 数据表格
+import { tableData } from '../../tables/user.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -22,7 +26,7 @@ export default async (fastify) => {
                 const result = await sysUserModel
                     .clone() //
                     .where('id', req.session.id)
-                    .selectOne(...fnField('user', 'core', ['password']));
+                    .selectOne(toOmit(Object.keys(tableData), ['password']));
 
                 if (!result?.id) {
                     return {

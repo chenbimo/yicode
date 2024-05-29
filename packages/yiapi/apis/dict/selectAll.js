@@ -1,8 +1,11 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
-import { fnField } from '../../utils/fnField.js';
+import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+// 数据表格
+import { tableData } from '../../tables/dict.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 // 处理函数
@@ -23,7 +26,7 @@ export default async (fastify) => {
                     .table('sys_dict')
                     .where('category_code', req.body.category_code)
                     .modify(function (db) {});
-                const rowsTemp = await dictModel.clone().selectAll(...fnField('dict', 'core'));
+                const rowsTemp = await dictModel.clone().selectAll(...Object.keys(tableData));
 
                 const rows = rowsTemp?.map((item) => {
                     if (item.symbol === 'number') {

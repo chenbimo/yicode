@@ -1,11 +1,14 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
-import { fnField } from '../../utils/fnField.js';
+import { toOmit } from '../../utils/toOmit.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
-import { metaConfig } from './_meta.js';
 import { schemaHelperConfig } from '../../config/schemaHelper.js';
+// 数据表格
+import { tableData } from '../../tables/admin.js';
+// 接口元数据
+import { metaConfig } from './_meta.js';
 
 // 处理函数
 export default async (fastify) => {
@@ -32,7 +35,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, ...fnField('admin', 'core', ['password']));
+                    .selectData(req.body.page, req.body.limit, ...toOmit(Object, keys(tableData), ['password']));
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

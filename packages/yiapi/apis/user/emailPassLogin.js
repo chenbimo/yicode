@@ -1,9 +1,12 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
-import { fnField } from '../../utils/fnField.js';
+import { fnSchema } from '../../utils/fnSchema.js';
 import { fnSaltMD5 } from '../../utils/fnSaltMD5.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+// 数据表格
+import { tableData } from '../../tables/user.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -25,7 +28,7 @@ export default async (fastify) => {
                 const userData = await userModel //
                     .clone()
                     .where({ email: req.body.email })
-                    .selectOne(...fnField('user', 'core'));
+                    .selectOne(Object.keys(tableData));
 
                 if (!userData?.id) {
                     return {

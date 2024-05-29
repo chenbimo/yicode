@@ -1,8 +1,13 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
+import { fnSchema } from '../../utils/fnSchema.js';
 import { fnSaltMD5 } from '../../utils/fnSaltMD5.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { schemaHelperConfig } from '../../config/schemaHelper.js';
+// 数据表格
+import { tableData } from '../../tables/admin.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 // 处理函数
@@ -13,10 +18,10 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                id: metaConfig.id,
-                password: metaConfig.password,
-                nickname: metaConfig.nickname,
-                role: metaConfig.role
+                id: fnSchema(schemaHelperConfig.id),
+                password: fnSchema(tableData.password),
+                nickname: fnSchema(tableData.nickname),
+                role: fnSchema(tableData.role)
             },
             required: ['id']
         },

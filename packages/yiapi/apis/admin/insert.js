@@ -5,8 +5,10 @@ import { fnPureMD5 } from '../../utils/fnPureMD5.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
-import { metaConfig } from './_meta.js';
+// 数据表格
 import { tableData } from '../../tables/admin.js';
+// 接口元数据
+import { metaConfig } from './_meta.js';
 
 // 处理函数
 export default async (fastify) => {

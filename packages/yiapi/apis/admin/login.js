@@ -2,10 +2,14 @@
 // 工具函数
 import { toOmit } from '../../utils/toOmit.js';
 import { fnRoute } from '../../utils/fnRoute.js';
+import { fnSchema } from '../../utils/fnSchema.js';
 import { fnPureMD5 } from '../../utils/fnPureMD5.js';
 import { fnSaltMD5 } from '../../utils/fnSaltMD5.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+// 数据表格
+import { tableData } from '../../tables/admin.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 // 处理函数
@@ -16,8 +20,13 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                account: metaConfig.account,
-                password: metaConfig.password
+                account: {
+                    title: '账号',
+                    type: 'string',
+                    minLength: 1,
+                    maxLength: 100
+                },
+                password: fnSchema(tableData.password)
             },
             required: ['account', 'password']
         },

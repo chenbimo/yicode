@@ -1,8 +1,11 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
-import { fnField } from '../../utils/fnField.js';
+import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+// 数据表格
+import { tableData } from '../../tables/menu.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 // 处理函数
@@ -31,7 +34,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, ...fnField('menu', 'core'));
+                    .selectData(req.body.page, req.body.limit, ...Object.keys(tableData));
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

@@ -1,6 +1,7 @@
 import { resolve } from 'node:path';
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
+import { fnSchema } from '../../utils/fnSchema.js';
 import { fnImportAbsolutePath } from '../../utils/fnImportAbsolutePath.js';
 import { fnUUID } from '../../utils/fnUUID.js';
 import { isFunction } from '../../utils/isFunction.js';
@@ -8,6 +9,7 @@ import { isFunction } from '../../utils/isFunction.js';
 import { system } from '../../system.js';
 import { appConfig } from '../../config/app.js';
 import { httpConfig } from '../../config/http.js';
+// 接口元数据
 import { metaConfig } from './_meta.js';
 
 export default async (fastify) => {
@@ -38,9 +40,7 @@ export default async (fastify) => {
     });
 
     // 当前文件的路径，fastify 实例
-    fnRoute(import.meta.url, fastify, {
-        // 接口名称
-        apiName: apiName,
+    fnRoute(import.meta.url, fastify, metaConfig, {
         // 请求参数约束
         schemaRequest: {
             type: 'object',

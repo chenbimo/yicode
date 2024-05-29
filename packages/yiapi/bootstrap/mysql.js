@@ -4,6 +4,7 @@ import Knex from 'knex';
 import { mysqlConfig } from '../config/mysql.js';
 import { fnDbInsert } from '../utils/fnDbInsert.js';
 import { fnDbUpdate } from '../utils/fnDbUpdate.js';
+import { isArray } from '../utils/isArray.js';
 
 async function plugin(fastify, options) {
     try {
@@ -27,21 +28,35 @@ async function plugin(fastify, options) {
             return this.delete(data);
         });
         // 查询数据
-        Knex.QueryBuilder.extend('selectData', function (page, limit, ...args) {
-            return this.offset((page - 1) * limit)
-                .limit(limit)
-                .select(args);
+        Knex.QueryBuilder.extend('selectData', function (page, limit, args) {
+            if (isArray(args) === true) {
+                return this.offset((page - 1) * limit)
+                    .limit(limit)
+                    .select(...args);
+            } else {
+                return this.offset((page - 1) * limit)
+                    .limit(limit)
+                    .select();
+            }
         });
         // 查询一条
-        Knex.QueryBuilder.extend('selectOne', function (...args) {
-            return this.first(args);
+        Knex.QueryBuilder.extend('selectOne', function (args) {
+            if (isArray(args) === true) {
+                return this.first(...args);
+            } else {
+                return this.first();
+            }
         });
         // 查询所有
-        Knex.QueryBuilder.extend('selectAll', function (...args) {
-            return this.select(args);
+        Knex.QueryBuilder.extend('selectAll', function (args) {
+            if (isArray(args) === true) {
+                return this.select(...args);
+            } else {
+                return this.select();
+            }
         });
         // 查询总数
-        Knex.QueryBuilder.extend('selectCount', function (...args) {
+        Knex.QueryBuilder.extend('selectCount', function () {
             return this.count('id', { as: 'totalCount' }).first();
         });
         // 定义数据库链接

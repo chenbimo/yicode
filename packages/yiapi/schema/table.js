@@ -51,8 +51,8 @@ export const tableSchema = {
                         pattern: { title: '模式匹配', type: 'string' },
                         multipleOf: { title: '倍数', type: 'integer', minimum: 1 },
                         items: { title: '数组类型', type: 'string' },
-                        isUniqueItems: { title: '是否唯一', type: 'boolean', default: false },
-                        isAdditionalItems: { title: '是否扩展', type: 'boolean', default: false }
+                        isUnique: { title: '是否唯一', type: 'boolean', default: false },
+                        isAdditional: { title: '是否扩展', type: 'boolean', default: false }
                     },
                     additionalProperties: false,
                     required: ['type']

@@ -1,3 +1,5 @@
 export const isFunction = (f) => {
-    return Object.prototype.toString.call(f) === '[object Function]';
+    const symbolString = Object.prototype.toString.call(f);
+    const result = ['[object Function]', '[object AsyncFunction]'].includes(symbolString);
+    return result;
 };

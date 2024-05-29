@@ -1,6 +1,6 @@
 export const tableSchemaConfig = {
-    string: ['type', 'default', 'min', 'max', 'enum', 'pattern'],
-    integer: ['type', 'default', 'min', 'max', 'multipleOf'],
-    number: ['type', 'default', 'min', 'max', 'multipleOf'],
-    array: ['type', 'default', 'items', 'isUniqueItems', 'isAdditionalItems']
+    string: ['type', 'default', 'min', 'max', 'pattern', 'enum'],
+    integer: ['type', 'default', 'min', 'max', 'multipleOf', 'enum'],
+    number: ['type', 'default', 'min', 'max', 'multipleOf', 'enum'],
+    array: ['type', 'default', 'min', 'max', 'items', 'isUnique', 'isAdditional']
 };
