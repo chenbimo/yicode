@@ -1,9 +1,11 @@
 import { resolve } from 'node:path';
 // 工具函数
-import { fnRoute, fnImport, fnUUID } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnImport } from '../../utils/fnImport.js';
+import { fnUUID } from '../../utils/fnUUID.js';
 import { isFunction } from '../../utils/isFunction.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
+import { appConfig } from '../../config/app.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';

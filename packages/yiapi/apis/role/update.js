@@ -1,5 +1,5 @@
 // 工具函数
-import { fnRoute } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
 // 配置文件夹
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';

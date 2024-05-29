@@ -32,6 +32,7 @@ async function plugin(fastify, opts) {
                 });
                 return;
             }
+            if (routePath.startsWith('/docs')) return;
 
             /* --------------------------------- 接口禁用检测 --------------------------------- */
             const isMatchBlackApi = picomatch.isMatch(routePath, blackApisConfig);

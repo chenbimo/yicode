@@ -1,8 +1,8 @@
 import got from 'got';
 import crypto from 'crypto';
 
-import { appConfig } from '../config/appConfig.js';
-import { fnUUID } from '../utils/index.js';
+import { appConfig } from '../config/app.js';
+import { fnUUID } from '../utils/fnUUID.js';
 
 const wxPayConfig = {
     certificates: [],

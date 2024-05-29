@@ -12,7 +12,7 @@ function plugin(fastify, opts, next) {
     cronConfig.forEach((item) => {
         if (isFunction(item.handler) === false) {
             console.log(logSymbols.error, `${item.name} 定时器 handler 必须为一个函数`);
-            process.exit(1);
+            process.exit();
         }
         const options = {
             name: item.name,

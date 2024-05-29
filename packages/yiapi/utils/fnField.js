@@ -6,7 +6,7 @@ export function fnField(tableName, fromType, excludeFields = []) {
     // 如果没有 fields 字段
     if (['core', 'app'].includes(fromType) === false) {
         console.log(`${logSymbols.warning} ${color.blueBright(filePath)} fromType 属性必须为 core,app 二者之一，请检查`);
-        process.exit(1);
+        process.exit();
     }
     // 内置的字段
     const innerFields = [
@@ -21,7 +21,7 @@ export function fnField(tableName, fromType, excludeFields = []) {
     // 如果没有 fields 字段
     if (!tableJson?.fields) {
         console.log(`${logSymbols.warning} ${color.blueBright(filePath)} 没有 fields 属性，请检查`);
-        process.exit(1);
+        process.exit();
     }
     let extraFields = {};
     if (fromType === 'core') {

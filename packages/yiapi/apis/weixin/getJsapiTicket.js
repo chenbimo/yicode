@@ -1,5 +1,8 @@
 // 工具函数
-import { fnRoute, fnParamsRaw, fnHashSign, fnUUID } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnParamsRaw } from '../../utils/fnParamsRaw.js';
+import { fnHashSign } from '../../utils/fnHashSign.js';
+import { fnUUID } from '../../utils/fnUUID.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';

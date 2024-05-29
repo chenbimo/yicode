@@ -1,5 +1,8 @@
 // 工具函数
-import { fnRoute, fnSaltMD5, fnPureMD5, fnProp } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnSaltMD5 } from '../../utils/fnSaltMD5.js';
+import { fnPureMD5 } from '../../utils/fnPureMD5.js';
+import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
@@ -13,10 +16,10 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                username: fnProp(tableData.username),
-                password: fnProp(tableData.password),
-                nickname: fnProp(tableData.nickname),
-                role: fnProp(tableData.role)
+                username: fnSchema(tableData.username),
+                password: fnSchema(tableData.password),
+                nickname: fnSchema(tableData.nickname),
+                role: fnSchema(tableData.role)
             },
             required: ['username', 'password', 'nickname', 'role']
         },

@@ -1,10 +1,12 @@
 import got from 'got';
 import { find } from 'lodash-es';
 // 工具函数
-import { fnRoute, fnField, fnSchema, fnIncrUID } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnField } from '../../utils/fnField.js';
+import { fnIncrUID } from '../../utils/fnIncrUID.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
+import { appConfig } from '../../config/app.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 

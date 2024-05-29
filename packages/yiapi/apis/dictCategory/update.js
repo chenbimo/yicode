@@ -1,5 +1,6 @@
 // 工具函数
-import { fnRoute, fnCamelCase } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnCamelCase } from '../../utils/fnCamelCase.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';

@@ -3,12 +3,14 @@ import { toDate, addDays, getTime } from 'date-fns';
 import { find, isFunction } from 'lodash-es';
 
 // 工具函数
-import { fnRoute, fnIncrUID, fnImport } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnIncrUID } from '../../utils/fnIncrUID.js';
+import { fnImport } from '../../utils/fnImport.js';
 import { isFunction } from '../../utils/isFunction.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
 import { sysConfig } from '../../config/sysConfig.js';
-import { appConfig } from '../../config/appConfig.js';
+import { appConfig } from '../../config/app.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 

@@ -52,7 +52,7 @@ export const syncMysql = async () => {
     // console.log('🚀 ~ file: syncCoreDatabase.js:220 ~ syncCoreDatabase ~ isPortOpen:', isPortOpen);
     // if (!isPortOpen) {
     //     console.log(`${logSymbols.warning} 请停止应用后再同步！！！`);
-    //     process.exit(1);
+    //     process.exit();
     // }
     // 定义数据库链接
     const mysql = await new Knex({
@@ -112,46 +112,46 @@ export const syncMysql = async () => {
             const pureFileName = basename(item.file, '.js');
             if (/[a-z][a-zA-Z0-9_]/.test(pureFileName) === false) {
                 console.log(`${logSymbols.warning} ${file} 文件名只能为 大小写字母+数字+下划线`);
-                process.exit(1);
+                process.exit();
             }
             const tableFile = item.prefix + toSnakeCase(pureFileName.trim());
             if (!item.prefix && tableFile.startsWith('sys_') === true) {
                 console.log(`${logSymbols.warning} ${file} 非系统表不能以 sys_ 开头`);
-                process.exit(1);
+                process.exit();
             }
             const { tableName } = await fnImportAbsolutePath(item.file, 'tableName', '');
             const { tableData } = await fnImportAbsolutePath(item.file, 'tableData', {});
 
             if (!tableName) {
                 console.log(`${logSymbols.warning} ${item.file} 文件的 tableName 必须有表名称`);
-                process.exit(1);
+                process.exit();
             }
 
             if (tableName.endsWith('_temp')) {
                 console.log(`${logSymbols.warning} ${item.file} 文件名不能以 _temp 结尾`);
-                process.exit(1);
+                process.exit();
             }
 
             if (isObject(tableData) === false) {
                 console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 必须为对象结构`);
-                process.exit(1);
+                process.exit();
             }
 
             if (isPlainObject(tableData || {}) === true) {
                 console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 必须为非空对象`);
-                process.exit(1);
+                process.exit();
             }
 
             if (isArrayContain(Object.keys(tableData), denyFields) === true) {
                 console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 不能包含 ${denyFields} 字段`);
-                process.exit(1);
+                process.exit();
             }
 
             const validResult = validateTable(tableData);
             if (!validResult) {
                 localize.zh(validateTable.errors);
                 console.log(logSymbols.error, '[ ' + item.file + ' ] \n' + ajv.errorsText(validateTable.errors, { separator: '\n' }));
-                process.exit(1);
+                process.exit();
             }
 
             // 验证字段
@@ -166,53 +166,53 @@ export const syncMysql = async () => {
                 if (['string'].includes(itemData.field.type)) {
                     if (itemData.field.default !== undefined && isString(itemData.field.default) === false) {
                         console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为字符串`);
-                        process.exit(1);
+                        process.exit();
                     }
                 }
                 if (['tinyInt', 'smallInt', 'mediumInt', 'int', 'bigInt'].includes(itemData.field.type)) {
                     if (itemData.field.default !== undefined && isInteger(itemData.field.default) === false) {
                         console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为整数`);
-                        process.exit(1);
+                        process.exit();
                     }
                 }
                 if (['float', 'double'].includes(itemData.field.type)) {
                     if (itemData.field.default !== undefined && isNumber(itemData.field.default) === false) {
                         console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为数字`);
-                        process.exit(1);
+                        process.exit();
                     }
                 }
                 if (itemData.schema.type === 'string') {
                     if (itemData.schema.default !== undefined && isString(itemData.schema.default) === false) {
                         console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为字符串`);
-                        process.exit(1);
+                        process.exit();
                     }
                 }
                 if (itemData.schema.type === 'integer') {
                     if (itemData.schema.default !== undefined && isInteger(itemData.schema.default) === false) {
                         console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为整数`);
-                        process.exit(1);
+                        process.exit();
                     }
                 }
                 if (itemData.schema.type === 'number') {
                     if (itemData.schema.default !== undefined && isNumber(itemData.schema.default) === false) {
                         console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为数字`);
-                        process.exit(1);
+                        process.exit();
                     }
                 }
                 if (itemData.schema.type === 'array') {
                     if (itemData.schema.default !== undefined && isArray(itemData.schema.default) === false) {
                         console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为数组`);
-                        process.exit(1);
+                        process.exit();
                     }
                 }
                 if (tableFieldDiff.length > 0) {
                     console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field 属性不能为 ${tableFieldDiff}`);
-                    process.exit(1);
+                    process.exit();
                 }
                 const tableSchemaDiff = getArrayDiffFirst(keysField, tableField);
                 if (tableSchemaDiff.length > 0) {
                     console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema 属性不能为 ${tableSchemaDiff} 中的值`);
-                    process.exit(1);
+                    process.exit();
                 }
             }
             allDbTable.push({

@@ -5,9 +5,10 @@ import { writeFileSync } from 'node:fs';
 import { ensureDirSync, ensureFileSync } from 'fs-extra';
 import { format } from 'date-fns';
 // 工具函数
-import { fnRoute, fnUUID } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnUUID } from '../../utils/fnUUID.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
+import { appConfig } from '../../config/app.js';
 import { sysConfig } from '../../config/sysConfig.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';

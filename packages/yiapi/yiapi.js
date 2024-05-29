@@ -120,37 +120,37 @@ fastify.register(syncApiPlugin, {});
 fastify.register(syncDevPlugin, {});
 
 // 加载用户插件
-// fastify.register(autoLoad, {
-//     dir: join(system.appDir, 'plugins'),
-//     matchFilter: (_path) => {
-//         return _path.endsWith('.js') === true;
-//     },
-//     ignorePattern: /^[_.]/
-// });
+fastify.register(autoLoad, {
+    dir: join(system.appDir, 'plugins'),
+    matchFilter: (_path) => {
+        return _path.endsWith('.js') === true;
+    },
+    ignorePattern: /^[_.]/
+});
 
 // 加载系统接口
-// fastify.register(autoLoad, {
-//     dir: join(system.yiapiDir, 'apis'),
-//     matchFilter: (_path) => {
-//         return _path.endsWith('.js') === true;
-//     },
-//     ignorePattern: /^[_.]/,
-//     options: {
-//         prefix: '/api'
-//     }
-// });
+fastify.register(autoLoad, {
+    dir: join(system.yiapiDir, 'apis'),
+    matchFilter: (_path) => {
+        return _path.endsWith('.js') === true;
+    },
+    ignorePattern: /^[_.]/,
+    options: {
+        prefix: '/api'
+    }
+});
 
 // 加载用户接口
-// fastify.register(autoLoad, {
-//     dir: join(system.appDir, 'apis'),
-//     matchFilter: (_path) => {
-//         return _path.endsWith('.js') === true;
-//     },
-//     ignorePattern: /^[_.]/,
-//     options: {
-//         prefix: '/api'
-//     }
-// });
+fastify.register(autoLoad, {
+    dir: join(system.appDir, 'apis'),
+    matchFilter: (_path) => {
+        return _path.endsWith('.js') === true;
+    },
+    ignorePattern: /^[_.]/,
+    options: {
+        prefix: '/api'
+    }
+});
 
 // 初始化服务
 function initServer() {
@@ -159,7 +159,7 @@ function initServer() {
         fastify.listen({ port: appConfig.port, host: appConfig.host }, async function (err, address) {
             if (err) {
                 fastify.log.error(err);
-                process.exit(1);
+                process.exit();
             }
             fastify.log.warn(`${appConfig.appName} 接口服务已启动： ${address}`);
             console.log(`${appConfig.appName} 接口服务已启动： ${address}`);

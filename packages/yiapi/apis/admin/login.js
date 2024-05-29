@@ -1,7 +1,9 @@
 // 外部模块
 // 工具函数
-import { fnRoute, fnPureMD5, fnSaltMD5 } from '../../utils/index.js';
 import { toOmit } from '../../utils/toOmit.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnPureMD5 } from '../../utils/fnPureMD5.js';
+import { fnSaltMD5 } from '../../utils/fnSaltMD5.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';

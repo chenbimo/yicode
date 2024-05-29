@@ -1,8 +1,9 @@
 import got from 'got';
 // 工具函数
-import { fnRoute, fnField } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnField } from '../../utils/fnField.js';
 // 配置文件
-import { appConfig } from '../../config/appConfig.js';
+import { appConfig } from '../../config/app.js';
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
 

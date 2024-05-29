@@ -17,7 +17,7 @@ export const fnAjvValidate = async (file, schema, config, isBreak = false) => {
         localize.zh(ajv.errors);
         console.log(logSymbols.error, '[ ' + file + ' ] ' + ajv.errorsText(ajv.errors, { separator: '\n' }));
         if (isBreak === true) {
-            process.exit(1);
+            process.exit();
         }
     }
 };

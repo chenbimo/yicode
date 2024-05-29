@@ -18,11 +18,11 @@ export function fnApiInfo(metaUrl) {
 
     const metaFile = path.dirname(metaUrl) + '/_meta.js';
 
-    const apiHash = {
+    const apiData = {
         pureFileName: pureFileName,
         parentDirName: parentDirName,
         apiPath: [parentDirName, pureFileName].join('/')
     };
 
-    return apiHash;
+    return apiData;
 }

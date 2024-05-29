@@ -1,20 +1,24 @@
 import * as color from 'colorette';
 import logSymbols from 'log-symbols';
+import { isObject } from './isObject.js';
+import { isFunction } from './isFunction.js';
+import { fnApiInfo } from './fnApiInfo.js';
+
 // 设置路由函数
 export const fnRoute = (metaUrl, fastify, metaConfig, options) => {
     const apiInfo = fnApiInfo(metaUrl);
     const method = (options.method || 'post').toLowerCase();
-    if (!options.schemaRequest) {
-        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 schemaRequest 属性，请检查`);
-        process.exit(1);
+    if (isObject(options.schemaRequest) === false) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口的 schemaRequest 必须为一个对象，请检查`);
+        process.exit();
     }
-    if (!options.apiHandler) {
-        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口没有 apiHandler 属性，请检查`);
-        process.exit(1);
+    if (isFunction(options.apiHandler) === false) {
+        console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口的 apiHandler 必须为一个函数，请检查`);
+        process.exit();
     }
-    if (!['get', 'post'].includes(method)) {
+    if (['get', 'post'].includes(method) === false) {
         console.log(`${logSymbols.error} ${color.blueBright(apiInfo.apiPath)} 接口方法只能为 get 或 post 之一，请检查`);
-        process.exit(1);
+        process.exit();
     }
 
     options.schemaRequest.title = metaConfig.apiNames[apiInfo.pureFileName];

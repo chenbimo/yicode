@@ -1,5 +1,8 @@
 // 工具函数
-import { fnRoute, fnField, fnSaltMD5, fnPureMD5 } from '../../utils/index.js';
+import { fnRoute } from '../../utils/fnRoute.js';
+import { fnField } from '../../utils/fnField.js';
+import { fnSaltMD5 } from '../../utils/fnSaltMD5.js';
+import { fnPureMD5 } from '../../utils/fnPureMD5.js';
 // 配置文件
 import { httpConfig } from '../../config/httpConfig.js';
 import { metaConfig } from './_meta.js';
