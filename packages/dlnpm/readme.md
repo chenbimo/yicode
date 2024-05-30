@@ -53,7 +53,7 @@ pnpm add -g @yicode/dlnpm
 | 性格     | 喜欢安静，喜欢分享，喜欢钻研                          |
 | 身份     | 前端吹水专家，高级劝退师                              |
 | 爱好     | 敲代码，写小说，看电影，算命                          |
-| 微信     | c91374286                                             |
+| 微信     | chensuiyime                                           |
 | 扣扣     | 24323626                                              |
 | 邮箱     | bimostyle@qq.com                                      |
 | 知乎     | [知乎陈随易](https://www.zhihu.com/people/chensuiyi)  |

@@ -30,4 +30,4 @@ npm install -g @yicode/gitlook
 
 ## 社区交流
 
-项目相关讨论交流，请添加作者微信 `c91374286` 入群。
+项目相关讨论交流，请添加作者微信 `chensuiyime` 入群。

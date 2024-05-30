@@ -149,7 +149,7 @@ export default defineConfig({
 
 ## 反馈
 
--   作者微信：c91374286
+-   作者微信：chensuiyime
 -   作者邮箱：bimostyle@qq.com
 
 ## 其他
@@ -324,7 +324,7 @@ export default defineConfig({
 
 ## feedback
 
--   Author WeChat：c91374286
+-   Author WeChat：chensuiyime
 -   Author Email：bimostyle@qq.com
 
 ## others
