@@ -8,17 +8,25 @@ import { cacheConfig } from '../config/cache.js';
 async function plugin(fastify) {
     // 设置 redis
     const redisSet = async (key, value, second = 0) => {
-        if (second > 0) {
-            await fastify.redis.set(key, JSON.stringify(value), 'EX', second);
-        } else {
-            await fastify.redis.set(key, JSON.stringify(value));
+        try {
+            if (second > 0) {
+                await fastify.redis.set(key, JSON.stringify(value), 'EX', second);
+            } else {
+                await fastify.redis.set(key, JSON.stringify(value));
+            }
+        } catch (err) {
+            fastify.log.warn(err);
         }
     };
 
     // 获取 redis
     const redisGet = async (key, unpack = false) => {
-        const result = await fastify.redis.get(key);
-        return JSON.parse(result);
+        try {
+            const result = await fastify.redis.get(key);
+            return JSON.parse(result);
+        } catch (err) {
+            fastify.log.warn(err);
+        }
     };
 
     const getUserApis = async (session) => {

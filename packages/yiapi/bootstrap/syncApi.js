@@ -8,7 +8,6 @@ import fp from 'fastify-plugin';
 import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
 import { fnDelay } from '../utils/fnDelay.js';
 import { fnIncrUID } from '../utils/fnIncrUID.js';
-import { fnCloneAny } from '../utils/fnCloneAny.js';
 // 工具函数
 import { toKeyBy } from '../utils/toKeyBy.js';
 import { toOmit } from '../utils/toOmit.js';
