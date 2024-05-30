@@ -3,6 +3,7 @@ import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { cacheConfig } from '../../config/cache.js';
 import { schemaHelperConfig } from '../../config/schemaHelper.js';
 // 数据表格
 import { tableData } from '../../tables/menu.js';
@@ -21,7 +22,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const result = await fastify.redisGet('cacheData:menu');
+                const result = await fastify.redisGet(cacheConfig.menu);
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

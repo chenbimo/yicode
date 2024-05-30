@@ -1,5 +1,6 @@
+import { tableExtConfig } from '../config/tableExt.js';
 export const tableName = '系统角色表';
-export const tableData = {
+export const tableData = Object.assign(tableExtConfig.sys_role || {}, {
     code: {
         name: '角色编码',
         field: {
@@ -78,4 +79,4 @@ export const tableData = {
             enum: [0, 1]
         }
     }
-};
+});

@@ -30,7 +30,7 @@ export default async (fastify) => {
                         }
                     });
 
-                const rows = await roleModel.clone().selectAll(Object.keys(tableData));
+                const rows = await roleModel.clone().selectAll();
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

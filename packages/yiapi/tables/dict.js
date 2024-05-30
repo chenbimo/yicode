@@ -1,5 +1,6 @@
+import { tableExtConfig } from '../config/tableExt.js';
 export const tableName = '系统字典表';
-export const tableData = {
+export const tableData = Object.assign(tableExtConfig.sys_dict || {}, {
     category_id: {
         name: '分类ID',
         field: {
@@ -113,4 +114,4 @@ export const tableData = {
             enum: [0, 1]
         }
     }
-};
+});

@@ -15,7 +15,7 @@
                 <template #columns>
                     <a-table-column title="昵称" data-index="nickname"></a-table-column>
                     <a-table-column title="用户名" data-index="username"></a-table-column>
-                    <a-table-column title="角色" data-index="role_codes"></a-table-column>
+                    <a-table-column title="角色" data-index="role"></a-table-column>
                     <a-table-column title="手机" data-index="phone"></a-table-column>
                     <a-table-column title="微信" data-index="wexin"></a-table-column>
                     <a-table-column title="QQ" data-index="qq"></a-table-column>

@@ -26,7 +26,7 @@ export default async (fastify) => {
                     .table('sys_dict')
                     .where('category_code', req.body.category_code)
                     .modify(function (db) {});
-                const rowsTemp = await dictModel.clone().selectAll(...Object.keys(tableData));
+                const rowsTemp = await dictModel.clone().selectAll();
 
                 const rows = rowsTemp?.map((item) => {
                     if (item.symbol === 'number') {

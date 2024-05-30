@@ -11,6 +11,7 @@ import { blackApisConfig } from '../config/blackApis.js';
 import { freeApisConfig } from '../config/freeApis.js';
 import { whiteApisConfig } from '../config/whiteApis.js';
 import { httpConfig } from '../config/http.js';
+import { cacheConfig } from '../config/cache.js';
 // 工具函数
 import { fnApiCheck } from '../utils/fnApiCheck.js';
 import { fnRouterPath } from '../utils/fnRouterPath.js';
@@ -25,10 +26,7 @@ async function plugin(fastify, opts) {
             // 如果是收藏图标，则直接通过
             if (routePath === 'favicon.ico') return;
             if (routePath === '/') {
-                res.send({
-                    code: 0,
-                    msg: `${appConfig.appName} 接口程序已启动`
-                });
+                res.send({ code: 0, msg: `${appConfig.appName} 接口程序已启动` });
                 return;
             }
             if (routePath.startsWith('/swagger')) return;
@@ -65,7 +63,7 @@ async function plugin(fastify, opts) {
             }
 
             /* --------------------------------- 接口存在性判断 -------------------------------- */
-            const allApiNames = await fastify.redisGet('cacheData:apiNames');
+            const allApiNames = await fastify.redisGet(cacheConfig.apiNames);
 
             if (allApiNames.includes(routePath) === false) {
                 res.send(httpConfig.NO_API);
@@ -101,7 +99,7 @@ async function plugin(fastify, opts) {
 
             /* ---------------------------------- 白名单判断 --------------------------------- */
             // 从缓存获取白名单接口
-            const dataApiWhiteLists = await fastify.redisGet('cacheData:apiWhiteLists');
+            const dataApiWhiteLists = await fastify.redisGet(cacheConfig.apiWhiteLists);
             const whiteApis = dataApiWhiteLists?.map((item) => item.value);
             const allWhiteApis = toUnique([...whiteApisConfig, ...(whiteApis || [])]);
 

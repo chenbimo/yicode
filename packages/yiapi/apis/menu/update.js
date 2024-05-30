@@ -35,7 +35,7 @@ export default async (fastify) => {
 
                 // 如果传了 pid 值
                 if (req.body.pid) {
-                    const parentData = await menuModel.clone().where('id', req.body.pid).selectOne('id');
+                    const parentData = await menuModel.clone().where('id', req.body.pid).selectOne(['id']);
                     if (!parentData?.id) {
                         return {
                             ...httpConfig.FAIL,
@@ -44,7 +44,7 @@ export default async (fastify) => {
                     }
                 }
 
-                const selfData = await menuModel.clone().where('id', req.body.id).selectOne('id');
+                const selfData = await menuModel.clone().where('id', req.body.id).selectOne(['id']);
                 if (!selfData?.id) {
                     return {
                         ...httpConfig.FAIL,

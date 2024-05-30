@@ -13,7 +13,7 @@
                 <template #columns>
                     <a-table-column title="用户名" data-index="username" :width="200"></a-table-column>
                     <a-table-column title="昵称" data-index="nickname" :width="200"></a-table-column>
-                    <a-table-column title="角色" data-index="role_codes" :width="150"></a-table-column>
+                    <a-table-column title="角色" data-index="role" :width="150"></a-table-column>
                     <a-table-column title="IP地址" data-index="ip" :width="200"></a-table-column>
                     <a-table-column title="登录时间" data-index="created_at2" :width="150"></a-table-column>
                     <a-table-column title="UA" data-index="ua" ellipsis></a-table-column>

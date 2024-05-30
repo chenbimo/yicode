@@ -37,7 +37,7 @@ export default async (fastify) => {
                     const parentData = await menuModel //
                         .clone()
                         .where('id', req.body.pid)
-                        .selectOne('id');
+                        .selectOne(['id']);
 
                     if (!parentData?.id) {
                         return {

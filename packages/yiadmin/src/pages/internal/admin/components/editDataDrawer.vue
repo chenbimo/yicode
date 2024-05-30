@@ -7,7 +7,7 @@
         <div class="bodyer">
             <a-form :model="$Data.formData" layout="vertical">
                 <a-form-item field="name" label="角色">
-                    <a-select v-model="$Data.formData.role_codes" @change="$Method.onChangeCategory">
+                    <a-select v-model="$Data.formData.role" @change="$Method.onChangeCategory">
                         <a-option v-for="item in $Data.roleAll" :key="item.id" :value="item.code" :label="item.name"></a-option>
                     </a-select>
                 </a-form-item>
@@ -68,7 +68,7 @@ const $Data = $ref({
     },
     // 表单数据
     formData: {
-        role_codes: '',
+        role: '',
         username: '',
         nickname: '',
         password: ''

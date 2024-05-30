@@ -3,10 +3,12 @@
 import url from 'node:url';
 import { basename, resolve } from 'node:path';
 import { readdirSync } from 'node:fs';
+import { randomInt } from 'node:crypto';
 // 外部模块
 import Knex from 'knex';
 import logSymbols from 'log-symbols';
 import * as color from 'colorette';
+import { format } from 'date-fns';
 import Ajv from 'ajv';
 import localize from 'ajv-i18n';
 // 配置文件
@@ -29,7 +31,13 @@ import { isString } from '../utils/isString.js';
 import { isInteger } from '../utils/isInteger.js';
 import { isNumber } from '../utils/isNumber.js';
 import { isArray } from '../utils/isArray.js';
-import { fnIncrDate } from '../utils/fnIncrDate.js';
+
+// 创建顺序自增唯一 ID
+function fnIncrDate() {
+    const date = format(new Date(), 'yyyyMMddHHmmss');
+    const random = randomInt(100000, 999999);
+    return `${date}_${random}`;
+}
 
 // 不能设置的字段
 const denyFields = [
@@ -147,6 +155,11 @@ export const syncMysql = async () => {
                 process.exit();
             }
 
+            if (tableFile === 'sys_user' && !tableData.test_field) {
+                console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 必须有一个test_field 测试字段`);
+                process.exit();
+            }
+
             const validResult = validateTable(tableData);
             if (!validResult) {
                 localize.zh(validateTable.errors);
@@ -233,9 +246,20 @@ export const syncMysql = async () => {
 
             // 判断新表是否存在，存在则删除，否则会报错
             if (allTableName.includes(tableItem.tableFileTemp) === true) {
-                // 删除新表;
                 await trx.schema.dropTableIfExists(tableItem.tableFileTemp);
             }
+
+            // 获取所有旧字段
+            const allOldFieldsInfo = await mysql.table(tableItem.tableFile).columnInfo();
+            const allOldFields = Object.keys(allOldFieldsInfo);
+            // 获取当前的新字段
+            const allNewFields = [
+                //
+                ...Object.keys(tableItem.tableData),
+                ...denyFields
+            ];
+            // 判断字段是否有调整，如果没有调整则不用进行数据转移
+            const allFieldDiff = getArrayDiffBoth(allNewFields, allOldFields);
 
             // 删除旧表
             // await trx.schema.dropTableIfExists(tableItem.tableOldName);
@@ -316,18 +340,6 @@ export const syncMysql = async () => {
 
             // 如果创建的是新表，则把旧表的数据转移进来
             if (tableItem.tableFileTemp) {
-                // 获取所有旧字段
-                const allOldFieldsInfo = await mysql.table(tableItem.tableFile).columnInfo();
-                const allOldFields = Object.keys(allOldFieldsInfo);
-                // 获取当前的新字段
-                const allNewFields = [
-                    //
-                    ...Object.keys(tableItem.tableData),
-                    ...denyFields
-                ];
-                // 判断字段是否有调整，如果没有调整则不用进行数据转移
-                const allFieldDiff = getArrayDiffBoth(allNewFields, allOldFields);
-
                 if (allFieldDiff.length > 0) {
                     // 提取所有旧字段跟新字段匹配的字段
                     const validFieldsRaw = allOldFields
@@ -342,6 +354,7 @@ export const syncMysql = async () => {
                     await trx.schema.renameTable(tableItem.tableFileTemp, tableItem.tableFile);
                     console.log(`${logSymbols.success} ${color.magentaBright(tableItem.tableFile)}(${color.blueBright(tableItem.tableName)}) ${color.yellowBright('数据已同步')}`);
                 } else {
+                    await trx.schema.dropTableIfExists(tableItem.tableFileTemp);
                     console.log(`${logSymbols.success} ${color.magentaBright(tableItem.tableFile)}(${color.blueBright(tableItem.tableName)}) ${color.blackBright('字段无改动')}`);
                 }
             } else {

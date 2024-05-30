@@ -7,6 +7,7 @@ import { toUnique } from '../utils/toUnique.js';
 import { toOmit } from '../utils/toOmit.js';
 import { fnIncrUID } from '../utils/fnIncrUID.js';
 import { fnDelay } from '../utils/fnDelay.js';
+import { toKebabCase } from '../utils/toKebabCase.js';
 // 配置文件
 import { appConfig } from '../config/app.js';
 import { menuConfig } from '../config/menu.js';
@@ -35,7 +36,7 @@ async function syncMenuDir(fastify) {
                 updateMenuDb.push({
                     id: menuDirData.id,
                     name: itemDir.name,
-                    value: itemDir.value,
+                    value: keyDir,
                     sort: itemDir.sort || index,
                     is_system: itemDir.is_system || 0
                 });
@@ -57,7 +58,7 @@ async function syncMenuDir(fastify) {
 
         // 获得删除数据
         menuDirDb.forEach((item) => {
-            if (!menuConfig[item.value]) {
+            if (!item.value || !menuConfig[item.value]) {
                 deleteMenuDb.push(item.id);
             }
         });
@@ -124,7 +125,7 @@ async function syncMenuFile(fastify) {
                     updateMenuDb.push({
                         id: menuFileData.id,
                         name: itemFile.name,
-                        value: itemFile.value,
+                        value: keyFile,
                         pid: menuDirData.id,
                         sort: itemFile.sort || menuDbIndex++,
                         is_system: itemFile.is_system || 0
@@ -133,7 +134,7 @@ async function syncMenuFile(fastify) {
                     if (menuDirData) {
                         const insertMenuData = {
                             name: itemFile.name,
-                            value: itemFile.value,
+                            value: keyFile,
                             pid: menuDirData.id,
                             sort: itemFile.sort || menuDbIndex++,
                             is_open: 0,
@@ -149,13 +150,11 @@ async function syncMenuFile(fastify) {
         }
 
         // 获得删除数据
-        for (let key in menuFileDbByValue) {
-            if (menuFileDbByValue.hasOwnProperty(key) === false) continue;
-            const item = menuFileDbByValue[key];
-            if (!menuConfigByFileValue[item.value]) {
+        menuFileDb.forEach((item) => {
+            if (!item.value || !menuConfigByFileValue[item.value]) {
                 deleteMenuDb.push(item.id);
             }
-        }
+        });
 
         // 数据的同步只在主进程中操作
         if (process.env.NODE_APP_INSTANCE === undefined) {

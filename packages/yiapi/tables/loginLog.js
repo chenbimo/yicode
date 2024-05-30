@@ -1,5 +1,6 @@
+import { tableExtConfig } from '../config/tableExt.js';
 export const tableName = '登录日志表';
-export const tableData = {
+export const tableData = Object.assign(tableExtConfig.sys_login_log || {}, {
     username: {
         name: '用户名',
         field: {
@@ -55,4 +56,4 @@ export const tableData = {
             max: 500
         }
     }
-};
+});

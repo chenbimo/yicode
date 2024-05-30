@@ -1,5 +1,6 @@
+import { tableExtConfig } from '../config/tableExt.js';
 export const tableName = '系统字典分类表';
-export const tableData = {
+export const tableData = Object.assign(tableExtConfig.sys_dict_category || {}, {
     code: {
         name: '字典分类编码',
         field: {
@@ -48,4 +49,4 @@ export const tableData = {
             max: 500
         }
     }
-};
+});

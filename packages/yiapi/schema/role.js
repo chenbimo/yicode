@@ -28,5 +28,6 @@ export const roleSchema = {
             additionalProperties: false,
             required: ['name', 'describe']
         }
-    }
+    },
+    additionalProperties: false
 };

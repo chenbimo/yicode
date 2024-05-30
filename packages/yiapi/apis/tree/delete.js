@@ -29,7 +29,7 @@ export default async (fastify) => {
                 const treeData = await treeModel //
                     .clone()
                     .where({ pid: req.body.id })
-                    .selectOne('id');
+                    .selectOne(['id']);
 
                 if (treeData?.id) {
                     return {

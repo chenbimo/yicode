@@ -1,5 +1,6 @@
+import { tableExtConfig } from '../config/tableExt.js';
 export const tableName = '项目配置表';
-export const tableData = {
+export const tableData = Object.assign(tableExtConfig.sys_app_config || {}, {
     site_name: {
         name: '站点名称',
         field: {
@@ -99,4 +100,4 @@ export const tableData = {
             max: 100
         }
     }
-};
+});

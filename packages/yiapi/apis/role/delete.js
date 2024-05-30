@@ -29,7 +29,7 @@ export default async (fastify) => {
                     .where('id', req.body.id)
                     .modify(function (db) {});
 
-                const roleData = await roleModel.clone().selectOne('id', 'is_system');
+                const roleData = await roleModel.clone().selectOne(['id', 'is_system']);
                 if (!roleData?.id) {
                     return httpConfig.NO_DATA;
                 }

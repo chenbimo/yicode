@@ -30,13 +30,13 @@ export default async (fastify) => {
 
                 const dictModel = fastify.mysql.table('sys_dict');
 
-                const dictCategoryData = await dictCategoryModel.clone().selectOne('id');
+                const dictCategoryData = await dictCategoryModel.clone().selectOne(['id']);
 
                 if (!dictCategoryData?.id) {
                     return httpConfig.NO_DATA;
                 }
 
-                const childrenDict = await dictModel.clone().where({ category_id: req.body.id }).selectOne('id');
+                const childrenDict = await dictModel.clone().where({ category_id: req.body.id }).selectOne(['id']);
                 if (childrenDict?.id) {
                     return {
                         ...httpConfig.DELETE_FAIL,

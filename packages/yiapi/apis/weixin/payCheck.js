@@ -1,6 +1,7 @@
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
+import { getCacheName } from '../../utils/getCacheName.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
 // 数据库表
@@ -22,7 +23,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const redisKey = `cacheData:payOrder_${req.session.id}_${req.body.order_no}`;
+                const redisKey = getCacheName(`payOrder_${req.session.id}_${req.body.order_no}`);
                 const payOrderNo = await fastify.redisGet(redisKey);
                 if (payOrderNo) {
                     await fastify.redis.del(redisKey);

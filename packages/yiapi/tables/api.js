@@ -1,5 +1,6 @@
+import { tableExtConfig } from '../config/tableExt.js';
 export const tableName = '系统接口表';
-export const tableData = {
+export const tableData = Object.assign(tableExtConfig.sys_api || {}, {
     pid: {
         name: '父级ID',
         field: {
@@ -100,4 +101,4 @@ export const tableData = {
             enum: [0, 1]
         }
     }
-};
+});

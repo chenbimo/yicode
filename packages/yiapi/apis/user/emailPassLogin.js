@@ -29,7 +29,7 @@ export default async (fastify) => {
                 const userData = await userModel //
                     .clone()
                     .where({ email: req.body.email })
-                    .selectOne(Object.keys(tableData));
+                    .selectOne();
 
                 if (!userData?.id) {
                     return {

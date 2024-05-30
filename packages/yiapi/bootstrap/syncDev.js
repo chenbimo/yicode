@@ -25,9 +25,9 @@ async function plugin(fastify, opts) {
         const roleData = await roleModel.clone().selectAll();
         const roleDataByCode = roleData.map((item) => item.code);
         // 查询开发管理员
-        const devAdminData = await adminModel.clone().where('username', 'dev').selectOne('id');
+        const devAdminData = await adminModel.clone().where('username', 'dev').selectOne(['id']);
         // 查询开发角色
-        const devRoleData = await roleModel.clone().where('code', 'dev').selectOne('id');
+        const devRoleData = await roleModel.clone().where('code', 'dev').selectOne(['id']);
 
         // 请求菜单数据，用于给开发管理员绑定菜单
         const menuData = await menuModel.clone().selectAll();

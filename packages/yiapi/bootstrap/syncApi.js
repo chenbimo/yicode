@@ -24,30 +24,40 @@ async function fnAllApiFiles(type) {
 
     const allApiFiles = [
         //
-        ...coreApiFiles.map((file) => resolve(system.yiapiDir, 'apis', file)),
-        ...appApiFiles.map((file) => resolve(system.appDir, 'apis', file))
-    ] //
-        .filter((file) => file.endsWith('.js'))
-        .map((file) => file.replace(/\\+/gi, '/'));
+        ...coreApiFiles.map((file) => {
+            return {
+                where: 'core',
+                filePath: resolve(system.yiapiDir, 'apis', file).replace(/\\+/gi, '/')
+            };
+        }),
+        ...appApiFiles.map((file) => {
+            return {
+                where: 'app',
+                filePath: resolve(system.appDir, 'apis', file).replace(/\\+/gi, '/')
+            };
+        })
+    ];
 
     if (type === 'meta') {
         return allApiFiles
-            .filter((file) => file.endsWith('/_meta.js') === true)
-            .map((file) => {
+            .filter((item) => item.filePath.endsWith('/_meta.js') === true)
+            .map((item) => {
                 return {
-                    file: file,
-                    filePathName: file.replace('/_meta.js', '').replace(/.+\/apis/, '')
+                    where: item.where,
+                    filePath: item.filePath,
+                    filePathName: item.filePath.replace('/_meta.js', '').replace(/.+\/apis/, '')
                 };
             });
     }
 
     if (type === 'api') {
         return allApiFiles
-            .filter((file) => basename(file).startsWith('_') === false)
-            .map((file) => {
+            .filter((item) => basename(item.filePath).startsWith('_') === false && item.filePath.endsWith('.js'))
+            .map((item) => {
                 return {
-                    file: file,
-                    filePathName: file.replace('.js', '').replace(/.+\/apis/, '')
+                    where: item.where,
+                    filePath: item.filePath,
+                    filePathName: item.filePath.replace('.js', '').replace(/.+\/apis/, '')
                 };
             });
     }
@@ -89,7 +99,7 @@ async function syncApiDir(fastify) {
             const apiDirName = item.filePathName;
 
             // 如果数据库中存在当前接口目录，则进行添加或更新
-            const { metaConfig } = await fnImportAbsolutePath(item.file, 'metaConfig', {});
+            const { metaConfig } = await fnImportAbsolutePath(item.filePath, 'metaConfig', {});
 
             if (isObject(metaConfig) === false) {
                 fastify.log.warn(`${metaFilePath} 文件的必须导出一个对象`);
@@ -181,6 +191,7 @@ async function syncApiFile(fastify) {
         const insertApiData = [];
         // 将要修改的数据
         const updateApiData = [];
+        const coreFileRoutes = [];
 
         // 找出所有需要删除的接口文件
         apiFileDb.forEach((item) => {
@@ -192,16 +203,27 @@ async function syncApiFile(fastify) {
         // 遍历项目接口文件
         for (let i = 0; i < allApiFiles.length; i++) {
             const item = allApiFiles[i];
-            const apiFileName = basename(item.file, '.js');
-            const apiDirName = dirname(item.file);
+            const apiFileName = basename(item.filePath, '.js');
+            const apiDirName = dirname(item.filePath);
             const apiFileRoute = item.filePathName;
             const apiDirRoute = dirname(apiFileRoute);
 
             // 判断接口层次
             const apiFileSplit = apiFileRoute.split('/').filter((name) => name);
             if (apiFileSplit.length !== 2) {
-                fastify.log.warn(`${item.file} 接口只能为2层`);
+                console.log('🚀 ~ syncApiFile ~ apiFileSplit:', item);
+
+                fastify.log.warn(`${item.filePath} 接口只能为2层`);
                 process.exit();
+            }
+
+            if (item.where === 'core') {
+                coreFileRoutes.push(apiFileRoute);
+            } else {
+                if (coreFileRoutes.includes(apiFileRoute)) {
+                    fastify.log.warn(`${item.filePath} 接口不能与内核接口同名`);
+                    process.exit();
+                }
             }
 
             // 当前接口的目录数据

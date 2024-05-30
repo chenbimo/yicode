@@ -28,7 +28,7 @@ export default async (fastify) => {
                     .table('sys_dict')
                     .where({ id: req.body.id });
 
-                const dictData = await dictModel.clone().selectOne('id', 'is_system');
+                const dictData = await dictModel.clone().selectOne(['id', 'is_system']);
                 if (!dictData?.id) {
                     return httpConfig.NO_DATA;
                 }

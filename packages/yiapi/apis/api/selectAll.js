@@ -2,6 +2,7 @@
 import { fnRoute } from '../../utils/fnRoute.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
+import { cacheConfig } from '../../config/cache.js';
 // 接口元数据
 import { metaConfig } from './_meta.js';
 
@@ -17,7 +18,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const result = await fastify.redisGet('cacheData:api');
+                const result = await fastify.redisGet(cacheConfig.api);
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

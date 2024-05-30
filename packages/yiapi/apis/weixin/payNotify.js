@@ -8,6 +8,7 @@ import { fnIncrUID } from '../../utils/fnIncrUID.js';
 import { fnImportAbsolutePath } from '../../utils/fnImportAbsolutePath.js';
 import { isFunction } from '../../utils/isFunction.js';
 import { toFind } from '../../utils/toFind.js';
+import { getCacheName } from '../../utils/getCacheName.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
 import { system } from '../../system.js';
@@ -57,7 +58,7 @@ export default async (fastify) => {
                 const payOrderData = await payOrderModel //
                     .clone()
                     .where('order_no', reply.out_trade_no)
-                    .selectOne();
+                    .selectOne(['id']);
                 if (payOrderData?.id) {
                     fastify.log.error({
                         what: '订单已存在',
@@ -91,7 +92,7 @@ export default async (fastify) => {
                     what: '微信支付回调参数',
                     ...insertData
                 });
-                const redisKey = `cacheData:payOrder_${attach.user_id}_${reply.out_trade_no}`;
+                const redisKey = getCacheName(`payOrder_${attach.user_id}_${reply.out_trade_no}`);
                 await fastify.redisSet(redisKey, 'yes', 6000);
                 let result = await payOrderModel.clone().insertData(insertData);
                 if (appConfig.tablePrimaryKey === 'default') {

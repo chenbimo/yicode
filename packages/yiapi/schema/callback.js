@@ -5,6 +5,7 @@ export const callbackSchema = {
         '^[a-z][a-z0-9_-]*$': {
             title: '任意字段',
             type: 'object'
-        }
+        },
+        additionalProperties: false
     }
 };

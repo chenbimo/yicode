@@ -2,6 +2,7 @@
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 import { toOmit } from '../../utils/toOmit.js';
+import { getDbFields } from '../../utils/getDbFields.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
 import { schemaHelperConfig } from '../../config/schemaHelper.js';
@@ -35,7 +36,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, ...toOmit(Object, keys(tableData), ['password']));
+                    .selectData(req.body.page, req.body.limit, getDbFields(tableData, ['password']));
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

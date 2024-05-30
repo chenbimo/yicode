@@ -176,6 +176,8 @@ const $Method = {
                 updateData: '/role/update'
             }[$Prop.actionType];
 
+            console.log('🚀 ~ apiRoleBindPermission ~ $Data.formData:', $Data.formData);
+
             const menuIds = _.concat($Data.menuCheckedKeys, $Data.menuHalfCheckedKeys);
             const apiIds = _.concat($Data.apiCheckedKeys, $Data.apiHalfCheckedKeys);
 
@@ -183,8 +185,8 @@ const $Method = {
                 url: url,
                 data: {
                     ...$Data.formData,
-                    menu_ids: menuIds,
-                    api_ids: apiIds
+                    menu_ids: menuIds.join(','),
+                    api_ids: apiIds.join(',')
                 }
             });
             Message.success({

@@ -43,7 +43,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, ...Object.keys(tableData));
+                    .selectData(req.body.page, req.body.limit);
 
                 // 处理数字符号强制转换为数字值
                 const rows = rowsTemp?.map((item) => {

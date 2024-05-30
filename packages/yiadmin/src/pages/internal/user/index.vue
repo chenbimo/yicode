@@ -13,7 +13,7 @@
                 <template #columns>
                     <a-table-column title="昵称" data-index="nickname" :width="200" ellipsis tooltip></a-table-column>
                     <a-table-column title="用户名" data-index="username" :width="150" ellipsis tooltip></a-table-column>
-                    <a-table-column title="角色" data-index="role_codes" :width="100" ellipsis tooltip></a-table-column>
+                    <a-table-column title="角色" data-index="role" :width="100" ellipsis tooltip></a-table-column>
                     <a-table-column title="手机" data-index="phone" :width="150" ellipsis tooltip></a-table-column>
                     <a-table-column title="微信" data-index="wexin" :width="200" ellipsis tooltip></a-table-column>
                     <a-table-column title="QQ" data-index="qq" :width="200" ellipsis tooltip></a-table-column>

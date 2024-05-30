@@ -24,7 +24,7 @@ export default async (fastify) => {
                     .table('sys_dict_category')
                     .modify(function (db) {});
 
-                const rows = await dictCategoryModel.clone().selectAll(...Object.keys(tableData));
+                const rows = await dictCategoryModel.clone().selectAll();
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

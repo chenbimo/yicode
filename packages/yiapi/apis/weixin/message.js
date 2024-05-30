@@ -73,7 +73,7 @@ export default async (fastify) => {
                     const userData = await userModel //
                         .clone()
                         .where({ openid: xmlData.FromUserName })
-                        .selectOne('id');
+                        .selectOne(['id']);
 
                     // 如果用户已存在，则返回
                     if (userData?.id) {

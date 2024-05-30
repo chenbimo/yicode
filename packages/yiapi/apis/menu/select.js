@@ -35,7 +35,7 @@ export default async (fastify) => {
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, ...Object.keys(tableData));
+                    .selectData(req.body.page, req.body.limit);
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

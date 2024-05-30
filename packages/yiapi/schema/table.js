@@ -58,5 +58,6 @@ export const tableSchema = {
             additionalProperties: false,
             required: ['name', 'field', 'schema']
         }
-    }
+    },
+    additionalProperties: false
 };

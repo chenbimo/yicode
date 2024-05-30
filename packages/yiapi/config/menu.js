@@ -44,9 +44,25 @@ export const menuConfig = Object.assign(importConfig, {
             }
         }
     },
+    '/dict': {
+        name: '字典数据',
+        sort: 1002,
+        children: {
+            '/internal/dict-category': {
+                name: '字典分类',
+                is_system: 1,
+                sort: 3
+            },
+            '/internal/dict': {
+                name: '字典管理',
+                is_system: 1,
+                sort: 4
+            }
+        }
+    },
     '/permission': {
         name: '权限数据',
-        sort: 1002,
+        sort: 1003,
         children: {
             '/internal/menu': {
                 name: '菜单列表',
@@ -58,16 +74,6 @@ export const menuConfig = Object.assign(importConfig, {
                 is_system: 1,
                 sort: 2
             },
-            '/internal/dictCategory': {
-                name: '字典分类',
-                is_system: 1,
-                sort: 3
-            },
-            '/internal/dict': {
-                name: '字典管理',
-                is_system: 1,
-                sort: 4
-            },
             '/internal/role': {
                 name: '角色管理',
                 is_system: 1,
@@ -77,7 +83,7 @@ export const menuConfig = Object.assign(importConfig, {
     },
     '/setup': {
         name: '配置数据',
-        sort: 1003,
+        sort: 1004,
         children: {
             '/internal/app-config': {
                 name: '项目配置',
@@ -88,7 +94,7 @@ export const menuConfig = Object.assign(importConfig, {
     },
     '/log': {
         name: '日志数据',
-        sort: 1004,
+        sort: 1005,
         children: {
             '/internal/login-log': {
                 name: '登录日志',

@@ -1,5 +1,6 @@
+import { tableExtConfig } from '../config/tableExt.js';
 export const tableName = '系统用户表';
-export const tableData = {
+export const tableData = Object.assign(tableExtConfig.sys_user || {}, {
     openid: {
         name: '微信 openid',
         field: {
@@ -178,4 +179,4 @@ export const tableData = {
             enum: [0, 1]
         }
     }
-};
+});

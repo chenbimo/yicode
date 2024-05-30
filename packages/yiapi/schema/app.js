@@ -46,6 +46,11 @@ export const appSchema = {
             type: 'boolean',
             default: false
         },
+        isSession: {
+            title: '是否开启会话模式',
+            type: 'boolean',
+            default: false
+        },
         // 数据库表主键方案
         tablePrimaryKey: {
             title: '数据库表主键方案',

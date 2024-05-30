@@ -1,5 +1,6 @@
+import { tableExtConfig } from '../config/tableExt.js';
 export const tableName = '邮件日志表';
-export const tableData = {
+export const tableData = Object.assign(tableExtConfig.sys_mail_log || {}, {
     login_email: {
         name: '登录邮箱',
         field: {
@@ -77,4 +78,4 @@ export const tableData = {
             max: 10000
         }
     }
-};
+});

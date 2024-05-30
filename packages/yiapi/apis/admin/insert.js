@@ -35,7 +35,7 @@ export default async (fastify) => {
                     };
                 }
                 const adminModel = fastify.mysql.table('sys_admin');
-                const adminData = await adminModel.clone().where('username', req.body.username).selectOne('id');
+                const adminData = await adminModel.clone().where('username', req.body.username).selectOne(['id']);
                 if (adminData?.id) {
                     return {
                         ...httpConfig.FAIL,

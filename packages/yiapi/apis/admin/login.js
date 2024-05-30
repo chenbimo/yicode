@@ -20,12 +20,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                account: {
-                    title: '账号',
-                    type: 'string',
-                    minLength: 1,
-                    maxLength: 100
-                },
+                account: fnSchema({ name: '账号', schema: { type: 'string', min: 1, max: 100 } }),
                 password: fnSchema(tableData.password)
             },
             required: ['account', 'password']
@@ -41,7 +36,7 @@ export default async (fastify) => {
                 const adminData = await adminModel //
                     .clone()
                     .orWhere({ username: req.body.account })
-                    .selectOne('id', 'password', 'username', 'nickname', 'role');
+                    .selectOne(['id', 'password', 'username', 'nickname', 'role']);
 
                 // 判断用户存在
                 if (!adminData?.id) {

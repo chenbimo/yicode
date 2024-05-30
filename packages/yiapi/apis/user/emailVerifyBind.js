@@ -28,7 +28,7 @@ export default async (fastify) => {
                 const userData = await userModel //
                     .clone()
                     .where({ email: req.body.email })
-                    .selectOne('id');
+                    .selectOne(['id']);
                 if (userData?.id) {
                     return {
                         ...httpConfig.FAIL,

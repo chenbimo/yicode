@@ -3,6 +3,7 @@ import fp from 'fastify-plugin';
 import got from 'got';
 // 配置文件
 import { weixinConfig } from '../config/weixin.js';
+import { cacheConfig } from '../config/cache.js';
 
 async function plugin(fastify) {
     // 设置 redis
@@ -26,7 +27,7 @@ async function plugin(fastify) {
 
         // 提取所有角色拥有的接口
         let apiIds = [];
-        const dataRoleCodes = await redisGet('cacheData:role');
+        const dataRoleCodes = await redisGet(cacheConfig.role);
         dataRoleCodes.forEach((item) => {
             if (session.role === item.code) {
                 apiIds = item.api_ids
@@ -38,7 +39,7 @@ async function plugin(fastify) {
 
         // 将接口进行唯一性处理
         const userApiIds = [...new Set(apiIds)];
-        const dataApi = await redisGet('cacheData:api');
+        const dataApi = await redisGet(cacheConfig.api);
         // 最终的用户接口列表
         const result = dataApi.filter((item) => {
             return userApiIds.includes(item.id);
@@ -53,7 +54,7 @@ async function plugin(fastify) {
             // 所有菜单 ID
             let menuIds = [];
 
-            const dataRoleCodes = await redisGet('cacheData:role');
+            const dataRoleCodes = await redisGet(cacheConfig.role);
             dataRoleCodes.forEach((item) => {
                 if (session.role === item.code) {
                     menuIds = item.menu_ids
@@ -64,7 +65,7 @@ async function plugin(fastify) {
             });
 
             const userMenuIds = [...new Set(menuIds)];
-            const dataMenu = await redisGet('cacheData:menu');
+            const dataMenu = await redisGet(cacheConfig.menu);
 
             const result = dataMenu.filter((item) => {
                 return userMenuIds.includes(item.id);
@@ -80,8 +81,8 @@ async function plugin(fastify) {
         const dataMenu = await fastify.mysql.table('sys_menu').selectAll();
 
         // 菜单树数据
-        await redisSet('cacheData:menu', []);
-        await redisSet('cacheData:menu', dataMenu);
+        await redisSet(cacheConfig.menu, []);
+        await redisSet(cacheConfig.menu, dataMenu);
     };
 
     const cacheApiData = async () => {
@@ -92,33 +93,33 @@ async function plugin(fastify) {
         const dataApiWhiteLists = dataApi.filter((item) => item.is_open === 1).map((item) => item.value);
 
         // 接口树数据
-        await redisSet('cacheData:api', []);
-        await redisSet('cacheData:api', dataApi);
+        await redisSet(cacheConfig.api, []);
+        await redisSet(cacheConfig.api, dataApi);
 
         // 接口名称缓存
-        await redisSet('cacheData:apiNames', []);
+        await redisSet(cacheConfig.apiNames, []);
         await redisSet(
-            'cacheData:apiNames',
+            cacheConfig.apiNames,
             dataApi.filter((item) => item.is_bool === 1).map((item) => `/api${item.value}`)
         );
 
         // 白名单接口数据
-        await redisSet('cacheData:apiWhiteLists', []);
-        await redisSet('cacheData:apiWhiteLists', dataApiWhiteLists);
+        await redisSet(cacheConfig.apiWhiteLists, []);
+        await redisSet(cacheConfig.apiWhiteLists, dataApiWhiteLists);
     };
 
     const cacheRoleData = async () => {
         // 角色类别
         const dataRole = await fastify.mysql.table('sys_role').selectAll();
 
-        await redisSet('cacheData:role', []);
-        await redisSet('cacheData:role', dataRole);
+        await redisSet(cacheConfig.role, []);
+        await redisSet(cacheConfig.role, dataRole);
     };
 
     // 获取微信访问令牌
     const getWeixinAccessToken = async () => {
         try {
-            const cacheWeixinAccessToken = await redisGet(`cacheData:weixinAccessToken`);
+            const cacheWeixinAccessToken = await redisGet(cacheConfig.weixinAccessToken);
             if (cacheWeixinAccessToken) {
                 return cacheWeixinAccessToken;
             } else {
@@ -132,7 +133,7 @@ async function plugin(fastify) {
                 }).json();
 
                 if (res.access_token) {
-                    await redisSet(`cacheData:weixinAccessToken`, res.access_token, 6000);
+                    await redisSet(cacheConfig.weixinAccessToken, res.access_token, 6000);
                     return res.access_token;
                 } else {
                     fastify.log.error(res);
@@ -157,7 +158,7 @@ async function plugin(fastify) {
                 }
             }).json();
             if (res.ticket) {
-                await redisSet(`cacheData:weixinJsapiTicket`, res.ticket, 6000);
+                await redisSet(cacheConfig.weixinJsapiTicket, res.ticket, 6000);
             }
             return res.ticket;
         } catch (err) {

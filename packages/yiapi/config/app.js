@@ -20,6 +20,8 @@ export const appConfig = Object.assign(
         isSwagger: false,
         // 是否开启微信支付
         isWxPay: false,
+        // 是否使用 session 模式
+        isSession: false,
         // TODO: 考虑增加 uuid 类型以及不同的 uuid 格式
         // 数据库表主键方案 default（mysql 自带）time（时序 ID）
         tablePrimaryKey: 'default'

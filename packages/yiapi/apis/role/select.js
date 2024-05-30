@@ -28,18 +28,15 @@ export default async (fastify) => {
             try {
                 const roleModel = fastify.mysql //
                     .table('sys_role')
-                    .modify(function (db) {
-                        if (req.session.role !== 'dev') {
-                            db.where('code', '<>', 'dev');
-                        }
-                    });
+                    .where('code', '<>', 'dev')
+                    .modify(function (db) {});
 
                 const { totalCount } = await roleModel.clone().selectCount();
                 const rows = await roleModel
                     //
                     .clone()
                     .orderBy('created_at', 'desc')
-                    .selectData(req.body.page, req.body.limit, ...Object.keys(tableData));
+                    .selectData(req.body.page, req.body.limit);
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

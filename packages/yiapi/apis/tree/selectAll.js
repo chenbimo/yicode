@@ -29,7 +29,7 @@ export default async (fastify) => {
                     .where('category', req.body.category)
                     .modify(function (db) {});
 
-                const rows = await roleModel.clone().selectAll(Object.keys(tableData));
+                const rows = await roleModel.clone().selectAll();
 
                 return {
                     ...httpConfig.SELECT_SUCCESS,

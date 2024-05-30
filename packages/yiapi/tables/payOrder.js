@@ -1,3 +1,4 @@
+import { tableExtConfig } from '../config/tableExt.js';
 import { paymentConfig } from '../config/payment.js';
 import { productConfig } from '../config/product.js';
 
@@ -5,7 +6,7 @@ const paymentCodes = paymentConfig.map((item) => item.code);
 const productCodes = [0, ...Object.values(productConfig)];
 
 export const tableName = '支付订单表';
-export const tableData = {
+export const tableData = Object.assign(tableExtConfig.sys_pay_order || {}, {
     user_id: {
         name: '用户 ID',
         field: {
@@ -155,4 +156,4 @@ export const tableData = {
             max: 100
         }
     }
-};
+});

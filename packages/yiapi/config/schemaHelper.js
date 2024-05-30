@@ -64,7 +64,7 @@ export const schemaHelperConfig = Object.assign(importConfig, {
         }
     },
     // 布尔值
-    boolEnum: {
+    bool_enum: {
         name: '布尔值',
         field: {
             type: 'tinyInt'
@@ -75,7 +75,7 @@ export const schemaHelperConfig = Object.assign(importConfig, {
         }
     },
     // 状态 (0 正常，1 禁用，2 删除)
-    stateEnum: {
+    state_enum: {
         name: '状态值',
         field: {
             type: 'tinyInt'

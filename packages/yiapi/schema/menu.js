@@ -2,7 +2,7 @@ export const menuSchema = {
     title: '菜单字段',
     type: 'object',
     patternProperties: {
-        '^\\/[a-z][a-z0-9_\\/-]*$': {
+        '^\\/[a-z][a-z0-9\\/-]*$': {
             title: '主菜单',
             type: 'object',
             properties: {
@@ -24,8 +24,8 @@ export const menuSchema = {
                 children: {
                     title: '子菜单',
                     type: 'object',
-                    properties: {
-                        '*': {
+                    patternProperties: {
+                        '^\\/[a-z][a-z0-9\\/-]*$': {
                             type: 'object',
                             properties: {
                                 name: {
@@ -45,9 +45,10 @@ export const menuSchema = {
                                 }
                             },
                             additionalProperties: false,
-                            required: ['name', 'sort', 'children']
+                            required: ['name', 'sort']
                         }
-                    }
+                    },
+                    additionalProperties: false
                 }
             },
             additionalProperties: false,

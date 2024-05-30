@@ -37,7 +37,7 @@ export default async (fastify) => {
                     .clone()
                     .where('name', req.body.name)
                     .orWhere('code', req.body.code)
-                    .selectOne('id');
+                    .selectOne(['id']);
 
                 // 编码存在且 id 不等于当前角色
                 if (roleData?.id !== req.body.id) {
@@ -47,16 +47,13 @@ export default async (fastify) => {
                     };
                 }
 
-                const result = await roleModel
-                    .clone()
-                    .where({ id: req.body.id })
-                    .updateData({
-                        code: req.body.code,
-                        name: req.body.name,
-                        describe: req.body.describe,
-                        menu_ids: req.body.menu_ids.join(','),
-                        api_ids: req.body.api_ids.join(',')
-                    });
+                const result = await roleModel.clone().where({ id: req.body.id }).updateData({
+                    code: req.body.code,
+                    name: req.body.name,
+                    describe: req.body.describe,
+                    menu_ids: req.body.menu_ids,
+                    api_ids: req.body.api_ids
+                });
 
                 await fastify.cacheRoleData();
 

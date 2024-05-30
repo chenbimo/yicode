@@ -2,6 +2,7 @@
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 import { toOmit } from '../../utils/toOmit.js';
+import { getDbFields } from '../../utils/getDbFields.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
 import { schemaHelperConfig } from '../../config/schemaHelper.js';
@@ -30,7 +31,7 @@ export default async (fastify) => {
                 const userData = await userModel //
                     .clone()
                     .where({ email: req.body.email })
-                    .selectOne(toOmit(Object.keys(tableData), ['password']));
+                    .selectOne(getDbFields(tableData, ['password']));
 
                 // 若用户存在则提示该用户已存在
                 if (!userData?.id) {

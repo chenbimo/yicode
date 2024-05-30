@@ -26,7 +26,7 @@ export default async (fastify) => {
             try {
                 const menuModel = fastify.mysql.table('sys_menu');
 
-                const menuData = await menuModel.clone().selectOne('id');
+                const menuData = await menuModel.clone().selectOne(['id']);
 
                 if (!menuData?.id) {
                     return {
@@ -42,7 +42,7 @@ export default async (fastify) => {
                     };
                 }
 
-                const childData = await menuModel.clone().where({ pid: req.body.id }).selectOne('id');
+                const childData = await menuModel.clone().where({ pid: req.body.id }).selectOne(['id']);
 
                 if (childData?.id) {
                     return {

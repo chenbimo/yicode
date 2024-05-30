@@ -27,7 +27,7 @@ export default async (fastify) => {
                     .where({ id: req.body.id })
                     .modify(function (db) {});
 
-                const adminData = await adminModel.clone().selectOne('id');
+                const adminData = await adminModel.clone().selectOne(['id']);
                 if (!adminData?.id) {
                     return httpConfig.NO_DATA;
                 }

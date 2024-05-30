@@ -2,10 +2,16 @@
 export const tableExtConfig = {
     sys_user: {
         test_field: {
-            type: 'string',
-            comment: '测试字段，此字段不能删除，用来验证自定义字段是否生效，避免同步时误删字段',
-            length: 10,
-            default: ''
+            name: '测试字段，此字段不能删除',
+            field: {
+                type: 'string',
+                default: ''
+            },
+            schema: {
+                type: 'string',
+                min: 1,
+                max: 50
+            }
         }
     }
 };

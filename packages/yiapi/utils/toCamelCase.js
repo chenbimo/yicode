@@ -1,7 +1,9 @@
+import { toCapitalize } from './toCapitalize.js';
+
 const camel = (str) => {
     const parts =
         str
-            ?.replace(/([A-Z])+/g, capitalize)
+            ?.replace(/([A-Z])+/g, toCapitalize)
             ?.split(/(?=[A-Z])|[\.\-\s_]/)
             .map((x) => x.toLowerCase()) ?? [];
     if (parts.length === 0) return '';
