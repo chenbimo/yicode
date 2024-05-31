@@ -115,6 +115,6 @@ if (appConfig.md5Salt === 'yiapi-123456.') {
 
 // jwt密钥验证
 if (jwtConfig.secret === 'yiapi') {
-    console.log(`${logSymbols.warning} 请修改jwt默认密钥！！！（位置：appConfig.jwt.secret`);
+    console.log(`${logSymbols.warning} 请修改jwt默认密钥！！！（位置：jwtConfig.secret`);
     process.exit();
 }
