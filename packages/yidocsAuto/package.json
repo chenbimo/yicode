@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yidocs-auto",
-    "version": "1.6.2",
+    "version": "1.6.3",
     "description": "vitepress 导航和侧边栏自动生成工具",
     "type": "module",
     "private": false,
