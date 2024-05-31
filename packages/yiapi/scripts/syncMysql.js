@@ -15,7 +15,6 @@ import localize from 'ajv-i18n';
 import { system } from '../system.js';
 import { appConfig } from '../config/app.js';
 import { mysqlConfig } from '../config/mysql.js';
-import { tableFieldConfig } from '../config/tableField.js';
 import { tableSchemaConfig } from '../config/tableSchema.js';
 import { tableSchema } from '../schema/table.js';
 // 工具函数
@@ -50,8 +49,8 @@ const denyFields = [
 
 const ajv = new Ajv({
     strict: false,
-    allErrors: true,
-    verbose: true
+    allErrors: false,
+    verbose: false
 });
 
 // 同步数据库
@@ -167,67 +166,6 @@ export const syncMysql = async () => {
                 process.exit();
             }
 
-            // 验证字段
-            for (let keyField in tableData) {
-                if (tableData.hasOwnProperty(keyField) === false) continue;
-                const itemData = tableData[keyField];
-                const keysField = Object.keys(itemData.field);
-                const keysSchema = Object.keys(itemData.schema);
-                const tableField = tableFieldConfig[itemData.field.type];
-                const tableSchema = tableSchemaConfig[itemData.schema.type];
-                const tableFieldDiff = getArrayDiffFirst(keysField, tableField);
-                if (['string'].includes(itemData.field.type)) {
-                    if (itemData.field.default !== undefined && isString(itemData.field.default) === false) {
-                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为字符串`);
-                        process.exit();
-                    }
-                }
-                if (['tinyInt', 'smallInt', 'mediumInt', 'int', 'bigInt'].includes(itemData.field.type)) {
-                    if (itemData.field.default !== undefined && isInteger(itemData.field.default) === false) {
-                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为整数`);
-                        process.exit();
-                    }
-                }
-                if (['float', 'double'].includes(itemData.field.type)) {
-                    if (itemData.field.default !== undefined && isNumber(itemData.field.default) === false) {
-                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field.default 属性必须为数字`);
-                        process.exit();
-                    }
-                }
-                if (itemData.schema.type === 'string') {
-                    if (itemData.schema.default !== undefined && isString(itemData.schema.default) === false) {
-                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为字符串`);
-                        process.exit();
-                    }
-                }
-                if (itemData.schema.type === 'integer') {
-                    if (itemData.schema.default !== undefined && isInteger(itemData.schema.default) === false) {
-                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为整数`);
-                        process.exit();
-                    }
-                }
-                if (itemData.schema.type === 'number') {
-                    if (itemData.schema.default !== undefined && isNumber(itemData.schema.default) === false) {
-                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为数字`);
-                        process.exit();
-                    }
-                }
-                if (itemData.schema.type === 'array') {
-                    if (itemData.schema.default !== undefined && isArray(itemData.schema.default) === false) {
-                        console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema.default 属性必须为数组`);
-                        process.exit();
-                    }
-                }
-                if (tableFieldDiff.length > 0) {
-                    console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 field 属性不能为 ${tableFieldDiff}`);
-                    process.exit();
-                }
-                const tableSchemaDiff = getArrayDiffFirst(keysField, tableField);
-                if (tableSchemaDiff.length > 0) {
-                    console.log(`${logSymbols.warning} ${item.file} 文件的 ${keyField} 字段的 schema 属性不能为 ${tableSchemaDiff} 中的值`);
-                    process.exit();
-                }
-            }
             allDbTable.push({
                 tableFile: tableFile,
                 tableName: (tableName + '表').replace('表表', '表'),
@@ -288,41 +226,39 @@ export const syncMysql = async () => {
                     const itemData = tableItem.tableData[keyField];
                     let fieldHandler = null;
                     // 字符串
-                    if (itemData.field.type === 'string') {
-                        if (itemData.field?.length !== undefined) {
-                            fieldHandler = table['string'](keyField, itemData.field.length);
-                        } else if (itemData.schema?.max !== undefined) {
-                            fieldHandler = table['string'](keyField, itemData.schema.max);
+                    if (itemData.type === 'string') {
+                        if (itemData?.max !== undefined) {
+                            fieldHandler = table['string'](keyField, itemData.max);
                         } else {
                             fieldHandler = table['string'](keyField);
                         }
                     }
                     // 文本
-                    if (['mediumText', 'text', 'bigText'].includes(itemData.field.type) === true) {
-                        fieldHandler = table['text'](keyField, itemData.field.type.toLowerCase());
+                    if (['mediumText', 'text', 'bigText'].includes(itemData.type) === true) {
+                        fieldHandler = table['text'](keyField, itemData.type.toLowerCase());
                     }
                     // 数字
-                    if (['tinyInt', 'smallInt', 'int', 'mediumInt', 'bigInt'].includes(itemData.field.type) === true) {
-                        if (itemData.field.type === 'int') {
+                    if (['tinyInt', 'smallInt', 'int', 'mediumInt', 'bigInt'].includes(itemData.type) === true) {
+                        if (itemData.type === 'int') {
                             fieldHandler = table['integer'](keyField);
                         } else {
-                            fieldHandler = table[itemData.field.type.toLowerCase()](keyField);
+                            fieldHandler = table[itemData.type.toLowerCase()](keyField);
                         }
-                        if (itemData.field.isUnsigned !== false) {
+                        if (itemData.isUnsigned !== false) {
                             fieldHandler = fieldHandler.unsigned();
                         }
                     }
                     // 小数
-                    if (['float', 'double'].includes(itemData.field.type) === true) {
-                        fieldHandler = table[itemData.field.type](keyField, itemData.field.precision || 8, itemData.field.scale || 2);
-                        if (itemData.field.isUnsigned !== false) {
+                    if (['float', 'double'].includes(itemData.type) === true) {
+                        fieldHandler = table[itemData.type](keyField, itemData.precision || 8, itemData.scale || 2);
+                        if (itemData.isUnsigned !== false) {
                             fieldHandler = fieldHandler.unsigned();
                         }
                     }
 
                     // 设置默认值
-                    if (itemData.field.default !== undefined) {
-                        fieldHandler = fieldHandler.defaultTo(itemData.field.default);
+                    if (itemData.default !== undefined) {
+                        fieldHandler = fieldHandler.defaultTo(itemData.default);
                     }
                     // 设置索引
                     if (itemData.isIndex === true) {
