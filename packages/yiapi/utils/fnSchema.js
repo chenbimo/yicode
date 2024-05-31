@@ -1,46 +1,64 @@
 import { isObject } from '../utils/isObject.js';
 
+export const tableFieldSchemaMap = {
+    // 字符串型
+    string: 'string',
+    // 文本型
+    mediumText: 'string',
+    text: 'string',
+    bigText: 'string',
+    // 整型
+    tinyInt: 'integer',
+    smallInt: 'integer',
+    mediumInt: 'integer',
+    int: 'integer',
+    bigInt: 'integer',
+    // 浮点型
+    float: 'number',
+    // 双精度型
+    double: 'number'
+};
+
 export const fnSchema = (field) => {
     if (!field) {
         throw new Error('字段格式错误');
     }
     const params = {
         title: field.name,
-        type: field.schema.type
+        type: tableFieldSchemaMap[field.type]
     };
-    const schema = field.schema;
-    if (schema.type === 'string') {
-        if (schema.default !== undefined) {
-            params.default = schema.default;
+    if (field.type === 'string') {
+        if (field.default2 !== undefined) {
+            params.default = field.default2;
         }
-        if (schema.min !== undefined) {
-            params.minLength = schema.min;
+        if (field.min !== undefined) {
+            params.minLength = field.min;
         }
-        if (schema.max !== undefined) {
-            params.maxLength = schema.max;
+        if (field.max !== undefined) {
+            params.maxLength = field.max;
         }
-        if (schema.enum !== undefined) {
-            params.enum = schema.enum;
+        if (field.enum !== undefined) {
+            params.enum = field.enum;
         }
-        if (schema.pattern !== undefined) {
-            params.pattern = schema.pattern;
+        if (field.pattern !== undefined) {
+            params.pattern = field.pattern;
         }
     }
-    if (schema.type === 'integer' || schema.type === 'number') {
-        if (schema.default !== undefined) {
-            params.default = schema.default;
+    if (field.type === 'integer' || field.type === 'number') {
+        if (field.default2 !== undefined) {
+            params.default = field.default2;
         }
-        if (schema.min !== undefined) {
-            params.minimum = schema.min;
+        if (field.min !== undefined) {
+            params.minimum = field.min;
         }
-        if (schema.max !== undefined) {
-            params.maximum = schema.max;
+        if (field.max !== undefined) {
+            params.maximum = field.max;
         }
-        if (schema.enum !== undefined) {
-            params.enum = schema.enum;
+        if (field.enum !== undefined) {
+            params.enum = field.enum;
         }
-        if (schema.multipleOf !== undefined) {
-            params.multipleOf = schema.multipleOf;
+        if (field.multipleOf !== undefined) {
+            params.multipleOf = field.multipleOf;
         }
     }
 
