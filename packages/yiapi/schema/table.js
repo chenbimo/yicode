@@ -25,26 +25,27 @@ export const tableSchema = {
                     title: '字段名称',
                     type: 'string'
                 },
+                type: {
+                    title: '数据类型',
+                    type: 'string',
+                    enum: fieldTypeEnum
+                },
                 field: {
                     type: 'object',
                     properties: {
-                        type: { title: '类型值', type: 'string', enum: fieldTypeEnum },
                         default: { title: '默认值', type: ['string', 'integer', 'number'] },
-                        length: { title: '内容长度', type: 'string', maxLength: 60000 },
                         isIndex: { title: '是否索引', type: 'boolean', default: false },
                         isUnique: { title: '是否唯一', type: 'boolean', default: false },
                         isUnsigned: { title: '是否无符号', type: 'boolean', default: false },
                         precision: { title: '整数精度', type: 'integer', minimum: 0, default: 8 },
                         scale: { title: '小数精度', type: 'integer', minimum: 0, default: 2 }
                     },
-                    additionalProperties: false,
-                    required: ['type']
+                    additionalProperties: false
                 },
                 schema: {
                     type: 'object',
                     properties: {
-                        type: { title: '类型值', type: 'string', enum: schemaTypeEnum },
-                        default: { title: '默认值', type: ['string', 'integer', 'number', 'array'] },
+                        default: { title: '默认值', type: ['string', 'integer', 'number'] },
                         min: { title: '最小长度', type: 'integer', minimum: 0 },
                         max: { title: '最大长度', type: 'integer' },
                         enum: { title: '枚举值', type: 'array' },
@@ -52,11 +53,11 @@ export const tableSchema = {
                         multipleOf: { title: '倍数', type: 'integer', minimum: 1 }
                     },
                     additionalProperties: false,
-                    required: ['type']
+                    required: []
                 }
             },
             additionalProperties: false,
-            required: ['name', 'field', 'schema']
+            required: ['name', 'type', 'field', 'schema']
         }
     },
     additionalProperties: false
