@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiserver",
-    "version": "5.0.1",
+    "version": "5.1.0",
     "description": "易接口模板",
     "main": "yiapi.js",
     "type": "module",
