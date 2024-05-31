@@ -1,4 +1,3 @@
-import { vitePluginForArco } from '@arco-plugins/vite-vue';
 export const yiteConfig = {
     devtool: false,
     // 自动导入解析
