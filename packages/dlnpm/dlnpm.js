@@ -15,7 +15,7 @@ async function main() {
     try {
         const promptData = {};
 
-        console.log(logSymbols.info, '开发者：随易科技（https://yicode.tech）');
+        console.log(logSymbols.info, '开发者：陈随易（https://chensuiyi.me）');
         console.log('-----------------------------------------');
 
         // 下载类型
@@ -67,23 +67,23 @@ async function main() {
                 choices: [
                     {
                         name: 'yiapi 接口开发模板',
-                        value: '@yicode/yiapi-template'
+                        value: '@yicode/yiserver'
                     },
                     {
                         name: 'yibase 基础项目开发模板',
-                        value: '@yicode/yibase-template'
+                        value: '@yicode/yibase'
                     },
                     {
                         name: 'yiadmin 后台项目开发模板',
-                        value: '@yicode/yiadmin-template'
+                        value: '@yicode/yiadmin'
                     },
                     {
                         name: 'yiuni 小程序项目开发模板',
-                        value: '@yicode/yiuni-template'
+                        value: '@yicode/yiuni'
                     },
                     {
                         name: 'yidocs 易文档基础模板',
-                        value: '@yicode/yidocs-template'
+                        value: '@yicode/yidocs'
                     }
                 ]
             });
