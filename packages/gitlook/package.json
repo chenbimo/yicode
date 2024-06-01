@@ -1,6 +1,6 @@
 {
     "name": "@yicode/gitlook",
-    "version": "1.1.42",
+    "version": "1.1.43",
     "description": "gitlook - 命令行 git 提交数据统计查看工具",
     "main": "index.js",
     "bin": {
