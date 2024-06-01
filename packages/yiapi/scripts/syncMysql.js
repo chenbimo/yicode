@@ -15,7 +15,6 @@ import localize from 'ajv-i18n';
 import { system } from '../system.js';
 import { appConfig } from '../config/app.js';
 import { mysqlConfig } from '../config/mysql.js';
-import { tableSchemaConfig } from '../config/tableSchema.js';
 import { tableSchema } from '../schema/table.js';
 // 工具函数
 import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
