@@ -209,10 +209,8 @@ async function syncApiFile(fastify) {
 
             // 判断接口层次
             const apiFileSplit = apiFileRoute.split('/').filter((name) => name);
-            if (apiFileSplit.length !== 2) {
-                console.log('🚀 ~ syncApiFile ~ apiFileSplit:', item);
-
-                fastify.log.warn(`${item.filePath} 接口只能为2层`);
+            if (apiFileSplit.length !== 2 && apiFileSplit.length !== 3) {
+                fastify.log.warn(`${item.filePath} 接口嵌套只能为 2-3 层`);
                 process.exit();
             }
 
