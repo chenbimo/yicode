@@ -12,6 +12,7 @@
         "./yiapi.js": "./yiapi.js",
         "./fn.js": "./fn.js",
         "./config/*.js": "./config/*.js",
+        "./tables/*.js": "./tables/*.js",
         "./scripts/*.js": "./scripts/*.js"
     },
     "scripts": {},
