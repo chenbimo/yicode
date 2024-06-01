@@ -52,7 +52,7 @@
         "fs-extra": "^11.2.0",
         "got": "^14.3.0",
         "http-graceful-shutdown": "^3.1.13",
-        "inquirer": "^9.2.22",
+        "inquirer": "^9.2.23",
         "ioredis": "^5.4.1",
         "knex": "^3.1.0",
         "log-symbols": "^6.0.0",
