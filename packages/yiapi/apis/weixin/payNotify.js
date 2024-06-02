@@ -84,7 +84,7 @@ export default async (fastify) => {
                     product_code: paymentInfo.product || 0,
                     buy_duration: paymentInfo.duration || 0,
                     origin_price: paymentInfo.money || 0,
-                    buy_note: attach.buy_note,
+                    // buy_note: attach.buy_note,
                     buy_agent: attach.buy_agent || 0
                 };
                 if (appConfig.tablePrimaryKey === 'time') {
