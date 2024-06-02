@@ -132,7 +132,7 @@ async function syncApiDir(fastify) {
         }
 
         // 只有主进程才操作一次
-        if (process.env.NODE_APP_INSTANCE === undefined) {
+        if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
             // 如果待删除接口目录大于0，则删除
             if (deleteApiDirData.length > 0) {
                 await apiModel.clone().whereIn('id', deleteApiDirData).deleteData();
@@ -273,7 +273,7 @@ async function syncApiFile(fastify) {
         }
 
         // 数据的同步只在主进程中操作
-        if (process.env.NODE_APP_INSTANCE === undefined) {
+        if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
             // 如果待删除接口大于0，则删除
             if (deleteApiData.length > 0) {
                 await apiModel.clone().whereIn('id', deleteApiData).deleteData();

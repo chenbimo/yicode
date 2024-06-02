@@ -63,7 +63,7 @@ async function syncMenuDir(fastify) {
             }
         });
 
-        if (process.env.NODE_APP_INSTANCE === undefined) {
+        if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
             // 删除菜单目录
             if (deleteMenuDb.length > 0) {
                 await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
@@ -157,7 +157,7 @@ async function syncMenuFile(fastify) {
         });
 
         // 数据的同步只在主进程中操作
-        if (process.env.NODE_APP_INSTANCE === undefined) {
+        if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
             if (deleteMenuDb.length > 0) {
                 await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
             }

@@ -69,7 +69,7 @@ async function plugin(fastify, opts) {
         }
 
         // 只有主进程才操作一次
-        if (process.env.NODE_APP_INSTANCE === undefined) {
+        if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
             if (insertRoleData.length > 0) {
                 await roleModel.clone().insertData(insertRoleData);
             }
@@ -102,7 +102,7 @@ async function plugin(fastify, opts) {
                 insertData.id = fnIncrUID();
             }
             // 只有主进程才操作一次
-            if (process.env.NODE_APP_INSTANCE === undefined) {
+            if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
                 await roleModel.clone().insertData(insertData);
             }
         } else {
@@ -113,7 +113,7 @@ async function plugin(fastify, opts) {
                 api_ids: apiIds.join(',')
             };
             // 只有主进程才操作一次
-            if (process.env.NODE_APP_INSTANCE === undefined) {
+            if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
                 await roleModel.clone().where('code', 'dev').updateData(updateData);
             }
         }
@@ -130,7 +130,7 @@ async function plugin(fastify, opts) {
                 insertData.id = fnIncrUID();
             }
             // 只有主进程才操作一次
-            if (process.env.NODE_APP_INSTANCE === undefined) {
+            if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
                 await adminModel.clone().insertData(insertData);
             }
         } else {
@@ -140,7 +140,7 @@ async function plugin(fastify, opts) {
                 password: fnSaltMD5(fnPureMD5(appConfig.devPassword))
             };
             // 只有主进程才操作一次
-            if (process.env.NODE_APP_INSTANCE === undefined) {
+            if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
                 await adminModel.clone().where('username', 'dev').updateData(updateData);
             }
         }
