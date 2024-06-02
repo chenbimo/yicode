@@ -51,7 +51,7 @@ export default async (fastify) => {
                     user_id: req.session.id,
                     pay_code: req.body.pay_code,
                     buy_amount: req.body.buy_amount,
-                    // buy_note: req.body.buy_note || '常规支付',
+                    // buy_note: req.body.buy_note || '常规支付2',
                     buy_agent: req.body.buy_agent || 0
                 };
                 fastify.log.warn({
