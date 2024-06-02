@@ -7,6 +7,7 @@ import { toFind } from '../../utils/toFind.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
 import { appConfig } from '../../config/app.js';
+import { paymentConfig } from '../../config/payment.js';
 import { httpConfig } from '../../config/http.js';
 // 数据库表
 import { tableData } from '../../tables/payOrder.js';
@@ -29,7 +30,7 @@ export default async (fastify) => {
         // 执行函数
         apiHandler: async (req, res) => {
             try {
-                const productInfo = toFind(appConfig.payment, 'code', req.body.pay_code);
+                const productInfo = toFind(paymentConfig, 'code', req.body.pay_code);
                 if (!productInfo?.name) {
                     return {
                         ...httpConfig.FAIL,
@@ -72,7 +73,7 @@ export default async (fastify) => {
                     },
                     attach: attachStringify
                 });
-                if (res.code_url) {
+                if (res?.code_url) {
                     return {
                         ...httpConfig.SUCCESS,
                         data: {

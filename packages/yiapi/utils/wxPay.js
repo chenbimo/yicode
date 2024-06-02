@@ -1,7 +1,7 @@
 import got from 'got';
 import crypto from 'crypto';
 
-import { appConfig } from '../config/app.js';
+import { weixinConfig } from '../config/weixin.js';
 import { fnUUID } from '../utils/fnUUID.js';
 
 const wxPayConfig = {
@@ -36,7 +36,7 @@ const wxPayhttpUrl = (type, params) => {
  * @returns 返回签名字符串，base64
  */
 export const wxPayRsaSign = (content) => {
-    return crypto.createSign('RSA-SHA256').update(content).sign(appConfig.weixin.privateKey, 'base64');
+    return crypto.createSign('RSA-SHA256').update(content).sign(weixinConfig.privateKey, 'base64');
 };
 
 // 初始化微信支付
@@ -99,7 +99,7 @@ export const wxPayDecodeCertificate = (options) => {
     const ciphertextBuffer = Buffer.from(ciphertext, 'base64');
     const authTag = ciphertextBuffer.slice(ciphertextBuffer.length - 16);
     const data = ciphertextBuffer.slice(0, ciphertextBuffer.length - 16);
-    const decipherIv = crypto.createDecipheriv('aes-256-gcm', appConfig.weixin.apiv3PrivateKey, nonce);
+    const decipherIv = crypto.createDecipheriv('aes-256-gcm', weixinConfig.apiv3PrivateKey, nonce);
     decipherIv.setAuthTag(authTag);
     decipherIv.setAAD(Buffer.from(associated_data));
     const decryptBuf = decipherIv.update(data);
@@ -148,9 +148,9 @@ export const wxPayRequest = async (type, params) => {
         // 请求体，如果没有参数，则请求体为空
         let paramsStr = '';
         if (Object.keys(params).length > 0) {
-            params.appid = appConfig.weixin.appId;
-            params.mchid = appConfig.weixin.mchId;
-            params.notify_url = appConfig.weixin.notifyUrl;
+            params.appid = weixinConfig.appId;
+            params.mchid = weixinConfig.mchId;
+            params.notify_url = weixinConfig.notifyUrl;
             paramsStr = JSON.stringify(params);
         }
 
@@ -158,7 +158,7 @@ export const wxPayRequest = async (type, params) => {
         const signature = wxPayRsaSign(`${method}\n${url}\n${timestamp}\n${onece_str}\n${paramsStr}\n`);
 
         // 认证
-        const Authorization = `WECHATPAY2-SHA256-RSA2048 mchid="${appConfig.weixin.mchId}",nonce_str="${onece_str}",timestamp="${timestamp}",signature="${signature}",serial_no="${appConfig.weixin.serialNo}"`;
+        const Authorization = `WECHATPAY2-SHA256-RSA2048 mchid="${weixinConfig.mchId}",nonce_str="${onece_str}",timestamp="${timestamp}",signature="${signature}",serial_no="${weixinConfig.serialNo}"`;
         // 发起请求
         let reqParams = {
             method: method,

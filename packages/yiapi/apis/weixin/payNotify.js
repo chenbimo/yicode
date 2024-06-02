@@ -13,6 +13,7 @@ import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from
 // 配置文件
 import { system } from '../../system.js';
 import { appConfig } from '../../config/app.js';
+import { paymentConfig } from '../../config/payment.js';
 import { httpConfig } from '../../config/http.js';
 // 接口元数据
 import { metaConfig } from './_meta.js';
@@ -68,7 +69,7 @@ export default async (fastify) => {
                 }
 
                 // 产品信息
-                const paymentInfo = toFind(appConfig.payment, 'code', attach.pay_code);
+                const paymentInfo = toFind(paymentConfig, 'code', attach.pay_code);
                 fastify.log.warn({ msg: '产品信息', ...paymentInfo });
 
                 // 添加订单数据
