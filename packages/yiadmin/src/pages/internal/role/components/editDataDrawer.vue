@@ -176,8 +176,6 @@ const $Method = {
                 updateData: '/role/update'
             }[$Prop.actionType];
 
-            console.log('🚀 ~ apiRoleBindPermission ~ $Data.formData:', $Data.formData);
-
             const menuIds = _.concat($Data.menuCheckedKeys, $Data.menuHalfCheckedKeys);
             const apiIds = _.concat($Data.apiCheckedKeys, $Data.apiHalfCheckedKeys);
 
