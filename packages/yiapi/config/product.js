@@ -2,4 +2,4 @@ import { fnImportAppConfig } from '../utils/fnImportAppConfig.js';
 
 const { productConfig: importConfig } = await fnImportAppConfig('product', {});
 
-export const productConfig = Object.assign({}, importConfig);
+export const productConfig = importConfig;
