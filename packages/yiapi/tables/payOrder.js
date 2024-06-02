@@ -62,6 +62,12 @@ export const tableData = Object.assign(tableExtConfig.sys_pay_order || {}, {
         default: 0,
         min: 0
     },
+    buy_agent: {
+        name: '邀请人',
+        type: 'bigInt',
+        default: 0,
+        min: 0
+    },
     buy_amount: {
         name: '购买数量',
         type: 'bigInt',

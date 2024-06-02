@@ -23,7 +23,8 @@ export default async (fastify) => {
             properties: {
                 pay_code: fnSchema(tableData.pay_code),
                 buy_amount: fnSchema(tableData.buy_amount),
-                buy_note: fnSchema(tableData.buy_note)
+                buy_note: fnSchema(tableData.buy_note),
+                buy_agent: fnSchema({ name: '邀请人', type: 'bigInt', min: 0 })
             },
             required: ['buy_amount', 'pay_code']
         },
@@ -50,7 +51,8 @@ export default async (fastify) => {
                     user_id: req.session.id,
                     pay_code: req.body.pay_code,
                     buy_amount: req.body.buy_amount,
-                    buy_note: req.body.buy_note || '常规支付'
+                    buy_note: req.body.buy_note || '常规支付',
+                    buy_agent: req.body.buy_agent || ''
                 };
                 fastify.log.warn({
                     what: '创建支付二维码',
