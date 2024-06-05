@@ -43,7 +43,7 @@
         "copy-anything": "^4.0.0",
         "fast-glob": "^3.3.2",
         "fs-extra": "^11.2.0",
-        "got": "^14.3.0",
+        "got": "^14.4.0",
         "lodash-es": "^4.17.21",
         "log-symbols": "^6.0.0",
         "merge-anything": "^6.0.0",
