@@ -27,9 +27,9 @@
     },
     "homepage": "https://chensuiyi.me",
     "dependencies": {
-        "@arco-design/web-vue": "^2.55.2",
+        "@arco-design/web-vue": "^2.55.3",
         "@arco-plugins/vite-vue": "^1.4.5",
-        "@iconify/json": "^2.2.216",
+        "@iconify/json": "^2.2.217",
         "@yicode/yidash": "workspace:^",
         "axios": "^1.7.2",
         "date-fns": "^3.6.0",

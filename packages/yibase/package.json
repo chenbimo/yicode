@@ -26,7 +26,7 @@
     },
     "homepage": "https://chensuiyi.me",
     "dependencies": {
-        "@iconify/json": "^2.2.216",
+        "@iconify/json": "^2.2.217",
         "@yicode/yidash": "workspace:^",
         "@yicode/yite-cli": "workspace:^",
         "axios": "^1.7.2",
