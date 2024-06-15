@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yibase",
-    "version": "1.4.10",
+    "version": "1.4.11",
     "description": "vue3 + vite + yite-cli 基础开发模板",
     "sideEffects": true,
     "type": "module",
