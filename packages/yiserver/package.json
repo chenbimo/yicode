@@ -31,6 +31,6 @@
         "@yicode/yiapi": "workspace:^"
     },
     "devDependencies": {
-        "nodemon": "^3.1.3"
+        "nodemon": "^3.1.4"
     }
 }

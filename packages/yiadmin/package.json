@@ -29,7 +29,7 @@
     "dependencies": {
         "@arco-design/web-vue": "^2.55.3",
         "@arco-plugins/vite-vue": "^1.4.5",
-        "@iconify/json": "^2.2.220",
+        "@iconify/json": "^2.2.222",
         "@yicode/yidash": "workspace:^",
         "axios": "^1.7.2",
         "date-fns": "^3.6.0",
@@ -39,9 +39,9 @@
         "sass": "^1.77.6",
         "store2": "^2.14.3",
         "unocss": "^0.61.0",
-        "vue": "^3.4.29",
+        "vue": "^3.4.30",
         "vue-i18n": "^9.13.1",
-        "vue-router": "^4.3.3"
+        "vue-router": "^4.4.0"
     },
     "devDependencies": {
         "@yicode/yite-cli": "workspace:^"
