@@ -11,9 +11,9 @@
     },
     "scripts": {
         "dev": "nodemon --config=nodemon.json",
-        "build": "pm2 start pm2.config.cjs",
+        "server": "pm2 start pm2.config.cjs",
         "syncMysql:dev": "node --env-file=env/.development.env ./scripts/syncMysql.js",
-        "syncMysql:build": "node --env-file=env/.production.env ./scripts/syncMysql.js",
+        "syncMysql:prod": "node --env-file=env/.production.env ./scripts/syncMysql.js",
         "flamegraph": "pnpm dlx rimraf .cache/0x & pnpm dlx 0x --output-dir=.cache/0x --output-html={outputDir}/index.html -- node --env-file=env/.development.env yiapi.js"
     },
     "keywords": [
