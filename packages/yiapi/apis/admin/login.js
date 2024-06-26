@@ -20,7 +20,7 @@ export default async (fastify) => {
         schemaRequest: {
             type: 'object',
             properties: {
-                account: fnSchema({ name: '账号', schema: { type: 'string', min: 1, max: 100 } }),
+                account: fnSchema({ name: '账号', type: 'string', min: 1, max: 100 }),
                 password: fnSchema(tableData.password)
             },
             required: ['account', 'password']
