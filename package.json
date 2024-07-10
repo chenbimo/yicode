@@ -31,10 +31,10 @@
     "devDependencies": {
         "@commitlint/cli": "^19.3.0",
         "@yicode/commit-lint": "workspace:^",
-        "lerna": "^8.1.5",
+        "lerna": "^8.1.6",
         "lint-staged": "^15.2.7",
         "prettier": "^3.3.2",
-        "rollup": "^4.18.0",
+        "rollup": "^4.18.1",
         "simple-git-hooks": "^2.11.1"
     },
     "simple-git-hooks": {
