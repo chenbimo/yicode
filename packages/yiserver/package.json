@@ -28,9 +28,10 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "workspace:^"
+        "@yicode/yiapi": "^5.3.11"
     },
     "devDependencies": {
         "nodemon": "^3.1.4"
-    }
+    },
+    "gitHead": "e1251973e74a2861a08dd8837e7a43afde0a0b6e"
 }

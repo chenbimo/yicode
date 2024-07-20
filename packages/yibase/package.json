@@ -27,8 +27,8 @@
     "homepage": "https://chensuiyi.me",
     "dependencies": {
         "@iconify/json": "^2.2.229",
-        "@yicode/yidash": "workspace:^",
-        "@yicode/yite-cli": "workspace:^",
+        "@yicode/yidash": "^3.8.4",
+        "@yicode/yite-cli": "^2.6.27",
         "axios": "^1.7.2",
         "date-fns": "^3.6.0",
         "lodash-es": "^4.17.21",
@@ -39,5 +39,6 @@
         "vue": "^3.4.33",
         "vue-i18n": "^9.13.1",
         "vue-router": "^4.4.0"
-    }
+    },
+    "gitHead": "e1251973e74a2861a08dd8837e7a43afde0a0b6e"
 }

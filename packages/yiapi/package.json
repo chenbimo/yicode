@@ -63,5 +63,6 @@
         "picomatch": "^4.0.2",
         "winston": "^3.13.1",
         "winston-daily-rotate-file": "^5.0.0"
-    }
+    },
+    "gitHead": "e1251973e74a2861a08dd8837e7a43afde0a0b6e"
 }
