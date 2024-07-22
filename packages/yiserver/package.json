@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiserver",
-    "version": "5.3.11",
+    "version": "5.3.12",
     "description": "易接口模板",
     "main": "yiapi.js",
     "type": "module",
@@ -28,7 +28,7 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "^5.3.11"
+        "@yicode/yiapi": "^5.3.12"
     },
     "devDependencies": {
         "nodemon": "^3.1.4"
