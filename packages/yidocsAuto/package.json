@@ -12,7 +12,12 @@
         ".": "./index.js"
     },
     "sideEffects": true,
-    "scripts": {},
+    "scripts": {
+        "release": "release-it"
+    },
+    "release-it": {
+        "git": false
+    },
     "keywords": [
         "lodash",
         "utils",

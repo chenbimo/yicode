@@ -10,14 +10,28 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
+        "release": "release-it",
         "dev": "vitepress dev",
         "build": "vitepress build"
+    },
+    "release-it": {
+        "git": false,
+        "plugins": {
+            "@release-it/bumper": {
+                "out": {
+                    "file": "package.json",
+                    "path": [
+                        "dependencies.@yicode/yidocs-auto"
+                    ]
+                }
+            }
+        }
     },
     "keywords": [],
     "author": "陈随易 <bimostyle@qq.com>",
     "license": "ISC",
     "dependencies": {
-        "@yicode/yidocs-auto": "workspace:*"
+        "@yicode/yidocs-auto": "workspace:^"
     },
     "devDependencies": {
         "vitepress": "^1.3.1"

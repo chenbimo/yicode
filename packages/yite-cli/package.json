@@ -15,7 +15,22 @@
         "access": "public",
         "registry": "https://registry.npmjs.org"
     },
-    "scripts": {},
+    "scripts": {
+        "release": "release-it"
+    },
+    "release-it": {
+        "git": false,
+        "plugins": {
+            "@release-it/bumper": {
+                "out": {
+                    "file": "package.json",
+                    "path": [
+                        "dependencies.@yicode/yidash"
+                    ]
+                }
+            }
+        }
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/chenbimo/yite-cli"
@@ -38,7 +53,7 @@
         "@unocss/transformer-variant-group": "^0.61.5",
         "@vitejs/plugin-vue": "^5.1.0",
         "@vue-macros/reactivity-transform": "^1.0.0",
-        "@yicode/yidash": "workspace:*",
+        "@yicode/yidash": "workspace:^",
         "colorette": "^2.0.20",
         "copy-anything": "^4.0.2",
         "fast-glob": "^3.3.2",
@@ -59,5 +74,5 @@
         "vite-plugin-vue-devtools": "^7.3.7",
         "vue-i18n": "^9.13.1"
     },
-    "gitHead": "fe121733d94995eaeba021ae747d0817f1294a09"
+    "gitHead": "130b0428722cebb2a4170fea95c08a398b50eb23"
 }

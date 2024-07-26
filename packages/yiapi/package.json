@@ -15,7 +15,12 @@
         "./tables/*.js": "./tables/*.js",
         "./scripts/*.js": "./scripts/*.js"
     },
-    "scripts": {},
+    "scripts": {
+        "release": "release-it"
+    },
+    "release-it": {
+        "git": false
+    },
     "keywords": [
         "fastify",
         "nodejs",
@@ -64,5 +69,5 @@
         "winston": "^3.13.1",
         "winston-daily-rotate-file": "^5.0.0"
     },
-    "gitHead": "fe121733d94995eaeba021ae747d0817f1294a09"
+    "gitHead": "130b0428722cebb2a4170fea95c08a398b50eb23"
 }

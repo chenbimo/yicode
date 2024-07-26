@@ -10,11 +10,25 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
+        "release": "release-it",
         "dev": "nodemon --config=nodemon.json",
         "server": "pm2 start pm2.config.cjs",
         "syncMysql:dev": "node --env-file=env/.development.env ./scripts/syncMysql.js",
         "syncMysql:prod": "node --env-file=env/.production.env ./scripts/syncMysql.js",
         "flamegraph": "pnpm dlx rimraf .cache/0x & pnpm dlx 0x --output-dir=.cache/0x --output-html={outputDir}/index.html -- node --env-file=env/.development.env yiapi.js"
+    },
+    "release-it": {
+        "git": false,
+        "plugins": {
+            "@release-it/bumper": {
+                "out": {
+                    "file": "package.json",
+                    "path": [
+                        "dependencies.@yicode/yiapi"
+                    ]
+                }
+            }
+        }
     },
     "keywords": [
         "api",
@@ -28,10 +42,10 @@
         "url": "https://github.com/chenbimo/yicode.git"
     },
     "dependencies": {
-        "@yicode/yiapi": "workspace:*"
+        "@yicode/yiapi": "workspace:^"
     },
     "devDependencies": {
         "nodemon": "^3.1.4"
     },
-    "gitHead": "fe121733d94995eaeba021ae747d0817f1294a09"
+    "gitHead": "130b0428722cebb2a4170fea95c08a398b50eb23"
 }

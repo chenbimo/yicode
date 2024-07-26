@@ -9,7 +9,12 @@
         "access": "public",
         "registry": "https://registry.npmjs.org"
     },
-    "scripts": {},
+    "scripts": {
+        "release": "release-it"
+    },
+    "release-it": {
+        "git": false
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/chenbimo/commit-lint"

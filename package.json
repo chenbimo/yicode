@@ -14,8 +14,7 @@
     "homepage": "https://chensuiyi.me",
     "main": "index.js",
     "scripts": {
-        "r": "lerna publish",
-        "c": "pnpm dlx lerna clean"
+        "r": "release-it"
     },
     "keywords": [
         "yicode",
@@ -28,12 +27,30 @@
         "nodejs"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
+    "workspaces": [
+        "packages/commitLint",
+        "packages/yidash",
+        "packages/yidocsAuto",
+        "packages/yidocs",
+        "packages/yite-cli",
+        "packages/yibase",
+        "packages/yiadmin",
+        "packages/yiapi",
+        "packages/yiserver"
+    ],
+    "release-it": {
+        "git": {
+            "requireCleanWorkingDir": false
+        }
+    },
     "devDependencies": {
         "@commitlint/cli": "^19.3.0",
-        "@yicode/commit-lint": "workspace:*",
-        "lerna": "^8.1.7",
+        "@release-it/bumper": "^6.0.1",
+        "@yicode/commit-lint": "workspace:^",
         "lint-staged": "^15.2.7",
         "prettier": "^3.3.3",
+        "release-it": "^17.6.0",
+        "release-it-pnpm": "^4.6.3",
         "rollup": "^4.19.0",
         "simple-git-hooks": "^2.11.1"
     },

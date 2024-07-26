@@ -10,8 +10,23 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
+        "release": "release-it",
         "dev": "yite --command=dev --envfile=development",
         "build": "yite --command=build --envfile=production"
+    },
+    "release-it": {
+        "git": false,
+        "plugins": {
+            "@release-it/bumper": {
+                "out": {
+                    "file": "package.json",
+                    "path": [
+                        "dependencies.@yicode/yidash",
+                        "dependencies.@yicode/yite-cli"
+                    ]
+                }
+            }
+        }
     },
     "keywords": [
         "lodash",
@@ -27,8 +42,8 @@
     "homepage": "https://chensuiyi.me",
     "dependencies": {
         "@iconify/json": "^2.2.231",
-        "@yicode/yidash": "workspace:*",
-        "@yicode/yite-cli": "workspace:*",
+        "@yicode/yidash": "workspace:^",
+        "@yicode/yite-cli": "workspace:^",
         "axios": "^1.7.2",
         "date-fns": "^3.6.0",
         "lodash-es": "^4.17.21",
@@ -40,5 +55,5 @@
         "vue-i18n": "^9.13.1",
         "vue-router": "^4.4.0"
     },
-    "gitHead": "fe121733d94995eaeba021ae747d0817f1294a09"
+    "gitHead": "130b0428722cebb2a4170fea95c08a398b50eb23"
 }

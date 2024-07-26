@@ -13,7 +13,12 @@
         ".": "./index.js",
         "./yidashLibNames.js": "./yidashLibNames.js"
     },
-    "scripts": {},
+    "scripts": {
+        "release": "release-it"
+    },
+    "release-it": {
+        "git": false
+    },
     "keywords": [
         "lodash",
         "utils",
