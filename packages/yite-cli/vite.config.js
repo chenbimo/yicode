@@ -8,7 +8,7 @@ import logSymbols from 'log-symbols';
 import { visualizer } from 'rollup-plugin-visualizer';
 
 // import { viteZip as ZipFile } from 'vite-plugin-zip-file';
-import { ensureDirSync, readJsonSync } from 'fs-extra/esm';
+import { ensureDirSync, readJsonSync, outputJsonSync } from 'fs-extra/esm';
 import portfinder from 'portfinder';
 
 import { mergeAndConcat } from 'merge-anything';
@@ -248,6 +248,6 @@ export default defineViteConfig(async ({ command, mode }) => {
         },
         yiteConfig?.viteConfig || {}
     );
-
+    outputJsonSync(path.resolve(appDir, '.cache', 'vite-config.json'), viteConfig);
     return viteConfig;
 });
