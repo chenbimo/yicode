@@ -38,7 +38,7 @@
         "@unocss/transformer-variant-group": "^0.61.5",
         "@vitejs/plugin-vue": "^5.1.0",
         "@vue-macros/reactivity-transform": "^1.0.0",
-        "@yicode/yidash": "workspace:*",
+        "@yicode/yidash": "3.8.4",
         "colorette": "^2.0.20",
         "copy-anything": "^4.0.2",
         "fast-glob": "^3.3.2",
@@ -59,5 +59,5 @@
         "vite-plugin-vue-devtools": "^7.3.7",
         "vue-i18n": "^9.13.1"
     },
-    "gitHead": "e1251973e74a2861a08dd8837e7a43afde0a0b6e"
+    "gitHead": "fe121733d94995eaeba021ae747d0817f1294a09"
 }
