@@ -29,12 +29,7 @@
         "commitMessage": "发布版本：${version}",
         "commitArgs": [],
         "tag": false,
-        "tagExclude": null,
-        "tagName": null,
-        "tagMatch": null,
         "getLatestTagFromAllRefs": false,
-        "tagAnnotation": "Release ${version}",
-        "tagArgs": [],
         "push": true,
         "pushArgs": ["--follow-tags"],
         "pushRepo": ""
