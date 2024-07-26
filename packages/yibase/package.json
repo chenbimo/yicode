@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yibase",
-    "version": "1.4.19",
+    "version": "1.4.20",
     "description": "vue3 + vite + yite-cli 基础开发模板",
     "sideEffects": true,
     "type": "module",
@@ -27,8 +27,8 @@
     "homepage": "https://chensuiyi.me",
     "dependencies": {
         "@iconify/json": "^2.2.231",
-        "@yicode/yidash": "3.8.4",
-        "@yicode/yite-cli": "2.6.31",
+        "@yicode/yidash": "workspace:*",
+        "@yicode/yite-cli": "workspace:*",
         "axios": "^1.7.2",
         "date-fns": "^3.6.0",
         "lodash-es": "^4.17.21",
