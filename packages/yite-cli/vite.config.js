@@ -83,10 +83,6 @@ export default defineViteConfig(async ({ command, mode }) => {
                         //
                         ['*', 'Pinia']
                     ],
-                    '@yicode/yite-cli': [
-                        //
-                        ['*', 'yite']
-                    ],
                     'vue-i18n': [
                         //
                         'createI18n'
