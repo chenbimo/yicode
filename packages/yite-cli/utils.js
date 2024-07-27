@@ -2,7 +2,6 @@ import url from 'node:url';
 import path from 'node:path';
 import fg from 'fast-glob';
 import { copy as copyAny } from 'copy-anything';
-import { cloneDeep, startsWith } from 'lodash-es';
 
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -35,7 +34,7 @@ export function fnAppDir(workdir) {
 
 // 获取file协议的路径
 export function fnFileProtocolPath(_path) {
-    if (startsWith(_path, 'file:')) {
+    if (_path.startsWith('file:')) {
         return _path;
     } else {
         return 'file:///' + _path.replace(/\\+/gi, '/');
