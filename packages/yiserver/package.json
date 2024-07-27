@@ -10,7 +10,6 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "r": "pnpm publish --access public --no-git-checks",
         "dev": "nodemon --config=nodemon.json",
         "server": "pm2 start pm2.config.cjs",
         "syncMysql:dev": "node --env-file=env/.development.env ./scripts/syncMysql.js",
@@ -33,6 +32,5 @@
     },
     "devDependencies": {
         "nodemon": "^3.1.4"
-    },
-    "gitHead": "130b0428722cebb2a4170fea95c08a398b50eb23"
+    }
 }

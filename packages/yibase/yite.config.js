@@ -13,7 +13,6 @@ export const yiteConfig = {
         optimizeDeps: {
             include: [
                 //
-                'lodash-es',
                 'vue-i18n',
                 'axios',
                 'store2'

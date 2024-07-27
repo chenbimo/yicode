@@ -9,9 +9,7 @@
         "access": "public",
         "registry": "https://registry.npmjs.org"
     },
-    "scripts": {
-        "r": "pnpm publish --access public --no-git-checks"
-    },
+    "scripts": {},
     "repository": {
         "type": "git",
         "url": "https://github.com/chenbimo/commit-lint"

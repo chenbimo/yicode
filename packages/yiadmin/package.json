@@ -10,7 +10,6 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "r": "pnpm publish --access public --no-git-checks",
         "dev": "yite --command=dev --envfile=development --workdir=./",
         "build": "yite --command=build --envfile=production --workdir=./",
         "update:template": "yite --command=update --project-type=yiadmin"
@@ -45,7 +44,6 @@
         "vue-router": "^4.4.0"
     },
     "devDependencies": {
-        "@yicode/yite-cli": "^2.7.0"
-    },
-    "gitHead": "130b0428722cebb2a4170fea95c08a398b50eb23"
+        "@yicode/yite-cli": "^2.7.1"
+    }
 }

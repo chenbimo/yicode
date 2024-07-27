@@ -12,9 +12,7 @@
         ".": "./index.js"
     },
     "sideEffects": true,
-    "scripts": {
-        "r": "pnpm publish --access public --no-git-checks"
-    },
+    "scripts": {},
     "keywords": [
         "lodash",
         "utils",

@@ -13,9 +13,7 @@
         ".": "./index.js",
         "./yidashLibNames.js": "./yidashLibNames.js"
     },
-    "scripts": {
-        "r": "pnpm publish --access public --no-git-checks"
-    },
+    "scripts": {},
     "keywords": [
         "lodash",
         "utils",

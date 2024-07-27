@@ -15,9 +15,7 @@
         "./tables/*.js": "./tables/*.js",
         "./scripts/*.js": "./scripts/*.js"
     },
-    "scripts": {
-        "r": "pnpm publish --access public --no-git-checks"
-    },
+    "scripts": {},
     "keywords": [
         "fastify",
         "nodejs",
@@ -65,6 +63,5 @@
         "picomatch": "^4.0.2",
         "winston": "^3.13.1",
         "winston-daily-rotate-file": "^5.0.0"
-    },
-    "gitHead": "130b0428722cebb2a4170fea95c08a398b50eb23"
+    }
 }
