@@ -1,0 +1,37 @@
+{
+    "plugins": {
+        "release-it-pnpm": {
+            "disableRelease": false
+        }
+    },
+    "npm": {
+        "publish": true,
+        "publishPath": ".",
+        "publishArgs": [],
+        "tag": null,
+        "otp": null,
+        "ignoreVersion": false,
+        "allowSameVersion": false,
+        "versionArgs": [],
+        "skipChecks": true,
+        "timeout": 30
+    },
+    "git": {
+        "changelog": false,
+        "requireCleanWorkingDir": true,
+        "requireBranch": false,
+        "requireUpstream": true,
+        "requireCommits": false,
+        "requireCommitsFail": true,
+        "commitsPath": "",
+        "addUntrackedFiles": false,
+        "commit": true,
+        "commitMessage": "发布版本：${version}",
+        "commitArgs": [],
+        "tag": false,
+        "getLatestTagFromAllRefs": false,
+        "push": true,
+        "pushArgs": ["--follow-tags"],
+        "pushRepo": ""
+    }
+}

@@ -16,7 +16,7 @@
         "./scripts/*.js": "./scripts/*.js"
     },
     "scripts": {
-        "release": "release-it"
+        "r": "release-it"
     },
     "release-it": {
         "git": false

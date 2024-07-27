@@ -1,0 +1,21 @@
+{
+    "npm": {
+        "publish": true,
+        "publishPath": ".",
+        "publishArgs": [],
+        "tag": null,
+        "otp": null,
+        "ignoreVersion": false,
+        "allowSameVersion": false,
+        "versionArgs": [],
+        "skipChecks": true,
+        "timeout": 30
+    },
+    "git": {
+        "changelog": false,
+        "commit": true,
+        "commitMessage": "发布版本：${version}",
+        "tag": false,
+        "push": false
+    }
+}

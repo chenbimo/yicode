@@ -10,7 +10,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "release": "release-it"
+        "r": "release-it"
     },
     "release-it": {
         "git": false

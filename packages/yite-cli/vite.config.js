@@ -19,7 +19,6 @@ import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 import VueDevTools from 'vite-plugin-vue-devtools';
 import { defineConfig as defineUnocssConfig } from 'unocss';
 // import Markdown from 'vite-plugin-md';
-import { yidashLibNames } from '@yicode/yidash/yidashLibNames.js';
 
 // 内部文件
 import { yiteRouter } from './plugins/router.js';
@@ -80,10 +79,6 @@ export default defineViteConfig(async ({ command, mode }) => {
                         'isNavigationFailure',
                         'loadRouteLocation'
                     ],
-                    'lodash-es': [
-                        //
-                        ['*', '_']
-                    ],
                     pinia: [
                         //
                         ['*', 'Pinia']
@@ -95,8 +90,7 @@ export default defineViteConfig(async ({ command, mode }) => {
                     'vue-i18n': [
                         //
                         'createI18n'
-                    ],
-                    '@yicode/yidash': yidashLibNames
+                    ]
                 }
             ],
             dirs: [

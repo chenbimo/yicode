@@ -16,7 +16,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "release": "release-it"
+        "r": "release-it"
     },
     "release-it": {
         "git": false,
@@ -53,7 +53,6 @@
         "@unocss/transformer-variant-group": "^0.61.5",
         "@vitejs/plugin-vue": "^5.1.0",
         "@vue-macros/reactivity-transform": "^1.0.0",
-        "@yicode/yidash": "workspace:^",
         "colorette": "^2.0.20",
         "copy-anything": "^4.0.2",
         "fast-glob": "^3.3.2",

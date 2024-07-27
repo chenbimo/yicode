@@ -14,7 +14,7 @@
         "./yidashLibNames.js": "./yidashLibNames.js"
     },
     "scripts": {
-        "release": "release-it"
+        "r": "release-it"
     },
     "release-it": {
         "git": false

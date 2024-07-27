@@ -13,9 +13,7 @@
     "description": "随易科技（yicode.tech） - 软件开发生态",
     "homepage": "https://chensuiyi.me",
     "main": "index.js",
-    "scripts": {
-        "r": "release-it"
-    },
+    "scripts": {},
     "keywords": [
         "yicode",
         "cli",
@@ -27,30 +25,12 @@
         "nodejs"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "workspaces": [
-        "packages/commitLint",
-        "packages/yidash",
-        "packages/yidocsAuto",
-        "packages/yidocs",
-        "packages/yite-cli",
-        "packages/yibase",
-        "packages/yiadmin",
-        "packages/yiapi",
-        "packages/yiserver"
-    ],
-    "release-it": {
-        "git": {
-            "requireCleanWorkingDir": false
-        }
-    },
     "devDependencies": {
         "@commitlint/cli": "^19.3.0",
-        "@release-it/bumper": "^6.0.1",
-        "@yicode/commit-lint": "workspace:^",
+        "@yicode/commit-lint": "^1.1.3",
         "lint-staged": "^15.2.7",
         "prettier": "^3.3.3",
         "release-it": "^17.6.0",
-        "release-it-pnpm": "^4.6.3",
         "rollup": "^4.19.0",
         "simple-git-hooks": "^2.11.1"
     },
