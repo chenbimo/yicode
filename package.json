@@ -13,7 +13,9 @@
     "description": "随易科技（yicode.tech） - 软件开发生态",
     "homepage": "https://chensuiyi.me",
     "main": "index.js",
-    "scripts": {},
+    "scripts": {
+        "r": "pnpm -r --no-git-checks publish"
+    },
     "keywords": [
         "yicode",
         "cli",
