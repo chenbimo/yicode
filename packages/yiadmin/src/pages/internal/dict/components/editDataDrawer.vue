@@ -35,6 +35,7 @@
 </template>
 <script setup>
 // 外部集
+import { keyBy as _keyBy, merge as _merge } from 'lodash-es';
 
 // 内部集
 
@@ -93,11 +94,11 @@ const $Data = $ref({
 const $Method = {
     async initData() {
         $Data.isShow.editDataDrawer = $Prop.modelValue;
-        $Data.categoryAllId = _.keyBy($Prop.categoryAll, 'id');
-        $Data.categoryAllCode = _.keyBy($Prop.categoryAll, 'code');
+        $Data.categoryAllId = _keyBy($Prop.categoryAll, 'id');
+        $Data.categoryAllCode = _keyBy($Prop.categoryAll, 'code');
         $Data.formData.category_id = $Data.categoryAllCode[$Prop.category_code]?.id;
         $Method.setCategoryCode();
-        $Data.formData = _.merge($Data.formData, $Prop.rowData);
+        $Data.formData = _merge($Data.formData, $Prop.rowData);
     },
     // 关闭抽屉事件
     onCloseDrawer() {

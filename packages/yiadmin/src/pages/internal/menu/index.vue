@@ -50,6 +50,10 @@
 </template>
 
 <script setup>
+// 外部集
+import { yd_tree_array2Tree, yd_datetime_relativeTime } from '@yicode/yidash';
+import { sortBy as _sortBy } from 'lodash-es';
+
 // 内部集
 import editDataDrawer from './components/editDataDrawer.vue';
 import editMenuDrawer from './components/editMenuDrawer.vue';
@@ -147,7 +151,7 @@ const $Method = {
                     limit: $GlobalData.pageLimit
                 }
             });
-            $Data.tableData = yd_tree_array2Tree(_.sortBy(yd_datetime_relativeTime(res.data.rows), 'sort'));
+            $Data.tableData = yd_tree_array2Tree(_sortBy(yd_datetime_relativeTime(res.data.rows), 'sort'));
         } catch (err) {
             Message.error({
                 content: err.msg || err

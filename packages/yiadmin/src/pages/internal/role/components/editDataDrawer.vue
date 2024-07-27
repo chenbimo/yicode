@@ -37,6 +37,8 @@
 </template>
 <script setup>
 // 外部集
+import { yd_tree_array2Tree } from '@yicode/yidash';
+import { cloneDeep as _cloneDeep, keyBy as _keyBy, concat as _concat } from 'lodash-es';
 
 // 内部集
 
@@ -138,8 +140,8 @@ const $Method = {
                 return item;
             });
             $Data.allMenuTableData = data;
-            $Data.allMenuTreeData = yd_tree_array2Tree(_.cloneDeep(data));
-            $Data.allMenuDataObject = _.keyBy(data, 'id');
+            $Data.allMenuTreeData = yd_tree_array2Tree(_cloneDeep(data));
+            $Data.allMenuDataObject = _keyBy(data, 'id');
         } catch (err) {
             console.log('🚀 ~ file: index.vue:201 ~ apiSelectAllMenuData ~ err', err);
             Message.error(err.msg || err);
@@ -161,8 +163,8 @@ const $Method = {
                 return item;
             });
             $Data.allApiTableData = data;
-            $Data.allApiTreeData = yd_tree_array2Tree(_.cloneDeep(data));
-            $Data.allApiDataObject = _.keyBy(data, 'id');
+            $Data.allApiTreeData = yd_tree_array2Tree(_cloneDeep(data));
+            $Data.allApiDataObject = _keyBy(data, 'id');
         } catch (err) {
             console.log('🚀 ~ file: index.vue:227 ~ apiSelectAllApiData ~ err', err);
             Message.error(err.msg || err);
@@ -176,8 +178,8 @@ const $Method = {
                 updateData: '/role/update'
             }[$Prop.actionType];
 
-            const menuIds = _.concat($Data.menuCheckedKeys, $Data.menuHalfCheckedKeys);
-            const apiIds = _.concat($Data.apiCheckedKeys, $Data.apiHalfCheckedKeys);
+            const menuIds = _concat($Data.menuCheckedKeys, $Data.menuHalfCheckedKeys);
+            const apiIds = _concat($Data.apiCheckedKeys, $Data.apiHalfCheckedKeys);
 
             const res = await $Http({
                 url: url,

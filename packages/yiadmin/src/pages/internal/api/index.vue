@@ -26,6 +26,10 @@
 </template>
 
 <script setup>
+// 外部集
+import { yd_tree_array2Tree, yd_datetime_relativeTime } from '@yicode/yidash';
+import { sortBy as _sortBy } from 'lodash-es';
+
 // 选项集
 defineOptions({
     name: 'api'
@@ -62,7 +66,7 @@ const $Method = {
                 }
             });
 
-            $Data.tableData = yd_tree_array2Tree(_.sortBy(yd_datetime_relativeTime(res.data.rows), 'sort'));
+            $Data.tableData = yd_tree_array2Tree(_sortBy(yd_datetime_relativeTime(res.data.rows), 'sort'));
         } catch (err) {}
     }
 };

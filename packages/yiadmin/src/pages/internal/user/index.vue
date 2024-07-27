@@ -45,6 +45,9 @@
 </template>
 
 <script setup>
+// 外部集
+import { yd_datetime_relativeTime } from '@yicode/yidash';
+
 // 选项集
 defineOptions({
     name: 'user'

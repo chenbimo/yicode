@@ -61,6 +61,7 @@
 </template>
 <script setup>
 // 外部集
+import { merge as _merge, forOwn as _forOwn, cloneDeep as _cloneDeep } from 'lodash-es';
 
 // 内部集
 
@@ -192,9 +193,9 @@ const $Data = $ref({
 const $Method = {
     async initData() {
         $Data.isShow.editDataDrawer = $Prop.modelValue;
-        const formData = _.merge($Data.formData, $Prop.rowData);
+        const formData = _merge($Data.formData, $Prop.rowData);
         const fields = [];
-        _.forOwn(formData.fields, (item, key) => {
+        _forOwn(formData.fields, (item, key) => {
             if (item.options.includes('index')) {
                 item.index = 1;
             }
@@ -234,7 +235,7 @@ const $Method = {
     // 编辑
     async apiEditData() {
         try {
-            const formData = _.cloneDeep($Data.formData);
+            const formData = _cloneDeep($Data.formData);
             formData.fields = formData.fields.map((item) => {
                 if (item.length === '') item.length = 0;
                 return item;

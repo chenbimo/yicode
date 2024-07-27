@@ -21,6 +21,7 @@
 </template>
 <script setup>
 // 外部集
+import { merge as _merge } from 'lodash-es';
 
 // 内部集
 
@@ -67,7 +68,7 @@ const $Data = $ref({
 const $Method = {
     async initData() {
         $Data.isShow.editDataDrawer = $Prop.modelValue;
-        $Data.formData = _.merge($Data.formData, $Prop.rowData);
+        $Data.formData = _merge($Data.formData, $Prop.rowData);
         // $Data.formData.pid = $Prop.rowData.id;
     },
     // 关闭抽屉事件

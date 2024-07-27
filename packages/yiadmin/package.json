@@ -28,7 +28,7 @@
     },
     "homepage": "https://chensuiyi.me",
     "dependencies": {
-        "@arco-design/web-vue": "^2.55.3",
+        "@arco-design/web-vue": "^2.56.0",
         "@arco-plugins/vite-vue": "^1.4.5",
         "@iconify/json": "^2.2.231",
         "@yicode/yidash": "^3.8.4",
@@ -36,10 +36,10 @@
         "date-fns": "^3.6.0",
         "js-md5": "^0.8.3",
         "lodash-es": "^4.17.21",
-        "pinia": "^2.1.7",
+        "pinia": "^2.2.0",
         "sass": "^1.77.8",
         "store2": "^2.14.3",
-        "unocss": "^0.61.5",
+        "unocss": "^0.61.6",
         "vue": "^3.4.34",
         "vue-i18n": "^9.13.1",
         "vue-router": "^4.4.0"

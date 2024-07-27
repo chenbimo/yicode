@@ -33,6 +33,9 @@
 </template>
 
 <script setup>
+// 外部集
+import { yd_datetime_relativeTime } from '@yicode/yidash';
+
 // 内部集
 import editDataDrawer from './components/editDataDrawer.vue';
 

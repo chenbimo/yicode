@@ -26,6 +26,7 @@
 </template>
 <script setup>
 // 外部集
+import { merge as _merge, omit as _omit } from 'lodash-es';
 
 // 内部集
 
@@ -81,7 +82,7 @@ const $Method = {
     async initData() {
         await $Method.apiSelectAllRole();
         $Data.isShow.editDataDrawer = $Prop.modelValue;
-        $Data.formData = _.merge($Data.formData, _.omit($Prop.rowData, ['password']));
+        $Data.formData = _merge($Data.formData, _omit($Prop.rowData, ['password']));
     },
     // 关闭抽屉事件
     onCloseDrawer() {
