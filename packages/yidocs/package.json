@@ -10,7 +10,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "r": "release-it",
+        "r": "pnpm publish --access public --no-git-checks",
         "dev": "vitepress dev",
         "build": "vitepress build"
     },

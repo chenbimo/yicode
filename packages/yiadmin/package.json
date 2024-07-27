@@ -10,7 +10,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "r": "release-it",
+        "r": "pnpm publish --access public --no-git-checks",
         "dev": "yite --command=dev --envfile=development",
         "build": "yite --command=build --envfile=production",
         "update:template": "yite --command=update --project-type=yiadmin"

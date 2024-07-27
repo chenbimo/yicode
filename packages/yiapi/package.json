@@ -16,7 +16,7 @@
         "./scripts/*.js": "./scripts/*.js"
     },
     "scripts": {
-        "r": "release-it"
+        "r": "pnpm publish --access public --no-git-checks"
     },
     "keywords": [
         "fastify",

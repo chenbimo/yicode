@@ -10,7 +10,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "r": "release-it",
+        "r": "pnpm publish --access public --no-git-checks",
         "dev": "nodemon --config=nodemon.json",
         "server": "pm2 start pm2.config.cjs",
         "syncMysql:dev": "node --env-file=env/.development.env ./scripts/syncMysql.js",

@@ -1,6 +1,6 @@
 {
     "name": "@yicode/commit-lint",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "description": "git 提交信息校验",
     "type": "commonjs",
     "main": "index.js",
@@ -10,7 +10,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "r": "pnpm publish --access public --no-git-checks "
+        "r": "pnpm publish --access public --no-git-checks"
     },
     "repository": {
         "type": "git",

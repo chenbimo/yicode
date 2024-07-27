@@ -14,7 +14,7 @@
         "./yidashLibNames.js": "./yidashLibNames.js"
     },
     "scripts": {
-        "r": "release-it"
+        "r": "pnpm publish --access public --no-git-checks"
     },
     "keywords": [
         "lodash",
