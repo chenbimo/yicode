@@ -30,5 +30,8 @@
         "web",
         "qrcode"
     ],
-    "author": "chensuiyi <bimostyle@qq.com>"
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "devDependencies": {
+        "release-it": "^17.6.0"
+    }
 }
