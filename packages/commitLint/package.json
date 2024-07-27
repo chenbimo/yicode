@@ -10,7 +10,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "r": "pnpm --access public --no-git-checks publish"
+        "r": "pnpm publish --access public --no-git-checks "
     },
     "repository": {
         "type": "git",
