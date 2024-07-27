@@ -1,4 +1,9 @@
 {
+    "plugins": {
+        "release-it-pnpm": {
+            "disableRelease": true
+        }
+    },
     "npm": {
         "publish": true,
         "publishPath": ".",
