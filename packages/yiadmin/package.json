@@ -15,20 +15,6 @@
         "build": "yite --command=build --envfile=production",
         "update:template": "yite --command=update --project-type=yiadmin"
     },
-    "release-it": {
-        "git": false,
-        "plugins": {
-            "@release-it/bumper": {
-                "out": {
-                    "file": "package.json",
-                    "path": [
-                        "dependencies.@yicode/yidash",
-                        "dependencies.@yicode/yite-cli"
-                    ]
-                }
-            }
-        }
-    },
     "keywords": [
         "lodash",
         "utils",

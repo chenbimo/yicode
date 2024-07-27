@@ -32,8 +32,6 @@
         "@yicode/commit-lint": "^1.1.3",
         "lint-staged": "^15.2.7",
         "prettier": "^3.3.3",
-        "release-it": "^17.6.0",
-        "release-it-pnpm": "^4.6.3",
         "rollup": "^4.19.0",
         "simple-git-hooks": "^2.11.1"
     },

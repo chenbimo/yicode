@@ -10,10 +10,7 @@
         "registry": "https://registry.npmjs.org"
     },
     "scripts": {
-        "r": "release-it"
-    },
-    "release-it": {
-        "git": false
+        "r": "pnpm --access public --no-git-checks publish"
     },
     "repository": {
         "type": "git",
@@ -31,7 +28,5 @@
         "qrcode"
     ],
     "author": "chensuiyi <bimostyle@qq.com>",
-    "devDependencies": {
-        "release-it": "^17.6.0"
-    }
+    "devDependencies": {}
 }

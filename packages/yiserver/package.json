@@ -17,19 +17,6 @@
         "syncMysql:prod": "node --env-file=env/.production.env ./scripts/syncMysql.js",
         "flamegraph": "pnpm dlx rimraf .cache/0x & pnpm dlx 0x --output-dir=.cache/0x --output-html={outputDir}/index.html -- node --env-file=env/.development.env yiapi.js"
     },
-    "release-it": {
-        "git": false,
-        "plugins": {
-            "@release-it/bumper": {
-                "out": {
-                    "file": "package.json",
-                    "path": [
-                        "dependencies.@yicode/yiapi"
-                    ]
-                }
-            }
-        }
-    },
     "keywords": [
         "api",
         "nodejs",

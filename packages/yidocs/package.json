@@ -14,19 +14,6 @@
         "dev": "vitepress dev",
         "build": "vitepress build"
     },
-    "release-it": {
-        "git": false,
-        "plugins": {
-            "@release-it/bumper": {
-                "out": {
-                    "file": "package.json",
-                    "path": [
-                        "dependencies.@yicode/yidocs-auto"
-                    ]
-                }
-            }
-        }
-    },
     "keywords": [],
     "author": "陈随易 <bimostyle@qq.com>",
     "license": "ISC",

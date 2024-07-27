@@ -15,9 +15,6 @@
     "scripts": {
         "r": "release-it"
     },
-    "release-it": {
-        "git": false
-    },
     "keywords": [
         "lodash",
         "utils",
