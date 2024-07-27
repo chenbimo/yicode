@@ -16,6 +16,6 @@
         "commit": true,
         "commitMessage": "发布版本：${version}",
         "tag": false,
-        "push": false
+        "push": true
     }
 }
