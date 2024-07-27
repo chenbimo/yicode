@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Message } from '@arco-design/web-vue';
 
 const $Http = axios.create({
     method: 'POST',
@@ -34,10 +33,7 @@ $Http.interceptors.response.use(
         return Promise.reject(res.data);
     },
     function (error) {
-        Message.error({
-            duration: 5000,
-            message: error?.response?.data?.msg
-        });
+        console.log('🚀 ~ error:', error);
     }
 );
 export { $Http };
