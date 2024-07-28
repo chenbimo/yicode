@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiadmin",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "description": "前后分离的 vue3 + vite + yite-cli 后台管理模板",
     "sideEffects": true,
     "type": "module",
@@ -30,7 +30,7 @@
         "@arco-design/web-vue": "^2.56.0",
         "@arco-plugins/vite-vue": "^1.4.5",
         "@iconify/json": "^2.2.231",
-        "@yicode/yidash": "^3.8.5",
+        "@yicode/yidash": "^3.9.0",
         "axios": "^1.7.2",
         "date-fns": "^3.6.0",
         "js-md5": "^0.8.3",
