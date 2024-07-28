@@ -1,0 +1,44 @@
+{
+    "name": "@yicode/dlnpm",
+    "version": "1.4.0",
+    "description": "dlnpm - npm包下载工具",
+    "author": "chensuiyi <bimostyle@qq.com>",
+    "bin": {
+        "dlnpm": "dlnpm.js"
+    },
+    "type": "module",
+    "homepage": "https://chensuiyi.me",
+    "scripts": {},
+    "engines": {},
+    "keywords": [
+        "npm",
+        "download",
+        "package",
+        "npmjs"
+    ],
+    "private": false,
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org"
+    },
+    "main": "dlnpm.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/chenbimo/yicode.git"
+    },
+    "files": [
+        "readme.md",
+        "package.json",
+        "LICENSE",
+        "dlnpm.js",
+        ".npmrc",
+        ".gitignore",
+        ".npmignore"
+    ],
+    "dependencies": {
+        "@inquirer/prompts": "^5.3.2",
+        "got": "^14.4.2",
+        "log-symbols": "^6.0.0",
+        "pacote": "^18.0.6"
+    }
+}
