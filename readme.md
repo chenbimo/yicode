@@ -22,15 +22,21 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 
 ## 项目介绍
 
-主要开源项目
+### 主要开源
 
 -   **@yicode/yite-cli**（基于 `vite` 进行深度封装的 `vue3` 项目开发脚手架）
 -   **@yicode/yiapi**（自用，基于 `fastify` 进行深度封装的 `nodejs` 项目接口开发框架）
+
+### 辅助开源
+
 -   **@yicode/yidash**（类 `lodash` 的业务方法库）
 -   **@yicode/gitlook** （`git` 提交统计工具）
 -   **@yicode/dlnpm**（`yicode` 软件生态下载工具）
--   **@yicode/yidocs**（`vitepress` 经过深度定制的文档模板）
 -   **@yicode/yidocs-auto**（`vitepress` 侧边栏和导航栏自动生成工具，避免手动配置）
+
+### 模板开源
+
+-   **@yicode/yidocs**（`vitepress` 经过深度定制的文档模板）
 -   **@yicode/yibase**（基于`yite-cli` 的基础项目模板）
 -   **@yicode/yiadmin**（跟`yiapi` 配套的后台管理模板）
 -   **@yicode/yiserver**（`yiapi` 接口开发项目模板）
@@ -44,18 +50,6 @@ yicode（易编程）系列软件开发生态，全部由 `陈随易` 自 `2019`
 ## 作者简介
 
 [陈随易的个人网站 https://chensuiyi.me](https://chensuiyi.me)
-
-| 属性     | 值                                                    |
-| -------- | ----------------------------------------------------- |
-| 姓名     | `陈随易`                                              |
-| 微信     | `chensuiyime`                                         |
-| 扣扣     | `24323626(用得少)`                                    |
-| 邮箱     | `bimostyle@qq.com`                                    |
-| 知乎     | [知乎陈随易](https://www.zhihu.com/people/chensuiyi)  |
-| 掘金     | [掘金陈随易](https://juejin.im/user/1239904846873326) |
-| 码云     | [码云陈随易](https://gitee.com/banshiweichen)         |
-| github   | [github 陈随易](https://github.com/chenbimo)          |
-| 交流探讨 | 创建了 `全球顶级程序员微信交流群`，加入交流请加我微信 |
 
 ## 作者时间线
 
