@@ -12,19 +12,16 @@ import { ensureDirSync, readJsonSync, outputJsonSync } from 'fs-extra/esm';
 import portfinder from 'portfinder';
 
 import { mergeAndConcat } from 'merge-anything';
-import Unocss from 'unocss/vite';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import ReactivityTransform from '@vue-macros/reactivity-transform/vite';
 import VueDevTools from 'vite-plugin-vue-devtools';
-import { defineConfig as defineUnocssConfig } from 'unocss';
 // import Markdown from 'vite-plugin-md';
 
 // 内部文件
 import { yiteRouter } from './plugins/router.js';
 import { yiteI18n } from './plugins/i18n.js';
 import { fnFileProtocolPath, fnOmit, fnImport, fnAppDir } from './utils.js';
-import { unocssConfig } from './unocss.js';
 
 const appDir = fnAppDir(process.env.YITE_CLI_WORK_DIR);
 
@@ -148,7 +145,6 @@ export default defineViteConfig(async ({ command, mode }) => {
     allPlugins.push(yiteRouter({}));
     allPlugins.push(yiteI18n({}));
     allPlugins.push(ReactivityTransform());
-    allPlugins.push(Unocss(defineUnocssConfig(unocssConfig)));
     allPlugins.push(
         Icons({
             compiler: 'vue3'
