@@ -10,6 +10,7 @@ export { yd_data_groupBy } from './lib/yd_data_groupBy.js';
 export { yd_data_keyBy } from './lib/yd_data_keyBy.js';
 export { yd_data_omitObj } from './lib/yd_data_omitObj.js';
 export { yd_data_pickObj } from './lib/yd_data_pickObj.js';
+export { yd_data_sortBy } from './lib/yd_data_sortBy.js';
 export { yd_data_uniqWith } from './lib/yd_data_uniqWith.js';
 export { yd_datetime_leftTime } from './lib/yd_datetime_leftTime.js';
 export { yd_datetime_relativeTime } from './lib/yd_datetime_relativeTime.js';
