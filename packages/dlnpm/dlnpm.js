@@ -20,7 +20,6 @@ async function main() {
 
         // 下载类型
         promptData.type = await select({
-            name: 'type',
             message: '选择下载类型',
             default: 'yicode',
             choices: [
@@ -37,7 +36,6 @@ async function main() {
 
         // 从哪里下载
         promptData.registry = await select({
-            name: 'registry',
             message: '选择从哪里下载',
             default: 'npmmirror.com',
             choices: [
@@ -55,7 +53,6 @@ async function main() {
         if (promptData.type === 'yicode') {
             // 下载什么内容
             promptData.template = await select({
-                name: 'template',
                 message: '选择要下载的包',
                 default: '@yicode/yibase',
                 choices: [
@@ -86,7 +83,6 @@ async function main() {
         if (promptData.type === 'other') {
             // 下载什么内容
             promptData.template = await input({
-                name: 'template',
                 message: '请输入要下载的包名称',
                 validate: function (value = '') {
                     const done = this.async();
@@ -102,8 +98,6 @@ async function main() {
 
         // 下载什么版本
         promptData.version = await input({
-            type: 'input',
-            name: 'version',
             message: '输入要下载的版本（默认下载最新版本）',
             default: 'latest'
         });
@@ -115,9 +109,7 @@ async function main() {
         } catch (error) {
             console.log(logSymbols.error, '资源错误或不存在，请检查包名或版本是否正确!');
         }
-    } catch (err) {
-        console.log('🚀 ~ file: dlnpm.js:66 ~ main ~ err:', err);
-    }
+    } catch (err) {}
 }
 
 main();
