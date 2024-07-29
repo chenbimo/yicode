@@ -1,6 +1,6 @@
 {
     "name": "@yicode/yiapi",
-    "version": "5.3.18",
+    "version": "5.3.19",
     "description": "yiapi(易接口)，5 分钟上手 Node.js 接口开发",
     "type": "module",
     "private": false,
@@ -52,7 +52,6 @@
         "fs-extra": "^11.2.0",
         "got": "^14.4.2",
         "http-graceful-shutdown": "^3.1.13",
-        "inquirer": "^10.1.2",
         "ioredis": "^5.4.1",
         "knex": "^3.1.0",
         "log-symbols": "^6.0.0",
