@@ -1,10 +1,10 @@
 // 外部模块
 import fp from 'fastify-plugin';
+import { yd_data_omitObj } from '@yicode/yidash';
 // 工具函数
 import { fnSaltMD5 } from '../utils/fnSaltMD5.js';
 import { fnPureMD5 } from '../utils/fnPureMD5.js';
 import { fnIncrUID } from '../utils/fnIncrUID.js';
-import { toOmit } from '../utils/toOmit.js';
 // 配置文件
 import { appConfig } from '../config/app.js';
 import { roleConfig } from '../config/role.js';
@@ -80,7 +80,7 @@ async function plugin(fastify, opts) {
                     return roleModel
                         .clone()
                         .where('code', item.code)
-                        .updateData(toOmit(item, ['code']));
+                        .updateData(yd_data_omitObj(item, ['code']));
                 });
                 await Promise.all(updateBatchData);
             }

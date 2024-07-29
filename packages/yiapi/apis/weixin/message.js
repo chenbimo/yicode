@@ -1,10 +1,12 @@
+// 内部函数
 import { resolve } from 'node:path';
+// 外部函数
+import { yd_is_function } from '@yicode/yidash';
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 import { fnImportAbsolutePath } from '../../utils/fnImportAbsolutePath.js';
 import { fnUUID } from '../../utils/fnUUID.js';
-import { isFunction } from '../../utils/isFunction.js';
 // 配置文件
 import { system } from '../../system.js';
 import { appConfig } from '../../config/app.js';
@@ -79,7 +81,7 @@ export default async (fastify) => {
                     if (userData?.id) {
                         // 若用户不存在则创建该用户
                         await fastify.redisSet(`scanQrcodeLogin:${qrcode_uuid}`, xmlData.FromUserName, 120);
-                        if (isFunction(callbackConfig.weixinMessage)) {
+                        if (yd_is_function(callbackConfig.weixinMessage)) {
                             callbackConfig.weixinMessage(fastify, {
                                 new_user: 0,
                                 user_id: userData?.id,
@@ -101,7 +103,7 @@ export default async (fastify) => {
                                 from_product: product_code || 0
                             });
                         await fastify.redisSet(`scanQrcodeLogin:${qrcode_uuid}`, xmlData.FromUserName, 120);
-                        if (isFunction(callbackConfig.weixinMessage)) {
+                        if (yd_is_function(callbackConfig.weixinMessage)) {
                             callbackConfig.weixinMessage(fastify, {
                                 new_user: 1,
                                 user_id: result?.[0] || 0,

@@ -1,16 +1,16 @@
 import fp from 'fastify-plugin';
 import Knex from 'knex';
+import { yd_is_array } from '@yicode/yidash';
 
 import { mysqlConfig } from '../config/mysql.js';
 import { fnDbInsert } from '../utils/fnDbInsert.js';
 import { fnDbUpdate } from '../utils/fnDbUpdate.js';
-import { isArray } from '../utils/isArray.js';
 
 async function plugin(fastify, options) {
     try {
         // 添加数据
         Knex.QueryBuilder.extend('insertData', function (data) {
-            if (Array.isArray(data)) {
+            if (yd_is_array(data)) {
                 const data2 = data.map((item) => {
                     return fnDbInsert(item);
                 });
@@ -29,7 +29,7 @@ async function plugin(fastify, options) {
         });
         // 查询数据
         Knex.QueryBuilder.extend('selectData', function (page, limit, args) {
-            if (isArray(args) === true) {
+            if (yd_is_array(args) === true) {
                 return this.offset((page - 1) * limit)
                     .limit(limit)
                     .select(...args);
@@ -41,7 +41,7 @@ async function plugin(fastify, options) {
         });
         // 查询一条
         Knex.QueryBuilder.extend('selectOne', function (args) {
-            if (isArray(args) === true) {
+            if (yd_is_array(args) === true) {
                 return this.first(...args);
             } else {
                 return this.first();
@@ -49,7 +49,7 @@ async function plugin(fastify, options) {
         });
         // 查询所有
         Knex.QueryBuilder.extend('selectAll', function (args) {
-            if (isArray(args) === true) {
+            if (yd_is_array(args) === true) {
                 return this.select(...args);
             } else {
                 return this.select();

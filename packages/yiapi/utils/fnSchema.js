@@ -1,5 +1,3 @@
-import { isObject } from '../utils/isObject.js';
-
 export const tableFieldSchemaMap = {
     // 字符串型
     string: 'string',

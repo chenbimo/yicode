@@ -1,6 +1,6 @@
 // 外部模块
+import { yd_data_omitObj } from '@yicode/yidash';
 // 工具函数
-import { toOmit } from '../../utils/toOmit.js';
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 import { fnPureMD5 } from '../../utils/fnPureMD5.js';
@@ -66,7 +66,7 @@ export default async (fastify) => {
                 return {
                     ...httpConfig.SUCCESS,
                     msg: '登录成功',
-                    data: toOmit(adminData, ['password']),
+                    data: yd_data_omitObj(adminData, ['password']),
                     token: await fastify.jwt.sign({
                         id: adminData.id,
                         username: adminData.username,

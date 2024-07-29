@@ -1,7 +1,8 @@
+// 外部函数
+import { yd_string_camelCase } from '@/yicode/yidash';
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
-import { toCamelCase } from '../../utils/toCamelCase.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
 import { schemaHelperConfig } from '../../config/schemaHelper.js';
@@ -32,7 +33,7 @@ export default async (fastify) => {
 
                 const dictCategoryData = await dictCategoryModel
                     .clone()
-                    .where({ code: toCamelCase(req.body.code) })
+                    .where({ code: yd_string_camelCase(req.body.code) })
                     .selectOne(['id']);
 
                 if (dictCategory?.id) {
@@ -46,7 +47,7 @@ export default async (fastify) => {
                     .clone()
                     .where({ id: req.body.id })
                     .updateData({
-                        code: toCamelCase(req.body.code),
+                        code: yd_string_camelCase(req.body.code),
                         name: req.body.name,
                         describe: req.body.describe
                     });

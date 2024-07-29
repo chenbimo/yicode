@@ -1,7 +1,7 @@
+import { yd_string_camelCase } from '@/yicode/yidash';
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
-import { toCamelCase } from '../../utils/toCamelCase.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
 import { schemaHelperConfig } from '../../config/schemaHelper.js';
@@ -48,8 +48,8 @@ export default async (fastify) => {
                     .where({ id: req.body.id })
                     .updateData({
                         category_id: req.body.category_id,
-                        category_code: toCamelCase(req.body.category_code),
-                        code: toCamelCase(req.body.code),
+                        category_code: yd_string_camelCase(req.body.category_code),
+                        code: yd_string_camelCase(req.body.code),
                         name: req.body.name,
                         value: req.body.value,
                         symbol: req.body.symbol,

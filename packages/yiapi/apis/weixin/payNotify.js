@@ -1,13 +1,13 @@
+// 外部函数
 import { resolve } from 'path';
 import { toDate, addDays, getTime } from 'date-fns';
+import { yd_is_function, yd_data_findObj } from '@yicode/yidash';
 
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
 import { fnIncrUID } from '../../utils/fnIncrUID.js';
 import { fnImportAbsolutePath } from '../../utils/fnImportAbsolutePath.js';
-import { isFunction } from '../../utils/isFunction.js';
-import { toFind } from '../../utils/toFind.js';
 import { getCacheName } from '../../utils/getCacheName.js';
 import { wxPayinit, wxPayVerifySign, wxPayDecodeCertificate, wxPayRequest } from '../../utils/wxPay.js';
 // 配置文件
@@ -69,7 +69,7 @@ export default async (fastify) => {
                 }
 
                 // 产品信息
-                const paymentInfo = toFind(paymentConfig, 'code', attach.pay_code);
+                const paymentInfo = yd_data_findObj(paymentConfig, 'code', attach.pay_code);
                 fastify.log.warn({ msg: '产品信息', ...paymentInfo });
 
                 // 添加订单数据
@@ -101,7 +101,7 @@ export default async (fastify) => {
                     insertData.id = result?.[0] || 0;
                 }
 
-                if (isFunction(callbackConfig.weixinPayNotify)) {
+                if (yd_is_function(callbackConfig.weixinPayNotify)) {
                     callbackConfig.weixinPayNotify(fastify, insertData);
                 }
 

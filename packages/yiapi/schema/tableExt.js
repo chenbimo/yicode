@@ -1,14 +1,17 @@
+// 核心模块
 import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
+// 外部模块
+import { yd_string_snakeCase } from '@yicode/yidash';
+// 内部模块
 import { system } from '../system.js';
-import { toSnakeCase } from '../utils/toSnakeCase.js';
 import { tableSchema } from './table.js';
 
 const sysDbFiles = readdirSync(resolve(system.yiapiDir, 'tables'));
 const propertieFields = {};
 
 sysDbFiles.forEach((file) => {
-    propertieFields[toSnakeCase('sys_' + file.replace('.js', ''))] = tableSchema;
+    propertieFields[yd_string_snakeCase('sys_' + file.replace('.js', ''))] = tableSchema;
 });
 
 export const tableExtSchema = {

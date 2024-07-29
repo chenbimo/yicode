@@ -1,7 +1,8 @@
+// 外部函数
+import { yd_string_camelCase } from '@/yicode/yidash';
 // 工具函数
 import { fnRoute } from '../../utils/fnRoute.js';
 import { fnSchema } from '../../utils/fnSchema.js';
-import { toCamelCase } from '../../utils/toCamelCase.js';
 // 配置文件
 import { httpConfig } from '../../config/http.js';
 // 数据表格
@@ -53,8 +54,8 @@ export default async (fastify) => {
 
                 const result = await dictModel.insertData({
                     category_id: req.body.category_id,
-                    category_code: toCamelCase(req.body.category_code),
-                    code: toCamelCase(req.body.code),
+                    category_code: yd_string_camelCase(req.body.category_code),
+                    code: yd_string_camelCase(req.body.code),
                     name: req.body.name,
                     value: req.body.value,
                     symbol: req.body.symbol,

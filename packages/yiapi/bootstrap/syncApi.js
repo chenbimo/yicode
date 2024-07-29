@@ -4,14 +4,11 @@ import { basename, dirname, resolve } from 'node:path';
 import { readdirSync, readFileSync } from 'node:fs';
 // 外部模块
 import fp from 'fastify-plugin';
+import { yd_is_object, yd_data_omitObj, yd_data_keyBy } from '@yicode/yidash';
 // 工具函数
 import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
-import { fnDelay } from '../utils/fnDelay.js';
 import { fnIncrUID } from '../utils/fnIncrUID.js';
 // 工具函数
-import { toKeyBy } from '../utils/toKeyBy.js';
-import { toOmit } from '../utils/toOmit.js';
-import { isObject } from '../utils/isObject.js';
 // 配置文件
 import { system } from '../system.js';
 import { appConfig } from '../config/app.js';
@@ -80,7 +77,7 @@ async function syncApiDir(fastify) {
 
         // 所有接口目录数据
         const apiDirDb = apis.filter((item) => item.is_bool === 0);
-        const apiDirDbByValue = toKeyBy(apiDirDb, 'value');
+        const apiDirDbByValue = yd_data_keyBy(apiDirDb, 'value');
 
         const deleteApiDirData = [];
         const insertApiDirData = [];
@@ -100,7 +97,7 @@ async function syncApiDir(fastify) {
             // 如果数据库中存在当前接口目录，则进行添加或更新
             const { metaConfig } = await fnImportAbsolutePath(item.filePath, 'metaConfig', {});
 
-            if (isObject(metaConfig) === false) {
+            if (yd_is_object(metaConfig) === false) {
                 fastify.log.warn(`${metaFilePath} 文件的必须导出一个对象`);
                 process.exit();
             }
@@ -149,7 +146,7 @@ async function syncApiDir(fastify) {
                     return apiModel
                         .clone()
                         .where('id', item.id)
-                        .updateData(toOmit(item, ['id', 'created_at']));
+                        .updateData(yd_data_omitObj(item, ['id', 'created_at']));
                 });
                 await Promise.all(updateBatchData);
             }
@@ -178,11 +175,11 @@ async function syncApiFile(fastify) {
 
         // 所有接口目录数据
         const apiDirDb = apiDb.filter((item) => item.is_bool === 0);
-        const apiDirDbByValue = toKeyBy(apiDirDb, 'value');
+        const apiDirDbByValue = yd_data_keyBy(apiDirDb, 'value');
 
         // 所有的接口数据
         const apiFileDb = apiDb.filter((item) => item.is_bool === 1);
-        const apiFileDbByValue = toKeyBy(apiFileDb, 'value');
+        const apiFileDbByValue = yd_data_keyBy(apiFileDb, 'value');
 
         // 将要删除的接口数据
         const deleteApiData = [];
@@ -229,7 +226,7 @@ async function syncApiFile(fastify) {
             const metaFilePath = resolve(apiDirName, '_meta.js');
             const { metaConfig } = await fnImportAbsolutePath(metaFilePath, 'metaConfig', {});
 
-            if (isObject(metaConfig?.apiNames) === false) {
+            if (yd_is_object(metaConfig?.apiNames) === false) {
                 fastify.log.warn(`${metaFilePath} 文件的 apiNames 值必须为一个对象`);
                 process.exit();
             }
@@ -287,7 +284,7 @@ async function syncApiFile(fastify) {
             // 如果待更新接口大于0，则更新
             if (updateApiData.length > 0) {
                 const updateBatchData = updateApiData.map((item) => {
-                    return apiModel.clone().where('id', item.id).updateData(toOmit(item, 'id'));
+                    return apiModel.clone().where('id', item.id).updateData(yd_data_omitObj(item, 'id'));
                 });
                 await Promise.all(updateBatchData);
             }

@@ -1,13 +1,8 @@
 // 外部插件
 import fp from 'fastify-plugin';
+import { yd_data_omitObj, yd_data_unique, yd_data_keyBy } from '@yicode/yidash';
 // 工具函数
-import { isObject } from '../utils/isObject.js';
-import { toKeyBy } from '../utils/toKeyBy.js';
-import { toUnique } from '../utils/toUnique.js';
-import { toOmit } from '../utils/toOmit.js';
 import { fnIncrUID } from '../utils/fnIncrUID.js';
-import { fnDelay } from '../utils/fnDelay.js';
-import { toKebabCase } from '../utils/toKebabCase.js';
 // 配置文件
 import { appConfig } from '../config/app.js';
 import { menuConfig } from '../config/menu.js';
@@ -21,7 +16,7 @@ async function syncMenuDir(fastify) {
 
         // 第一次请求菜单数据，用于创建一级菜单
         const menuDirDb = await menuModel.clone().where({ pid: 0 }).selectAll();
-        const menuDirDbByValue = toKeyBy(menuDirDb, 'value');
+        const menuDirDbByValue = yd_data_keyBy(menuDirDb, 'value');
 
         const insertMenuDb = [];
         const deleteMenuDb = [];
@@ -66,7 +61,7 @@ async function syncMenuDir(fastify) {
         if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
             // 删除菜单目录
             if (deleteMenuDb.length > 0) {
-                await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
+                await menuModel.clone().whereIn('id', yd_data_unique(deleteMenuDb)).deleteData();
             }
 
             // 添加菜单目录
@@ -80,7 +75,7 @@ async function syncMenuDir(fastify) {
                     return menuModel
                         .clone()
                         .where('id', item.id)
-                        .updateData(toOmit(item, ['id']));
+                        .updateData(yd_data_omitObj(item, ['id']));
                 });
                 await Promise.all(updateBatch);
             }
@@ -99,11 +94,11 @@ async function syncMenuFile(fastify) {
         const menuModel = fastify.mysql.table('sys_menu');
 
         const menuDirDb = await menuModel.clone().where({ pid: 0 }).selectAll();
-        const menuDirDbByValue = toKeyBy(menuDirDb, 'value');
+        const menuDirDbByValue = yd_data_keyBy(menuDirDb, 'value');
 
         // 第二次请求菜单数据，用于创建二级菜单
         const menuFileDb = await menuModel.clone().where('pid', '<>', 0).selectAll();
-        const menuFileDbByValue = toKeyBy(menuFileDb, 'value');
+        const menuFileDbByValue = yd_data_keyBy(menuFileDb, 'value');
 
         const insertMenuDb = [];
         const updateMenuDb = [];
@@ -159,7 +154,7 @@ async function syncMenuFile(fastify) {
         // 数据的同步只在主进程中操作
         if (!process.env.NODE_APP_INSTANCE || process.env.NODE_APP_INSTANCE === '0') {
             if (deleteMenuDb.length > 0) {
-                await menuModel.clone().whereIn('id', toUnique(deleteMenuDb)).deleteData();
+                await menuModel.clone().whereIn('id', yd_data_unique(deleteMenuDb)).deleteData();
             }
 
             if (insertMenuDb.length > 0) {
@@ -172,7 +167,7 @@ async function syncMenuFile(fastify) {
                     return menuModel
                         .clone()
                         .where('id', item.id)
-                        .updateData(toOmit(item, ['id']));
+                        .updateData(yd_data_omitObj(item, ['id']));
                 });
                 await Promise.all(updateBatchData);
             }

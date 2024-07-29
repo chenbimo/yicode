@@ -39,6 +39,7 @@
         "@fastify/static": "^7.0.4",
         "@fastify/swagger": "^8.15.0",
         "@fastify/swagger-ui": "^4.0.1",
+        "@yicode/yidash": "^3.11.2",
         "ajv": "^8.17.1",
         "ajv-i18n": "^4.2.0",
         "blueimp-md5": "^2.19.0",

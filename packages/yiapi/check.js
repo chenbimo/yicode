@@ -6,6 +6,7 @@ import { ensureDirSync } from 'fs-extra';
 import logSymbols from 'log-symbols';
 import Ajv from 'ajv';
 import localize from 'ajv-i18n';
+import { yd_is_object, yd_is_function, yd_data_unique } from '@yicode/yidash';
 
 // 内部模块
 import { system } from './system.js';
@@ -19,10 +20,6 @@ import { jwtConfig } from './config/jwt.js';
 // 协议配置
 import { tableSchema } from './schema/table.js';
 // 工具函数
-import { toUnique } from './utils/toUnique.js';
-import { isPlainObject } from './utils/isPlainObject.js';
-import { isObject } from './utils/isObject.js';
-import { isFunction } from './utils/isFunction.js';
 import { fnImportCoreConfig } from './utils/fnImportCoreConfig.js';
 import { fnImportCoreSchema } from './utils/fnImportCoreSchema.js';
 
@@ -78,25 +75,25 @@ for (let file of files) {
 }
 
 // 检测回调配置都是函数
-if (isObject(callbackConfig) === false) {
+if (yd_is_object(callbackConfig) === false) {
     console.log(`${logSymbols.warning} callback.js 文件必须为一个对象`);
     process.exit();
 }
 
 for (let callback in callbackConfig) {
     if (callbackConfig.hasOwnProperty(callback) === false) continue;
-    if (isFunction(callbackConfig[callback]) === false) {
+    if (yd_is_function(callbackConfig[callback]) === false) {
         console.log(`${logSymbols.warning} callback.js 文件中的 ${callback} 必须为函数`);
         process.exit();
     }
 }
 
-if (toUnique(Object.values(productConfig)) === false) {
+if (yd_data_unique(Object.values(productConfig)) === false) {
     console.log(`${logSymbols.warning} 产品代号必须唯一`);
     process.exit();
 }
 
-if (toUnique(paymentConfig.map((item) => item.code)) === false) {
+if (yd_data_unique(paymentConfig.map((item) => item.code)) === false) {
     console.log(`${logSymbols.warning} 支付代号必须唯一`);
     process.exit();
 }

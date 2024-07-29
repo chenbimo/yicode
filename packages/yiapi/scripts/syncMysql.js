@@ -11,24 +11,15 @@ import * as color from 'colorette';
 import { format } from 'date-fns';
 import Ajv from 'ajv';
 import localize from 'ajv-i18n';
+import { yd_is_arrayContain, yd_is_object, yd_is_plainObject, yd_string_snakeCase, yd_array_diffBoth } from '@yicode/yidash';
 // 配置文件
 import { system } from '../system.js';
 import { appConfig } from '../config/app.js';
 import { mysqlConfig } from '../config/mysql.js';
 import { tableSchema } from '../schema/table.js';
+
 // 工具函数
 import { fnImportAbsolutePath } from '../utils/fnImportAbsolutePath.js';
-import { isObject } from '../utils/isObject.js';
-import { isPlainObject } from '../utils/isPlainObject.js';
-import { toSnakeCase } from '../utils/toSnakeCase.js';
-import { toUnique } from '../utils/toUnique.js';
-import { isArrayContain } from '../utils/isArrayContain.js';
-import { getArrayDiffBoth } from '../utils/getArrayDiffBoth.js';
-import { getArrayDiffFirst } from '../utils/getArrayDiffFirst.js';
-import { isString } from '../utils/isString.js';
-import { isInteger } from '../utils/isInteger.js';
-import { isNumber } from '../utils/isNumber.js';
-import { isArray } from '../utils/isArray.js';
 
 // 创建顺序自增唯一 ID
 function fnIncrDate() {
@@ -120,7 +111,7 @@ export const syncMysql = async () => {
                 console.log(`${logSymbols.warning} ${file} 文件名只能为 大小写字母+数字+下划线`);
                 process.exit();
             }
-            const tableFile = item.prefix + toSnakeCase(pureFileName.trim());
+            const tableFile = item.prefix + yd_string_snakeCase(pureFileName.trim());
             if (!item.prefix && tableFile.startsWith('sys_') === true) {
                 console.log(`${logSymbols.warning} ${file} 非系统表不能以 sys_ 开头`);
                 process.exit();
@@ -138,17 +129,17 @@ export const syncMysql = async () => {
                 process.exit();
             }
 
-            if (isObject(tableData) === false) {
+            if (yd_is_object(tableData) === false) {
                 console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 必须为对象结构`);
                 process.exit();
             }
 
-            if (isPlainObject(tableData || {}) === true) {
+            if (yd_is_plainObject(tableData || {}) === true) {
                 console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 必须为非空对象`);
                 process.exit();
             }
 
-            if (isArrayContain(Object.keys(tableData), denyFields) === true) {
+            if (yd_is_arrayContain(Object.keys(tableData), denyFields) === true) {
                 console.log(`${logSymbols.warning} ${item.file} 文件的 tableData 不能包含 ${denyFields} 字段`);
                 process.exit();
             }
@@ -196,7 +187,7 @@ export const syncMysql = async () => {
                 ...denyFields
             ];
             // 判断字段是否有调整，如果没有调整则不用进行数据转移
-            const allFieldDiff = getArrayDiffBoth(allNewFields, allOldFields);
+            const allFieldDiff = yd_array_diffBoth(allNewFields, allOldFields);
 
             // 删除旧表
             // await trx.schema.dropTableIfExists(tableItem.tableOldName);

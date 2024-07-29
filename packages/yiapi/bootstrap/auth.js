@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 // 外部模块
 import fp from 'fastify-plugin';
 import picomatch from 'picomatch';
+import { yd_data_omitObj, yd_data_unique, yd_data_findObj } from '@yicode/yidash';
 // 配置文件
 import { system } from '../system.js';
 import { appConfig } from '../config/app.js';
@@ -15,9 +16,6 @@ import { cacheConfig } from '../config/cache.js';
 // 工具函数
 import { fnApiCheck } from '../utils/fnApiCheck.js';
 import { fnRouterPath } from '../utils/fnRouterPath.js';
-import { toUnique } from '../utils/toUnique.js';
-import { toOmit } from '../utils/toOmit.js';
-import { toFind } from '../utils/toFind.js';
 
 async function plugin(fastify, opts) {
     fastify.addHook('preHandler', async (req, res) => {
@@ -87,7 +85,7 @@ async function plugin(fastify, opts) {
              */
             fastify.log.warn({
                 apiPath: req?.url,
-                body: toOmit(req?.body || {}, appConfig.reqParamsFilter),
+                body: yd_data_omitObj(req?.body || {}, appConfig.reqParamsFilter),
                 session: req?.session,
                 reqId: req?.id
             });
@@ -101,7 +99,7 @@ async function plugin(fastify, opts) {
             // 从缓存获取白名单接口
             const dataApiWhiteLists = await fastify.redisGet(cacheConfig.apiWhiteLists);
             const whiteApis = dataApiWhiteLists?.map((item) => item.value);
-            const allWhiteApis = toUnique([...whiteApisConfig, ...(whiteApis || [])]);
+            const allWhiteApis = yd_data_unique([...whiteApisConfig, ...(whiteApis || [])]);
 
             // 是否匹配白名单
             const isMatchWhiteApi = picomatch.isMatch(routePath, allWhiteApis);
@@ -111,7 +109,7 @@ async function plugin(fastify, opts) {
             /* ---------------------------------- 角色接口权限判断 --------------------------------- */
             // 如果接口不在白名单中，则判断用户是否有接口访问权限
             const userApis = await fastify.getUserApis(req.session);
-            const hasApi = toFind(userApis, 'value', routePath.replace('/api/', '/'));
+            const hasApi = yd_data_findObj(userApis, 'value', routePath.replace('/api/', '/'));
 
             if (!hasApi) {
                 res.send({
